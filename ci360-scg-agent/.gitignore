@@ -1,0 +1,8 @@
+/cacheData
+/target/
+target/
+*.log
+*.zip
+logs/
+/logs/*
+/last_event_json.txt
