@@ -60,7 +60,7 @@ Please refer to [`Add an Endpoint`](https://go.documentation.sas.com/doc/en/cint
 
 ### CI360 Setup
 
-Steps to set up new connector for Syniverse:
+Steps to set up new connector for Twilio:
 -   In CI360, go to General Settings -> External Access -> Connectors
 -   Create “New Connector”
 -   Name it “Twilio Connector” 
