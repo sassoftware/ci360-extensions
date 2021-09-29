@@ -9,8 +9,8 @@ SAS CI360 Connector Framework and Agent SDK provide infrastructure to integrate 
 This topic contains the following sections:
 * <a href="#prerequisites">Prerequisites</a>
 * <a href="#installation">Installation</a>
-* <a href="#list">List of Extensions</a>
-* <a href="#getstart">Getting Started</a>
+* <a href="#list-of-extensions">List of Extensions</a>
+* <a href="#getting-started">Getting Started</a>
 * <a href="#contributing">Contributing</a>
 * <a href="#license">License</a>
 * <a href="#resources">Additional Resources</a>
@@ -33,6 +33,7 @@ This is a list of connectors and agents included in this repository:
 - [__ci360-scg-agent__](ci360-scg-agent): Syniverse Communication Gateway (SCG) agent, enables SMS/MMS/WhatsApp through Syniverse
 - [__ci360-scg-connector__](ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS/MMS/WhatsApp through Syniverse
 - [__ci360-sfmc-connector__](ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email and SMS through Salesforce
+- [__ci360-twilio-connector__](ci360-twilio-connector): Twilio connector, enables SMS through Twilio
 
 ## Getting Started
 
