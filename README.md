@@ -30,10 +30,15 @@ Installation instructions for every extension are included in the project specif
 ## List of Extensions
 
 This is a list of connectors and agents included in this repository:
-- [__ci360-scg-agent__](ci360-scg-agent): Syniverse Communication Gateway (SCG) agent, enables SMS/MMS/WhatsApp through Syniverse
-- [__ci360-scg-connector__](ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS/MMS/WhatsApp through Syniverse
-- [__ci360-sfmc-connector__](ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email and SMS through Salesforce
-- [__ci360-twilio-connector__](ci360-twilio-connector): Twilio connector, enables SMS through Twilio
+- [__SMS/MMS Connector (via Syniverse)__](ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS and MMS communication through Syniverse
+- [__WhatsApp Connector (via Syniverse)__](ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WhatsApp communication through Syniverse
+- [__WeChat Connector (via Syniverse)__](ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WeChat communication through Syniverse
+- [__SMS Connector (via SFMC)__](ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email communication through Salesforce Marketing Cloud
+- [__Email Connector (via SFMC)__](ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
+- [__SMS Connector (via Twilio)__](ci360-twilio-connector): Twilio connector, enables SMS through Twilio
+- [__Google Analytics Integration__](google-analytics-integration): Implementation of connection with Google Analytics (GA)
+- [__Facebook Event Manager Integration__](facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
+- [__Adobe Audience Manager Integration__](adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
 
 ## Getting Started
 
