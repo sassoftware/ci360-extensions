@@ -2,7 +2,7 @@
 
 ## Overview
 
-CI360 integration to Syniverse Communication Gateway using CI360 Connector Framework. CI360 Syniverse Connector supports outbound SMS and MMS messages using SCG APIs.
+CI360 SCG Connector provides integration to Syniverse Communication Gateway using CI360 Connector Framework. CI360 Syniverse Connector supports outbound SMS/MMS, WhatsApp and WeChat messages using SCG APIs. It enables marketing end-users to send SMS, MMS, WhatsApp and WeChat messages to their customers using CI360 External System Task.
 
 ### Connector Architecture
 

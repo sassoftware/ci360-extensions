@@ -2,7 +2,7 @@
 
 ## Overview
 
-CI360 integration to Twilio using CI360 Connector Framework. CI360 Twilio Connector supports outbound SMS messages using Twilio APIs. Only one-way (outbound) SMS is supported by this connector at the moment.
+CI360 Twilio Connector provides integration to Twilio using CI360 Connector Framework. CI360 Twilio Connector supports outbound SMS messages using Twilio APIs. It enables marketing end-users to send SMS messages to their customers through Twilio platform using CI360 External System Task. Only one-way (outbound) SMS is supported by this connector at the moment.
 
 ## Connector Architecture
 

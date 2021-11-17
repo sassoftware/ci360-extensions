@@ -2,7 +2,7 @@
 
 ## Overview
 
-CI360 integration to Salesforce Marketing Cloud using CI360 Connector Framework. CI360 SFMC Connector supports outbound email and SMS messages using SFMC APIs.
+CI360 SFMC Connector provides integration to Salesforce Marketing Cloud using CI360 Connector Framework. CI360 SFMC Connector supports outbound email and SMS messages using SFMC APIs. It enables marketing end-users to send SMS and email messages to their customers through SFMC platform using CI360 External System Task.
 
 ### Connector Architecture
 
