@@ -39,6 +39,7 @@ This is a list of connectors and agents included in this repository:
 - [__Google Analytics Integration__](google-analytics-integration): Implementation of connection with Google Analytics (GA)
 - [__Facebook Event Manager Integration__](facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
 - [__Adobe Audience Manager Integration__](adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
+- [__SAS ESP CI360 Adapter__](esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events to CI360
 
 ## Getting Started
 

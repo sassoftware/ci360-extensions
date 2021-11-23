@@ -1,0 +1,5 @@
+target\*
+/target/
+config.txt
+config.properties
+

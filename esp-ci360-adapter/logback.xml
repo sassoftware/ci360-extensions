@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan this file for configuration changes every minute -->
+<!-- change the scan period with: <configuration scan="true" scanPeriod="30 seconds" > -->
+<configuration scan="true">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <property name="LOG_DIR" value="./logs" />
+
+  <appender name="ADAPTER-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/${project.artifactId}.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_DIR}/${project.artifactId}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+        <!-- each archived file, size max 10MB -->
+        <maxFileSize>50MB</maxFileSize>
+        <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+        <totalSizeCap>1GB</totalSizeCap>
+        <!-- 14 days to keep -->
+        <maxHistory>14</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <root level="WARN">
+    <appender-ref ref="CONSOLE" />
+  </root> 
+  <logger name="com.sas.esp.ci360adapter" level="DEBUG">
+  	<appender-ref ref="AGENT-FILE-ROLLING" />
+  </logger>
+</configuration>
