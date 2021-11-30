@@ -1,0 +1,112 @@
+<project name="CI360_Event_Stream" threads="1" pubsub="auto" heartbeat-interval="1">
+  <metadata>
+    <meta id="studioUploadedBy">sasdemo</meta>
+    <meta id="studioUploaded">1554382160517</meta>
+    <meta id="studioModifiedBy">sasdemo</meta>
+    <meta id="studioModified">1554463175172</meta>
+    <meta id="layout">{"eventstream":{"ci360_events":{"x":50,"y":175},"event_source":{"x":50,"y":50}}}</meta>
+  </metadata>
+  <contqueries>
+    <contquery name="eventstream">
+      <windows>
+        <window-source pubsub="true" name="event_source">
+          <schema>
+            <fields>
+              <field name="eventid" type="string" key="true"/>
+              <field name="timestamp" type="int64"/>
+              <field name="event" type="string"/>
+              <field name="channelType" type="string"/>
+              <field name="eventname" type="string"/>
+              <field name="identityId" type="string"/>
+              <field name="domain" type="string"/>
+              <field name="uri" type="string"/>
+              <field name="referrer" type="string"/>
+              <field name="session" type="string"/>
+              <field name="mobile_appid" type="string"/>
+              <field name="visitor_state" type="string"/>
+              <field name="page_path" type="string"/>
+              <field name="page_title" type="string"/>
+              <field name="browser_platform" type="string"/>
+              <field name="browser_device_type" type="string"/>
+              <field name="browser_language_name" type="string"/>
+              <field name="browser_name" type="string"/>
+              <field name="geo_country" type="string"/>
+              <field name="geo_region" type="string"/>
+              <field name="geo_city" type="string"/>
+              <field name="geo_latitude" type="double"/>
+              <field name="geo_longitude" type="double"/>
+              <field name="PageTitle" type="string"/>
+              <field name="PageCategory" type="string"/>
+              <field name="searchTerm" type="string"/>
+              <field name="timestamp_sas" type="double"/>
+            </fields>
+          </schema>
+        </window-source>
+        <window-compute pubsub="true" index="pi_EMPTY" name="ci360_events">
+          <schema>
+            <fields>
+              <field name="eventid" type="string" key="true"/>
+              <field name="timestamp" type="int64"/>
+              <field name="event" type="string"/>
+              <field name="channelType" type="string"/>
+              <field name="eventname" type="string"/>
+              <field name="identityId" type="string"/>
+              <field name="domain" type="string"/>
+              <field name="uri" type="string"/>
+              <field name="referrer" type="string"/>
+              <field name="session" type="string"/>
+              <field name="mobile_appid" type="string"/>
+              <field name="visitor_state" type="string"/>
+              <field name="page_path" type="string"/>
+              <field name="page_title" type="string"/>
+              <field name="browser_platform" type="string"/>
+              <field name="browser_device_type" type="string"/>
+              <field name="browser_language_name" type="string"/>
+              <field name="browser_name" type="string"/>
+              <field name="geo_country" type="string"/>
+              <field name="geo_region" type="string"/>
+              <field name="geo_city" type="string"/>
+              <field name="geo_latitude" type="double"/>
+              <field name="geo_longitude" type="double"/>
+              <field name="PageTitle" type="string"/>
+              <field name="PageCategory" type="string"/>
+              <field name="searchTerm" type="string"/>
+              <field name="timestamp_sas" type="double"/>
+            </fields>
+          </schema>
+          <output>
+            <field-expr><![CDATA[timestamp]]></field-expr>
+            <field-expr><![CDATA[event]]></field-expr>
+            <field-expr><![CDATA[channelType]]></field-expr>
+            <field-expr><![CDATA[eventname]]></field-expr>
+            <field-expr><![CDATA[identityId]]></field-expr>
+            <field-expr><![CDATA[domain]]></field-expr>
+            <field-expr><![CDATA[uri]]></field-expr>
+            <field-expr><![CDATA[referrer]]></field-expr>
+            <field-expr><![CDATA[session]]></field-expr>
+            <field-expr><![CDATA[mobile_appid]]></field-expr>
+            <field-expr><![CDATA[visitor_state]]></field-expr>
+            <field-expr><![CDATA[page_path]]></field-expr>
+            <field-expr><![CDATA[page_title]]></field-expr>
+            <field-expr><![CDATA[browser_platform]]></field-expr>
+            <field-expr><![CDATA[browser_device_type]]></field-expr>
+            <field-expr><![CDATA[browser_language_name]]></field-expr>
+            <field-expr><![CDATA[browser_name]]></field-expr>
+            <field-expr><![CDATA[geo_country]]></field-expr>
+            <field-expr><![CDATA[geo_region]]></field-expr>
+            <field-expr><![CDATA[geo_city]]></field-expr>
+            <field-expr><![CDATA[geo_latitude]]></field-expr>
+            <field-expr><![CDATA[geo_longitude]]></field-expr>
+            <field-expr><![CDATA[PageTitle]]></field-expr>
+            <field-expr><![CDATA[PageCategory]]></field-expr>
+            <field-expr><![CDATA[searchTerm]]></field-expr>
+            <field-expr><![CDATA[timestamp_sas]]></field-expr>
+          </output>
+        </window-compute>
+      </windows>
+      <edges>
+        <edge source="event_source" target="ci360_events"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>
