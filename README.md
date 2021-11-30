@@ -41,6 +41,7 @@ This is a list of connectors and agents included in this repository:
 - [__Adobe Audience Manager Integration__](adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
 - [__SAS ESP CI360 Adapter__](esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
 - [__SAS ESP Agent__](ci360-esp-agent): SAS Event Stream Processing agent enables streaming of CI360 events into ESP
+- [__CI360 Debug Agent__](ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 
 ## Getting Started
 
