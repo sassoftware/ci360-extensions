@@ -39,13 +39,14 @@ This is a list of connectors and agents included in this repository:
 - [__Google Analytics Integration__](google-analytics-integration): Implementation of connection with Google Analytics (GA)
 - [__Facebook Event Manager Integration__](facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
 - [__Adobe Audience Manager Integration__](adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
-- [__SAS ESP CI360 Adapter__](esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events to CI360
+- [__SAS ESP CI360 Adapter__](esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
+- [__SAS ESP Agent__](ci360-esp-agent): SAS Event Stream Processing agent enables streaming of CI360 events into ESP
 
 ## Getting Started
 
-To set up and use the sample connector codes you need to perform the following steps :
+To set up and use the provided extension code you need to perform the following steps :
 
-### Download sample connector code
+### Download sample code
 1. Download a `ci360-extensions` project source code into zip/tar.gz/tar.bz2/tar file format on your local machine.<br/>
    `Note:` You can also clone the project on your local machine
 
@@ -58,10 +59,11 @@ To set up and use the sample connector codes you need to perform the following s
 ### Build or Deploy
 Build and deployment instructions are included for each of the integration assets in their respoective sub-folders.
 
+
 ### Deploying CI360 Connectors
 Please refer [Set up a Custom Connector](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/ext-connectors-custom.htm) section in SAS Customer Intelligence 360 admin guide.
 
-### Register your connector into CI360
+##### Register your connector into CI360
 
 For most connector or agent integration assets, you need to register the connector and endpoint with these details into the CI360 system to use the connector. Details are included for each connector or agent in their sub-folders. Documentation sections are referenced below for eacy access.
 
@@ -70,6 +72,18 @@ Please refer to [`Add and Register a Connector`](https://go.documentation.sas.co
 
 **Add an Endpoint**
 Please refer to [`Add an Endpoint`](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/ext-connectors-add-endpoint.htm) in SAS Customer Intelligence 360 admin guide.
+
+### Deploying CI360 Agents
+
+For CI360 agent development, agent SDK needs to be downloaded and installed into the local Maven repository. See [`Download an Access Point SDK`](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/extapi-config-downloadsdk.htm) in SAS Customer Intelligence 360 admin guide.
+
+To install SDK JAR into local Maven repository:
+```
+mvn install:install-file -Dfile=<path where CI360 agent was downloaded>/sdk/mkt-agent-sdk-jar-1.current release.jar -DpomFile=path where CI360 agent was downloaded/sdk/pom.xml
+```
+
+**Create an Access Point Definition**
+Please refer to [`Create an Access Point Definition`](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/extapi-config-agentdefa.htm) in SAS Customer Intelligence 360 admin guide.
 
 
 ## Contributing
