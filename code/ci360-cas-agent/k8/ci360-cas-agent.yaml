@@ -1,0 +1,206 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ci360-agent-log
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ci360-cas-agent
+data:
+  agent.config: |
+   # Standard agent config - CI360 settings
+   ci360.gatewayHost=
+   ci360.tenantID=
+   ci360.clientSecret=
+
+   # Standard agent config
+   agent.keepaliveInterval=300000
+   agent.runInteractiveConsole=false
+   agent.monitorOutputInterval=600000
+   agent.batchInterval=5000
+   agent.lastEventOutput=last_event_json.txt
+
+   # Custom agent settings here
+   cas.host=sas-cas-server-default-client
+   cas.port=5570
+   cas.username=
+   cas.password=
+   cas.tableName=CI360EVENTS
+   cas.caslib=
+   cas.createTable=true
+   cas.tableColumns=[{"name":"timestamp", "type":"VARCHAR"},{"name":"eventName", "type":"VARCHAR"},{"name":"channelType", "type":"VARCHAR"},\
+   {"name":"identityId", "type":"VARCHAR"},{"name":"session", "type":"VARCHAR"},{"name":"page_title", "type":"VARCHAR"},{"name":"spot_id", "type":"VARCHAR"}]
+   cas.commitRowCount=1000
+   cas.maxBatchSize=0
+  logback.xml: |
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!-- scan this file for configuration changes every minute -->
+   <!-- change the scan period with: <configuration scan="true" scanPeriod="30 seconds" > -->
+   <configuration scan="true">
+     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+         <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+         <charset>UTF-8</charset>
+       </encoder>
+     </appender>
+     <appender name="CONSOLE-stats" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+         <pattern>%d{ISO8601} %m%n</pattern>
+         <charset>UTF-8</charset>
+       </encoder>
+     </appender>
+
+     <property name="LOG_DIR" value="/agentlogs" />
+
+     <appender name="AGENT-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+       <file>${LOG_DIR}/cas_agent.log</file>
+
+       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+           <fileNamePattern>${LOG_DIR}/scg_agent.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+           <!-- each archived file, size max 10MB -->
+           <maxFileSize>50MB</maxFileSize>
+           <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+           <totalSizeCap>1GB</totalSizeCap>
+           <!-- 60 days to keep -->
+           <maxHistory>14</maxHistory>
+       </rollingPolicy>
+
+       <encoder>
+         <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+         <charset>UTF-8</charset>
+       </encoder>
+     </appender>
+
+     <appender name="STATS-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+       <file>${LOG_DIR}/agent_event_stats.log</file>
+
+       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+           <fileNamePattern>${LOG_DIR}/agent_event_stats.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+           <!-- each archived file, size max 10MB -->
+           <maxFileSize>20MB</maxFileSize>
+           <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+           <totalSizeCap>100MB</totalSizeCap>
+           <!-- 60 days to keep -->
+           <maxHistory>14</maxHistory>
+       </rollingPolicy>
+
+       <encoder>
+           <pattern>%d %m%n</pattern>
+       </encoder>
+     </appender>
+  
+     <appender name="EVENTS-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+       <file>${LOG_DIR}/agent_events.log</file>
+
+       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+           <fileNamePattern>${LOG_DIR}/agent_events.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+           <!-- each archived file, size max 10MB -->
+           <maxFileSize>50MB</maxFileSize>
+           <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+           <totalSizeCap>1GB</totalSizeCap>
+           <!-- 60 days to keep -->
+           <maxHistory>14</maxHistory>
+       </rollingPolicy>
+
+       <encoder>
+           <pattern>%d %m%n</pattern>
+       </encoder>
+     </appender>
+ 
+     <logger name="com.sas" level="INFO">
+        <appender-ref ref="AGENT-FILE-ROLLING" />
+     </logger>
+     <logger name="org.apache" level="INFO"/>
+     <logger name="com.sas.ci360" level="INFO"/>
+     <logger name="com.sas.ci360.agent.impl.CASEventHandler.batchProcess" level="DEBUG"/>
+     <logger name="CustomAgent.stats" level="DEBUG">
+        <appender-ref ref="STATS-FILE-ROLLING" />
+     </logger>
+     <logger name="CustomAgent.events" level="INFO">
+        <appender-ref ref="EVENTS-FILE-ROLLING" />
+     </logger>
+     <root level="WARN">
+       <appender-ref ref="CONSOLE" />
+     </root>
+   </configuration>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci360-cas-agent
+  labels:
+    app: ci360-cas-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci360-cas-agent
+  template:
+    metadata:
+      labels:
+        app: ci360-cas-agent
+    spec:
+     imagePullSecrets:
+     - name: <YOUR SECRET>
+     containers:
+     - name: ci360-cas-agent
+       image: <YOUR CONTAINER REGISTRY>:<TAG>
+       livenessProbe:
+         exec:
+           command:
+           - /bin/sh
+           - -c
+           - netstat -al|grep 5570 |grep ESTABLISHED       
+       resources:
+         requests:
+           memory: "500Mi"
+           cpu: "250m"
+         limits:
+           memory: "2Gi"
+           cpu: "1"
+       imagePullPolicy: IfNotPresent
+       volumeMounts:
+       - name: ci360-agent-log
+         mountPath: /agentlogs
+       - name: config
+         mountPath: /ci360-cas-agent-config
+     restartPolicy: Always
+     volumes:
+       - name: ci360-agent-log
+         persistentVolumeClaim:
+           claimName: ci360-agent-log
+       - name: config
+         configMap:
+           name: ci360-cas-agent
+           items:
+             - key: agent.config
+               path: agent.config
+             - key: logback.xml
+               path: logback.xml
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ci360-cas-agent
+spec:
+  maxReplicas: 4
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ci360-cas-agent
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: AverageValue
+        averageValue: 800m

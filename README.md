@@ -30,18 +30,20 @@ Installation instructions for every extension are included in the project specif
 ## List of Extensions
 
 This is a list of connectors and agents included in this repository:
-- [__SMS/MMS Connector (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS and MMS communication through Syniverse
-- [__WhatsApp Connector (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WhatsApp communication through Syniverse
-- [__WeChat Connector (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WeChat communication through Syniverse
-- [__SMS Connector (via SFMC)__](code/i360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email communication through Salesforce Marketing Cloud
-- [__Email Connector (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
-- [__SMS Connector (via Twilio)__](code/ci360-twilio-connector): Twilio connector, enables SMS through Twilio
-- [__Google Analytics Integration__](code/google-analytics-integration): Implementation of connection with Google Analytics (GA)
-- [__Facebook Event Manager Integration__](code/facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
-- [__Adobe Audience Manager Integration__](code/adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
+- [__SMS/MMS (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS and MMS communication through Syniverse
+- [__WhatsApp (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WhatsApp communication through Syniverse
+- [__WeChat (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WeChat communication through Syniverse
+- [__SMS (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email communication through Salesforce Marketing Cloud
+- [__Email (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
+- [__SMS (via Twilio)__](code/ci360-twilio-connector): Twilio connector, enables SMS through Twilio
+- [__Google Analytics__](code/google-analytics-integration): Implementation of connection with Google Analytics (GA)
+- [__Facebook Event Manager__](code/facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
+- [__Adobe Audience Manager__](code/adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
+- [__Google Tag Manager__](https://github.com/sassoftware/sas-ci360-template-google-tag-manager): Employ the use of Google Tag Manager's Community Templates in order to easily deploy javascript actions for Customer Intelligence 360
+- [__SAS Event Stream Processing__](code/ci360-esp-agent): SAS Event Stream Processing (ESP) agent enables streaming of CI360 events into ESP
 - [__SAS ESP CI360 Adapter__](code/esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
-- [__SAS ESP Agent__](code/ci360-esp-agent): SAS Event Stream Processing agent enables streaming of CI360 events into ESP
 - [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
+- [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
 
 ## Getting Started
 

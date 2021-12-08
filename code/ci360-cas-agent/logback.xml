@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan this file for configuration changes every minute -->
+<!-- change the scan period with: <configuration scan="true" scanPeriod="30 seconds" > -->
+<configuration scan="true">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+  <appender name="CONSOLE-stats" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{ISO8601} %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <property name="LOG_DIR" value="./logs" />
+
+  <appender name="AGENT-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/cas_agent.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_DIR}/scg_agent.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+        <!-- each archived file, size max 10MB -->
+        <maxFileSize>50MB</maxFileSize>
+        <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+        <totalSizeCap>1GB</totalSizeCap>
+        <!-- 60 days to keep -->
+        <maxHistory>14</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="STATS-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/agent_event_stats.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_DIR}/agent_event_stats.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+        <!-- each archived file, size max 10MB -->
+        <maxFileSize>20MB</maxFileSize>
+        <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+        <totalSizeCap>100MB</totalSizeCap>
+        <!-- 60 days to keep -->
+        <maxHistory>14</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+        <pattern>%d %m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="EVENTS-FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/agent_events.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_DIR}/agent_events.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+        <!-- each archived file, size max 10MB -->
+        <maxFileSize>50MB</maxFileSize>
+        <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+        <totalSizeCap>1GB</totalSizeCap>
+        <!-- 60 days to keep -->
+        <maxHistory>14</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+        <pattern>%d %m%n</pattern>
+    </encoder>
+  </appender>
+ 
+  <logger name="com.sas" level="INFO">
+  	<appender-ref ref="AGENT-FILE-ROLLING" />
+  </logger>
+  <logger name="org.apache" level="INFO"/>
+  <logger name="com.sas.ci360" level="INFO"/>
+  <logger name="com.sas.ci360.agent.impl.CASEventHandler.batchProcess" level="DEBUG"/>
+  <logger name="CustomAgent.stats" level="DEBUG">
+  	<appender-ref ref="STATS-FILE-ROLLING" />
+  </logger>
+  <logger name="CustomAgent.events" level="INFO">
+  	<appender-ref ref="EVENTS-FILE-ROLLING" />
+  </logger>
+  <root level="WARN">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>
