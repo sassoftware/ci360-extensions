@@ -1,0 +1,11 @@
+*.log
+*.log.gz
+*.zip
+*.txt
+/target/
+*.log
+/target/
+*.zip
+/logs/*
+/last_event_json.txt
+/agent.config
