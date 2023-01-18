@@ -45,6 +45,7 @@ This is a list of connectors and agents included in this repository:
 - [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 - [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
+- [__Snowflake UDM Loader__](code/ci360-udm-loader-snowflake): CI360 UDM Loader for Snowflake automates the download of UDM data from Customer Intelligence 360 and then seemlessly loads this into Snowflake, utilizing SAS provided Python download client within a Docker container
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
 
 ## Getting Started
