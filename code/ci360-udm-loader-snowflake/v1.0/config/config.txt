@@ -1,0 +1,11 @@
+# Enter the agent name configured in CI360 GUI
+agentName = <CI360_ACCESS_POINT>
+
+# Enter the tenantId of your CI360 tenant, you find it underneath General in CI360 GUI
+tenantId  = <CI360_TENANT_ID>
+
+# Enter the secret of your agent which you created in CI360 GUI
+secret    = <CI360_SECRET_KEY>
+
+# CI360 Download URL
+baseUrl   = <CI360_EXTERNAL_GATEWAY_URL>
