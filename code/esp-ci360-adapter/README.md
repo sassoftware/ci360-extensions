@@ -6,7 +6,7 @@ SAS ESP (SAS Event Stream Processing) adapter that subscribes to a window in ESP
 
 ### Quick Start
 
-To use the ESP-CI360 adapter, follow these steps:
+To use the ESP-CI360 adapter, follow these steps after the project has been built and packaged (or if you already have a distribution archive):
 1. Unzip/copy the adapter to a directory where it will run
 2. Edit configuration file (__config.properties__) and specify ESP and CI360 connection information
 3. Run the adapter using the included script __start_esp_subscriber.sh__  
@@ -26,10 +26,10 @@ mvn package
 
 Distribution archive (ZIP) will be created in target folder. 
 
-You can reference the included script to install required dfx-esp-api into local Maven:
+Required dfx-esp-api library JAR can be found in your local installation of SAS ESP, in $DFESP_HOME/lib directory. It is a best practice to always use the JAR included with your current installation to ensure version compatibility. You can reference the included command line to install required dfx-esp-api into local Maven:
  
 ```
-mvn install:install-file -Dfile=lib\dfx-esp-api.jar -DgroupId=com.sas.esp -DartifactId=dfx-esp-api -Dversion=1 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=dfx-esp-api.jar -DgroupId=com.sas.esp -DartifactId=dfx-esp-api -Dversion=6.2 -Dpackaging=jar -DgeneratePom=true
 ```
 
 ## Using the Adapter
@@ -42,7 +42,7 @@ When adapter is running, it will subscribe to an active ESP window. Every event 
 
 ### Configuration
 
-You need to change the connection settings in the "config.txt" file to specify ESP server and project, as well as information needed connect to your access point in CI360 (gateway URL and token).
+You need to change the connection settings in the "config.properties" file to specify ESP server and project, as well as information needed connect to your access point in CI360 (gateway URL and token).
 
 ###### Windows
 You can run the adapter on Windows by executing follwing command:
@@ -56,7 +56,7 @@ You can run the adapter on Linux/Unix by calling:
 ./start_esp_subscriber.sh config.properties
 ```
 
-Configuration file config.txt has the following parameters:
+Configuration file config.properties has the following parameters:
 
 ### Configuration parameters
 
