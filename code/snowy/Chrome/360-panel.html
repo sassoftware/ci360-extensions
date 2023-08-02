@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="moment.js"></script>
+    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+    <script type="text/javascript" src="datetime.js"></script>
+</head>
+
+<body>
+    <button class="tablink tabActive" id="networkTab">Network</button>
+    <button class="tablink" id="eventStreamTab">Event Stream</button>
+    <button class="tablinkConfig tablink" id="config360Tab">Rules</button>
+    <button class="tablinkHeader">Monitor SAS CI 360 (Code name: Snowy)</button>
+    <br />
+    <div id="netwrok" class="tabcontent" style="display: block;">
+        <div>
+            <div class="btnStop tooltip" id="btnClear">Clear</div>
+            <div class="btnStop tooltip" id="btnStartStop"><span id="btnStartStop_text">Stop</span></div>
+        </div>
+        <div style="margin-bottom: 5px;">
+            <table class="collapsible active" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <img id="close_icon" src='images/details_close.png' alt="Show or Hide" style="display: none;" />
+                        <img id="open_icon" src='images/details_open.png' alt="Show or Hide" />
+                    </td>
+                    <td>
+                        Profile (click to hide and show)
+                    </td>
+                </tr>
+            </table>
+            <div class="content">
+                <div id="profileTableContainer">
+                    <table id="profileTable">
+                        <thead>
+                            <th>Time</th>
+                            <th>Session</th>
+                            <th>Visitor</th>
+                            <th>Datahub</th>
+                            <th>PII</th>
+                            <th>Event/EventName</th>
+                            <th>Ref Req #</th>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <table id="trafficTable" class="display" width="100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event</th>
+                    <th>Event JSON</th>
+                    <th>Event Name / Designed Name</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Datahub Id</th>
+                    <th>Req #</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Event</th>
+                    <th>Event JSON</th>
+                    <th>Event Name / Designed Name</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Datahub Id</th>
+                    <th>Req #</th>
+                </tr>
+            </tfoot>
+        </table>
+        <footer>
+            <br /> *Inferred Events are those events for which there is no 'Event' attribute in the request body. These are usually the 'Attach Identity' and 'Detach Identity' events send through 360 JavaScript APIs.
+            <br /> *'Time' shown is 'startedDateTime' attribute of the browser's network request. Timestamp calculated by CI 360 may differ.
+            <br /> *'Req #' is the order in which this extension receives request information from your browser, hence this may not sync with 'Time' column
+        </footer>
+    </div>
+    <div id="event_stream" class="tabcontent">
+        <div>
+            <div class="btnStop tooltip" id="btnClearEventStream">Clear</div>
+            <div class="btnStart tooltip" id="btnStartStopEventStream"><span id="btnStartStopEventStream_text">Start</span></div>
+        </div>
+        <table class="collapsible active" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <img id="close_icon" src='images/details_close.png' alt="Show or Hide" />
+                    <img id="open_icon" src='images/details_open.png' alt="Show or Hide" style="display: none;" />
+                </td>
+                <td>
+                    Access Point Configuration (click to hide and show)
+                </td>
+            </tr>
+        </table>
+        <div id="tenantDetails" class="content" style="display: block;">
+            <table border="0px">
+                <tr>
+                    <td>
+                        <label>External gateway address:</label>
+                    </td>
+                    <td>
+                        <input type="text" id="tenantUrl" name="tenantUrl" placeholder="extapigwservice-xxxyyyzzz.ci360.sas.com" size="50" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Tenant ID:</label>
+                    </td>
+                    <td>
+                        <input type="text" id="tenantId" name="tenantId" placeholder="ba1a5f5f5304413b4dde1b18" size="25" style="width: 100%;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Client secret:</label>
+                    </td>
+                    <td>
+                        <input type="password" id="clientSecret" name="clientSecret" placeholder="AWESOMEzamSASsdkfkdssdsdkcfisdfCI360" size="50" style="width: 100%;">
+                    </td>
+                </tr>
+            </table>
+
+            <div class="alert alert-warning" style="display: none; text-align: center;" id="divConfirmationBox">
+                <strong>Attention!</strong><br/> The Access Point details you provided are not of a diagnostics agent. Are you sure you want to continue?
+                <br/><br/>
+                <button id="btnConfirm">Yes, connect.</button>&nbsp;&nbsp;&nbsp;
+                <button id="btnDonotConnect">No, do not connect.</button>
+            </div>
+            <div class=" alert alert-warning AgentFilterBox" style="display: none;" id="divAgentFilterBox">
+                Please select a filter condition for your diagnostics agent.<br/> Auto detect from browser:
+
+                <input type="radio" id="diagnostics_filter_session" name="diagnostics_filter" value="session" checked>
+                <label for="session">Session Id</label>
+                <input type="radio" id="diagnostics_filter_datahub_id" name="diagnostics_filter" value="datahub_id">
+                <label for="datahub_id">Datahub Id</label>, OR
+                <input type="radio" id="diagnostics_filter_visitor" name="diagnostics_filter" value="channel_id">
+                <label for="channel_id">Channel User Id (Visitor Id)</label>
+                <input type="radio" id="diagnostics_filter_custom" name="diagnostics_filter" value="custom">
+                <label for="custom">Fixed value</label>
+                <select name="diagnostics_filter_custom" id="diagnostics_filter_custom_attr">
+                <option value="session_id">Session Id</option>
+                <option value="datahub_id">Datahub Id</option>
+                <option value="channel_id">Channel User Id (Visitor Id)</option>
+            </select>
+                <input type="text" id="diagnostics_filter_custom_fixed">
+                <br/>
+                <div id="divfiltervalues">
+
+                </div>
+                <br />
+                <button id="btnApplyDiagnosticsFilter">Apply</button>
+            </div>
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> You should <strong>NEVER</strong> provide the credentials of a SAS CI 360 Access Point which is integrated with another system, especially from a production tenant.
+            </div>
+        </div>
+        <table id="eventStreamTable" class="display" width="100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event Name</th>
+                    <th>Event</th>
+                    <th>Datahub Id</th>
+                    <th>Event JSON</th>
+                    <th>Timestamp</th>
+                    <th>Session Id</th>
+                    <th>Visitor/Channel User Id</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Event Name</th>
+                    <th>Event</th>
+                    <th>Identity Id</th>
+                    <th>Event JSON</th>
+                    <th>Timestamp</th>
+                    <th>Session Id</th>
+                    <th>Visitor/Channel User Id</th>
+                </tr>
+            </tfoot>
+        </table>
+        <br /><br /><span style="padding-left: 1em;"> Console:</span>
+        <div id="eventStreamConsole">
+
+        </div>
+    </div>
+    <div id="config_360" class="tabcontent">
+        <div style="margin: 3px;">
+            <span class="rule_title">Current domain:</span>
+            <span class="rule_content" id="current_domain">
+            </span>
+
+            <span class="rule_title" style="margin-left: 10px;">Tenant Id:</span>
+            <span class="rule_content" id="tenant_id">
+            </span>
+            <br /><br />
+            <span class="rule_title">Scripts Loaded</span>
+            <br />
+            <ul class="rule_content" id="scripts_loaded">
+                <li>No CI 360 related scripts are loaded yet. Please ensure that the site is tagged.</li>
+            </ul>
+            <br />
+            <span class="rule_title">Generic data collection rules:</span>
+            <ul class="rule_content" id="generic_collection_rules">
+            </ul>
+            <span class="rule_title">Form data collection rules:</span>
+            <ul class="rule_content" id="form_collection_rules">
+            </ul>
+        </div>
+    </div>
+    <footer>
+        Disclaimer
+        <ul>
+            <li>This browser extension is an experimental project to assist consultants to troubleshoot SAS CI 360 network traffic and event stream from their browser.</li>
+            <li>This tool does not guarantee that the data collected by SAS CI 360 will match what is shown here, though best efforts are made. </li>
+            <li>For formal data collection and validation, you must use the APIs provided by SAS CI 360 to download the data or use SAS CI 360 Agent to stream the events to your on-premise systems. </li>
+            <li>This tool is not a product from SAS and do not follow any official support mechanisms of SAS.</li>
+        </ul>
+    </footer>
+</body>
+<script src="360-panel.js"></script>
+<script src="jsrsasign-all-min.js"></script>
+
+</html>
