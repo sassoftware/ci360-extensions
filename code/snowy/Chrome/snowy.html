@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--
+    Developed by Sudheesh Warrier
+    Contact for any issues: Sudheesh.Warrier@sas.com
+-->
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="snowy.css" />
+    <link rel="stylesheet" type="text/css" href="w3.css" />
+    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+    <script src="jsrsasign-all-min.js"></script>
+    <script type="text/javascript" src="moment.js"></script>
+    <script src="snowy.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="dt.css" />
+    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+</head>
+
+<body>
+    <div class="header-container">
+
+        <div class="header-menu">
+            <div id="selected_page_header" class="w3-medium w3-text-white" style="margin-right: 10px; display: none;">
+                Network
+            </div>
+            <a id="network_stream" class="header-menu-item header-menu-item-selected" href="#" tabindex="1">
+                <img src="images/network.png" alt="Network Stream" title="Network Stream" />
+            </a>
+            <a id="event_stream" class="header-menu-item " href="#" tabindex="2">
+                <img src="images/stream.png" alt="360 Event Stream" title="360 Event Stream" />
+            </a>
+            <a id="debugging" class="header-menu-item " href="#" tabindex="3">
+                <img src="images/bug.png" alt="Debugging" title="Debugging" />
+            </a>
+            <a id="settings" class="header-menu-item " href="#" tabindex="4">
+                <img src="images/settings.png" alt="Settings" title="Settings" />
+            </a>
+        </div>
+        <div class="pull-down w3-hover-shadow">
+
+            <div id="profileTableContainer" class="profile-table-container w3-small">
+                <div style="width: 100%; padding-bottom: 7px;">
+                    <span class="w3-small" >
+                        <label id="lblDatahubId" class="w3-text-lime"></label>
+                        <label id="lblIPii" class="w3-text-lime"></label>
+                    </span>
+                    <strong> | </strong>
+                    <span id="gateway_info" class="w3-small" style="padding-left: 3px; text-align: right;">
+                        <label id="lblActiveTenantName"></label>
+                        , Tenant Id: <label id="lblActiveId" class="w3-tiny"></label>
+                        , Url: <label id="lblActiveUrl" class="w3-tiny"></label>
+                    </span>
+                </div>
+                <table id="profileTable" class="profile-table w3-tiny" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <th>Time</th>
+                        <th>Session</th>
+                        <th>Visitor</th>
+                        <th>Datahub</th>
+                        <th>PII</th>
+                        <th>Event/EventName</th>
+                        <th>Ref Req #</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">
+                                No data available in table
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="w3-tiny" style="clear: left;">
+                *Identity information is based on the Network traffic.
+            </div>
+        </div>
+
+    </div>
+    <div class="network-stream-main">
+
+        <table id="trafficTable" class="display" width="100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event</th>
+                    <th>Event JSON</th>
+                    <th>Quick Info</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Datahub Id</th>
+                    <th>Req#</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Event</th>
+                    <th>Event JSON</th>
+                    <th>Quick Info</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Datahub Id</th>
+                    <th>Req#</th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="w3-leftbar w3-border-orange w3-small">
+            <h4 class="w3-text-teal">Fire Identity Events</h4>
+            <p>
+            <table cellspacing="8" cellpassing="30" style="min-width: 50%;">
+                <tr>
+                    <td>
+                        <select class="w3-select" id="identity_type">
+                            <option value="select">Select Identity Type</option>
+                            <option value="login_id">login_id</option>
+                            <option value="customer_id">customer_id</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="w3-select" id="identity_obscure">
+                            <option value="select">Do you want to obscure the identity?</option>
+                            <option value="yes">Yes, obscure the identity.</option>
+                            <option value="no">No, don't obscure the identity.</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="txtIdentity_value" class="w3-input w3-border"
+                            placeholder="Enter the identity value" />
+                    </td>
+                    <td>
+                        <button class="w3-btn w3-teal" id='attach_identity'>Attach Identity</button>
+                        <button class="w3-btn w3-deep-orange" id='detach_identity'>Detach Identity</button>
+                    </td>
+                </tr>
+            </table>
+            *Events will be fired using JavaScript APIs of CI360.
+            </p>
+        </div>
+        <footer class="w3-leftbar w3-border-yellow w3-small w3-text-khaki">
+            <p>*Inferred Events are those events for which there is no 'Event' attribute in the request body. These are
+                usually the 'Attach Identity' and 'Detach Identity' events send through 360 JavaScript APIs.
+                <br /> *'Time' shown is 'startedDateTime' attribute of the browser's network request. Timestamps
+                calculated by CI 360 may differ.
+                <br /> *'Req #' is the order in which this extension receives request information from your browser,
+                hence this may not sync with 'Time' column
+                <br />*Highlighting of elements on mouse-over of the row is currently experimental, and it doesn't
+                consider the URL of the page while doing so.
+            </p>
+        </footer>
+    </div>
+    <div class="event-stream-main">
+
+        <table id="eventStreamTable" class="display" width="100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Event Name</th>
+                    <th>Quick Info</th>
+                    <th>Datahub Id</th>
+                    <th>Event JSON</th>
+                    <th>Timestamp</th>
+                    <th>Session Id</th>
+                    <th>Visitor/Channel User Id</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th></th>
+                    <th>Event Name</th>
+                    <th>Quick Info</th>
+                    <th>Identity Id</th>
+                    <th>Event JSON</th>
+                    <th>Timestamp</th>
+                    <th>Session Id</th>
+                    <th>Visitor/Channel User Id</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="debugging_main" class="debugging-main w3-small">
+
+        <span>Current domain:</span>
+        <span id="current_domain">
+        </span>
+
+        <span style="margin-left: 10px;">Tenant Id:</span>
+        <span id="tenant_id">
+        </span>
+        <div>
+            <h4 class="w3-text-teal">Identity Information</h4>
+            <span id="no_identity_info">Identity information is available only if you have configured and activated an Access Point under <strong>Settings > Event Stream Configurations</strong></span>
+            <div id="identity_info">
+                <table id="identityTable" class="profile-table w3-tiny" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <th>Identity ID</th>
+                        <th>Identity Type</th>
+                        <th>Source</th>
+                        <th>Create Time</th>
+                        <th>Attributes</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">
+                                No data available in table
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h4 class="w3-text-teal">Scripts Loaded</h4>
+
+        <ul id="scripts_loaded">
+            <li>No CI 360 related scripts are loaded yet. Please ensure that the site is tagged.This message is
+                refreshed only when the page is first loaded.</li>
+        </ul>
+        <h4 class="w3-text-teal">Scripts Tag from the Page</h4>
+        <ul id="script_tag">
+            <li>If you un-docked the dev tools to a separate window, Script information will not be available. You need
+                to check the console log to see the same.</li>
+        </ul>
+
+        <h4 class="w3-text-teal">Generic data collection rules:</h4>
+        <ul id="generic_collection_rules">
+        </ul>
+        <h4 class="w3-text-teal">Form data collection rules:</h4>
+        <ul id="form_collection_rules">
+        </ul>
+        <footer class="w3-leftbar w3-border-yellow w3-small w3-text-khaki">
+            <p>
+                *For better results reload the page by keeping this plugin active.
+                <br />*Based on the type of tag you added to the page, some information might be missing.
+                <br />*If you are using only the ot-api tag, then configuration information on this page will be
+                missing.
+
+            </p>
+        </footer>
+    </div>
+
+    <div class="settings-main">
+        <button class="w3-text-sand accordion setting-sub-section-1 w3-xlarge" >
+            Event Stream Configurations
+        </button>
+        <div class="panel event-stream-settings">
+            <div>Select a tenant from your saved list:</div>
+            <select id="ci360SavedTenantList" class="w3-select">
+            </select>
+            <p>
+                <button class="w3-btn w3-teal" id='settings_activate_selected_tenant'>Activate this tenant</button>
+                <button class="w3-btn w3-deep-orange" id='settings_forget_selected_tenant'>Forget this
+                    tenant</button>
+            </p>
+            <h4 class="w3-text-teal">Add a new tenant configuration</h4>
+            <div>Select CI360 API Gateway:</div>
+            <select id="ci360restUrlDropDown" class="w3-select">
+                <option value="extapigwservice-demo.cidemo.sas.com" selected="">DEMO -
+                    extapigwservice-demo.cidemo.sas.com</option>
+                <option value="extapigwservice-eu-prod.ci360.sas.com">EU -
+                    extapigwservice-eu-prod.ci360.sas.com
+                </option>
+                <option value="extapigwservice-prod.ci360.sas.com">US - extapigwservice-prod.ci360.sas.com
+                </option>
+                <option value="extapigwservice-syd-prod.ci360.sas.com">SYD -
+                    extapigwservice-syd-prod.ci360.sas.com
+                </option>
+                <option value="extapigwservice-apn-prod.ci360.sas.com">APN -
+                    extapigwservice-apn-prod.ci360.sas.com
+                </option>
+                <option value="extapigwservice-mum-prod.ci360.sas.com">MUM -
+                    extapigwservice-mum-prod.ci360.sas.com
+                </option>
+                <option value="extapigwservice-training.ci360.sas.com">Training -
+                    extapigwservice-training.ci360.sas.com
+                </option>
+            </select>
+            <br />
+            &nbsp;&nbsp;&nbsp;or
+            <br />
+            <input type="text" id="ci360restUrlTxt" class="w3-input w3-border" />
+
+            <span class="example">Example: extapigwservice-demo.cidemo.sas.com</span>
+            <div>What is your Tenant ID?</div>
+            <input type="text" id="ci360TenantIdTxt" class="w3-input w3-border" />
+            <div>Sh! Client Secret please...</div>
+            <input type="password" id="ci360TenantSecretTxt" class="w3-input w3-border" />
+            <span class="example">It is advised to provid the details of a Diagnostics Access Point.</span>
+            <div>A friendly name to remember...</div>
+            <input type="text" id="ci360TenantNameTxt" class="w3-input w3-border" />
+            
+            <input type="checkbox" id="display_metadata_from_360" name="display_metadata_from_360" class="w3-check" value="true" checked>
+            <label for="display_metadata_from_360">When activated, use this information to fetch metadata about Tasks, Spots, Creatives, Identity etc. from the tenant.</label>
+            <div class="w3-panel w3-pale-yellow w3-leftbar w3-border-yellow">
+                <p>
+                <ul>
+                    <li>Warning! You should <strong>NEVER</strong> provide the credentials of a SAS CI 360 Access Point
+                        which is integrated with another system, especially from a production tenant.</li>
+                    <li>Information you save is stored locally on your device/browser
+                        and it is not encrypted.</li>
+                </ul>
+
+                </p>
+            </div>
+
+
+            <p>
+                <button class="w3-btn w3-teal" id='settings_save_activate'>Save & Activate</button>
+                <button class="w3-btn w3-teal" id='settings_without_save_activate'>Activate without saving</button>
+                <button class="w3-btn w3-deep-orange" id='settings_clear'>Clear</button>
+            </p>
+        </div>
+        <button class="w3-text-sand accordion setting-sub-section-2 w3-xlarge">Tag Management (Beta) </button>
+        <div class="panel tag-settings">
+            <p>
+            <div>Select a Tag from your saved list:</div>
+            <select id="ci360SavedTagList" class="w3-select">
+            </select>
+            <p>
+                <button class="w3-btn w3-teal" id='settings_tag_activate_selected_tenant'>Activate this Tag</button>
+                <button class="w3-btn w3-deep-orange" id='settings_tag_forget_selected_tenant'>Forget this
+                    Tag</button>
+            </p>
+            <h4 class="w3-text-teal">Add a new Tag configuration</h4>
+
+            <div class=" example w3-panel w3-pale-yellow w3-leftbar w3-border-yellow">
+                <p>
+                    Currently, the plugin will add ot-all.min tag to the page, which is the most commonly used one. Here
+                    is the example of how it is added.
+                    <br />
+                <pre>
+                        var tag = document.createElement('script');
+                        tag.src = 'https://Your Tenant Url/js/ot-all.min.js';
+                        tag.setAttribute('id','ob-script-async');
+                        tag.setAttribute('data-efname','ci360');
+                        tag.setAttribute('data-a','YourTenantID');
+                        var head = document.getElementsByTagName('head')[0];
+                        head.appendChild(tag);
+                        console.log('CI 360 Tag added to this site by Snowy.');
+                    </pre>
+                </p>
+            </div>
+
+            <div>Select CI360 Environment:</div>
+            <select id="ci360tagUrlDropDown" class="w3-select">
+                <option value="eventsingest-training.ci360.sas.com">Training -eventsingest-training.ci360.sas.com
+                </option>
+                <option value="eventsingest-demo.cidemo.sas.com" selected="">DEMO - eventsingest-demo.cidemo.sas.com
+                </option>
+                <option value="i-eu.ci360.sas.com">EU -i-eu.ci360.sas.com</option>
+                <option value="i-us.ci360.sas.com">US - i-us.ci360.sas.com</option>
+                <option value="i-au.ci360.sas.com">SYD -i-au.ci360.sas.com</option>
+                <option value="i-ap.ci360.sas.com">APN - i-ap.ci360.sas.com</option>
+                <option value="eventsingest-mum-prod.ci360.sas.com">MUM - eventsingest-mum-prod.ci360.sas.com</option>
+            </select>
+            <br />
+            &nbsp;&nbsp;&nbsp;or
+            <br />
+            <input type="text" id="ci360tagUrlTxt" class="w3-input w3-border"
+                placeholder="You can get this value from your CI 360 Tenant > Settings > SAS Tag Instructions" />
+
+            <span class="example">Example: eventsingest-training.ci360.sas.com</span>
+            <div>What is your Tenant ID?</div>
+            <input type="text" id="ci360TenantId_TagTxt" class="w3-input w3-border" />
+            <div>A friendly name to remember...</div>
+            <input type="text" id="ci360TenantNameTagTxt" class="w3-input w3-border" />
+
+            <div class="w3-panel w3-pale-yellow w3-leftbar w3-border-yellow">
+                <p>Information you save is stored locally on your device/browser
+                    and it is not encrypted.</p>
+
+            </div>
+            <p>
+                <button class="w3-btn w3-teal" id='settings_tag_save_activate'>Save & Activate</button>
+                <button class="w3-btn w3-teal" id='settings_tag_without_save_activate'>Activate without saving</button>
+                <button class="w3-btn w3-deep-orange" id='settings_tag_clear'>Clear</button>
+            </p>
+            </p>
+        </div>
+        <button class="w3-text-sand accordion setting-sub-section-3 w3-xlarge" >Plugin Configurations</button>
+        <div class="panel plugin-settings">
+            <input type="checkbox" id="display_console" name="display_console" class="w3-check" value="true">
+            <label for="display_console"> Do you what to see the console logs?</label>
+            <br />
+            <input type="checkbox" id="display_gateway_eventstream" name="display_gateway_eventstream" class="w3-check"
+                value="true">
+            <label for="display_gateway_eventstream"> Do you what to see the active gateway information in pull-down
+                menu?</label>
+        </div>
+        <div class="w3-pale-yellow w3-leftbar w3-border-yellow" id="status_version">
+
+        </div>
+    </div>
+    
+    <div id="eventStreamConsole" class="console w3-panel w3-pale-red w3-leftbar w3-border-red">
+
+    </div>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4" style="width:auto !important; margin: auto;">
+            <header class="w3-container w3-deep-purple">
+                <span id='close_modal' class="w3-button w3-display-topright">&times;</span>
+                <h4>Snowy says...</h4>
+            </header>
+            <div class="w3-container w3-text-deep-purple" id="modal_msg">
+
+            </div>
+            <footer class="w3-container w3-deep-purple">
+                <p id="popup_btn_section" style="display: none;">
+                    <button class="w3-btn w3-teal" id='popup_btn_1'>Yes!</button>
+                    <button class="w3-btn w3-red" id='popup_btn_2'>No!</button>
+                </p>
+                <p id="popup_footer_spacer">&nbsp</p>
+            </footer>
+        </div>
+    </div>
+
+    <div id="id02" class="w3-modal">
+        <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-indigo">
+                <span id='close_modal02' class="w3-button w3-display-topright">&times;</span>
+                <h4>Snowy says...</h4>
+            </header>
+            <div class="w3-container w3-text-indigo" id="modal_msg02">
+                <p>
+                    Please select a filter condition for your diagnostics agent.<br /> Auto detect from browser:
+
+                    <input type="radio" id="diagnostics_filter_session" name="diagnostics_filter" value="session">
+                    <label for="session">Session Id</label>
+                    <input type="radio" id="diagnostics_filter_datahub_id" name="diagnostics_filter" value="datahub_id">
+                    <label for="datahub_id">Datahub Id</label>
+                    <input type="radio" id="diagnostics_filter_visitor" name="diagnostics_filter" value="channel_id">
+                    <label for="channel_id">Channel User Id (Visitor Id)</label>
+
+                <div style="text-align: center;">OR</div>
+                <input type="radio" id="diagnostics_filter_custom" name="diagnostics_filter" value="custom">
+                <label for="custom">Fixed value</label>
+                <select name="diagnostics_filter_custom" id="diagnostics_filter_custom_attr">
+                    <option value="session_id">Session Id</option>
+                    <option value="datahub_id">Datahub Id</option>
+                    <option value="channel_id">Channel User Id (Visitor Id)</option>
+                </select>
+                <input type="text" id="diagnostics_filter_custom_fixed">
+                <br />
+                <p class="w3-small w3-text-orange">*Auto detect options will be disabled if there are no traffic detected
+                    in the Network Stream.</p>
+                <div id="divfiltervalues">
+
+                </div>
+                </p>
+            </div>
+            <footer class="w3-container w3-indigo">
+                <p id="popup_btn_section">
+                    <button class="w3-btn w3-teal" id='popup_btn_102'>Yes!</button>
+                    <button class="w3-btn w3-red" id='popup_btn_202'>Cancel!</button>
+                </p>
+                <p id="popup_footer_spacer">&nbsp</p>
+            </footer>
+        </div>
+    </div>
+
+    <footer class="w3-leftbar w3-border-yellow w3-small w3-text-light-blue">
+        Disclaimer
+        <ul>
+            <li>This browser extension is an experimental project to assist consultants to troubleshoot SAS CI 360
+                network traffic and event stream from their browser.</li>
+            <li>This tool does not guarantee that the data collected by SAS CI 360 will match what is shown here, though
+                best efforts are made. </li>
+            <li>For formal data collection and validation, you must use the APIs provided by SAS CI 360 to download the
+                data or use SAS CI 360 Agent to stream the events to your on-premise systems. </li>
+            <li>This tool is not a product from SAS and does not follow any official support mechanisms of SAS.</li>
+        </ul>
+    </footer>
+    <div class="status-feedback">
+        Please check the details entered.
+    </div>
+    <div class="status-version">
+        
+    </div>
+</body>
+
+</html>

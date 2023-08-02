@@ -1,0 +1,8 @@
+{
+    "name":"Snowy",
+    "latest_version":3.8,
+    "message":"A new version of Snowy (3.8) is available. Debugging tab will now display Identity attributes if an Access Point is activated.",
+    "DIAG_VERSION":"diag9(2301)",
+    "SDK_VERSION":"sdk10(2301)",
+    "date":"19-Apr-2023"
+}

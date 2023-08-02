@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+    Developed by Sudheesh Warrier
+    Contact for any issues: Sudheesh.Warrier@sas.com
+-->
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="snowy.css" />
+    <link rel="stylesheet" type="text/css" href="w3.css" />
+    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+    <script src="jsrsasign-all-min.js"></script>
+    <script src="snowy.js"></script>
+</head>
+
+<body>
+    <div class="header-menu">
+        <span id="selected_page_header" class="w3-large w3-text-white" style="margin-right: 10px;">
+            Network
+        </span>
+        <span id="network_stream" class="header-menu-item header-menu-item-selected" href="#">
+            <img src="images/network.png" alt="Network Stream" title="Network Stream" />
+        </span>
+        <span id="event_stream" class="header-menu-item " href="#">
+            <img src="images/stream.png" alt="360 Event Stream" title="360 Event Stream" />
+        </span>
+        <span id="settings" class="header-menu-item " href="#">
+            <img src="images/settings.png" alt="Settings" title="Settings" />
+        </span>
+    </div>
+    <div class="network-stream-main">Network</div>
+    <div class="event-stream-main">
+        <div id="gateway_info" class="w3-hover-shadow w3-blue-gray w3-small"
+            style="padding: 3px; min-height: 35px; display: none;">
+            <label id="lblActiveTenantName">05 (SW Agent)</label>
+            <br />
+            Tenant Id: <label id="lblActiveId" class="w3-tiny">da1a105f5300013b4dde1b18</label>
+            Url: <label id="lblActiveUrl" class="w3-tiny">extapigwservice-demo.cidemo.sas.com</label>
+        </div>
+    </div>
+    <div class="settings-main">
+        <h2 class="w3-text-teal">
+            Tenant Configurations
+        </h2>
+        <div>Select a tenant from your saved list:</div>
+        <select id="ci360SavedTenantList" class="w3-select">
+        </select>
+        <p>
+            <button class="w3-btn w3-teal" id='settings_activate_selected_tenant'>Activate this tenant</button>
+            <button class="w3-btn w3-deep-orange" id='settings_forget_selected_tenant'>Forget this
+                tenant</button>
+        </p>
+        <h4 class="w3-text-teal">Add a new tenant configuration</h4>
+        <div>Select CI360 API Gateway:</div>
+        <select id="ci360restUrlDropDown" class="w3-select">
+            <option value="extapigwservice-demo.cidemo.sas.com" selected="">DEMO -
+                extapigwservice-demo.cidemo.sas.com</option>
+            <option value="extapigwservice-eu-prod.ci360.sas.com">EU -
+                extapigwservice-eu-prod.ci360.sas.com
+            </option>
+            <option value="extapigwservice-prod.ci360.sas.com">US - extapigwservice-prod.ci360.sas.com
+            </option>
+            <option value="extapigwservice-syd-prod.ci360.sas.com">SYD -
+                extapigwservice-syd-prod.ci360.sas.com
+            </option>
+            <option value="extapigwservice-apn-prod.ci360.sas.com">APN -
+                extapigwservice-apn-prod.ci360.sas.com
+            </option>
+            <option value="extapigwservice-mum-prod.ci360.sas.com">MUM -
+                extapigwservice-mum-prod.ci360.sas.com
+            </option>
+            <option value="extapigwservice-training.ci360.sas.com">Training -
+                extapigwservice-training.ci360.sas.com
+            </option>
+        </select>
+        <br />
+        &nbsp;&nbsp;&nbsp;or
+        <br />
+        <input type="text" id="ci360restUrlTxt" class="w3-input w3-border" />
+
+        <span class="example">Example: extapigwservice-demo.cidemo.sas.com</span>
+        <div>What is your Tenant ID?</div>
+        <input type="text" id="ci360TenantIdTxt" class="w3-input w3-border" />
+        <div>Sh! Client Secret please...</div>
+        <input type="password" id="ci360TenantSecretTxt" class="w3-input w3-border" />
+        <span class="example">It is advised to provide the details of a Diagnostics Access Point.</span>
+        <div>A friendly name to remember...</div>
+        <input type="text" id="ci360TenantNameTxt" class="w3-input w3-border" />
+
+        <div class="w3-panel w3-pale-yellow w3-leftbar w3-border-yellow">
+            <p>Information you save is stored locally on your device
+                and the information is saved without any encryption.</p>
+
+        </div>
+        <p>
+            <button class="w3-btn w3-teal" id='settings_save_activate'>Save & Activate</button>
+            <button class="w3-btn w3-teal" id='settings_without_save_activate'>Activate without saving</button>
+            <button class="w3-btn w3-deep-orange" id='settings_clear'>Clear</button>
+        </p>
+
+        <h4 class="w3-text-teal">Plugin Configurations</h4>
+
+        <input type="checkbox" id="display_console" name="display_console" class="w3-check" value="true">
+        <label for="display_console"> Do you what to see the console logs?</label>
+        <br />
+        <input type="checkbox" id="display_gateway_eventstream" name="display_gateway_eventstream" class="w3-check"
+            value="true">
+        <label for="display_gateway_eventstream"> Do you what to see the active gateway information in Event Stream
+            page?</label>
+
+    </div>
+    <div id="eventStreamConsole" class="console w3-panel w3-pale-red w3-leftbar w3-border-red">
+
+    </div>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-deep-purple">
+                <span id='close_modal' class="w3-button w3-display-topright">&times;</span>
+                <h4>Snowy says...</h4>
+            </header>
+            <div class="w3-container w3-text-deep-purple" id="modal_msg">
+
+            </div>
+            <footer class="w3-container w3-deep-purple">
+                <p id="popup_btn_section" style="display: none;">
+                    <button class="w3-btn w3-teal" id='popup_btn_1'>Yes!</button>
+                    <button class="w3-btn w3-red" id='popup_btn_2'>No!</button>
+                </p>
+                <p id="popup_footer_spacer">&nbsp</p>
+            </footer>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
