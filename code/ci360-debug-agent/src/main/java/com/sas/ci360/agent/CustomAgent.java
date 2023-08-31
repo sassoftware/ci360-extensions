@@ -79,8 +79,8 @@ public class CustomAgent {
 								}
 
 								// update stats
-								statsHashMap.put(STATS_EVENT_COUNT, statsHashMap.getOrDefault(STATS_EVENT_COUNT, 0) + 1);
-								statsHashMap.put(eventName, statsHashMap.getOrDefault(eventName, 0) + 1);
+								statsHashMap.compute(Agent.STATS_EVENT_COUNT, (k, v) -> v == null ? 1 : v + 1);
+								statsHashMap.compute(eventName, (k, v) -> v == null ? 1 : v + 1);
 
 								try {
 									eventHandler.processEvent(jsonEvent);
