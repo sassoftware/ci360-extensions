@@ -1,0 +1,121 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+<br>
+<p>CI360 provides an Event API to send external events to CI360. With the following option you can send events to CI360
+  to trigger Tasks and Activities </p>
+
+<!-- start details -->
+<details class="grey-box" style="padding-left: 1em;padding-right: 2em;display:none">
+  <summary>
+    You can enter CI360 Tenant credentials to retrieve available external events....
+    <button type="button" class="btn btn-default btn-sm" id="btn_GetExternalEvents"
+      onclick="btnGetExternalEvents(this);">
+      <span class="oi oi-reload"></span> &nbsp;Get Events
+    </button>
+    <img src="./images/ajax_loader_green_32.gif" id="imgLoad_getexternalevents" style="display:none">
+  </summary>
+  <p>
+  <dl class="row">
+    <dt class="col-lg-1" style="text-align: right;">CI360 URL</dt>
+    <dd class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+      <select class="form-control form-control-sm tenantCi360Url" id="ci360DesignCenterUrl">
+        <option value="design-prod.cidemo.sas.com" selected="">DEMO - design-prod.cidemo.sas.com</option>
+        <option value="design-euw.ci360.sas.com">EU - design-euw.ci360.sas.com</option>
+        <option value="design-use.ci360.sas.com">US - design-use.ci360.sas.com</option>
+        <option value="design-syd.ci360.sas.com">SYD - design-syd.ci360.sas.com</option>
+        <option value="design-apn.ci360.sas.com">APN - design-apn.ci360.sas.com</option>
+        <option value="design-training.ci360.sas.com">Training - design-training.ci360.sas.com</option>
+      </select>
+    </dd>
+
+    <dt class="col-lg-1" style="text-align: right;">API User</dt>
+    <dd class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+      <input id="api_user" class="form-control form-control-sm tenantApiUser" value=""></input>
+    </dd>
+
+    <dt class="col-lg-1" style="text-align: right;">Secret</dt>
+    <dd class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+      <input id="api_user_secret" type="password" class="form-control form-control-sm tenantApiSecret" value=""></input>
+    </dd>
+  </dl>
+  </p>
+</details><!-- end details -->
+
+<br><br>
+
+<p>
+  <span id="eventsContainer" class="row">
+
+  </span>
+</p>
+
+<div id="ci360EventAttributes"></div>
+
+<dl class="row marginbottom">
+  <dd class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+    <select id="ci360IDType" class="form-control form-control-sm ci360attrName" placeholder="Name">
+      <option value="subject_id">subject_id</option>
+      <option value="datahub_id">datahub_id</option>
+      <option value="login_id">login_id</option>
+      <option value="customer_id">customer_id</option>
+    </select>
+  </dd>
+
+  <dd class="col-lg-3 col-md-7 col-sm-7 col-xs-9">
+    <input id="ci360IDvalue" class="form-control form-control-sm ci360attrValue" value="372" placeholder="Value">
+  </dd>
+</dl>
+<dl class="row marginbottom">
+  <dd class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+    <input class="form-control form-control-sm ci360attrName" value="eventName">
+  </dd>
+
+  <dd class="col-lg-3 col-md-7 col-sm-7 col-xs-9">
+    <input class="form-control form-control-sm ci360attrValue" id="ci360EventName" value="Contact Event"
+      placeholder="Value">
+  </dd>
+  <dd class="col-lg-2 col-md-9 col-sm-12 col-xs-12" id="ci360ExternalEventsDropDown" style="display:none">
+    <select class="form-control form-control-sm" id="ci360ExternalEvents" style="background: #efefef;"
+      onchange="getExternalEventAttributes(this);"></select>
+  </dd>
+  <!-- send external event button -->
+  <dd class="col-lg-4 col-md-9 col-sm-12 col-xs-12">
+      <!-- load in events here -->
+    <button id="ci360SendEventBtn" class="btn btn-sm btn-primary" onclick="sendExternalEvent(this);">
+      <span class="oi oi-caret-right"></span> &nbsp;Send External Event
+    </button>
+  </dd>
+</dl>
+  <!-- add attributes button -->
+  <dl class="row marginbottom">
+    <dd class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+      <button type="button" class="btn btn-sm btn-default" onclick="addCi360Attribute(this);">
+        <span class="oi oi-plus"></span> &nbsp;Add Attribute
+      </button>
+    </dd>
+  </dl>
+
+
+
+
+<br><br>
+<!-- response from CI360 textarea -->
+<div class="row" id="ci360ResponseDiv" style="display:none">
+  <br>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label><b>CI360 Response</b></label>
+    </div>
+  </div>
+
+  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <textarea rows="5" id="ci360Response" class="form-control" value=""></textarea>
+      </div>
+    </div>
+  </div>
+</div><!-- end response of CI360 -->
+<br>

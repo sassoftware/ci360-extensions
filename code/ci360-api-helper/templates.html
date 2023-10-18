@@ -1,0 +1,569 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+    <script id="configMobileTransactionRow" type="text/x-handlebars-template">
+        <tr>
+            <td ><input name="key" type="text" value="{{key}}" class="form-control input-md" /></td>
+            <td ><input name="label" type="text" value="{{label}}" class="form-control input-md" /></td>
+            <td class="text-center"><button type="button" class="btn btn-sm btn-primary" onclick="configRemoveMobileTransaction(this);">Delete</button> </td>
+        </tr>
+    </script>
+
+    <script id="configSelectOptions" type="text/x-handlebars-template">
+        {{#each optionList}}
+            <option value="{{this.value}}" {{this.markSelected}}>{{this.label}}</option>
+        {{/each}}
+    </script>
+
+
+    <script id="templateAttrItem" type="text/x-handlebars-template">
+    <dl class="row marginbottom">   
+      <dd class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <input class="form-control form-control-sm {{endpoint}}attrName" value="{{eventName}}" placeholder="Name">
+      </dd>
+                    
+      <dd class="col-lg-3 col-md-7 col-sm-7 col-xs-9">
+        <input class="form-control form-control-sm {{endpoint}}attrValue" value="{{eventValue}}" placeholder="Value">
+      </dd>
+      <dd class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+        <button type="button" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">
+          <span class="oi oi-delete"></span>
+        </button>
+      </dd>
+    </dl>
+    </script>
+
+    <script id="templateDataItem" type="text/x-handlebars-template">
+    <div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h6 class="mb-0 row"> 
+        <a class="col-lg-1" data-toggle="collapse" href="#item{{itemid}}" aria-expanded="true" aria-controls="item{{itemid}}" style="color: #212529; margin-top: 4px">
+          <span class="oi oi-ellipses"></span></a>
+
+        <label class="col-lg-1 col-md-2 col-sm-4 text-right">Label</label>
+        <input class="col-lg-2 col-md-9 col-sm-7 form-control form-control-sm item" name="label" value="{{label}}" 
+          placeholder="enter an attribute label"></input>
+        
+        <label class="col-lg-1 col-md-2 col-sm-4 text-right">Name</label>
+        <input class="col-lg-2 col-md-9 col-sm-7 form-control form-control-sm item" name="name" value="{{name}}"
+          placeholder="enter an attribute name" onkeyup="removeSpaces(this);"></input>
+        
+        <label class="col-lg-1 col-md-2 col-sm-4 text-right">Type</label>
+        <select name="type" class="form-control form-control-sm col-lg-2 col-md-9 col-sm-7 item-type item">
+              <option value="{{type}}" selected>{{type}}</option>
+              <option value="INT" >INT</option>
+              <option value="DOUBLE">DOUBLE</option>
+              <option value="STRING">STRING</option>
+              <option value="BOOLEAN">BOOLEAN</option>
+              <option value="TIMESTAMP">TIMESTAMP</option>
+              <option value="DATE">DATE</option>
+              <option value="SMALLINT">SMALLINT</option>
+          </select>
+        <button class="ml-auto btn btn-sm btn-danger" type="button" 
+           onclick="$(this).parent().parent().parent().remove()"><span class="oi oi-delete"></span></button>
+        
+      </h6>
+    </div>
+    <div id="item{{itemid}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">
+
+    <div class="row">
+        <div class="col-lg-4">
+          <dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">desc</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <input name="description" class="form-control form-control-sm item" value="{{description}}"
+                placeholder="enter an attribute description"></input>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">tags</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12">
+              <input id="item{{itemid}}_tags" name="tags" class="form-control form-control-sm item" value="{{tags}}"
+                placeholder="enter tags comma separated"></input>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">valid tags</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12" style="font-size:small;color: cornflowerblue;">
+              <a onclick="addTag(this)">DEMOGRAPHICS</a> &nbsp;
+              <a onclick="addTag(this)">EMAIL_CONTACT</a> &nbsp;
+              <a onclick="addTag(this)">IMPORTEDLIST</a> &nbsp;
+              <a onclick="addTag(this)">OFFERS</a> &nbsp;
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">family</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <input name="family" class="form-control form-control-sm item" value="{{family}}"
+                placeholder="enter a family"></input>
+            </dd>
+          </dl>
+          <!--<dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">itemid</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12">
+              <input name="itemid" type="number" class="form-control form-control-sm item" value="{{itemid}}"
+                placeholder="enter itemid"></input>
+            </dd>
+          </dl>-->
+          <dl class="row marginbottom">
+            <dt class="col-lg-3 col-md-12 col-sm-12 text-right">delimiter</dt>
+            <dd class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+              <input name="delimiter" class="form-control form-control-sm item" value="{{delimiter}}"
+                placeholder=""></input>
+            </dd>
+          </dl>
+        </div>
+
+        <div class="col-lg-4">
+          <dl class="row marginbottom">
+            <dt class="col-lg-5 col-md-12 col-sm-12 text-right">key</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="key" class="form-control form-control-sm  item">
+                  <option value="{{key}}" selected>{{key}}</option>
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-5 col-md-12 col-sm-12 text-right">identity</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="identity" class="form-control form-control-sm  item">
+                  <option value="{{identity}}" selected>{{identity}}</option>
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-5 col-md-12 col-sm-12 text-right">identityType</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="identityType" class="form-control form-control-sm  item">
+                  <option value="{{identityType}}" selected>{{identityType}}</option>
+                  <option value="customer_id">customer_id</option>
+                  <option value="login_id">login_id</option>
+                  <option value="email_id">email_id</option>
+                  <option value="subject_id">subject_id</option>
+                  <option value="visitor_id">visitor_id</option>
+                  <option value="device_id">device_id</option>
+                  <option value="identity_id">identity_id</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-5 col-md-12 col-sm-12 text-right">identityAttribute</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="identityAttribute" class="form-control form-control-sm item">
+                  <option value="{{identityAttribute}}" selected>{{identityAttribute}}</option>
+                  <option value="false">false</option>
+                  <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-5 col-md-12 col-sm-12 text-right">uniqueValuesAvailable</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="uniqueValuesAvailable" class="form-control form-control-sm item">
+                <option value="{{uniqueValuesAvailable}}" selected>{{uniqueValuesAvailable}}</option>
+                <option value="false" >false</option>
+                <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      
+        <div class="col-lg-4">
+          <dl class="row marginbottom">
+            <dt class="col-lg-6 col-md-12 col-sm-12 text-right">noAnalytics</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="excludeFromAnalytics" class="form-control form-control-sm item">
+                  <option value="{{excludeFromAnalytics}}" selected>{{excludeFromAnalytics}}</option>
+                  <option value="false">false</option>
+                  <option value="true" >true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-6 col-md-12 col-sm-12 text-right">segmentProfilingField</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="segmentProfilingField" class="form-control form-control-sm item">
+                  <option value="{{segmentProfilingField}}" selected>{{segmentProfilingField}}</option>
+                  <option value="false" >false</option>
+                  <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-6 col-md-12 col-sm-12 text-right">channelContactInfo</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="channelContactInformation" class="form-control form-control-sm item">
+                  <option value="{{channelContactInformation}}" selected>{{channelContactInformation}}</option>
+                  <option value="false">false</option>
+                  <option value="true" >true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-6 col-md-12 col-sm-12 text-right">segmentation</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="segmentation" class="form-control form-control-sm item">
+                <option value="{{segmentation}}" selected>{{segmentation}}</option>
+                <option value="false" >false</option>
+                <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+          <dl class="row marginbottom">
+            <dt class="col-lg-6 col-md-12 col-sm-12 text-right">targeting</dt>
+            <dd class="col-lg-6 col-md-12 col-sm-12">
+              <select name="availableForTargeting" class="form-control form-control-sm item">
+                <option value="{{availableForTargeting}}" selected>{{availableForTargeting}}</option>
+                <option value="false" >false</option>
+                <option value="true">true</option>
+              </select>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+    </script>
+
+    <script id="templateTableHeader" type="text/x-handlebars-template">
+    <div class="existingDescriptor">
+    <dl class="row marginbottom">
+      <dt class="col-sm-2 text-right">Created By</dt>
+      <dd class="col-lg-4 col-md-9 col-sm-9 col-xs-9">
+        {{createdBy}}
+      </dd>
+
+      <dt class="col-sm-2 text-right">Created TimeStamp</dt>
+      <dd class="col-lg-2 col-md-9 col-sm-9 col-xs-9">
+        {{createdTimeStamp}}
+      </dd>
+    </dl>
+
+    <dl class="row marginbottom">
+      <dt class="col-sm-2 text-right">Modified By</dt>
+      <dd class="col-lg-4 col-md-9 col-sm-9 col-xs-9">
+        {{modifiedBy}}
+      </dd>
+
+      <dt class="col-sm-2 text-right">Modified TimeStamp</dt>
+      <dd class="col-lg-2 col-md-9 col-sm-9 col-xs-9">
+        {{modifiedTimeStamp}}
+      </dd>
+    </dl>
+
+    <dl class="row marginbottom">
+      <dt class="col-sm-2 text-right">ID</dt>
+      <dd class="col-lg-4 col-md-9 col-sm-9 col-xs-9">
+        {{id}}
+      </dd>
+
+      <dt class="col-sm-2 text-right">Version</dt>
+      <dd class="col-lg-2 col-md-9 col-sm-9 col-xs-9">
+        {{version}}
+      </dd>
+    </dl>
+    </div>
+    <br>
+
+    <dl class="row marginbottom">
+      <dt class="col-sm-2 text-right">Table Name</dt>
+      <dd class="col-lg-4 col-md-9 col-sm-9 col-xs-9">
+        <input id="name" class="form-control form-control-sm settings" value="{{name}}"
+          placeholder="enter a table name"></input>
+      </dd>
+      <dt class="col-sm-2 text-right">Table Type</dt>
+      <dd class="col-lg-2 col-md-9 col-sm-9 col-xs-9">
+        <select id="type" class="form-control form-control-sm">
+            <option value= selected></option>
+            <option value="identity">identity</option>
+            <option value="contact_preference">contact_preference</option>
+            <option value="customer">customer</option>
+            <option value="deleteList">deleteList</option>
+            <option value="importedList">importedList</option>
+            <option value="lookup">lookup</option>
+            <option value="transient">transient</option>
+            <option value="transientDeviceList">transientDeviceList</option>
+        </select>
+      </dd>
+    </dl>
+
+    <dl class="row marginbottom">
+      <dt class="col-sm-2 text-right">Table Description</dt>
+      <dd class="col-lg-4 col-md-9 col-sm-9 col-xs-9">
+        <input id="description" class="form-control form-control-sm settings" value="{{description}}"
+          placeholder="enter a table description"></input>
+      </dd>
+      <dt class="col-sm-2 text-right">Targeting</dt>
+      <dd class="col-lg-2 col-md-9 col-sm-9 col-xs-9">
+        <select id="makeAvailableForTargeting" class="form-control form-control-sm">
+            <option value selected></option>
+            <option value="false">false</option>
+            <option value="true">true</option>
+        </select>
+      </dd>
+    </dl>
+
+    <dl class="row marginbottom">
+    </dl>
+  </script>
+  
+  <script id="templateDataItemNameList" type="text/x-handlebars-template">
+	<span class="badge badge-pill badge-{{badgeColor}} dataItemName" 
+          style="cursor: pointer;font-size: smaller;" onclick="$(this).remove();expGenerateFilterJSON();"
+          name="{{dataItemName}}">
+		{{dataItemName}}       
+    </span>
+  </script>
+  
+  <script id="tmpl_eventChannelValuesDropDown" type="text/x-handlebars-template">
+  						<option value='' >--select channel--</option>
+		        		<option value='email'  >email</option>
+						<option value='mobile' >mobile</option>
+						<option value='web'    >web</option>
+						<option value='onprem' >onprem</option>
+						<option value='system' >system</option>
+  </script>
+  
+  <script id="tmpl_eventNameValuesDropDown" type="text/x-handlebars-template">
+						<option value='' >--select event name--</option>
+		        		<option value='abtestpathassignment' >abtestpathassignment</option>
+						<option value='activity_flow_in' >activity_flow_in</option>
+						<option value='activity_flow_out' >activity_flow_out</option>
+						<option value='activitystart' >activitystart</option>
+						<option value='bannerPress' >bannerPress</option>
+						<option value='button1Press' >button1Press</option>
+						<option value='button3Press' >button3Press</option>
+						<option value='cartitem' >cartitem</option>
+						<option value='click' >click</option>
+						<option value='complaint' >complaint</option>
+						<option value='conversion' >conversion</option>
+						<option value='defocus' >defocus</option>
+						<option value='focus' >focus</option>
+						<option value='hard_bounce' >hard_bounce</option>
+						<option value='impression' >impression</option>
+						<option value='impression_viewable' >impression_viewable</option>
+						<option value='messageDismiss' >messageDismiss</option>
+						<option value='milestone' >milestone</option>
+						<option value='NewSession' >NewSession</option>
+						<option value='notificationOpened' >notificationOpened</option>
+						<option value='open' >open</option>
+						<option value='opt-out' >opt-out</option>
+						<option value='PageView' >PageView</option>
+						<option value='send' >send</option>
+						<option value='spot_clicked' >spot_clicked</option>
+						<option value='spot_closed' >spot_closed</option>
+						<option value='spot_default_delivered' >spot_default_delivered</option>
+						<option value='spot_failed' >spot_failed</option>
+						<option value='spot_requested' >spot_requested</option>
+						<option value='spot_viewable' >spot_viewable</option>
+            <option value='view' >view</option>
+  </script>
+  
+  <script id="tmpl_eventTypeValuesDropDown" type="text/x-handlebars-template">
+						<option value='' >--select event type--</option>
+		        		<option value='abtestpathassignment' >abtestpathassignment</option>
+						<option value='activity_flow_in' >activity_flow_in</option>
+						<option value='activity_flow_out' >activity_flow_out</option>
+						<option value='activitystart' >activitystart</option>
+						<option value='bannerPress' >bannerPress</option>
+						<option value='button1Press' >button1Press</option>
+						<option value='button3Press' >button3Press</option>
+						<option value='cartitem' >cartitem</option>
+						<option value='click' >click</option>
+						<option value='complaint' >complaint</option>
+						<option value='dataview' >dataview</option>
+						<option value='defocus' >defocus</option>
+						<option value='focus' >focus</option>
+						<option value='goal' >goal</option>
+						<option value='hard_bounce' >hard_bounce</option>
+						<option value='messageDismiss' >messageDismiss</option>
+						<option value='NewSession' >NewSession</option>
+						<option value='notificationOpened' >notificationOpened</option>
+						<option value='open' >open</option>
+						<option value='opt-out' >opt-out</option>
+						<option value='send' >send</option>
+						<option value='spot_change' >spot_change</option>
+						<option value='spot_clicked' >spot_clicked</option>
+						<option value='spot_closed' >spot_closed</option>
+						<option value='spot_default_delivered' >spot_default_delivered</option>
+						<option value='spot_failed' >spot_failed</option>
+						<option value='spot_requested' >spot_requested</option>
+						<option value='spot_viewable' >spot_viewable</option>
+						<option value='spot_viewable_goal' >spot_viewable_goal</option>
+						<option value='submit' >submit</option>
+						<option value='view' >view</option>
+  </script>
+  
+  
+  <script id="tmpl_dataItemDropDown" type="text/x-handlebars-template">
+	<option value='' >--select data item--</option>
+    <option value='account' >account</option>
+    <option value='activity_nm' >activity_nm</option>
+    <option value='activity_node_id' >activity_node_id</option>
+    <option value='browser_device_name' >browser_device_name</option>
+    <option value='browser_device_type' >browser_device_type</option>
+    <option value='browser_language_name' >browser_language_name</option>
+    <option value='browser_name' >browser_name</option>
+    <option value='browser_platform' >browser_platform</option>
+    <option value='browser_platform_type' >browser_platform_type</option>
+    <option value='browser_platform_version' >browser_platform_version</option>
+    <option value='browser_version_no' >browser_version_no</option>
+    <option value='cart_number_of_items_cnt' >cart_number_of_items_cnt</option>
+    <option value='cart_type_nm' >cart_type_nm</option>
+    <option value='channel_name' >channel_name</option>
+    <option value='contact_response_cd' >contact_response_cd</option>
+    <option value='creative_id' >creative_id</option>
+    <option value='creative_name' >creative_name</option>
+    <option value='cts' >cts</option>
+    <option value='domain' >domain</option>
+    <option value='domain_type' >domain_type</option>
+    <option value='event_channel' >event_channel</option>
+    <option value='event_timestamp' >event_timestamp</option>
+    <option value='event_type_nm' >event_type_nm</option>
+    <option value='event_uid' >event_uid</option>
+    <option value='eventname' >eventname</option>
+    <option value='goal_name' >goal_name</option>
+    <option value='http_request_header_referer' >http_request_header_referer</option>
+    <option value='http_request_origin' >http_request_origin</option>
+    <option value='http_request_origination_type' >http_request_origination_type</option>
+    <option value='load_id' >load_id</option>
+    <option value='mkt_event_name' >mkt_event_name</option>
+    <option value='mobile_app_version' >mobile_app_version</option>
+    <option value='mobile_appid' >mobile_appid</option>
+    <option value='mobile_carrier_name' >mobile_carrier_name</option>
+    <option value='mobile_country_code' >mobile_country_code</option>
+    <option value='mobile_country_code' >mobile_country_code</option>
+    <option value='mobile_device_mfg' >mobile_device_mfg</option>
+    <option value='mobile_device_model' >mobile_device_model</option>
+    <option value='mobile_device_name' >mobile_device_name</option>
+    <option value='mobile_device_type' >mobile_device_type</option>
+    <option value='mobile_network_code' >mobile_network_code</option>
+    <option value='mobile_platform' >mobile_platform</option>
+    <option value='mobile_platform_type' >mobile_platform_type</option>
+    <option value='mobile_platform_version' >mobile_platform_version</option>
+    <option value='mobile_screen_height' >mobile_screen_height</option>
+    <option value='mobile_screen_width' >mobile_screen_width</option>
+    <option value='page_desc' >page_desc</option>
+    <option value='page_title_nm' >page_title_nm</option>
+    <option value='processed_dttm' >processed_dttm</option>
+    <option value='processed_dttm' >processed_dttm</option>
+    <option value='product_availability_message' >product_availability_message</option>
+    <option value='product_group' >product_group</option>
+    <option value='product_id' >product_id</option>
+    <option value='product_name' >product_name</option>
+    <option value='product_quantity_num' >product_quantity_num</option>
+    <option value='product_savings_message' >product_savings_message</option>
+    <option value='product_shipping_message' >product_shipping_message</option>
+    <option value='product_sku' >product_sku</option>
+    <option value='product_unit_price_num' >product_unit_price_num</option>
+    <option value='region_nm' >region_nm</option>
+    <option value='screen_info' >screen_info</option>
+    <option value='session' >session</option>
+    <option value='session_id' >session_id</option>
+    <option value='shippingCost_num' >shippingCost_num</option>
+    <option value='spot_name' >spot_name</option>
+    <option value='task_id' >task_id</option>
+    <option value='task_name' >task_name</option>
+    <option value='tax_num' >tax_num</option>
+    <option value='totalCost_num' >totalCost_num</option>
+    <option value='uri' >uri</option>
+    <option value='url_txt' >url_txt</option>
+    <option value='visitor_state' >visitor_state</option>
+			
+  </script>
+  
+  <script id="templateChildFilterItems" type="text/x-handlebars-template">
+  <div class="row childFilterItem">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-3">
+			<select class="form-control form-control-sm fiprop" name="type" onchange="expOnChildFilterTypeChange(this);">
+		        <option value="SimpleFilter" selected>SimpleFilter</option>
+		        <option value="IsNullFilter" >IsNullFilter</option>
+		        <!-- <option value="CompoundFilter" >CompoundFilter</option>-->
+		    </select>
+		    </div> 
+		    <div class="col-lg-3">
+				<select class="form-control form-control-sm dataItemDropDown fiprop selectpicker" data-live-search="true" name="dataItem" onchange="expOnChildFilterItemChange(this);">
+					<option value="true" selected>true</option>
+		        			<option value="false" >false</option>
+		    	</select>
+		    </div>
+		    
+			<span class="col-lg-4" name="IsNullFilterOptions" style="display:none">
+				<div class="row">
+					<div class="col-lg-6">negate</div>
+					<div class="col-lg-6">  
+		      			<select class="form-control form-control-sm fiprop" name="negate">
+		        			<option value="true" selected>true</option>
+		        			<option value="false" >false</option>
+		      			</select>
+		  			</div>
+				</div>
+			</span>
+
+		    <!-- operators -->
+			<span class="col-lg-4" name="SimpleFilterOptions" style="display:block">
+		    <div class="row">
+				<div class="col-lg-4">
+		    		<select class="form-control form-control-sm fiprop" name="op">
+		        		<option value="EQ" >EQ</option>
+		        		<option value="NE" >NE</option>
+		        		<option value="GT" >GT</option>
+		        		<option value="GTE" >GTE</option>
+		        		<option value="LT" >LT</option>
+		        		<option value="LTE" >LTE</option>
+		    		</select>
+		    	</div>
+
+		    <!-- value -->
+
+		    	<div class="col-lg-8" name="eventValuesDefault" style="display:none">
+					<input class="form-control form-control-sm fiprop" value=""  name="value"></input>
+		    	</div>
+
+				<div class="col-lg-8" name="eventChannelValuesDropDown" style="display:none">
+		    		<select class="form-control form-control-sm eventChannelValuesDropDown fiprop selectpicker" data-live-search="true" name="value">
+		    		</select>
+		    	</div>
+
+				<div class="col-lg-8" name="eventNameValuesDropDown" style="display:none">
+		    		<select class="form-control form-control-sm eventNameValuesDropDown fiprop selectpicker selectpicker" data-live-search="true" data-live-search="true" name="value">
+		    		</select>
+		    	</div>
+
+				<div class="col-lg-8" name="eventTypeValuesDropDown" style="display:none">
+		    		<select class="form-control form-control-sm eventTypeValuesDropDown fiprop selectpicker" data-live-search="true" name="value">						
+		    		</select>
+		    	</div>
+
+
+			</div>
+			</span>
+
+			<!-- delete button -->
+		    <div class="col-lg-1">
+		    	<button style="border: none;" class="btn btn-default btn-sm mybtn btn-danger" onclick="$(this).parent().parent().remove();expGenerateFilterJSON();" >
+		      		<span class="oi oi-minus"></span>
+		    	</button>
+		    </div>
+		    
+			
+		    
+    	</div>
+    </script>
+  
+
+    <script type="text/javascript">
+        var htmlTemplates = {};
+        $("script[type='text/x-handlebars-template']").each(function(elem) {
+            htmlTemplates[this.id] = Handlebars.compile($(this).html());
+        });
+    </script>
+

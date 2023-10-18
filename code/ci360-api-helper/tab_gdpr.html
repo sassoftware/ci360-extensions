@@ -1,0 +1,102 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+<br>
+<p>CI360 provides a GDPR API to maintain identity data. With the following option you can delete a specific customer
+  identity from CI360 </p>
+<br>
+
+
+<dl class="row marginbottom">
+  <dt class="col-sm-2 ">Identity Type</dt>
+  <dd class="col-lg-3 ">
+    <select class="form-control form-control-sm" id="identityType">
+      <option value="customer_id" selected>customer_id</option>
+      <option value="login_id">login_id</option>
+      <option value="subject_id">subject_id</option>
+      <option value="datahub_id">datahub_id</option>
+    </select>
+  </dd>
+</dl>
+
+<dl class="row marginbottom">
+  <dt class="col-sm-2 ">Identity Value</dt>
+  <dd class="col-lg-3 ">
+    <input id="identityValue" class="form-control form-control-sm" value=""></input>
+  </dd>
+  
+
+  <dd>
+    <button id="gdprCheckIdentityBtn" class="btn btn-sm btn-primary" onclick="btn_checkIdentity(this);" style="width: 100%;">
+      <span class="oi oi-caret-right"></span> &nbsp;Get Identity Details
+    </button>
+  </dd>&nbsp;&nbsp;
+  <dd>
+    <button id="btn_dropIdentity" class="btn btn-sm btn-danger" onclick="btn_dropIdentity(this);" style="display:none;width: 100%;">
+      <span class="oi oi-caret-right"></span> &nbsp;Delete Identity
+    </button>
+  </dd>
+  
+  
+</dl>
+
+<br><br>
+
+<div class="col-lg-12 grey-box identity_details" style="display:none">
+  <br>
+  <ul class="nav nav-tabs" id="gdprTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="main-identity-tab" data-bs-toggle="tab" href="#main-identity" role="tab" aria-controls="main-identity" aria-selected="true">Main Identities</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="other-identity-tab" data-bs-toggle="tab" href="#other-identity" role="tab" aria-controls="other-identity" aria-selected="false">Other Identities</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="attributes-tab" data-bs-toggle="tab" href="#attributes" role="tab" aria-controls="attributes" aria-selected="false">Attributes</a>
+    </li>
+	<li class="nav-item" role="presentation">
+      <a class="nav-link" id="preferences-tab" data-bs-toggle="tab" href="#preferences" role="tab" aria-controls="preferences" aria-selected="false">Preferences</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="main-identity" role="tabpanel" aria-labelledby="main-identity-tab">
+      <table id="mainIdentityTable" class="display nowrap" width="100%"></table>
+    </div>
+    <div class="tab-pane fade" id="other-identity" role="tabpanel" aria-labelledby="other-identity-tab">
+      <table id="identitiesTable" class="display nowrap" width="100%"></table>
+    </div>
+    <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">
+      <table id="attributesTable" class="display nowrap" width="100%"></table>
+    </div>
+	<div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
+      <table id="preferencesTable" class="display nowrap" width="100%"></table>
+	  
+	  <br>
+	  <p>You can use the following two buttons to Opt-In and Opt-Out the identity to a specific program. If the program field is blank, then you can Opt-Out or Opt-In to everything. </p>
+	<br>
+		<dl class="row marginbottom">
+		  <dt class="col-sm-2 " style="text-align: right;">Program</dt>
+		  <dd class="col-lg-3 ">
+			<input id="programValue" class="form-control form-control-sm" value="">
+		  </dd>&nbsp;&nbsp;
+		  <dd>
+			<button id="btn_optin" class="btn btn-sm btn-primary" onclick="btn_optin(this);" style="width: 100%;">
+			  <span class="oi oi-caret-right"></span> &nbsp;Opt-In
+			</button>
+		  </dd>&nbsp;&nbsp;
+		  <dd>
+			<button id="btn_optout" class="btn btn-sm btn-danger" onclick="btn_optout(this);" style="width: 100%;">
+			  <span class="oi oi-caret-right"></span> &nbsp;Opt-Out
+			</button>
+		  </dd>
+		</dl>
+		<br>
+    </div>
+  </div>
+  <br>
+  
+</div>
+
+
+<br>

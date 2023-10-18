@@ -1,0 +1,178 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" class="bg">
+
+<head>
+  <link rel="stylesheet" href="./css/app.css">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link id="appleTouchIcon" rel="apple-touch-icon" href="./images/app_icon.png" />
+  <!-- hide top bar in mobile safari-->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link id="shortcutIcon" rel="shortcut icon" href="./images/app_icon.png">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css" />
+  <link rel="stylesheet" href="./css/ext/open-iconic-bootstrap.css">
+
+  <!-- SELECT 2 -->
+  <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />-->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- datatables -->
+  <link href="./css/ext/datatables/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
+  <title>CI360 API Helpers</title>
+</head>
+
+<body id="body" class="bg" style="display:none">
+  <div id="appMainView" class="container" >
+
+    <br>
+    <h1 class="title text-center">SAS<sup class="reg">®</sup> CI360 API Helper </h1>
+    <br><br>
+
+    <div id="xapp" class="xmain_container">
+
+      <div class="whiteBox">
+
+        <!-- tab navigation -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="tab-home" data-toggle="tab" href="#tab_home" role="tab" aria-controls="home"
+              aria-expanded="true">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-ext-api-ci360" data-toggle="tab" href="#tab_external_events" role="tab"
+              aria-controls="external_events" style="display:none">Event API</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-datahub-api" data-toggle="tab" href="#tab_datahubapi" role="tab"
+              aria-controls="datahupapi" style="display:none">Datahub API</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-gdpr-api" data-toggle="tab" href="#tab_gdpr" role="tab" aria-controls="gdpr"
+              style="display:none">GDPR API</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-jobs-api" data-toggle="tab" href="#tab_jobs" role="tab" aria-controls="jobs"
+              style="display:none">Jobs API</a>
+          </li>
+        </ul>
+
+        <!-- link to about modal -->
+        <a class="nav-link" id="tab-about" style="float: right; cursor: pointer;" onclick="openAbout()">About</a>
+        <!-- tab content loaded from external files -->
+        <div class="tab-content" id="myTabContent">
+          <div id="tab_home"            role="tabpanel" aria-labelledby="home-tab"         class="tab-pane fade show active"></div>
+          <div id="tab_external_events" role="tabpanel" aria-labelledby="extapi-ci360-tab" class="tab-pane fade"></div>
+          <div id="tab_datahubapi"      role="tabpanel" aria-labelledby="datahubapi-tab"   class="tab-pane fade"></div>
+          <div id="tab_descriptor"      role="tabpanel" aria-labelledby="descriptor-tab"   class="tab-pane fade"></div>
+          <div id="tab_gdpr"            role="tabpanel" aria-labelledby="gdpr-tab"         class="tab-pane fade"></div>
+          <div id="tab_jobs"            role="tabpanel" aria-labelledby="jobs-tab"         class="tab-pane fade"></div>
+        </div>
+
+      </div> <!-- whiteBox -->
+    </div><!-- /main container -->
+  </div>
+
+  <!-- div for html templates -->
+  <div id="handlebarsTemplates"></div>
+
+  <!-- div for modal -->
+  <div id="modalJson"></div>
+
+  <!-- online scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.7/jsrsasign-all-min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+
+  <!-- local scripts -->
+  <script src="./js/ext/modal.js"></script>
+  <script src="./js/ext/util.js"></script>
+  <script src="./js/ext/handlebars-4.0.5.min.js" type="text/javascript"></script>
+
+  <!-- apihelper javascripts -->
+  <script src="./js/app.js?ver=1.12"></script>
+  <script src="./js/api_descriptor.js?ver=1.12"></script>
+  <script src="./js/api_external_events.js?ver=1.12"></script>
+  <script src="./js/api_gdpr.js?ver=1.12"></script>
+  <script src="./js/api_jobs.js?ver=1.12"></script>
+
+  <!-- datatables -->
+  <script src="./js/ext/datatables/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+
+  <!-- SELECT 2 -->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      var version = "1.12";
+      var lastUpdate = "2020-05-26";
+      var version_text = "Version "+version+" - last updated " + lastUpdate;
+
+      var contentToRender = [
+        { div: "#tab_home",            contentUrl: "./tab_home.html?ver=" + version },
+        { div: "#tab_external_events", contentUrl: "./tab_external_events.html?ver=" + version },
+        { div: "#tab_datahubapi",      contentUrl: "./tab_datahubapi.html?ver=" + version },
+        { div: "#tab_gdpr",            contentUrl: "./tab_gdpr.html?ver=" + version },
+        { div: "#tab_jobs",            contentUrl: "./tab_jobs.html?ver=" + version },
+        { div: "#modalJson",           contentUrl: "./modal_json.html?ver=" + version },
+        { div: "#handlebarsTemplates", contentUrl: "./templates.html?ver=" + version }
+      ];
+
+
+      var promiseToRender = [];
+      contentToRender.map(function (contentObj) {
+        var tempDiv = $("<div></div>");
+        var promise = {};
+        if (contentObj.contentUrl instanceof Array && contentObj.contentUrl.length > 0) {
+          for (var i = 0; i < contentObj.contentUrl.length; i++) {
+            promise = $.get(contentObj.contentUrl[i], function (responseHtml) {
+              $(contentObj.div).append(responseHtml);
+            });
+            promiseToRender.push(promise);
+          }
+        }
+        else {
+          promise = $.get(contentObj.contentUrl, function (responseHtml) {
+            $(contentObj.div).append(responseHtml);
+          });
+          promiseToRender.push(promise);
+        }
+      });
+
+      // wait until ALL elements are loaded (promise orchestration)
+      $.when.apply($, promiseToRender).done(function () {
+        initializeApp(version_text);
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>
