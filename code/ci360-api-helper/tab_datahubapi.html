@@ -1,0 +1,112 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+<br>
+<p>CI360 provides a Datahub API to maintain tables and upload data. With the following UI you can create, delete, update
+  descriptors and also upload data </p>
+<br>
+
+<dl class="row marginbottom">
+
+  <dd class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <button id="btn_getDescriptors" class="btn btn-default btn-sm mybtn" onclick="getDescriptors(this);">
+      <span class="oi oi-magnifying-glass"></span> &nbsp;Get Descriptors
+    </button>
+
+    &nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-default btn-sm mybtn" onclick="newTable();">
+      <span class="oi oi-plus"></span> &nbsp;Create New
+    </button>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="descriptorFilter" id="radioAll">
+    <label for="radioAll">all</label>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="descriptorFilter" id="radioOnlyImportedList">
+    <label for="radioOnlyImportedList">list only importedList descriptors</label>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="descriptorFilter" id="radioNoImportedList" checked>
+    <label for="radioNoImportedList">exclude all importedList descriptors</label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+  </dd>
+
+  <dd class="row">
+  <dd class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <select id="descriptors" class="form-control form-control-sm selectpicker" onchange="getDescriptorDetails(this)">
+    </select>
+  </dd>
+
+  <dd class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <span id="numberDescriptors" style="color: lightgrey;"></span>
+  </dd>
+
+  </dd>
+  <br>
+
+  <dd class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <span class="descriptor_buttons" style="display:none">
+
+      <!-- button descriptor json -->
+      <button type="button" class="btn btn-default btn-sm mybtn" onclick="showRetrievedDescriptorJSON();">
+        <span class="oi oi-file"></span> &nbsp;Descriptor JSON
+      </button>&nbsp;&nbsp;&nbsp;
+
+      <!-- button upload data -->
+      <button type="button" id="btn_uploadDataToDescriptor" class="btn btn-default btn-sm mybtn"
+        onclick="uploadDataModal();">
+        <span class="oi oi-cloud-upload"></span> &nbsp;Upload Data
+      </button>&nbsp;&nbsp;&nbsp;
+
+      <!-- button delete descriptor -->
+      <button type="button" id="btn_deleteDescriptor" class="btn btn-danger btn-sm mybtn" onclick="deleteDescriptor();">
+        <span class="oi oi-circle-x"></span> &nbsp;Delete Descriptor
+      </button>
+    </span>
+  </dd>
+</dl>
+
+<br>
+
+
+<div class="col-lg-12 grey-box descriptor_details" style="display:none">
+  <br>
+  <div id="tableHeader"></div>
+  <br>
+
+  <p class="table-buttons" style="display:none">
+
+    <!-- button to add data item -->
+    <button type="button" class="btn btn-default btn-sm" onclick="addDataItem();">
+      <span class="oi oi-plus"></span> &nbsp;Add Data Item
+    </button>
+
+    <!-- button to create table -->
+    <button type="button" class="btn btn-primary btn-sm" name="createTable" onclick="generateJSON(this);">
+      <span class="oi oi-caret-right"></span> &nbsp;Create Descriptor Based On This
+    </button>
+
+    <!-- button to update descriptor -->
+    <button type="button" class="btn btn-danger btn-sm" name="updateTable" onclick="generateJSON(this);">
+      <span class="oi oi-caret-right"></span> &nbsp;Update This Descriptor
+    </button>
+
+    <!-- link to attributes documentation -->
+    &nbsp;&nbsp;
+    <a target="_blank"
+      href="https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/dat-import-descitemprops.htm"
+      style="text-decoration:none">
+      Help on Attributes for Data Items
+    </a>
+  </p>
+
+  <div id="accordion" role="tablist"></div>
+  <br>
+</div> 
+
+</div>
+
+<br>

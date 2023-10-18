@@ -1,0 +1,79 @@
+<!-- /* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+ -->
+<br>
+
+<p>CI360 API Helper is a tool to support the API usage of SAS Customer Intelligence 360. It provides a user interface to
+  use API's like sending events and maintaining tables </p>
+<br>
+
+<dl id="ci360ApiHelperConfig" class="row">
+  <dt class="col-lg-2">Select Config</dt>
+  <dd class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <select class="form-control form-control-sm" id="ci360ApiHelperConfigDropDown" style="background: #efefef;"
+      onchange="onChangeCi360ApiHelperConfig(this);">
+    </select>
+  </dd>
+  <dd class="col-lg-1 col-md-9 col-sm-9 col-xs-9">
+    <button type="button" class="btn btn-default btn-sm" onclick="btnManageConfigs(this);">
+      <span class="oi oi-wrench"></span>
+    </button>
+  </dd>
+</dl>
+
+<dl class="row">
+  <dt class="col-lg-2">Select CI360 API Gateway</dt>
+  <dd class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <select class="form-control form-control-sm tenantApiGateway" id="ci360restUrlDropDown"
+      onchange="onChangeUrl(this);">
+      <option value="extapigwservice-demo.cidemo.sas.com" selected>DEMO - extapigwservice-demo.cidemo.sas.com</option>
+      <option value="extapigwservice-eu-prod.ci360.sas.com">EU - extapigwservice-eu-prod.ci360.sas.com</option>
+      <option value="extapigwservice-prod.ci360.sas.com">US - extapigwservice-prod.ci360.sas.com</option>
+      <option value="extapigwservice-syd-prod.ci360.sas.com">SYD - extapigwservice-syd-prod.ci360.sas.com</option>
+      <option value="extapigwservice-apn-prod.ci360.sas.com">APN - extapigwservice-apn-prod.ci360.sas.com</option>
+      <option value="extapigwservice-mum-prod.ci360.sas.com">MUM - extapigwservice-mum-prod.ci360.sas.com</option>
+      <option value="extapigwservice-training.ci360.sas.com">Training - extapigwservice-training.ci360.sas.com</option>
+    </select>
+  </dd>
+</dl>
+
+<dl class="row" style="display:none">
+  <dt class="col-lg-2">Or enter the URL manually</dt>
+  <dd class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <input id="ci360restUrl" class="form-control form-control-sm"></input>
+  </dd>
+</dl>
+
+<dl class="row">
+  <dt class="col-lg-2">Tenant ID</dt>
+  <dd class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+    <input id="username" class="form-control form-control-sm tenantId" value=""></input>
+  </dd>
+</dl>
+
+<dl class="row">
+  <dt class="col-lg-2">Secret</dt>
+  <dd class="col-lg-4 col-md-9 col-sm-12 col-xs-12">
+    <input id="password" type="password" class="form-control form-control-sm tenantSecret" value=""></input>
+  </dd>
+  <dd class="col-lg-1 col-md-9 col-sm-9 col-xs-9">
+    <button type="button" class="btn btn-primary btn-sm" id="btn_verifyLogin" onclick="btnCreateToken(this);">
+      <span class="oi oi-caret-right"></span> &nbsp;Create Token
+    </button>
+    <img src="./images/ajax_loader_green_32.gif" id="imgLoad_verifyLogin" style="display:none">
+  </dd>
+</dl>
+
+<div class="alert alert-primary tenantDetails" role="alert" style="display:none">
+  <dl class="row">
+    <dt class="col-lg-2 col-md-12 col-sm-12 col-xs-12" onclick="toggle('token');">Token created</dt>
+    <dd class="col-lg-9 col-md-10 col-sm-10 col-xs-10">
+      <span id="token" style="word-wrap:break-word;display:none"></span>
+    </dd>
+  </dl>
+</div>
+
+<div class="alert alert-danger loginwrong" role="alert" style="display:none">
+  No valid tenantID and secret or API Gateway does not fit to login details!
+</div>

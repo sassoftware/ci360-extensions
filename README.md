@@ -48,6 +48,7 @@ This is a list of connectors and agents included in this repository:
 - [__Snowflake UDM Loader__](code/ci360-udm-loader-snowflake): CI360 UDM Loader for Snowflake automates the download of UDM data from Customer Intelligence 360 and then seemlessly loads this into Snowflake, utilizing SAS provided Python download client within a Docker container
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
 - [__Snowy CI360__](code/snowy): Browser extension as an easy way to monitor the network traffic (POST) to SAS CI 360, with the ability to search the form data
+- [__API Helper for CI360__](code/ci360-api-helper): Interact with CI360 APIs using easy to use web based UI
 
 ## Getting Started
 
