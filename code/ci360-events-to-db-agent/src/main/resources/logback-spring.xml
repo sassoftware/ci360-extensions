@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- use Spring default values -->
+	<include
+		resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<springProfile name="local">
+		<include
+			resource="org/springframework/boot/logging/logback/console-appender.xml" />
+		<root level="ERROR">
+			<appender-ref ref="CONSOLE" />
+		</root>
+
+		<logger name="com.sas" level="trace" additivity="false">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+
+		<logger name="org.springframework.jdbc.core.JdbcTemplate"
+			level="debug" additivity="false">
+			<appender-ref ref="CONSOLE" />
+		</logger>
+	</springProfile>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/ContactHistoryAgent.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/ContactHistoryAgent.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>${FILE_LOG_CHARSET}</charset>
+		</encoder>
+	</appender>
+
+	<root level="ERROR">
+		<appender-ref ref="FILE" />
+	</root>
+
+	<logger name="com.sas" level="debug" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger name="org.springframework.jdbc.core.JdbcTemplate"
+		level="debug" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+</configuration>

@@ -1,0 +1,57 @@
+/******************************************************************************/
+/* Copyright © 2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */
+/* SPDX-License-Identifier: Apache-2.0                                        */
+/* ****************************************************************************/
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id "io.freefair.lombok" version "6.6.1"
+}
+
+group = 'com.sas.incubation.ci'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+tasks.register("bootRunDev") {
+    group = "application"
+    description = "Runs the Spring Boot application with the dev profile"
+    doFirst {
+        tasks.bootRun.configure {
+            systemProperty("spring.profiles.active", "dev")
+        }
+    }
+    finalizedBy("bootRun")
+}
+
+ext['jetty.version'] = '9.4.48.v20220622'
+
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-logging'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	//mvn install:install-file -Dfile="C:\gerhwi\CI360_SDK\mkt-agent-sdk-jar-2.2301.2212220903.jar" -DpomFile="C:\gerhwi\CI360_SDK\pom.xml"
+	implementation 'com.sas.mkt.agent:mkt-agent-sdk-jar:latest.release'
+	implementation 'org.json:json:20220924'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	runtimeOnly 'org.postgresql:postgresql'
+		
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+ 
+tasks.named('test') {
+	useJUnitPlatform()
+}

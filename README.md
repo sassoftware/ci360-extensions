@@ -20,7 +20,7 @@ This topic contains the following sections:
 Prerequisites vary between integration assets included here, and are listed in detail for each in the respecitive sub-folders. But some of the prerequisites include:
 - Amazon Web Service account with access to Lambda and API Gateway service
 - Microsoft Azure account with access to Functions and other Azure services
-- Java 1.8 or newer
+- Java 8 or newer for 23.07 release or earlier, Java 11 or newer for 23.08 release or later
 - Python 3.7 or newer
 
 ## Installation
@@ -49,6 +49,11 @@ This is a list of connectors and agents included in this repository:
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
 - [__Snowy CI360__](code/snowy): Browser extension as an easy way to monitor the network traffic (POST) to SAS CI 360, with the ability to search the form data
 - [__API Helper for CI360__](code/ci360-api-helper): Interact with CI360 APIs using easy to use web based UI
+- [__Customer Data Upload for CI360__](code/ci360-customer-data-uploader): Upload customer data to CI360 cloud datahub table
+- [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
+- [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
+- [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
+
 
 ## Getting Started
 
@@ -83,7 +88,7 @@ Please refer to [`Add an Endpoint`](https://go.documentation.sas.com/doc/en/cint
 
 ### Deploying CI360 Agents
 
-For CI360 agent development, agent SDK needs to be downloaded and installed into the local Maven repository. See [`Download an Access Point SDK`](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/extapi-config-downloadsdk.htm) in SAS Customer Intelligence 360 admin guide.
+For CI360 agent development, agent SDK needs to be downloaded and installed into the local Maven repository. See [`Download the General Agent`](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/gen-access-download.htm) in SAS Customer Intelligence 360 admin guide. General Agent includes the SDK.
 
 To install SDK JAR into local Maven repository:
 ```
