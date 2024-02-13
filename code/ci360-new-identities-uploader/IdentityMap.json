@@ -1,0 +1,24 @@
+{
+  "name": "Identity Map",
+  "description": "Used for uploading identity values to datahub",
+  "type": "customer",
+  "makeAvailableForTargeting": false,
+  "dataItems": [
+    {
+      "label": "subject_id",
+      "name": "subject_id",
+      "type": "STRING",
+      "identity": true,
+      "identityType": "subject_id",
+      "key": true,
+      "segmentation": false,
+      "uniqueValuesAvailable": false,
+      "tags": [],
+      "customProperties": {},
+      "excludeFromAnalytics": true,
+      "segmentProfilingField": false,
+      "channelContactInformation": false
+    }
+  ],
+  "customProperties": {}
+}
