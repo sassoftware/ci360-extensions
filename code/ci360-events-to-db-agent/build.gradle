@@ -35,8 +35,6 @@ tasks.register("bootRunDev") {
     finalizedBy("bootRun")
 }
 
-ext['jetty.version'] = '9.4.48.v20220622'
-
 dependencies {
 	//implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
