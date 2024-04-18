@@ -1,6 +1,3 @@
-/* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
 var row_num = 1;
 var last_profile = { timestamp: "", session: "", visitor: "", datahub_id: "", pii: "", event: "", row_num: "", touched: false };
 var EnableNetworkCapture = true;
