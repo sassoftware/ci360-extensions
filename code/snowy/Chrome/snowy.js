@@ -1,10 +1,11 @@
-/* Copyright © 2021, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
+/**
+    Developed by Sudheesh Warrier
+    Contact for any issues: Sudheesh.Warrier+Snowy@sas.com
  */
 var IsExtension = false;
 
-var DIAG_VERSION = "diag10(2304)";
-var SDK_VERSION = "sdk11(2304)";
+var DIAG_VERSION = "diag13(2304)";
+var SDK_VERSION = "sdk14(2304)";
 
 var LookupSDK_version_from_server = true;
 var token = null;
@@ -68,12 +69,12 @@ var IsTagAdded = false;
 function checkLatestVersion() {
   var settings = {
     url:
-      "https://www.cidemo.sas.com/tools/snowy/version-remote.json?dt=" +
+      "https://static.cidemo.sas.com/snowy/version-remote.json?dt=" +
       Date.now(),
     method: "GET",
     timeout: 0,
     headers: {
-      "Access-Control-Allow-Origin": "www.cidemo.sas.com",
+      "Access-Control-Allow-Origin": "static.cidemo.sas.com",
     },
   };
 
@@ -2018,7 +2019,13 @@ function checkAndUpdateIdentityInfo() {
               cell3.innerHTML = response.identities[i].createTime;
             if (response.identities[i].attributes) {
               for (var key in response.identities[i].attributes) {
-                cell4.innerHTML=cell4.innerHTML+"<div style='border-bottom:1px sold #1b6194'>"+key+": "+response.identities[i].attributes[key]+"</div>";
+                cell4.innerHTML =
+                  cell4.innerHTML +
+                  "<div style='border-bottom:1px sold #1b6194'>" +
+                  key +
+                  ": " +
+                  response.identities[i].attributes[key] +
+                  "</div>";
               }
             }
           }
@@ -2315,7 +2322,9 @@ if (chrome && chrome.devtools)
         request._initiator.stack.parent.callFrames[0].url.includes("/t/s/") ||
         request._initiator.stack.parent.callFrames[0].url.includes("ot-min") ||
         request._initiator.stack.parent.callFrames[0].url.includes("ot-api") ||
-        request._initiator.stack.parent.callFrames[0].url.includes("ot-all"))
+        request._initiator.stack.parent.callFrames[0].url.includes("ot-all") ||
+        //Support for ot2 tag
+        request._initiator.stack.parent.callFrames[0].url.includes("ot2.min")) 
     ) {
       IsTagAdded = true;
     }
@@ -2323,7 +2332,9 @@ if (chrome && chrome.devtools)
       if (
         request.request.url.includes("ot-min") ||
         request.request.url.includes("ot-api") ||
-        request.request.url.includes("ot-all")
+        request.request.url.includes("ot-all") ||
+        //Support for ot2 tag
+        request.request.url.includes("ot2.min")
       ) {
         if (clear_entries) {
           clear_entries = false;
@@ -2442,6 +2453,11 @@ if (chrome && chrome.devtools)
         (request._initiator.stack &&
           request._initiator.stack.parent &&
           (request._initiator.stack.parent.callFrames[0].url.includes("/t/e") ||
+
+          request._initiator.stack.parent.callFrames[0].url.includes(
+            "ot2.min"
+          ) ||
+
             request._initiator.stack.parent.callFrames[0].url.includes(
               "ot-min"
             ) ||
@@ -2515,6 +2531,10 @@ if (chrome && chrome.devtools)
           (request._initiator.stack.parent.callFrames[0].url.includes("/t/e") ||
             request._initiator.stack.parent.callFrames[0].url.includes(
               "ot-min"
+            ) ||
+            //Support for ot2
+            request._initiator.stack.parent.callFrames[0].url.includes(
+              "ot2min"
             ) ||
             request._initiator.stack.parent.callFrames[0].url.includes(
               "ot-api"
