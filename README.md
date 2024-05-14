@@ -52,6 +52,7 @@ This is a list of connectors and agents included in this repository:
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
 - [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
 - [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
+- [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
 
 
 ## Getting Started
