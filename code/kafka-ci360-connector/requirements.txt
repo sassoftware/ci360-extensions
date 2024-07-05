@@ -1,0 +1,4 @@
+configparser
+confluent_kafka
+requests
+pyjwt
