@@ -53,6 +53,7 @@ This is a list of connectors and agents included in this repository:
 - [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
 - [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
 - [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
+- [__Kafka CI360 Connector__](code/kafka-ci360-connector): Send events from Kafka to CI360
 
 
 ## Getting Started
