@@ -55,7 +55,7 @@ This is a list of connectors and agents included in this repository:
 - [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
 - [__Kafka CI360 Connector__](code/kafka-ci360-connector): Send events from Kafka to CI360
 - [__CI360 Braze Bulk User Import Connector__](code/ci360-braze-bulk-user-import-connector): Send customer audiences and attributes generated in CI360 from various sources to Braze 
-
+- [__CI360 API DS2 Utilities__](code/ci360-api-ds2-utilities): Utilities package for CI360 API interaction using DS2
 
 ## Getting Started
 
