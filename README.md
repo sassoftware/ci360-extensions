@@ -29,7 +29,7 @@ Installation instructions for every extension are included in the project specif
 
 ## List of Extensions
 
-This is a list of connectors and agents included in this repository:
+This is a list of connectors, agents and other related content and utilities included in this repository:
 - [__SMS/MMS (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS and MMS communication through Syniverse
 - [__WhatsApp (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WhatsApp communication through Syniverse
 - [__SMS (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
