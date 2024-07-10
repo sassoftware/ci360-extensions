@@ -1,0 +1,155 @@
+{
+	"showPageContentOnly": true,
+	"pages": [
+		{
+			"id": "page1",
+			"type": "page",
+			"label": "Definition",
+			"children": [
+				{
+					"id": "profile",
+					"type": "dropdown",
+					"label": "Tennant connection profile",
+					"items": [
+						{
+							"value": "training tenant 01"
+						},
+						{
+							"value": "training tenant 02"
+						},
+						{
+							"value": "Demo tenant 01"
+						},
+						{
+							"value": "Customer EU 01"
+						},
+						{
+							"value": "Customer US 01"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "audience_name",
+					"type": "textfield",
+					"label": "Audience name",
+					"placeholder": "",
+					"required": false,
+					"visible": ""
+				},
+				{
+					"id": "expiration",
+					"type": "numberfield",
+					"label": "Expiration (days)",
+					"placeholder": "",
+					"required": true,
+					"max": 180,
+					"min": 1,
+					"excludemin": false,
+					"excludemax": false,
+					"visible": ""
+				}
+			]
+		},
+		{
+			"id": "page2",
+			"type": "page",
+			"label": "Columns",
+			"children": [
+				{
+					"id": "inputtable1",
+					"type": "inputtable",
+					"label": "Taget input table",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "columnselector1",
+					"type": "columnselector",
+					"label": "Columns",
+					"order": false,
+					"columntype": "a",
+					"max": 10,
+					"min": 0,
+					"visible": "",
+					"table": "inputtable1",
+					"include": null
+				},
+				{
+					"id": "Identity_column",
+					"type": "columnselector",
+					"label": "Identity column",
+					"order": false,
+					"columntype": "c",
+					"max": 1,
+					"min": 1,
+					"visible": "",
+					"table": "inputtable1",
+					"include": null
+				},
+				{
+					"id": "Identity_type",
+					"type": "dropdown",
+					"label": "Indentity type",
+					"items": [
+						{
+							"value": "subject_id"
+						},
+						{
+							"value": "customer_id"
+						},
+						{
+							"value": "login_id"
+						}
+					],
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				},
+				{
+					"id": "email_column",
+					"type": "columnselector",
+					"label": "email",
+					"order": false,
+					"columntype": "c",
+					"max": 1,
+					"min": 0,
+					"visible": "",
+					"readonly": false,
+					"table": "inputtable1",
+					"include": null
+				},
+				{
+					"id": "outputtable1",
+					"type": "outputtable",
+					"label": "Result output table",
+					"required": true,
+					"placeholder": "",
+					"visible": ""
+				}
+			]
+		}
+	],
+	"values": {
+		"profile": {
+			"value": "training tenant 01"
+		},
+		"audience_name": "",
+		"expiration": 14,
+		"inputtable1": {
+			"library": "",
+			"table": ""
+		},
+		"columnselector1": [],
+		"Identity_column": [],
+		"Identity_type": null,
+		"email_column": [],
+		"outputtable1": {
+			"library": "",
+			"table": ""
+		}
+	}
+}
