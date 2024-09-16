@@ -57,6 +57,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Braze Bulk User Import Connector__](code/ci360-braze-bulk-user-import-connector): Send customer audiences and attributes generated in CI360 from various sources to Braze 
 - [__CI360 API DS2 Utilities__](code/ci360-api-ds2-utilities): Utilities package for CI360 API interaction using DS2
 - [__CI360 Audience from Viya (custom step)__](code/ci360-audience-from-viya): Upload analytically defined customer audience from Viya into CI360 using Viya Custom Step
+- [__CI Modernization Preparation Tool__](code/ci-modernization-preparation-tool): Customer-facing tool intended to support the modernization from CI 6.6 to SAS CI 360
 
 ## Getting Started
 
