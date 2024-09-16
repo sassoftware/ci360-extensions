@@ -1,0 +1,174 @@
+{
+    "count": 13,
+    "voList": [
+        {
+            "voType": "calculatedItemConcise",
+            "id": "FGGFGLTIGFBZU53A",
+            "name": "Calculated Item using Calc Item",
+            "description": "",
+            "dateModified": "2023-11-14T13:17:09Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "<</Calculated Items/Propensity Free Trading>> * <</Calculated Items/Response Revenue Free Trading>>",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "GGFDXZA4IJHKUEUP",
+            "name": "Customer Segment",
+            "description": "",
+            "dateModified": "2023-08-14T10:56:28Z",
+            "whoModified": "SAS Demo User",
+            "type": 0,
+            "expression": "CASE WHEN <</Demographics/Language>> = 'English' THEN 'Gold' ELSE 'Silver' END",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "AFCEN24F5FF5WBLM",
+            "name": "Marketing Segment",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:28Z",
+            "whoModified": "SAS Demo User",
+            "type": 0,
+            "expression": "CASE WHEN <</Demographics/Language>> = 'English' THEN 'HighValue' ELSE 'LowValue' END",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "GBAFVC303JBNVILF",
+            "name": "Propensity Deposit Accounts",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:50Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(76)*2",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "CBEGFRH3E3DWUF54",
+            "name": "Propensity for Portfolio Management",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:52Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(3)",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "AADC0WHIONC1TXS3",
+            "name": "Propensity Free Trading",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:44Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(47)*79",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "ADFHAMAPFFC5XN4L",
+            "name": "Propensity Retirement Products",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:54Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(89)*.09837",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "HEFFJXDPVVBIVBZP",
+            "name": "Propensity Trust Accounts",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:57Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(759321)",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "GAAG0UYR33ACQGWR",
+            "name": "Resp Revenue Portfolio Management",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:52Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "int(RANUNI(109)*2000)",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "DFFBTFLS2ZGKWKQN",
+            "name": "Response Revenue Deposit Accounts",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:50Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(837)*984",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "CHACACP4A3G2V5RM",
+            "name": "Response Revenue Free Trading",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:44Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(97)*400",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "CACBTE21S3DOUB2U",
+            "name": "Response Revenue Retirement Products",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:54Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(89)*6",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        },
+        {
+            "voType": "calculatedItemConcise",
+            "id": "DBDGXNUC4BAEWCPH",
+            "name": "Response Revenue Trust Accounts",
+            "description": "",
+            "dateModified": "2022-11-18T04:39:57Z",
+            "whoModified": "SAS Demo User",
+            "type": 4,
+            "expression": "RANUNI(1)*1643",
+            "validSubjects": [
+                "SUBJECT_ID_CUSTOMER"
+            ]
+        }
+    ]
+}
