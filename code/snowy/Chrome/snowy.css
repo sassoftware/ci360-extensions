@@ -326,3 +326,14 @@ html {
     background-position: 0% 50%;
   }
 }
+.output-line {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  margin: 2px 0;
+}
+.output-line span:last-child {
+  color: rgb(243, 243, 243);
+  float: right;
+  margin-right: 0.5rem;
+}

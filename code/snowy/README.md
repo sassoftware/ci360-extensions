@@ -1,11 +1,15 @@
 # Snowy: Monitor SAS CI 360 Network Traffic
-An easier way to monitor the network traffic (POST) to SAS CI 360, with the ability to search the form data. For example, you can use this extension to filter and find out the identity event or search for any other kind of event type or input field.
+
+Snowy is a browser extension developed to help you troubleshoot SAS CI360 Events. You can use Snowy to inspect the data captured by CI360 Tag from your website on your browser in real time. 
+
+Snowy can also act as an alternative to General Agent or a Diagnostic Agent, so that you can stream Events from the tenant to your browser for troubleshooting purposes. 
+
+If you want to capture the JSON payload sent by CI360 to your Connector Endpoint, you can assign a General Agent to your Connector, under CI360 Tenant > General Setting > Connector, and activate that Access Point details in Snowy.
+
 # Features
-1. Tracks all POST requests initiated by SAS CI 360 on any website
-2. Tracks all Form data from your request. All Form data will be displayed in a nice format.
-3. Search and filter request based on Form data or Event (Similar to [Tintin](https://gitlab.sas.com/psd-ci-enablement/tintin))
-4. Option to sort on any column
-4. Option to enable and disable per website (provided by your browser)
+1. Monitor CI360 Event information captured by CI360 Tag.
+2. Act as a General Agent or Diagnostic Agent to capture real time events from any channels, including Mobile SDK.
+3. Inspect the payload sent to Connector Endpoint, while using a General Agent as Proxy.
  
 # Installation
 ## Chrome
@@ -46,14 +50,31 @@ Since the extension is not distributed via the public domains (like Chrome Web S
 
 
 # Usage
+## Monitoring Network Traffic from CI 360 Tag
 1. Open your browser
 2. Navigate to the website you want to inspect.
 3. Based on the configuration you selected under the `Optional Steps` above, you might have to click on the icon of the extension to start it.
 4. Open the `Developer Toolbar` (`F12` or `Ctrl+Shift+I`)
 5. Inside the Developer Toolbar, go to the tab `CI 360`
-6. Browser around your site as usual and you will see all the 360 network traffic getting added to the list.
+6. Browse around your site as usual and you will see all the 360 network traffic getting added to the list.
 7. The list will be reset when you Close the developer toolbar
+## Streaming Events into Snowy
+`Warning!`
+When you start streaming events to Snowy by activating the Access Point (aka Agent), ensure you do not have another instance of the Agent running elsewhere.
+1. Open your browser
+2. Navigate to the website you want to inspect.
+3. Based on the configuration you selected under the `Optional Steps` above, you might have to click on the icon of the extension to start it.
+4. Open the `Developer Toolbar` (`F12` or `Ctrl+Shift+I`)
+5. Inside the Developer Toolbar, go to the tab `CI 360`
+6. Go to the Setting Tab with in Snowy (the little `Purple` gear icon on the top right hand side)
+7. Enter the Tenant Id, Client secret and other details as needed
+8. Save and Activate the Agent.
+9. If you have a details saved already, you can select that from the dropdown and activate it.
+10. Go to the `360 Event Stream` Tab with in Snowy.
+11. Click on the Start button.
+12. If the Access Point you configured is a Diagnostic Access Point, then you will be prompted to select a filter based on Identity. Provide necessary details. 
 
 # Note
 1. If you are looking to demo the data captured by CI 360 to a prospect then please use CI 360 Event Inspector by the Sales Team
 2. Snowy captures only the POST requests in its raw format, any processing done by CI 360 in the cloud will not reflect here
+3. When you activate Snowy's event stream capabilities, (aka. Agent), it will temporarily break your integration, if you have done any, using that Access Point. 

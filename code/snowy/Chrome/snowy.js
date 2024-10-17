@@ -4,33 +4,24 @@
  */
 var IsExtension = false;
 
-var DIAG_VERSION = "diag13(2304)";
-var SDK_VERSION = "sdk14(2304)";
+var DIAG_VERSION = "diag16(2410)";
+var SDK_VERSION = "sdk17(2410)";
 
 var LookupSDK_version_from_server = true;
 var token = null;
 
-const NO_TAG_FOUND_MSG =
-  "Yet to detect a 360 tag on this page, please wait a few seconds.<br/>If the message persists, please check the page and ensure the tag is configured correctly and that the domain is approved in CI 360.";
-const NOT_DIAG_AP_MSG =
-  "This is not a Diagnostics Access Point. Do you want to activate?";
-const NOT_DIAG_AP_SAVE_MSG =
-  "This is not a Diagnostics Access Point. Do you want to save and activate?";
-const UNABLE_TO_AP_CONFIG_MSG =
-  "Unable to get CI 360 Access Point configurations. Please check the External gateway address, Tenant Id and Client Secret.";
-const ERROR_CONNECTING_AP_MSG =
-  "Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret.";
-const NO_ACTIVE_AP_MSG =
-  "You have not activated any Access Point yet. Please configure and activate an Access Point.";
-const UNDOCKED_DEVTOOL_MSG =
-  "<li>If you un-docked the dev tools to a separate window and/or using Firefox, Script information will not be available. You need to check the console log to see the same.</li>";
-const IDENTITY_INFO_NOT_VALID_MSG =
-  "Please check the identity type and identity values and try again.";
-const NO_TAG_LOADED_MSG =
-  "<li>No CI 360 related scripts are loaded yet. Please ensure that the site is tagged.This message is refreshed only when the page is first loaded.</li>";
-const DOMAIN_NOT_APPROVED_MSG =
-  "<li class='alert alert-warning'>The domain is either not approved or not activated in CI 360.</li>";
+const NO_TAG_FOUND_MSG = "Yet to detect a 360 tag on this page, please wait a few seconds.<br/>If the message persists, please check the page and ensure the tag is configured correctly and that the domain is approved in CI 360.";
+const NOT_DIAG_AP_MSG = "This is not a Diagnostics Access Point. Do you want to activate?";
+const NOT_DIAG_AP_SAVE_MSG = "This is not a Diagnostics Access Point. Do you want to save and activate?";
+const UNABLE_TO_AP_CONFIG_MSG = "Unable to get CI 360 Access Point configurations. Please check the External gateway address, Tenant Id and Client Secret.";
+const ERROR_CONNECTING_AP_MSG = "Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret.";
+const NO_ACTIVE_AP_MSG = "You have not activated any Access Point yet. Please configure and activate an Access Point.";
+const UNDOCKED_DEVTOOL_MSG = "<li>If you un-docked the dev tools to a separate window and/or using Firefox, Script information will not be available. You need to check the console log to see the same.</li>";
+const IDENTITY_INFO_NOT_VALID_MSG = "Please check the identity type and identity values and try again.";
+const NO_TAG_LOADED_MSG = "<li>No CI 360 related scripts are loaded yet. Please ensure that the site is tagged.This message is refreshed only when the page is first loaded.</li>";
+const DOMAIN_NOT_APPROVED_MSG = "<li class='alert alert-warning'>The domain is either not approved or not activated in CI 360.</li>";
 const COLS_WITH_META = ["task_id"];
+const MSG_CONNECTOR_JSON_INFO = "This is the payload sent to the Connector Endpoint. If present, in White color, what you see is the JSON path that you can use while defining variables in Connector Custom Body.";
 var META_LIST = {};
 
 $(document).ready(function () {
@@ -68,9 +59,7 @@ var IsTagAdded = false;
 
 function checkLatestVersion() {
   var settings = {
-    url:
-      "https://static.cidemo.sas.com/snowy/version-remote.json?dt=" +
-      Date.now(),
+    url: "https://static.cidemo.sas.com/snowy/version-remote.json?dt=" + Date.now(),
     method: "GET",
     timeout: 0,
     headers: {
@@ -81,22 +70,12 @@ function checkLatestVersion() {
   $.ajax(settings)
     .done(function (response) {
       log(response);
-      if (
-        response &&
-        response.latest_version &&
-        response.message &&
-        chrome &&
-        chrome.runtime &&
-        chrome.runtime.getManifest() &&
-        chrome.runtime.getManifest().version
-      ) {
+      if (response && response.latest_version && response.message && chrome && chrome.runtime && chrome.runtime.getManifest() && chrome.runtime.getManifest().version) {
         var version_local = parseFloat(chrome.runtime.getManifest().version);
         var latest_version = parseFloat(response.latest_version);
         if (latest_version > version_local) {
           $(".status-version").html(response.message);
-          $("#status_version").html(
-            "<p style='padding:.5em'>" + response.message + "</p>"
-          );
+          $("#status_version").html("<p style='padding:.5em'>" + response.message + "</p>");
           $(".status-version").addClass("status-version-active");
           setTimeout(function () {
             $(".status-version").removeClass("status-version-active");
@@ -116,53 +95,25 @@ function checkLatestVersion() {
 
 function addEventsToControls() {
   //add events to buttons in settings page. For event streams.
-  $("#settings_activate_selected_tenant").on(
-    "click",
-    settings_activate_selected_tenant
-  );
-  $("#settings_forget_selected_tenant").on(
-    "click",
-    settings_forget_selected_tenant
-  );
+  $("#settings_activate_selected_tenant").on("click", settings_activate_selected_tenant);
+  $("#settings_forget_selected_tenant").on("click", settings_forget_selected_tenant);
   $("#settings_save_activate").on("click", settings_save_activate);
-  $("#settings_without_save_activate").on(
-    "click",
-    settings_without_save_activate
-  );
+  $("#settings_without_save_activate").on("click", settings_without_save_activate);
   $("#settings_clear").on("click", settings_clear);
 
   //add events to buttons in settings page. For tags.
-  $("#settings_tag_activate_selected_tenant").on(
-    "click",
-    settings_tag_activate_selected_tenant
-  );
-  $("#settings_tag_forget_selected_tenant").on(
-    "click",
-    settings_tag_forget_selected_tenant
-  );
+  $("#settings_tag_activate_selected_tenant").on("click", settings_tag_activate_selected_tenant);
+  $("#settings_tag_forget_selected_tenant").on("click", settings_tag_forget_selected_tenant);
   $("#settings_tag_save_activate").on("click", settings_tag_save_activate);
-  $("#settings_tag_without_save_activate").on(
-    "click",
-    settings_tag_without_save_activate
-  );
+  $("#settings_tag_without_save_activate").on("click", settings_tag_without_save_activate);
   $("#settings_tag_clear").on("click", settings_tag_clear);
 
   //add events to the menu links
   $("#network_stream").click(function () {
-    setActivePage(
-      ".network-stream-main",
-      "#network_stream",
-      "Network",
-      "w3-text-white"
-    );
+    setActivePage(".network-stream-main", "#network_stream", "Network", "w3-text-white");
   });
   $("#event_stream").click(function () {
-    setActivePage(
-      ".event-stream-main",
-      "#event_stream",
-      "Event Stream",
-      "w3-text-white"
-    );
+    setActivePage(".event-stream-main", "#event_stream", "Event Stream", "w3-text-white");
     var table = $("#eventStreamTable").DataTable();
     table.columns.adjust().draw();
   });
@@ -184,24 +135,12 @@ function addEventsToControls() {
 
   $("#display_metadata_from_360").on("change", function () {
     if (this.checked) {
-      log(
-        "For future rows added to the table, will attempt to fetch metadata from 360."
-      );
-      if (IsExtension === true)
-        chrome.storage.sync.set(
-          { display_metadata_from_360_prop: true },
-          function () {}
-        );
+      log("For future rows added to the table, will attempt to fetch metadata from 360.");
+      if (IsExtension === true) chrome.storage.sync.set({ display_metadata_from_360_prop: true }, function () {});
       display_metadata_from_360 = true;
     } else {
-      log(
-        "For future rows added to the table, will not attempt to fetch metadata from 360."
-      );
-      if (IsExtension === true)
-        chrome.storage.sync.set(
-          { display_metadata_from_360_prop: false },
-          function () {}
-        );
+      log("For future rows added to the table, will not attempt to fetch metadata from 360.");
+      if (IsExtension === true) chrome.storage.sync.set({ display_metadata_from_360_prop: false }, function () {});
       display_metadata_from_360 = false;
     }
   });
@@ -212,16 +151,11 @@ function addEventsToControls() {
     if (this.checked) {
       log("Displaying Console.");
       $("#eventStreamConsole").show();
-      if (IsExtension === true)
-        chrome.storage.sync.set({ display_console_prop: true }, function () {});
+      if (IsExtension === true) chrome.storage.sync.set({ display_console_prop: true }, function () {});
     } else {
       log("Hiding console.");
       $("#eventStreamConsole").hide();
-      if (IsExtension === true)
-        chrome.storage.sync.set(
-          { display_console_prop: false },
-          function () {}
-        );
+      if (IsExtension === true) chrome.storage.sync.set({ display_console_prop: false }, function () {});
     }
   });
 
@@ -234,19 +168,11 @@ function addEventsToControls() {
         $("#gateway_info").show();
       }
 
-      if (IsExtension === true)
-        chrome.storage.sync.set(
-          { display_gateway_eventstream_prop: true },
-          function () {}
-        );
+      if (IsExtension === true) chrome.storage.sync.set({ display_gateway_eventstream_prop: true }, function () {});
     } else {
       log("Hiding gateway information on event stream page.");
       $("#gateway_info").hide();
-      if (IsExtension === true)
-        chrome.storage.sync.set(
-          { display_gateway_eventstream_prop: false },
-          function () {}
-        );
+      if (IsExtension === true) chrome.storage.sync.set({ display_gateway_eventstream_prop: false }, function () {});
     }
   });
 }
@@ -308,9 +234,7 @@ function loadPreference() {
   if (IsExtension === true)
     chrome.storage.sync.get("display_metadata_from_360_prop", function (data) {
       if (data.display_metadata_from_360_prop === true) {
-        log(
-          "For future rows added to the table, will attempt to fetch metadata from 360."
-        );
+        log("For future rows added to the table, will attempt to fetch metadata from 360.");
         $("#display_metadata_from_360").prop("checked", true);
         display_metadata_from_360 = true;
       } else {
@@ -336,20 +260,17 @@ function loadPreference() {
 
   //Load the preference for gateway information visibility on event stream page.
   if (IsExtension === true)
-    chrome.storage.sync.get(
-      "display_gateway_eventstream_prop",
-      function (data) {
-        if (data.display_gateway_eventstream_prop === true) {
-          log("Displaying gateway information on event stream page.");
-          $("#display_gateway_eventstream").prop("checked", true);
-          if (current_tenant_gateway != null) $("#gateway_info").show();
-        } else {
-          log("Hiding gateway information on event stream page.");
-          $("#display_gateway_eventstream").prop("checked", false);
-          $("#gateway_info").hide();
-        }
+    chrome.storage.sync.get("display_gateway_eventstream_prop", function (data) {
+      if (data.display_gateway_eventstream_prop === true) {
+        log("Displaying gateway information on event stream page.");
+        $("#display_gateway_eventstream").prop("checked", true);
+        if (current_tenant_gateway != null) $("#gateway_info").show();
+      } else {
+        log("Hiding gateway information on event stream page.");
+        $("#display_gateway_eventstream").prop("checked", false);
+        $("#gateway_info").hide();
       }
-    );
+    });
   //check if 360 tag add option is enabled or not.
   if (IsExtension === true)
     chrome.storage.sync.get("auto_add_360_tag_prop", function (data) {
@@ -361,12 +282,7 @@ function loadPreference() {
     });
 }
 
-function setActivePage(
-  active_page_class,
-  selected_menu_id,
-  selected_page_header,
-  selected_page_class
-) {
+function setActivePage(active_page_class, selected_menu_id, selected_page_header, selected_page_class) {
   $(".settings-main").hide();
   $(".network-stream-main").hide();
   $(".event-stream-main").hide();
@@ -389,9 +305,7 @@ function log(msg) {
   if (console_log_enabled) {
     console.log(msg);
     if (typeof msg === "object") msg = JSON.stringify(msg);
-    $("#eventStreamConsole").prepend(
-      "<span style='color:silver'> >> </span>" + msg + "<br />"
-    );
+    $("#eventStreamConsole").prepend("<span style='color:silver'> >> </span>" + msg + "<br />");
   }
 }
 function uuidv4() {
@@ -404,12 +318,7 @@ function uuidv4() {
 function makeToken(tenantId, clientSecret) {
   var header = { alg: "HS256", typ: "JWT" };
   var payload = { clientID: tenantId };
-  token = KJUR.jws.JWS.sign(
-    "HS256",
-    JSON.stringify(header),
-    JSON.stringify(payload),
-    btoa(clientSecret)
-  );
+  token = KJUR.jws.JWS.sign("HS256", JSON.stringify(header), JSON.stringify(payload), btoa(clientSecret));
   return token;
 }
 
@@ -417,9 +326,7 @@ function show_msg(msg, show_popup_btn) {
   if (msg && msg.data && msg.data.param) {
     $("#popup_footer_spacer").show();
     $("#popup_btn_section").hide();
-    $("#modal_msg").html(
-      "<p class='body'>" + format({ event_json: msg.data.param }, true) + "</p>"
-    );
+    $("#modal_msg").html("<p class='body'>" + format({ event_json: msg.data.param }, true) + "</p>");
   } else {
     if (msg && msg.data && msg.data.error) msg = msg.data.error;
     msg = "<p>" + msg + "</p>";
@@ -454,29 +361,21 @@ function format(d, IsMeta) {
     data.customProperties = "Check the JSON data.";
   }
 
-  table = syntaxHighlight(data, IsMeta ? raw : d.event_json, IsMeta);
+  IsConnectorJSON = false;
+  decoded_connector_json = "";
+  if (d && d.connector_JSON) {
+    IsConnectorJSON = true;
+
+    if (d.is_payload_Json) decoded_connector_json = JSON.stringify(d.connector_JSON);
+    else decoded_connector_json = d.connector_JSON;
+  }
+  table = syntaxHighlight(data, IsMeta ? raw : d.event_json, IsMeta, IsConnectorJSON, decoded_connector_json, d.is_payload_Json);
+
   table = table.replaceAll("</td>,", "</td>");
-  if (IsMeta)
-    return (
-      '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%">' +
-      "<tr>" +
-      '<td><div class="body" style="overflow:auto">' +
-      table +
-      "</div></td>" +
-      "</tr>" +
-      "</table>"
-    ); //syntaxHighlight(data,d.event_json)
-  return (
-    '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%">' +
-    "<tr>" +
-    '<td><div style="overflow:auto">' +
-    table +
-    "</div></td>" +
-    "</tr>" +
-    "</table>"
-  ); //syntaxHighlight(data,d.event_json)
+  if (IsMeta) return '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%">' + "<tr>" + '<td><div class="body" style="overflow:auto">' + table + "</div></td>" + "</tr>" + "</table>"; //syntaxHighlight(data,d.event_json)
+  return '<table cellpadding="0" cellspacing="0" border="0" style="width: 100%">' + "<tr>" + '<td><div style="overflow:auto">' + table + "</div></td>" + "</tr>" + "</table>"; //syntaxHighlight(data,d.event_json)
 }
-function syntaxHighlight(json, raw, IsMeta) {
+function syntaxHighlight(json, raw, IsMeta, IsConnectorJSON, decoded_connector_json, is_payload_Json) {
   if (typeof json != "string") {
     json = JSON.stringify(json, undefined, 2);
   }
@@ -489,97 +388,78 @@ function syntaxHighlight(json, raw, IsMeta) {
 
   var next_col_need_meta = "";
 
-  var str = json.replace(
-    /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-    function (match) {
-      var cls = "number";
-      if (/^"/.test(match)) {
-        if (/:$/.test(match)) {
-          cls = "key";
-        } else {
-          cls = "string";
-        }
-      } else if (/true|false/.test(match)) {
-        cls = "boolean";
-      } else if (/null/.test(match)) {
-        cls = "null";
-      }
-
-      if (cls == "key") match = match.substring(1, match.length - 2);
-      else if (cls != "null") match = match.substring(1, match.length - 1);
-
-      if (cls == "key") {
-        if (counter % 4 === 0)
-          val = '<tr> <td class="' + cls + '">' + match + "</td>";
-        else val = '<td class="' + cls + '">' + match + "</td>";
+  var str = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+    var cls = "number";
+    if (/^"/.test(match)) {
+      if (/:$/.test(match)) {
+        cls = "key";
       } else {
-        temp_val = htmlCodes(match, false);
-        len = temp_val.length;
-        if (len > 100)
-          temp_val = "<textarea readonly>" + temp_val + "</textarea>";
+        cls = "string";
+      }
+    } else if (/true|false/.test(match)) {
+      cls = "boolean";
+    } else if (/null/.test(match)) {
+      cls = "null";
+    }
 
-        if (IsValuePresent(next_col_need_meta) && IsMeta != true) {
-          if (
-            current_tenant_gateway != undefined &&
-            IsValuePresent(current_tenant_gateway.token) &&
-            ((current_tenant_gateway.display_metadata_from_360 === true &&
-              current_tenant_gateway.display_metadata_from_360 != undefined) ||
-              current_tenant_gateway.display_metadata_from_360 === undefined)
-          ) {
-            var temp_id = uuidv4();
-            temp_val =
-              temp_val +
-              "<span id='" +
-              temp_id +
-              "' class='meta-link-txt w3-text-amber' data-meta-type='" +
-              next_col_need_meta +
-              "' data-meta-id='" +
-              match +
-              "'>(Please wait...)</span>";
-            getMeta(next_col_need_meta, match, temp_id);
-          }
+    if (cls == "key") match = match.substring(1, match.length - 2);
+    else if (cls != "null") match = match.substring(1, match.length - 1);
+
+    if (cls == "key") {
+      if (counter % 4 === 0) val = '<tr> <td class="' + cls + '">' + match + "</td>";
+      else val = '<td class="' + cls + '">' + match + "</td>";
+    } else {
+      temp_val = htmlCodes(match, false);
+      len = temp_val.length;
+      if (len > 100) temp_val = "<textarea readonly>" + temp_val + "</textarea>";
+
+      if (IsValuePresent(next_col_need_meta) && IsMeta != true) {
+        if (
+          current_tenant_gateway != undefined &&
+          IsValuePresent(current_tenant_gateway.token) &&
+          ((current_tenant_gateway.display_metadata_from_360 === true && current_tenant_gateway.display_metadata_from_360 != undefined) || current_tenant_gateway.display_metadata_from_360 === undefined)
+        ) {
+          var temp_id = uuidv4();
+          temp_val = temp_val + "<span id='" + temp_id + "' class='meta-link-txt w3-text-amber' data-meta-type='" + next_col_need_meta + "' data-meta-id='" + match + "'>(Please wait...)</span>";
+          getMeta(next_col_need_meta, match, temp_id);
         }
-
-        if (counter % 4 === 0) {
-          val = '<td class="' + cls + '">' + temp_val + "</td></tr>";
-        } else val = '<td class="' + cls + '">' + temp_val + "</td>";
       }
 
-      counter = counter + 1;
-      if (cls == "key" && COLS_WITH_META.includes(match))
-        next_col_need_meta = match;
-      else next_col_need_meta = "";
-      return val;
+      if (counter % 4 === 0) {
+        val = '<td class="' + cls + '">' + temp_val + "</td></tr>";
+      } else val = '<td class="' + cls + '">' + temp_val + "</td>";
     }
-  );
+
+    counter = counter + 1;
+    if (cls == "key" && COLS_WITH_META.includes(match)) next_col_need_meta = match;
+    else next_col_need_meta = "";
+    return val;
+  });
   str = str.substring(1, str.length - 1);
 
-  str =
-    str +
-    "<tr><td colspan=4 class='w3-text-khaki w3-tiny'><div style='width:100%; '>" +
-    htmlCodes(raw, false) +
-    "</div></td></tr>";
+  if (IsConnectorJSON && is_payload_Json) {
+    formatted_connector_json = addConnectorJSON(decoded_connector_json);
+    str =
+      str +
+      "<tr><td colspan=4 class='w3-text-khaki w3-tiny'>" +
+      MSG_CONNECTOR_JSON_INFO +
+      "<div style='width:100%; '>" +
+      formatted_connector_json +
+      "</div><div style='width:100%'>Raw JSON Payload: <br/>" +
+      htmlCodes(decoded_connector_json, false) +
+      "</div></td></tr>";
+  } else if (IsConnectorJSON && !is_payload_Json) {
+    str = str + "<tr><td colspan=4 class='w3-text-khaki w3-tiny'><div style='width:100%; '>" + MSG_CONNECTOR_JSON_INFO + "<br/>" + htmlCodes(decoded_connector_json, false) + "</div></td></tr>";
+  } else {
+    str = str + "<tr><td colspan=4 class='w3-text-khaki w3-tiny'><div style='width:100%; '>" + htmlCodes(raw, false) + "</div></td></tr>";
+  }
 
-  return (
-    "<table border=0 style='width:100%' cellpadding='0' cellspacing='1' >" +
-    str +
-    "</table>"
-  );
+  return "<table border=0 style='width:100%' cellpadding='0' cellspacing='1' >" + str + "</table>";
 }
 function getMeta(meta_type, meta_id, html_id) {
-  if (
-    meta_id in META_LIST &&
-    META_LIST[meta_id] &&
-    META_LIST[meta_id] != undefined &&
-    META_LIST[meta_id].length > 0
-  ) {
+  if (meta_id in META_LIST && META_LIST[meta_id] && META_LIST[meta_id] != undefined && META_LIST[meta_id].length > 0) {
     setTimeout(function () {
-      handle_meta_response(
-        JSON.parse(META_LIST[meta_id]),
-        meta_type,
-        meta_id,
-        html_id
-      );
+      handle_meta_response(JSON.parse(META_LIST[meta_id]), meta_type, meta_id, html_id);
     }, 1000);
 
     return;
@@ -607,25 +487,16 @@ function getMeta(meta_type, meta_id, html_id) {
       META_LIST[meta_id] = JSON.stringify(response);
     })
     .fail(function (error) {
-      log(
-        "Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret."
-      );
+      log("Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret.");
       log(error);
       var tmp_msg = "";
-      if (
-        error != undefined &&
-        error.responseJSON != undefined &&
-        error.responseJSON.message != undefined
-      )
-        tmp_msg = error.responseJSON.message;
+      if (error != undefined && error.responseJSON != undefined && error.responseJSON.message != undefined) tmp_msg = error.responseJSON.message;
       log(tmp_msg);
       $("#" + html_id).html("Unable to get metadata.");
       $("#" + html_id).bind(
         "click",
         {
-          error: error
-            ? JSON.stringify(error)
-            : "Unable to get metadata from tenant.",
+          error: error ? JSON.stringify(error) : "Unable to get metadata from tenant.",
         },
         show_msg
       );
@@ -675,11 +546,7 @@ function initSettingsPage() {
 
 function popup_btn_1_click() {
   if (null != popup_context && undefined != popup_context) {
-    saveAndActivate(
-      popup_context.response,
-      popup_context.tenant_gateway,
-      popup_context.save
-    );
+    saveAndActivate(popup_context.response, popup_context.tenant_gateway, popup_context.save);
     popup_context = null;
   }
 }
@@ -692,9 +559,7 @@ function activate_gateway(gateway) {
   log("Setting this tenant as the active tenant.");
   current_tenant_gateway = gateway;
   update_pull_down();
-  show_msg(
-    "New gateway configuration is activated. You might want to stop and start the data collection under Event Stream tab."
-  );
+  show_msg("New gateway configuration is activated. You might want to stop and start the data collection under Event Stream tab.");
   $(".status-feedback").removeClass("status-feedback-active");
 }
 function update_pull_down() {
@@ -704,26 +569,20 @@ function update_pull_down() {
     $("#lblActiveUrl").html(current_tenant_gateway.tenantUrl);
     $("#lblActiveId").html(current_tenant_gateway.tenantId);
     if (IsExtension === true)
-      chrome.storage.sync.get(
-        "display_gateway_eventstream_prop",
-        function (data) {
-          if (data.display_gateway_eventstream_prop === true) {
-            log("Displaying gateway information on event stream page.");
-            $("#gateway_info").show();
-          } else {
-            log("Hiding gateway information on event stream page.");
-            $("#gateway_info").hide();
-          }
+      chrome.storage.sync.get("display_gateway_eventstream_prop", function (data) {
+        if (data.display_gateway_eventstream_prop === true) {
+          log("Displaying gateway information on event stream page.");
+          $("#gateway_info").show();
+        } else {
+          log("Hiding gateway information on event stream page.");
+          $("#gateway_info").hide();
         }
-      );
+      });
   }
 }
 function settings_activate_selected_tenant() {
   var temp_tenantId = $("#ci360SavedTenantList :selected").val();
-  gateway =
-    ci360SavedTenantList.tenants[
-      ci360SavedTenantList.tenants.findIndex((a) => a.id === temp_tenantId)
-    ];
+  gateway = ci360SavedTenantList.tenants[ci360SavedTenantList.tenants.findIndex((a) => a.id === temp_tenantId)];
   if (gateway.type.toLowerCase() == "diag") {
     //it is safe to connect to this agent
     log("Diagnostics Access Point detected.");
@@ -743,14 +602,11 @@ function settings_forget_selected_tenant() {
     1
   );
   if (IsExtension === true)
-    chrome.storage.sync.set(
-      { ci360SavedTenantList_prop: ci360SavedTenantList },
-      function () {
-        log("Removed the gateway configuration.");
-        log("Total number of saved tenants:");
-        log(ci360SavedTenantList.tenants.length);
-      }
-    );
+    chrome.storage.sync.set({ ci360SavedTenantList_prop: ci360SavedTenantList }, function () {
+      log("Removed the gateway configuration.");
+      log("Total number of saved tenants:");
+      log(ci360SavedTenantList.tenants.length);
+    });
 
   loadCi360SavedTenantList();
 }
@@ -764,9 +620,7 @@ function validate_and_Activate(save) {
   var tenantId = $("#ci360TenantIdTxt").val().trim();
   var tenantSecret = $("#ci360TenantSecretTxt").val().trim();
   var tenantName = $("#ci360TenantNameTxt").val().trim();
-  var display_metadata_from_360 = $("#display_metadata_from_360").is(
-    ":checked"
-  );
+  var display_metadata_from_360 = $("#display_metadata_from_360").is(":checked");
 
   if ($("#ci360restUrlTxt").val().trim().length > 0) {
     tenantUrl = $("#ci360restUrlTxt").val().trim();
@@ -845,18 +699,11 @@ function loadCi360SavedTenantList() {
     chrome.storage.sync.get("ci360SavedTenantList_prop", function (data) {
       $("#ci360SavedTenantList").html("");
       ci360SavedTenantList = data.ci360SavedTenantList_prop;
-      if (
-        ci360SavedTenantList === undefined ||
-        ci360SavedTenantList.tenants.length < 1
-      ) {
+      if (ci360SavedTenantList === undefined || ci360SavedTenantList.tenants.length < 1) {
         log("There are no saved tenants.");
         return;
       }
-      log(
-        "There are " +
-          ci360SavedTenantList.tenants.length +
-          " saved gateway configurations."
-      );
+      log("There are " + ci360SavedTenantList.tenants.length + " saved gateway configurations.");
 
       for (const tenant of ci360SavedTenantList.tenants) {
         log("Tenant Id: " + tenant.id);
@@ -879,8 +726,7 @@ function validateGatewayDetailsAndActivate(tenant_gateway, save) {
   log("Token generated.");
 
   var settings = {
-    url:
-      "https://" + tenant_gateway.tenantUrl + "/marketingGateway/configuration",
+    url: "https://" + tenant_gateway.tenantUrl + "/marketingGateway/configuration",
     method: "GET",
     timeout: 0,
     headers: {
@@ -895,12 +741,7 @@ function validateGatewayDetailsAndActivate(tenant_gateway, save) {
         log("Access Point Type: " + response.type);
         tenant_gateway.type = response.type.toLowerCase();
         tenant_gateway.token = token;
-        if (
-          response.agentName.toLowerCase().trim() !=
-          tenant_gateway.tenantName.toLowerCase().trim()
-        )
-          tenant_gateway.tenantName =
-            tenant_gateway.tenantName + " (" + response.agentName + ")";
+        if (response.agentName.toLowerCase().trim() != tenant_gateway.tenantName.toLowerCase().trim()) tenant_gateway.tenantName = tenant_gateway.tenantName + " (" + response.agentName + ")";
 
         if (response.type.toLowerCase() == "diag") {
           //it is safe to connect to this agent
@@ -921,24 +762,15 @@ function validateGatewayDetailsAndActivate(tenant_gateway, save) {
         }
         saveAndActivate(response, tenant_gateway, save);
       } else {
-        log(
-          "Unable to get CI 360 Access Point configurations. Please check the External gateway address, Tenant Id and Client Secret."
-        );
+        log("Unable to get CI 360 Access Point configurations. Please check the External gateway address, Tenant Id and Client Secret.");
         show_msg(UNABLE_TO_AP_CONFIG_MSG, false);
       }
     })
     .fail(function (error) {
-      log(
-        "Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret."
-      );
+      log("Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret.");
       log(error);
       var tmp_msg = "";
-      if (
-        error != undefined &&
-        error.responseJSON != undefined &&
-        error.responseJSON.message != undefined
-      )
-        tmp_msg = error.responseJSON.message;
+      if (error != undefined && error.responseJSON != undefined && error.responseJSON.message != undefined) tmp_msg = error.responseJSON.message;
       show_msg(ERROR_CONNECTING_AP_MSG + "<p>" + tmp_msg + "</p>", false);
     });
 }
@@ -949,14 +781,11 @@ function saveAndActivate(response, tenant_gateway, save) {
     ci360SavedTenantList.tenants.push(tenant_gateway);
     log("Number of saved tenants: " + ci360SavedTenantList.tenants.length);
     if (IsExtension === true)
-      chrome.storage.sync.set(
-        { ci360SavedTenantList_prop: ci360SavedTenantList },
-        function () {
-          log("Tenant information is saved.");
-          loadCi360SavedTenantList();
-          settings_clear();
-        }
-      );
+      chrome.storage.sync.set({ ci360SavedTenantList_prop: ci360SavedTenantList }, function () {
+        log("Tenant information is saved.");
+        loadCi360SavedTenantList();
+        settings_clear();
+      });
   }
   activate_gateway(tenant_gateway);
 }
@@ -969,10 +798,7 @@ function loadCi360SavedTagList() {
     chrome.storage.sync.get("ci360SavedTagList_prop", function (data) {
       $("#ci360SavedTagList").html("");
       ci360SavedTagList = data.ci360SavedTagList_prop;
-      if (
-        ci360SavedTagList === undefined ||
-        ci360SavedTagList.tenants.length < 1
-      ) {
+      if (ci360SavedTagList === undefined || ci360SavedTagList.tenants.length < 1) {
         log("There are no saved Tags.");
         current_360_tag = null;
         return;
@@ -1009,10 +835,7 @@ function settings_tag_save_activate() {
 }
 function settings_tag_activate_selected_tenant() {
   var temp_tenantId = $("#ci360SavedTagList :selected").val();
-  tag =
-    ci360SavedTagList.tenants[
-      ci360SavedTagList.tenants.findIndex((a) => a.id === temp_tenantId)
-    ];
+  tag = ci360SavedTagList.tenants[ci360SavedTagList.tenants.findIndex((a) => a.id === temp_tenantId)];
   activate_tag(tag);
 }
 function settings_tag_forget_selected_tenant() {
@@ -1022,14 +845,11 @@ function settings_tag_forget_selected_tenant() {
     1
   );
   if (IsExtension === true)
-    chrome.storage.sync.set(
-      { ci360SavedTagList_prop: ci360SavedTagList },
-      function () {
-        log("Removed the Tag configuration.");
-        log("Total number of saved tags:");
-        log(ci360SavedTagList.tenants.length);
-      }
-    );
+    chrome.storage.sync.set({ ci360SavedTagList_prop: ci360SavedTagList }, function () {
+      log("Removed the Tag configuration.");
+      log("Total number of saved tags:");
+      log(ci360SavedTagList.tenants.length);
+    });
   loadCi360SavedTagList();
 }
 function validate_and_Activate_Tag(save) {
@@ -1085,14 +905,11 @@ function validate_and_Activate_Tag(save) {
       log("attempting to save the tag configuration.");
       ci360SavedTagList.tenants.push(tenant_tag);
       if (IsExtension === true)
-        chrome.storage.sync.set(
-          { ci360SavedTagList_prop: ci360SavedTagList },
-          function () {
-            log("Tag information is saved.");
-            loadCi360SavedTagList();
-            settings_tag_clear();
-          }
-        );
+        chrome.storage.sync.set({ ci360SavedTagList_prop: ci360SavedTagList }, function () {
+          log("Tag information is saved.");
+          loadCi360SavedTagList();
+          settings_tag_clear();
+        });
     }
     activate_tag(tenant_tag);
   } else {
@@ -1131,8 +948,7 @@ function initEventStreamTable() {
         orderable: false,
         data: null,
         width: "10px",
-        defaultContent:
-          '<a href="#" style="text-decoration: none;" tabindex="0">&nbsp;</a>',
+        defaultContent: '<a href="#" style="text-decoration: none;" tabindex="0">&nbsp;</a>',
       },
       { data: "eventName" },
       { data: "event" },
@@ -1264,11 +1080,7 @@ function close_event_stream_connection() {
 
 function connect360() {
   //"wss://" + document.getElementById("tenantUrl").value + "/marketingGateway/agent/stream";
-  ws = new WebSocket(
-    "wss://" +
-      current_tenant_gateway.tenantUrl +
-      "/marketingGateway/agent/stream"
-  );
+  ws = new WebSocket("wss://" + current_tenant_gateway.tenantUrl + "/marketingGateway/agent/stream");
   ws.onerror = function (event) {
     log("Error: " + event.data);
   };
@@ -1297,8 +1109,9 @@ function connect360() {
       if (event.data && event.data.includes("ping")) log("Message: ping.");
     }
 
-    if (event.data && event.data.includes("rowKey"))
-      addToGrid_eventStream(JSON.parse(event.data), event.data);
+    var isConnectorEvent = event.data.includes("connector-agent-proxy-event");
+
+    if (event.data && (event.data.includes("rowKey") || event.data.includes("connector-agent-proxy-event"))) addToGrid_eventStream(JSON.parse(event.data), event.data, isConnectorEvent);
     send("ack");
   };
   ws.onclose = function (event) {
@@ -1311,88 +1124,91 @@ function show_diagnostics_filters() {
   if (last_profile === null) {
     //This means there has been no network traffic caputred. So we can't auto detect any IDs.
     //Diable those options in the popup.
-    $('input:radio[name="diagnostics_filter"]')
-      .filter('[value="custom"]')
-      .attr("checked", true);
+    $('input:radio[name="diagnostics_filter"]').filter('[value="custom"]').attr("checked", true);
     $('input[name="diagnostics_filter"]').attr("disabled", true);
   } else {
-    $('input:radio[name="diagnostics_filter"]')
-      .filter('[value="datahub_id"]')
-      .attr("checked", true);
+    $('input:radio[name="diagnostics_filter"]').filter('[value="datahub_id"]').attr("checked", true);
   }
   document.getElementById("id02").style.display = "block";
   log("Displaying the popup for filters.");
 }
-function addToGrid_eventStream(event_json, raw_json) {
+function addToGrid_eventStream(event_json, raw_json, isConnectorEvent) {
   if (!event_json || !event_json.attributes) {
     return;
   }
+  is_payload_Json = false;
+  if (isConnectorEvent && event_json.attributes["connector-agent-proxy-event"] && JSON.parse(event_json.attributes["connector-agent-proxy-event"]).body) {
+    decoded_connector_payload = decodeZ85(JSON.parse(event_json.attributes["connector-agent-proxy-event"]).body);
+    connector_JSON = "";
+    is_payload_Json = isJson(decoded_connector_payload);
+    if (decoded_connector_payload && is_payload_Json) connector_JSON = JSON.parse(decoded_connector_payload);
+    log("Decoded Connector Payload: " + decoded_connector_payload);
+  }
 
-  if (
-    !event_json.attributes.eventName ||
-    event_json.attributes.eventName === undefined ||
-    event_json.attributes.eventName === null
-  )
-    event_json.attributes.eventName = "";
-  if (
-    !event_json.attributes.internalTenantId ||
-    event_json.attributes.internalTenantId === undefined ||
-    event_json.attributes.internalTenantId === null
-  )
-    event_json.attributes.internalTenantId = "";
+  if (!event_json.attributes.eventName || event_json.attributes.eventName === undefined || event_json.attributes.eventName === null) event_json.attributes.eventName = "";
+  if (!event_json.attributes.internalTenantId || event_json.attributes.internalTenantId === undefined || event_json.attributes.internalTenantId === null) event_json.attributes.internalTenantId = "";
 
-  if (
-    !event_json.attributes.event ||
-    event_json.attributes.event === undefined ||
-    event_json.attributes.event === null
-  )
-    event_json.attributes.event = "";
-  if (
-    !event_json.attributes.datahub_id ||
-    event_json.attributes.datahub_id === undefined ||
-    event_json.attributes.datahub_id === null
-  )
-    event_json.attributes.datahub_id = "";
-  if (
-    !event_json.attributes.sessionId ||
-    event_json.attributes.sessionId === undefined ||
-    event_json.attributes.sessionId === null
-  )
-    event_json.attributes.sessionId = "";
-  if (
-    !event_json.rowKey ||
-    event_json.rowKey === undefined ||
-    event_json.rowKey === null
-  )
-    event_json.rowKey = "";
-  if (
-    !event_json.attributes.timestamp ||
-    event_json.attributes.timestamp === undefined ||
-    event_json.attributes.timestamp === null
-  )
-    event_json.attributes.timestamp = "";
-  if (
-    !event_json.attributes.channel_user_id ||
-    event_json.attributes.channel_user_id === undefined ||
-    event_json.attributes.channel_user_id === null
-  )
-    event_json.attributes.channel_user_id = "";
+  if (!event_json.attributes.event || event_json.attributes.event === undefined || event_json.attributes.event === null) event_json.attributes.event = "";
+  if (!event_json.attributes.datahub_id || event_json.attributes.datahub_id === undefined || event_json.attributes.datahub_id === null) event_json.attributes.datahub_id = "";
+  if (!event_json.attributes.sessionId || event_json.attributes.sessionId === undefined || event_json.attributes.sessionId === null) event_json.attributes.sessionId = "";
+  if (!event_json.rowKey || event_json.rowKey === undefined || event_json.rowKey === null) event_json.rowKey = "";
+  if (!event_json.attributes.timestamp || event_json.attributes.timestamp === undefined || event_json.attributes.timestamp === null) event_json.attributes.timestamp = "";
+
+  tmp_generatedTimestamp = "";
+  tmp_event = "";
+  tmp_sessionId = "";
+  tmp_identityId = "";
+
+  if (isConnectorEvent && is_payload_Json && connector_JSON) {
+    if (event_json.attributes.timestamp == "" && connector_JSON.date && connector_JSON.date.generatedTimestamp) {
+      tmp_generatedTimestamp = connector_JSON.date.generatedTimestamp + "";
+    }
+    if (tmp_generatedTimestamp || tmp_generatedTimestamp == "") {
+      tmp_generatedTimestamp = moment().valueOf();
+      tmp_generatedTimestamp = tmp_generatedTimestamp + "";
+    }
+    if (connector_JSON.eventName && connector_JSON.eventName.length > 0) {
+      tmp_event = connector_JSON.eventName;
+    }
+    if (!tmp_event || tmp_event.length < 1) {
+      if (connector_JSON.name && connector_JSON.name.length > 0) tmp_event = connector_JSON.name;
+      if (connector_JSON.domainObjectTypeCode && connector_JSON.domainObjectTypeCode.length > 0) tmp_event = tmp_event + " (" + connector_JSON.domainObjectTypeCode + ")";
+    }
+
+    if (connector_JSON.identity && connector_JSON.identity.sessionId) {
+      tmp_sessionId = connector_JSON.identity.sessionId;
+    }
+    if (connector_JSON.identity && connector_JSON.identity.identityId) {
+      tmp_identityId = connector_JSON.identity.identityId;
+    }
+  }
+  if (isConnectorEvent && !is_payload_Json)
+  {
+    if (tmp_generatedTimestamp || tmp_generatedTimestamp == "") {
+      tmp_generatedTimestamp = moment().valueOf();
+      tmp_generatedTimestamp = tmp_generatedTimestamp + "";
+    }
+  }
+
+  if (!event_json.attributes.channel_user_id || event_json.attributes.channel_user_id === undefined || event_json.attributes.channel_user_id === null) event_json.attributes.channel_user_id = "";
   let row = {
     eventName: event_json.attributes.eventName,
     internalTenantId: event_json.attributes.internalTenantId,
     //"event": event_json.attributes.event,
-    event: getSuitableCol(JSON.stringify(event_json.attributes)),
-    datahub_id: event_json.attributes.datahub_id,
+    event: tmp_event == "" ? getSuitableCol(JSON.stringify(event_json.attributes)) : tmp_event,
+    datahub_id: tmp_identityId == "" ? event_json.attributes.datahub_id : tmp_identityId,
     attributes: JSON.stringify(event_json.attributes, undefined, 2),
     event_json: JSON.stringify(event_json, undefined, 2),
-    sessionId: event_json.attributes.sessionId,
+    sessionId: tmp_sessionId == "" ? event_json.attributes.sessionId : tmp_sessionId,
     rowKey: event_json.rowKey,
-    timestamp: event_json.attributes.timestamp,
+    timestamp: event_json.attributes.timestamp == "" ? tmp_generatedTimestamp : event_json.attributes.timestamp,
     vid: event_json.attributes.channel_user_id,
+    connector_JSON: isConnectorEvent ? (is_payload_Json ? connector_JSON : decoded_connector_payload) : undefined,
+    is_payload_Json: is_payload_Json,
   };
   var t = $("#eventStreamTable").DataTable();
   t.row.add(row).draw(false);
-  log("Event recieved: " + event_json.attributes.eventName);
+  log("Event received: " + event_json.attributes.eventName);
 }
 function send(message, callback) {
   waitForConnection(function () {
@@ -1430,10 +1246,7 @@ function addFunctionsforDataTables() {
         }
 
         if (!$) {
-          $ =
-            typeof window !== "undefined"
-              ? require("jquery")
-              : require("jquery")(root);
+          $ = typeof window !== "undefined" ? require("jquery") : require("jquery")(root);
         }
 
         return factory($, root, root.document);
@@ -1462,6 +1275,14 @@ function addFunctionsforDataTables() {
     };
   });
 }
+function isJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
 /** End of Event stream page related JS functions */
 
 /** Start of Debugging page related JS functions */
@@ -1482,18 +1303,14 @@ function onError(error) {
   console.log(`Error: ${error}`);
 }
 function get360TagScripts_console() {
-  var ev2 =
-    'document.querySelectorAll("script[id^=ob-]").forEach((s) => {console.log("From Snowy, 360 Tag: "+s.outerHTML);}); ';
+  var ev2 = 'document.querySelectorAll("script[id^=ob-]").forEach((s) => {console.log("From Snowy, 360 Tag: "+s.outerHTML);}); ';
   if (IsExtension)
     chrome.devtools.inspectedWindow.eval(ev2, function (result, isException) {
       if (isException) {
         log("Unable to get the 360 script tag from page. Will try again.");
       } else {
         log("Got Script from page. Check the Console log of dev tools please.");
-        if (
-          null != id_get360TagScripts_console &&
-          id_get360TagScripts_console.length > 0
-        ) {
+        if (null != id_get360TagScripts_console && id_get360TagScripts_console.length > 0) {
           id_get360TagScripts_console.forEach((intv) => {
             clearInterval(intv);
           });
@@ -1504,23 +1321,14 @@ function get360TagScripts_console() {
 }
 function get360TagScripts() {
   $("#script_tag").html(UNDOCKED_DEVTOOL_MSG);
-  if (
-    IsExtension &&
-    chrome.tabs !== undefined &&
-    chrome.tabs.executeScript !== undefined
-  ) {
+  if (IsExtension && chrome.tabs !== undefined && chrome.tabs.executeScript !== undefined) {
     chrome.tabs.executeScript(
       null,
       {
         code: 'var result=[]; document.querySelectorAll("script[id^=ob-]").forEach((s) => {result.push(s.outerHTML);}); result',
       },
       function (results) {
-        if (
-          results &&
-          results != undefined &&
-          results != null &&
-          results.length > 0
-        ) {
+        if (results && results != undefined && results != null && results.length > 0) {
           log("Got the script tags from page.");
           if (null != id_get360TagScripts && id_get360TagScripts.length > 0) {
             id_get360TagScripts.forEach((intv) => {
@@ -1575,8 +1383,7 @@ function initNetWorkTable() {
         className: "details-control",
         orderable: false,
         data: null,
-        defaultContent:
-          '<a href="#" style="text-decoration: none;" tabindex="0">&nbsp;</a>',
+        defaultContent: '<a href="#" style="text-decoration: none;" tabindex="0">&nbsp;</a>',
       },
       { data: "event" },
       { data: "event_json" },
@@ -1623,32 +1430,16 @@ function initNetWorkTable() {
     var rowData = table.row(this).data();
     if (rowData && rowData.event_json !== undefined) {
       //var target = JSON.parse(rowData.event_json);
-      var target = JSON.parse(
-        rowData.event_json
-          .replace(/\n/g, "\\n")
-          .replace(/\r/g, "\\r")
-          .replace(/\t/g, "\\t")
-          .replace("\b", "")
-      );
+      var target = JSON.parse(rowData.event_json.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace("\b", ""));
       var t = getSelector(target);
       if (t && t != undefined && t.length > 0) {
         t = t.trim();
         t = t.replaceAll(". ", "");
         //works var ev2 = "$('" + t + "').css({border: '2px solid red', transform: 'scale(1.5)'})";
         log("Selector: " + t);
-        var ev2 =
-          "document.querySelectorAll('" +
-          t +
-          "').forEach ((i) => {i.style.border_tmp = i.style.border;i.style.border='2px solid red'; i.style.transform='scale(1.5)';})";
-        if (
-          IsValuePresent(target["event"]) &&
-          (target["event"] === "spot_change" ||
-            target["event"] === "spot_viewable")
-        )
-          ev2 =
-            "document.querySelectorAll('" +
-            t +
-            "').forEach ((i) => {i.parentElement.style.border_tmp = i.parentElement.style.border;i.parentElement.style.border='2px solid red'; i.parentElement.style.transform='scale(1.5)';})";
+        var ev2 = "document.querySelectorAll('" + t + "').forEach ((i) => {i.style.border_tmp = i.style.border;i.style.border='2px solid red'; i.style.transform='scale(1.5)';})";
+        if (IsValuePresent(target["event"]) && (target["event"] === "spot_change" || target["event"] === "spot_viewable"))
+          ev2 = "document.querySelectorAll('" + t + "').forEach ((i) => {i.parentElement.style.border_tmp = i.parentElement.style.border;i.parentElement.style.border='2px solid red'; i.parentElement.style.transform='scale(1.5)';})";
         chrome.devtools.inspectedWindow.eval(ev2);
       }
     }
@@ -1657,32 +1448,16 @@ function initNetWorkTable() {
     var rowData = table.row(this).data();
     if (rowData && rowData.event_json !== undefined) {
       //var target = JSON.parse(rowData.event_json);
-      var target = JSON.parse(
-        rowData.event_json
-          .replace(/\n/g, "\\n")
-          .replace(/\r/g, "\\r")
-          .replace(/\t/g, "\\t")
-          .replace("\b", "")
-      );
+      var target = JSON.parse(rowData.event_json.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace("\b", ""));
       //var t = target["targetSelectorPath"];
       var t = getSelector(target);
       if (t && t != undefined && t.length > 0) {
         t = t.trim();
         t = t.replaceAll(". ", "");
         //works var ev = "$('" + t + "').css({border: '0px solid red', transform: 'scale(1)'})";
-        var ev =
-          "document.querySelectorAll('" +
-          t +
-          "').forEach ((i) => {i.style.border=i.style.border_tmp;i.style.transform='scale(1)';})";
-        if (
-          IsValuePresent(target["event"]) &&
-          (target["event"] === "spot_change" ||
-            target["event"] === "spot_viewable")
-        )
-          ev =
-            "document.querySelectorAll('" +
-            t +
-            "').forEach ((i) => {i.parentElement.style.border=i.parentElement.style.border_tmp;i.parentElement.style.transform='scale(1)';})";
+        var ev = "document.querySelectorAll('" + t + "').forEach ((i) => {i.style.border=i.style.border_tmp;i.style.transform='scale(1)';})";
+        if (IsValuePresent(target["event"]) && (target["event"] === "spot_change" || target["event"] === "spot_viewable"))
+          ev = "document.querySelectorAll('" + t + "').forEach ((i) => {i.parentElement.style.border=i.parentElement.style.border_tmp;i.parentElement.style.transform='scale(1)';})";
         chrome.devtools.inspectedWindow.eval(ev);
       }
     }
@@ -1751,56 +1526,28 @@ function initNetWorkTable() {
     $("#identity_type").removeClass("border_red");
     $("#identity_obscure").removeClass("border_red");
 
-    if (
-      !identity_type ||
-      identity_type === undefined ||
-      identity_type === "select"
-    ) {
+    if (!identity_type || identity_type === undefined || identity_type === "select") {
       $("#identity_type").addClass("border_red");
       valid = false;
     }
 
-    if (
-      !identity_obscure ||
-      identity_obscure === undefined ||
-      identity_obscure === "select"
-    ) {
+    if (!identity_obscure || identity_obscure === undefined || identity_obscure === "select") {
       $("#identity_obscure").addClass("border_red");
       valid = false;
     }
 
-    if (
-      !identity_value ||
-      identity_value === undefined ||
-      identity_value.length < 1
-    ) {
+    if (!identity_value || identity_value === undefined || identity_value.length < 1) {
       $("#txtIdentity_value").addClass("border_red");
       valid = false;
     }
     if (valid) {
       log("attempting to fire JS APIs");
-      var js_api =
-        "ci360('attachIdentity', { 'loginId': '" +
-        identity_value +
-        "', 'loginEventType': '" +
-        identity_type +
-        "' });";
-      if (identity_obscure === "yes")
-        js_api =
-          "ci360('attachIdentity', { 'loginId': '" +
-          identity_value +
-          "', 'loginEventType': '" +
-          identity_type +
-          "', 'obfuscateFields': '[\"loginId\"]' });";
+      var js_api = "ci360('attachIdentity', { 'loginId': '" + identity_value + "', 'loginEventType': '" + identity_type + "' });";
+      if (identity_obscure === "yes") js_api = "ci360('attachIdentity', { 'loginId': '" + identity_value + "', 'loginEventType': '" + identity_type + "', 'obfuscateFields': '[\"loginId\"]' });";
 
       if (IsExtension) {
         chrome.devtools.inspectedWindow.eval(js_api);
-        log(
-          "Fired the event. Type: " +
-            identity_type +
-            ", Value: " +
-            identity_value
-        );
+        log("Fired the event. Type: " + identity_type + ", Value: " + identity_value);
         log(js_api);
       }
     } else {
@@ -1823,22 +1570,16 @@ function getSelector(target) {
   if (IsValuePresent(target["_tsp1"]) === true) return target["_tsp1"];
   if (IsValuePresent(target["targetSelectorPath"]) === true) {
     var sel = target["targetSelectorPath"];
-    if (
-      (sel.trim().endsWith(">a") || sel.trim().endsWith("> a")) &&
-      IsValuePresent(target["anchor_href"])
-    ) {
+    if ((sel.trim().endsWith(">a") || sel.trim().endsWith("> a")) && IsValuePresent(target["anchor_href"])) {
       //a[href*="about"]
       sel = sel + '[href*="' + target["anchor_href"] + '"]';
       return sel;
     }
     return target["targetSelectorPath"];
   }
-  if (IsValuePresent(target["targetselector"]) === true)
-    return target["targetselector"];
-  if (IsValuePresent(target["targetid"]) === true)
-    return "#" + target["targetid"];
-  if (IsValuePresent(target["creative_id"]) === true)
-    return 'data[data-creativeid="' + target["creative_id"] + '"]';
+  if (IsValuePresent(target["targetselector"]) === true) return target["targetselector"];
+  if (IsValuePresent(target["targetid"]) === true) return "#" + target["targetid"];
+  if (IsValuePresent(target["creative_id"]) === true) return 'data[data-creativeid="' + target["creative_id"] + '"]';
 
   for (key in target) {
     var v = getMatchingKeyValues(key, target);
@@ -1848,30 +1589,18 @@ function getSelector(target) {
 }
 function getMatchingKeyValues(key, target) {
   if (key && key != undefined && key.length > 0) {
-    if (
-      key.startsWith("form.f.") &&
-      key.endsWith("._h.id") &&
-      IsValuePresent(target[key])
-    ) {
+    if (key.startsWith("form.f.") && key.endsWith("._h.id") && IsValuePresent(target[key])) {
       return "#" + target[key];
     }
   }
   return "";
 }
 function IsValuePresent(val) {
-  if (val && val != null && val != undefined && val.trim().length > 0)
-    return true;
+  if (val && val != null && val != undefined && val.trim().length > 0) return true;
   return false;
 }
 function add_360_tag() {
-  if (
-    IsTagAdded === false &&
-    current_360_tag &&
-    current_360_tag.tenantUrl &&
-    current_360_tag.tenantUrl.length > 0 &&
-    current_360_tag.tenantId &&
-    current_360_tag.tenantId.length > 0
-  ) {
+  if (IsTagAdded === false && current_360_tag && current_360_tag.tenantUrl && current_360_tag.tenantUrl.length > 0 && current_360_tag.tenantId && current_360_tag.tenantId.length > 0) {
     log("Attempting to add the 360 tag to current page.");
     log("Tenant name: " + current_360_tag.tenantName);
     if (IsExtension)
@@ -1908,9 +1637,7 @@ function update_diagnostics_filter(manual_update) {
     filter_condition.identity_type = "channel_id";
     filter_condition.value = last_profile.visitor;
   } else if (selectedOption == "custom" && manual_update == true) {
-    filter_condition.identity_type = $(
-      "#diagnostics_filter_custom_attr :selected"
-    ).val();
+    filter_condition.identity_type = $("#diagnostics_filter_custom_attr :selected").val();
     filter_condition.value = $("#diagnostics_filter_custom_fixed").val().trim();
     if (filter_condition.value.length === 0) {
       $("#diagnostics_filter_custom_fixed").addClass("border_red");
@@ -1919,23 +1646,11 @@ function update_diagnostics_filter(manual_update) {
     }
   }
   if (valid) {
-    if (IsValuePresent(filter_condition.identity_type))
-      $("#filter_details").html(
-        "Filter: " +
-          filter_condition.identity_type +
-          " = <span>" +
-          filter_condition.value +
-          "</span>"
-      );
+    if (IsValuePresent(filter_condition.identity_type)) $("#filter_details").html("Filter: " + filter_condition.identity_type + " = <span>" + filter_condition.value + "</span>");
     document.getElementById("id02").style.display = "none";
     log("Closing the popup for filters.");
     if (ws) {
-      message =
-        'DIAGNOSTIC_AGENT: {"operation":"filter","attribute":"' +
-        filter_condition.identity_type +
-        '", "value":"' +
-        filter_condition.value +
-        '"}';
+      message = 'DIAGNOSTIC_AGENT: {"operation":"filter","attribute":"' + filter_condition.identity_type + '", "value":"' + filter_condition.value + '"}';
       log("Sending filter condition: " + message);
       send(message);
       send('DIAGNOSTIC_AGENT: {"operation":"show"}');
@@ -1963,8 +1678,7 @@ function addProfile() {
   cell5.innerHTML = last_profile.event;
   cell6.innerHTML = last_profile.row_num;
   $("#lblDatahubId").html("Datahub Id: " + last_profile.datahub_id);
-  if (last_profile.pii.length > 0)
-    $("#lblIPii").html(", Identity: " + last_profile.pii);
+  if (last_profile.pii.length > 0) $("#lblIPii").html(", Identity: " + last_profile.pii);
   checkAndUpdateIdentityInfo();
 }
 function checkAndUpdateIdentityInfo() {
@@ -1972,22 +1686,13 @@ function checkAndUpdateIdentityInfo() {
   if (
     current_tenant_gateway != undefined &&
     IsValuePresent(current_tenant_gateway.token) &&
-    ((current_tenant_gateway.display_metadata_from_360 === true &&
-      current_tenant_gateway.display_metadata_from_360 != undefined) ||
-      current_tenant_gateway.display_metadata_from_360 === undefined)
+    ((current_tenant_gateway.display_metadata_from_360 === true && current_tenant_gateway.display_metadata_from_360 != undefined) || current_tenant_gateway.display_metadata_from_360 === undefined)
   ) {
-    log(
-      "Attempting to get the identity information. Datahub Id: " +
-        last_profile.datahub_id
-    );
+    log("Attempting to get the identity information. Datahub Id: " + last_profile.datahub_id);
     $("#no_identity_info").hide();
     $("#no_identity_info").show();
     $("#identityTable").find("tr:not(:last-child)").remove();
-    var url =
-      "https://" +
-      current_tenant_gateway.tenantUrl +
-      "/marketingData/identityRecords/" +
-      last_profile.datahub_id;
+    var url = "https://" + current_tenant_gateway.tenantUrl + "/marketingData/identityRecords/" + last_profile.datahub_id;
 
     var settings = {
       url: url,
@@ -2013,28 +1718,18 @@ function checkAndUpdateIdentityInfo() {
             var cell4 = row.insertCell(4);
             cell0.innerHTML = response.identities[i].id;
             cell1.innerHTML = response.identities[i].type;
-            if (response.identities[i].source)
-              cell2.innerHTML = response.identities[i].source;
-            if (response.identities[i].createTime)
-              cell3.innerHTML = response.identities[i].createTime;
+            if (response.identities[i].source) cell2.innerHTML = response.identities[i].source;
+            if (response.identities[i].createTime) cell3.innerHTML = response.identities[i].createTime;
             if (response.identities[i].attributes) {
               for (var key in response.identities[i].attributes) {
-                cell4.innerHTML =
-                  cell4.innerHTML +
-                  "<div style='border-bottom:1px sold #1b6194'>" +
-                  key +
-                  ": " +
-                  response.identities[i].attributes[key] +
-                  "</div>";
+                cell4.innerHTML = cell4.innerHTML + "<div style='border-bottom:1px sold #1b6194'>" + key + ": " + response.identities[i].attributes[key] + "</div>";
               }
             }
           }
         }
       })
       .fail(function (error) {
-        log(
-          "Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret."
-        );
+        log("Error connecting to CI 360 Access Point. Please check the External gateway address, Tenant Id and Client Secret.");
         log(error);
       });
   }
@@ -2057,24 +1752,9 @@ function checkAndUpdateProfile(event_json) {
   current_profile.row_num = event_json.row_num;
   current_profile.pii = "";
 
-  if (
-    event_json.event &&
-    (event_json.event.toLowerCase() == "identityevent" ||
-      event_json.event.includes("Inferred Event: attachIdentity") ||
-      event_json.event.includes("Inferred Event: detachIdentity"))
-  ) {
-    if (
-      (event_json.login_event || event_json.User_ID_Attribute) &&
-      event_json.login_event_type
-    )
-      current_profile.pii =
-        decodeURIComponent(event_json.login_event_type) +
-        ": " +
-        decodeURIComponent(
-          event_json.login_event
-            ? event_json.login_event
-            : event_json.User_ID_Attribute
-        );
+  if (event_json.event && (event_json.event.toLowerCase() == "identityevent" || event_json.event.includes("Inferred Event: attachIdentity") || event_json.event.includes("Inferred Event: detachIdentity"))) {
+    if ((event_json.login_event || event_json.User_ID_Attribute) && event_json.login_event_type)
+      current_profile.pii = decodeURIComponent(event_json.login_event_type) + ": " + decodeURIComponent(event_json.login_event ? event_json.login_event : event_json.User_ID_Attribute);
     else current_profile.pii = " ";
   }
 
@@ -2085,15 +1765,10 @@ function checkAndUpdateProfile(event_json) {
     addProfile();
   } else {
     if (
-      (current_profile.session &&
-        current_profile.session != last_profile.session) ||
-      (current_profile.visitor &&
-        current_profile.visitor != last_profile.visitor) ||
-      (current_profile.datahub_id &&
-        current_profile.datahub_id != last_profile.datahub_id) ||
-      (current_profile.pii &&
-        current_profile.pii != "" &&
-        current_profile.pii != last_profile.pii)
+      (current_profile.session && current_profile.session != last_profile.session) ||
+      (current_profile.visitor && current_profile.visitor != last_profile.visitor) ||
+      (current_profile.datahub_id && current_profile.datahub_id != last_profile.datahub_id) ||
+      (current_profile.pii && current_profile.pii != "" && current_profile.pii != last_profile.pii)
     ) {
       copyProfile(current_profile);
       addProfile();
@@ -2138,13 +1813,8 @@ function network_stream_start_stop_click() {
   }
 }
 function addToNetworkGrid(event_json, raw_json) {
-  if (event_json.eventname === undefined || event_json.eventname === null)
-    event_json.eventname = "";
-  if (
-    event_json.eventDesignedName === undefined ||
-    event_json.eventDesignedName === null
-  )
-    event_json.eventDesignedName = "";
+  if (event_json.eventname === undefined || event_json.eventname === null) event_json.eventname = "";
+  if (event_json.eventDesignedName === undefined || event_json.eventDesignedName === null) event_json.eventDesignedName = "";
   if (event_json.event === undefined || event_json.event === null) {
     if (event_json.login_event_type && event_json.login_event) {
       event_json.event = "*Inferred Event: attachIdentity";
@@ -2154,30 +1824,10 @@ function addToNetworkGrid(event_json, raw_json) {
     event_json.datahub_id = "";
   }
 
-  if (
-    !event_json.status ||
-    event_json.status === undefined ||
-    event_json.status === null
-  )
-    event_json.status = "";
-  if (
-    !event_json.timestamp ||
-    event_json.timestamp === undefined ||
-    event_json.timestamp === null
-  )
-    event_json.timestamp = "";
-  if (
-    !event_json.datahub_id ||
-    event_json.datahub_id === undefined ||
-    event_json.datahub_id === null
-  )
-    event_json.datahub_id = "";
-  if (
-    !event_json.row_num ||
-    event_json.row_num === undefined ||
-    event_json.row_num === null
-  )
-    event_json.row_num = "";
+  if (!event_json.status || event_json.status === undefined || event_json.status === null) event_json.status = "";
+  if (!event_json.timestamp || event_json.timestamp === undefined || event_json.timestamp === null) event_json.timestamp = "";
+  if (!event_json.datahub_id || event_json.datahub_id === undefined || event_json.datahub_id === null) event_json.datahub_id = "";
+  if (!event_json.row_num || event_json.row_num === undefined || event_json.row_num === null) event_json.row_num = "";
 
   let row = {
     event: event_json.event,
@@ -2195,62 +1845,29 @@ function addToNetworkGrid(event_json, raw_json) {
   checkAndUpdateProfile(event_json);
 }
 function getSuitableCol(json) {
-  json = JSON.parse(
-    json
-      .replace(/\n/g, "\\n")
-      .replace(/\r/g, "\\r")
-      .replace(/\t/g, "\\t")
-      .replace("\b", "")
-  );
-  if (
-    IsValuePresent(json.eventname) &&
-    IsValuePresent(json.eventDesignedName) &&
-    json.eventDesignedName != json.eventname
-  )
-    return (
-      "Event Name: " +
-      json.eventname +
-      " / Design Name: " +
-      json.eventDesignedName
-    );
-  if (IsValuePresent(json.eventname) && json.eventname != json.event)
-    return "Event Name: " + json.eventname;
-  if (
-    IsValuePresent(json.eventDesignedName) &&
-    json.eventDesignedName != json.event
-  )
-    return "Design Name: " + json.eventDesignedName;
-  if (IsValuePresent(json.login_event_type) && IsValuePresent(json.login_event))
-    return json.login_event_type + ": " + json.login_event;
+  json = JSON.parse(json.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").replace("\b", ""));
+  if (IsValuePresent(json.eventname) && IsValuePresent(json.eventDesignedName) && json.eventDesignedName != json.eventname) return "Event Name: " + json.eventname + " / Design Name: " + json.eventDesignedName;
+  if (IsValuePresent(json.eventname) && json.eventname != json.event) return "Event Name: " + json.eventname;
+  if (IsValuePresent(json.eventDesignedName) && json.eventDesignedName != json.event) return "Design Name: " + json.eventDesignedName;
+  if (IsValuePresent(json.login_event_type) && IsValuePresent(json.login_event)) return json.login_event_type + ": " + json.login_event;
 
   var v = null;
 
   if (IsValuePresent(json.elementTagName)) v = json.elementTagName;
-  if (IsValuePresent(json.anchor_href))
-    v = v + " (href: " + json.anchor_href + ")";
+  if (IsValuePresent(json.anchor_href)) v = v + " (href: " + json.anchor_href + ")";
   if (IsValuePresent(json.anchor_id)) v = v + " (id: " + json.anchor_id + ")";
-  if (IsValuePresent(json.targetInnerText))
-    v = v + " (text: " + decodeURIComponent(json.targetInnerText) + ")";
+  if (IsValuePresent(json.targetInnerText)) v = v + " (text: " + decodeURIComponent(json.targetInnerText) + ")";
   if (v != null) return v;
 
-  if (IsValuePresent(json.searchTerm))
-    return "term: " + decodeURIComponent(json.searchTerm);
+  if (IsValuePresent(json.searchTerm)) return "term: " + decodeURIComponent(json.searchTerm);
 
-  if (IsValuePresent(json.apiEventKey) && json.apiEventKey != json.event)
-    return "apiEventKey: " + decodeURIComponent(json.apiEventKey);
+  if (IsValuePresent(json.apiEventKey) && json.apiEventKey != json.event) return "apiEventKey: " + decodeURIComponent(json.apiEventKey);
 
   v = null;
-  if (IsValuePresent(json.initiator))
-    v = "initiator: " + decodeURIComponent(json.initiator);
+  if (IsValuePresent(json.initiator)) v = "initiator: " + decodeURIComponent(json.initiator);
 
-  if (IsValuePresent(json.page_title))
-    return (
-      "Page Title: " +
-      decodeURIComponent(json.page_title) +
-      (v === null ? "" : " (" + v + ")")
-    );
-  if (IsValuePresent(json.page_path))
-    return "Page path: " + decodeURIComponent(json.page_path);
+  if (IsValuePresent(json.page_title)) return "Page Title: " + decodeURIComponent(json.page_title) + (v === null ? "" : " (" + v + ")");
+  if (IsValuePresent(json.page_path)) return "Page path: " + decodeURIComponent(json.page_path);
 
   return "";
 }
@@ -2269,10 +1886,7 @@ function htmlCodes(str, replace) {
     str = str.replaceAll("$SW4$sw4$", "=");
     str = str.replaceAll("$SW5$sw5$", '="');
     str = str.replaceAll("$SW6$sw6$", '"');
-    str = str
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+    str = str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   return str;
@@ -2302,9 +1916,7 @@ if (chrome && chrome.devtools)
       }, 2000)
     );
     id_get360TagScripts.push(setInterval(get360TagScripts, 2000));
-    id_get360TagScripts_console.push(
-      setInterval(get360TagScripts_console, 2000)
-    );
+    id_get360TagScripts_console.push(setInterval(get360TagScripts_console, 2000));
     $("#current_domain").html(url_domain(url));
     $("#scripts_loaded").html(NO_TAG_LOADED_MSG);
     $("#generic_collection_rules").html("");
@@ -2324,7 +1936,7 @@ if (chrome && chrome.devtools)
         request._initiator.stack.parent.callFrames[0].url.includes("ot-api") ||
         request._initiator.stack.parent.callFrames[0].url.includes("ot-all") ||
         //Support for ot2 tag
-        request._initiator.stack.parent.callFrames[0].url.includes("ot2.min")) 
+        request._initiator.stack.parent.callFrames[0].url.includes("ot2.min"))
     ) {
       IsTagAdded = true;
     }
@@ -2346,95 +1958,21 @@ if (chrome && chrome.devtools)
         $("#Msg360Tag").hide();
         //loading configurations
         $("#tenant_id").html(request.request.url.split("/")[6].split("?")[0]);
-        if (!$("#tenantId").val() || $("#tenantId").val().trim().length < 1)
-          $("#tenantId").val(request.request.url.split("/")[6].split("?")[0]);
+        if (!$("#tenantId").val() || $("#tenantId").val().trim().length < 1) $("#tenantId").val(request.request.url.split("/")[6].split("?")[0]);
 
         request.getContent(function (content, encoding) {
           if (content && content.length > 0) {
-            if (content.includes("collect['clicks']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'clicks'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['contentevents']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'contentevents'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['fieldinteractions']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'fieldinteractions'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['formsubmits']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'formsubmits'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['jsvars']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'jsvars'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['media']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'media'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['mouseovers']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'mouseovers'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
-            if (content.includes("collect['pageloads']"))
-              $("#generic_collection_rules").append(
-                "<li>" +
-                  content
-                    .match("'pageloads'(.*);")[0]
-                    .replaceAll("'", "")
-                    .replaceAll("]", "") +
-                  "</li>"
-              );
+            if (content.includes("collect['clicks']")) $("#generic_collection_rules").append("<li>" + content.match("'clicks'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['contentevents']")) $("#generic_collection_rules").append("<li>" + content.match("'contentevents'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['fieldinteractions']")) $("#generic_collection_rules").append("<li>" + content.match("'fieldinteractions'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['formsubmits']")) $("#generic_collection_rules").append("<li>" + content.match("'formsubmits'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['jsvars']")) $("#generic_collection_rules").append("<li>" + content.match("'jsvars'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['media']")) $("#generic_collection_rules").append("<li>" + content.match("'media'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['mouseovers']")) $("#generic_collection_rules").append("<li>" + content.match("'mouseovers'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
+            if (content.includes("collect['pageloads']")) $("#generic_collection_rules").append("<li>" + content.match("'pageloads'(.*);")[0].replaceAll("'", "").replaceAll("]", "") + "</li>");
 
-            if (
-              content.includes(
-                "com_sas_ci_acs._ob_configure.prototype.getFormConfig"
-              )
-            ) {
-              var tempstr = content
-                .substring(
-                  content.indexOf("var ff = {}") + 12,
-                  content.indexOf("return ff")
-                )
-                .replaceAll("\n", "<br/>");
+            if (content.includes("com_sas_ci_acs._ob_configure.prototype.getFormConfig")) {
+              var tempstr = content.substring(content.indexOf("var ff = {}") + 12, content.indexOf("return ff")).replaceAll("\n", "<br/>");
               $("#form_collection_rules").append(tempstr);
             }
           } else {
@@ -2447,26 +1985,14 @@ if (chrome && chrome.devtools)
     if (!network_stream_ON) return;
     if (
       request.request.method == "POST" &&
-      ((request.request &&
-        (request.request.url.includes("/t/e/") ||
-          request.request.url.includes("/t/s/"))) ||
+      ((request.request && (request.request.url.includes("/t/e/") || request.request.url.includes("/t/s/"))) ||
         (request._initiator.stack &&
           request._initiator.stack.parent &&
           (request._initiator.stack.parent.callFrames[0].url.includes("/t/e") ||
-
-          request._initiator.stack.parent.callFrames[0].url.includes(
-            "ot2.min"
-          ) ||
-
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-min"
-            ) ||
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-api"
-            ) ||
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-all"
-            ))))
+            request._initiator.stack.parent.callFrames[0].url.includes("ot2.min") ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-min") ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-api") ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-all"))))
     ) {
       IsTagAdded = true;
       $("#Msg360Tag").hide();
@@ -2475,42 +2001,18 @@ if (chrome && chrome.devtools)
         var params = "{";
         var param_raw = "{";
         var first = 0;
-        params =
-          params +
-          '"status": "' +
-          (request.response.status == "0"
-            ? "0 (cancelled)"
-            : request.response.status) +
-          '"';
+        params = params + '"status": "' + (request.response.status == "0" ? "0 (cancelled)" : request.response.status) + '"';
         params = params + ',"row_num": "' + row_num + '"';
         row_num = row_num + 1;
         for (var i = 0; i < request.request.postData.params.length; i++) {
           if (first == 0) {
             first = 1;
-            param_raw =
-              param_raw +
-              '"' +
-              request.request.postData.params[i].name +
-              '": "' +
-              htmlCodes(request.request.postData.params[i].value, true) +
-              '"';
+            param_raw = param_raw + '"' + request.request.postData.params[i].name + '": "' + htmlCodes(request.request.postData.params[i].value, true) + '"';
           } else {
-            param_raw =
-              param_raw +
-              ',"' +
-              request.request.postData.params[i].name +
-              '": "' +
-              htmlCodes(request.request.postData.params[i].value, true) +
-              '"';
+            param_raw = param_raw + ',"' + request.request.postData.params[i].name + '": "' + htmlCodes(request.request.postData.params[i].value, true) + '"';
           }
 
-          params =
-            params +
-            ',"' +
-            request.request.postData.params[i].name +
-            '": "' +
-            htmlCodes(request.request.postData.params[i].value, true) +
-            '"';
+          params = params + ',"' + request.request.postData.params[i].name + '": "' + htmlCodes(request.request.postData.params[i].value, true) + '"';
         }
         params = params + "}";
         param_raw = param_raw + "}";
@@ -2521,47 +2023,24 @@ if (chrome && chrome.devtools)
         addToNetworkGrid(obj, param_raw);
       }
     } else if (
-      (request.request.method == "OPTIONS" ||
-        request.request.method == "DELETE") &&
-      ((request.request &&
-        (request.request.url.includes("/t/e/") ||
-          request.request.url.includes("/t/s/"))) ||
+      (request.request.method == "OPTIONS" || request.request.method == "DELETE") &&
+      ((request.request && (request.request.url.includes("/t/e/") || request.request.url.includes("/t/s/"))) ||
         (request._initiator.stack &&
           request._initiator.stack.parent &&
           (request._initiator.stack.parent.callFrames[0].url.includes("/t/e") ||
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-min"
-            ) ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-min") ||
             //Support for ot2
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot2min"
-            ) ||
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-api"
-            ) ||
-            request._initiator.stack.parent.callFrames[0].url.includes(
-              "ot-all"
-            ))))
+            request._initiator.stack.parent.callFrames[0].url.includes("ot2min") ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-api") ||
+            request._initiator.stack.parent.callFrames[0].url.includes("ot-all"))))
     ) {
       $("#Msg360Tag").hide();
       IsTagAdded = true;
       var params = "{";
       var param_raw = "{";
       var first = 0;
-      params =
-        params +
-        '"status": "' +
-        (request.response.status == "0"
-          ? "0 (cancelled)"
-          : request.response.status) +
-        '"';
-      params =
-        params +
-        ',"event": "' +
-        "*Inferred Event: detachIdentity (method: " +
-        request.request.method +
-        ")" +
-        '"';
+      params = params + '"status": "' + (request.response.status == "0" ? "0 (cancelled)" : request.response.status) + '"';
+      params = params + ',"event": "' + "*Inferred Event: detachIdentity (method: " + request.request.method + ")" + '"';
       params = params + ',"row_num": "' + row_num + '"';
       row_num = row_num + 1;
 
@@ -2574,5 +2053,167 @@ if (chrome && chrome.devtools)
       addToNetworkGrid(obj, param_raw);
     }
   });
+
+/** Start of Connector payload related functions */
+
+class Z85 {
+  static encodeTable = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+^!/\\*?&<>()[]{}@%$#";
+
+  static decodeTable = [
+    0, 68, 0, 84, 83, 82, 72, 0, 75, 76, 70, 65, 0, 63, 62, 69, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 64, 0, 73, 66, 74, 71, 81, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 77, 0, 78, 67, 0, 0, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 79, 0, 80, 0, 0,
+  ];
+
+  static decoder = {
+    decodeBytes: (string) => {
+      let remainder = string.length % 5;
+      let padding = 5 - (remainder === 0 ? 5 : remainder);
+
+      for (let p = 0; p < padding; ++p) {
+        string += Z85.encodeTable[Z85.encodeTable.length - 1];
+      }
+
+      let length = string.length;
+      let bytes = new Uint8Array((length * 4) / 5 - padding);
+      let value = 0;
+      let index = 0;
+
+      for (let i = 0; i < length; i++) {
+        let code = string.charCodeAt(i) - 32;
+        value = value * 85 + Z85.decodeTable[code];
+        if ((i + 1) % 5 === 0) {
+          let divisor = 256 * 256 * 256;
+          while (divisor >= 1) {
+            if (index < bytes.length) {
+              bytes[index++] = Math.floor((value / divisor) % 256);
+            }
+            divisor /= 256;
+          }
+          value = 0;
+        }
+      }
+      return bytes;
+    },
+  };
+}
+
+function isValidGzip(data) {
+  // Check if the first two bytes are the GZIP magic number (0x1F 0x8B)
+  return data[0] === 0x1f && data[1] === 0x8b;
+}
+
+// Use pako for decompression instead of native API
+function ungzip(bytes) {
+  try {
+    // Use pako to ungzip the bytes array
+    const decompressedBytes = pako.ungzip(bytes);
+
+    // Return the decompressed bytes as an ArrayBuffer
+    return decompressedBytes.buffer;
+  } catch (err) {
+    log("Failed to ungzip data", err);
+    throw err;
+  }
+}
+
+function decodeZ85(z85EncodedJSON) {
+  //const z85EncodedJSON = document.getElementById("input").value;
+  try {
+    const decodedBytes = Z85.decoder.decodeBytes(z85EncodedJSON);
+    var s = "";
+    s = decodedBytes.join(",");
+    console.log(s);
+
+    // Check if the decoded data is valid GZIP
+    if (!isValidGzip(decodedBytes)) {
+      throw new Error("Decoded data is not in valid GZIP format.");
+    }
+
+    // Decompress the GZIP encoded data using pako
+    const decompressedArrayBuffer = ungzip(decodedBytes);
+
+    // Convert the decompressed ArrayBuffer into a string (UTF-8)
+    const jsonString = new TextDecoder("utf-8").decode(decompressedArrayBuffer);
+
+    log("decode - z85EncodedJSON length: ${z85EncodedJSON.length}, decoded jsonString length: ${jsonString.length}");
+    //document.getElementById("output").textContent = jsonString;
+    return jsonString;
+  } catch (error) {
+    log("Failed to deserialize z85(gzip(json-string)): ${z85EncodedJSON}" + error);
+    //document.getElementById("output").textContent = `Error: ${error.message}`;
+  }
+}
+
+function addConnectorJSON(input) {
+  const outputDiv = document.createElement("div");
+  try {
+    // Parse the input JSON and stringify it with indentation
+    const parsedJSON = JSON.parse(input);
+    const formattedJSON = JSON.stringify(parsedJSON, null, 4); // 4 spaces for indentation
+
+    // Split the formatted JSON by line and append each line to a div
+    const paths = [];
+    let path = "";
+
+    // Function to extract the JSON paths
+    function extractPaths(obj, currentPath) {
+      for (const key in obj) {
+        const newPath = currentPath ? `${currentPath}.${key}` : key;
+        if (typeof obj[key] === "object" && obj[key] !== null) {
+          extractPaths(obj[key], newPath);
+        } else {
+          paths.push({ key, value: obj[key], path: newPath });
+        }
+      }
+    }
+    // Extract paths from the parsed JSON
+    extractPaths(parsedJSON, "");
+
+    var counter = 0;
+    // Split the formatted JSON by line and append each line to a div
+    formattedJSON.split("\n").forEach((line) => {
+      var path = "$.";
+      if (line.startsWith("{") || line.startsWith("[") || line.endsWith("{") || line.endsWith("[") || line.endsWith("}") || line.endsWith("]") || line.endsWith("},") || line.endsWith("],")) {
+      } else if (line.includes(":") || (line.match(/"/g) || []).length == 2 || isNumberOrBoolean(line)) {
+        path = path + "" + paths[counter].path;
+        counter++;
+      }
+
+      const lineDiv = document.createElement("div");
+      lineDiv.classList.add("output-line");
+
+      const lineSpan = document.createElement("span");
+      lineSpan.textContent = line;
+
+      const pathSpan = document.createElement("span");
+      if (path.length > 2) pathSpan.textContent = path;
+
+      lineDiv.appendChild(lineSpan);
+      lineDiv.appendChild(pathSpan);
+      outputDiv.appendChild(lineDiv);
+    });
+    return outputDiv.outerHTML;
+  } catch (error) {
+    log("Error processing connector JSON: " + error);
+    return input;
+  }
+}
+
+function isNumberOrBoolean(str) {
+  if (str) str = str.trim();
+  // Check if it's a number
+  if (!isNaN(str) && str.trim() !== "") {
+    return true;
+  }
+
+  // Check if it's a boolean
+  if (str.toLowerCase() === "true" || str.toLowerCase() === "false") {
+    return true;
+  }
+
+  return false;
+}
+
+/** End of Connector payload related functions */
 
 /** End of Network stream page related JS functions */
