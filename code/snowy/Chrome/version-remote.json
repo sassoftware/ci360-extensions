@@ -1,8 +1,8 @@
 {
     "name":"Snowy",
-    "latest_version":3.9,
-    "message":"A new version of Snowy (3.9) is available. Internal updates to manage automatic version detection from a static server.",
-    "DIAG_VERSION":"diag13(2403)",
-    "SDK_VERSION":"sdk14(2403)",
-    "date":"22-Mar-2024"
+    "latest_version":4.0,
+    "message":"A new version of Snowy (4.0) is available. Ability to intercept and display the Connector payload.",
+    "DIAG_VERSION":"diag16(2410)",
+    "SDK_VERSION":"sdk17(2410)",
+    "date":"11-Oct-2024"
 }
