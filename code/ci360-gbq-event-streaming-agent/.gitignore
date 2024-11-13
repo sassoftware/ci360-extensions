@@ -1,9 +1,0 @@
-*.log
-*.log.gz
-*.txt
-*.log
-/logs/*
-/last_event_json.txt
-/target
-/target/*
-
