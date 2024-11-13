@@ -1,0 +1,1 @@
+ps -ef | grep ${project.artifactId} | grep -v grep
