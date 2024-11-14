@@ -58,6 +58,9 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 API DS2 Utilities__](code/ci360-api-ds2-utilities): Utilities package for CI360 API interaction using DS2
 - [__CI360 Audience from Viya (custom step)__](code/ci360-audience-from-viya): Upload analytically defined customer audience from Viya into CI360 using Viya Custom Step
 - [__CI Modernization Preparation Tool__](code/ci-modernization-preparation-tool): Customer-facing tool intended to support the modernization from CI 6.6 to SAS CI 360
+- [__CI360 Direct SQL Extraction Utility__](code/ci360-engage-direct-sql-extraction-utility): Utility for extracting generated SQL statements from CI360 Direct logs
+- [__CI360 Direct Data Item Extraction Utility__](code/ci360-engage-direct-dataitem-log-extraction-utility): Utility for creating a report on used data items in CI360 Direct Marketing tasks and segment maps
+- [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
 
 ## Getting Started
 
