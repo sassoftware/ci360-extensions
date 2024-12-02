@@ -62,19 +62,14 @@ For how to create a Custom Task Type, you can refer to the 360 documentation her
  - Define a Bulk Outbound Connector for the Custom Task Type. You can create it from the CTT screen itself.
  - Associate a General Access Point with this Connector
  - Add a webhook endpoint
-	 - Define the endpoint URL as: http://127.0.0.10:8100/ExecuteSTP
+	 - Define the endpoint URL as: http://<host:port>/ExecuteSTP. Host and Port are where the Flask service is hosted. For example, the URL will be: http://127.0.0.10:8100/ExecuteSTP if the service is hosted on 127.0.0.10 and port number where the Flask is running is 8100. 
 	 - Define the method to be: "POST"
 	 - Add a Header with Key as "Content-Type" and Value as "application/json"
 
 ## 360 General Access Point 
 
 ### Agent Configuration
-- Create a new general access point in 360.
-- Mark access point as active. 
-- Download access point framework to Server.
-- Configure tenant and access point credentials in the agent config files.
-- Open a new command prompt window as administrator and run the agent.
-- For more details on setting up a General Access Point refer to the 360 documentation here: https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/ext-access-pts-general.htm 
+- For more details on setting up and running a General Access Point refer to the 360 documentation here: https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/ext-access-pts-general.htm 
 
 ## Python Flask
 
@@ -82,9 +77,14 @@ In this section, we will define a Python Flask service and host/deploy it on the
 
 ### Flask Prerequisites
  
-Make sure you have the latest Python (Python 3.13.0) installed on the Server. Copy the "Python Flask" folder from this repository to the Server. 
+- Recommended to have the latest Python (Python 3.13.0) installed on the Server. 
+  Note: This service has been tested on 3.13.0, yet earlier 3.x versions of Python may work fine too.
 
-Here is a list of Python libraries that you may need to install before running this Flask service. Do a pip install <library name> to install these libraries. For example: pip install flask. You can also run the "Install Python Libraries.bat" file in the "Python Flask" folder to install these libraries on the server.
+- Copy the "Python Flask" folder from this repository to the Server.  
+
+- List of required Python libraries: 
+  Do a pip install <library name> to install these libraries. For example: pip install flask. 
+  Alternatively, run the "Install Python Libraries.bat" file in the "Python Flask" folder to install these libraries on the server.
 
  - flask
  - jsonify
@@ -95,7 +95,7 @@ Here is a list of Python libraries that you may need to install before running t
 
 ### Flask Configuration
 
-In the "Python Flask" folder, you will notice the "conf" directory. This is the configuration folder for this program. In this folder, there are two config files for this Flask service.
+In the "Python Flask" folder, you will notice the "conf" directory. This is the configuration folder for this program. In this folder, there are three config files for this Flask service.
 
  - credentials.ini
    This file contains the credentials required to connect to the SAS STP. This is optional and only required if the STP requires authorization.
@@ -104,12 +104,18 @@ In the "Python Flask" folder, you will notice the "conf" directory. This is the 
 
  - serviceConfig.ini
    This file contains some crucial parameters required for execution of the program. 
-    - stpurl - This is the URL of the onprem SASBIWS Stored Process. Please do not specify the name of the STP in this URL. Instead put in the URL this way: "http://sas-aap.demo.sas.com/SASBIWS/rest/storedProcesses/Shared Data/Customer Intelligence/CI360Jobs/Stored Processes/{{stpName}}". As you see, please type {{stpName}} instead of the actual STP Name. The STP Name will be picked up from the CTT Data Attribute "STP Name". 
+    - stpurl - This is the URL of the onprem SASBIWS Stored Process. Do not specify the name of the STP in this URL. use the following format: "http://sas-aap.demo.sas.com/SASBIWS/rest/storedProcesses/Shared Data/Customer Intelligence/CI360Jobs/Stored Processes/{{stpName}}". The STP Name will be picked up from the CTT Data Attribute "STP Name". 
 	- Note: If you have deployed the STP as a web service, the URL will contain the name of the web service here. So, do not mention the name of the web service in this parameter. For example, if this is your Web Service URL: "http://sas-aap.demo.sas.com:80/SASBIWS/services/DownloadFile", just specify "http://sas-aap.demo.sas.com:80/SASBIWS/services/{{stpName}}" in the "stpurl" parameter.
 	- proglog - Set this parameter value to "true" if you want the program to log execution info, else set it to "false".
 	- loglevel - Set the desired logging level for the program. Values could be DEBUG, INFO, WARNING, ERROR, CRITICAL.
 	- logfilepath - Defines the log directory path. Do not change the default value i.e. ".\logs\".
    
+ - serviceConfig.py
+   This file contains parameters that define where i.e. what location/url on the Server to host this Flask service.
+	- host - This is the IP where this Flask Service will be hosted on the Server. Defaulted to '127.0.0.10'.
+	- port - This is the port number where this Flask Service will be run on the Server. Defaulted to 8100.
+	- debug - Set to 'True' or 'False' if you would like to debug this code. Defaulted to 'False'.
+
 ### Flask Service Deployment
 
 After you have installed Python, dependent Python libraries and updated the 2 program configuration files, you would need to run/deploy the Flask Service on the Server. Here is how you would host the Flask service (on a Windows machine):
@@ -117,14 +123,14 @@ After you have installed Python, dependent Python libraries and updated the 2 pr
  - Open command prompt as administrator.
  - Change directory to the location of the Python Flask program, say "cd c:\Python Flask".
  - Type this command and hit enter: "python ConnectorProxy.py"
- - The Flask service will be hosted on 127.0.0.10:8100  
+ - The Flask service will be hosted on the host:port as defined in the serviceConfig.py file. For example, http://127.0.0.10:8100/ExecuteSTP if host is 127.0.0.10 and port is 8100.
  - Keep the command window open.
- - You can also opt to deploy the Flask program on Windows IIS. Here is a link that will guide you aptly: https://www.londonacademyofit.co.uk/blog/how-to-deploy-a-flask-application-on-windows-iis-server-a-complete-guide 
+ - You can also opt to deploy the Flask program on Windows IIS. This link should be helpful: https://learn.microsoft.com/en-us/visualstudio/python/configure-web-apps-for-iis-windows?view=vs-2022 
 
 
 ## SAS Stored Process
 
-In this section, we will see how to configure a SAS Stored Process and deploy it as a SAS BI Web Service.
+In this section, we will see how to configure a SAS Stored Process and optionally deploy it as a SAS BI Web Service.
 
 ### STP Prerequisites
  - SAS 9.4 M7+
@@ -139,7 +145,7 @@ Copy the "SAS Stored Process" folder from this repository to the Server. In this
 - config.sas - This file stores librefs, filerefs, variables, macros and pre-assigned values required for the execution of the Stored Process. The parameters you can change in this file are:
 
 	- saslogredirect - Set this flag to "true" if you want the STP log to be written to a file, else set it to "false".
-	- logprogfiles - Set this flag to "true" if you want all files generated by the process to be logged in a folder. If set to "false" no process files will be created. For example, API payloads, API responses, etc. 
+	- debug - Set this flag to "true" if you want all files generated by the process to be logged in a folder. If set to "false" no process files will be created. For example, API payloads, API responses, etc. 
 	- liblocation - This will ideally be the location of the folder where the STP code resides. For example, if you copied the "SAS Stored Process folder to C drive, the liblocation would be C:\SAS Stored Process".
 
 - stpDownloadFile.sas - You will find this file in the "SAS Stored Process/code" directory. This is the main code file of the STP so be very careful while making any changes. Please do not update any code other than the change mentioned here. 
@@ -183,6 +189,8 @@ Once you have saved the changes to the STP configuration files, you can now crea
 - Click on "Finish" to complete setting up the STP.
 
 #### Deploy the STP as a Web Service
+
+You might want to deploy the STP as a web service. Note this step is optional. 
 	
 - Once you have created the STP and it appears in the STP list, right click on it and select "Deploy as Web Service".
 - In the new window, specify the "Web Service Maker URL". For example: "http://sas-aap.demo.sas.com/SASBIWS/services/WebServiceMaker".

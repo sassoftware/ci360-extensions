@@ -1,14 +1,17 @@
 #*************************************************************************************************************#
-# Program Name: credentials.ini                                                                               #
-# Program Description: This file contains the credentials that are required to invoke the STP Web Service     #                                                                                                             #
+# Program Name: serviceConfig.py                                                                              #
+# Program Description: This is a configuration file for the utility. Users can define values for parameters   #
+#                      that help in executing/hosting the service on the Server.                              #                                                                                                             #
 # Author: Global Customer Intelligence Practice                                                               #
 # Date: 11-October-2024                                                                                       #
 #                                                                                                             #
 # Copyright  2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.                                   #
 # SPDX-License-Identifier: Apache-2.0                                                                         #
 #*************************************************************************************************************#
-[DEFAULT]
-# Username to connect to STP
-stpusername = sasdemo 
-# Password to connect to STP
-stppassword = str((SAS005)2C9BAC37830AF422BFDCF8BC64B161CF2)
+class svcConfig(object):   
+    # IP address where service will be hosted 
+    host = '127.0.0.10'  
+    # Port number where service will be run on
+    port = 8100
+    # Set to 'True' if you want to enable debugging or else set to 'False'
+    debug = 'False'

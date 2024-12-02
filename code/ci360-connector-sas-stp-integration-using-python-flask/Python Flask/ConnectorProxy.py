@@ -13,6 +13,7 @@
 
 # Import Python Libraries
 from flask import Flask, request, jsonify, json
+from conf.serviceConfig import svcConfig
 import os
 import time
 import configparser
@@ -37,10 +38,11 @@ class StringBuilder:
     return self._file_str.getvalue()
   
 app = Flask(__name__)
+app.config.from_object(svcConfig)
 @app.route('/ExecuteSTP', methods=['POST']) # REST API URL
 
-def ExecuteSTP(): # REST API Function
-  
+def init():
+  global currdatetime, configfile
   try:
     currdatetime = time.strftime("%Y%m%d%H%M%S")    
     path_current_directory = os.path.dirname(__file__)
@@ -58,6 +60,12 @@ def ExecuteSTP(): # REST API Function
     print('Cannot read Configuration File!')    
     raise Exception('Cannot read Configuration File!')
 
+
+
+def ExecuteSTP(): # REST API Function
+  
+  
+
   try: # Read values from App Config Files
     url = configfile.get('DEFAULT','stpurl')
     #stpusername = credsfile.get('DEFAULT','stpusername')
@@ -67,7 +75,7 @@ def ExecuteSTP(): # REST API Function
     if (proglog.casefold == 'true'):
       loglevel=configfile.get('DEFAULT','loglevel')    
       logfile = configfile.get('DEFAULT','logfilepath')
-      logfile = logfile + 'Log_' + currdatetime + '.log'
+      logfile = logfile + 'ServiceLog_' + currdatetime + '.log'
       
       logging.basicConfig(filename=logfile, filemode='a+', format='%(asctime)s - %(process)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
       if (loglevel.casefold=='debug'): # Set apt log level based on config value
@@ -121,7 +129,7 @@ def ExecuteSTP(): # REST API Function
     sbxmldata.Append('</streams>\r\n')
     sbxmldata.Append('</' + stpName + '>\r\n')  
 
-    if (proglog == 'true'):
+    if (proglog.casefold == 'true'):
       logging.debug("XML Data: " + str(sbxmldata))      
       f = open( 'logs\\360TaskPayload_' + currdatetime + '.xml', 'w')
       f.write(str(sbxmldata))
@@ -136,7 +144,7 @@ def ExecuteSTP(): # REST API Function
     stpdata = str(sbxmldata)
     response = session.post(stpUrl, headers=stpheaders, data=stpdata, timeout=(30,30))
     
-    if (proglog == 'true'):
+    if (proglog.casefold == 'true'):
       logging.debug("STP Response: " + str(response.text))  
       f = open( 'logs\STPResponse_' + currdatetime + '.txt', 'w' )
       f.write( str(response) )
@@ -152,6 +160,11 @@ def ExecuteSTP(): # REST API Function
     logging.info('----------------------------------------------------------------------------------')
   # Return STP response to 360
   return (jsonify(response.text))
+
+init()
+
 # The REST API will be published on this location on the Server
-app.run(host ='127.0.0.10', port = 8100, debug=False) 
+if __name__ == '__main__':
+  with app.app_context():    
+    app.run(host = app.config['host'], port = app.config['port'], debug=app.config['debug']) 
 
