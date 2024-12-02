@@ -1,0 +1,27 @@
+{
+  "DATASETS": [
+    {
+      "DSNAME": "root",
+      "TABLEPATH": "/root",
+      "VARIABLES": [
+        {
+          "NAME": "ordinal_root",
+          "TYPE": "ORDINAL",
+          "PATH": "/root"
+        },
+        {
+          "NAME": "columnName",
+          "TYPE": "CHARACTER",
+          "PATH": "/root/columnName",
+          "CURRENT_LENGTH": 12
+        },
+        {
+          "NAME": "dataType",
+          "TYPE": "CHARACTER",
+          "PATH": "/root/dataType",
+          "CURRENT_LENGTH": 9
+        }
+      ]
+    }
+  ]
+}

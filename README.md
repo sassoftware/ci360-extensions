@@ -62,6 +62,9 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Direct Data Item Extraction Utility__](code/ci360-engage-direct-dataitem-log-extraction-utility): Utility for creating a report on used data items in CI360 Direct Marketing tasks and segment maps
 - [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
 - [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
+- [__CI360 Tenant Promotion Utility__](code/ci360-tenant-promotion-utility): Tenant Promotion utility helps in copying objects from one tenant to another
+- [__CI360 Audit Data Download__](code/ci360-audit-data-download): Download the Audit data from CI360 in parquet and CSV formats
+- [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
 
 ## Getting Started
 
