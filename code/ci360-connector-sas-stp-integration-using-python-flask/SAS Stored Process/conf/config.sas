@@ -6,10 +6,7 @@
 |Copyright  2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 |SPDX-License-Identifier: Apache-2.0	
 |***********************************************************************************************/
-/* Program Options */
-options mlogic mprint symbolgen dlcreatedir noquotelenmax;
-options nosource nosource2 nomlogic nomprint nosymbolgen spool;
-
+   
 /* Global Variables */
 %global DTTM;
 %global liblocation;
@@ -17,21 +14,16 @@ options nosource nosource2 nomlogic nomprint nosymbolgen spool;
 %global metadatafile;
 %global columnnames;
 %global saslogdirect;
-%global logprogfiles;
+%global debug;
 
 /* Variable Assignments */
 %let saslogredirect = true; /* true - redirect STP log to a file */
-%let logprogfiles = true; /* true - save all files created in program to log folder */
-%let liblocation = %str(c:\Ron);
+%let debug = true; /* true - save all files created in program to log folder */
+%let liblocation = %str(c:\STP);
 
 /* Format to define datetimestamp in yymmddHHMMSS format */
-proc format; 
-  picture dtfmt (default=14)
-    other = '%Y%0m%0d%0H%0M%0S' (datatype=datetime);
-run;
-
 data _null_;
-  DTTM=strip(put(datetime(), dtfmt.));
+  DTTM=strip(compress(tranwrd(put(datetime(), B8601DT.),"T","")));
   call symput("DTTM",DTTM);
 run;
 

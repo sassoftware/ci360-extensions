@@ -9,26 +9,26 @@
 |***********************************************************************************************/
 
 /* Set Project Working Directory */
-%let projdir = %sysfunc(dlgcdir('C:\Ron')); 
+%let projdir = %sysfunc(dlgcdir('C:/STP')); 
 /* Include Configuration Files */
-%include ".\conf\config.sas";
-%include ".\conf\credentials.sas";
+%include "./conf/config.sas";
+%include "./conf/credentials.sas";
 
 /* Print STP log to external file */
 %if &saslogredirect. = %str(true) %then %do;
-	proc printto log=".\logs\STPLog_&DTTM..txt";
+	proc printto log="./logs/STPLog_&DTTM..txt";
 	run;
 %end;
 
 /* Main Macro of this STP */
 %macro Main();
-libname instream xmlv2 xmlmap=".\conf\inpxmlmap.map"; /* Libname to read incoming XML payload */
+libname instream xmlv2 xmlmap="./conf/inpxmlmap.map"; /* Libname to read incoming XML payload */
 libname proglib "&liblocation."; /* Library definition for program */
-libname outdata ".\output"; /* STP output will be saved to this library */
+libname outdata "./output"; /* STP output will be saved to this library */
 
 /* Write files only if config parameter is set to true */
-%if &logprogfiles. = %str(true) %then %do;
-	filename xmlfile ".\logs\InStream_&DTTM..xml";
+%if &debug. = %str(true) %then %do;
+	filename xmlfile "./logs/InStream_&DTTM..xml";
 %end;
 %else %do;
 	filename xmlfile TEMP;
@@ -43,7 +43,7 @@ data _null_;
 run;
 
 /* Library definition based on payload XML file */
-libname instrtmp xmlv2 xmlfileref=xmlfile xmlmap=".\conf\procxmlmap.map" automap=replace;
+libname instrtmp xmlv2 xmlfileref=xmlfile xmlmap="./conf/procxmlmap.map" automap=replace;
 proc copy in=instrtmp out=proglib memtype=data; /* Copy table data from payload to program library */
  select InData;
 run;
@@ -65,9 +65,9 @@ run;
 %macro downloadawsfile(fileUrl=, fileType=);
 /* Write files only if config parameter is set to true */
 %if &fileType. = %str(datafile) %then %do;
-	%if &logprogfiles. = %str(true) %then %do;
-		filename outfile ".\output\datafile_&DTTM..csv";
-		filename apiresp ".\output\datafileApiResponse_&DTTM..txt";
+	%if &debug. = %str(true) %then %do;
+		filename outfile "./output/datafile_&DTTM..csv";
+		filename apiresp "./output/datafileApiResponse_&DTTM..txt";
 	%end;
 	%else %do;
 		filename outfile TEMP;
@@ -75,9 +75,9 @@ run;
 	%end;	
 %end;
 %else %if &fileType. = %str(metadatafile) %then %do;
-	%if &logprogfiles. = %str(true) %then %do;
-		filename outfile ".\output\metadatafile_&DTTM..txt";
-		filename apiresp ".\output\metadatafileApiResponse_&DTTM..txt";
+	%if &debug. = %str(true) %then %do;
+		filename outfile "./output/metadatafile_&DTTM..txt";
+		filename apiresp "./output/metadatafileApiResponse_&DTTM..txt";
 	%end;
 	%else %do;
 		filename outfile TEMP;
@@ -98,7 +98,7 @@ run;
 
 /* Read metadatafile for getting column names in a variable */
 %if &fileType. = %str(metadatafile) %then %do;
-	filename jsonmap ".\conf\jsonmap.map";
+	filename jsonmap "./conf/jsonmap.map";
 	libname objjson JSON fileref=outfile map=jsonmap automap=create;
 
 	data proglib.columnnames_&DTTM.;
