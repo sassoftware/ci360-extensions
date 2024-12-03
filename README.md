@@ -29,7 +29,10 @@ Installation instructions for every extension are included in the project specif
 
 ## List of Extensions
 
-This is a list of connectors, agents and other related content and utilities included in this repository:
+This is a list of connectors, agents and other related content and utilities included in this repository.
+
+### Integrations
+
 - [__SMS/MMS (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables SMS and MMS communication through Syniverse
 - [__WhatsApp (via Syniverse)__](code/ci360-scg-connector): Syniverse Communication Gateway (SCG) connector, enables WhatsApp communication through Syniverse
 - [__SMS (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
@@ -38,30 +41,33 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__Google Analytics__](code/google-analytics-integration): Implementation of connection with Google Analytics (GA)
 - [__Facebook Event Manager__](code/facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
 - [__Adobe Audience Manager__](code/adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
-- [__Google Tag Manager__](https://github.com/sassoftware/sas-ci360-template-google-tag-manager): Employ the use of Google Tag Manager's Community Templates in order to easily deploy javascript actions for Customer Intelligence 360
 - [__SAS Event Stream Processing__](code/ci360-esp-agent): SAS Event Stream Processing (ESP) agent enables streaming of CI360 events into ESP
 - [__SAS ESP CI360 Adapter__](code/esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
-- [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 - [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
 - [__Snowflake UDM Loader__](code/ci360-udm-loader-snowflake): CI360 UDM Loader for Snowflake automates the download of UDM data from Customer Intelligence 360 and then seemlessly loads this into Snowflake, utilizing SAS provided Python download client within a Docker container
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
-- [__Snowy CI360__](code/snowy): Browser extension as an easy way to monitor the network traffic (POST) to SAS CI 360, with the ability to search the form data
-- [__API Helper for CI360__](code/ci360-api-helper): Interact with CI360 APIs using easy to use web based UI
-- [__Customer Data Upload for CI360__](code/ci360-customer-data-uploader): Upload customer data to CI360 cloud datahub table
+- [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
-- [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
-- [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
 - [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
+- [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
 - [__Kafka CI360 Connector__](code/kafka-ci360-connector): Send events from Kafka to CI360
 - [__CI360 Braze Bulk User Import Connector__](code/ci360-braze-bulk-user-import-connector): Send customer audiences and attributes generated in CI360 from various sources to Braze 
+- [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
+
+### Utilities
+
+- [__Google Tag Manager__](https://github.com/sassoftware/sas-ci360-template-google-tag-manager): Employ the use of Google Tag Manager's Community Templates in order to easily deploy javascript actions for Customer Intelligence 360
+- [__Snowy CI360__](code/snowy): Browser extension as an easy way to monitor the network traffic (POST) to SAS CI 360, with the ability to search the form data
+- [__API Helper for CI360__](code/ci360-api-helper): Interact with CI360 APIs using easy to use web based UI
 - [__CI360 API DS2 Utilities__](code/ci360-api-ds2-utilities): Utilities package for CI360 API interaction using DS2
+- [__Customer Data Upload for CI360__](code/ci360-customer-data-uploader): Upload customer data to CI360 cloud datahub table
+- [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
+- [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
 - [__CI360 Audience from Viya (custom step)__](code/ci360-audience-from-viya): Upload analytically defined customer audience from Viya into CI360 using Viya Custom Step
 - [__CI Modernization Preparation Tool__](code/ci-modernization-preparation-tool): Customer-facing tool intended to support the modernization from CI 6.6 to SAS CI 360
 - [__CI360 Direct SQL Extraction Utility__](code/ci360-engage-direct-sql-extraction-utility): Utility for extracting generated SQL statements from CI360 Direct logs
 - [__CI360 Direct Data Item Extraction Utility__](code/ci360-engage-direct-dataitem-log-extraction-utility): Utility for creating a report on used data items in CI360 Direct Marketing tasks and segment maps
-- [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
-- [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
 - [__CI360 Tenant Promotion Utility__](code/ci360-tenant-promotion-utility): Tenant Promotion utility helps in copying objects from one tenant to another
 - [__CI360 Audit Data Download__](code/ci360-audit-data-download): Download the Audit data from CI360 in parquet and CSV formats
 - [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
