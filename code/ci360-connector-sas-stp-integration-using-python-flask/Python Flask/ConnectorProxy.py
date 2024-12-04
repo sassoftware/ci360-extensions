@@ -72,21 +72,21 @@ def ExecuteSTP(): # REST API Function
     #stppassword = credsfile.get('DEFAULT','stppassword')
     proglog = configfile.get('DEFAULT','proglog')
     # Log data only if config parameter is set to true
-    if (proglog.casefold == 'true'):
+    if (proglog.casefold() == 'true'):
       loglevel=configfile.get('DEFAULT','loglevel')    
       logfile = configfile.get('DEFAULT','logfilepath')
       logfile = logfile + 'ServiceLog_' + currdatetime + '.log'
       
       logging.basicConfig(filename=logfile, filemode='a+', format='%(asctime)s - %(process)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-      if (loglevel.casefold=='debug'): # Set apt log level based on config value
+      if (loglevel.casefold()=='debug'): # Set apt log level based on config value
         logging.getLogger().setLevel(logging.DEBUG)
-      elif (loglevel.casefold=='info'):
+      elif (loglevel.casefold()=='info'):
         logging.getLogger().setLevel(logging.INFO)
-      elif (loglevel.casefold=='warning'):
+      elif (loglevel.casefold()=='warning'):
         logging.getLogger().setLevel(logging.WARNING)
-      elif (loglevel.casefold=='error'):
+      elif (loglevel.casefold()=='error'):
         logging.getLogger().setLevel(logging.ERROR)
-      elif (loglevel.casefold=='critical'):
+      elif (loglevel.casefold()=='critical'):
         logging.getLogger().setLevel(logging.CRITICAL)
         
       logging.info('----------------------------------------------------------------------------------')
@@ -129,7 +129,7 @@ def ExecuteSTP(): # REST API Function
     sbxmldata.Append('</streams>\r\n')
     sbxmldata.Append('</' + stpName + '>\r\n')  
 
-    if (proglog.casefold == 'true'):
+    if (proglog.casefold() == 'true'):
       logging.debug("XML Data: " + str(sbxmldata))      
       f = open( 'logs\\360TaskPayload_' + currdatetime + '.xml', 'w')
       f.write(str(sbxmldata))
@@ -144,7 +144,7 @@ def ExecuteSTP(): # REST API Function
     stpdata = str(sbxmldata)
     response = session.post(stpUrl, headers=stpheaders, data=stpdata, timeout=(30,30))
     
-    if (proglog.casefold == 'true'):
+    if (proglog.casefold() == 'true'):
       logging.debug("STP Response: " + str(response.text))  
       f = open( 'logs\STPResponse_' + currdatetime + '.txt', 'w' )
       f.write( str(response) )
