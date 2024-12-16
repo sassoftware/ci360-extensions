@@ -56,6 +56,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
 - [__Azure Eventhub CI360 Connector__](code/eventhub-ci360-connector): Stream events from Azure Event Hub to CI360
 - [__Azure Blob Storage__](code/ci360-azure-blob-storage-bulk-connector): Upload CI360 generated customer data to Azure Blob storage
+- [__CI360 Match__](code/ci360-match-bulk-connector): Sync CI360 targeted audiences to CI360 Match
 
 ### Utilities
 
