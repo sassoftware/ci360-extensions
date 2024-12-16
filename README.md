@@ -54,6 +54,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__Kafka CI360 Connector__](code/kafka-ci360-connector): Send events from Kafka to CI360
 - [__CI360 Braze Bulk User Import Connector__](code/ci360-braze-bulk-user-import-connector): Send customer audiences and attributes generated in CI360 from various sources to Braze 
 - [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
+- [__Azure Eventhub CI360 Connector__](code/eventhub-ci360-connector): Stream events from Azure Event Hub to CI360
+- [__Azure Blob Storage__](code/ci360-azure-blob-storage-bulk-connector): Upload CI360 generated customer data to Azure Blob storage
 
 ### Utilities
 
