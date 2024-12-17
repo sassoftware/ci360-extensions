@@ -74,6 +74,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Tenant Promotion Utility__](code/ci360-tenant-promotion-utility): Tenant Promotion utility helps in copying objects from one tenant to another
 - [__CI360 Audit Data Download__](code/ci360-audit-data-download): Download the Audit data from CI360 in parquet and CSV formats
 - [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
+- [__CI360 Audience Management Utility__](code/ci360-audience-management-utility): Create, manage and populate CI360 audiences using Python scripts
 
 ## Getting Started
 

@@ -1,0 +1,30 @@
+{
+"name": "Test Audience Definition",
+"description": "A definition created via the API",
+"expiration": 10,
+"source": "customer_defined_datasource",
+"identityType": "customer_id",
+"iconName": "super",
+"identityColumnName": "Customer ID",
+"emailColumnName": "Zip Code",
+"dataItems": [ 
+    { 
+        "columnNumber": 1,
+        "label": "Customer ID",
+        "dataType": "character",
+        "usedForTracking": "false" 
+    },
+    { 
+        "columnNumber": 2,
+        "label": "Zip Code",
+        "dataType": "character",
+        "usedForTracking": "false"
+    },
+    { 
+        "columnNumber": 3,
+        "label": "Birthday",
+        "dataType": "date",
+        "usedForTracking": "false" 
+    }
+] 
+}
