@@ -38,6 +38,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__SMS (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables SMS through Salesforce Marketing Cloud
 - [__Email (via SFMC)__](code/ci360-sfmc-connector): Salesforce Marketing Cloud (SFMC) connector, enables Email communication through Salesforce Marketing Cloud
 - [__SMS (via Twilio)__](code/ci360-twilio-connector): Twilio connector, enables SMS through Twilio
+- [__SMS (via Twilio)__](code/ci360-twilio-custom-task-connector): Twilio connector, enables SMS through Twilio, no-code integration using CI360 custom task types
 - [__Google Analytics__](code/google-analytics-integration): Implementation of connection with Google Analytics (GA)
 - [__Facebook Event Manager__](code/facebook-event-manager-integration): Implementation of connection with Facebook Event Manager
 - [__Adobe Audience Manager__](code/adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
