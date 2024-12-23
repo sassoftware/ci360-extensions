@@ -19,10 +19,7 @@ Using Kafka to CI360 connector, CI360 can receive events from a Kafka environmen
 
 ## Setup
 
-1. Clone the repository to your local machine:
-    ```bash
-    git clone https://gitlab.sas.com/psd-ci-enablement/Kafka-to-CI360-Connector.git
-    ```
+1. Clone the repository to your local machine.
 
 2. Navigate to the project directory.
     
@@ -40,8 +37,8 @@ Using Kafka to CI360 connector, CI360 can receive events from a Kafka environmen
 ### Notes:
 - Ensure the directory structure in your repository matches the paths mentioned in the `README.md`.
 
-### Configuration
-#### Config.ini file
+## Configuration
+### Config.ini file
 
 Find the config.ini file in the same directory where your Python script (script_name.py) is located.
 
@@ -65,7 +62,7 @@ Note:
 - Please create the external event in CI360 prior to running this script with the required attributes. You need to create both the default event specified in config and any other events that are expected from Kafka, based on mapping below.
 - Replace placeholders like `your_external_gateway_host`, `your_tenant_id`, etc., with actual values.
 
-#### Field Mapping Configuration
+### Field Mapping Configuration
 
 The field_mapping.ini file is used to define the mapping between the incoming event keys and the modified keys that will be sent to CI360. This file allows you to specify how fields in the incoming JSON events should be renamed or transformed.
 
@@ -90,13 +87,13 @@ Keys containing dots (.) indicate nested JSON structures.
 
 Nested JSON Handling: For nested JSON fields, use dot notation to specify the path. For example, custDetails.custnum indicates that custnum is a nested field within the custDetails object in the incoming JSON.
 
-### Run the Script
+## Run the Script
 Ensure the script, config.ini, and field_mapping.ini are updated and in the same directory. Then, run the script with the following command:
 ```bash
 python Kafka_to_CI360_connector.py
 ``` 
 
-#### Logging
+### Logging
 The script sets up logging to a file (script_log.log) and the console. It uses a rotating file handler to manage log file size and backups. These logs provide detailed information about the script execution and help in troubleshooting issues.
 
 
