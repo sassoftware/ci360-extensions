@@ -77,6 +77,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
 - [__CI360 Audience Management Utility__](code/ci360-audience-management-utility): Create, manage and populate CI360 audiences using Python scripts
 - [__CI360 Custom Code Nodes__](code/ci360-custom-code-nodes): Stored process that extracts SAS code from a specific location and makes them available to run in CI360 as part of a stored process
+- [__JavaScript Event API Support__](code/ci360-js-event-api-support-doc): Code snippets for for SPA applications, delivering a spot/creative using SAS CI360
+
 
 ## Getting Started
 
