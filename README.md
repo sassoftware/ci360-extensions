@@ -76,6 +76,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Audit Data Download__](code/ci360-audit-data-download): Download the Audit data from CI360 in parquet and CSV formats
 - [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
 - [__CI360 Audience Management Utility__](code/ci360-audience-management-utility): Create, manage and populate CI360 audiences using Python scripts
+- [__CI360 Custom Code Nodes__](code/ci360-custom-code-nodes): Stored process that extracts SAS code from a specific location and makes them available to run in CI360 as part of a stored process
 
 ## Getting Started
 
