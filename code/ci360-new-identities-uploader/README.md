@@ -10,6 +10,7 @@ This process is implemented via standard .sas files executed on the command line
 ### Getting Started
 When implementing this process, you will need to review and/or adjust the following:
 * Create a Generic Agent in the CI 360 UI and get the tenant ID and secret for your JWT authentication.
+* Get the latest ds2 utilities from code/ci360-api-ds2-utilities/CI360Utilities.sas, in this repository, and copy the .sas file to your deployment in the ci360-new-identities-uploader/util folder.
 * Edit the initialize_parameters.sas file and update tenant, database, and other relevant variables.
 * Ensure pre-requisites of CI360Utilities are installed. Add the following to /sas/sashome/SASFoundation/9.4/bin/sasenv_local:
 ```bash
