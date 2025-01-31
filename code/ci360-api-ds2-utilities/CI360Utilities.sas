@@ -9,7 +9,7 @@ VERSION: 4.3
 DATE MODIFIED: 25-APRIL-2024
 AUTHOR: GLOBAL CUSTOMER INTELLIGENCE ENABLEMENT TEAM
 
-#Copyright © 2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
+#Copyright ï¿½ 2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.
 #SPDX-License-Identifier: Apache-2.0
 **********************************************************************************************************************/
 
@@ -76,7 +76,7 @@ Parameters: None
 		/* THIS PACKAGE CONTAINS ALL THE METHODS NEEDED TO MANAGE THE PROCESS OF GETTING A LIST OF FILES TO DOWNLOAD */
 		/* HOWEVER, DS2 DOESN'T HAVE THE ABILITY TO WRITE TO A FILE AND THERE ARE LIIMTS TO THE SIZE OF STRING VARS */
 		/* SO IT PROVIDES A DATASET LISTING ALL THE FILES THAT NEED TO BE RETRIEVED, BUT RETRIEVAL NEEDS PROC HTTP. */
-		PROC DS2 NOLIBS CONN="((DRIVER=BASE;CATALOG=&sas_utility_library;SCHEMA=(NAME=&sas_utility_library;PRIMARYPATH={&sas_utility_path}));(DRIVER=BASE;CATALOG=WORK;SCHEMA=(NAME=WORK;PRIMARYPATH={%sysfunc(pathname(work))}));)";
+		PROC DS2 NOLIBS CONN="((DRIVER=BASE;CATALOG=&sas_utility_library;SCHEMA=(NAME=&sas_utility_library;PRIMARYPATH={&sas_utility_path/data}));(DRIVER=BASE;CATALOG=WORK;SCHEMA=(NAME=WORK;PRIMARYPATH={%sysfunc(pathname(work))}));)";
 		    package &sas_utility_library..CI360Utilities /overwrite=yes;
 
 				declare double dblVersion;
@@ -361,7 +361,7 @@ Parameters: None
 						
 						/* search until we find the token */
 						objJSON.getNextToken(intRC, strToken, intTokenType, intParseFlags, bigLineNum, bigColNum);
-						Log(3, 'GetJSONValue','Token=' || strToken || ', rc=' || intRC);
+						Log(4, 'GetJSONValue','Token=' || strToken || ', rc=' || intRC);
 						if (intRC = 0) then do;
 							if (strToken eq strName) then do;
 
@@ -400,19 +400,45 @@ Parameters: None
 						in_out 	varchar 		strResponse - Output response from API													
 				*/					
 				method IsReady(varchar(2048) strURL, varchar(100) strWaitFor, in_out varchar strResponse) returns tinyint;
-
+				
+        			declare package json j();
 					declare varchar(32) strStatus;
-		            declare int intRC;
-					declare tinyint blnResult;
+					declare varchar(256) token;
+		            declare int intRC tokenType parseFlags ;
+       				declare bigint lineNum colNum;
+					declare tinyint blnResult jsonLevel;
 
 					Log(3, 'IsReady', '>>>> IsReady(' || strURL || ', ' || strWaitFor || ', <string>)');
 
 					intRC = DoHTTPGet(strURL, strResponse);
+					Log(3, 'IsReady', '<<<< DoHTTPGet inRC (expecting 0)=' || intRC);
 		            if intRC = 0 then do;
-						strStatus = GetJSONValue(strResponse, 'status');
+				        intRC = j.createParser( strResponse );
+						Log(3, 'IsReady', '<<<<  j.createParser inRC (expecting 0)=' || intRC);
+				        if (intRC = 0) then do;
+							j.getNextToken( intRC, token, tokenType, parseFlags, lineNum, colNum );
+							Log(3, 'IsReady', '<<<<  j.getNextToken inRC (expecting 0)=' || intRC);
+							do while (intRC eq 0);
+								if j.ISLEFTBRACE(tokenType)  then jsonLevel+1;
+								if j.ISRIGHTBRACE(tokenType) then jsonLevel-1;
+								/* getJSONvalue for status form the ROOT level of the JSON */
+								if token='status' and jsonLevel=1 then do;
+									j.getNextToken( intRC, token, tokenType, parseFlags, lineNum, colNum );
+									strStatus=token;
+								Log(3, 'IsReady', '<<<<  strStatus (expecting '|| strWaitFor ||')=' || strStatus);
+								end;
+								j.getNextToken( intRC, token, tokenType, parseFlags, lineNum, colNum );
+							end;
+						    if intRC not in ( 0, 101 ) then do;
+								Log(0, 'IsReady', 'Parseing of strResponse ended abnormally.');
+							end;
+						end;
+						intRC = j.destroyParser();
 						blnResult = (strStatus eq strWaitFor);
 					end;
-
+					
+					Log(3, 'IsReady', '<<<< strResponse=' || strResponse);
+					Log(3, 'IsReady', '<<<< strStatus=' || strStatus);
 					Log(3, 'IsReady', '<<<< IsReady=' || blnResult);
 
 					return blnResult;
@@ -539,6 +565,194 @@ Parameters: None
 					return blnResult;
 				end;
 
+
+
+
+				/* Get the URL in a step in a JSON, one level lower than  */
+				method getUrlNotImported(varchar(32767) strResponse, in_out varchar strIdentityRowsFailedURL) returns int;
+
+			        dcl package json j();
+			        dcl int rc tokenType parseFlags inStep urlFound blnResult;
+			        dcl bigint lineNum colNum;
+			        dcl nvarchar(128) token;
+
+					inStep=0;
+					urlFound=0;
+
+			        rc = j.createParser( strResponse );
+			        if rc = 0 then do;
+						j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+						put;
+						do while (rc eq 0 and urlFound eq 0);
+							if token='downloadItems' then do;
+							   inStep=1;
+							   	Log(3, 'getUrlNotImported','>>>> token = ' || token);
+							end;
+							if inStep=1 and token='url' then do;
+								j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+								strIdentityRowsFailedURL=token;
+								urlFound=1;
+							   	Log(3, 'getUrlNotImported','>>>> strIdentityRowsFailedURL = ' || strIdentityRowsFailedURL);
+							end;
+							j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+						end;
+					end;
+					rc = j.destroyParser();
+
+					Log(3, 'getUrlNotImported','>>>> tagFound = ' || urlFound);
+
+					if (urlFound eq 1 and strIdentityRowsFailedURL eq 'RECORD_UNAVAILABLE') then do;
+						blnResult = 1;
+						Log(0, 'getUrlNotImported','There is a failed url');
+					end;
+					else do;
+						blnResult = 0;
+						Log(3, 'getUrlNotImported','There is no url failed');
+					end;
+					return blnResult;
+
+				end;
+
+				/* Get the status in a step in a JSON, one level lower than strStepName */
+				method getStepStatus(varchar(32767) strResponse, varchar(128) strStepName, in_out varchar strStepStatus) returns int;
+
+			        dcl package json j();
+			        dcl int rc tokenType parseFlags inStep tagFound blnResult;
+			        dcl bigint lineNum colNum;
+			        dcl nvarchar(128) token;
+
+					inStep=0;
+					tagFound=0;
+					blnResult=0;
+					strStepStatus='STATUS_NOT_FOUND';
+
+			        rc = j.createParser( strResponse );
+			        if rc = 0 then do;
+						j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+						put;
+						do while (rc eq 0 and tagFound eq 0);
+							if token=strStepName then do;
+							   inStep=1;
+							   	Log(3, 'getStepStatus','>>>> token = ' || token);
+							end;
+							if inStep=1 and token='status' then do;
+								j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+								strStepStatus=token;
+								tagFound=1;
+							   	Log(3, 'getStepStatus','>>>> strStepStatus = ' || strStepStatus);
+							end;
+							j.getNextToken( rc, token, tokenType, parseFlags, lineNum, colNum );
+						end;
+					end;
+					rc = j.destroyParser();
+
+					Log(3, 'getStepStatus','>>>> tagFound = ' || tagFound);
+					Log(3, 'getStepStatus','>>>> stepStatus=' || stepStatus);
+					if stepStatus in('FAILED','FAILED_VALIDATION','FAILED_IDENTITIES') then do;
+							blnResult = 1;
+							Log(0, 'getStepStatus','There is a failed step status with stepStatus=' || stepStatus);
+					end;
+
+					return blnResult;
+
+				end;
+
+				/* RETURN THE STATUS CODE */
+				method getImportDataStatus(varchar(2048) strURL, varchar(100) strWaitFor, 
+											in_out varchar strFailedURL, in_out varchar strRejectedURL,
+											in_out int intIdentityRowsSuccessful, in_out int intIdentityRowsFailed,
+											in_out int intIdentityRowsRejected, in_out int intIdentityRowsNotFound) returns int;
+
+					*dcl package pyUtils pyUtils('pyUtils');
+					dcl int intImportDataStatus logLevel;
+					dcl varchar(2048) strIdentityRowsFailedURL strIdentityRowsRejectedURL;
+					dcl varchar(100) strStepStatus strIdentityRowsSuccess strIdentityRowsNotFound
+								strIdentityRowsFailed strIdentityRowsRejected;
+					dcl varchar(32767) strResponse;
+					dcl tinyint blnIdentityRowsFailed blnIdentityRowsRejected
+								blnIdentityRowsFailedURL blnIdentityRowsRejectedURL
+								blnStepStatusValidation blnStepStatusDataProcessing
+								blnStepStatusIdentityProcessing blnStepStatusTargetingProcessing
+								blnReady blnIdentityRowsSuccess blnIdentityRowsNotFound
+								
+					; 
+
+					/*Initialize vars */
+					logLevel=3;
+					intImportDataStatus = -1;
+					strFailedURL = 'URL_FAILED_NOT_FOUND';
+					strRejectedURL = 'URL_REJECTED_NOT_FOUND';
+
+					/* return 0 is imported 1 otherwise */
+					/* get the real result */
+					blnReady = IsReady(strURL, strWaitFor, strResponse);
+
+					/* if imported */
+					if blnReady then do;
+						intImportDataStatus = 0;
+
+						blnIdentityRowsFailedURL = getUrlNotImported(strResponse, strIdentityRowsFailedURL);
+						if blnIdentityRowsFailedURL then do;
+							intImportDataStatus = 1;
+							strFailedURL = strIdentityRowsFailedURL;
+						end;
+
+						blnIdentityRowsRejectedURL =getUrlNotImported(strResponse, strIdentityRowsRejectedURL);
+						if blnIdentityRowsRejectedURL then do;
+							intImportDataStatus = 2;
+							strRejectedURL = strIdentityRowsRejectedURL;
+						end;
+
+						if (blnIdentityRowsFailedURL and blnIdentityRowsRejectedURL) then do;
+							intImportDataStatus = 3;
+						end;
+						strIdentityRowsSuccess  = getJSONValue(strResponse, 'identityRowsSuccessful');
+						strIdentityRowsFailed   = getJSONValue(strResponse, 'identityRowsFailed');
+						if strIdentityRowsFailed ne '0' then logLevel=0;
+						strIdentityRowsRejected = getJSONValue(strResponse, 'identityRowsRejected');
+						if strIdentityRowsRejected ne '0' then logLevel=0;
+						strIdentityRowsNotFound = getJSONValue(strResponse, 'identityRowsNotFound');
+						if strIdentityRowsNotFound ne '0' then logLevel=0;
+						
+						Log(0,'getImportDataStatus','>>>> strIdentityRowsSuccess = ' || strIdentityRowsSuccess);
+						Log(logLevel,'getImportDataStatus','>>>> strIdentityRowsFailed = '  || strIdentityRowsFailed);
+						Log(logLevel,'getImportDataStatus','>>>> strIdentityRowsRejected = ' || strIdentityRowsRejected);
+						Log(logLevel,'getImportDataStatus','>>>> strIdentityRowsNotFound = ' || strIdentityRowsNotFound);
+						Log(logLevel,'getImportDataStatus','>>>> strResponse = ' || strResponse);
+					end;
+					/* if not imported */
+					else do;
+						blnStepStatusValidation = getStepStatus(strResponse, 'Import Validation', strStepStatus);
+						Log(2, 'getImportDataStatus','>>>> blnStepStatusValidation = ' || blnStepStatusValidation || ' strStepStatus = ' || strStepStatus);
+						if blnStepStatusValidation then do;
+							intImportDataStatus = 4;
+						end;
+
+						blnStepStatusDataProcessing =getStepStatus(strResponse, 'Data Processing', strStepStatus);
+						Log(3, 'getImportDataStatus','>>>> blnStepStatusDataProcessing = ' || blnStepStatusDataProcessing || ' strStepStatus = ' || strStepStatus);
+						if blnStepStatusDataProcessing then do;
+							intImportDataStatus = 5;
+						end;
+
+						blnStepStatusIdentityProcessing = getStepStatus(strResponse, 'Identity Processing', strStepStatus);
+						Log(3, 'getImportDataStatus','>>>> blnStepStatusIdentityProcessing = ' || blnStepStatusIdentityProcessing || ' strStepStatus = ' || strStepStatus);
+						if blnStepStatusIdentityProcessing then do;
+							intImportDataStatus = 6;
+						end;
+
+						blnStepStatusTargetingProcessing =getStepStatus(strResponse, 'Targeting Data Processing', strStepStatus);
+						Log(3, 'getImportDataStatus','>>>> blnStepStatusTargetingProcessing = ' || blnStepStatusTargetingProcessing || ' strStepStatus = ' || strStepStatus);
+						if blnStepStatusTargetingProcessing then do;
+							intImportDataStatus = 7;
+						end;
+
+					end;
+						
+					Log(3, 'getImportDataStatus','>>>> intImportDataStatus = ' || intImportDataStatus);
+
+					return intImportDataStatus;
+										
+				end;
 				/*
 					Function Name: CreateFileList
 					Description: Get a list of all files for this export request.
@@ -965,19 +1179,22 @@ Parameters: None
 							int 			blnHeaderRow - Flag to indicate if input file has a header row
 							int 			intWaitMins - Time to wait in minutes for import to finish before retrying							
 				*/				
-				method ImportData(varchar(256) strUploadName, varchar(2048) strDescriptor, varchar(2048) strLocation, varchar(36) strUpdateMode, int blnHeaderRow, int intWaitMins) returns int;
+			   method ImportData(varchar(256) strUploadName, varchar(2048) strDescriptor, varchar(2048) strLocation, varchar(36) strUpdateMode, 
+													int blnHeaderRow, int intWaitMins, in_out int intImportDataStatus, in_out varchar strFailedURL, 
+													in_out varchar strRejectedURL) returns int;
 				
 					declare varchar(2048) strResult strImportURL;
 					declare varchar(36) strDescriptorID;
+					dcl int intIdentityRowsSuccessful intIdentityRowsFailed intIdentityRowsRejected intIdentityRowsNotFound;
 
 					declare int intTries intCount intRC;
-					declare int intNotProcessed intUpdated intCreated intRejected intProcessed;
-					declare tinyint blnReady;
+
+							  
 
 					Log(3, 'ImportData', '>>>> ImportData(' || strUploadName || ', ' || strDescriptor || ', <S3 URL>, ' || blnHeaderRow || ', ' || intWaitMins || ')');
 
 					intRC = 0;
-					blnReady = 0;
+					intImportDataStatus = -1;
 					intTries = 0;
 
 					m_hashFiles.clear();
@@ -991,41 +1208,51 @@ Parameters: None
 								if lengthn(strImportURL) > 0 then do;
 
 									/* Wait for it to be finished - up to <waitMins> times * 60 seconds each */
-									do while ((blnReady = 0) and (intTries < intWaitMins));
+									do while ((intImportDataStatus = -1) and (intTries < intWaitMins));
 										sleep(60, 1); /* wait 60 seconds */
-										blnReady = IsImportReady(strImportURL, 'Imported', intNotProcessed, intUpdated, intCreated, intRejected, intProcessed);
+										intImportDataStatus = getImportDataStatus(strImportURL, 'Imported', strFailedURL, strRejectedURL,
+																					intIdentityRowsSuccessful, intIdentityRowsFailed,
+																					intIdentityRowsRejected, intIdentityRowsNotFound);
 										intTries = intTries + 1;
-										Log(3, 'ImportData', 'Attempt ' || intTries || ': ' || blnReady);
+										Log(3, 'ImportData', 'Attempt ' || intTries || ': ' || intImportDataStatus);
 									end;
 
 									/* two reasons we could have fallen out of the loop above, so make sure we handle this correctly */
-									if blnReady and (intTries <= intWaitMins) then do;
-										 
-										if intNotProcessed > 0 then do;
-											intCount = CreateFileList(strImportURL);
-											if (intCount > 0) then do;
-												m_hashFiles.output('work.' || strDescriptor || '_exports');
-												intRC = 1;
-											end;
-											else
-												Log(0, 'ImportData', 'The file list is empty.');
+									if intImportDataStatus ne -1 and (intTries <= intWaitMins) then do; /*if I finished*/
+									
+										/*if 0,1,2,3 return rc=0 import completed*/
+										if intImportDataStatus eq 0 or intImportDataStatus eq 1 or intImportDataStatus eq 2 or intImportDataStatus eq 3 then do;
+	   
+											Log(0, 'ImportData',  'Imported completed');
 										end;
-										else do;
-											intRC = 1;
-											Log(2, 'ImportData', 'No failure files to download.');
+										/*if 4,5,6,7 return rc=1 import error */
+										else if intImportDataStatus eq 4 or intImportDataStatus eq 5 or intImportDataStatus eq 6 or intImportDataStatus eq 7 then do;
+											Log(0, 'ImportData',  'Imported error');
+											intRc = 1;
 										end;
-
 									end;
-									else
-										Log(0, 'ImportData', 'Timed out waiting for files to be ready.');									
-								end;							
-								else
+									else do;
+										/*if 8,9,10 return rc=2 serious error*/
+										intImportDataStatus = 8;
+										Log(0, 'ImportData', 'Timed out waiting for files to be ready.');
+										intRc = 2;
+									end;
+								end;
+								else do;
+									intImportDataStatus = 9;
+				   
+			
 									Log(0, 'ImportData', 'Failed to get the import job URL.');
+									intRc = 2;
+								end;
 							end;
-							else
+							else do;
+								intImportDataStatus = 10;
 								Log(0, 'ImportData',  'Could not get Descriptor ID for ' || strDescriptor || '.');
+								intRc = 2;
+							end;
 
-					Log(3, 'ImportData', '<<<< ImportData=' || intRC);
+					Log(3, 'ImportData', '>>>>> ImportData =' || intRC);
 
 					return intRC;
 
@@ -1255,6 +1482,7 @@ Parameters: None
 					else if strEnvironment = 'training.ci360.sas.com' then m_strEGWEnvironment = 'training.ci360.sas.com';
 					else if strEnvironment = 'eurc.ci3dev.sas.com' 	  then m_strEGWEnvironment = 'eurc.cidev.sas.us';
 					else if strEnvironment = 'syd.ci360.sas.com'      then m_strEGWEnvironment = 'syd-prod.ci360.sas.com';
+					else if strEnvironment = 'eu-prod.ci360.sas.com'  then m_strEGWEnvironment = 'eu-prod.ci360.sas.com';
 
 					Log(2, 'Setup', 'CI360Utilities EGW Environment=' || m_strEGWEnvironment);
 
