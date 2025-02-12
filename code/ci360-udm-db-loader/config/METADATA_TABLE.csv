@@ -1,0 +1,3437 @@
+table_name|column_name|isnull|ispk|isfk|fk_reference
+ab_test_path_assignment|abtest_path_id|||TS|md_activity_abtestpath (abtest_path_id)
+ab_test_path_assignment|abtestpath_assignment_dttm||||
+ab_test_path_assignment|abtestpath_assignment_dttm_tz||||
+ab_test_path_assignment|activity_id|||TS|md_activity (activity_id)
+ab_test_path_assignment|channel_nm||||
+ab_test_path_assignment|channel_user_id||||
+ab_test_path_assignment|context_type_nm||||
+ab_test_path_assignment|context_val||||
+ab_test_path_assignment|event_designed_id|||TS|md_event (event_id)
+ab_test_path_assignment|event_id|TS|TS||
+ab_test_path_assignment|event_nm||||
+ab_test_path_assignment|identity_id|||TS|identity_attributes (identity_id)
+ab_test_path_assignment|load_dttm||||
+ab_test_path_assignment|session_id_hex|||TS|session_details (session_id_hex)
+abt_attribution|conversion_value||||
+abt_attribution|creative_id||||
+abt_attribution|identity_id||||
+abt_attribution|interaction||||
+abt_attribution|interaction_cost||||
+abt_attribution|interaction_dttm|TS|TS||
+abt_attribution|interaction_id|TS|TS||
+abt_attribution|interaction_subtype||||
+abt_attribution|interaction_type||||
+abt_attribution|load_id||||
+abt_attribution|task_id||||
+activity_conversion|abtest_path_id|||TS|md_activity_abtestpath (abtest_path_id)
+activity_conversion|activity_conversion_dttm||||
+activity_conversion|activity_conversion_dttm_tz||||
+activity_conversion|activity_id|||TS|md_activity (activity_id)
+activity_conversion|activity_node_id|||TS|md_activity_node (activity_node_id)
+activity_conversion|channel_nm||||
+activity_conversion|channel_user_id||||
+activity_conversion|context_type_nm||||
+activity_conversion|context_val||||
+activity_conversion|detail_id_hex|||TS|page_details (detail_id_hex)
+activity_conversion|event_designed_id|||TS|md_event (event_id)
+activity_conversion|event_id|TS|TS||
+activity_conversion|event_nm||||
+activity_conversion|goal_id||||
+activity_conversion|identity_id|||TS|identity_attributes (identity_id)
+activity_conversion|load_dttm||||
+activity_conversion|parent_event_designed_id|||TS|md_event (event_id)
+activity_conversion|session_id_hex|||TS|session_details (session_id_hex)
+activity_flow_in|abtest_path_id||||
+activity_flow_in|activity_flow_in_dttm||||
+activity_flow_in|activity_flow_in_dttm_tz||||
+activity_flow_in|activity_id|||TS|md_activity (activity_id)
+activity_flow_in|activity_node_id||||
+activity_flow_in|channel_nm||||
+activity_flow_in|channel_user_id||||
+activity_flow_in|context_type_nm||||
+activity_flow_in|context_val||||
+activity_flow_in|event_designed_id|||TS|md_event (event_id)
+activity_flow_in|event_id|TS|TS||
+activity_flow_in|event_nm||||
+activity_flow_in|identity_id|||TS|identity_attributes (identity_id)
+activity_flow_in|load_dttm||||
+activity_flow_in|task_id|||TS|md_task (task_id)
+activity_start|activity_id|||TS|md_activity (activity_id)
+activity_start|activity_start_dttm||||
+activity_start|activity_start_dttm_tz||||
+activity_start|channel_nm||||
+activity_start|channel_user_id||||
+activity_start|context_type_nm||||
+activity_start|context_val||||
+activity_start|event_designed_id|||TS|md_event (event_id)
+activity_start|event_id|TS|TS||
+activity_start|event_nm||||
+activity_start|identity_id|||TS|identity_attributes (identity_id)
+activity_start|load_dttm||||
+advertising_contact|advertising_contact_dttm||||
+advertising_contact|advertising_contact_dttm_tz||||
+advertising_contact|advertising_platform_nm||||
+advertising_contact|aud_occurrence_id||||
+advertising_contact|audience_id||||
+advertising_contact|channel_nm||||
+advertising_contact|context_type_nm||||
+advertising_contact|context_val||||
+advertising_contact|event_designed_id||||
+advertising_contact|event_id|TS|TS||
+advertising_contact|event_nm||||
+advertising_contact|identity_id||||
+advertising_contact|load_dttm||||
+advertising_contact|occurrence_id||||
+advertising_contact|response_tracking_cd||||
+advertising_contact|segment_id||||
+advertising_contact|segment_version_id||||
+advertising_contact|task_action_nm||||
+advertising_contact|task_id||||
+advertising_contact|task_version_id||||
+asset_details|asset_deleted_flg||||
+asset_details|asset_desc||||
+asset_details|asset_id|TS|TS||
+asset_details|asset_locked_by_usernm||||
+asset_details|asset_locked_dttm||||
+asset_details|asset_locked_flg||||
+asset_details|asset_nm||||
+asset_details|asset_owner_usernm||||
+asset_details|asset_process_status||||
+asset_details|asset_sk||||
+asset_details|asset_source_nm||||
+asset_details|asset_source_type||||
+asset_details|average_user_rating_val||||
+asset_details|created_by_usernm||||
+asset_details|created_dttm||||
+asset_details|download_disabled_by_usernm||||
+asset_details|download_disabled_dttm||||
+asset_details|download_disabled_flg||||
+asset_details|entity_attribute_enabled_flg||||
+asset_details|entity_revision_enabled_flg||||
+asset_details|entity_status_cd||||
+asset_details|entity_subtype_enabled_flg||||
+asset_details|entity_subtype_nm||||
+asset_details|entity_table_nm||||
+asset_details|entity_type_nm||||
+asset_details|entity_type_usage_cd||||
+asset_details|expired_dttm||||
+asset_details|expired_flg||||
+asset_details|external_sharing_error_dt||||
+asset_details|external_sharing_error_msg||||
+asset_details|folder_deleted_flg||||
+asset_details|folder_desc||||
+asset_details|folder_entity_status_cd||||
+asset_details|folder_id|||TS|asset_details (folder_id)
+asset_details|folder_level||||
+asset_details|folder_nm||||
+asset_details|folder_owner_usernm||||
+asset_details|folder_path||||
+asset_details|folder_sk||||
+asset_details|last_modified_by_usernm||||
+asset_details|last_modified_dttm||||
+asset_details|load_dttm||||
+asset_details|process_id||||
+asset_details|process_task_id||||
+asset_details|public_link||||
+asset_details|public_media_id||||
+asset_details|public_url||||
+asset_details|recycled_by_usernm||||
+asset_details|recycled_dttm||||
+asset_details|total_user_rating_val||||
+asset_details|user_rating_cnt||||
+asset_details_custom_prop|asset_id|TS|TS||
+asset_details_custom_prop|attr_cd||||
+asset_details_custom_prop|attr_group_cd||||
+asset_details_custom_prop|attr_group_id||||
+asset_details_custom_prop|attr_group_nm||||
+asset_details_custom_prop|attr_id|TS|TS||
+asset_details_custom_prop|attr_nm||||
+asset_details_custom_prop|attr_val||||
+asset_details_custom_prop|created_by_usernm||||
+asset_details_custom_prop|created_dttm||||
+asset_details_custom_prop|data_formatter||||
+asset_details_custom_prop|data_type||||
+asset_details_custom_prop|is_grid_flg||||
+asset_details_custom_prop|is_obsolete_flg||||
+asset_details_custom_prop|last_modified_dttm||||
+asset_details_custom_prop|last_modified_usernm||||
+asset_details_custom_prop|load_dttm||||
+asset_details_custom_prop|remote_pklist_tab_col||||
+asset_folder_details|created_by_usernm||||
+asset_folder_details|created_dttm||||
+asset_folder_details|deleted_flg||||
+asset_folder_details|entity_status_cd||||
+asset_folder_details|folder_desc||||
+asset_folder_details|folder_id|TS|TS||
+asset_folder_details|folder_level||||
+asset_folder_details|folder_nm||||
+asset_folder_details|folder_owner_usernm||||
+asset_folder_details|folder_path||||
+asset_folder_details|last_modified_by_usernm||||
+asset_folder_details|last_modified_dttm||||
+asset_folder_details|load_dttm||||
+asset_rendition_details|asset_id|TS|TS|TS|asset_details (asset_id)
+asset_rendition_details|created_by_usernm||||
+asset_rendition_details|created_dttm||||
+asset_rendition_details|current_revision_flg||||
+asset_rendition_details|download_cnt||||
+asset_rendition_details|entity_status_cd||||
+asset_rendition_details|file_format||||
+asset_rendition_details|file_nm||||
+asset_rendition_details|file_size||||
+asset_rendition_details|last_modified_by_usernm||||
+asset_rendition_details|last_modified_dttm||||
+asset_rendition_details|last_modified_status_cd||||
+asset_rendition_details|load_dttm||||
+asset_rendition_details|media_depth||||
+asset_rendition_details|media_dpi||||
+asset_rendition_details|media_height||||
+asset_rendition_details|media_width||||
+asset_rendition_details|rend_deleted_flg||||
+asset_rendition_details|rend_duration||||
+asset_rendition_details|rendition_generated_type_cd||||
+asset_rendition_details|rendition_id|TS|TS||
+asset_rendition_details|rendition_nm||||
+asset_rendition_details|rendition_type_cd||||
+asset_rendition_details|rev_deleted_flg||||
+asset_rendition_details|revision_comment_txt||||
+asset_rendition_details|revision_id|TS|TS|TS|asset_revision (revision_id)
+asset_rendition_details|revision_no|TS|TS||
+asset_revision|asset_id|TS|TS|TS|asset_details (asset_id)
+asset_revision|created_by_usernm||||
+asset_revision|created_dttm||||
+asset_revision|current_revision_flg||||
+asset_revision|deleted_flg||||
+asset_revision|entity_status_cd||||
+asset_revision|last_modified_by_usernm||||
+asset_revision|last_modified_dttm||||
+asset_revision|load_dttm||||
+asset_revision|revision_comment_txt||||
+asset_revision|revision_id|TS|TS||
+asset_revision|revision_no|TS|TS||
+audience_membership_change|aud_occurrence_id||||
+audience_membership_change|audience_change_dttm||||
+audience_membership_change|audience_change_dttm_tz||||
+audience_membership_change|audience_id||||
+audience_membership_change|event_id|TS|TS|TS|md_event (event_id)
+audience_membership_change|event_nm||||
+audience_membership_change|identity_id||||
+audience_membership_change|load_dttm||||
+business_process_details|attribute1_txt||||
+business_process_details|attribute2_txt||||
+business_process_details|detail_id|TS|TS|TS|page_details (detail_id)
+business_process_details|detail_id_hex|||TS|page_details (detail_id_hex)
+business_process_details|event_designed_id|TS|TS|TS|md_event (event_id)
+business_process_details|event_nm||||
+business_process_details|identity_id|||TS|identity_attributes (identity_id)
+business_process_details|is_completion_flg||||
+business_process_details|is_start_flg||||
+business_process_details|load_dttm||||
+business_process_details|next_detail_id||||
+business_process_details|process_attempt_cnt||||
+business_process_details|process_details_sk||||
+business_process_details|process_dttm|TS|TS||
+business_process_details|process_dttm_tz||||
+business_process_details|process_exception_dttm||||
+business_process_details|process_exception_dttm_tz||||
+business_process_details|process_exception_txt||||
+business_process_details|process_instance_no|TS|TS||
+business_process_details|process_nm|TS|TS||
+business_process_details|process_step_nm|TS|TS||
+business_process_details|session_id|||TS|session_details (session_id)
+business_process_details|session_id_hex|||TS|session_details (session_id_hex)
+business_process_details|step_order_no|TS|TS||
+business_process_details|visit_id|||TS|visit_details (visit_id)
+business_process_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+cart_activity_details|activity_cd||||
+cart_activity_details|activity_dttm|TS|TS||
+cart_activity_details|activity_dttm_tz||||
+cart_activity_details|availability_message_txt||||
+cart_activity_details|cart_activity_sk|||TS|cart_activity_details_ext (cart_activity_sk)
+cart_activity_details|cart_id||||
+cart_activity_details|cart_nm||||
+cart_activity_details|channel_nm||||
+cart_activity_details|currency_cd||||
+cart_activity_details|detail_id|TS|TS|TS|page_details (detail_id)
+cart_activity_details|detail_id_hex|||TS|page_details (detail_id_hex)
+cart_activity_details|displayed_cart_amt||||
+cart_activity_details|displayed_cart_items_no||||
+cart_activity_details|event_designed_id|||TS|md_event (event_id)
+cart_activity_details|event_key_cd||||
+cart_activity_details|event_nm||||
+cart_activity_details|identity_id|||TS|identity_attributes (identity_id)
+cart_activity_details|load_dttm||||
+cart_activity_details|mobile_app_id||||
+cart_activity_details|product_group_nm||||
+cart_activity_details|product_id|TS|TS||
+cart_activity_details|product_nm|TS|TS||
+cart_activity_details|product_sku|TS|TS||
+cart_activity_details|properties_map_doc||||
+cart_activity_details|quantity_val||||
+cart_activity_details|saving_message_txt||||
+cart_activity_details|session_id|||TS|session_details (session_id)
+cart_activity_details|session_id_hex|||TS|session_details (session_id_hex)
+cart_activity_details|shipping_message_txt||||
+cart_activity_details|unit_price_amt||||
+cart_activity_details|visit_id|||TS|visit_details (visit_id)
+cart_activity_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+cc_budget_breakup|cc_budget_distribution||||
+cc_budget_breakup|cc_desc||||
+cc_budget_breakup|cc_nm||||
+cc_budget_breakup|cc_obsolete_flg||||
+cc_budget_breakup|cc_owner_usernm||||
+cc_budget_breakup|cost_center_id|TS|TS|TS|md_costcenter (cost_center_id)
+cc_budget_breakup|created_by_usernm||||
+cc_budget_breakup|created_dttm||||
+cc_budget_breakup|fin_accnt_desc||||
+cc_budget_breakup|fin_accnt_nm||||
+cc_budget_breakup|fin_accnt_obsolete_flg||||
+cc_budget_breakup|gen_ledger_cd||||
+cc_budget_breakup|last_modified_dttm||||
+cc_budget_breakup|last_modified_usernm||||
+cc_budget_breakup|load_dttm||||
+cc_budget_breakup|planning_id|TS|TS|TS|planning_info (planning_id)
+cc_budget_breakup|planning_nm||||
+cc_budget_breakup_ccbdgt|cc_bdgt_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_budget_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_budget_desc||||
+cc_budget_breakup_ccbdgt|cc_bdgt_cmtmnt_invoice_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_cmtmnt_invoice_cnt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_cmtmnt_outstanding_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_cmtmnt_overspent_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_committed_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_direct_invoice_amt||||
+cc_budget_breakup_ccbdgt|cc_bdgt_invoiced_amt||||
+cc_budget_breakup_ccbdgt|cc_budget_distribution||||
+cc_budget_breakup_ccbdgt|cc_desc||||
+cc_budget_breakup_ccbdgt|cc_level_expense||||
+cc_budget_breakup_ccbdgt|cc_lvl_distribution||||
+cc_budget_breakup_ccbdgt|cc_nm||||
+cc_budget_breakup_ccbdgt|cc_number||||
+cc_budget_breakup_ccbdgt|cc_obsolete_flg||||
+cc_budget_breakup_ccbdgt|cc_owner_usernm||||
+cc_budget_breakup_ccbdgt|cc_rldup_child_bdgt||||
+cc_budget_breakup_ccbdgt|cc_rldup_total_expense||||
+cc_budget_breakup_ccbdgt|cost_center_id|TS|TS||
+cc_budget_breakup_ccbdgt|created_by_usernm||||
+cc_budget_breakup_ccbdgt|created_dttm||||
+cc_budget_breakup_ccbdgt|fin_accnt_desc||||
+cc_budget_breakup_ccbdgt|fin_accnt_nm||||
+cc_budget_breakup_ccbdgt|fin_accnt_obsolete_flg||||
+cc_budget_breakup_ccbdgt|fp_cls_ver||||
+cc_budget_breakup_ccbdgt|fp_desc||||
+cc_budget_breakup_ccbdgt|fp_end_dt||||
+cc_budget_breakup_ccbdgt|fp_id|TS|TS||
+cc_budget_breakup_ccbdgt|fp_nm||||
+cc_budget_breakup_ccbdgt|fp_obsolete_flg||||
+cc_budget_breakup_ccbdgt|fp_start_dt||||
+cc_budget_breakup_ccbdgt|gen_ledger_cd||||
+cc_budget_breakup_ccbdgt|last_modified_dttm||||
+cc_budget_breakup_ccbdgt|last_modified_usernm||||
+cc_budget_breakup_ccbdgt|load_dttm||||
+cc_budget_breakup_ccbdgt|planning_id|TS|TS||
+cc_budget_breakup_ccbdgt|planning_nm||||
+cdm_activity_custom_attr|activity_id||||
+cdm_activity_custom_attr|activity_version_id|TS|TS|TS|cdm_activity_detail (activity_version_id)
+cdm_activity_custom_attr|attribute_character_val||||
+cdm_activity_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_activity_custom_attr|attribute_dttm_val||||
+cdm_activity_custom_attr|attribute_nm|TS|TS||
+cdm_activity_custom_attr|attribute_numeric_val||||
+cdm_activity_custom_attr|attribute_val|TS|TS||
+cdm_activity_custom_attr|updated_by_nm||||
+cdm_activity_custom_attr|updated_dttm||||
+cdm_activity_detail|activity_category_nm||||
+cdm_activity_detail|activity_cd||||
+cdm_activity_detail|activity_desc||||
+cdm_activity_detail|activity_id||||
+cdm_activity_detail|activity_nm||||
+cdm_activity_detail|activity_version_id|TS|TS||
+cdm_activity_detail|last_published_dttm||||
+cdm_activity_detail|source_system_cd||||
+cdm_activity_detail|status_cd||||
+cdm_activity_detail|updated_by_nm||||
+cdm_activity_detail|updated_dttm||||
+cdm_activity_detail|valid_from_dttm||||
+cdm_activity_detail|valid_to_dttm||||
+cdm_activity_x_task|activity_id||||
+cdm_activity_x_task|activity_version_id|TS|TS|TS|cdm_activity_detail (activity_version_id)
+cdm_activity_x_task|task_id||||
+cdm_activity_x_task|task_version_id|TS|TS|TS|cdm_task_detail (task_version_id)
+cdm_activity_x_task|updated_by_nm||||
+cdm_activity_x_task|updated_dttm||||
+cdm_audience_detail|audience_data_source_nm||||
+cdm_audience_detail|audience_desc||||
+cdm_audience_detail|audience_id|TS|TS||
+cdm_audience_detail|audience_nm||||
+cdm_audience_detail|audience_schedule_flg||||
+cdm_audience_detail|audience_source_nm||||
+cdm_audience_detail|create_dttm||||
+cdm_audience_detail|created_user_nm||||
+cdm_audience_detail|delete_dttm||||
+cdm_audience_detail|updated_dttm||||
+cdm_audience_occur_detail|audience_id||||
+cdm_audience_occur_detail|audience_occur_id|TS|TS||
+cdm_audience_occur_detail|audience_size_cnt||||
+cdm_audience_occur_detail|end_dttm||||
+cdm_audience_occur_detail|execution_status_cd||||
+cdm_audience_occur_detail|occurrence_type_nm||||
+cdm_audience_occur_detail|start_dttm||||
+cdm_audience_occur_detail|started_by_nm||||
+cdm_audience_occur_detail|updated_dttm||||
+cdm_business_context|business_context_id|TS|TS||
+cdm_business_context|business_context_nm||||
+cdm_business_context|business_context_type_cd||||
+cdm_business_context|source_system_cd||||
+cdm_business_context|updated_by_nm||||
+cdm_business_context|updated_dttm||||
+cdm_campaign_custom_attr|attribute_character_val||||
+cdm_campaign_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_campaign_custom_attr|attribute_dttm_val||||
+cdm_campaign_custom_attr|attribute_nm|TS|TS||
+cdm_campaign_custom_attr|attribute_numeric_val||||
+cdm_campaign_custom_attr|attribute_val|TS|TS||
+cdm_campaign_custom_attr|campaign_id|TS|TS|TS|cdm_campaign_detail (campaign_id)
+cdm_campaign_custom_attr|extension_attribute_nm||||
+cdm_campaign_custom_attr|page_nm|TS|TS||
+cdm_campaign_custom_attr|updated_by_nm||||
+cdm_campaign_custom_attr|updated_dttm||||
+cdm_campaign_detail|approval_dttm||||
+cdm_campaign_detail|approval_given_by_nm||||
+cdm_campaign_detail|campaign_cd||||
+cdm_campaign_detail|campaign_desc||||
+cdm_campaign_detail|campaign_folder_txt||||
+cdm_campaign_detail|campaign_group_sk||||
+cdm_campaign_detail|campaign_id|TS|TS||
+cdm_campaign_detail|campaign_nm||||
+cdm_campaign_detail|campaign_owner_nm||||
+cdm_campaign_detail|campaign_status_cd||||
+cdm_campaign_detail|campaign_type_cd||||
+cdm_campaign_detail|campaign_version_no||||
+cdm_campaign_detail|current_version_flg||||
+cdm_campaign_detail|deleted_flg||||
+cdm_campaign_detail|deployment_version_no||||
+cdm_campaign_detail|end_dttm||||
+cdm_campaign_detail|last_modified_by_user_nm||||
+cdm_campaign_detail|last_modified_dttm||||
+cdm_campaign_detail|max_budget_amt||||
+cdm_campaign_detail|max_budget_offer_amt||||
+cdm_campaign_detail|min_budget_amt||||
+cdm_campaign_detail|min_budget_offer_amt||||
+cdm_campaign_detail|run_dttm||||
+cdm_campaign_detail|source_system_cd||||
+cdm_campaign_detail|start_dttm||||
+cdm_campaign_detail|updated_by_nm||||
+cdm_campaign_detail|updated_dttm||||
+cdm_campaign_detail|valid_from_dttm||||
+cdm_campaign_detail|valid_to_dttm||||
+cdm_contact_channel|contact_channel_cd|TS|TS||
+cdm_contact_channel|contact_channel_nm||||
+cdm_contact_channel|updated_by_nm||||
+cdm_contact_channel|updated_dttm||||
+cdm_contact_history|audience_id||||
+cdm_contact_history|audience_occur_id||||
+cdm_contact_history|contact_dt||||
+cdm_contact_history|contact_dttm||||
+cdm_contact_history|contact_dttm_tz||||
+cdm_contact_history|contact_id|TS|TS||
+cdm_contact_history|contact_nm||||
+cdm_contact_history|contact_status_cd|||TS|cdm_contact_status (contact_status_cd)
+cdm_contact_history|context_type_nm||||
+cdm_contact_history|context_val||||
+cdm_contact_history|control_group_flg||||
+cdm_contact_history|external_contact_info_1_id||||
+cdm_contact_history|external_contact_info_2_id||||
+cdm_contact_history|identity_id|||TS|cdm_identity_map (identity_id)
+cdm_contact_history|optimization_backfill_flg||||
+cdm_contact_history|rtc_id|||TS|cdm_rtc_detail (rtc_id)
+cdm_contact_history|source_system_cd||||
+cdm_contact_history|updated_by_nm||||
+cdm_contact_history|updated_dttm||||
+cdm_contact_status|contact_status_cd|TS|TS||
+cdm_contact_status|contact_status_desc||||
+cdm_contact_status|updated_by_nm||||
+cdm_contact_status|updated_dttm||||
+cdm_content_custom_attr|attribute_character_val|TS|TS||
+cdm_content_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_content_custom_attr|attribute_dttm_val|TS|TS||
+cdm_content_custom_attr|attribute_nm|TS|TS||
+cdm_content_custom_attr|attribute_numeric_val|TS|TS||
+cdm_content_custom_attr|attribute_val|TS|TS||
+cdm_content_custom_attr|content_id||||
+cdm_content_custom_attr|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_content_custom_attr|extension_attribute_nm||||
+cdm_content_custom_attr|updated_by_nm||||
+cdm_content_custom_attr|updated_dttm||||
+cdm_content_detail|active_flg||||
+cdm_content_detail|contact_content_category_nm||||
+cdm_content_detail|contact_content_cd||||
+cdm_content_detail|contact_content_class_nm||||
+cdm_content_detail|contact_content_desc||||
+cdm_content_detail|contact_content_nm||||
+cdm_content_detail|contact_content_status_cd||||
+cdm_content_detail|contact_content_type_nm||||
+cdm_content_detail|content_id||||
+cdm_content_detail|content_version_id|TS|TS||
+cdm_content_detail|created_dt||||
+cdm_content_detail|created_user_nm||||
+cdm_content_detail|external_reference_txt||||
+cdm_content_detail|external_reference_url_txt||||
+cdm_content_detail|owner_nm||||
+cdm_content_detail|source_system_cd||||
+cdm_content_detail|updated_by_nm||||
+cdm_content_detail|updated_dttm||||
+cdm_content_detail|valid_from_dttm||||
+cdm_content_detail|valid_to_dttm||||
+cdm_dyn_content_custom_attr|attribute_character_val||||
+cdm_dyn_content_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_dyn_content_custom_attr|attribute_dttm_val||||
+cdm_dyn_content_custom_attr|attribute_nm|TS|TS||
+cdm_dyn_content_custom_attr|attribute_numeric_val||||
+cdm_dyn_content_custom_attr|attribute_val|TS|TS||
+cdm_dyn_content_custom_attr|content_hash_val|TS|TS||
+cdm_dyn_content_custom_attr|content_id||||
+cdm_dyn_content_custom_attr|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_dyn_content_custom_attr|extension_attribute_nm||||
+cdm_dyn_content_custom_attr|updated_by_nm||||
+cdm_dyn_content_custom_attr|updated_dttm||||
+cdm_identifier_type|identifier_type_desc||||
+cdm_identifier_type|identifier_type_id|TS|TS||
+cdm_identifier_type|updated_by_nm||||
+cdm_identifier_type|updated_dttm||||
+cdm_identity_attr|entry_dttm||||
+cdm_identity_attr|identifier_type_id|TS|TS||
+cdm_identity_attr|identity_id|TS|TS|TS|cdm_identity_map (identity_id)
+cdm_identity_attr|source_system_cd||||
+cdm_identity_attr|updated_by_nm||||
+cdm_identity_attr|updated_dttm||||
+cdm_identity_attr|user_identifier_val||||
+cdm_identity_attr|valid_from_dttm||||
+cdm_identity_attr|valid_to_dttm||||
+cdm_identity_map|identity_id|TS|TS||
+cdm_identity_map|identity_type_cd|||TS|cdm_identity_type (identity_type_cd)
+cdm_identity_map|updated_by_nm||||
+cdm_identity_map|updated_dttm||||
+cdm_identity_type|identity_type_cd|TS|TS||
+cdm_identity_type|identity_type_desc||||
+cdm_identity_type|updated_by_nm||||
+cdm_identity_type|updated_dttm||||
+cdm_occurrence_detail|end_dttm||||
+cdm_occurrence_detail|execution_status_cd||||
+cdm_occurrence_detail|occurrence_id|TS|TS||
+cdm_occurrence_detail|occurrence_no||||
+cdm_occurrence_detail|occurrence_object_id||||
+cdm_occurrence_detail|occurrence_object_type_cd||||
+cdm_occurrence_detail|occurrence_type_cd||||
+cdm_occurrence_detail|source_system_cd||||
+cdm_occurrence_detail|start_dttm||||
+cdm_occurrence_detail|updated_by_nm||||
+cdm_occurrence_detail|updated_dttm||||
+cdm_response_channel|response_channel_cd|TS|TS||
+cdm_response_channel|response_channel_nm||||
+cdm_response_channel|updated_by_nm||||
+cdm_response_channel|updated_dttm||||
+cdm_response_extended_attr|attribute_data_type_cd||||
+cdm_response_extended_attr|attribute_nm|TS|TS||
+cdm_response_extended_attr|attribute_val||||
+cdm_response_extended_attr|response_attribute_type_cd|TS|TS||
+cdm_response_extended_attr|response_id|TS|TS|TS|cdm_response_history (response_id)
+cdm_response_extended_attr|updated_by_nm||||
+cdm_response_extended_attr|updated_dttm||||
+cdm_response_history|audience_id||||
+cdm_response_history|audience_occur_id||||
+cdm_response_history|contact_id|||TS|cdm_contact_history (contact_id)
+cdm_response_history|content_hash_val||||
+cdm_response_history|content_id||||
+cdm_response_history|content_version_id|||TS|cdm_content_detail (content_version_id)
+cdm_response_history|context_type_nm||||
+cdm_response_history|context_val||||
+cdm_response_history|conversion_flg||||
+cdm_response_history|external_contact_info_1_id||||
+cdm_response_history|external_contact_info_2_id||||
+cdm_response_history|identity_id|||TS|cdm_identity_map (identity_id)
+cdm_response_history|inferred_response_flg||||
+cdm_response_history|properties_map_doc||||
+cdm_response_history|response_cd|||TS|cdm_response_lookup (response_cd)
+cdm_response_history|response_channel_cd|||TS|cdm_response_channel (response_channel_cd)
+cdm_response_history|response_dt||||
+cdm_response_history|response_dttm||||
+cdm_response_history|response_dttm_tz||||
+cdm_response_history|response_id|TS|TS||
+cdm_response_history|response_type_cd|||TS|cdm_response_type (response_type_cd)
+cdm_response_history|response_val_amt||||
+cdm_response_history|rtc_id|||TS|cdm_rtc_detail (rtc_id)
+cdm_response_history|source_system_cd||||
+cdm_response_history|updated_by_nm||||
+cdm_response_history|updated_dttm||||
+cdm_response_lookup|response_cd|TS|TS||
+cdm_response_lookup|response_nm||||
+cdm_response_lookup|updated_by_nm||||
+cdm_response_lookup|updated_dttm||||
+cdm_response_type|response_type_cd|TS|TS||
+cdm_response_type|response_type_desc||||
+cdm_response_type|updated_by_nm||||
+cdm_response_type|updated_dttm||||
+cdm_rtc_detail|deleted_flg||||
+cdm_rtc_detail|execution_status_cd||||
+cdm_rtc_detail|occurrence_id|||TS|cdm_occurrence_detail (occurrence_id)
+cdm_rtc_detail|processed_dttm||||
+cdm_rtc_detail|response_tracking_flg||||
+cdm_rtc_detail|rtc_id|TS|TS||
+cdm_rtc_detail|segment_id||||
+cdm_rtc_detail|segment_version_id|||TS|cdm_segment_detail (segment_version_id)
+cdm_rtc_detail|source_system_cd||||
+cdm_rtc_detail|task_id||||
+cdm_rtc_detail|task_occurrence_no||||
+cdm_rtc_detail|task_version_id|||TS|cdm_task_detail (task_version_id
+cdm_rtc_detail|updated_by_nm||||
+cdm_rtc_detail|updated_dttm||||
+cdm_rtc_x_content|content_hash_val||||
+cdm_rtc_x_content|content_id||||
+cdm_rtc_x_content|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_rtc_x_content|rtc_id|TS|TS|TS|cdm_rtc_detail (rtc_id)
+cdm_rtc_x_content|rtc_x_content_sk||||
+cdm_rtc_x_content|sequence_no||||
+cdm_rtc_x_content|updated_by_nm||||
+cdm_rtc_x_content|updated_dttm||||
+cdm_segment_custom_attr|attribute_character_val||||
+cdm_segment_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_segment_custom_attr|attribute_dttm_val||||
+cdm_segment_custom_attr|attribute_nm|TS|TS||
+cdm_segment_custom_attr|attribute_numeric_val||||
+cdm_segment_custom_attr|attribute_val|TS|TS||
+cdm_segment_custom_attr|segment_id||||
+cdm_segment_custom_attr|segment_version_id|TS|TS|TS|cdm_segment_detail (segment_version_id)
+cdm_segment_custom_attr|updated_by_nm||||
+cdm_segment_custom_attr|updated_dttm||||
+cdm_segment_detail|segment_category_nm||||
+cdm_segment_detail|segment_cd||||
+cdm_segment_detail|segment_desc||||
+cdm_segment_detail|segment_id||||
+cdm_segment_detail|segment_map_id||||
+cdm_segment_detail|segment_map_version_id||||
+cdm_segment_detail|segment_nm||||
+cdm_segment_detail|segment_src_nm||||
+cdm_segment_detail|segment_status_cd||||
+cdm_segment_detail|segment_version_id|TS|TS||
+cdm_segment_detail|source_system_cd||||
+cdm_segment_detail|updated_by_nm||||
+cdm_segment_detail|updated_dttm||||
+cdm_segment_detail|valid_from_dttm||||
+cdm_segment_detail|valid_to_dttm||||
+cdm_segment_map|segment_map_category_nm||||
+cdm_segment_map|segment_map_cd||||
+cdm_segment_map|segment_map_desc||||
+cdm_segment_map|segment_map_id||||
+cdm_segment_map|segment_map_nm||||
+cdm_segment_map|segment_map_src_nm||||
+cdm_segment_map|segment_map_status_cd||||
+cdm_segment_map|segment_map_version_id|TS|TS||
+cdm_segment_map|source_system_cd||||
+cdm_segment_map|updated_by_nm||||
+cdm_segment_map|updated_dttm||||
+cdm_segment_map|valid_from_dttm||||
+cdm_segment_map|valid_to_dttm||||
+cdm_segment_map_custom_attr|attribute_character_val||||
+cdm_segment_map_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_segment_map_custom_attr|attribute_dttm_val||||
+cdm_segment_map_custom_attr|attribute_nm|TS|TS||
+cdm_segment_map_custom_attr|attribute_numeric_val||||
+cdm_segment_map_custom_attr|attribute_val|TS|TS||
+cdm_segment_map_custom_attr|segment_map_id||||
+cdm_segment_map_custom_attr|segment_map_version_id|TS|TS|TS|cdm_segment_map (segment_map_version_id)
+cdm_segment_map_custom_attr|updated_by_nm||||
+cdm_segment_map_custom_attr|updated_dttm||||
+cdm_segment_test|stratified_samp_criteria_txt||||
+cdm_segment_test|stratified_sampling_flg||||
+cdm_segment_test|task_id||||
+cdm_segment_test|task_version_id|TS|TS||
+cdm_segment_test|test_cd|TS|TS||
+cdm_segment_test|test_cnt||||
+cdm_segment_test|test_enabled_flg||||
+cdm_segment_test|test_nm||||
+cdm_segment_test|test_pct||||
+cdm_segment_test|test_sizing_type_nm||||
+cdm_segment_test|test_type_nm||||
+cdm_segment_test|updated_dttm||||
+cdm_segment_test_x_segment|segment_id|TS|TS||
+cdm_segment_test_x_segment|task_id||||
+cdm_segment_test_x_segment|task_version_id|TS|TS||
+cdm_segment_test_x_segment|test_cd|TS|TS||
+cdm_segment_test_x_segment|updated_dttm||||
+cdm_task_custom_attr|attribute_character_val||||
+cdm_task_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_task_custom_attr|attribute_dttm_val||||
+cdm_task_custom_attr|attribute_nm|TS|TS||
+cdm_task_custom_attr|attribute_numeric_val||||
+cdm_task_custom_attr|attribute_val|TS|TS||
+cdm_task_custom_attr|extension_attribute_nm||||
+cdm_task_custom_attr|task_id||||
+cdm_task_custom_attr|task_version_id|TS|TS|TS|cdm_task_detail (task_version_id)
+cdm_task_custom_attr|updated_by_nm||||
+cdm_task_custom_attr|updated_dttm||||
+cdm_task_detail|active_flg||||
+cdm_task_detail|budget_unit_cost_amt||||
+cdm_task_detail|budget_unit_usage_amt||||
+cdm_task_detail|business_context_id|||TS|cdm_business_context (business_context_id)
+cdm_task_detail|campaign_id|||TS|cdm_campaign_detail (campaign_id)
+cdm_task_detail|contact_channel_cd|||TS|cdm_contact_channel (contact_channel_cd)
+cdm_task_detail|control_group_action_nm||||
+cdm_task_detail|created_dt||||
+cdm_task_detail|created_user_nm||||
+cdm_task_detail|export_dttm||||
+cdm_task_detail|limit_by_total_impression_flg||||
+cdm_task_detail|limit_period_unit_cnt||||
+cdm_task_detail|max_budget_amt||||
+cdm_task_detail|max_budget_offer_amt||||
+cdm_task_detail|maximum_period_expression_cnt||||
+cdm_task_detail|min_budget_amt||||
+cdm_task_detail|min_budget_offer_amt||||
+cdm_task_detail|modified_status_cd||||
+cdm_task_detail|owner_nm||||
+cdm_task_detail|published_flg||||
+cdm_task_detail|recurr_type_cd||||
+cdm_task_detail|recurring_schedule_flg||||
+cdm_task_detail|saved_flg||||
+cdm_task_detail|scheduled_end_dttm||||
+cdm_task_detail|scheduled_flg||||
+cdm_task_detail|scheduled_start_dttm||||
+cdm_task_detail|segment_tests_flg||||
+cdm_task_detail|source_system_cd||||
+cdm_task_detail|staged_flg||||
+cdm_task_detail|standard_reply_flg||||
+cdm_task_detail|stratified_sampling_action_nm||||
+cdm_task_detail|subject_type_nm||||
+cdm_task_detail|task_cd||||
+cdm_task_detail|task_delivery_type_nm||||
+cdm_task_detail|task_desc||||
+cdm_task_detail|task_id||||
+cdm_task_detail|task_nm||||
+cdm_task_detail|task_status_cd||||
+cdm_task_detail|task_subtype_nm||||
+cdm_task_detail|task_type_nm||||
+cdm_task_detail|task_version_id|TS|TS||
+cdm_task_detail|update_contact_history_flg||||
+cdm_task_detail|updated_by_nm||||
+cdm_task_detail|updated_dttm||||
+cdm_task_detail|valid_from_dttm||||
+cdm_task_detail|valid_to_dttm||||
+commitment_details|cmtmnt_amt||||
+commitment_details|cmtmnt_closure_note||||
+commitment_details|cmtmnt_created_dttm||||
+commitment_details|cmtmnt_desc||||
+commitment_details|cmtmnt_id|TS|TS||
+commitment_details|cmtmnt_nm||||
+commitment_details|cmtmnt_no||||
+commitment_details|cmtmnt_outstanding_amt||||
+commitment_details|cmtmnt_overspent_amt||||
+commitment_details|cmtmnt_payment_dttm||||
+commitment_details|cmtmnt_status||||
+commitment_details|created_by_usernm||||
+commitment_details|created_dttm||||
+commitment_details|last_modified_dttm||||
+commitment_details|last_modified_usernm||||
+commitment_details|load_dttm||||
+commitment_details|planning_currency_cd||||
+commitment_details|planning_id|TS|TS|TS|planning_info (planning_id)
+commitment_details|planning_nm||||
+commitment_details|vendor_amt||||
+commitment_details|vendor_currency_cd||||
+commitment_details|vendor_id|||TS|md_vendor (vendor_id)
+commitment_details|vendor_nm||||
+commitment_details|vendor_number||||
+commitment_details|vendor_obsolete_flg||||
+commitment_line_items|cc_allocated_amt||||
+commitment_line_items|cc_available_amt||||
+commitment_line_items|cc_desc||||
+commitment_line_items|cc_nm||||
+commitment_line_items|cc_owner_usernm||||
+commitment_line_items|cc_recon_alloc_amt||||
+commitment_line_items|ccat_nm||||
+commitment_line_items|cmtmnt_amt||||
+commitment_line_items|cmtmnt_closure_note||||
+commitment_line_items|cmtmnt_created_dttm||||
+commitment_line_items|cmtmnt_desc||||
+commitment_line_items|cmtmnt_id|TS|TS|TS|commitment_details (cmtmnt_id)
+commitment_line_items|cmtmnt_nm||||
+commitment_line_items|cmtmnt_no||||
+commitment_line_items|cmtmnt_outstanding_amt||||
+commitment_line_items|cmtmnt_overspent_amt||||
+commitment_line_items|cmtmnt_payment_dttm||||
+commitment_line_items|cmtmnt_status||||
+commitment_line_items|cost_center_id|||TS|md_costcenter (cost_center_id)
+commitment_line_items|created_by_usernm||||
+commitment_line_items|created_dttm||||
+commitment_line_items|fin_acc_nm||||
+commitment_line_items|gen_ledger_cd||||
+commitment_line_items|item_alloc_amt||||
+commitment_line_items|item_alloc_unit||||
+commitment_line_items|item_nm|TS|TS||
+commitment_line_items|item_number|TS|TS||
+commitment_line_items|item_qty||||
+commitment_line_items|item_rate||||
+commitment_line_items|item_vend_alloc_amt||||
+commitment_line_items|item_vend_alloc_unit||||
+commitment_line_items|last_modified_dttm||||
+commitment_line_items|last_modified_usernm||||
+commitment_line_items|load_dttm||||
+commitment_line_items|planning_currency_cd||||
+commitment_line_items|planning_id|TS|TS|TS|planning_info (planning_id)
+commitment_line_items|planning_nm||||
+commitment_line_items|vendor_amt||||
+commitment_line_items|vendor_currency_cd||||
+commitment_line_items|vendor_id|||TS|md_vendor (vendor_id)
+commitment_line_items|vendor_nm||||
+commitment_line_items|vendor_number||||
+commitment_line_items|vendor_obsolete_flg||||
+commitment_line_items_ccbdgt|cc_allocated_amt||||
+commitment_line_items_ccbdgt|cc_available_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_budget_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_budget_desc||||
+commitment_line_items_ccbdgt|cc_bdgt_cmtmnt_invoice_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_cmtmnt_invoice_cnt||||
+commitment_line_items_ccbdgt|cc_bdgt_cmtmnt_outstanding_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_cmtmnt_overspent_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_committed_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_direct_invoice_amt||||
+commitment_line_items_ccbdgt|cc_bdgt_invoiced_amt||||
+commitment_line_items_ccbdgt|cc_desc||||
+commitment_line_items_ccbdgt|cc_nm||||
+commitment_line_items_ccbdgt|cc_number||||
+commitment_line_items_ccbdgt|cc_obsolete_flg||||
+commitment_line_items_ccbdgt|cc_owner_usernm||||
+commitment_line_items_ccbdgt|cc_recon_alloc_amt||||
+commitment_line_items_ccbdgt|ccat_nm||||
+commitment_line_items_ccbdgt|cmtmnt_amt||||
+commitment_line_items_ccbdgt|cmtmnt_closure_note||||
+commitment_line_items_ccbdgt|cmtmnt_created_dttm||||
+commitment_line_items_ccbdgt|cmtmnt_desc||||
+commitment_line_items_ccbdgt|cmtmnt_id|TS|TS||
+commitment_line_items_ccbdgt|cmtmnt_nm||||
+commitment_line_items_ccbdgt|cmtmnt_no||||
+commitment_line_items_ccbdgt|cmtmnt_outstanding_amt||||
+commitment_line_items_ccbdgt|cmtmnt_overspent_amt||||
+commitment_line_items_ccbdgt|cmtmnt_payment_dttm||||
+commitment_line_items_ccbdgt|cmtmnt_status||||
+commitment_line_items_ccbdgt|cost_center_id||||
+commitment_line_items_ccbdgt|created_by_usernm||||
+commitment_line_items_ccbdgt|created_dttm||||
+commitment_line_items_ccbdgt|fin_acc_nm||||
+commitment_line_items_ccbdgt|fp_cls_ver||||
+commitment_line_items_ccbdgt|fp_desc||||
+commitment_line_items_ccbdgt|fp_end_dt||||
+commitment_line_items_ccbdgt|fp_id||||
+commitment_line_items_ccbdgt|fp_nm||||
+commitment_line_items_ccbdgt|fp_obsolete_flg||||
+commitment_line_items_ccbdgt|fp_start_dt||||
+commitment_line_items_ccbdgt|gen_ledger_cd||||
+commitment_line_items_ccbdgt|item_alloc_amt||||
+commitment_line_items_ccbdgt|item_alloc_unit||||
+commitment_line_items_ccbdgt|item_nm||||
+commitment_line_items_ccbdgt|item_number|TS|TS||
+commitment_line_items_ccbdgt|item_qty||||
+commitment_line_items_ccbdgt|item_rate||||
+commitment_line_items_ccbdgt|item_vend_alloc_amt||||
+commitment_line_items_ccbdgt|item_vend_alloc_unit||||
+commitment_line_items_ccbdgt|last_modified_dttm||||
+commitment_line_items_ccbdgt|last_modified_usernm||||
+commitment_line_items_ccbdgt|load_dttm||||
+commitment_line_items_ccbdgt|planning_currency_cd||||
+commitment_line_items_ccbdgt|planning_id||||
+commitment_line_items_ccbdgt|planning_nm||||
+commitment_line_items_ccbdgt|vendor_amt||||
+commitment_line_items_ccbdgt|vendor_currency_cd||||
+commitment_line_items_ccbdgt|vendor_id||||
+commitment_line_items_ccbdgt|vendor_nm||||
+commitment_line_items_ccbdgt|vendor_number||||
+commitment_line_items_ccbdgt|vendor_obsolete_flg||||
+contact_history|aud_occurrence_id||||
+contact_history|audience_id||||
+contact_history|contact_channel_nm||||
+contact_history|contact_dttm||||
+contact_history|contact_dttm_tz||||
+contact_history|contact_id|TS|TS||
+contact_history|contact_nm||||
+contact_history|context_type_nm||||
+contact_history|context_val||||
+contact_history|control_group_flg||||
+contact_history|creative_id|||TS|md_creative (creative_id)
+contact_history|detail_id_hex|||TS|page_details (detail_id_hex)
+contact_history|event_designed_id|||TS|md_event (event_id)
+contact_history|identity_id|||TS|identity_attributes (identity_id)
+contact_history|load_dttm||||
+contact_history|message_id|||TS|md_message (message_id)
+contact_history|occurrence_id|||TS|md_occurrence (occurrence_id)
+contact_history|parent_event_designed_id|||TS|md_event (event_id)
+contact_history|properties_map_doc||||
+contact_history|response_tracking_cd|||TS|md_rtc (rtc_id)
+contact_history|session_id_hex|||TS|session_details (session_id_hex)
+contact_history|task_id|||TS|md_task (task_id)
+contact_history|task_version_id||||
+contact_history|visit_id_hex|||TS|visit_details (visit_id_hex)
+conversion_milestone|activity_id|||TS|md_activity (activity_id)
+conversion_milestone|analysis_group_id||||
+conversion_milestone|aud_occurrence_id||||
+conversion_milestone|audience_id||||
+conversion_milestone|channel_nm||||
+conversion_milestone|channel_user_id||||
+conversion_milestone|context_type_nm||||
+conversion_milestone|context_val||||
+conversion_milestone|control_group_flg||||
+conversion_milestone|conversion_milestone_dttm||||
+conversion_milestone|conversion_milestone_dttm_tz||||
+conversion_milestone|creative_id|||TS|md_creative (creative_id)
+conversion_milestone|creative_version_id||||
+conversion_milestone|detail_id_hex|||TS|page_details (detail_id_hex)
+conversion_milestone|event_designed_id|||TS|md_event (event_id)
+conversion_milestone|event_id|TS|TS||
+conversion_milestone|event_nm||||
+conversion_milestone|goal_id||||
+conversion_milestone|identity_id|||TS|identity_attributes (identity_id)
+conversion_milestone|load_dttm||||
+conversion_milestone|message_id||||
+conversion_milestone|message_version_id||||
+conversion_milestone|mobile_app_id||||
+conversion_milestone|occurrence_id|||TS|md_occurrence (occurrence_id)
+conversion_milestone|parent_event_designed_id|||TS|md_event (event_id)
+conversion_milestone|properties_map_doc||||
+conversion_milestone|rec_group_id||||
+conversion_milestone|reserved_1_txt||||
+conversion_milestone|reserved_2_txt||||
+conversion_milestone|response_tracking_cd||||
+conversion_milestone|segment_id||||
+conversion_milestone|segment_version_id||||
+conversion_milestone|session_id_hex|||TS|session_details (session_id_hex)
+conversion_milestone|spot_id|||TS|md_spot (spot_id)
+conversion_milestone|subject_line_txt||||
+conversion_milestone|task_id|||TS|md_task (task_id)
+conversion_milestone|task_version_id||||
+conversion_milestone|test_flg||||
+conversion_milestone|total_cost_amt||||
+conversion_milestone|visit_id_hex|||TS|visit_details (visit_id_hex)
+custom_events|channel_nm||||
+custom_events|channel_user_id||||
+custom_events|custom_event_dttm||||
+custom_events|custom_event_dttm_tz||||
+custom_events|custom_event_group_nm||||
+custom_events|custom_event_nm||||
+custom_events|custom_events_sk|||TS|custom_events_sk (custom_event_sk)
+custom_events|custom_revenue_amt||||
+custom_events|detail_id|||TS|page_details (detail_id)
+custom_events|detail_id_hex|||TS|page_details (detail_id_hex)
+custom_events|event_designed_id|||TS|md_event (event_id)
+custom_events|event_id|TS|TS||
+custom_events|event_key_cd||||
+custom_events|event_nm||||
+custom_events|event_type_nm||||
+custom_events|identity_id|||TS|identity_attributes (identity_id)
+custom_events|load_dttm||||
+custom_events|mobile_app_id||||
+custom_events|page_id||||
+custom_events|properties_map_doc||||
+custom_events|reserved_1_txt||||
+custom_events|reserved_2_txt||||
+custom_events|session_id|||TS|session_details (session_id)
+custom_events|session_id_hex|||TS|session_details (session_id_hex)
+custom_events|visit_id|||TS|visit_details (visit_id)
+custom_events|visit_id_hex|||TS|visit_details (visit_id_hex)
+custom_events_ext|custom_events_sk|TS|TS||
+custom_events_ext|custom_revenue_amt||||
+custom_events_ext|event_designed_id|||TS|md_event (event_id)
+custom_events_ext|load_dttm||||
+daily_usage|admin_user_cnt||||
+daily_usage|api_usage_str||||
+daily_usage|asset_size||||
+daily_usage|audience_usage_cnt||||
+daily_usage|bc_subjcnt_str||||
+daily_usage|db_size||||
+daily_usage|email_preview_cnt||||
+daily_usage|email_send_cnt||||
+daily_usage|event_day|TS|TS||
+daily_usage|facebook_ads_cnt||||
+daily_usage|google_ads_cnt||||
+daily_usage|linkedin_ads_cnt||||
+daily_usage|mob_impr_cnt||||
+daily_usage|mob_sesn_cnt||||
+daily_usage|mobile_in_app_msg_cnt||||
+daily_usage|mobile_push_cnt||||
+daily_usage|outbound_api_cnt||||
+daily_usage|plan_users_cnt||||
+daily_usage|web_impr_cnt||||
+daily_usage|web_sesn_cnt||||
+data_view_details|channel_user_id||||
+data_view_details|data_view_dttm||||
+data_view_details|data_view_dttm_tz||||
+data_view_details|detail_id|||TS|page_details (detail_id)
+data_view_details|detail_id_hex|TS|TS|TS|page_details (detail_id_hex)
+data_view_details|event_designed_id|||TS|md_event (event_id)
+data_view_details|event_id|TS|TS||
+data_view_details|event_nm||||
+data_view_details|identity_id|||TS|identity_attributes (identity_id)
+data_view_details|load_dttm||||
+data_view_details|parent_event_designed_id|||TS|md_event (event_id)
+data_view_details|properties_map_doc||||
+data_view_details|reserved_1_txt||||
+data_view_details|reserved_2_txt||||
+data_view_details|session_id|||TS|session_details (session_id)
+data_view_details|session_id_hex|||TS|session_details (session_id_hex)
+data_view_details|total_cost_amt||||
+data_view_details|visit_id|||TS|visit_details (visit_id)
+data_view_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+dbt_adv_campaign_visitors|average_visit_duration||||
+dbt_adv_campaign_visitors|bouncer||||
+dbt_adv_campaign_visitors|bouncers||||
+dbt_adv_campaign_visitors|br_browser_name||||
+dbt_adv_campaign_visitors|br_browser_version||||
+dbt_adv_campaign_visitors|co_conversions||||
+dbt_adv_campaign_visitors|cu_customer_id||||
+dbt_adv_campaign_visitors|device_name||||
+dbt_adv_campaign_visitors|device_type||||
+dbt_adv_campaign_visitors|ge_city||||
+dbt_adv_campaign_visitors|ge_country||||
+dbt_adv_campaign_visitors|ge_latitude||||
+dbt_adv_campaign_visitors|ge_longitude||||
+dbt_adv_campaign_visitors|ge_state_region||||
+dbt_adv_campaign_visitors|landing_page||||
+dbt_adv_campaign_visitors|landing_page_url||||
+dbt_adv_campaign_visitors|landing_page_url_domain||||
+dbt_adv_campaign_visitors|new_visitors||||
+dbt_adv_campaign_visitors|page_views||||
+dbt_adv_campaign_visitors|pl_device_operating_system||||
+dbt_adv_campaign_visitors|return_visitors||||
+dbt_adv_campaign_visitors|rv_revenue||||
+dbt_adv_campaign_visitors|se_external_search_engine||||
+dbt_adv_campaign_visitors|se_external_search_engine_domai||||
+dbt_adv_campaign_visitors|se_external_search_engine_phras||||
+dbt_adv_campaign_visitors|session_complete_load_dttm||||
+dbt_adv_campaign_visitors|session_id|TS|TS||
+dbt_adv_campaign_visitors|session_start_dttm||||
+dbt_adv_campaign_visitors|session_start_dttm_tz||||
+dbt_adv_campaign_visitors|visit_dttm||||
+dbt_adv_campaign_visitors|visit_dttm_tz||||
+dbt_adv_campaign_visitors|visit_id|TS|TS||
+dbt_adv_campaign_visitors|visit_origination_creative||||
+dbt_adv_campaign_visitors|visit_origination_name||||
+dbt_adv_campaign_visitors|visit_origination_placement||||
+dbt_adv_campaign_visitors|visit_origination_tracking_code||||
+dbt_adv_campaign_visitors|visit_origination_type||||
+dbt_adv_campaign_visitors|visitor_id||||
+dbt_adv_campaign_visitors|visitor_type||||
+dbt_adv_campaign_visitors|visits||||
+dbt_business_process|bouncer||||
+dbt_business_process|bus_process_started_dttm|TS|TS||
+dbt_business_process|bus_process_started_dttm_tz||||
+dbt_business_process|business_process_attribute_1||||
+dbt_business_process|business_process_attribute_2||||
+dbt_business_process|business_process_name|TS|TS||
+dbt_business_process|business_process_step_name|TS|TS||
+dbt_business_process|cu_customer_id||||
+dbt_business_process|device_name||||
+dbt_business_process|device_type||||
+dbt_business_process|last_step||||
+dbt_business_process|processes||||
+dbt_business_process|processes_abandoned||||
+dbt_business_process|processes_completed||||
+dbt_business_process|session_complete_load_dttm||||
+dbt_business_process|session_id|TS|TS||
+dbt_business_process|session_start_dttm||||
+dbt_business_process|session_start_dttm_tz||||
+dbt_business_process|step_count||||
+dbt_business_process|steps||||
+dbt_business_process|steps_abandoned||||
+dbt_business_process|steps_completed||||
+dbt_business_process|visit_id||||
+dbt_business_process|visit_origination_creative||||
+dbt_business_process|visit_origination_name||||
+dbt_business_process|visit_origination_placement||||
+dbt_business_process|visit_origination_tracking_code||||
+dbt_business_process|visit_origination_type||||
+dbt_business_process|visitor_id||||
+dbt_business_process|visitor_type||||
+dbt_content|active_page_view_time|TS|TS||
+dbt_content|bouncer||||
+dbt_content|bouncers||||
+dbt_content|class1_id||||
+dbt_content|class2_id||||
+dbt_content|cu_customer_id||||
+dbt_content|detail_dttm|TS|TS||
+dbt_content|detail_dttm_tz||||
+dbt_content|device_name||||
+dbt_content|device_type||||
+dbt_content|entry_pages|TS|TS||
+dbt_content|exit_pages|TS|TS||
+dbt_content|pg_domain_name||||
+dbt_content|pg_page||||
+dbt_content|pg_page_url|TS|TS||
+dbt_content|session_complete_load_dttm||||
+dbt_content|session_id|TS|TS||
+dbt_content|session_start_dttm||||
+dbt_content|session_start_dttm_tz||||
+dbt_content|total_page_view_time||||
+dbt_content|views||||
+dbt_content|visit_id||||
+dbt_content|visit_origination_creative||||
+dbt_content|visit_origination_name||||
+dbt_content|visit_origination_placement||||
+dbt_content|visit_origination_tracking_code||||
+dbt_content|visit_origination_type||||
+dbt_content|visitor_id||||
+dbt_content|visitor_type||||
+dbt_content|visits||||
+dbt_documents|bouncer||||
+dbt_documents|class1_id||||
+dbt_documents|class2_id||||
+dbt_documents|cu_customer_id||||
+dbt_documents|device_name||||
+dbt_documents|device_type||||
+dbt_documents|do_page_description||||
+dbt_documents|do_page_url||||
+dbt_documents|document_download_dttm|TS|TS||
+dbt_documents|document_download_dttm_tz||||
+dbt_documents|document_downloads||||
+dbt_documents|session_complete_load_dttm||||
+dbt_documents|session_id|TS|TS||
+dbt_documents|session_start_dttm||||
+dbt_documents|session_start_dttm_tz||||
+dbt_documents|visit_id||||
+dbt_documents|visit_origination_creative||||
+dbt_documents|visit_origination_name||||
+dbt_documents|visit_origination_placement||||
+dbt_documents|visit_origination_tracking_code||||
+dbt_documents|visit_origination_type||||
+dbt_documents|visitor_id||||
+dbt_documents|visitor_type||||
+dbt_ecommerce|basket_adds||||
+dbt_ecommerce|basket_adds_revenue||||
+dbt_ecommerce|basket_adds_units||||
+dbt_ecommerce|basket_id||||
+dbt_ecommerce|basket_removes||||
+dbt_ecommerce|basket_removes_revenue||||
+dbt_ecommerce|basket_removes_units||||
+dbt_ecommerce|baskets_abandoned||||
+dbt_ecommerce|baskets_completed||||
+dbt_ecommerce|baskets_started||||
+dbt_ecommerce|bouncer||||
+dbt_ecommerce|cu_customer_id||||
+dbt_ecommerce|device_name||||
+dbt_ecommerce|device_type||||
+dbt_ecommerce|product_activity_dttm|TS|TS||
+dbt_ecommerce|product_activity_dttm_tz||||
+dbt_ecommerce|product_group_name||||
+dbt_ecommerce|product_id|TS|TS||
+dbt_ecommerce|product_name||||
+dbt_ecommerce|product_purchase_revenues||||
+dbt_ecommerce|product_purchase_units||||
+dbt_ecommerce|product_purchases||||
+dbt_ecommerce|product_sku||||
+dbt_ecommerce|product_views||||
+dbt_ecommerce|session_complete_load_dttm||||
+dbt_ecommerce|session_id|TS|TS||
+dbt_ecommerce|session_start_dttm||||
+dbt_ecommerce|session_start_dttm_tz||||
+dbt_ecommerce|visit_id||||
+dbt_ecommerce|visit_origination_creative||||
+dbt_ecommerce|visit_origination_name||||
+dbt_ecommerce|visit_origination_placement||||
+dbt_ecommerce|visit_origination_tracking_code||||
+dbt_ecommerce|visit_origination_type||||
+dbt_ecommerce|visitor_id||||
+dbt_ecommerce|visitor_type||||
+dbt_forms|attempts||||
+dbt_forms|bouncer||||
+dbt_forms|cu_customer_id||||
+dbt_forms|device_name||||
+dbt_forms|device_type||||
+dbt_forms|form_attempt_dttm|TS|TS||
+dbt_forms|form_attempt_dttm_tz||||
+dbt_forms|form_nm|TS|TS||
+dbt_forms|forms_completed||||
+dbt_forms|forms_not_submitted||||
+dbt_forms|forms_started||||
+dbt_forms|last_field||||
+dbt_forms|session_complete_load_dttm||||
+dbt_forms|session_id|TS|TS||
+dbt_forms|session_start_dttm||||
+dbt_forms|session_start_dttm_tz||||
+dbt_forms|visit_id||||
+dbt_forms|visit_origination_creative||||
+dbt_forms|visit_origination_name||||
+dbt_forms|visit_origination_placement||||
+dbt_forms|visit_origination_tracking_code||||
+dbt_forms|visit_origination_type||||
+dbt_forms|visitor_id||||
+dbt_forms|visitor_type||||
+dbt_goals|bouncer||||
+dbt_goals|cu_customer_id||||
+dbt_goals|device_name||||
+dbt_goals|device_type||||
+dbt_goals|goal_group_name||||
+dbt_goals|goal_name||||
+dbt_goals|goal_reached_dttm|TS|TS||
+dbt_goals|goal_reached_dttm_tz||||
+dbt_goals|goal_revenue||||
+dbt_goals|goals||||
+dbt_goals|session_complete_load_dttm||||
+dbt_goals|session_id|TS|TS||
+dbt_goals|session_start_dttm||||
+dbt_goals|session_start_dttm_tz||||
+dbt_goals|visit_id||||
+dbt_goals|visit_origination_creative||||
+dbt_goals|visit_origination_name||||
+dbt_goals|visit_origination_placement||||
+dbt_goals|visit_origination_tracking_code||||
+dbt_goals|visit_origination_type||||
+dbt_goals|visitor_id||||
+dbt_goals|visitor_type||||
+dbt_goals|visits||||
+dbt_media_consumption|bouncer||||
+dbt_media_consumption|content_viewed||||
+dbt_media_consumption|counter||||
+dbt_media_consumption|cu_customer_id||||
+dbt_media_consumption|detail_id|TS|TS||
+dbt_media_consumption|device_name||||
+dbt_media_consumption|device_type||||
+dbt_media_consumption|duration||||
+dbt_media_consumption|interactions_count|TS|TS||
+dbt_media_consumption|maximum_progress|TS|TS||
+dbt_media_consumption|media_completion_rate|TS|TS||
+dbt_media_consumption|media_name||||
+dbt_media_consumption|media_section|TS|TS||
+dbt_media_consumption|media_section_view||||
+dbt_media_consumption|media_start_dttm||||
+dbt_media_consumption|media_start_dttm_tz||||
+dbt_media_consumption|media_uri_txt||||
+dbt_media_consumption|session_complete_load_dttm||||
+dbt_media_consumption|session_id||||
+dbt_media_consumption|session_start_dttm||||
+dbt_media_consumption|session_start_dttm_tz||||
+dbt_media_consumption|time_viewing||||
+dbt_media_consumption|views||||
+dbt_media_consumption|views_completed||||
+dbt_media_consumption|views_started||||
+dbt_media_consumption|visit_id|TS|TS||
+dbt_media_consumption|visit_origination_creative||||
+dbt_media_consumption|visit_origination_name||||
+dbt_media_consumption|visit_origination_placement||||
+dbt_media_consumption|visit_origination_tracking_code||||
+dbt_media_consumption|visit_origination_type||||
+dbt_media_consumption|visitor_id||||
+dbt_media_consumption|visitor_type||||
+dbt_promotions|bouncer||||
+dbt_promotions|click_throughs||||
+dbt_promotions|cu_customer_id||||
+dbt_promotions|device_name||||
+dbt_promotions|device_type||||
+dbt_promotions|displays||||
+dbt_promotions|promotion_creative||||
+dbt_promotions|promotion_name|TS|TS||
+dbt_promotions|promotion_placement||||
+dbt_promotions|promotion_shown_dttm|TS|TS||
+dbt_promotions|promotion_shown_dttm_tz||||
+dbt_promotions|promotion_tracking_code||||
+dbt_promotions|promotion_type||||
+dbt_promotions|session_complete_load_dttm||||
+dbt_promotions|session_id|TS|TS||
+dbt_promotions|session_start_dttm||||
+dbt_promotions|session_start_dttm_tz||||
+dbt_promotions|visit_id||||
+dbt_promotions|visit_origination_creative||||
+dbt_promotions|visit_origination_name||||
+dbt_promotions|visit_origination_placement||||
+dbt_promotions|visit_origination_tracking_code||||
+dbt_promotions|visit_origination_type||||
+dbt_promotions|visitor_id||||
+dbt_promotions|visitor_type||||
+dbt_search|bouncer||||
+dbt_search|cu_customer_id||||
+dbt_search|device_name||||
+dbt_search|device_type||||
+dbt_search|exit_pages||||
+dbt_search|internal_search_term||||
+dbt_search|num_additional_searches||||
+dbt_search|num_pages_viewed_afterwards||||
+dbt_search|search_name|TS|TS||
+dbt_search|search_no_results_returned||||
+dbt_search|search_results_dttm|TS|TS||
+dbt_search|search_results_dttm_tz||||
+dbt_search|search_returned_results||||
+dbt_search|search_unknown_results||||
+dbt_search|searches||||
+dbt_search|session_complete_load_dttm||||
+dbt_search|session_id|TS|TS||
+dbt_search|session_start_dttm||||
+dbt_search|session_start_dttm_tz||||
+dbt_search|visit_id||||
+dbt_search|visit_origination_creative||||
+dbt_search|visit_origination_name||||
+dbt_search|visit_origination_placement||||
+dbt_search|visit_origination_tracking_code||||
+dbt_search|visit_origination_type||||
+dbt_search|visitor_id||||
+dbt_search|visitor_type||||
+dbt_search|visits||||
+direct_contact|channel_nm||||
+direct_contact|channel_user_id||||
+direct_contact|context_type_nm||||
+direct_contact|context_val||||
+direct_contact|control_active_flg||||
+direct_contact|control_group_flg||||
+direct_contact|direct_contact_dttm||||
+direct_contact|direct_contact_dttm_tz||||
+direct_contact|event_designed_id|||TS|md_event (event_id)
+direct_contact|event_id|TS|TS||
+direct_contact|event_nm||||
+direct_contact|identity_id|||TS|identity_attributes (identity_id)
+direct_contact|identity_type_nm||||
+direct_contact|load_dttm||||
+direct_contact|message_id|||TS|md_message (message_id)
+direct_contact|occurrence_id|||TS|md_occurrence (occurrence_id)
+direct_contact|properties_map_doc||||
+direct_contact|response_tracking_cd||||
+direct_contact|segment_id||||
+direct_contact|task_id|||TS|md_task (task_id)
+direct_contact|task_version_id||||
+document_details|alt_txt||||
+document_details|detail_id|TS|TS|TS|page_details (detail_id)
+document_details|detail_id_hex|||TS|page_details (detail_id_hex)
+document_details|event_key_cd||||
+document_details|identity_id|||TS|identity_attributes (identity_id)
+document_details|link_event_dttm|TS|TS||
+document_details|link_event_dttm_tz||||
+document_details|link_id||||
+document_details|link_name||||
+document_details|link_selector_path||||
+document_details|load_dttm||||
+document_details|session_id|||TS|session_details (session_id)
+document_details|session_id_hex|||TS|session_details (session_id_hex)
+document_details|uri_txt|TS|TS||
+document_details|visit_id|||TS|visit_details (visit_id)
+document_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+email_bounce|analysis_group_id||||
+email_bounce|aud_occurrence_id||||
+email_bounce|audience_id||||
+email_bounce|bounce_class_cd||||
+email_bounce|channel_user_id||||
+email_bounce|context_type_nm||||
+email_bounce|context_val||||
+email_bounce|email_bounce_dttm||||
+email_bounce|email_bounce_dttm_tz||||
+email_bounce|event_designed_id|||TS|md_event (event_id)
+email_bounce|event_id|TS|TS||
+email_bounce|event_nm||||
+email_bounce|identity_id|||TS|identity_attributes (identity_id)
+email_bounce|imprint_id||||
+email_bounce|load_dttm||||
+email_bounce|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_bounce|program_id||||
+email_bounce|properties_map_doc||||
+email_bounce|raw_reason_txt||||
+email_bounce|reason_txt||||
+email_bounce|recipient_domain_nm||||
+email_bounce|response_tracking_cd||||
+email_bounce|segment_id||||
+email_bounce|segment_version_id||||
+email_bounce|subject_line_txt||||
+email_bounce|task_id|||TS|md_task (task_id)
+email_bounce|task_version_id||||
+email_bounce|test_flg||||
+email_click|agent_family_nm||||
+email_click|analysis_group_id||||
+email_click|aud_occurrence_id||||
+email_click|audience_id||||
+email_click|channel_user_id||||
+email_click|click_tracking_flg||||
+email_click|context_type_nm||||
+email_click|context_val||||
+email_click|device_nm||||
+email_click|email_click_dttm||||
+email_click|email_click_dttm_tz||||
+email_click|event_designed_id|||TS|md_event (event_id)
+email_click|event_id|TS|TS||
+email_click|event_nm||||
+email_click|identity_id|||TS|identity_attributes (identity_id)
+email_click|imprint_id||||
+email_click|is_mobile_flg||||
+email_click|link_tracking_group_txt||||
+email_click|link_tracking_id||||
+email_click|link_tracking_label_txt||||
+email_click|load_dttm||||
+email_click|mailbox_provider_nm||||
+email_click|manufacturer_nm||||
+email_click|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_click|open_tracking_flg||||
+email_click|platform_desc||||
+email_click|platform_version||||
+email_click|program_id||||
+email_click|properties_map_doc||||
+email_click|recipient_domain_nm||||
+email_click|response_tracking_cd||||
+email_click|segment_id||||
+email_click|segment_version_id||||
+email_click|subject_line_txt||||
+email_click|task_id|||TS|md_task (task_id)
+email_click|task_version_id||||
+email_click|test_flg||||
+email_click|uri_txt||||
+email_click|user_agent_nm||||
+email_complaint|analysis_group_id||||
+email_complaint|aud_occurrence_id||||
+email_complaint|audience_id||||
+email_complaint|channel_user_id||||
+email_complaint|context_type_nm||||
+email_complaint|context_val||||
+email_complaint|email_complaint_dttm||||
+email_complaint|email_complaint_dttm_tz||||
+email_complaint|event_designed_id|||TS|md_event (event_id)
+email_complaint|event_id|TS|TS||
+email_complaint|event_nm||||
+email_complaint|identity_id|||TS|identity_attributes (identity_id)
+email_complaint|imprint_id||||
+email_complaint|load_dttm||||
+email_complaint|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_complaint|program_id||||
+email_complaint|properties_map_doc||||
+email_complaint|recipient_domain_nm||||
+email_complaint|response_tracking_cd||||
+email_complaint|segment_id||||
+email_complaint|segment_version_id||||
+email_complaint|subject_line_txt||||
+email_complaint|task_id|||TS|md_task (task_id)
+email_complaint|task_version_id||||
+email_complaint|test_flg||||
+email_open|agent_family_nm||||
+email_open|analysis_group_id||||
+email_open|aud_occurrence_id||||
+email_open|audience_id||||
+email_open|channel_user_id||||
+email_open|click_tracking_flg||||
+email_open|context_type_nm||||
+email_open|context_val||||
+email_open|device_nm||||
+email_open|email_open_dttm||||
+email_open|email_open_dttm_tz||||
+email_open|event_designed_id|||TS|md_event (event_id)
+email_open|event_id|TS|TS||
+email_open|event_nm||||
+email_open|identity_id|||TS|identity_attributes (identity_id)
+email_open|imprint_id||||
+email_open|is_mobile_flg||||
+email_open|load_dttm||||
+email_open|mailbox_provider_nm||||
+email_open|manufacturer_nm||||
+email_open|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_open|open_tracking_flg||||
+email_open|platform_desc||||
+email_open|platform_version||||
+email_open|prefetched_flg||||
+email_open|program_id||||
+email_open|properties_map_doc||||
+email_open|recipient_domain_nm||||
+email_open|response_tracking_cd||||
+email_open|segment_id||||
+email_open|segment_version_id||||
+email_open|subject_line_txt||||
+email_open|task_id|||TS|md_task (task_id)
+email_open|task_version_id||||
+email_open|test_flg||||
+email_open|user_agent_nm||||
+email_optout|analysis_group_id||||
+email_optout|aud_occurrence_id||||
+email_optout|audience_id||||
+email_optout|channel_user_id||||
+email_optout|context_type_nm||||
+email_optout|context_val||||
+email_optout|email_optout_dttm||||
+email_optout|email_optout_dttm_tz||||
+email_optout|event_designed_id|||TS|md_event (event_id)
+email_optout|event_id|TS|TS||
+email_optout|event_nm||||
+email_optout|identity_id|||TS|identity_attributes (identity_id)
+email_optout|imprint_id||||
+email_optout|link_tracking_group_txt||||
+email_optout|link_tracking_id||||
+email_optout|link_tracking_label_txt||||
+email_optout|load_dttm||||
+email_optout|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_optout|optout_type_nm||||
+email_optout|program_id||||
+email_optout|properties_map_doc||||
+email_optout|recipient_domain_nm||||
+email_optout|response_tracking_cd||||
+email_optout|segment_id||||
+email_optout|segment_version_id||||
+email_optout|subject_line_txt||||
+email_optout|task_id|||TS|md_task (task_id)
+email_optout|task_version_id||||
+email_optout|test_flg||||
+email_optout_details|analysis_group_id||||
+email_optout_details|aud_occurrence_id||||
+email_optout_details|audience_id||||
+email_optout_details|context_type_nm||||
+email_optout_details|context_val||||
+email_optout_details|email_action_dttm||||
+email_optout_details|email_action_dttm_tz||||
+email_optout_details|email_address||||
+email_optout_details|event_designed_id|||TS|md_event (event_id)
+email_optout_details|event_id|TS|TS||
+email_optout_details|event_nm||||
+email_optout_details|identity_id|||TS|identity_attributes (identity_id)
+email_optout_details|imprint_id||||
+email_optout_details|load_dttm||||
+email_optout_details|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_optout_details|optout_type_nm||||
+email_optout_details|program_id||||
+email_optout_details|properties_map_doc||||
+email_optout_details|recipient_domain_nm||||
+email_optout_details|response_tracking_cd||||
+email_optout_details|segment_id||||
+email_optout_details|segment_version_id||||
+email_optout_details|subject_line_txt||||
+email_optout_details|task_id|||TS|md_task (task_id)
+email_optout_details|task_version_id||||
+email_optout_details|test_flg||||
+email_reply|analysis_group_id||||
+email_reply|aud_occurrence_id||||
+email_reply|audience_id||||
+email_reply|channel_user_id||||
+email_reply|context_type_nm||||
+email_reply|context_val||||
+email_reply|email_reply_dttm||||
+email_reply|email_reply_dttm_tz||||
+email_reply|event_designed_id|||TS|md_event (event_id)
+email_reply|event_id|TS|TS||
+email_reply|event_nm||||
+email_reply|identity_id|||TS|identity_attributes (identity_id)
+email_reply|imprint_id||||
+email_reply|load_dttm||||
+email_reply|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_reply|program_id||||
+email_reply|properties_map_doc||||
+email_reply|recipient_domain_nm||||
+email_reply|response_tracking_cd||||
+email_reply|segment_id||||
+email_reply|segment_version_id||||
+email_reply|subject_line_txt||||
+email_reply|task_id|||TS|md_task (task_id)
+email_reply|task_version_id||||
+email_reply|test_flg||||
+email_reply|uri_txt||||
+email_send|analysis_group_id||||
+email_send|aud_occurrence_id||||
+email_send|audience_id||||
+email_send|channel_user_id||||
+email_send|context_type_nm||||
+email_send|context_val||||
+email_send|email_send_dttm||||
+email_send|email_send_dttm_tz||||
+email_send|event_designed_id|||TS|md_event (event_id)
+email_send|event_id|TS|TS||
+email_send|event_nm||||
+email_send|identity_id|||TS|identity_attributes (identity_id)
+email_send|imprint_id||||
+email_send|imprint_url_txt||||
+email_send|load_dttm||||
+email_send|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_send|program_id||||
+email_send|properties_map_doc||||
+email_send|recipient_domain_nm||||
+email_send|response_tracking_cd||||
+email_send|segment_id||||
+email_send|segment_version_id||||
+email_send|subject_line_txt||||
+email_send|task_id|||TS|md_task (task_id)
+email_send|task_version_id||||
+email_send|test_flg||||
+email_view|analysis_group_id||||
+email_view|aud_occurrence_id||||
+email_view|audience_id||||
+email_view|channel_user_id||||
+email_view|context_type_nm||||
+email_view|context_val||||
+email_view|email_view_dttm||||
+email_view|email_view_dttm_tz||||
+email_view|event_designed_id|||TS|md_event (event_id)
+email_view|event_id|TS|TS||
+email_view|event_nm||||
+email_view|identity_id|||TS|identity_attributes (identity_id)
+email_view|imprint_id||||
+email_view|link_tracking_group_txt||||
+email_view|link_tracking_id||||
+email_view|link_tracking_label_txt||||
+email_view|load_dttm||||
+email_view|occurrence_id|||TS|md_occurrence (occurrence_id)
+email_view|program_id||||
+email_view|properties_map_doc||||
+email_view|recipient_domain_nm||||
+email_view|response_tracking_cd||||
+email_view|segment_id||||
+email_view|segment_version_id||||
+email_view|subject_line_txt||||
+email_view|task_id|||TS|md_task (task_id)
+email_view|task_version_id||||
+email_view|test_flg||||
+external_event|channel_nm||||
+external_event|channel_user_id||||
+external_event|context_type_nm||||
+external_event|context_val||||
+external_event|event_designed_id|||TS|md_event (event_id)
+external_event|event_id|TS|TS||
+external_event|event_nm||||
+external_event|external_event_dttm||||
+external_event|external_event_dttm_tz||||
+external_event|identity_id|||TS|identity_attributes (identity_id)
+external_event|load_dttm||||
+external_event|properties_map_doc||||
+external_event|response_tracking_cd||||
+fiscal_cc_budget|cc_bdgt_amt||||
+fiscal_cc_budget|cc_bdgt_budget_amt||||
+fiscal_cc_budget|cc_bdgt_budget_desc||||
+fiscal_cc_budget|cc_bdgt_cmtmnt_invoice_amt||||
+fiscal_cc_budget|cc_bdgt_cmtmnt_invoice_cnt||||
+fiscal_cc_budget|cc_bdgt_cmtmnt_outstanding_amt||||
+fiscal_cc_budget|cc_bdgt_cmtmnt_overspent_amt||||
+fiscal_cc_budget|cc_bdgt_committed_amt||||
+fiscal_cc_budget|cc_bdgt_direct_invoice_amt||||
+fiscal_cc_budget|cc_bdgt_invoiced_amt||||
+fiscal_cc_budget|cc_desc||||
+fiscal_cc_budget|cc_nm||||
+fiscal_cc_budget|cc_number||||
+fiscal_cc_budget|cc_obsolete_flg||||
+fiscal_cc_budget|cc_owner_usernm||||
+fiscal_cc_budget|cost_center_id|TS|TS||
+fiscal_cc_budget|created_by_usernm||||
+fiscal_cc_budget|created_dttm||||
+fiscal_cc_budget|fin_accnt_desc||||
+fiscal_cc_budget|fin_accnt_nm||||
+fiscal_cc_budget|fin_accnt_obsolete_flg||||
+fiscal_cc_budget|fp_cls_ver||||
+fiscal_cc_budget|fp_desc||||
+fiscal_cc_budget|fp_end_dt||||
+fiscal_cc_budget|fp_id|TS|TS||
+fiscal_cc_budget|fp_nm||||
+fiscal_cc_budget|fp_obsolete_flg||||
+fiscal_cc_budget|fp_start_dt||||
+fiscal_cc_budget|gen_ledger_cd||||
+fiscal_cc_budget|last_modified_dttm||||
+fiscal_cc_budget|last_modified_usernm||||
+fiscal_cc_budget|load_dttm||||
+form_details|attempt_index_cnt|TS|TS||
+form_details|attempt_status_cd|TS|TS||
+form_details|change_index_no||||
+form_details|detail_id|TS|TS|TS|page_details (detail_id)
+form_details|detail_id_hex|||TS|page_details (detail_id_hex)
+form_details|event_key_cd||||
+form_details|form_field_detail_dttm|TS|TS||
+form_details|form_field_detail_dttm_tz||||
+form_details|form_field_id||||
+form_details|form_field_nm||||
+form_details|form_field_value||||
+form_details|form_nm||||
+form_details|identity_id|||TS|identity_attributes (identity_id)
+form_details|load_dttm||||
+form_details|session_id|||TS|session_details (session_id)
+form_details|session_id_hex|||TS|session_details (session_id_hex)
+form_details|submit_flg|TS|TS||
+form_details|visit_id|||TS|visit_details (visit_id)
+form_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+identity_attributes|entrytime|TS|TS||
+identity_attributes|identifier_type_id|TS|TS||
+identity_attributes|identity_id|TS|TS||
+identity_attributes|processed_dttm||||
+identity_attributes|user_identifier_val||||
+identity_map|entrytime||||
+identity_map|processed_dttm||||
+identity_map|source_identity_id|TS|TS||
+identity_map|target_identity_id|||TS|identity_attributes (identity_id)
+impression_delivered|aud_occurrence_id||||
+impression_delivered|audience_id||||
+impression_delivered|channel_nm||||
+impression_delivered|channel_user_id||||
+impression_delivered|context_type_nm||||
+impression_delivered|context_val||||
+impression_delivered|control_group_flg||||
+impression_delivered|creative_id|||TS|md_creative (creative_id)
+impression_delivered|creative_version_id||||
+impression_delivered|detail_id_hex|||TS|page_details (detail_id_hex)
+impression_delivered|event_designed_id|||TS|md_event (event_id)
+impression_delivered|event_id|TS|TS||
+impression_delivered|event_key_cd||||
+impression_delivered|event_nm||||
+impression_delivered|identity_id|||TS|identity_attributes (identity_id)
+impression_delivered|impression_delivered_dttm||||
+impression_delivered|impression_delivered_dttm_tz||||
+impression_delivered|load_dttm||||
+impression_delivered|message_id||||
+impression_delivered|message_version_id||||
+impression_delivered|mobile_app_id||||
+impression_delivered|product_id||||
+impression_delivered|product_nm||||
+impression_delivered|product_qty_no||||
+impression_delivered|product_sku_no||||
+impression_delivered|properties_map_doc||||
+impression_delivered|rec_group_id||||
+impression_delivered|reserved_1_txt||||
+impression_delivered|reserved_2_txt||||
+impression_delivered|response_tracking_cd||||
+impression_delivered|segment_id||||
+impression_delivered|segment_version_id||||
+impression_delivered|session_id_hex|||TS|session_details (session_id_hex)
+impression_delivered|spot_id|||TS|md_spot (spot_id)
+impression_delivered|task_id|||TS|md_task (task_id)
+impression_delivered|task_version_id||||
+impression_delivered|visit_id_hex|||TS|visit_details (visit_id_hex)
+impression_spot_viewable|analysis_group_id||||
+impression_spot_viewable|aud_occurrence_id||||
+impression_spot_viewable|audience_id||||
+impression_spot_viewable|channel_nm||||
+impression_spot_viewable|channel_user_id||||
+impression_spot_viewable|context_type_nm||||
+impression_spot_viewable|context_val||||
+impression_spot_viewable|control_group_flg||||
+impression_spot_viewable|creative_id|||TS|md_creative (creative_id)
+impression_spot_viewable|creative_version_id||||
+impression_spot_viewable|detail_id_hex|||TS|page_details (detail_id_hex)
+impression_spot_viewable|event_designed_id|||TS|md_event (event_id)
+impression_spot_viewable|event_id|TS|TS||
+impression_spot_viewable|event_key_cd||||
+impression_spot_viewable|event_nm||||
+impression_spot_viewable|identity_id|||TS|identity_attributes (identity_id)
+impression_spot_viewable|impression_viewable_dttm||||
+impression_spot_viewable|impression_viewable_dttm_tz||||
+impression_spot_viewable|load_dttm||||
+impression_spot_viewable|message_id||||
+impression_spot_viewable|message_version_id||||
+impression_spot_viewable|mobile_app_id||||
+impression_spot_viewable|occurrence_id|||TS|md_occurrence (occurrence_id)
+impression_spot_viewable|product_id||||
+impression_spot_viewable|product_nm||||
+impression_spot_viewable|product_qty_no||||
+impression_spot_viewable|product_sku_no||||
+impression_spot_viewable|properties_map_doc||||
+impression_spot_viewable|rec_group_id||||
+impression_spot_viewable|reserved_1_txt||||
+impression_spot_viewable|reserved_2_txt||||
+impression_spot_viewable|response_tracking_cd||||
+impression_spot_viewable|segment_id||||
+impression_spot_viewable|segment_version_id||||
+impression_spot_viewable|session_id_hex|||TS|session_details (session_id_hex)
+impression_spot_viewable|spot_id|||TS|md_spot (spot_id)
+impression_spot_viewable|task_id|||TS|md_task (task_id)
+impression_spot_viewable|task_version_id||||
+impression_spot_viewable|visit_id_hex|||TS|visit_details (visit_id_hex)
+in_app_failed|channel_nm||||
+in_app_failed|channel_user_id||||
+in_app_failed|context_type_nm||||
+in_app_failed|context_val||||
+in_app_failed|creative_id|||TS|md_creative (creative_id)
+in_app_failed|creative_version_id||||
+in_app_failed|error_cd||||
+in_app_failed|error_message_txt||||
+in_app_failed|event_designed_id|||TS|md_event (event_id)
+in_app_failed|event_id|TS|TS||
+in_app_failed|event_nm||||
+in_app_failed|identity_id|||TS|identity_attributes (identity_id)
+in_app_failed|in_app_failed_dttm||||
+in_app_failed|in_app_failed_dttm_tz||||
+in_app_failed|load_dttm||||
+in_app_failed|message_id||||
+in_app_failed|message_version_id||||
+in_app_failed|mobile_app_id||||
+in_app_failed|occurrence_id|||TS|md_occurrence (occurrence_id)
+in_app_failed|properties_map_doc||||
+in_app_failed|reserved_1_txt||||
+in_app_failed|reserved_2_txt||||
+in_app_failed|response_tracking_cd||||
+in_app_failed|segment_id||||
+in_app_failed|segment_version_id||||
+in_app_failed|spot_id|||TS|md_spot (spot_id)
+in_app_failed|task_id|||TS|md_task (task_id)
+in_app_failed|task_version_id||||
+in_app_message|channel_nm||||
+in_app_message|channel_user_id||||
+in_app_message|context_type_nm||||
+in_app_message|context_val||||
+in_app_message|creative_id|||TS|md_creative (creative_id)
+in_app_message|creative_version_id||||
+in_app_message|event_designed_id|||TS|md_event (event_id)
+in_app_message|event_id|TS|TS||
+in_app_message|event_nm||||
+in_app_message|identity_id|||TS|identity_attributes (identity_id)
+in_app_message|in_app_action_dttm||||
+in_app_message|in_app_action_dttm_tz||||
+in_app_message|load_dttm||||
+in_app_message|message_id||||
+in_app_message|message_version_id||||
+in_app_message|mobile_app_id||||
+in_app_message|occurrence_id|||TS|md_occurrence (occurrence_id)
+in_app_message|properties_map_doc||||
+in_app_message|reserved_1_txt||||
+in_app_message|reserved_2_txt||||
+in_app_message|reserved_3_txt||||
+in_app_message|response_tracking_cd||||
+in_app_message|segment_id||||
+in_app_message|segment_version_id||||
+in_app_message|spot_id|||TS|md_spot (spot_id)
+in_app_message|task_id|||TS|md_task (task_id)
+in_app_message|task_version_id||||
+in_app_send|channel_nm||||
+in_app_send|channel_user_id||||
+in_app_send|context_type_nm||||
+in_app_send|context_val||||
+in_app_send|creative_id|||TS|md_creative (creative_id)
+in_app_send|creative_version_id||||
+in_app_send|event_designed_id|||TS|md_event (event_id)
+in_app_send|event_id|TS|TS||
+in_app_send|event_nm||||
+in_app_send|identity_id|||TS|identity_attributes (identity_id)
+in_app_send|in_app_send_dttm||||
+in_app_send|in_app_send_dttm_tz||||
+in_app_send|load_dttm||||
+in_app_send|message_id||||
+in_app_send|message_version_id||||
+in_app_send|mobile_app_id||||
+in_app_send|occurrence_id|||TS|md_occurrence (occurrence_id)
+in_app_send|properties_map_doc||||
+in_app_send|reserved_1_txt||||
+in_app_send|reserved_2_txt||||
+in_app_send|response_tracking_cd||||
+in_app_send|segment_id||||
+in_app_send|segment_version_id||||
+in_app_send|spot_id|||TS|md_spot (spot_id)
+in_app_send|task_id|||TS|md_task (task_id)
+in_app_send|task_version_id||||
+in_app_targeting_request|channel_nm||||
+in_app_targeting_request|channel_user_id||||
+in_app_targeting_request|context_type_nm||||
+in_app_targeting_request|context_val||||
+in_app_targeting_request|eligibility_flg||||
+in_app_targeting_request|event_designed_id|||TS|md_event (event_id)
+in_app_targeting_request|event_id|TS|TS||
+in_app_targeting_request|event_nm||||
+in_app_targeting_request|identity_id|||TS|identity_attributes (identity_id)
+in_app_targeting_request|in_app_tgt_request_dttm||||
+in_app_targeting_request|in_app_tgt_request_dttm_tz||||
+in_app_targeting_request|load_dttm||||
+in_app_targeting_request|mobile_app_id||||
+invoice_details|cmtmnt_id|TS|TS|TS|commitment_details (cmtmnt_id)
+invoice_details|cmtmnt_nm||||
+invoice_details|created_by_usernm||||
+invoice_details|created_dttm||||
+invoice_details|invoice_amt||||
+invoice_details|invoice_created_dttm||||
+invoice_details|invoice_desc||||
+invoice_details|invoice_id|TS|TS||
+invoice_details|invoice_nm||||
+invoice_details|invoice_number||||
+invoice_details|invoice_reconciled_dttm||||
+invoice_details|invoice_status||||
+invoice_details|last_modified_dttm||||
+invoice_details|last_modified_usernm||||
+invoice_details|load_dttm||||
+invoice_details|payment_dttm||||
+invoice_details|plan_currency_cd||||
+invoice_details|planning_id|TS|TS|TS|planning_info (planning_id)
+invoice_details|planning_nm||||
+invoice_details|reconcile_amt||||
+invoice_details|reconcile_note||||
+invoice_details|vendor_amt||||
+invoice_details|vendor_currency_cd||||
+invoice_details|vendor_desc||||
+invoice_details|vendor_id|||TS|md_vendor (vendor_id)
+invoice_details|vendor_nm||||
+invoice_details|vendor_number||||
+invoice_details|vendor_obsolete_flg||||
+invoice_line_items|cc_allocated_amt||||
+invoice_line_items|cc_available_amt||||
+invoice_line_items|cc_desc||||
+invoice_line_items|cc_nm||||
+invoice_line_items|cc_owner_usernm||||
+invoice_line_items|cc_recon_alloc_amt||||
+invoice_line_items|ccat_nm||||
+invoice_line_items|cmtmnt_id|TS|TS|TS|commitment_details (cmtmnt_id)
+invoice_line_items|cmtmnt_nm||||
+invoice_line_items|cost_center_id|||TS|md_costcenter (cost_center_id)
+invoice_line_items|created_by_usernm||||
+invoice_line_items|created_dttm||||
+invoice_line_items|fin_acc_ccat_nm||||
+invoice_line_items|fin_acc_nm||||
+invoice_line_items|gen_ledger_cd||||
+invoice_line_items|invoice_amt||||
+invoice_line_items|invoice_created_dttm||||
+invoice_line_items|invoice_desc||||
+invoice_line_items|invoice_id|TS|TS|TS|invoice_details (invoice_id)
+invoice_line_items|invoice_nm|TS|TS||
+invoice_line_items|invoice_number|TS|TS||
+invoice_line_items|invoice_reconciled_dttm||||
+invoice_line_items|invoice_status||||
+invoice_line_items|item_alloc_amt||||
+invoice_line_items|item_alloc_unit||||
+invoice_line_items|item_nm||||
+invoice_line_items|item_number||||
+invoice_line_items|item_qty||||
+invoice_line_items|item_rate||||
+invoice_line_items|item_vend_alloc_amt||||
+invoice_line_items|item_vend_alloc_unit||||
+invoice_line_items|last_modified_dttm||||
+invoice_line_items|last_modified_usernm||||
+invoice_line_items|load_dttm||||
+invoice_line_items|payment_dttm||||
+invoice_line_items|plan_currency_cd||||
+invoice_line_items|planning_id|TS|TS|TS|planning_info (planning_id)
+invoice_line_items|planning_nm||||
+invoice_line_items|reconcile_amt||||
+invoice_line_items|reconcile_note||||
+invoice_line_items|vendor_amt||||
+invoice_line_items|vendor_currency_cd||||
+invoice_line_items|vendor_desc||||
+invoice_line_items|vendor_id|||TS|md_vendor (vendor_id)
+invoice_line_items|vendor_nm||||
+invoice_line_items|vendor_number||||
+invoice_line_items|vendor_obsolete_flg||||
+invoice_line_items_ccbdgt|cc_allocated_amt||||
+invoice_line_items_ccbdgt|cc_available_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_budget_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_budget_desc||||
+invoice_line_items_ccbdgt|cc_bdgt_cmtmnt_invoice_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_cmtmnt_invoice_cnt||||
+invoice_line_items_ccbdgt|cc_bdgt_cmtmnt_outstanding_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_cmtmnt_overspent_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_committed_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_direct_invoice_amt||||
+invoice_line_items_ccbdgt|cc_bdgt_invoiced_amt||||
+invoice_line_items_ccbdgt|cc_desc||||
+invoice_line_items_ccbdgt|cc_nm||||
+invoice_line_items_ccbdgt|cc_number||||
+invoice_line_items_ccbdgt|cc_obsolete_flg||||
+invoice_line_items_ccbdgt|cc_owner_usernm||||
+invoice_line_items_ccbdgt|cc_recon_alloc_amt||||
+invoice_line_items_ccbdgt|ccat_nm||||
+invoice_line_items_ccbdgt|cmtmnt_id||||
+invoice_line_items_ccbdgt|cmtmnt_nm||||
+invoice_line_items_ccbdgt|cost_center_id||||
+invoice_line_items_ccbdgt|created_by_usernm||||
+invoice_line_items_ccbdgt|created_dttm||||
+invoice_line_items_ccbdgt|fin_acc_ccat_nm||||
+invoice_line_items_ccbdgt|fin_acc_nm||||
+invoice_line_items_ccbdgt|fp_cls_ver||||
+invoice_line_items_ccbdgt|fp_desc||||
+invoice_line_items_ccbdgt|fp_end_dt||||
+invoice_line_items_ccbdgt|fp_id||||
+invoice_line_items_ccbdgt|fp_nm||||
+invoice_line_items_ccbdgt|fp_obsolete_flg||||
+invoice_line_items_ccbdgt|fp_start_dt||||
+invoice_line_items_ccbdgt|gen_ledger_cd||||
+invoice_line_items_ccbdgt|invoice_amt||||
+invoice_line_items_ccbdgt|invoice_created_dttm||||
+invoice_line_items_ccbdgt|invoice_desc||||
+invoice_line_items_ccbdgt|invoice_id|TS|TS||
+invoice_line_items_ccbdgt|invoice_nm||||
+invoice_line_items_ccbdgt|invoice_number||||
+invoice_line_items_ccbdgt|invoice_reconciled_dttm||||
+invoice_line_items_ccbdgt|invoice_status||||
+invoice_line_items_ccbdgt|item_alloc_amt||||
+invoice_line_items_ccbdgt|item_alloc_unit||||
+invoice_line_items_ccbdgt|item_nm||||
+invoice_line_items_ccbdgt|item_number|TS|TS||
+invoice_line_items_ccbdgt|item_qty||||
+invoice_line_items_ccbdgt|item_rate||||
+invoice_line_items_ccbdgt|item_vend_alloc_amt||||
+invoice_line_items_ccbdgt|item_vend_alloc_unit||||
+invoice_line_items_ccbdgt|last_modified_dttm||||
+invoice_line_items_ccbdgt|last_modified_usernm||||
+invoice_line_items_ccbdgt|load_dttm||||
+invoice_line_items_ccbdgt|payment_dttm||||
+invoice_line_items_ccbdgt|plan_currency_cd||||
+invoice_line_items_ccbdgt|planning_id||||
+invoice_line_items_ccbdgt|planning_nm||||
+invoice_line_items_ccbdgt|reconcile_amt||||
+invoice_line_items_ccbdgt|reconcile_note||||
+invoice_line_items_ccbdgt|vendor_amt||||
+invoice_line_items_ccbdgt|vendor_currency_cd||||
+invoice_line_items_ccbdgt|vendor_desc||||
+invoice_line_items_ccbdgt|vendor_id||||
+invoice_line_items_ccbdgt|vendor_nm||||
+invoice_line_items_ccbdgt|vendor_number||||
+invoice_line_items_ccbdgt|vendor_obsolete_flg||||
+md_activity|activity_category_nm||||
+md_activity|activity_cd||||
+md_activity|activity_desc||||
+md_activity|activity_id||||
+md_activity|activity_nm||||
+md_activity|activity_status_cd||||
+md_activity|activity_version_id|TS|TS||
+md_activity|business_context_id|||TS|md_business_context (business_context_id)
+md_activity|folder_path_nm||||
+md_activity|last_published_dttm||||
+md_activity|valid_from_dttm||||
+md_activity|valid_to_dttm||||
+md_activity_abtestpath|abtest_dist_pct||||
+md_activity_abtestpath|abtest_path_id|TS|TS||
+md_activity_abtestpath|abtest_path_nm||||
+md_activity_abtestpath|activity_id|||TS|md_activity (activity_id)
+md_activity_abtestpath|activity_node_id|TS|TS|TS|md_activity_node (activity_node_id)
+md_activity_abtestpath|activity_status_cd||||
+md_activity_abtestpath|activity_version_id|TS|TS||
+md_activity_abtestpath|control_flg||||
+md_activity_abtestpath|next_node_val||||
+md_activity_abtestpath|valid_from_dttm||||
+md_activity_abtestpath|valid_to_dttm||||
+md_activity_custom_prop|activity_id|||TS|md_activity (activity_id)
+md_activity_custom_prop|activity_status_cd||||
+md_activity_custom_prop|activity_version_id|TS|TS||
+md_activity_custom_prop|property_datatype_cd|TS|TS||
+md_activity_custom_prop|property_nm|TS|TS||
+md_activity_custom_prop|property_val|TS|TS|TS|md_activity (activity_id)
+md_activity_custom_prop|valid_from_dttm||||
+md_activity_custom_prop|valid_to_dttm||||
+md_activity_node|abtest_id||||
+md_activity_node|activity_id|||TS|md_activity (activity_id)
+md_activity_node|activity_node_id|TS|TS|TS|md_activity_node (activity_node_id)
+md_activity_node|activity_node_nm||||
+md_activity_node|activity_node_type_nm||||
+md_activity_node|activity_status_cd||||
+md_activity_node|activity_version_id|TS|TS||
+md_activity_node|end_node_flg||||
+md_activity_node|next_node_val||||
+md_activity_node|node_sequence_no||||
+md_activity_node|previous_node_val||||
+md_activity_node|specific_wait_flg||||
+md_activity_node|start_node_flg||||
+md_activity_node|time_boxed_flg||||
+md_activity_node|valid_from_dttm||||
+md_activity_node|valid_to_dttm||||
+md_activity_node|wait_tm||||
+md_activity_x_activity_node|activity_id|||TS|md_activity (activity_id)
+md_activity_x_activity_node|activity_node_id|TS|TS|TS|md_activity_node (activity_node_id)
+md_activity_x_activity_node|activity_status_cd||||
+md_activity_x_activity_node|activity_version_id|TS|TS||
+md_activity_x_task|activity_id||||
+md_activity_x_task|activity_status_cd||||
+md_activity_x_task|activity_version_id|TS|TS||
+md_activity_x_task|task_id|TS|TS|TS|md_task (task_id)
+md_activity_x_task|task_version_id||||
+md_asset|asset_desc||||
+md_asset|asset_id||||
+md_asset|asset_nm||||
+md_asset|asset_status_cd||||
+md_asset|asset_type_nm||||
+md_asset|asset_version_id|TS|TS||
+md_asset|created_user_nm||||
+md_asset|last_published_dttm||||
+md_asset|owner_nm||||
+md_asset|valid_from_dttm||||
+md_asset|valid_to_dttm||||
+md_audience|audience_data_source_nm||||
+md_audience|audience_desc||||
+md_audience|audience_expiration_val||||
+md_audience|audience_id|TS|TS||
+md_audience|audience_nm||||
+md_audience|audience_schedule_flg||||
+md_audience|audience_source_nm||||
+md_audience|create_dttm||||
+md_audience|created_user_nm||||
+md_audience|delete_dttm||||
+md_audience_occurrence|aud_occurrence_id|TS|TS||
+md_audience_occurrence|audience_id||||
+md_audience_occurrence|audience_size_val||||
+md_audience_occurrence|end_tm||||
+md_audience_occurrence|execution_status_cd||||
+md_audience_occurrence|occurrence_type_nm||||
+md_audience_occurrence|start_tm||||
+md_audience_occurrence|started_by_nm||||
+md_bu|bu_currency_cd||||
+md_bu|bu_desc||||
+md_bu|bu_id|TS|TS||
+md_bu|bu_nm||||
+md_bu|bu_obsolete_flg||||
+md_bu|bu_owner_usernm||||
+md_bu|bu_parentid||||
+md_bu|created_by_usernm||||
+md_bu|created_dttm||||
+md_bu|last_modified_dttm||||
+md_bu|last_modified_usernm||||
+md_bu|load_dttm||||
+md_business_context|business_context_desc||||
+md_business_context|business_context_id||||
+md_business_context|business_context_nm||||
+md_business_context|business_context_src_cd||||
+md_business_context|business_context_status_cd||||
+md_business_context|business_context_version_id|TS|TS||
+md_business_context|created_user_nm||||
+md_business_context|information_map_nm||||
+md_business_context|last_published_dttm||||
+md_business_context|locked_information_map_nm||||
+md_business_context|owner_nm||||
+md_business_context|valid_from_dttm||||
+md_business_context|valid_to_dttm||||
+md_cost_category|ccat_desc||||
+md_cost_category|ccat_id|TS|TS||
+md_cost_category|ccat_nm||||
+md_cost_category|ccat_obsolete_flg||||
+md_cost_category|ccat_owner_usernm||||
+md_cost_category|created_by_usernm||||
+md_cost_category|created_dttm||||
+md_cost_category|fin_accnt_nm||||
+md_cost_category|gen_ledger_cd||||
+md_cost_category|last_modified_dttm||||
+md_cost_category|last_modified_usernm||||
+md_cost_category|load_dttm||||
+md_costcenter|cc_desc||||
+md_costcenter|cc_nm||||
+md_costcenter|cc_obsolete_flg||||
+md_costcenter|cc_owner_usernm||||
+md_costcenter|cost_center_id|TS|TS||
+md_costcenter|created_by_usernm||||
+md_costcenter|created_dttm||||
+md_costcenter|fin_accnt_nm||||
+md_costcenter|gen_ledger_cd||||
+md_costcenter|last_modified_dttm||||
+md_costcenter|last_modified_usernm||||
+md_costcenter|load_dttm||||
+md_creative|business_context_id||||
+md_creative|created_user_nm||||
+md_creative|creative_category_nm||||
+md_creative|creative_cd||||
+md_creative|creative_desc||||
+md_creative|creative_id||||
+md_creative|creative_nm||||
+md_creative|creative_status_cd||||
+md_creative|creative_type_nm||||
+md_creative|creative_version_id|TS|TS||
+md_creative|folder_path_nm||||
+md_creative|last_published_dttm||||
+md_creative|owner_nm||||
+md_creative|recommender_template_id||||
+md_creative|recommender_template_nm||||
+md_creative|valid_from_dttm||||
+md_creative|valid_to_dttm||||
+md_creative_custom_prop|creative_id||||
+md_creative_custom_prop|creative_status_cd||||
+md_creative_custom_prop|creative_version_id|TS|TS||
+md_creative_custom_prop|property_datatype_cd|TS|TS||
+md_creative_custom_prop|property_nm|TS|TS||
+md_creative_custom_prop|property_val|TS|TS||
+md_creative_custom_prop|valid_from_dttm||||
+md_creative_custom_prop|valid_to_dttm||||
+md_creative_x_asset|asset_id|TS|TS|TS|md_asset (asset_id)
+md_creative_x_asset|creative_id|||TS|md_creative (creative_id)
+md_creative_x_asset|creative_status_cd||||
+md_creative_x_asset|creative_version_id|TS|TS||
+md_cust_attrib|associated_grid||||
+md_cust_attrib|attr_cd||||
+md_cust_attrib|attr_group_cd||||
+md_cust_attrib|attr_group_id|TS|TS||
+md_cust_attrib|attr_group_nm||||
+md_cust_attrib|attr_id|TS|TS||
+md_cust_attrib|attr_nm||||
+md_cust_attrib|created_by_usernm||||
+md_cust_attrib|created_dttm||||
+md_cust_attrib|data_formatter||||
+md_cust_attrib|data_type||||
+md_cust_attrib|is_grid_flg||||
+md_cust_attrib|is_obsolete_flg||||
+md_cust_attrib|last_modified_dttm||||
+md_cust_attrib|last_modified_usernm||||
+md_cust_attrib|load_dttm||||
+md_cust_attrib|remote_pklist_tab_col||||
+md_custattrib_table_values|attr_cd||||
+md_custattrib_table_values|attr_group_cd||||
+md_custattrib_table_values|attr_group_id|TS|TS||
+md_custattrib_table_values|attr_group_nm||||
+md_custattrib_table_values|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+md_custattrib_table_values|attr_nm||||
+md_custattrib_table_values|created_by_usernm||||
+md_custattrib_table_values|created_dttm||||
+md_custattrib_table_values|data_formatter||||
+md_custattrib_table_values|data_type||||
+md_custattrib_table_values|is_obsolete_flg||||
+md_custattrib_table_values|last_modified_dttm||||
+md_custattrib_table_values|last_modified_usernm||||
+md_custattrib_table_values|load_dttm||||
+md_custattrib_table_values|table_val||||
+md_dataview|analytic_active_flg||||
+md_dataview|analytics_period_type_nm||||
+md_dataview|analytics_period_val||||
+md_dataview|created_user_nm||||
+md_dataview|custom_recent_cd||||
+md_dataview|custom_recent_exclude_cd||||
+md_dataview|dataview_desc||||
+md_dataview|dataview_id||||
+md_dataview|dataview_nm||||
+md_dataview|dataview_status_cd||||
+md_dataview|dataview_version_id|TS|TS||
+md_dataview|half_life_time_val||||
+md_dataview|include_external_flg||||
+md_dataview|include_internal_flg||||
+md_dataview|last_published_dttm||||
+md_dataview|max_path_length_val||||
+md_dataview|max_path_time_type_nm||||
+md_dataview|max_path_time_val||||
+md_dataview|owner_nm||||
+md_dataview|selected_task_list||||
+md_dataview|valid_from_dttm||||
+md_dataview|valid_to_dttm||||
+md_dataview_x_event|dataview_id|||TS|md_dataview (dataview_id)
+md_dataview_x_event|dataview_status_cd||||
+md_dataview_x_event|dataview_version_id|TS|TS||
+md_dataview_x_event|event_id|TS|TS|TS|md_event (event_id)
+md_event|channel_nm||||
+md_event|created_user_nm||||
+md_event|event_desc||||
+md_event|event_id||||
+md_event|event_nm||||
+md_event|event_status_cd||||
+md_event|event_subtype_nm||||
+md_event|event_type_nm||||
+md_event|event_version_id|TS|TS||
+md_event|last_published_dttm||||
+md_event|owner_nm||||
+md_event|valid_from_dttm||||
+md_event|valid_to_dttm||||
+md_fiscal_period|created_by_usernm||||
+md_fiscal_period|created_dttm||||
+md_fiscal_period|fp_cls_ver||||
+md_fiscal_period|fp_desc||||
+md_fiscal_period|fp_end_dt||||
+md_fiscal_period|fp_id|TS|TS||
+md_fiscal_period|fp_nm||||
+md_fiscal_period|fp_obsolete_flg||||
+md_fiscal_period|fp_start_dt||||
+md_fiscal_period|last_modified_dttm||||
+md_fiscal_period|last_modified_usernm||||
+md_fiscal_period|load_dttm||||
+md_grid_attr_defn|associated_grid||||
+md_grid_attr_defn|attr_cd||||
+md_grid_attr_defn|attr_desc||||
+md_grid_attr_defn|attr_group_cd||||
+md_grid_attr_defn|attr_group_id|TS|TS||
+md_grid_attr_defn|attr_group_nm||||
+md_grid_attr_defn|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+md_grid_attr_defn|attr_nm||||
+md_grid_attr_defn|attr_obsolete_flg||||
+md_grid_attr_defn|attr_order_no||||
+md_grid_attr_defn|created_by_usernm||||
+md_grid_attr_defn|created_dttm||||
+md_grid_attr_defn|data_formatter||||
+md_grid_attr_defn|data_type||||
+md_grid_attr_defn|grid_cd||||
+md_grid_attr_defn|grid_desc||||
+md_grid_attr_defn|grid_id|TS|TS||
+md_grid_attr_defn|grid_mandatory_flg||||
+md_grid_attr_defn|grid_nm||||
+md_grid_attr_defn|grid_obsolete_flg||||
+md_grid_attr_defn|last_modified_dttm||||
+md_grid_attr_defn|last_modified_usernm||||
+md_grid_attr_defn|load_dttm||||
+md_grid_attr_defn|remote_pklist_tab_col||||
+md_message|business_context_id||||
+md_message|created_user_nm||||
+md_message|folder_path_nm||||
+md_message|last_published_dttm||||
+md_message|message_category_nm||||
+md_message|message_cd||||
+md_message|message_desc||||
+md_message|message_id||||
+md_message|message_nm||||
+md_message|message_status_cd||||
+md_message|message_type_nm||||
+md_message|message_version_id|TS|TS||
+md_message|owner_nm||||
+md_message|valid_from_dttm||||
+md_message|valid_to_dttm||||
+md_message_custom_prop|message_id|||TS|md_message (message_id)
+md_message_custom_prop|message_status_cd||||
+md_message_custom_prop|message_version_id|TS|TS||
+md_message_custom_prop|property_datatype_cd|TS|TS||
+md_message_custom_prop|property_nm|TS|TS||
+md_message_custom_prop|property_val|TS|TS||
+md_message_custom_prop|valid_from_dttm||||
+md_message_custom_prop|valid_to_dttm||||
+md_message_x_creative|creative_id|TS|TS|TS|md_creative (creative_id)
+md_message_x_creative|message_id|||TS|md_message (message_id)
+md_message_x_creative|message_status_cd||||
+md_message_x_creative|message_version_id|TS|TS||
+md_object_type|attr_cd||||
+md_object_type|attr_group_cd||||
+md_object_type|attr_group_id|TS|TS||
+md_object_type|attr_group_nm||||
+md_object_type|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+md_object_type|attr_nm||||
+md_object_type|created_by_usernm||||
+md_object_type|created_dttm||||
+md_object_type|data_formatter||||
+md_object_type|data_type||||
+md_object_type|is_obsolete_flg||||
+md_object_type|last_modified_dttm||||
+md_object_type|last_modified_usernm||||
+md_object_type|load_dttm||||
+md_object_type|object_category||||
+md_object_type|object_type|TS|TS||
+md_object_type|remote_pklist_tab_col||||
+md_occurrence|end_tm||||
+md_occurrence|execution_status_cd||||
+md_occurrence|object_id||||
+md_occurrence|object_type_nm||||
+md_occurrence|object_version_id||||
+md_occurrence|occurrence_id|TS|TS||
+md_occurrence|occurrence_no||||
+md_occurrence|occurrence_type_nm||||
+md_occurrence|properties_map_doc||||
+md_occurrence|start_tm||||
+md_occurrence|started_by_nm||||
+md_picklist|attr_cd||||
+md_picklist|attr_group_id||||
+md_picklist|attr_group_nm||||
+md_picklist|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+md_picklist|attr_nm||||
+md_picklist|created_by_usernm||||
+md_picklist|created_dttm||||
+md_picklist|is_obsolete_flg||||
+md_picklist|last_modified_dttm||||
+md_picklist|last_modified_usernm||||
+md_picklist|load_dttm||||
+md_picklist|plist_cd||||
+md_picklist|plist_desc||||
+md_picklist|plist_id|TS|TS||
+md_picklist|plist_nm||||
+md_picklist|plist_val||||
+md_rtc|content_map_doc||||
+md_rtc|occurrence_id|||TS|md_occurrence (occurrence_id)
+md_rtc|occurrence_no||||
+md_rtc|rtc_dttm||||
+md_rtc|rtc_id|TS|TS||
+md_rtc|segment_id|||TS|md_segment (segment_id)
+md_rtc|segment_version_id||||
+md_rtc|task_id|||TS|md_task (task_id)
+md_rtc|task_version_id||||
+md_segment|business_context_id|||TS|md_business_context (business_context_id)
+md_segment|created_user_nm||||
+md_segment|folder_path_nm||||
+md_segment|last_published_dttm||||
+md_segment|owner_nm||||
+md_segment|segment_category_nm||||
+md_segment|segment_cd||||
+md_segment|segment_desc||||
+md_segment|segment_id||||
+md_segment|segment_map_id|||TS|md_segment_map (segment_map_id)
+md_segment|segment_nm||||
+md_segment|segment_src_cd||||
+md_segment|segment_status_cd||||
+md_segment|segment_version_id|TS|TS||
+md_segment|valid_from_dttm||||
+md_segment|valid_to_dttm||||
+md_segment_custom_prop|property_datatype_cd|TS|TS||
+md_segment_custom_prop|property_nm|TS|TS||
+md_segment_custom_prop|property_val|TS|TS||
+md_segment_custom_prop|segment_id|||TS|md_segment (segment_id)
+md_segment_custom_prop|segment_status_cd||||
+md_segment_custom_prop|segment_version_id|TS|TS||
+md_segment_custom_prop|valid_from_dttm||||
+md_segment_custom_prop|valid_to_dttm||||
+md_segment_map|business_context_id||||
+md_segment_map|created_user_nm||||
+md_segment_map|folder_path_nm||||
+md_segment_map|last_published_dttm||||
+md_segment_map|owner_nm||||
+md_segment_map|rec_scheduled_end_dttm|||TS|md_business_context (business_context_id)
+md_segment_map|rec_scheduled_start_dttm||||
+md_segment_map|rec_scheduled_start_tm||||
+md_segment_map|recurrence_day_of_month_no||||
+md_segment_map|recurrence_day_of_week_txt||||
+md_segment_map|recurrence_day_of_wk_ordinal_no||||
+md_segment_map|recurrence_days_of_week_txt||||
+md_segment_map|recurrence_frequency_cd||||
+md_segment_map|recurrence_monthly_type_nm||||
+md_segment_map|scheduled_end_dttm||||
+md_segment_map|scheduled_flg||||
+md_segment_map|scheduled_start_dttm||||
+md_segment_map|segment_map_category_nm||||
+md_segment_map|segment_map_cd||||
+md_segment_map|segment_map_desc||||
+md_segment_map|segment_map_id||||
+md_segment_map|segment_map_nm||||
+md_segment_map|segment_map_src_cd||||
+md_segment_map|segment_map_status_cd||||
+md_segment_map|segment_map_version_id|TS|TS||
+md_segment_map|valid_from_dttm||||
+md_segment_map|valid_to_dttm||||
+md_segment_map_custom_prop|property_datatype_cd|TS|TS||
+md_segment_map_custom_prop|property_nm|TS|TS||
+md_segment_map_custom_prop|property_val|TS|TS||
+md_segment_map_custom_prop|segment_map_id|||TS|md_segment_map (segment_map_id)
+md_segment_map_custom_prop|segment_map_status_cd||||
+md_segment_map_custom_prop|segment_map_version_id|TS|TS||
+md_segment_map_custom_prop|valid_from_dttm||||
+md_segment_map_custom_prop|valid_to_dttm||||
+md_segment_map_x_segment|segment_id|||TS|md_segment (segment_id)
+md_segment_map_x_segment|segment_map_id|||TS|md_segment_map (segment_map_id)
+md_segment_map_x_segment|segment_map_status_cd||||
+md_segment_map_x_segment|segment_map_version_id|TS|TS||
+md_segment_map_x_segment|segment_version_id|TS|TS||
+md_segment_test|stratified_samp_criteria_txt||||
+md_segment_test|stratified_sampling_flg||||
+md_segment_test|task_id||||
+md_segment_test|task_version_id|TS|TS|TS|md_task (task_version_id)
+md_segment_test|test_cd|TS|TS||
+md_segment_test|test_cnt||||
+md_segment_test|test_enabled_flg||||
+md_segment_test|test_nm||||
+md_segment_test|test_pct||||
+md_segment_test|test_sizing_type_nm||||
+md_segment_test|test_type_nm||||
+md_segment_test_x_segment|segment_id|TS|TS|TS|md_segment (segment_id)
+md_segment_test_x_segment|task_id||||
+md_segment_test_x_segment|task_version_id|TS|TS||
+md_segment_test_x_segment|test_cd|TS|TS||
+md_segment_x_event|event_id|TS|TS|TS|md_event (event_id)
+md_segment_x_event|segment_id|||TS|md_segment (segment_id)
+md_segment_x_event|segment_status_cd||||
+md_segment_x_event|segment_version_id|TS|TS||
+md_spot|channel_nm||||
+md_spot|created_user_nm||||
+md_spot|dimension_label_txt||||
+md_spot|height_width_ratio_val_txt||||
+md_spot|last_published_dttm||||
+md_spot|multi_page_flg||||
+md_spot|owner_nm||||
+md_spot|spot_desc||||
+md_spot|spot_height_val_no||||
+md_spot|spot_id||||
+md_spot|spot_nm||||
+md_spot|spot_status_cd||||
+md_spot|spot_type_nm||||
+md_spot|spot_version_id|TS|TS||
+md_spot|spot_width_val_no||||
+md_spot|valid_from_dttm||||
+md_spot|valid_to_dttm||||
+md_target_assist|last_modified_dttm||||
+md_target_assist|model_available_dttm||||
+md_target_assist|percent_target_population_size||||
+md_target_assist|task_id|TS|TS||
+md_target_assist|threshold_type_nm||||
+md_target_assist|use_targeting_flg||||
+md_task|activity_flg||||
+md_task|arbitration_method_cd||||
+md_task|business_context_id|||TS|md_business_context (business_context_id)
+md_task|channel_nm||||
+md_task|control_group_action_nm||||
+md_task|created_user_nm||||
+md_task|delivery_config_type_nm||||
+md_task|display_priority_no||||
+md_task|export_template_flg||||
+md_task|folder_path_nm||||
+md_task|impressions_life_time_cnt||||
+md_task|impressions_per_session_cnt||||
+md_task|impressions_qty_period_cnt||||
+md_task|last_published_dttm||||
+md_task|limit_period_unit_cnt||||
+md_task|maximum_period_expression_cnt||||
+md_task|mobile_app_id||||
+md_task|mobile_app_nm||||
+md_task|model_start_dttm||||
+md_task|owner_nm||||
+md_task|period_type_nm||||
+md_task|rec_scheduled_end_dttm||||
+md_task|rec_scheduled_start_dttm||||
+md_task|rec_scheduled_start_tm||||
+md_task|recurrence_day_of_month_no||||
+md_task|recurrence_day_of_week_txt||||
+md_task|recurrence_day_of_wk_ordinal_no||||
+md_task|recurrence_days_of_week_txt||||
+md_task|recurrence_frequency_cd||||
+md_task|recurrence_monthly_type_nm||||
+md_task|recurring_schedule_flg||||
+md_task|rtdm_flg||||
+md_task|scheduled_end_dttm||||
+md_task|scheduled_flg||||
+md_task|scheduled_start_dttm||||
+md_task|segment_tests_flg||||
+md_task|send_notification_locale_cd||||
+md_task|stratified_sampling_action_nm||||
+md_task|subject_line_txt||||
+md_task|task_category_nm||||
+md_task|task_cd||||
+md_task|task_delivery_type_nm||||
+md_task|task_desc||||
+md_task|task_id||||
+md_task|task_nm||||
+md_task|task_status_cd||||
+md_task|task_subtype_nm||||
+md_task|task_type_nm||||
+md_task|task_version_id|TS|TS||
+md_task|template_id||||
+md_task|test_duration||||
+md_task|use_modeling_flg||||
+md_task|valid_from_dttm||||
+md_task|valid_to_dttm||||
+md_task_custom_prop|property_datatype_nm|TS|TS||
+md_task_custom_prop|property_nm|TS|TS||
+md_task_custom_prop|property_val|TS|TS||
+md_task_custom_prop|task_id|||TS|md_task (task_id)
+md_task_custom_prop|task_status_cd||||
+md_task_custom_prop|task_version_id|TS|TS||
+md_task_custom_prop|valid_from_dttm||||
+md_task_custom_prop|valid_to_dttm||||
+md_task_x_audience|audience_id|TS|TS||
+md_task_x_audience|task_id|TS|TS||
+md_task_x_creative|arbitration_method_cd||||
+md_task_x_creative|arbitration_method_val||||
+md_task_x_creative|creative_id|TS|TS|TS|md_creative (creative_id)
+md_task_x_creative|spot_id|TS|TS||
+md_task_x_creative|task_id|||TS|md_task (task_id)
+md_task_x_creative|task_status_cd||||
+md_task_x_creative|task_version_id|TS|TS||
+md_task_x_creative|variant_id||||
+md_task_x_creative|variant_nm||||
+md_task_x_dataview|dataview_id|TS|TS|TS|md_dataview (dataview_id)
+md_task_x_dataview|primary_metric_flg||||
+md_task_x_dataview|secondary_metric_flg||||
+md_task_x_dataview|targeting_flg||||
+md_task_x_dataview|task_id|||TS|md_task (task_id)
+md_task_x_dataview|task_status_cd||||
+md_task_x_dataview|task_version_id|TS|TS||
+md_task_x_event|event_id|TS|TS|TS|md_event (event_id)
+md_task_x_event|primary_metric_flg||||
+md_task_x_event|secondary_metric_flg||||
+md_task_x_event|targeting_flg||||
+md_task_x_event|task_id|||TS|md_task (task_id)
+md_task_x_event|task_status_cd||||
+md_task_x_event|task_version_id|TS|TS||
+md_task_x_message|message_id|TS|TS|TS|md_message (message_id)
+md_task_x_message|task_id|||TS|md_task (task_id)
+md_task_x_message|task_status_cd||||
+md_task_x_message|task_version_id|TS|TS||
+md_task_x_segment|segment_id|TS|TS|TS|md_segment (segment_id)
+md_task_x_segment|task_id|||TS|md_task (task_id)
+md_task_x_segment|task_status_cd||||
+md_task_x_segment|task_version_id|TS|TS||
+md_task_x_spot|spot_id|TS|TS|TS|md_spot (spot_id)
+md_task_x_spot|task_id|||TS|md_task (task_id)
+md_task_x_spot|task_status_cd||||
+md_task_x_spot|task_version_id|TS|TS||
+md_task_x_variant|analysis_group_id|TS|TS||
+md_task_x_variant|task_id|||TS|md_task (task_id)
+md_task_x_variant|task_status_cd||||
+md_task_x_variant|task_version_id|TS|TS||
+md_task_x_variant|variant_nm||||
+md_task_x_variant|variant_source_nm||||
+md_task_x_variant|variant_type_nm||||
+md_task_x_variant|variant_val||||
+md_vendor|created_by_usernm||||
+md_vendor|created_dttm||||
+md_vendor|is_obsolete_flg||||
+md_vendor|last_modified_dttm||||
+md_vendor|last_modified_usernm||||
+md_vendor|load_dttm||||
+md_vendor|owner_usernm||||
+md_vendor|vendor_currency_cd||||
+md_vendor|vendor_desc||||
+md_vendor|vendor_id|TS|TS||
+md_vendor|vendor_nm||||
+md_vendor|vendor_number||||
+md_wf_process_def|associated_object_type||||
+md_wf_process_def|buildin_template_flg||||
+md_wf_process_def|created_by_usernm||||
+md_wf_process_def|created_dttm||||
+md_wf_process_def|default_approval_flg||||
+md_wf_process_def|engine_pdef_id|TS|TS||
+md_wf_process_def|engine_pdef_key||||
+md_wf_process_def|file_tobecatlgd_flg||||
+md_wf_process_def|last_modified_dttm||||
+md_wf_process_def|last_modified_usernm||||
+md_wf_process_def|latest_version_flg||||
+md_wf_process_def|load_dttm||||
+md_wf_process_def|owner_usernm||||
+md_wf_process_def|pdef_desc||||
+md_wf_process_def|pdef_id|TS|TS||
+md_wf_process_def|pdef_nm||||
+md_wf_process_def|pdef_state||||
+md_wf_process_def|pdef_type||||
+md_wf_process_def|version_num||||
+md_wf_process_def_attr_grp|attr_group_id|TS|TS||
+md_wf_process_def_attr_grp|load_dttm||||
+md_wf_process_def_attr_grp|pdef_id|TS|TS|TS|md_wf_process_def (pdef_id)
+md_wf_process_def_categories|category_id|TS|TS||
+md_wf_process_def_categories|category_type||||
+md_wf_process_def_categories|default_category_flg||||
+md_wf_process_def_categories|load_dttm||||
+md_wf_process_def_categories|pdef_id|TS|TS|TS|md_wf_process_def (pdef_id)
+md_wf_process_def_task_assg|assignee_duration||||
+md_wf_process_def_task_assg|assignee_id|TS|TS||
+md_wf_process_def_task_assg|assignee_instruction||||
+md_wf_process_def_task_assg|assignee_type|TS|TS||
+md_wf_process_def_task_assg|load_dttm||||
+md_wf_process_def_task_assg|pdef_id|TS|TS|TS|md_wf_process_def (pdef_id)
+md_wf_process_def_task_assg|task_id|TS|TS|TS|md_task (task_id)
+md_wf_process_def_tasks|assignee_type||||
+md_wf_process_def_tasks|ciobject_enabled_flg||||
+md_wf_process_def_tasks|comment_enabled_flg||||
+md_wf_process_def_tasks|comment_mandatory_flg||||
+md_wf_process_def_tasks|default_duration_perassignee||||
+md_wf_process_def_tasks|file_enabled_flg||||
+md_wf_process_def_tasks|file_mandatory_flg||||
+md_wf_process_def_tasks|is_sequential_flg||||
+md_wf_process_def_tasks|item_approval_state||||
+md_wf_process_def_tasks|load_dttm||||
+md_wf_process_def_tasks|multiple_asgnsuprt_flg||||
+md_wf_process_def_tasks|outgoing_flow_flg||||
+md_wf_process_def_tasks|pdef_id|TS|TS|TS|md_wf_process_def (pdef_id)
+md_wf_process_def_tasks|predecessor_task_id||||
+md_wf_process_def_tasks|res_mandatory_flg||||
+md_wf_process_def_tasks|resp_enabled_flg||||
+md_wf_process_def_tasks|resp_file_enabled_flg||||
+md_wf_process_def_tasks|show_sourceitemlink_flg||||
+md_wf_process_def_tasks|show_workflowlink_flg||||
+md_wf_process_def_tasks|source_item_field||||
+md_wf_process_def_tasks|task_desc||||
+md_wf_process_def_tasks|task_id|TS|TS|TS|md_task (task_id)
+md_wf_process_def_tasks|task_instruction||||
+md_wf_process_def_tasks|task_nm||||
+md_wf_process_def_tasks|task_subtype||||
+md_wf_process_def_tasks|task_type||||
+md_wf_process_def_tasks|url_enabled_flg||||
+media_activity_details|action||||
+media_activity_details|action_dttm|TS|TS||
+media_activity_details|action_dttm_tz||||
+media_activity_details|detail_id|TS|TS|TS|page_details (detail_id)
+media_activity_details|detail_id_hex|||TS|page_details (detail_id_hex)
+media_activity_details|load_dttm||||
+media_activity_details|media_nm|TS|TS||
+media_activity_details|media_uri_txt||||
+media_activity_details|playhead_position||||
+media_details|detail_id|TS|TS|TS|page_details (detail_id)
+media_details|detail_id_hex|||TS|page_details (detail_id_hex)
+media_details|event_key_cd||||
+media_details|identity_id|||TS|identity_attributes (identity_id)
+media_details|load_dttm||||
+media_details|media_duration_secs||||
+media_details|media_nm|TS|TS||
+media_details|media_player_nm||||
+media_details|media_player_version_txt||||
+media_details|media_uri_txt||||
+media_details|play_start_dttm|TS|TS||
+media_details|play_start_dttm_tz||||
+media_details|session_id|||TS|session_details (session_id)
+media_details|session_id_hex|||TS|session_details (session_id_hex)
+media_details|visit_id|||TS|visit_details (visit_id)
+media_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+media_details_ext|detail_id|TS|TS|TS|page_details (detail_id)
+media_details_ext|detail_id_hex|||TS|page_details (detail_id_hex)
+media_details_ext|end_tm||||
+media_details_ext|exit_point_secs||||
+media_details_ext|interaction_cnt||||
+media_details_ext|load_dttm||||
+media_details_ext|max_play_secs||||
+media_details_ext|media_display_duration_secs||||
+media_details_ext|media_nm|TS|TS||
+media_details_ext|media_uri_txt||||
+media_details_ext|play_end_dttm|TS|TS||
+media_details_ext|play_end_dttm_tz||||
+media_details_ext|start_tm||||
+media_details_ext|view_duration_secs||||
+mobile_focus_defocus|action_dttm||||
+mobile_focus_defocus|action_dttm_tz||||
+mobile_focus_defocus|channel_user_id||||
+mobile_focus_defocus|detail_id_hex|||TS|page_details (detail_id_hex)
+mobile_focus_defocus|event_designed_id|||TS|md_event (event_id)
+mobile_focus_defocus|event_id|TS|TS||
+mobile_focus_defocus|event_nm||||
+mobile_focus_defocus|identity_id|||TS|identity_attributes (identity_id)
+mobile_focus_defocus|load_dttm||||
+mobile_focus_defocus|mobile_app_id||||
+mobile_focus_defocus|reserved_1_txt||||
+mobile_focus_defocus|session_id_hex|||TS|session_details (session_id_hex)
+mobile_focus_defocus|visit_id_hex|||TS|visit_details (visit_id_hex)
+mobile_spots|action_dttm||||
+mobile_spots|action_dttm_tz||||
+mobile_spots|channel_user_id||||
+mobile_spots|context_type_nm||||
+mobile_spots|context_val||||
+mobile_spots|creative_id|||TS|md_creative (creative_id)
+mobile_spots|detail_id_hex|||TS|page_details (detail_id_hex)
+mobile_spots|event_designed_id|||TS|md_event (event_id)
+mobile_spots|event_id|TS|TS||
+mobile_spots|event_nm||||
+mobile_spots|identity_id|||TS|identity_attributes (identity_id)
+mobile_spots|load_dttm||||
+mobile_spots|mobile_app_id||||
+mobile_spots|session_id_hex|||TS|session_details (session_id_hex)
+mobile_spots|spot_id|||TS|md_spot (spot_id)
+mobile_spots|visit_id_hex|||TS|visit_details (visit_id_hex)
+monthly_usage|admin_user_cnt||||
+monthly_usage|api_usage_str||||
+monthly_usage|asset_size||||
+monthly_usage|audience_usage_cnt||||
+monthly_usage|bc_subjcnt_str||||
+monthly_usage|db_size||||
+monthly_usage|email_preview_cnt||||
+monthly_usage|email_send_cnt||||
+monthly_usage|event_month|TS|TS||
+monthly_usage|facebook_ads_cnt||||
+monthly_usage|google_ads_cnt||||
+monthly_usage|linkedin_ads_cnt||||
+monthly_usage|mob_impr_cnt||||
+monthly_usage|mob_sesn_cnt||||
+monthly_usage|mobile_in_app_msg_cnt||||
+monthly_usage|mobile_push_cnt||||
+monthly_usage|outbound_api_cnt||||
+monthly_usage|plan_users_cnt||||
+monthly_usage|web_impr_cnt||||
+monthly_usage|web_sesn_cnt||||
+notification_failed|aud_occurrence_id||||
+notification_failed|audience_id||||
+notification_failed|channel_nm||||
+notification_failed|channel_user_id||||
+notification_failed|context_type_nm||||
+notification_failed|context_val||||
+notification_failed|creative_id|||TS|md_creative (creative_id)
+notification_failed|creative_version_id||||
+notification_failed|error_cd||||
+notification_failed|error_message_txt||||
+notification_failed|event_designed_id|||TS|md_event (event_id)
+notification_failed|event_id|TS|TS||
+notification_failed|event_nm||||
+notification_failed|identity_id|||TS|identity_attributes (identity_id)
+notification_failed|load_dttm||||
+notification_failed|message_id||||
+notification_failed|message_version_id||||
+notification_failed|mobile_app_id||||
+notification_failed|notification_failed_dttm||||
+notification_failed|notification_failed_dttm_tz||||
+notification_failed|occurrence_id|||TS|md_occurrence (occurrence_id)
+notification_failed|properties_map_doc||||
+notification_failed|reserved_1_txt||||
+notification_failed|reserved_2_txt||||
+notification_failed|response_tracking_cd||||
+notification_failed|segment_id||||
+notification_failed|segment_version_id||||
+notification_failed|spot_id|||TS|md_spot (spot_id)
+notification_failed|task_id|||TS|md_task (task_id)
+notification_failed|task_version_id||||
+notification_opened|aud_occurrence_id||||
+notification_opened|audience_id||||
+notification_opened|channel_nm||||
+notification_opened|channel_user_id||||
+notification_opened|context_type_nm||||
+notification_opened|context_val||||
+notification_opened|creative_id|||TS|md_creative (creative_id)
+notification_opened|creative_version_id||||
+notification_opened|event_designed_id|||TS|md_event (event_id)
+notification_opened|event_id|TS|TS||
+notification_opened|event_nm||||
+notification_opened|identity_id|||TS|identity_attributes (identity_id)
+notification_opened|load_dttm||||
+notification_opened|message_id||||
+notification_opened|message_version_id||||
+notification_opened|mobile_app_id||||
+notification_opened|notification_opened_dttm||||
+notification_opened|notification_opened_dttm_tz||||
+notification_opened|occurrence_id|||TS|md_occurrence (occurrence_id)
+notification_opened|properties_map_doc||||
+notification_opened|reserved_1_txt||||
+notification_opened|reserved_2_txt||||
+notification_opened|reserved_3_txt||||
+notification_opened|response_tracking_cd||||
+notification_opened|segment_id||||
+notification_opened|segment_version_id||||
+notification_opened|spot_id|||TS|md_spot (spot_id)
+notification_opened|task_id|||TS|md_task (task_id)
+notification_opened|task_version_id||||
+notification_send|aud_occurrence_id||||
+notification_send|audience_id||||
+notification_send|channel_nm||||
+notification_send|channel_user_id||||
+notification_send|context_type_nm||||
+notification_send|context_val||||
+notification_send|creative_id|||TS|md_creative (creative_id)
+notification_send|creative_version_id||||
+notification_send|event_designed_id|||TS|md_event (event_id)
+notification_send|event_id|TS|TS||
+notification_send|event_nm||||
+notification_send|identity_id|||TS|identity_attributes (identity_id)
+notification_send|load_dttm||||
+notification_send|message_id||||
+notification_send|message_version_id||||
+notification_send|mobile_app_id||||
+notification_send|notification_send_dttm||||
+notification_send|notification_send_dttm_tz||||
+notification_send|occurrence_id|||TS|md_occurrence (occurrence_id)
+notification_send|properties_map_doc||||
+notification_send|reserved_1_txt||||
+notification_send|reserved_2_txt||||
+notification_send|response_tracking_cd||||
+notification_send|segment_id||||
+notification_send|segment_version_id||||
+notification_send|spot_id|||TS|md_spot (spot_id)
+notification_send|task_id|||TS|md_task (task_id)
+notification_send|task_version_id||||
+notification_targeting_request|aud_occurrence_id||||
+notification_targeting_request|audience_id||||
+notification_targeting_request|channel_nm||||
+notification_targeting_request|channel_user_id||||
+notification_targeting_request|context_type_nm||||
+notification_targeting_request|context_val||||
+notification_targeting_request|eligibility_flg||||
+notification_targeting_request|event_designed_id|||TS|md_event (event_id)
+notification_targeting_request|event_id|TS|TS||
+notification_targeting_request|event_nm||||
+notification_targeting_request|identity_id|||TS|identity_attributes (identity_id)
+notification_targeting_request|load_dttm||||
+notification_targeting_request|mobile_app_id||||
+notification_targeting_request|notification_tgt_req_dttm||||
+notification_targeting_request|notification_tgt_req_dttm_tz||||
+order_details|activity_dttm||||
+order_details|activity_dttm_tz||||
+order_details|availability_message_txt||||
+order_details|cart_id||||
+order_details|cart_nm||||
+order_details|channel_nm||||
+order_details|currency_cd||||
+order_details|detail_id|TS|TS|TS|page_details (detail_id)
+order_details|detail_id_hex|||TS|page_details (detail_id_hex)
+order_details|event_designed_id|TS|TS|TS|md_event (event_id)
+order_details|event_key_cd||||
+order_details|event_nm||||
+order_details|identity_id|||TS|identity_attributes (identity_id)
+order_details|load_dttm||||
+order_details|mobile_app_id||||
+order_details|order_id||||
+order_details|product_group_nm||||
+order_details|product_id|TS|TS||
+order_details|product_nm|TS|TS||
+order_details|product_sku|TS|TS||
+order_details|properties_map_doc||||
+order_details|quantity_amt||||
+order_details|record_type|TS|TS||
+order_details|reserved_1_txt||||
+order_details|saving_message_txt||||
+order_details|session_id|||TS|session_details (session_id)
+order_details|session_id_hex|||TS|session_details (session_id_hex)
+order_details|shipping_message_txt||||
+order_details|unit_price_amt||||
+order_details|visit_id|||TS|visit_details (visit_id)
+order_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+order_summary|activity_dttm||||
+order_summary|activity_dttm_tz||||
+order_summary|billing_city_nm||||
+order_summary|billing_country_nm||||
+order_summary|billing_postal_cd||||
+order_summary|billing_state_region_cd||||
+order_summary|cart_id||||
+order_summary|cart_nm||||
+order_summary|channel_nm||||
+order_summary|currency_cd||||
+order_summary|delivery_type_desc||||
+order_summary|detail_id|TS|TS|TS|page_details (detail_id)
+order_summary|detail_id_hex|||TS|page_details (detail_id_hex)
+order_summary|event_designed_id|TS|TS|TS|md_event (event_id)
+order_summary|event_key_cd||||
+order_summary|event_nm||||
+order_summary|identity_id|||TS|identity_attributes (identity_id)
+order_summary|load_dttm||||
+order_summary|mobile_app_id||||
+order_summary|order_id||||
+order_summary|payment_type_desc||||
+order_summary|properties_map_doc||||
+order_summary|record_type|TS|TS||
+order_summary|session_id|||TS|session_details (session_id)
+order_summary|session_id_hex|||TS|session_details (session_id_hex)
+order_summary|shipping_amt||||
+order_summary|shipping_city_nm||||
+order_summary|shipping_country_nm||||
+order_summary|shipping_postal_cd||||
+order_summary|shipping_state_region_cd||||
+order_summary|total_price_amt||||
+order_summary|total_tax_amt||||
+order_summary|total_unit_qty||||
+order_summary|visit_id|||TS|visit_details (visit_id)
+order_summary|visit_id_hex|||TS|visit_details (visit_id_hex)
+outbound_system|aud_occurrence_id||||
+outbound_system|audience_id||||
+outbound_system|channel_nm||||
+outbound_system|channel_user_id||||
+outbound_system|context_type_nm||||
+outbound_system|context_val||||
+outbound_system|creative_id|||TS|md_creative (creative_id)
+outbound_system|creative_version_id||||
+outbound_system|detail_id_hex|||TS|page_details (detail_id_hex)
+outbound_system|event_designed_id|||TS|md_event (event_id)
+outbound_system|event_id|TS|TS||
+outbound_system|event_nm||||
+outbound_system|identity_id|||TS|identity_attributes (identity_id)
+outbound_system|load_dttm||||
+outbound_system|message_id||||
+outbound_system|message_version_id||||
+outbound_system|mobile_app_id||||
+outbound_system|occurrence_id|||TS|md_occurrence (occurrence_id)
+outbound_system|outbound_system_dttm||||
+outbound_system|outbound_system_dttm_tz||||
+outbound_system|parent_event_id|||TS|md_event (event_id)
+outbound_system|properties_map_doc||||
+outbound_system|reserved_1_txt||||
+outbound_system|reserved_2_txt||||
+outbound_system|response_tracking_cd||||
+outbound_system|segment_id||||
+outbound_system|segment_version_id||||
+outbound_system|session_id_hex|||TS|session_details (session_id_hex)
+outbound_system|spot_id|||TS|md_spot (spot_id)
+outbound_system|task_id|||TS|md_task (task_id)
+outbound_system|task_version_id||||
+outbound_system|visit_id_hex|||TS|visit_details (visit_id_hex)
+page_details|bytes_sent_cnt||||
+page_details|channel_nm||||
+page_details|class10_id||||
+page_details|class11_id||||
+page_details|class12_id||||
+page_details|class13_id||||
+page_details|class14_id||||
+page_details|class15_id||||
+page_details|class1_id||||
+page_details|class2_id||||
+page_details|class3_id||||
+page_details|class4_id||||
+page_details|class5_id||||
+page_details|class6_id||||
+page_details|class7_id||||
+page_details|class8_id||||
+page_details|class9_id||||
+page_details|detail_dttm||||
+page_details|detail_dttm_tz||||
+page_details|detail_id|TS|TS||
+page_details|detail_id_hex||||
+page_details|domain_nm||||
+page_details|event_key_cd||||
+page_details|identity_id|||TS|identity_attributes (identity_id)
+page_details|load_dttm||||
+page_details|mobile_app_id||||
+page_details|page_complete_sec_cnt||||
+page_details|page_desc||||
+page_details|page_load_sec_cnt||||
+page_details|page_url_txt||||
+page_details|protocol_nm||||
+page_details|referrer_url_txt||||
+page_details|session_dt||||
+page_details|session_dt_tz||||
+page_details|session_id|||TS|session_details (session_id)
+page_details|session_id_hex|||TS|session_details (session_id_hex)
+page_details|url_domain||||
+page_details|visit_id|||TS|visit_details (visit_id)
+page_details|visit_id_hex|||TS|visit_details (visit_id_hex)
+page_details|window_size_txt||||
+page_details_ext|active_sec_spent_on_page_cnt||||
+page_details_ext|detail_id|TS|TS|TS|page_details (detail_id)
+page_details_ext|detail_id_hex|||TS|page_details (detail_id_hex)
+page_details_ext|load_dttm|TS|TS||
+page_details_ext|seconds_spent_on_page_cnt||||
+page_details_ext|session_id|TS|TS|TS|session_details (session_id)
+page_details_ext|session_id_hex|||TS|session_details (session_id_hex)
+page_errors|detail_id|TS|TS|TS|page_details (detail_id)
+page_errors|detail_id_hex|||TS|page_details (detail_id_hex)
+page_errors|error_location_txt|TS|TS||
+page_errors|identity_id|||TS|identity_attributes (identity_id)
+page_errors|in_page_error_dttm||||
+page_errors|in_page_error_dttm_tz||||
+page_errors|in_page_error_txt|TS|TS||
+page_errors|load_dttm||||
+page_errors|session_id|||TS|session_details (session_id)
+page_errors|session_id_hex|||TS|session_details (session_id_hex)
+page_errors|visit_id|||TS|visit_details (visit_id)
+page_errors|visit_id_hex|||TS|visit_details (visit_id_hex)
+planning_hierarchy_defn|created_by_usernm||||
+planning_hierarchy_defn|created_dttm||||
+planning_hierarchy_defn|hier_defn_desc||||
+planning_hierarchy_defn|hier_defn_id|TS|TS||
+planning_hierarchy_defn|hier_defn_nm||||
+planning_hierarchy_defn|hier_defn_subtype||||
+planning_hierarchy_defn|hier_defn_type||||
+planning_hierarchy_defn|last_modified_dttm||||
+planning_hierarchy_defn|last_modified_usernm||||
+planning_hierarchy_defn|level_desc||||
+planning_hierarchy_defn|level_nm|TS|TS||
+planning_hierarchy_defn|level_no|TS|TS||
+planning_hierarchy_defn|load_dttm||||
+planning_info|activity_desc||||
+planning_info|activity_id|||TS|md_activity (activity_id)
+planning_info|activity_nm||||
+planning_info|activity_status||||
+planning_info|all_msgs||||
+planning_info|alloc_budget||||
+planning_info|available_budget||||
+planning_info|bu_currency_cd||||
+planning_info|bu_desc||||
+planning_info|bu_id|||TS|planning_info (bu_id)
+planning_info|bu_nm||||
+planning_info|bu_obsolete_flg||||
+planning_info|category_nm||||
+planning_info|created_by_usernm||||
+planning_info|created_dttm||||
+planning_info|currency_cd||||
+planning_info|hier_defn_id|TS|TS|TS|planning_hierarchy_defn (hier_defn_id)
+planning_info|hier_defn_nodeid||||
+planning_info|last_modified_dttm||||
+planning_info|last_modified_usernm||||
+planning_info|lev10_nm||||
+planning_info|lev1_nm||||
+planning_info|lev2_nm||||
+planning_info|lev3_nm||||
+planning_info|lev4_nm||||
+planning_info|lev5_nm||||
+planning_info|lev6_nm||||
+planning_info|lev7_nm||||
+planning_info|lev8_nm||||
+planning_info|lev9_nm||||
+planning_info|load_dttm||||
+planning_info|parent_id||||
+planning_info|parent_nm||||
+planning_info|planned_end_dttm||||
+planning_info|planned_start_dttm||||
+planning_info|planning_desc||||
+planning_info|planning_id|TS|TS||
+planning_info|planning_item_path||||
+planning_info|planning_level_no||||
+planning_info|planning_level_type||||
+planning_info|planning_nm||||
+planning_info|planning_number||||
+planning_info|planning_owner_usernm||||
+planning_info|planning_status||||
+planning_info|planning_type||||
+planning_info|reserved_budget||||
+planning_info|reserved_budget_same_flg||||
+planning_info|rolledup_budget||||
+planning_info|task_channel||||
+planning_info|task_desc||||
+planning_info|task_id||||
+planning_info|task_nm||||
+planning_info|task_status||||
+planning_info|tot_cmtmnt_outstanding||||
+planning_info|tot_cmtmnt_overspent||||
+planning_info|tot_committed||||
+planning_info|tot_expenses||||
+planning_info|tot_invoiced||||
+planning_info|total_budget||||
+planning_info_custom_prop|attr_cd||||
+planning_info_custom_prop|attr_group_cd||||
+planning_info_custom_prop|attr_group_id|TS|TS||
+planning_info_custom_prop|attr_group_nm||||
+planning_info_custom_prop|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+planning_info_custom_prop|attr_nm||||
+planning_info_custom_prop|attr_val||||
+planning_info_custom_prop|created_by_usernm||||
+planning_info_custom_prop|created_dttm||||
+planning_info_custom_prop|data_formatter||||
+planning_info_custom_prop|data_type||||
+planning_info_custom_prop|is_grid_flg||||
+planning_info_custom_prop|is_obsolete_flg||||
+planning_info_custom_prop|last_modified_dttm||||
+planning_info_custom_prop|last_modified_usernm||||
+planning_info_custom_prop|load_dttm||||
+planning_info_custom_prop|planning_id|TS|TS|TS|planning_info (planning_id)
+planning_info_custom_prop|remote_pklist_tab_col||||
+product_views|action_dttm||||
+product_views|action_dttm_tz||||
+product_views|availability_message_txt||||
+product_views|channel_nm||||
+product_views|currency_cd||||
+product_views|detail_id|TS|TS|TS|page_details (detail_id)
+product_views|detail_id_hex|||TS|page_details (detail_id_hex)
+product_views|event_designed_id|||TS|md_event (event_id)
+product_views|event_key_cd||||
+product_views|event_nm||||
+product_views|identity_id|||TS|identity_attributes (identity_id)
+product_views|load_dttm||||
+product_views|mobile_app_id||||
+product_views|price_val||||
+product_views|product_group_nm||||
+product_views|product_id|TS|TS||
+product_views|product_nm|TS|TS||
+product_views|product_sku|TS|TS||
+product_views|properties_map_doc||||
+product_views|saving_message_txt||||
+product_views|session_id|||TS|session_details (session_id)
+product_views|session_id_hex|||TS|session_details (session_id_hex)
+product_views|shipping_message_txt||||
+product_views|visit_id|||TS|visit_details (visit_id)
+product_views|visit_id_hex|||TS|visit_details (visit_id_hex)
+promotion_displayed|channel_nm||||
+promotion_displayed|derived_display_flg||||
+promotion_displayed|detail_id|TS|TS|TS|page_details (detail_id)
+promotion_displayed|detail_id_hex|||TS|page_details (detail_id_hex)
+promotion_displayed|display_dttm|TS|TS||
+promotion_displayed|display_dttm_tz||||
+promotion_displayed|event_designed_id|||TS|md_event (event_id)
+promotion_displayed|event_key_cd||||
+promotion_displayed|event_nm||||
+promotion_displayed|identity_id|||TS|identity_attributes (identity_id)
+promotion_displayed|load_dttm||||
+promotion_displayed|mobile_app_id||||
+promotion_displayed|promotion_creative_nm||||
+promotion_displayed|promotion_nm|TS|TS||
+promotion_displayed|promotion_number||||
+promotion_displayed|promotion_placement_nm||||
+promotion_displayed|promotion_tracking_cd||||
+promotion_displayed|promotion_type_nm||||
+promotion_displayed|properties_map_doc||||
+promotion_displayed|session_id|||TS|session_details (session_id)
+promotion_displayed|session_id_hex|||TS|session_details (session_id_hex)
+promotion_displayed|visit_id|||TS|visit_details (visit_id)
+promotion_displayed|visit_id_hex|||TS|visit_details (visit_id_hex)
+promotion_used|channel_nm||||
+promotion_used|click_dttm|TS|TS||
+promotion_used|click_dttm_tz||||
+promotion_used|detail_id|TS|TS|TS|page_details (detail_id)
+promotion_used|detail_id_hex|||TS|page_details (detail_id_hex)
+promotion_used|event_designed_id|||TS|md_event (event_id)
+promotion_used|event_key_cd||||
+promotion_used|event_nm||||
+promotion_used|identity_id|||TS|identity_attributes (identity_id)
+promotion_used|load_dttm||||
+promotion_used|mobile_app_id||||
+promotion_used|promotion_creative_nm||||
+promotion_used|promotion_nm|TS|TS||
+promotion_used|promotion_number||||
+promotion_used|promotion_placement_nm||||
+promotion_used|promotion_tracking_cd||||
+promotion_used|promotion_type_nm||||
+promotion_used|properties_map_doc||||
+promotion_used|session_id|||TS|session_details (session_id)
+promotion_used|session_id_hex|||TS|session_details (session_id_hex)
+promotion_used|visit_id|||TS|visit_details (visit_id)
+promotion_used|visit_id_hex|||TS|visit_details (visit_id_hex)
+response_history|aud_occurrence_id||||
+response_history|audience_id||||
+response_history|context_type_nm||||
+response_history|context_val||||
+response_history|creative_id|||TS|md_creative (creative_id)
+response_history|detail_id_hex|||TS|page_details (detail_id_hex)
+response_history|event_designed_id|||TS|md_event (event_id)
+response_history|identity_id|||TS|identity_attributes (identity_id)
+response_history|load_dttm||||
+response_history|message_id|||TS|md_message (message_id)
+response_history|occurrence_id|||TS|md_occurrence (occurrence_id)
+response_history|parent_event_designed_id|||TS|md_event (event_id)
+response_history|properties_map_doc||||
+response_history|response_channel_nm||||
+response_history|response_dttm||||
+response_history|response_dttm_tz||||
+response_history|response_id|TS|TS||
+response_history|response_nm||||
+response_history|response_tracking_cd|||TS|md_rtc (rtc_id)
+response_history|session_id_hex|||TS|session_details (session_id_hex)
+response_history|task_id|||TS|md_task (task_id)
+response_history|task_version_id||||
+response_history|visit_id_hex|||TS|visit_details (visit_id_hex)
+search_results|channel_nm||||
+search_results|detail_id|TS|TS|TS|page_details (detail_id)
+search_results|detail_id_hex|||TS|page_details (detail_id_hex)
+search_results|event_designed_id|||TS|md_event (event_id)
+search_results|event_key_cd||||
+search_results|event_nm||||
+search_results|identity_id|||TS|identity_attributes (identity_id)
+search_results|load_dttm||||
+search_results|mobile_app_id||||
+search_results|properties_map_doc||||
+search_results|results_displayed_flg||||
+search_results|search_nm||||
+search_results|search_results_displayed||||
+search_results|search_results_dttm|TS|TS||
+search_results|search_results_dttm_tz||||
+search_results|search_results_sk|||TS|search_results_ext (search_results_sk)
+search_results|session_id|||TS|session_details (session_id)
+search_results|session_id_hex|||TS|session_details (session_id_hex)
+search_results|srch_field_id||||
+search_results|srch_field_name||||
+search_results|srch_phrase||||
+search_results|visit_id|||TS|visit_details (visit_id)
+search_results|visit_id_hex|||TS|visit_details (visit_id_hex)
+search_results_ext|event_designed_id|||TS|md_event (event_id)
+search_results_ext|load_dttm||||
+search_results_ext|search_results_displayed||||
+search_results_ext|search_results_sk|TS|TS||
+session_details|app_id||||
+session_details|app_version||||
+session_details|browser_nm||||
+session_details|browser_version_no||||
+session_details|carrier_name||||
+session_details|channel_nm||||
+session_details|city_nm||||
+session_details|client_session_start_dttm||||
+session_details|client_session_start_dttm_tz||||
+session_details|cookies_enabled_flg||||
+session_details|country_cd||||
+session_details|country_nm||||
+session_details|device_language||||
+session_details|device_nm||||
+session_details|device_type_nm||||
+session_details|flash_enabled_flg||||
+session_details|flash_version_no||||
+session_details|identity_id|||TS|identity_attributes (identity_id)
+session_details|ip_address||||
+session_details|is_portable_flag||||
+session_details|java_enabled_flg||||
+session_details|java_script_enabled_flg||||
+session_details|java_version_no||||
+session_details|latitude||||
+session_details|load_dttm||||
+session_details|longitude||||
+session_details|manufacturer||||
+session_details|metro_cd||||
+session_details|mobile_country_code||||
+session_details|network_code||||
+session_details|new_visitor_flg||||
+session_details|organization_nm||||
+session_details|platform_desc||||
+session_details|platform_type_nm||||
+session_details|platform_version||||
+session_details|postal_cd||||
+session_details|previous_session_id||||
+session_details|previous_session_id_hex||||
+session_details|profile_nm1||||
+session_details|profile_nm2||||
+session_details|profile_nm3||||
+session_details|profile_nm4||||
+session_details|profile_nm5||||
+session_details|region_nm||||
+session_details|screen_color_depth_no||||
+session_details|screen_size_txt||||
+session_details|sdk_version||||
+session_details|session_dt||||
+session_details|session_dt_tz||||
+session_details|session_id|TS|TS|TS|session_details_ext (session_id)
+session_details|session_id_hex|||TS|session_details_ext (session_id)
+session_details|session_start_dttm||||
+session_details|session_start_dttm_tz||||
+session_details|session_timeout||||
+session_details|state_region_cd||||
+session_details|user_agent_nm||||
+session_details|user_language_cd||||
+session_details|visitor_id||||
+session_details_ext|active_sec_spent_in_sessn_cnt||||
+session_details_ext|last_session_activity_dttm||||
+session_details_ext|last_session_activity_dttm_tz||||
+session_details_ext|load_dttm||||
+session_details_ext|seconds_spent_in_session_cnt||||
+session_details_ext|session_expiration_dttm||||
+session_details_ext|session_expiration_dttm_tz||||
+session_details_ext|session_id|TS|TS||
+session_details_ext|session_id_hex|TS|TS||
+spot_clicked|channel_nm||||
+spot_clicked|channel_user_id||||
+spot_clicked|context_type_nm||||
+spot_clicked|context_val||||
+spot_clicked|control_group_flg||||
+spot_clicked|creative_id|||TS|md_creative (creative_id)
+spot_clicked|creative_version_id||||
+spot_clicked|detail_id_hex|||TS|page_details (detail_id_hex)
+spot_clicked|event_designed_id|||TS|md_event (event_id)
+spot_clicked|event_id|TS|TS||
+spot_clicked|event_key_cd||||
+spot_clicked|event_nm||||
+spot_clicked|identity_id|||TS|identity_attributes (identity_id)
+spot_clicked|load_dttm||||
+spot_clicked|message_id||||
+spot_clicked|message_version_id||||
+spot_clicked|mobile_app_id||||
+spot_clicked|occurrence_id|||TS|md_occurrence (occurrence_id)
+spot_clicked|product_id||||
+spot_clicked|product_nm||||
+spot_clicked|product_qty_no||||
+spot_clicked|product_sku_no||||
+spot_clicked|properties_map_doc||||
+spot_clicked|rec_group_id||||
+spot_clicked|reserved_1_txt||||
+spot_clicked|reserved_2_txt||||
+spot_clicked|response_tracking_cd||||
+spot_clicked|segment_id||||
+spot_clicked|segment_version_id||||
+spot_clicked|session_id_hex|||TS|session_details (session_id_hex)
+spot_clicked|spot_clicked_dttm||||
+spot_clicked|spot_clicked_dttm_tz||||
+spot_clicked|spot_id|||TS|md_spot (spot_id)
+spot_clicked|task_id|||TS|md_task (task_id)
+spot_clicked|task_version_id||||
+spot_clicked|url_txt||||
+spot_clicked|visit_id_hex|||TS|visit_details (visit_id_hex)
+spot_requested|channel_nm||||
+spot_requested|channel_user_id||||
+spot_requested|context_type_nm||||
+spot_requested|context_val||||
+spot_requested|detail_id_hex|||TS|page_details (detail_id_hex)
+spot_requested|event_designed_id|||TS|md_event (event_id)
+spot_requested|event_id|TS|TS||
+spot_requested|event_nm||||
+spot_requested|identity_id|||TS|identity_attributes (identity_id)
+spot_requested|load_dttm||||
+spot_requested|mobile_app_id||||
+spot_requested|session_id_hex|||TS|session_details (session_id_hex)
+spot_requested|spot_id|||TS|md_spot (spot_id)
+spot_requested|spot_requested_dttm||||
+spot_requested|spot_requested_dttm_tz||||
+spot_requested|visit_id_hex|||TS|visit_details (visit_id_hex)
+tag_details|component_id|TS|TS||
+tag_details|component_type|TS|TS||
+tag_details|created_by_usernm||||
+tag_details|created_dttm||||
+tag_details|identity_cd||||
+tag_details|last_modified_dttm||||
+tag_details|last_modified_usernm||||
+tag_details|load_dttm||||
+tag_details|tag_desc||||
+tag_details|tag_id|TS|TS||
+tag_details|tag_nm||||
+tag_details|tag_owner_usernm||||
+visit_details|identity_id|||TS|identity_attributes (identity_id)
+visit_details|load_dttm||||
+visit_details|origination_creative_nm||||
+visit_details|origination_nm||||
+visit_details|origination_placement_nm||||
+visit_details|origination_tracking_cd||||
+visit_details|origination_type_nm||||
+visit_details|referrer_domain_nm||||
+visit_details|referrer_query_string_txt||||
+visit_details|referrer_txt||||
+visit_details|search_engine_desc||||
+visit_details|search_engine_domain_txt||||
+visit_details|search_term_txt||||
+visit_details|sequence_no||||
+visit_details|session_id|||TS|session_details (session_id)
+visit_details|session_id_hex|||TS|session_details (session_id_hex)
+visit_details|visit_dttm||||
+visit_details|visit_dttm_tz||||
+visit_details|visit_id|TS|TS||
+visit_details|visit_id_hex||||
+wf_process_details|business_info_id||||
+wf_process_details|business_info_nm||||
+wf_process_details|business_info_type||||
+wf_process_details|completed_dttm||||
+wf_process_details|created_by_usernm||||
+wf_process_details|created_dttm||||
+wf_process_details|delayed_by_day||||
+wf_process_details|deleted_by_usernm||||
+wf_process_details|deleted_dttm||||
+wf_process_details|indexed_dttm||||
+wf_process_details|last_modified_dttm||||
+wf_process_details|last_modified_usernm||||
+wf_process_details|load_dttm||||
+wf_process_details|modified_status_cd||||
+wf_process_details|pdef_id|TS|TS|TS|md_wf_process_def (pdef_id)
+wf_process_details|percent_complete||||
+wf_process_details|planned_end_dttm||||
+wf_process_details|process_category||||
+wf_process_details|process_comment||||
+wf_process_details|process_desc||||
+wf_process_details|process_id|TS|TS||
+wf_process_details|process_instance_version||||
+wf_process_details|process_nm||||
+wf_process_details|process_owner_usernm||||
+wf_process_details|process_status||||
+wf_process_details|process_type||||
+wf_process_details|projected_end_dttm||||
+wf_process_details|published_by_usernm||||
+wf_process_details|published_dttm||||
+wf_process_details|start_dttm||||
+wf_process_details|submitted_by_usernm||||
+wf_process_details|submitted_dttm||||
+wf_process_details|timeline_calculated_dttm||||
+wf_process_details|user_tasks_cnt||||
+wf_process_details_custom_prop|attr_cd||||
+wf_process_details_custom_prop|attr_group_cd||||
+wf_process_details_custom_prop|attr_group_id|TS|TS||
+wf_process_details_custom_prop|attr_group_nm||||
+wf_process_details_custom_prop|attr_id|TS|TS|TS|md_cust_attrib (attr_id)
+wf_process_details_custom_prop|attr_nm||||
+wf_process_details_custom_prop|attr_val||||
+wf_process_details_custom_prop|created_by_usernm||||
+wf_process_details_custom_prop|created_dttm||||
+wf_process_details_custom_prop|data_formatter||||
+wf_process_details_custom_prop|data_type||||
+wf_process_details_custom_prop|is_grid_flg||||
+wf_process_details_custom_prop|is_obsolete_flg||||
+wf_process_details_custom_prop|last_modified_dttm||||
+wf_process_details_custom_prop|last_modified_usernm||||
+wf_process_details_custom_prop|load_dttm||||
+wf_process_details_custom_prop|process_id|TS|TS|TS|wf_process_details (process_id)
+wf_process_details_custom_prop|remote_pklist_tab_col||||
+wf_process_tasks|approval_task_flg||||
+wf_process_tasks|cancelled_task_flg||||
+wf_process_tasks|completed_dttm||||
+wf_process_tasks|created_by_usernm||||
+wf_process_tasks|created_dttm||||
+wf_process_tasks|delayed_by_day||||
+wf_process_tasks|deleted_by_usernm||||
+wf_process_tasks|deleted_dttm||||
+wf_process_tasks|due_dttm||||
+wf_process_tasks|duration_per_assignee||||
+wf_process_tasks|engine_task_cancelled_dttm||||
+wf_process_tasks|engine_taskdef_id|TS|TS||
+wf_process_tasks|existobj_update_flg||||
+wf_process_tasks|first_usertask_flg||||
+wf_process_tasks|indexed_dttm||||
+wf_process_tasks|instance_version||||
+wf_process_tasks|is_sequential_flg||||
+wf_process_tasks|latest_flg||||
+wf_process_tasks|load_dttm||||
+wf_process_tasks|locally_updated_flg||||
+wf_process_tasks|modified_by_usernm||||
+wf_process_tasks|modified_dttm||||
+wf_process_tasks|modified_status_cd||||
+wf_process_tasks|multi_assig_suprt_flg||||
+wf_process_tasks|owner_usernm||||
+wf_process_tasks|percent_complete||||
+wf_process_tasks|process_id|TS|TS|TS|wf_process_details (process_id)
+wf_process_tasks|projected_end_dttm||||
+wf_process_tasks|projected_start_dttm||||
+wf_process_tasks|published_by_usernm||||
+wf_process_tasks|published_dttm||||
+wf_process_tasks|skip_peerupdate_scanning_flg||||
+wf_process_tasks|skip_update_scanning_flg||||
+wf_process_tasks|started_dttm||||
+wf_process_tasks|task_attachment||||
+wf_process_tasks|task_comment||||
+wf_process_tasks|task_desc||||
+wf_process_tasks|task_id|TS|TS|TS|md_task (task_id)
+wf_process_tasks|task_instruction||||
+wf_process_tasks|task_nm||||
+wf_process_tasks|task_status||||
+wf_process_tasks|task_subtype||||
+wf_process_tasks|task_type||||
+wf_process_tasks|version_num||||
+wf_tasks_user_assignment|activation_completed_flg||||
+wf_tasks_user_assignment|approval_status||||
+wf_tasks_user_assignment|assignee_id|||TS|wf_tasks_user_assignment (assignee_id)
+wf_tasks_user_assignment|assignee_type||||
+wf_tasks_user_assignment|completed_dttm||||
+wf_tasks_user_assignment|created_by_usernm||||
+wf_tasks_user_assignment|created_dttm||||
+wf_tasks_user_assignment|delayed_by_day||||
+wf_tasks_user_assignment|deleted_by_usernm||||
+wf_tasks_user_assignment|deleted_dttm||||
+wf_tasks_user_assignment|due_dttm||||
+wf_tasks_user_assignment|initiator_comment||||
+wf_tasks_user_assignment|instance_version||||
+wf_tasks_user_assignment|is_assigned_flg||||
+wf_tasks_user_assignment|is_latest_flg||||
+wf_tasks_user_assignment|is_replaced_flg||||
+wf_tasks_user_assignment|load_dttm||||
+wf_tasks_user_assignment|modified_by_usernm||||
+wf_tasks_user_assignment|modified_dttm||||
+wf_tasks_user_assignment|modified_status_cd||||
+wf_tasks_user_assignment|owner_usernm||||
+wf_tasks_user_assignment|process_id|TS|TS|TS|wf_process_details (process_id)
+wf_tasks_user_assignment|projected_end_dttm||||
+wf_tasks_user_assignment|projected_start_dttm||||
+wf_tasks_user_assignment|replacement_assignee_id||||
+wf_tasks_user_assignment|replacement_reason||||
+wf_tasks_user_assignment|replacement_userid||||
+wf_tasks_user_assignment|start_dttm||||
+wf_tasks_user_assignment|task_id|TS|TS|TS|md_task (task_id)
+wf_tasks_user_assignment|usan_comment||||
+wf_tasks_user_assignment|usan_desc||||
+wf_tasks_user_assignment|usan_duration_day||||
+wf_tasks_user_assignment|usan_instruction||||
+wf_tasks_user_assignment|usan_status||||
+wf_tasks_user_assignment|user_assignment_id|TS|TS||
+wf_tasks_user_assignment|user_id|TS|TS||
+wf_tasks_user_assignment|user_nm||||
