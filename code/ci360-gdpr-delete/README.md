@@ -6,7 +6,6 @@ The GDPR Remove Customer Cloud Data provides a custom script that deletes record
 
 ### Pre-requisites
 - Base SAS
-- Python for token generation
 - Database and libname credentials
 - CI360 gateway host and access point credentials
 - Table with records for deletion (i.e. **CI360_GDPR_DELETE** table) including rules on when to delete the records
