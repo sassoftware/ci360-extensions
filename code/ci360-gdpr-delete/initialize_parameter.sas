@@ -57,7 +57,7 @@ options mprint mlogic symbolgen;
 
 %check_tables_ddl;
 
-%let TokenGenMethod=python;
+%let TokenGenMethod=ds2;
 %let DSC_CONFIG_PATH = &IB_GDPR_DELETE_PATH./util;
 %let PYTHON_PATH = python;
 %gentoken;
