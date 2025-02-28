@@ -6,11 +6,10 @@
 	%let errFlag = 0;
 
 	/*%let code_file_path=&cdmcodes_path.&slash.mscode.sas;*/
-	%let code_file_path=&cdmcodes_path.&slash.mscode.sas;
+	%let code_file_path=&cdmcodes_path.&slash.&database..sas;
 	%let default_col_tst=;
 	%let timeZone=;
 	%let pk_col=;
-
 	data _null_;
 		length pk_col $ 32767; /* Ensure the length is sufficient */
 		retain pk_col ''; /* Retain ensures the value persists across iterations */
@@ -62,7 +61,7 @@
 			do;
 				if timeZone = '' then
 					timeZone = timeZone_col;
-				else timeZone = catx(',', timeZone, timeZone_col);
+				else timeZone = catx(';', timeZone, timeZone_col);
 			end;
 
 		/* Store the concatenated string in a macro variable at the end of data step */
@@ -75,6 +74,7 @@
 	run;
 
 	%put pk_col: &pk_col;
+	%put Time_Zone: &timeZone;
 
 	/*	%if &pk_col eq '' %then*/
 	/*		%do;*/
@@ -86,11 +86,12 @@
 	/*	%if errFlag eq 0 %then*/
 	/*		%do;*/
 	%put inside generate code  condtion;
-	filename mscode DISK "&code_file_path.";
+	filename %upcase(&database.) DISK "&code_file_path.";
 
 	data _null_;
-		file mscode mod;  /* Output the code to the file 'mscode' */
-		length staging_table $32;
+		file %upcase(&database.) mod;  /* Output the code to the file 'mscode' */
+		length staging_table $32 timeZone_value1 $4000;
+ 		timeZone_value1 = symget('timeZone'); 
 		/* Generate MSSQL code */
 		put '%if %sysfunc(exist(&udmmart..' %trim("&table_name") ') ) %then %do;';
 		put +1 '%let errFlag=0;';
@@ -104,9 +105,9 @@
 		put +1 'data &tmplib..' %trim("&staging_table") ';';
 		put +2 '   set work.' %trim("&table_name") ';';
 
-		if "&timeZone_coll" ne "" then
+		if "&timeZone" ne "" then
 			do;
-				put +2  %trim("&timeZone_coll")';';
+				put +2  %trim(%nrstr(timeZone_value1))';';
 			end;
 
 		if &col_hash_flag. eq 1 then
@@ -123,7 +124,7 @@
 		put +1 '%ErrCheck (Failed to Append Data to :'%trim("&staging_table") ', '%trim("&table_name")');';
 		put +1'%if &errFlag = 0 %then %do;';
 		put +4 'proc sql noerrorstop;';
-		put +4 'connect to SQLSVR (DATASRC=&dbsrc user=&dbuser password=&dbpass);';
+		put +4 'connect to SQLSVR (&sql_passthru_connection.);';
 		put +8 'execute (merge into &dbschema..' %trim("&table_name") ' using &tmpdbschema..' %trim("&staging_table");
 		
 		if &col_hash_flag. eq 1 then
@@ -188,7 +189,7 @@
 		put '%put------------------------------------------------------------------;';
 	run;
 
-	filename mscode;
+	filename %upcase(&database.);
 
 %mend create_mssql_code;
 

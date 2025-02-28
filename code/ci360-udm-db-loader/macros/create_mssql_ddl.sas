@@ -44,7 +44,7 @@ data _null_;
     PUT +1 'PROC SQL ;';
 
     /* Connect to SQL Server */
-    PUT+1 'connect to SQLSVR (DATASRC=&dbsrc user=&dbuser password=&dbpass);';       
+    PUT+1 'connect to SQLSVR (&sql_passthru_connection.);';       
 
     	
 	PUT+4 'EXECUTE (CREATE TABLE &dbschema..'%trim("&target_table_name") '(';

@@ -95,8 +95,8 @@
 
 		if timeZone_flg eq 'Y' then
 			do;
-				timeZone_col =  cat('if ', trim(column_name), ' ne . then ', trim(column_name),' = ',
-					"tzoneu2s(", trim(column_name), ",'", trim(%unquote(%nrbquote('&timeZone_Value.'))), "')");
+				timeZone_col =  cat('if ', trim(column_name), ' ne . then ', trim(column_name),' = ',"tzoneu2s(", trim(column_name), ",",trim(%nrstr('&timeZone_Value.')), ")");
+
 			end;
 
 		target_table=trim(table_name);
