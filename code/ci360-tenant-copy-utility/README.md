@@ -1,8 +1,8 @@
-# SAS CI 360 Tenant Promotion Utility
+# SAS CI 360 Copy Utility
 
 ## Overview
 
-The 360 Tenant Promotion utility helps in copying objects from one tenant to the other. This Python based utility implements the 360 Copy Item API and supports copying of the following objects across tenants:
+The 360 Copy utility helps in copying objects from one tenant to the other. This Python based utility implements the 360 Copy Item API and supports copying of the following objects across tenants:
  - Calculated data items
  - Creatives 
  - Direct marketing tasks
