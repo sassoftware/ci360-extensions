@@ -1,5 +1,6 @@
+
 /******************************************************************************/
-/* Copyright © 2025, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */
+/* Copyright © 2025, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved.*/
 /* SPDX-License-Identifier: Apache-2.0                                        */
 /* ****************************************************************************/
 
@@ -30,16 +31,20 @@
 %macro udmloader;
 %let errFlag=0;
 options mprint SPOOL ;
-%include "/userdata/dev/common/projects/UDMLoader/cdm-udmloader-sas/config/config.sas"; 
+%include "/userdata/udmloader/config/config.sas"; 
 
 /*%let sysparameter=&sysparm;*/
-%Let sysparameter=LOADDATA;
+%Let sysparameter=CREATEDDL;
 %put sysparm=%str(%upcase(&sysparameter)) ;
 %if  "&sysparameter." eq "GENERATEMETADATA" %then %generate_base_metadata_tbl;
 /*%else %if  "&sysparameter." = "UPDATEMETADATA" %then %upsert_metadata;*/
 %else %if  "&sysparameter." = "CREATEDDL" OR "&sysparameter." = "CREATEETLCODE" %then %generate_code;
 %else %if  "&sysparameter." = "EXECUTEDDL" %then %execute_ddl;
 %else %if  "&sysparameter." = "LOADDATA" %then %load_data;
+%else %if  "&sysparameter." = "CREATEUPGRADEDDL" %then %create_upgrade_ddl;
+%else %if  "&sysparameter." = "EXECUTEUPGRADEDDL" %then %do;
+	%include "&UtilityLocation.&slash.code&slash.mig_&database._udm_V&previous_schema_version._to_V&schema_version..sas";
+%end;
 %else %do;
 %put Inappropriate parameter; 
 %end;

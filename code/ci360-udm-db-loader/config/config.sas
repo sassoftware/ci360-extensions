@@ -3,7 +3,7 @@
 /* SPDX-License-Identifier: Apache-2.0                                        */
 /* ****************************************************************************/
 
-%global sysparm dbname HistoryFile CDM_ErrMsg timeZone_Value;
+%global sysparm dbname HistoryFile CDM_ErrMsg timeZone_Value dbconn;
 options notes;
 
 %let errFlag=0;
@@ -12,15 +12,16 @@ options notes;
 
 /*Tenant Configuration*/
 %let DSC_TENANT_ID=%str(XXXXXXXXXXXXXXXXX);
-%let DSC_SECRET_KEY=%str(XXXXXXXXXXXXXXXXXXXXXXXX);
+%let DSC_SECRET_KEY=%str(XXXXXXXXXXXXXXXXXXXXXXXXXXX);
 %let External_gateway=https://<external gateway host>/marketingGateway;
-%let SCHEMA_VERSION=16;
+%let SCHEMA_VERSION=17;
+%let previous_schema_version=16;
 
 
 
 /*Path Configurations - Start*/
-%let UtilityLocation=/userdata/mydir/UDMLoader; /* location where UDMLoader is placed */
-%let downloadutilitylocation=/userdata/mydir/sas-data-download ; /* location where ci360 data download utility is placed */
+%let UtilityLocation=/userdata/udmloader; /* location where UDMLoader is placed */
+%let downloadutilitylocation=/userdata//downloaddata ; /* location where ci360 data download utility is placed */
 %let cdmcodes_path=&UtilityLocation.&slash.code; /*path where Utility will generate DDL and ETL code and also pick up DDL/codes for execution*/ 
 %let cdmmartloc=&downloadutilitylocation.&slash.Data; /* Location where cdm-udm downloaded data is saved */
 /*Path configurations - End*/
@@ -64,12 +65,12 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 %let dbsrc=mydbsrc; /* Specifies the Microsoft SQL Server data source to which you want to connect*/
 %let dbschema=mydbschema; /* provide database schema detail */
 %let dbuser=mydbuser;/* lets you connect to database with a user ID.*/
-%let dbpass=mydbpass; /* specifies the database password that is associated with your user ID.*/
+%let dbpass=mydbpass!; /* specifies the database password that is associated with your user ID.*/
 %let dbpath=mydbpath;
 %let dbdns=mydbdns;
 
 /* Staging schema details */
-%let tmplib=&trglib.;
+%let tmplib=tempLib;
 %let tmpdbname=&dbname.;
 %let tmpdbsrc=&dbsrc.;
 %let tmpdbschema=&dbschema.;
@@ -80,9 +81,14 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 
 /* ------Parameters for MS SQL Server - End------*/
 
+/*------ Connection String for MSSQL and AZURE SQL -----*/
+%let sql_passthru_connection =%str(noprompt="uid=&dbuser;pwd=&dbpass;dsn=&dbdns;"); /* connection string for AZURE */
+/*%let sql_passthru_connection =%str(DATASRC=&dbsrc. user=&dbuser. pass=&dbpass.);*/ /* connection string for MSSQL */
+
+/*------ Connection String for MSSQL and AZURE SQL - End -----*/
 
 /*Common Configurations */
-%let timeZone_Value=AMERICA/NEW_YORK; /* Provide timezone specific value for convertion of datetime fields into target tables */
+%let timeZone_Value='AMERICA/NEW_YORK'; /* Provide timezone specific value for convertion of datetime fields into target tables */
 %let format=datetime27.6; /*Provide prefered date time format */
 %let udmmart=udmmart; /*provide library name for source data */
 %let ignore_duplicate_err=0 ; /* 0=stop on dupliate key; 1=ignore duplicates and continue processing. */
@@ -98,19 +104,19 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 
 /*Assignment of Libraries*/
 /*filename &urlListMap "&UtilityLocation.&slash.config&slash.urlDataList.map";*/
-libname &udmmart. "&downloadutilitylocation.&slash.data&slash.dscwh";
+libname &udmmart. "&downloadutilitylocation.&slash.dscwh";
 
 /*Oracle Libname */
 /*libname &tmplib. &tmpdbname. path=&tmpdbpath user=&tmpdbuser pass=&tmpdbpass;*/
 /*libname &trglib. &dbname. path=&dbpath user=&dbuser pass=&dbpass ;*/
 
 /*MSSQL Libname*/
-libname &tmplib. &tmpdbname. DATASRC=&tmpdbsrc schema=&tmpdbschema. user=&tmpdbuser pass=&tmpdbpass;
-libname &trglib.  &dbname. DATASRC=&dbsrc schema=&dbschema. user=&dbuser pass=&dbpass;
+/*libname &tmplib. &tmpdbname. DATASRC=&tmpdbsrc. user=&tmpdbuser. pass=&tmpdbpass.;*/
+/*libname &trglib.  &dbname. &sql_passthru_connection.;*/
 
 /*Azure Libname*/
-/*libname &tmplib. &tmpdbname. noprompt="uid=&tmpdbuser;schema=&tmpdbschema; pwd=&tmpdbpass;dsn=&tmpdbdns;" stringdates=yes;*/
-/*libname &trglib.  &dbname. noprompt="uid=&dbuser; schema=&dbschema.; pwd=&dbpass;dsn=&dbdns;";*/
+libname &tmplib. &tmpdbname. noprompt="uid=&tmpdbuser;schema=&tmpdbschema; pwd=&tmpdbpass;dsn=&tmpdbdns;";
+libname &trglib.  &dbname. &sql_passthru_connection.;
 /**/
 
 /*Postgres Libname*/

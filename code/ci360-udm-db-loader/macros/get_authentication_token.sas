@@ -14,7 +14,6 @@
 		encDigest=translate(put(input(digest,$hex64.),$base64x100.), "-_ ", "+/=");
 		token=catx(".", encHeader,encPayload,encDigest);
 		call symputx("DSC_AUTH_TOKEN",token,'G');
-    %put &DSC_AUTH_TOKEN ;
 	run;
 %mend;
 

@@ -13,10 +13,11 @@ OPTION SPOOL;
 		%let filenm=rdstcode;
 	%else %if %upcase("&database.") eq "DB2" %then
 		%let filenm=db2code;
-	%else %if %upcase("&database.") eq "AZURE" %then
-		%let filenm=azcode;
-	%else %if %upcase("&database.") eq "MSSQL" %then
+/*	%else %if %upcase("&database.") eq "AZURE" %then*/
+/*		%let filenm=azcode;*/
+	%else %if %upcase("&database.") eq "MSSQL" or %upcase("&database.") eq "AZURE" %then %do;
 		%let filenm=mscode;
+		%end;
 	%else %if %upcase("&database.") eq "GREENPLM" %then
 		%let filenm=grnpcode;
 	%else %if %upcase("&database.") eq "POSTGRES" %then
@@ -26,8 +27,7 @@ OPTION SPOOL;
 
 	%if  "&sysparameter." = "CREATEETLCODE" %then
 		%do;
-			%let code_file_path=&cdmcodes_path.&slash.&filenm..sas;
-
+			%let code_file_path=&cdmcodes_path.&slash.%upcase(&database.).sas;
 			%if %sysfunc(fileexist("&code_file_path.")) ge 1 %then
 				%do;
 					%let rc=%sysfunc(filename(temp,"&code_file_path."));
@@ -35,11 +35,11 @@ OPTION SPOOL;
 					%put Old Code file deleted...;
 				%end;
 
-			filename &filenm. DISK "&code_file_path.";
+			filename %upcase(&database.) DISK "&code_file_path.";
 
 			data _null_;
-				file &filenm. mod;
-				put '%macro execute_'%trim("&filenm.")'_code;';
+				file %upcase(&database.) mod;
+				put '%macro execute_'%trim("&database.")'_code;';
 			run;
 
 			filename _all_ list;
@@ -72,13 +72,13 @@ OPTION SPOOL;
 
 	%if  "&sysparameter." = "CREATEETLCODE" %then
 		%do;
-			filename &filenm. DISK "&cdmcodes_path.&slash.&filenm..sas";
+			filename %upcase(&database.) DISK "&code_file_path.";
 
 			data _null_;
-				file &filenm. mod;
-				put+1 '%mend execute_'%trim("&filenm.")'_code;';
+				file %upcase(&database.) mod;
+				put+1 '%mend execute_'%trim("&database.")'_code;';
 
-				put+1 '%execute_'%trim("&filenm.")'_code;';
+				put+1 '%execute_'%trim("&database.")'_code;';
 			run;
 
 		%end;

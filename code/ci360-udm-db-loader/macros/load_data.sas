@@ -5,7 +5,7 @@
 %macro load_data;
 
 	%if %upcase("&database.") eq "ORACLE" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.orclcode.sas";
+	%include "&UtilityLocation.&slash.code&slash.&database..sas";
 	%end;
 
 	%if %upcase("&database.") eq "TERADATA" %then %do;
@@ -24,13 +24,10 @@
 	%include "&UtilityLocation.&slash.code&slash.grnpcode.sas";
 	%end;
 
-	%if %upcase("&database.") eq "MSSQL" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.mscode.sas";
+	%if %upcase("&database.") eq "MSSQL" or %upcase("&database.") eq "AZURE" %then %do;
+	%include "&UtilityLocation.&slash.code&slash.&database..sas";
 	%end;
-	
-	%if %upcase("&database.") eq "AZURE" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.azcode.sas";
-	%end;
+
 	%if %upcase("&database.") eq "POSTGRES" %then %do;
 	%include "&UtilityLocation.&slash.code&slash.pstgcode.sas";
 	%end;

@@ -20,11 +20,8 @@
 	%if %upcase("&database.") eq "GREENPLM" %then %do;
 	%include "&UtilityLocation.&slash.code&slash.grnplddl.sas";
 	%end;
-	%if %upcase("&database.") eq "MSSQL" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.MSSQLDDL.sas";
-	%end;
-	%if %upcase("&database.") eq "AZURE" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.AZUREDDL.sas";
+	%if %upcase("&database.") eq "MSSQL" or %upcase("&database.") eq "AZURE" %then %do;
+	%include "&UtilityLocation.&slash.code&slash.&database.DDL.sas";
 	%end;
 	%if %upcase("&database.") eq "POSTGRES" %then %do;
 	%include "&UtilityLocation.&slash.code&slash.PSTGDDL.sas";
