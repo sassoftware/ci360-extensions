@@ -46,7 +46,6 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__SAS ESP CI360 Adapter__](code/esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
 - [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
-- [__Snowflake UDM Loader__](code/ci360-udm-loader-snowflake): CI360 UDM Loader for Snowflake automates the download of UDM data from Customer Intelligence 360 and then seemlessly loads this into Snowflake, utilizing SAS provided Python download client within a Docker container
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
 - [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
@@ -66,13 +65,14 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__API Helper for CI360__](code/ci360-api-helper): Interact with CI360 APIs using easy to use web based UI
 - [__CI360 API DS2 Utilities__](code/ci360-api-ds2-utilities): Utilities package for CI360 API interaction using DS2
 - [__Customer Data Upload for CI360__](code/ci360-customer-data-uploader): Upload customer data to CI360 cloud datahub table
+- [__Snowflake UDM Loader__](code/ci360-udm-loader-snowflake): CI360 UDM Loader for Snowflake automates the download of UDM data from Customer Intelligence 360 and then seemlessly loads this into Snowflake, utilizing SAS provided Python download client within a Docker container
 - [__CI360 GDPR Delete__](code/ci360-gdpr-delete): GDPR remove customer cloud data from CI360
 - [__CI360 Identity Uploader__](code/ci360-new-identities-uploader): Upload new identities to CI360
 - [__CI360 Audience from Viya (custom step)__](code/ci360-audience-from-viya): Upload analytically defined customer audience from Viya into CI360 using Viya Custom Step
 - [__CI Modernization Preparation Tool__](code/ci-modernization-preparation-tool): Customer-facing tool intended to support the modernization from CI 6.6 to SAS CI 360
 - [__CI360 Direct SQL Extraction Utility__](code/ci360-engage-direct-sql-extraction-utility): Utility for extracting generated SQL statements from CI360 Direct logs
 - [__CI360 Direct Data Item Extraction Utility__](code/ci360-engage-direct-dataitem-log-extraction-utility): Utility for creating a report on used data items in CI360 Direct Marketing tasks and segment maps
-- [__CI360 Tenant Promotion Utility__](code/ci360-tenant-promotion-utility): Tenant Promotion utility helps in copying objects from one tenant to another
+- [__CI360 Tenant Copy Utility__](code/ci360-tenant-copy-utility): CI360 Copy Utility helps in copying objects from one tenant to another
 - [__CI360 Audit Data Download__](code/ci360-audit-data-download): Download the Audit data from CI360 in parquet and CSV formats
 - [__CI360 Custom Task Connector Integration with On-prem SAS STP__](code/ci360-connector-sas-stp-integration-using-python-flask): Integrate a CI360 Custom Task Type using a connector with an onprem SAS stored process (STP)
 - [__CI360 Audience Management Utility__](code/ci360-audience-management-utility): Create, manage and populate CI360 audiences using Python scripts
