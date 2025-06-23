@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan this file for configuration changes every minute -->
+<!-- change the scan period with: <configuration scan="true" scanPeriod="30 seconds" > -->
+<configuration scan="true">
+  <appender name="SAS_FILE"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+    <file>${APP_HOME}/logs/sas.mkt.apigw.sdk.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS, UTC} thread:"%thread" level:"%level" logger:"%logger" message:"%replace(%msg){'[\r\n]+', '↵'}" exception:"%replace(%ex){'[\r\n]+', '↵'}"%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <maxIndex>4</maxIndex>
+      <FileNamePattern>${APP_HOME}/logs/sas.mkt.apigw.sdk.log.%i
+      </FileNamePattern>
+    </rollingPolicy>
+    <triggeringPolicy
+      class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <maxFileSize>20MB</maxFileSize>
+    </triggeringPolicy>
+  </appender>
+  <logger name="com.sas.mkt.apigw.sdk" level="TRACE"></logger>
+  <logger name="org.springframework.web.client.RestTemplate" level="TRACE"></logger>
+  <root level="INFO">
+    <appender-ref ref="SAS_FILE" />
+  </root>
+</configuration>
