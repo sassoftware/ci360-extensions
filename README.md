@@ -80,6 +80,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__JavaScript Event API Support__](code/ci360-js-event-api-support-doc): Code snippets for for SPA applications, delivering a spot/creative using SAS CI360
 - [__CI360 UDM Database Loader__](code/ci360-udm-db-loader): Load data from the CI 360 Unified Data Model (UDM) into a relational database management system (RDBMS)
 - [__CI360 Direct Agent Monitor__](code/ci360-direct-agent-monitor): Assits with automating Direct Agent health checks
+- [__CI360 General Agent Log Analyzer__](code/ci360-general-agent-log-analyzer): LProvides insights on performance metrics, when integrating a CI360 custom connector with an on-premises endpoint
 
 ## Getting Started
 
