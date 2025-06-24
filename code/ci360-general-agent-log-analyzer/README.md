@@ -35,11 +35,11 @@ The tool applies python scripts to
 
 The diagram below illustrates the steps involved when the general agent processes a request from a custom connector:
 
-![timings](images/timings.png)
+![timings](./images/timings.png)
 
 In the general agent log this looks like:
 
-![single srequest](images/single_request.png)
+![single request](./images/single_request.png)
 
 ## Log analyzer data
 The log parser generates 2 datasets, `requests` and `records` that contain data for the requests reported in the logs.
