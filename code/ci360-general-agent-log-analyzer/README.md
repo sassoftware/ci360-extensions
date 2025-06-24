@@ -25,11 +25,11 @@
 - [Additional Resources](#additional-resources)
 		
 ## Introduction
-The SAS CI 360 General Agent log analyzer provides insights on performance metrics, when integrating a CI360 custom connector with an on-premises endpoint (See [How a Custom Connector Works with an On-Premises Agent](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/data-integration-on-prem.htm#n1r6v9qgj9slgjn12ik0czig50xf) ).
+The SAS CI 360 General Agent log analyzer provides insights on performance metrics, when integrating a CI360 custom connector with an on-premises endpoint (See [How a Custom Connector Works with an On-Premises Agent](https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/data-integration-on-prem.htm#n1r6v9qgj9slgjn12ik0czig50xf).
 
 The tool applies python scripts to
 - capture general agent performance metrics by parsing agent log files. 
-- vizualize these performance metrics
+- visualize these performance metrics
 
 ## Connector request life cycle
 
@@ -143,7 +143,7 @@ The final `logback-spring.xml` will look similar to this:
   </root>
 </configuration>
 ```
-See [sample config file](data/logback-spring.xml) for reference.
+See [sample config file](samples/logback-spring.xml) for reference.
 
 #### Apply log configuration
 
@@ -152,7 +152,7 @@ Restart general agent with the new log settings.
 Check that the agent log content looks similar to this:
 ![sample log](images/sample_log.png)
 
-See [sample log file](sample/sample.log) for reference.
+See [sample log file](samples/sample.log) for reference.
 
 ## The log analyzer
 
@@ -186,19 +186,19 @@ Locate the script `analyze_logs.py` in the `scripts` folder. This is the main sc
 
 In `analyze_logs.py`:
 ```py
-request_list, record_list = parse_log('data/sample.log')
+request_list, record_list = parse_log('samples/sample.log')
 ```
 parses the log file. Modify the path to parse your log file. Add more logs to the argument list to include more than one agent log, e.g. `request_list, record_list = parse_log('agent1.log','agent2.log')`
 
 ```py
-request_duration(request_list, out='sample/sample_duration.png')
-request_timeline(record_list, out='sample/sample_timeline.png')
+request_duration(request_list, out='samples/sample_duration.png')
+request_timeline(record_list, out='samples/sample_timeline.png')
 ```
 generates performance timeline and histograms, and saves these to disk.
 
 ```py
-save_as_jsonl(request_list, 'sample/sample_duration.jsonl')
-save_as_jsonl(record_list, 'sample/sample_records.jsonl')
+save_as_jsonl(request_list, 'samples/sample_duration.jsonl')
+save_as_jsonl(record_list, 'samples/sample_records.jsonl')
 ```
 Saves the parsed log data as json list files (`.jsonl`). This data can be reloadad by calling `load_jsonl(`*path-to-jsonl-file*`)`.
 
@@ -221,7 +221,7 @@ The custom task connects to a flask endpoint with an internal processing time of
 25 minutes in, we restart the flask application. We continue moitoring the log until all requests are completed.
 
 ### Analysis
-Datasets created in this analysis: [lowtp_requests](data/lowtp_requests.jsonl), [lowtp_records](data/lowtp_records.jsonl).
+Datasets created in this analysis: [lowtp_requests](samples/lowtp_requests.jsonl), [lowtp_records](samples/lowtp_records.jsonl).
 
 Let's check the histograms:
 ![lowtp histograms](images/lowtp_requests.png)
@@ -310,7 +310,7 @@ Requests complete almost immeidately as they are received. We no longer have a b
 Also note that there is no thread starvation.
 The only bottleneck we see, is the rate af which the agent receives request from CI-360, which is slower than the rate of generated requests. This leads to a build-up of queued requests in the 360-backend.
 
-Datasets used in this analysis: [redis_requests](data/redis_requests.jsonl), [redis_records](data/redis_records.jsonl).
+Datasets used in this analysis: [redis_requests](samples/redis_requests.jsonl), [redis_records](samples/redis_records.jsonl).
 
 ## Agent performance tuning and scaling
 
@@ -326,6 +326,14 @@ Horzontal scaling
 - Increase number of running agents
 - Simple operation if agent is deployed in kubernetes - just increse number of replicas.
 - Horzontal scaling also adds redundancy and can serve as a mean to ensure high availability.
+
+## Contributing
+
+> We welcome your contributions!
+
+## License
+
+> This project is licensed under the [Apache 2.0 License](LICENSE).
 
 ## Additional Resources
 
