@@ -1,0 +1,22 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sas-ci360-veloxpy"
+version = "0.1.0"
+description = "Async Web API client with token auth and modular service design with CI360 Rest APIs"
+readme = "README.md"
+authors = [{name="Gaurav Patil", email="gaurav.patil@sas.com"}]
+license = {text = "MIT"}
+dependencies = ["aiohttp>=3.9.5","asyncio>=3.4.3", "PyJWT>=2.8.0"]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://gitlab.sas.com/ci-consulting-delivery/sas-ci360-veloxpy"
+
+
+
+[tool.setuptools.packages.find]
+where = ["."]
