@@ -1,0 +1,3 @@
+aiohttp>=3.9.5
+asyncio>=3.4.3
+PyJWT>=2.8.0

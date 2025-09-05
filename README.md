@@ -82,6 +82,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 UDM Database Loader__](code/ci360-udm-db-loader): Load data from the CI 360 Unified Data Model (UDM) into a relational database management system (RDBMS)
 - [__CI360 Direct Agent Monitor__](code/ci360-direct-agent-monitor): Assits with automating Direct Agent health checks
 - [__CI360 General Agent Log Analyzer__](code/ci360-general-agent-log-analyzer): Provides insights on performance metrics, when integrating a CI360 custom connector with an on-premises endpoint
+- [__SAS CI 360 VeloxPy__](code/sas-ci360-veloxpy): Automation-ready, secure, and extensible Python library for interacting with RESTful APIs of CI 360 using asynchronous I/O. 
 
 ## Getting Started
 
