@@ -57,12 +57,12 @@ The Content for `sasci360veloxpy.ini` as below
 ```ini
 
 [tenant]
-extapigateway_url=xxx
-client_id=xxx
-client_secret=xxx
+extapigateway_url=extapigwservice-<your url>
+client_id=<your tenant Id>
+client_secret=<your tenant secret>
 protocol=https://
-api_user_name=xxx
-api_user_password=xxx
+api_user_name=<your api user name>
+api_user_password=<your api user password>
 
 ## Share and Test
 ```
