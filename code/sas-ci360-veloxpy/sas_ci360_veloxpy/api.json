@@ -1,0 +1,518 @@
+{
+  "APIS": {
+    "aud": {
+      "get_all_audiences": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_a_audiences": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}"
+        }
+      },
+      "audience_signedUrl": {
+        "authType": "static_jwt",
+        "path": "/marketingData/fileTransferLocation",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_audience": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/vnd.sas.marketing.audience.definition.upload+json",
+          "Accept": "*/*",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Connection": "keep-alive"
+        }
+      },
+      "upload_audience": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audience_id}/data",
+        "method": "put",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "delete_audience_by_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "DELETE",
+        "headers": {
+          "Authorization": "Bearer {token}"
+        }
+      },
+      "update_audience_by_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "PUT",
+        "headers": {
+          "Authorization": "Bearer {token}"
+        }
+      },
+      "get_audience_upload_history": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}/history",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}"
+        }
+      },
+      "get_file_history_by_upload_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}/history/{historyId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}"
+        }
+      }
+    },
+    "marketing_gateway": {
+      "send_single_external_event": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/events",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_signed_url_for_batch_upload_external_event": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/bulkEventsFileLocation",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        },
+        "data": {
+          "applicationId": "eventGenerator",
+          "version": "1"
+        }
+      },
+      "download_direct_agent": {
+        "path": "/marketingGateway/satellite",
+        "method": "GET"
+      },
+      "download_optimize_agent": {
+        "path": "/marketingGateway/optimize",
+        "method": "GET"
+      },
+      "download_general_agent": {
+        "path": "/marketingGateway/agent",
+        "method": "GET"
+      },
+      "download_diagnostic_agent": {
+        "path": "/marketingGateway/diag",
+        "method": "GET"
+      },
+      "get_configuration_for_the_API": {
+        "path": "/marketingGateway/configuration",
+        "method": "GET"
+      },
+      "download_Discover_Base_Tables_and_Analytical_Base_Tables": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/discoverService/dataDownload/eventData/dbtReport",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "download_Detail_tables": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/discoverService/dataDownload/eventData/detail/partitionedData",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+          
+        }
+      },
+      "download_identity_metadata_plan_tables": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/discoverService/dataDownload/eventData/detail/nonPartitionedData",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "download_reprocessed_data": {
+        "authType": "static_jwt",
+        "path": "/marketingGateway/discoverService/dataDownload/eventData/detail/nonPartitionedData",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    "marketing_execution": {
+      "create_job_to_execute_bulk_task": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/taskJobs",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_a_task_job": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/taskJobs/{taskJobId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_job_to_execute_segment_map": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/segmentMapJobs",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_a_segment_map_job": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/segmentMapJobs/{segmentMapJobId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "retrieve_response_tracking_codes": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/responseTrackingCodes",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "retrieve_response_tracking_code_by_id": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/responseTrackingCodes/{responseTrackingCodeId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "retrieve_execution_occurrences": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/occurrences",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "retrieve_execution_occurrences_by_id": {
+        "authType": "static_jwt",
+        "path": "/marketingExecution/occurrences/{occurrenceId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    "marketing_data": {
+      "access_analytic_services": {
+        "authType": "static_jwt",
+        "path": "/marketingData/analytic",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_collection_of_transfer_items": {
+        "authType": "static_jwt",
+        "path": "/marketingData/analytic/transfers",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_transfer_location_to_upload_analytic_data": {
+        "authType": "static_jwt",
+        "path": "/marketingData/analytic/transfers",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_transfer_result_by_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/analytic/transfers/{transferId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_and_run_customer_job": {
+        "authType": "static_jwt",
+        "path": "/marketingData/customerJobs",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_customer_job_details_by_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/customerJobs/{customerJobId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_signed_URL_to_upload_files": {
+        "authType": "static_jwt",
+        "path": "/marketingData/customerJobs/{customerJobId}",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_signed_URL_to_upload_files_for_customer_table": {
+        "authType": "static_jwt",
+        "path": "/marketingData/fileTransferLocation",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_identity_record_by_ID_filter": {
+        "authType": "static_jwt",
+        "path": "/marketingData/identityRecords",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_identity_record": {
+        "authType": "static_jwt",
+        "path": "/marketingData/identityRecords/{identityRecordId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_summary_of_import_requests": {
+        "authType": "static_jwt",
+        "path": "/marketingData/importRequestJobs",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_and_run_import_request": {
+        "authType": "static_jwt",
+        "path": "/marketingData/importRequestJobs",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_details_of_import_request_by_job_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/importRequestJobs/{importRequestJobId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_summary_of_all_tables": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_customer_table": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_table_object_by_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables/{tableId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "update_table_by_ID_PATCH": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables/{tableId}",
+        "method": "PATCH",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "update_table_by_ID_POST": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables/{tableId}",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "delete_table_by_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tables/{tableId}",
+        "method": "DELETE",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_table_job": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tableJobs",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_specific_table_job_details_by_ID": {
+        "authType": "static_jwt",
+        "path": "/marketingData/tableJobs/{tableJobId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    "marketing_audiences": {
+      "get_list_of_all_audiences": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_audience": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_audience_by_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "delete_audience_by_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "DELETE",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "patch_audience": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "PATCH",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "update_audience_by_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}",
+        "method": "PUT",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "upload_audience_data_file": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}/data",
+        "method": "PUT",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_audience_upload_history": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}/history",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "get_file_history_by_upload_id": {
+        "authType": "temporary_jwt",
+        "path": "/marketingAudience/audiences/{audienceId}/history/{historyId}",
+        "method": "GET",
+        "headers": {
+          "Authorization": "Bearer {token}",
+          "Content-Type": "application/json"
+        }
+      },
+      "create_signed_url_to_upload_files": {
+        "path": "/marketingAudience/audiences/fileTransferLocation",
+        "method": "POST"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./",
+        "./sas-ci360-veloxpy/io",
+        "./sas-ci360-veloxpy/auth"
+    ]
+}
