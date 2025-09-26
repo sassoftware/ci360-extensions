@@ -84,6 +84,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 General Agent Log Analyzer__](code/ci360-general-agent-log-analyzer): Provides insights on performance metrics, when integrating a CI360 custom connector with an on-premises endpoint
 - [__SAS CI 360 VeloxPy__](code/sas-ci360-veloxpy): Automation-ready, secure, and extensible Python library for interacting with RESTful APIs of CI 360 using asynchronous I/O. 
 
+- [__CI360 Direct Merge Variables__](code/ci360-direct-merge-variables): This stored process is intended to be used as a post process in the CI360 Engage Direct DM Task.   It updates any SAS datasets exported in that task, with corresponding dataitems from other SAS datasets.
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
