@@ -1,0 +1,21 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net9.0-ios</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>true</ImplicitUsings>
+        <IsBindingProject>true</IsBindingProject>
+        <AssemblyName>ci360sdk.iOS</AssemblyName>
+        <RootNamespace>ci360sdk.iOS</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <NativeReference Include="SASCollector.xcframework">
+            <Kind>Framework</Kind>
+            <SmartLink>false</SmartLink>
+            <ForceLoad>true</ForceLoad>
+        </NativeReference>
+        <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+        <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+    </ItemGroup>
+</Project>

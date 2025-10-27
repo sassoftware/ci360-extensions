@@ -1,0 +1,6 @@
+framework module SASCollector {
+  umbrella header "SASCollector.h"
+
+  export *
+  module * { export * }
+}
