@@ -135,14 +135,14 @@
 	select distinct table_name, mart_type, 'Y' as execution_flag  from &schema_table.;
 	run;
 
-%ErrCheck(ERROR in getting UDM Structure from API,get_udm_structure_from_api);
+%ErrCheck(Unable to get UDM Structure from API, get_udm_structure_from_api);
 	%if &errFlag %then %do;
 		%goto ERREXIT;
 	%end;
 
 
 %ERREXIT: 
- %put ERROR in getting UDM Structure from API;
+ 
 	
 %mend;
 

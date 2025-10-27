@@ -14,8 +14,8 @@ options notes;
 %let DSC_TENANT_ID=%str(XXXXXXXXXXXXXXXXX);
 %let DSC_SECRET_KEY=%str(XXXXXXXXXXXXXXXXXXXXXXXXXXX);
 %let External_gateway=https://<external gateway host>/marketingGateway;
-%let SCHEMA_VERSION=17;
-%let previous_schema_version=16;
+%let SCHEMA_VERSION=18;
+%let previous_schema_version=17;
 
 
 
@@ -62,12 +62,13 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 
 %let trglib=Target; /* Provide Target Library name */
 %let dbname=mydbname; /* Provide Database */
-%let dbsrc=mydbsrc; /* Specifies the Microsoft SQL Server data source to which you want to connect*/
+%let dbsrc=mydbsrc; /* Specifies the database source/server to which you want to connect*/
 %let dbschema=mydbschema; /* provide database schema detail */
 %let dbuser=mydbuser;/* lets you connect to database with a user ID.*/
 %let dbpass=mydbpass!; /* specifies the database password that is associated with your user ID.*/
-%let dbpath=mydbpath;
-%let dbdns=mydbdns;
+%let dbpath=; /* NOT USED with MSSQL - database path value */
+%let dbdns=mydbdns; /* NOT USED with MSSQL - database DNS name */
+%let dbport=8080; /* NOT USED with MSSQL - database connection port number  */
 
 /* Staging schema details */
 %let tmplib=tempLib;
@@ -78,14 +79,15 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 %let tmpdbpass=&dbpass.;
 %let tmpdbpath=&dbpath.;
 %let tmpdbdns=&dbdns.;
+%let tmpdbport=&dbport.;
 
 /* ------Parameters for MS SQL Server - End------*/
 
-/*------ Connection String for MSSQL and AZURE SQL -----*/
-%let sql_passthru_connection =%str(noprompt="uid=&dbuser;pwd=&dbpass;dsn=&dbdns;"); /* connection string for AZURE */
+/*------ Connection String for MSSQL, AZURE SQL and Redshift -----*/
+/*%let sql_passthru_connection =%str(noprompt="uid=&dbuser;pwd=&dbpass;dsn=&dbdns;"); /* connection string for AZURE */
 /*%let sql_passthru_connection =%str(DATASRC=&dbsrc. user=&dbuser. pass=&dbpass.);*/ /* connection string for MSSQL */
-
-/*------ Connection String for MSSQL and AZURE SQL - End -----*/
+%let sql_passthru_connection =%str(SERVER=&dbsrc. PORT=&dbport. USER=&dbuser. PASSWORD=&dbpass. DATABASE=&dbschema.);/* connection string for Redshift */
+/*------ Connection String for MSSQL, AZURE SQL and Redshift - End -----*/
 
 /*Common Configurations */
 %let timeZone_Value='AMERICA/NEW_YORK'; /* Provide timezone specific value for convertion of datetime fields into target tables */
@@ -104,7 +106,7 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 
 /*Assignment of Libraries*/
 /*filename &urlListMap "&UtilityLocation.&slash.config&slash.urlDataList.map";*/
-libname &udmmart. "&downloadutilitylocation.&slash.dscwh";
+libname &udmmart. "&downloadutilitylocation.&slash.data&slash.dscwh";
 
 /*Oracle Libname */
 /*libname &tmplib. &tmpdbname. path=&tmpdbpath user=&tmpdbuser pass=&tmpdbpass;*/
@@ -115,13 +117,19 @@ libname &udmmart. "&downloadutilitylocation.&slash.dscwh";
 /*libname &trglib.  &dbname. &sql_passthru_connection.;*/
 
 /*Azure Libname*/
-libname &tmplib. &tmpdbname. noprompt="uid=&tmpdbuser;schema=&tmpdbschema; pwd=&tmpdbpass;dsn=&tmpdbdns;";
-libname &trglib.  &dbname. &sql_passthru_connection.;
+/*libname &tmplib. &tmpdbname. noprompt="uid=&tmpdbuser;schema=&tmpdbschema; pwd=&tmpdbpass;dsn=&tmpdbdns;";*/
+/*libname &trglib.  &dbname. &sql_passthru_connection.;*/
 /**/
 
 /*Postgres Libname*/
 /*libname &trglib. postgres server=&dbsrc port=5432 user=&dbuser password=dbpass database=mydb1;*/
 /*libname &tmplib. postgres server=&dbsrc port=5432 user=&dbuser password=dbpass database=mydb1;*/
+
+
+/*REDSHIFT Libname*/
+libname &trglib. redshift server=&dbsrc port=&dbport user=&dbuser password=&dbpass database=&dbschema;
+libname &tmplib. redshift server=&tmpdbsrc port=&tmpdbport user=&tmpdbuser password=&tmpdbpass database=&tmpdbschema;
+
 
 libname cdmcnfg "&UtilityLocation.&slash.config&slash.";
 options sasautos=(sasautos,"&UtilityLocation.&slash.macros&slash.");

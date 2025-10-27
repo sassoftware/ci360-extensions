@@ -6,11 +6,13 @@ The utility is capable of automatically generating database-specific Data Defini
 
 ## Supported target databases 
 - Microsoft SQL Server
+- SQL Server on Azure 
+- Redshift
 
-This tool will support multiple target databases. Next up are SQL Server on Azure and Oracle.
+This tool will support multiple target databases. Next up are Oracle and Postgres.
 
 ## Supported UDM Schema Version
-This tool contains metadata for UDM schema version 16. 
+This tool contains metadata for UDM schema version 18. 
 
 ## Pre-requisites
 
@@ -39,7 +41,7 @@ Define tenant details and schema version for which you want to use this utility.
 - %let DSC_TENANT_ID=%str(< Tenant ID Value>);
 - %let DSC_SECRET_KEY=%str(< Secret Key Value >);
 - %let External_gateway=https://< external gateway host >/marketingGateway;
-- %let SCHEMA_VERSION=16;
+- %let SCHEMA_VERSION=18;
 
 ### Path Configurations
 These downloaded datasets will act as an input and will be stored under { UtilityLocation}/data folder or any location which can be set in config.sas file.
@@ -62,6 +64,7 @@ Define the third-party database name and the credentials to access the database.
 - %let dbpass=mypass; /* specifies the database password that is associated with your user ID.*/
 - %let dbpath=; /* NOT USED with MSSQL - database path value */
 - %let dbdns=mydbdns; /* NOT USED with MSSQL - database DNS name */
+- %let dbport=8080; /* NOT USED with MSSQL - database connection port number  */
 
 If you prefer to use different database schema for staging data then please provide staging schema details. By default it uses Target schema details. 
 
@@ -106,7 +109,7 @@ However, before you can load the data, the target tables need to be created. Run
 
 Next go to **Running utility for Batch Execution** to load the tool in batch 
 
-If you want to upload the lates supported schema version of the UDM tables you can  directly use the default generated ddl and load code from code folder. If not use the parameters **CREATEDDL** and **CREATEETLCODE** as described below.
+If you want to upload the latest supported schema version of the UDM tables you can  directly use the default generated ddl and load code from code folder. If not use the parameters **CREATEDDL** and **CREATEETLCODE** as described below.
 
 ### Running utility for Interactive Execution
 To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), edit **udmloader.sas** from udmloader_launch folder, update **%Let sysparameter=XXXXX ;** variable with one of the below parameters and run it.
@@ -120,6 +123,10 @@ To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), 
    > **NOTE:** Run EXECUTEDDL only once before loading data for the first time. If a correction is needed, drop all tables before re-executing
 
 - **LOADDATA** : This will execute the generated database specific ETL code file. It will Insert/update downloaded data into database specific target tables (you can schedule this periodically depending on the frequency of data download by using batch process). 
+
+- **CREATEUPGRADEDDL** : This will generate schema migration ddl code which will create alter and create table ddl when there is new schema version available. 
+
+- **EXECUTEUPGRADEDDL** :This will execute the generated database specific DDL schema migration script. This will pick the generated DDL migration code from previous step and create the tables in target Database .This will help create table structure based on new schema version without deleteting old tables and data.
 
 ### Running utility for Batch Execution
 

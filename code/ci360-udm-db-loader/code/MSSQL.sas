@@ -1,3 +1,7 @@
+/******************************************************************************/
+/* Copyright © 2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */
+/* SPDX-License-Identifier: Apache-2.0                                        */
+/* ****************************************************************************/
 %macro execute_MSSQL_code;
 %if %sysfunc(exist(&udmmart..ab_test_path_assignment) ) %then %do;
  %let errFlag=0;
@@ -782,6 +786,1679 @@
  %end;
  %end;
  %put %sysfunc(datetime(),E8601DT25.) --- Processing table cc_budget_breakup_ccbdgt;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_activity_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_activity_custom_attr_tmp    ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_custom_attr_tmp    ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_activity_custom_attr, table_keys=%str(activity_version_id,attribute_data_type_cd,attribute_nm,attribute_val), out_table=work.cdm_activity_custom_attr);
+ data &tmplib..cdm_activity_custom_attr_tmp    ;
+     set work.cdm_activity_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',activity_version_id,attribute_data_type_cd,attribute_nm,attribute_val)), $hex64.);
+  if activity_version_id='' then activity_version_id='-'; if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_activity_custom_attr_tmp    , cdm_activity_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_activity_custom_attr using &tmpdbschema..cdm_activity_custom_attr_tmp    
+         on (cdm_activity_custom_attr.Hashed_pk_col = cdm_activity_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_activity_custom_attr.activity_id = cdm_activity_custom_attr_tmp.activity_id , cdm_activity_custom_attr.attribute_character_val = cdm_activity_custom_attr_tmp.attribute_character_val , cdm_activity_custom_attr.attribute_dttm_val = cdm_activity_custom_attr_tmp.attribute_dttm_val , cdm_activity_custom_attr.attribute_numeric_val = cdm_activity_custom_attr_tmp.attribute_numeric_val , cdm_activity_custom_attr.updated_by_nm = cdm_activity_custom_attr_tmp.updated_by_nm , cdm_activity_custom_attr.updated_dttm = cdm_activity_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        activity_id,activity_version_id,attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_activity_custom_attr_tmp.activity_id,cdm_activity_custom_attr_tmp.activity_version_id,cdm_activity_custom_attr_tmp.attribute_character_val,cdm_activity_custom_attr_tmp.attribute_data_type_cd,cdm_activity_custom_attr_tmp.attribute_dttm_val,cdm_activity_custom_attr_tmp.attribute_nm,cdm_activity_custom_attr_tmp.attribute_numeric_val,cdm_activity_custom_attr_tmp.attribute_val,cdm_activity_custom_attr_tmp.updated_by_nm,cdm_activity_custom_attr_tmp.updated_dttm,cdm_activity_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_activity_custom_attr_tmp    , cdm_activity_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_custom_attr_tmp    ;
+    quit;
+    %put ######## Staging table: cdm_activity_custom_attr_tmp     Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_activity_custom_attr;
+      drop table work.cdm_activity_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_activity_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_activity_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_activity_detail_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_detail_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_activity_detail, table_keys=%str(activity_version_id), out_table=work.cdm_activity_detail);
+ data &tmplib..cdm_activity_detail_tmp         ;
+     set work.cdm_activity_detail;
+  if last_published_dttm ne . then last_published_dttm = tzoneu2s(last_published_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if activity_version_id='' then activity_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_activity_detail_tmp         , cdm_activity_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_activity_detail using &tmpdbschema..cdm_activity_detail_tmp         
+         on (cdm_activity_detail.activity_version_id=cdm_activity_detail_tmp.activity_version_id)
+        when matched then  
+        update set cdm_activity_detail.activity_category_nm = cdm_activity_detail_tmp.activity_category_nm , cdm_activity_detail.activity_cd = cdm_activity_detail_tmp.activity_cd , cdm_activity_detail.activity_desc = cdm_activity_detail_tmp.activity_desc , cdm_activity_detail.activity_id = cdm_activity_detail_tmp.activity_id , cdm_activity_detail.activity_nm = cdm_activity_detail_tmp.activity_nm , cdm_activity_detail.last_published_dttm = cdm_activity_detail_tmp.last_published_dttm , cdm_activity_detail.source_system_cd = cdm_activity_detail_tmp.source_system_cd , cdm_activity_detail.status_cd = cdm_activity_detail_tmp.status_cd , cdm_activity_detail.updated_by_nm = cdm_activity_detail_tmp.updated_by_nm , cdm_activity_detail.updated_dttm = cdm_activity_detail_tmp.updated_dttm , cdm_activity_detail.valid_from_dttm = cdm_activity_detail_tmp.valid_from_dttm , cdm_activity_detail.valid_to_dttm = cdm_activity_detail_tmp.valid_to_dttm
+        when not matched then insert ( 
+        activity_category_nm,activity_cd,activity_desc,activity_id,activity_nm,activity_version_id,last_published_dttm,source_system_cd,status_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_activity_detail_tmp.activity_category_nm,cdm_activity_detail_tmp.activity_cd,cdm_activity_detail_tmp.activity_desc,cdm_activity_detail_tmp.activity_id,cdm_activity_detail_tmp.activity_nm,cdm_activity_detail_tmp.activity_version_id,cdm_activity_detail_tmp.last_published_dttm,cdm_activity_detail_tmp.source_system_cd,cdm_activity_detail_tmp.status_cd,cdm_activity_detail_tmp.updated_by_nm,cdm_activity_detail_tmp.updated_dttm,cdm_activity_detail_tmp.valid_from_dttm,cdm_activity_detail_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_activity_detail_tmp         , cdm_activity_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_detail_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_activity_detail_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_activity_detail;
+      drop table work.cdm_activity_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_activity_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_activity_x_task) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_activity_x_task_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_x_task_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_activity_x_task, table_keys=%str(activity_version_id,task_version_id), out_table=work.cdm_activity_x_task);
+ data &tmplib..cdm_activity_x_task_tmp         ;
+     set work.cdm_activity_x_task;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if activity_version_id='' then activity_version_id='-'; if task_version_id='' then task_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_activity_x_task_tmp         , cdm_activity_x_task);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_activity_x_task using &tmpdbschema..cdm_activity_x_task_tmp         
+         on (cdm_activity_x_task.activity_version_id=cdm_activity_x_task_tmp.activity_version_id and cdm_activity_x_task.task_version_id=cdm_activity_x_task_tmp.task_version_id)
+        when matched then  
+        update set cdm_activity_x_task.activity_id = cdm_activity_x_task_tmp.activity_id , cdm_activity_x_task.task_id = cdm_activity_x_task_tmp.task_id , cdm_activity_x_task.updated_by_nm = cdm_activity_x_task_tmp.updated_by_nm , cdm_activity_x_task.updated_dttm = cdm_activity_x_task_tmp.updated_dttm
+        when not matched then insert ( 
+        activity_id,activity_version_id,task_id,task_version_id,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_activity_x_task_tmp.activity_id,cdm_activity_x_task_tmp.activity_version_id,cdm_activity_x_task_tmp.task_id,cdm_activity_x_task_tmp.task_version_id,cdm_activity_x_task_tmp.updated_by_nm,cdm_activity_x_task_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_activity_x_task_tmp         , cdm_activity_x_task, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_activity_x_task_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_activity_x_task_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_activity_x_task;
+      drop table work.cdm_activity_x_task;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_activity_x_task;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_audience_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_audience_detail_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_audience_detail_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_audience_detail, table_keys=%str(audience_id), out_table=work.cdm_audience_detail);
+ data &tmplib..cdm_audience_detail_tmp         ;
+     set work.cdm_audience_detail;
+  if create_dttm ne . then create_dttm = tzoneu2s(create_dttm,&timeZone_Value.);if delete_dttm ne . then delete_dttm = tzoneu2s(delete_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if audience_id='' then audience_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_audience_detail_tmp         , cdm_audience_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_audience_detail using &tmpdbschema..cdm_audience_detail_tmp         
+         on (cdm_audience_detail.audience_id=cdm_audience_detail_tmp.audience_id)
+        when matched then  
+        update set cdm_audience_detail.audience_data_source_nm = cdm_audience_detail_tmp.audience_data_source_nm , cdm_audience_detail.audience_desc = cdm_audience_detail_tmp.audience_desc , cdm_audience_detail.audience_nm = cdm_audience_detail_tmp.audience_nm , cdm_audience_detail.audience_schedule_flg = cdm_audience_detail_tmp.audience_schedule_flg , cdm_audience_detail.audience_source_nm = cdm_audience_detail_tmp.audience_source_nm , cdm_audience_detail.create_dttm = cdm_audience_detail_tmp.create_dttm , cdm_audience_detail.created_user_nm = cdm_audience_detail_tmp.created_user_nm , cdm_audience_detail.delete_dttm = cdm_audience_detail_tmp.delete_dttm , cdm_audience_detail.updated_dttm = cdm_audience_detail_tmp.updated_dttm
+        when not matched then insert ( 
+        audience_data_source_nm,audience_desc,audience_id,audience_nm,audience_schedule_flg,audience_source_nm,create_dttm,created_user_nm,delete_dttm,updated_dttm
+         ) values ( 
+        cdm_audience_detail_tmp.audience_data_source_nm,cdm_audience_detail_tmp.audience_desc,cdm_audience_detail_tmp.audience_id,cdm_audience_detail_tmp.audience_nm,cdm_audience_detail_tmp.audience_schedule_flg,cdm_audience_detail_tmp.audience_source_nm,cdm_audience_detail_tmp.create_dttm,cdm_audience_detail_tmp.created_user_nm,cdm_audience_detail_tmp.delete_dttm,cdm_audience_detail_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_audience_detail_tmp         , cdm_audience_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_audience_detail_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_audience_detail_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_audience_detail;
+      drop table work.cdm_audience_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_audience_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_audience_occur_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_audience_occur_detail_tmp   ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_audience_occur_detail_tmp   ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_audience_occur_detail, table_keys=%str(audience_occur_id), out_table=work.cdm_audience_occur_detail);
+ data &tmplib..cdm_audience_occur_detail_tmp   ;
+     set work.cdm_audience_occur_detail;
+  if end_dttm ne . then end_dttm = tzoneu2s(end_dttm,&timeZone_Value.);if start_dttm ne . then start_dttm = tzoneu2s(start_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if audience_occur_id='' then audience_occur_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_audience_occur_detail_tmp   , cdm_audience_occur_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_audience_occur_detail using &tmpdbschema..cdm_audience_occur_detail_tmp   
+         on (cdm_audience_occur_detail.audience_occur_id=cdm_audience_occur_detail_tmp.audience_occur_id)
+        when matched then  
+        update set cdm_audience_occur_detail.audience_id = cdm_audience_occur_detail_tmp.audience_id , cdm_audience_occur_detail.audience_size_cnt = cdm_audience_occur_detail_tmp.audience_size_cnt , cdm_audience_occur_detail.end_dttm = cdm_audience_occur_detail_tmp.end_dttm , cdm_audience_occur_detail.execution_status_cd = cdm_audience_occur_detail_tmp.execution_status_cd , cdm_audience_occur_detail.occurrence_type_nm = cdm_audience_occur_detail_tmp.occurrence_type_nm , cdm_audience_occur_detail.start_dttm = cdm_audience_occur_detail_tmp.start_dttm , cdm_audience_occur_detail.started_by_nm = cdm_audience_occur_detail_tmp.started_by_nm , cdm_audience_occur_detail.updated_dttm = cdm_audience_occur_detail_tmp.updated_dttm
+        when not matched then insert ( 
+        audience_id,audience_occur_id,audience_size_cnt,end_dttm,execution_status_cd,occurrence_type_nm,start_dttm,started_by_nm,updated_dttm
+         ) values ( 
+        cdm_audience_occur_detail_tmp.audience_id,cdm_audience_occur_detail_tmp.audience_occur_id,cdm_audience_occur_detail_tmp.audience_size_cnt,cdm_audience_occur_detail_tmp.end_dttm,cdm_audience_occur_detail_tmp.execution_status_cd,cdm_audience_occur_detail_tmp.occurrence_type_nm,cdm_audience_occur_detail_tmp.start_dttm,cdm_audience_occur_detail_tmp.started_by_nm,cdm_audience_occur_detail_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_audience_occur_detail_tmp   , cdm_audience_occur_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_audience_occur_detail_tmp   ;
+    quit;
+    %put ######## Staging table: cdm_audience_occur_detail_tmp    Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_audience_occur_detail;
+      drop table work.cdm_audience_occur_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_audience_occur_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_business_context) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_business_context_tmp        ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_business_context_tmp        ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_business_context, table_keys=%str(business_context_id), out_table=work.cdm_business_context);
+ data &tmplib..cdm_business_context_tmp        ;
+     set work.cdm_business_context;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if business_context_id='' then business_context_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_business_context_tmp        , cdm_business_context);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_business_context using &tmpdbschema..cdm_business_context_tmp        
+         on (cdm_business_context.business_context_id=cdm_business_context_tmp.business_context_id)
+        when matched then  
+        update set cdm_business_context.business_context_nm = cdm_business_context_tmp.business_context_nm , cdm_business_context.business_context_type_cd = cdm_business_context_tmp.business_context_type_cd , cdm_business_context.source_system_cd = cdm_business_context_tmp.source_system_cd , cdm_business_context.updated_by_nm = cdm_business_context_tmp.updated_by_nm , cdm_business_context.updated_dttm = cdm_business_context_tmp.updated_dttm
+        when not matched then insert ( 
+        business_context_id,business_context_nm,business_context_type_cd,source_system_cd,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_business_context_tmp.business_context_id,cdm_business_context_tmp.business_context_nm,cdm_business_context_tmp.business_context_type_cd,cdm_business_context_tmp.source_system_cd,cdm_business_context_tmp.updated_by_nm,cdm_business_context_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_business_context_tmp        , cdm_business_context, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_business_context_tmp        ;
+    quit;
+    %put ######## Staging table: cdm_business_context_tmp         Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_business_context;
+      drop table work.cdm_business_context;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_business_context;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_campaign_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_campaign_custom_attr_tmp    ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_campaign_custom_attr_tmp    ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_campaign_custom_attr, table_keys=%str(attribute_data_type_cd,attribute_nm,attribute_val,campaign_id,page_nm), out_table=work.cdm_campaign_custom_attr);
+ data &tmplib..cdm_campaign_custom_attr_tmp    ;
+     set work.cdm_campaign_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_data_type_cd,attribute_nm,attribute_val,campaign_id,page_nm)), $hex64.);
+  if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if campaign_id='' then campaign_id='-'; if page_nm='' then page_nm='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_campaign_custom_attr_tmp    , cdm_campaign_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_campaign_custom_attr using &tmpdbschema..cdm_campaign_custom_attr_tmp    
+         on (cdm_campaign_custom_attr.Hashed_pk_col = cdm_campaign_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_campaign_custom_attr.attribute_character_val = cdm_campaign_custom_attr_tmp.attribute_character_val , cdm_campaign_custom_attr.attribute_dttm_val = cdm_campaign_custom_attr_tmp.attribute_dttm_val , cdm_campaign_custom_attr.attribute_numeric_val = cdm_campaign_custom_attr_tmp.attribute_numeric_val , cdm_campaign_custom_attr.extension_attribute_nm = cdm_campaign_custom_attr_tmp.extension_attribute_nm , cdm_campaign_custom_attr.updated_by_nm = cdm_campaign_custom_attr_tmp.updated_by_nm , cdm_campaign_custom_attr.updated_dttm = cdm_campaign_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,campaign_id,extension_attribute_nm,page_nm,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_campaign_custom_attr_tmp.attribute_character_val,cdm_campaign_custom_attr_tmp.attribute_data_type_cd,cdm_campaign_custom_attr_tmp.attribute_dttm_val,cdm_campaign_custom_attr_tmp.attribute_nm,cdm_campaign_custom_attr_tmp.attribute_numeric_val,cdm_campaign_custom_attr_tmp.attribute_val,cdm_campaign_custom_attr_tmp.campaign_id,cdm_campaign_custom_attr_tmp.extension_attribute_nm,cdm_campaign_custom_attr_tmp.page_nm,cdm_campaign_custom_attr_tmp.updated_by_nm,cdm_campaign_custom_attr_tmp.updated_dttm,cdm_campaign_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_campaign_custom_attr_tmp    , cdm_campaign_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_campaign_custom_attr_tmp    ;
+    quit;
+    %put ######## Staging table: cdm_campaign_custom_attr_tmp     Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_campaign_custom_attr;
+      drop table work.cdm_campaign_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_campaign_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_campaign_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_campaign_detail_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_campaign_detail_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_campaign_detail, table_keys=%str(campaign_id), out_table=work.cdm_campaign_detail);
+ data &tmplib..cdm_campaign_detail_tmp         ;
+     set work.cdm_campaign_detail;
+  if approval_dttm ne . then approval_dttm = tzoneu2s(approval_dttm,&timeZone_Value.);if end_dttm ne . then end_dttm = tzoneu2s(end_dttm,&timeZone_Value.);if last_modified_dttm ne . then last_modified_dttm = tzoneu2s(last_modified_dttm,&timeZone_Value.);if run_dttm ne . then run_dttm = tzoneu2s(run_dttm,&timeZone_Value.);if start_dttm ne . then start_dttm = tzoneu2s(start_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if campaign_id='' then campaign_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_campaign_detail_tmp         , cdm_campaign_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_campaign_detail using &tmpdbschema..cdm_campaign_detail_tmp         
+         on (cdm_campaign_detail.campaign_id=cdm_campaign_detail_tmp.campaign_id)
+        when matched then  
+        update set cdm_campaign_detail.approval_dttm = cdm_campaign_detail_tmp.approval_dttm , cdm_campaign_detail.approval_given_by_nm = cdm_campaign_detail_tmp.approval_given_by_nm , cdm_campaign_detail.campaign_cd = cdm_campaign_detail_tmp.campaign_cd , cdm_campaign_detail.campaign_desc = cdm_campaign_detail_tmp.campaign_desc , cdm_campaign_detail.campaign_folder_txt = cdm_campaign_detail_tmp.campaign_folder_txt , cdm_campaign_detail.campaign_group_sk = cdm_campaign_detail_tmp.campaign_group_sk , cdm_campaign_detail.campaign_nm = cdm_campaign_detail_tmp.campaign_nm , cdm_campaign_detail.campaign_owner_nm = cdm_campaign_detail_tmp.campaign_owner_nm , cdm_campaign_detail.campaign_status_cd = cdm_campaign_detail_tmp.campaign_status_cd , cdm_campaign_detail.campaign_type_cd = cdm_campaign_detail_tmp.campaign_type_cd , cdm_campaign_detail.campaign_version_no = cdm_campaign_detail_tmp.campaign_version_no , cdm_campaign_detail.current_version_flg = cdm_campaign_detail_tmp.current_version_flg , cdm_campaign_detail.deleted_flg = cdm_campaign_detail_tmp.deleted_flg , cdm_campaign_detail.deployment_version_no = cdm_campaign_detail_tmp.deployment_version_no , cdm_campaign_detail.end_dttm = cdm_campaign_detail_tmp.end_dttm , cdm_campaign_detail.last_modified_by_user_nm = cdm_campaign_detail_tmp.last_modified_by_user_nm , cdm_campaign_detail.last_modified_dttm = cdm_campaign_detail_tmp.last_modified_dttm , cdm_campaign_detail.max_budget_amt = cdm_campaign_detail_tmp.max_budget_amt , cdm_campaign_detail.max_budget_offer_amt = cdm_campaign_detail_tmp.max_budget_offer_amt , cdm_campaign_detail.min_budget_amt = cdm_campaign_detail_tmp.min_budget_amt , cdm_campaign_detail.min_budget_offer_amt = cdm_campaign_detail_tmp.min_budget_offer_amt , cdm_campaign_detail.run_dttm = cdm_campaign_detail_tmp.run_dttm , cdm_campaign_detail.source_system_cd = cdm_campaign_detail_tmp.source_system_cd , cdm_campaign_detail.start_dttm = cdm_campaign_detail_tmp.start_dttm , cdm_campaign_detail.updated_by_nm = cdm_campaign_detail_tmp.updated_by_nm , cdm_campaign_detail.updated_dttm = cdm_campaign_detail_tmp.updated_dttm , cdm_campaign_detail.valid_from_dttm = cdm_campaign_detail_tmp.valid_from_dttm , cdm_campaign_detail.valid_to_dttm = cdm_campaign_detail_tmp.valid_to_dttm
+        when not matched then insert ( 
+        approval_dttm,approval_given_by_nm,campaign_cd,campaign_desc,campaign_folder_txt,campaign_group_sk,campaign_id,campaign_nm,campaign_owner_nm,campaign_status_cd,campaign_type_cd,campaign_version_no,current_version_flg,deleted_flg,deployment_version_no,end_dttm,last_modified_by_user_nm,last_modified_dttm,max_budget_amt,max_budget_offer_amt,min_budget_amt,min_budget_offer_amt,run_dttm,source_system_cd,start_dttm,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_campaign_detail_tmp.approval_dttm,cdm_campaign_detail_tmp.approval_given_by_nm,cdm_campaign_detail_tmp.campaign_cd,cdm_campaign_detail_tmp.campaign_desc,cdm_campaign_detail_tmp.campaign_folder_txt,cdm_campaign_detail_tmp.campaign_group_sk,cdm_campaign_detail_tmp.campaign_id,cdm_campaign_detail_tmp.campaign_nm,cdm_campaign_detail_tmp.campaign_owner_nm,cdm_campaign_detail_tmp.campaign_status_cd,cdm_campaign_detail_tmp.campaign_type_cd,cdm_campaign_detail_tmp.campaign_version_no,cdm_campaign_detail_tmp.current_version_flg,cdm_campaign_detail_tmp.deleted_flg,cdm_campaign_detail_tmp.deployment_version_no,cdm_campaign_detail_tmp.end_dttm,cdm_campaign_detail_tmp.last_modified_by_user_nm,cdm_campaign_detail_tmp.last_modified_dttm,cdm_campaign_detail_tmp.max_budget_amt,cdm_campaign_detail_tmp.max_budget_offer_amt,cdm_campaign_detail_tmp.min_budget_amt,cdm_campaign_detail_tmp.min_budget_offer_amt,cdm_campaign_detail_tmp.run_dttm,cdm_campaign_detail_tmp.source_system_cd,cdm_campaign_detail_tmp.start_dttm,cdm_campaign_detail_tmp.updated_by_nm,cdm_campaign_detail_tmp.updated_dttm,cdm_campaign_detail_tmp.valid_from_dttm,cdm_campaign_detail_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_campaign_detail_tmp         , cdm_campaign_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_campaign_detail_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_campaign_detail_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_campaign_detail;
+      drop table work.cdm_campaign_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_campaign_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_contact_channel) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_contact_channel_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_channel_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_contact_channel, table_keys=%str(contact_channel_cd), out_table=work.cdm_contact_channel);
+ data &tmplib..cdm_contact_channel_tmp         ;
+     set work.cdm_contact_channel;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if contact_channel_cd='' then contact_channel_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_contact_channel_tmp         , cdm_contact_channel);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_contact_channel using &tmpdbschema..cdm_contact_channel_tmp         
+         on (cdm_contact_channel.contact_channel_cd=cdm_contact_channel_tmp.contact_channel_cd)
+        when matched then  
+        update set cdm_contact_channel.contact_channel_nm = cdm_contact_channel_tmp.contact_channel_nm , cdm_contact_channel.updated_by_nm = cdm_contact_channel_tmp.updated_by_nm , cdm_contact_channel.updated_dttm = cdm_contact_channel_tmp.updated_dttm
+        when not matched then insert ( 
+        contact_channel_cd,contact_channel_nm,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_contact_channel_tmp.contact_channel_cd,cdm_contact_channel_tmp.contact_channel_nm,cdm_contact_channel_tmp.updated_by_nm,cdm_contact_channel_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_contact_channel_tmp         , cdm_contact_channel, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_channel_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_contact_channel_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_contact_channel;
+      drop table work.cdm_contact_channel;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_contact_channel;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_contact_history) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_contact_history_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_history_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_contact_history, table_keys=%str(contact_id), out_table=work.cdm_contact_history);
+ data &tmplib..cdm_contact_history_tmp         ;
+     set work.cdm_contact_history;
+  if contact_dttm ne . then contact_dttm = tzoneu2s(contact_dttm,&timeZone_Value.);if contact_dttm_tz ne . then contact_dttm_tz = tzoneu2s(contact_dttm_tz,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if contact_id='' then contact_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_contact_history_tmp         , cdm_contact_history);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_contact_history using &tmpdbschema..cdm_contact_history_tmp         
+         on (cdm_contact_history.contact_id=cdm_contact_history_tmp.contact_id)
+        when matched then  
+        update set cdm_contact_history.audience_id = cdm_contact_history_tmp.audience_id , cdm_contact_history.audience_occur_id = cdm_contact_history_tmp.audience_occur_id , cdm_contact_history.contact_dt = cdm_contact_history_tmp.contact_dt , cdm_contact_history.contact_dttm = cdm_contact_history_tmp.contact_dttm , cdm_contact_history.contact_dttm_tz = cdm_contact_history_tmp.contact_dttm_tz , cdm_contact_history.contact_nm = cdm_contact_history_tmp.contact_nm , cdm_contact_history.contact_status_cd = cdm_contact_history_tmp.contact_status_cd , cdm_contact_history.context_type_nm = cdm_contact_history_tmp.context_type_nm , cdm_contact_history.context_val = cdm_contact_history_tmp.context_val , cdm_contact_history.control_group_flg = cdm_contact_history_tmp.control_group_flg , cdm_contact_history.external_contact_info_1_id = cdm_contact_history_tmp.external_contact_info_1_id , cdm_contact_history.external_contact_info_2_id = cdm_contact_history_tmp.external_contact_info_2_id , cdm_contact_history.identity_id = cdm_contact_history_tmp.identity_id , cdm_contact_history.optimization_backfill_flg = cdm_contact_history_tmp.optimization_backfill_flg , cdm_contact_history.rtc_id = cdm_contact_history_tmp.rtc_id , cdm_contact_history.source_system_cd = cdm_contact_history_tmp.source_system_cd , cdm_contact_history.updated_by_nm = cdm_contact_history_tmp.updated_by_nm , cdm_contact_history.updated_dttm = cdm_contact_history_tmp.updated_dttm
+        when not matched then insert ( 
+        audience_id,audience_occur_id,contact_dt,contact_dttm,contact_dttm_tz,contact_id,contact_nm,contact_status_cd,context_type_nm,context_val,control_group_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,optimization_backfill_flg,rtc_id,source_system_cd,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_contact_history_tmp.audience_id,cdm_contact_history_tmp.audience_occur_id,cdm_contact_history_tmp.contact_dt,cdm_contact_history_tmp.contact_dttm,cdm_contact_history_tmp.contact_dttm_tz,cdm_contact_history_tmp.contact_id,cdm_contact_history_tmp.contact_nm,cdm_contact_history_tmp.contact_status_cd,cdm_contact_history_tmp.context_type_nm,cdm_contact_history_tmp.context_val,cdm_contact_history_tmp.control_group_flg,cdm_contact_history_tmp.external_contact_info_1_id,cdm_contact_history_tmp.external_contact_info_2_id,cdm_contact_history_tmp.identity_id,cdm_contact_history_tmp.optimization_backfill_flg,cdm_contact_history_tmp.rtc_id,cdm_contact_history_tmp.source_system_cd,cdm_contact_history_tmp.updated_by_nm,cdm_contact_history_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_contact_history_tmp         , cdm_contact_history, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_history_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_contact_history_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_contact_history;
+      drop table work.cdm_contact_history;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_contact_history;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_contact_status) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_contact_status_tmp          ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_status_tmp          ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_contact_status, table_keys=%str(contact_status_cd), out_table=work.cdm_contact_status);
+ data &tmplib..cdm_contact_status_tmp          ;
+     set work.cdm_contact_status;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if contact_status_cd='' then contact_status_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_contact_status_tmp          , cdm_contact_status);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_contact_status using &tmpdbschema..cdm_contact_status_tmp          
+         on (cdm_contact_status.contact_status_cd=cdm_contact_status_tmp.contact_status_cd)
+        when matched then  
+        update set cdm_contact_status.contact_status_desc = cdm_contact_status_tmp.contact_status_desc , cdm_contact_status.updated_by_nm = cdm_contact_status_tmp.updated_by_nm , cdm_contact_status.updated_dttm = cdm_contact_status_tmp.updated_dttm
+        when not matched then insert ( 
+        contact_status_cd,contact_status_desc,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_contact_status_tmp.contact_status_cd,cdm_contact_status_tmp.contact_status_desc,cdm_contact_status_tmp.updated_by_nm,cdm_contact_status_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_contact_status_tmp          , cdm_contact_status, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_contact_status_tmp          ;
+    quit;
+    %put ######## Staging table: cdm_contact_status_tmp           Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_contact_status;
+      drop table work.cdm_contact_status;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_contact_status;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_content_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_content_custom_attr_tmp     ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_content_custom_attr_tmp     ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_content_custom_attr, table_keys=%str(attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_version_id), out_table=work.cdm_content_custom_attr);
+ data &tmplib..cdm_content_custom_attr_tmp     ;
+     set work.cdm_content_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_version_id)), $hex64.);
+  if attribute_character_val='' then attribute_character_val='-'; if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if content_version_id='' then content_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_content_custom_attr_tmp     , cdm_content_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_content_custom_attr using &tmpdbschema..cdm_content_custom_attr_tmp     
+         on (cdm_content_custom_attr.Hashed_pk_col = cdm_content_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_content_custom_attr.content_id = cdm_content_custom_attr_tmp.content_id , cdm_content_custom_attr.extension_attribute_nm = cdm_content_custom_attr_tmp.extension_attribute_nm , cdm_content_custom_attr.updated_by_nm = cdm_content_custom_attr_tmp.updated_by_nm , cdm_content_custom_attr.updated_dttm = cdm_content_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_content_custom_attr_tmp.attribute_character_val,cdm_content_custom_attr_tmp.attribute_data_type_cd,cdm_content_custom_attr_tmp.attribute_dttm_val,cdm_content_custom_attr_tmp.attribute_nm,cdm_content_custom_attr_tmp.attribute_numeric_val,cdm_content_custom_attr_tmp.attribute_val,cdm_content_custom_attr_tmp.content_id,cdm_content_custom_attr_tmp.content_version_id,cdm_content_custom_attr_tmp.extension_attribute_nm,cdm_content_custom_attr_tmp.updated_by_nm,cdm_content_custom_attr_tmp.updated_dttm,cdm_content_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_content_custom_attr_tmp     , cdm_content_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_content_custom_attr_tmp     ;
+    quit;
+    %put ######## Staging table: cdm_content_custom_attr_tmp      Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_content_custom_attr;
+      drop table work.cdm_content_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_content_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_content_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_content_detail_tmp          ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_content_detail_tmp          ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_content_detail, table_keys=%str(content_version_id), out_table=work.cdm_content_detail);
+ data &tmplib..cdm_content_detail_tmp          ;
+     set work.cdm_content_detail;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if content_version_id='' then content_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_content_detail_tmp          , cdm_content_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_content_detail using &tmpdbschema..cdm_content_detail_tmp          
+         on (cdm_content_detail.content_version_id=cdm_content_detail_tmp.content_version_id)
+        when matched then  
+        update set cdm_content_detail.active_flg = cdm_content_detail_tmp.active_flg , cdm_content_detail.contact_content_category_nm = cdm_content_detail_tmp.contact_content_category_nm , cdm_content_detail.contact_content_cd = cdm_content_detail_tmp.contact_content_cd , cdm_content_detail.contact_content_class_nm = cdm_content_detail_tmp.contact_content_class_nm , cdm_content_detail.contact_content_desc = cdm_content_detail_tmp.contact_content_desc , cdm_content_detail.contact_content_nm = cdm_content_detail_tmp.contact_content_nm , cdm_content_detail.contact_content_status_cd = cdm_content_detail_tmp.contact_content_status_cd , cdm_content_detail.contact_content_type_nm = cdm_content_detail_tmp.contact_content_type_nm , cdm_content_detail.content_id = cdm_content_detail_tmp.content_id , cdm_content_detail.created_dt = cdm_content_detail_tmp.created_dt , cdm_content_detail.created_user_nm = cdm_content_detail_tmp.created_user_nm , cdm_content_detail.external_reference_txt = cdm_content_detail_tmp.external_reference_txt , cdm_content_detail.external_reference_url_txt = cdm_content_detail_tmp.external_reference_url_txt , cdm_content_detail.owner_nm = cdm_content_detail_tmp.owner_nm , cdm_content_detail.source_system_cd = cdm_content_detail_tmp.source_system_cd , cdm_content_detail.updated_by_nm = cdm_content_detail_tmp.updated_by_nm , cdm_content_detail.updated_dttm = cdm_content_detail_tmp.updated_dttm , cdm_content_detail.valid_from_dttm = cdm_content_detail_tmp.valid_from_dttm , cdm_content_detail.valid_to_dttm = cdm_content_detail_tmp.valid_to_dttm
+        when not matched then insert ( 
+        active_flg,contact_content_category_nm,contact_content_cd,contact_content_class_nm,contact_content_desc,contact_content_nm,contact_content_status_cd,contact_content_type_nm,content_id,content_version_id,created_dt,created_user_nm,external_reference_txt,external_reference_url_txt,owner_nm,source_system_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_content_detail_tmp.active_flg,cdm_content_detail_tmp.contact_content_category_nm,cdm_content_detail_tmp.contact_content_cd,cdm_content_detail_tmp.contact_content_class_nm,cdm_content_detail_tmp.contact_content_desc,cdm_content_detail_tmp.contact_content_nm,cdm_content_detail_tmp.contact_content_status_cd,cdm_content_detail_tmp.contact_content_type_nm,cdm_content_detail_tmp.content_id,cdm_content_detail_tmp.content_version_id,cdm_content_detail_tmp.created_dt,cdm_content_detail_tmp.created_user_nm,cdm_content_detail_tmp.external_reference_txt,cdm_content_detail_tmp.external_reference_url_txt,cdm_content_detail_tmp.owner_nm,cdm_content_detail_tmp.source_system_cd,cdm_content_detail_tmp.updated_by_nm,cdm_content_detail_tmp.updated_dttm,cdm_content_detail_tmp.valid_from_dttm,cdm_content_detail_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_content_detail_tmp          , cdm_content_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_content_detail_tmp          ;
+    quit;
+    %put ######## Staging table: cdm_content_detail_tmp           Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_content_detail;
+      drop table work.cdm_content_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_content_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_dyn_content_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_dyn_content_custom_attr_tmp ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_dyn_content_custom_attr_tmp ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_dyn_content_custom_attr, table_keys=%str(attribute_data_type_cd,attribute_nm,attribute_val,content_hash_val,content_version_id), out_table=work.cdm_dyn_content_custom_attr);
+ data &tmplib..cdm_dyn_content_custom_attr_tmp ;
+     set work.cdm_dyn_content_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_data_type_cd,attribute_nm,attribute_val,content_hash_val,content_version_id)), $hex64.);
+  if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if content_hash_val='' then content_hash_val='-'; if content_version_id='' then content_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_dyn_content_custom_attr_tmp , cdm_dyn_content_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_dyn_content_custom_attr using &tmpdbschema..cdm_dyn_content_custom_attr_tmp 
+         on (cdm_dyn_content_custom_attr.Hashed_pk_col = cdm_dyn_content_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_dyn_content_custom_attr.attribute_character_val = cdm_dyn_content_custom_attr_tmp.attribute_character_val , cdm_dyn_content_custom_attr.attribute_dttm_val = cdm_dyn_content_custom_attr_tmp.attribute_dttm_val , cdm_dyn_content_custom_attr.attribute_numeric_val = cdm_dyn_content_custom_attr_tmp.attribute_numeric_val , cdm_dyn_content_custom_attr.content_id = cdm_dyn_content_custom_attr_tmp.content_id , cdm_dyn_content_custom_attr.extension_attribute_nm = cdm_dyn_content_custom_attr_tmp.extension_attribute_nm , cdm_dyn_content_custom_attr.updated_by_nm = cdm_dyn_content_custom_attr_tmp.updated_by_nm , cdm_dyn_content_custom_attr.updated_dttm = cdm_dyn_content_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_hash_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_dyn_content_custom_attr_tmp.attribute_character_val,cdm_dyn_content_custom_attr_tmp.attribute_data_type_cd,cdm_dyn_content_custom_attr_tmp.attribute_dttm_val,cdm_dyn_content_custom_attr_tmp.attribute_nm,cdm_dyn_content_custom_attr_tmp.attribute_numeric_val,cdm_dyn_content_custom_attr_tmp.attribute_val,cdm_dyn_content_custom_attr_tmp.content_hash_val,cdm_dyn_content_custom_attr_tmp.content_id,cdm_dyn_content_custom_attr_tmp.content_version_id,cdm_dyn_content_custom_attr_tmp.extension_attribute_nm,cdm_dyn_content_custom_attr_tmp.updated_by_nm,cdm_dyn_content_custom_attr_tmp.updated_dttm,cdm_dyn_content_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_dyn_content_custom_attr_tmp , cdm_dyn_content_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_dyn_content_custom_attr_tmp ;
+    quit;
+    %put ######## Staging table: cdm_dyn_content_custom_attr_tmp  Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_dyn_content_custom_attr;
+      drop table work.cdm_dyn_content_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_dyn_content_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_identifier_type) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_identifier_type_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_identifier_type_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_identifier_type, table_keys=%str(identifier_type_id), out_table=work.cdm_identifier_type);
+ data &tmplib..cdm_identifier_type_tmp         ;
+     set work.cdm_identifier_type;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if identifier_type_id='' then identifier_type_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_identifier_type_tmp         , cdm_identifier_type);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_identifier_type using &tmpdbschema..cdm_identifier_type_tmp         
+         on (cdm_identifier_type.identifier_type_id=cdm_identifier_type_tmp.identifier_type_id)
+        when matched then  
+        update set cdm_identifier_type.identifier_type_desc = cdm_identifier_type_tmp.identifier_type_desc , cdm_identifier_type.updated_by_nm = cdm_identifier_type_tmp.updated_by_nm , cdm_identifier_type.updated_dttm = cdm_identifier_type_tmp.updated_dttm
+        when not matched then insert ( 
+        identifier_type_desc,identifier_type_id,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_identifier_type_tmp.identifier_type_desc,cdm_identifier_type_tmp.identifier_type_id,cdm_identifier_type_tmp.updated_by_nm,cdm_identifier_type_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_identifier_type_tmp         , cdm_identifier_type, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_identifier_type_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_identifier_type_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_identifier_type;
+      drop table work.cdm_identifier_type;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_identifier_type;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_identity_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_identity_attr_tmp           ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_attr_tmp           ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_identity_attr, table_keys=%str(identifier_type_id,identity_id), out_table=work.cdm_identity_attr);
+ data &tmplib..cdm_identity_attr_tmp           ;
+     set work.cdm_identity_attr;
+  if entry_dttm ne . then entry_dttm = tzoneu2s(entry_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if identifier_type_id='' then identifier_type_id='-'; if identity_id='' then identity_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_identity_attr_tmp           , cdm_identity_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_identity_attr using &tmpdbschema..cdm_identity_attr_tmp           
+         on (cdm_identity_attr.identifier_type_id=cdm_identity_attr_tmp.identifier_type_id and cdm_identity_attr.identity_id=cdm_identity_attr_tmp.identity_id)
+        when matched then  
+        update set cdm_identity_attr.entry_dttm = cdm_identity_attr_tmp.entry_dttm , cdm_identity_attr.source_system_cd = cdm_identity_attr_tmp.source_system_cd , cdm_identity_attr.updated_by_nm = cdm_identity_attr_tmp.updated_by_nm , cdm_identity_attr.updated_dttm = cdm_identity_attr_tmp.updated_dttm , cdm_identity_attr.user_identifier_val = cdm_identity_attr_tmp.user_identifier_val , cdm_identity_attr.valid_from_dttm = cdm_identity_attr_tmp.valid_from_dttm , cdm_identity_attr.valid_to_dttm = cdm_identity_attr_tmp.valid_to_dttm
+        when not matched then insert ( 
+        entry_dttm,identifier_type_id,identity_id,source_system_cd,updated_by_nm,updated_dttm,user_identifier_val,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_identity_attr_tmp.entry_dttm,cdm_identity_attr_tmp.identifier_type_id,cdm_identity_attr_tmp.identity_id,cdm_identity_attr_tmp.source_system_cd,cdm_identity_attr_tmp.updated_by_nm,cdm_identity_attr_tmp.updated_dttm,cdm_identity_attr_tmp.user_identifier_val,cdm_identity_attr_tmp.valid_from_dttm,cdm_identity_attr_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_identity_attr_tmp           , cdm_identity_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_attr_tmp           ;
+    quit;
+    %put ######## Staging table: cdm_identity_attr_tmp            Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_identity_attr;
+      drop table work.cdm_identity_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_identity_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_identity_map) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_identity_map_tmp            ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_map_tmp            ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_identity_map, table_keys=%str(identity_id), out_table=work.cdm_identity_map);
+ data &tmplib..cdm_identity_map_tmp            ;
+     set work.cdm_identity_map;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if identity_id='' then identity_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_identity_map_tmp            , cdm_identity_map);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_identity_map using &tmpdbschema..cdm_identity_map_tmp            
+         on (cdm_identity_map.identity_id=cdm_identity_map_tmp.identity_id)
+        when matched then  
+        update set cdm_identity_map.identity_type_cd = cdm_identity_map_tmp.identity_type_cd , cdm_identity_map.updated_by_nm = cdm_identity_map_tmp.updated_by_nm , cdm_identity_map.updated_dttm = cdm_identity_map_tmp.updated_dttm
+        when not matched then insert ( 
+        identity_id,identity_type_cd,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_identity_map_tmp.identity_id,cdm_identity_map_tmp.identity_type_cd,cdm_identity_map_tmp.updated_by_nm,cdm_identity_map_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_identity_map_tmp            , cdm_identity_map, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_map_tmp            ;
+    quit;
+    %put ######## Staging table: cdm_identity_map_tmp             Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_identity_map;
+      drop table work.cdm_identity_map;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_identity_map;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_identity_type) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_identity_type_tmp           ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_type_tmp           ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_identity_type, table_keys=%str(identity_type_cd), out_table=work.cdm_identity_type);
+ data &tmplib..cdm_identity_type_tmp           ;
+     set work.cdm_identity_type;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if identity_type_cd='' then identity_type_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_identity_type_tmp           , cdm_identity_type);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_identity_type using &tmpdbschema..cdm_identity_type_tmp           
+         on (cdm_identity_type.identity_type_cd=cdm_identity_type_tmp.identity_type_cd)
+        when matched then  
+        update set cdm_identity_type.identity_type_desc = cdm_identity_type_tmp.identity_type_desc , cdm_identity_type.updated_by_nm = cdm_identity_type_tmp.updated_by_nm , cdm_identity_type.updated_dttm = cdm_identity_type_tmp.updated_dttm
+        when not matched then insert ( 
+        identity_type_cd,identity_type_desc,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_identity_type_tmp.identity_type_cd,cdm_identity_type_tmp.identity_type_desc,cdm_identity_type_tmp.updated_by_nm,cdm_identity_type_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_identity_type_tmp           , cdm_identity_type, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_identity_type_tmp           ;
+    quit;
+    %put ######## Staging table: cdm_identity_type_tmp            Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_identity_type;
+      drop table work.cdm_identity_type;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_identity_type;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_occurrence_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_occurrence_detail_tmp       ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_occurrence_detail_tmp       ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_occurrence_detail, table_keys=%str(occurrence_id), out_table=work.cdm_occurrence_detail);
+ data &tmplib..cdm_occurrence_detail_tmp       ;
+     set work.cdm_occurrence_detail;
+  if end_dttm ne . then end_dttm = tzoneu2s(end_dttm,&timeZone_Value.);if start_dttm ne . then start_dttm = tzoneu2s(start_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if occurrence_id='' then occurrence_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_occurrence_detail_tmp       , cdm_occurrence_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_occurrence_detail using &tmpdbschema..cdm_occurrence_detail_tmp       
+         on (cdm_occurrence_detail.occurrence_id=cdm_occurrence_detail_tmp.occurrence_id)
+        when matched then  
+        update set cdm_occurrence_detail.end_dttm = cdm_occurrence_detail_tmp.end_dttm , cdm_occurrence_detail.execution_status_cd = cdm_occurrence_detail_tmp.execution_status_cd , cdm_occurrence_detail.occurrence_no = cdm_occurrence_detail_tmp.occurrence_no , cdm_occurrence_detail.occurrence_object_id = cdm_occurrence_detail_tmp.occurrence_object_id , cdm_occurrence_detail.occurrence_object_type_cd = cdm_occurrence_detail_tmp.occurrence_object_type_cd , cdm_occurrence_detail.occurrence_type_cd = cdm_occurrence_detail_tmp.occurrence_type_cd , cdm_occurrence_detail.source_system_cd = cdm_occurrence_detail_tmp.source_system_cd , cdm_occurrence_detail.start_dttm = cdm_occurrence_detail_tmp.start_dttm , cdm_occurrence_detail.updated_by_nm = cdm_occurrence_detail_tmp.updated_by_nm , cdm_occurrence_detail.updated_dttm = cdm_occurrence_detail_tmp.updated_dttm
+        when not matched then insert ( 
+        end_dttm,execution_status_cd,occurrence_id,occurrence_no,occurrence_object_id,occurrence_object_type_cd,occurrence_type_cd,source_system_cd,start_dttm,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_occurrence_detail_tmp.end_dttm,cdm_occurrence_detail_tmp.execution_status_cd,cdm_occurrence_detail_tmp.occurrence_id,cdm_occurrence_detail_tmp.occurrence_no,cdm_occurrence_detail_tmp.occurrence_object_id,cdm_occurrence_detail_tmp.occurrence_object_type_cd,cdm_occurrence_detail_tmp.occurrence_type_cd,cdm_occurrence_detail_tmp.source_system_cd,cdm_occurrence_detail_tmp.start_dttm,cdm_occurrence_detail_tmp.updated_by_nm,cdm_occurrence_detail_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_occurrence_detail_tmp       , cdm_occurrence_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_occurrence_detail_tmp       ;
+    quit;
+    %put ######## Staging table: cdm_occurrence_detail_tmp        Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_occurrence_detail;
+      drop table work.cdm_occurrence_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_occurrence_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_response_channel) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_response_channel_tmp        ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_response_channel_tmp        ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_response_channel, table_keys=%str(response_channel_cd), out_table=work.cdm_response_channel);
+ data &tmplib..cdm_response_channel_tmp        ;
+     set work.cdm_response_channel;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if response_channel_cd='' then response_channel_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_response_channel_tmp        , cdm_response_channel);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_response_channel using &tmpdbschema..cdm_response_channel_tmp        
+         on (cdm_response_channel.response_channel_cd=cdm_response_channel_tmp.response_channel_cd)
+        when matched then  
+        update set cdm_response_channel.response_channel_nm = cdm_response_channel_tmp.response_channel_nm , cdm_response_channel.updated_by_nm = cdm_response_channel_tmp.updated_by_nm , cdm_response_channel.updated_dttm = cdm_response_channel_tmp.updated_dttm
+        when not matched then insert ( 
+        response_channel_cd,response_channel_nm,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_response_channel_tmp.response_channel_cd,cdm_response_channel_tmp.response_channel_nm,cdm_response_channel_tmp.updated_by_nm,cdm_response_channel_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_response_channel_tmp        , cdm_response_channel, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_response_channel_tmp        ;
+    quit;
+    %put ######## Staging table: cdm_response_channel_tmp         Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_response_channel;
+      drop table work.cdm_response_channel;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_response_channel;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_response_extended_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_response_extended_attr_tmp  ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_response_extended_attr_tmp  ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_response_extended_attr, table_keys=%str(attribute_nm,response_attribute_type_cd,response_id), out_table=work.cdm_response_extended_attr);
+ data &tmplib..cdm_response_extended_attr_tmp  ;
+     set work.cdm_response_extended_attr;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if attribute_nm='' then attribute_nm='-'; if response_attribute_type_cd='' then response_attribute_type_cd='-'; if response_id='' then response_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_response_extended_attr_tmp  , cdm_response_extended_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_response_extended_attr using &tmpdbschema..cdm_response_extended_attr_tmp  
+         on (cdm_response_extended_attr.attribute_nm=cdm_response_extended_attr_tmp.attribute_nm and cdm_response_extended_attr.response_attribute_type_cd=cdm_response_extended_attr_tmp.response_attribute_type_cd and cdm_response_extended_attr.response_id=cdm_response_extended_attr_tmp.response_id)
+        when matched then  
+        update set cdm_response_extended_attr.attribute_data_type_cd = cdm_response_extended_attr_tmp.attribute_data_type_cd , cdm_response_extended_attr.attribute_val = cdm_response_extended_attr_tmp.attribute_val , cdm_response_extended_attr.updated_by_nm = cdm_response_extended_attr_tmp.updated_by_nm , cdm_response_extended_attr.updated_dttm = cdm_response_extended_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_data_type_cd,attribute_nm,attribute_val,response_attribute_type_cd,response_id,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_response_extended_attr_tmp.attribute_data_type_cd,cdm_response_extended_attr_tmp.attribute_nm,cdm_response_extended_attr_tmp.attribute_val,cdm_response_extended_attr_tmp.response_attribute_type_cd,cdm_response_extended_attr_tmp.response_id,cdm_response_extended_attr_tmp.updated_by_nm,cdm_response_extended_attr_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_response_extended_attr_tmp  , cdm_response_extended_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_response_extended_attr_tmp  ;
+    quit;
+    %put ######## Staging table: cdm_response_extended_attr_tmp   Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_response_extended_attr;
+      drop table work.cdm_response_extended_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_response_extended_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_response_history) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_response_history_tmp        ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_response_history_tmp        ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_response_history, table_keys=%str(response_id), out_table=work.cdm_response_history);
+ data &tmplib..cdm_response_history_tmp        ;
+     set work.cdm_response_history;
+  if response_dttm ne . then response_dttm = tzoneu2s(response_dttm,&timeZone_Value.);if response_dttm_tz ne . then response_dttm_tz = tzoneu2s(response_dttm_tz,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if response_id='' then response_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_response_history_tmp        , cdm_response_history);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_response_history using &tmpdbschema..cdm_response_history_tmp        
+         on (cdm_response_history.response_id=cdm_response_history_tmp.response_id)
+        when matched then  
+        update set cdm_response_history.audience_id = cdm_response_history_tmp.audience_id , cdm_response_history.audience_occur_id = cdm_response_history_tmp.audience_occur_id , cdm_response_history.contact_id = cdm_response_history_tmp.contact_id , cdm_response_history.content_hash_val = cdm_response_history_tmp.content_hash_val , cdm_response_history.content_id = cdm_response_history_tmp.content_id , cdm_response_history.content_version_id = cdm_response_history_tmp.content_version_id , cdm_response_history.context_type_nm = cdm_response_history_tmp.context_type_nm , cdm_response_history.context_val = cdm_response_history_tmp.context_val , cdm_response_history.conversion_flg = cdm_response_history_tmp.conversion_flg , cdm_response_history.external_contact_info_1_id = cdm_response_history_tmp.external_contact_info_1_id , cdm_response_history.external_contact_info_2_id = cdm_response_history_tmp.external_contact_info_2_id , cdm_response_history.identity_id = cdm_response_history_tmp.identity_id , cdm_response_history.inferred_response_flg = cdm_response_history_tmp.inferred_response_flg , cdm_response_history.properties_map_doc = cdm_response_history_tmp.properties_map_doc , cdm_response_history.response_cd = cdm_response_history_tmp.response_cd , cdm_response_history.response_channel_cd = cdm_response_history_tmp.response_channel_cd , cdm_response_history.response_dt = cdm_response_history_tmp.response_dt , cdm_response_history.response_dttm = cdm_response_history_tmp.response_dttm , cdm_response_history.response_dttm_tz = cdm_response_history_tmp.response_dttm_tz , cdm_response_history.response_type_cd = cdm_response_history_tmp.response_type_cd , cdm_response_history.response_val_amt = cdm_response_history_tmp.response_val_amt , cdm_response_history.rtc_id = cdm_response_history_tmp.rtc_id , cdm_response_history.source_system_cd = cdm_response_history_tmp.source_system_cd , cdm_response_history.updated_by_nm = cdm_response_history_tmp.updated_by_nm , cdm_response_history.updated_dttm = cdm_response_history_tmp.updated_dttm
+        when not matched then insert ( 
+        audience_id,audience_occur_id,contact_id,content_hash_val,content_id,content_version_id,context_type_nm,context_val,conversion_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,inferred_response_flg,properties_map_doc,response_cd,response_channel_cd,response_dt,response_dttm,response_dttm_tz,response_id,response_type_cd,response_val_amt,rtc_id,source_system_cd,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_response_history_tmp.audience_id,cdm_response_history_tmp.audience_occur_id,cdm_response_history_tmp.contact_id,cdm_response_history_tmp.content_hash_val,cdm_response_history_tmp.content_id,cdm_response_history_tmp.content_version_id,cdm_response_history_tmp.context_type_nm,cdm_response_history_tmp.context_val,cdm_response_history_tmp.conversion_flg,cdm_response_history_tmp.external_contact_info_1_id,cdm_response_history_tmp.external_contact_info_2_id,cdm_response_history_tmp.identity_id,cdm_response_history_tmp.inferred_response_flg,cdm_response_history_tmp.properties_map_doc,cdm_response_history_tmp.response_cd,cdm_response_history_tmp.response_channel_cd,cdm_response_history_tmp.response_dt,cdm_response_history_tmp.response_dttm,cdm_response_history_tmp.response_dttm_tz,cdm_response_history_tmp.response_id,cdm_response_history_tmp.response_type_cd,cdm_response_history_tmp.response_val_amt,cdm_response_history_tmp.rtc_id,cdm_response_history_tmp.source_system_cd,cdm_response_history_tmp.updated_by_nm,cdm_response_history_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_response_history_tmp        , cdm_response_history, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_response_history_tmp        ;
+    quit;
+    %put ######## Staging table: cdm_response_history_tmp         Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_response_history;
+      drop table work.cdm_response_history;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_response_history;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_response_lookup) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_response_lookup_tmp         ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_response_lookup_tmp         ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_response_lookup, table_keys=%str(response_cd), out_table=work.cdm_response_lookup);
+ data &tmplib..cdm_response_lookup_tmp         ;
+     set work.cdm_response_lookup;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if response_cd='' then response_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_response_lookup_tmp         , cdm_response_lookup);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_response_lookup using &tmpdbschema..cdm_response_lookup_tmp         
+         on (cdm_response_lookup.response_cd=cdm_response_lookup_tmp.response_cd)
+        when matched then  
+        update set cdm_response_lookup.response_nm = cdm_response_lookup_tmp.response_nm , cdm_response_lookup.updated_by_nm = cdm_response_lookup_tmp.updated_by_nm , cdm_response_lookup.updated_dttm = cdm_response_lookup_tmp.updated_dttm
+        when not matched then insert ( 
+        response_cd,response_nm,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_response_lookup_tmp.response_cd,cdm_response_lookup_tmp.response_nm,cdm_response_lookup_tmp.updated_by_nm,cdm_response_lookup_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_response_lookup_tmp         , cdm_response_lookup, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_response_lookup_tmp         ;
+    quit;
+    %put ######## Staging table: cdm_response_lookup_tmp          Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_response_lookup;
+      drop table work.cdm_response_lookup;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_response_lookup;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_response_type) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_response_type_tmp           ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_response_type_tmp           ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_response_type, table_keys=%str(response_type_cd), out_table=work.cdm_response_type);
+ data &tmplib..cdm_response_type_tmp           ;
+     set work.cdm_response_type;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if response_type_cd='' then response_type_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_response_type_tmp           , cdm_response_type);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_response_type using &tmpdbschema..cdm_response_type_tmp           
+         on (cdm_response_type.response_type_cd=cdm_response_type_tmp.response_type_cd)
+        when matched then  
+        update set cdm_response_type.response_type_desc = cdm_response_type_tmp.response_type_desc , cdm_response_type.updated_by_nm = cdm_response_type_tmp.updated_by_nm , cdm_response_type.updated_dttm = cdm_response_type_tmp.updated_dttm
+        when not matched then insert ( 
+        response_type_cd,response_type_desc,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_response_type_tmp.response_type_cd,cdm_response_type_tmp.response_type_desc,cdm_response_type_tmp.updated_by_nm,cdm_response_type_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_response_type_tmp           , cdm_response_type, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_response_type_tmp           ;
+    quit;
+    %put ######## Staging table: cdm_response_type_tmp            Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_response_type;
+      drop table work.cdm_response_type;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_response_type;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_rtc_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_rtc_detail_tmp              ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_rtc_detail_tmp              ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_rtc_detail, table_keys=%str(rtc_id), out_table=work.cdm_rtc_detail);
+ data &tmplib..cdm_rtc_detail_tmp              ;
+     set work.cdm_rtc_detail;
+  if processed_dttm ne . then processed_dttm = tzoneu2s(processed_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if rtc_id='' then rtc_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_rtc_detail_tmp              , cdm_rtc_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_rtc_detail using &tmpdbschema..cdm_rtc_detail_tmp              
+         on (cdm_rtc_detail.rtc_id=cdm_rtc_detail_tmp.rtc_id)
+        when matched then  
+        update set cdm_rtc_detail.deleted_flg = cdm_rtc_detail_tmp.deleted_flg , cdm_rtc_detail.execution_status_cd = cdm_rtc_detail_tmp.execution_status_cd , cdm_rtc_detail.occurrence_id = cdm_rtc_detail_tmp.occurrence_id , cdm_rtc_detail.processed_dttm = cdm_rtc_detail_tmp.processed_dttm , cdm_rtc_detail.response_tracking_flg = cdm_rtc_detail_tmp.response_tracking_flg , cdm_rtc_detail.segment_id = cdm_rtc_detail_tmp.segment_id , cdm_rtc_detail.segment_version_id = cdm_rtc_detail_tmp.segment_version_id , cdm_rtc_detail.source_system_cd = cdm_rtc_detail_tmp.source_system_cd , cdm_rtc_detail.task_id = cdm_rtc_detail_tmp.task_id , cdm_rtc_detail.task_occurrence_no = cdm_rtc_detail_tmp.task_occurrence_no , cdm_rtc_detail.task_version_id = cdm_rtc_detail_tmp.task_version_id , cdm_rtc_detail.updated_by_nm = cdm_rtc_detail_tmp.updated_by_nm , cdm_rtc_detail.updated_dttm = cdm_rtc_detail_tmp.updated_dttm
+        when not matched then insert ( 
+        deleted_flg,execution_status_cd,occurrence_id,processed_dttm,response_tracking_flg,rtc_id,segment_id,segment_version_id,source_system_cd,task_id,task_occurrence_no,task_version_id,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_rtc_detail_tmp.deleted_flg,cdm_rtc_detail_tmp.execution_status_cd,cdm_rtc_detail_tmp.occurrence_id,cdm_rtc_detail_tmp.processed_dttm,cdm_rtc_detail_tmp.response_tracking_flg,cdm_rtc_detail_tmp.rtc_id,cdm_rtc_detail_tmp.segment_id,cdm_rtc_detail_tmp.segment_version_id,cdm_rtc_detail_tmp.source_system_cd,cdm_rtc_detail_tmp.task_id,cdm_rtc_detail_tmp.task_occurrence_no,cdm_rtc_detail_tmp.task_version_id,cdm_rtc_detail_tmp.updated_by_nm,cdm_rtc_detail_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_rtc_detail_tmp              , cdm_rtc_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_rtc_detail_tmp              ;
+    quit;
+    %put ######## Staging table: cdm_rtc_detail_tmp               Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_rtc_detail;
+      drop table work.cdm_rtc_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_rtc_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_rtc_x_content) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_rtc_x_content_tmp           ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_rtc_x_content_tmp           ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_rtc_x_content, table_keys=%str(content_version_id,rtc_id), out_table=work.cdm_rtc_x_content);
+ data &tmplib..cdm_rtc_x_content_tmp           ;
+     set work.cdm_rtc_x_content;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if content_version_id='' then content_version_id='-'; if rtc_id='' then rtc_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_rtc_x_content_tmp           , cdm_rtc_x_content);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_rtc_x_content using &tmpdbschema..cdm_rtc_x_content_tmp           
+         on (cdm_rtc_x_content.content_version_id=cdm_rtc_x_content_tmp.content_version_id and cdm_rtc_x_content.rtc_id=cdm_rtc_x_content_tmp.rtc_id)
+        when matched then  
+        update set cdm_rtc_x_content.content_hash_val = cdm_rtc_x_content_tmp.content_hash_val , cdm_rtc_x_content.content_id = cdm_rtc_x_content_tmp.content_id , cdm_rtc_x_content.rtc_x_content_sk = cdm_rtc_x_content_tmp.rtc_x_content_sk , cdm_rtc_x_content.sequence_no = cdm_rtc_x_content_tmp.sequence_no , cdm_rtc_x_content.updated_by_nm = cdm_rtc_x_content_tmp.updated_by_nm , cdm_rtc_x_content.updated_dttm = cdm_rtc_x_content_tmp.updated_dttm
+        when not matched then insert ( 
+        content_hash_val,content_id,content_version_id,rtc_id,rtc_x_content_sk,sequence_no,updated_by_nm,updated_dttm
+         ) values ( 
+        cdm_rtc_x_content_tmp.content_hash_val,cdm_rtc_x_content_tmp.content_id,cdm_rtc_x_content_tmp.content_version_id,cdm_rtc_x_content_tmp.rtc_id,cdm_rtc_x_content_tmp.rtc_x_content_sk,cdm_rtc_x_content_tmp.sequence_no,cdm_rtc_x_content_tmp.updated_by_nm,cdm_rtc_x_content_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_rtc_x_content_tmp           , cdm_rtc_x_content, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_rtc_x_content_tmp           ;
+    quit;
+    %put ######## Staging table: cdm_rtc_x_content_tmp            Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_rtc_x_content;
+      drop table work.cdm_rtc_x_content;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_rtc_x_content;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_custom_attr_tmp     ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_custom_attr_tmp     ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_custom_attr, table_keys=%str(attribute_data_type_cd,attribute_nm,attribute_val,segment_version_id), out_table=work.cdm_segment_custom_attr);
+ data &tmplib..cdm_segment_custom_attr_tmp     ;
+     set work.cdm_segment_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_data_type_cd,attribute_nm,attribute_val,segment_version_id)), $hex64.);
+  if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if segment_version_id='' then segment_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_custom_attr_tmp     , cdm_segment_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_custom_attr using &tmpdbschema..cdm_segment_custom_attr_tmp     
+         on (cdm_segment_custom_attr.Hashed_pk_col = cdm_segment_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_segment_custom_attr.attribute_character_val = cdm_segment_custom_attr_tmp.attribute_character_val , cdm_segment_custom_attr.attribute_dttm_val = cdm_segment_custom_attr_tmp.attribute_dttm_val , cdm_segment_custom_attr.attribute_numeric_val = cdm_segment_custom_attr_tmp.attribute_numeric_val , cdm_segment_custom_attr.segment_id = cdm_segment_custom_attr_tmp.segment_id , cdm_segment_custom_attr.updated_by_nm = cdm_segment_custom_attr_tmp.updated_by_nm , cdm_segment_custom_attr.updated_dttm = cdm_segment_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,segment_id,segment_version_id,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_segment_custom_attr_tmp.attribute_character_val,cdm_segment_custom_attr_tmp.attribute_data_type_cd,cdm_segment_custom_attr_tmp.attribute_dttm_val,cdm_segment_custom_attr_tmp.attribute_nm,cdm_segment_custom_attr_tmp.attribute_numeric_val,cdm_segment_custom_attr_tmp.attribute_val,cdm_segment_custom_attr_tmp.segment_id,cdm_segment_custom_attr_tmp.segment_version_id,cdm_segment_custom_attr_tmp.updated_by_nm,cdm_segment_custom_attr_tmp.updated_dttm,cdm_segment_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_custom_attr_tmp     , cdm_segment_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_custom_attr_tmp     ;
+    quit;
+    %put ######## Staging table: cdm_segment_custom_attr_tmp      Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_custom_attr;
+      drop table work.cdm_segment_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_detail_tmp          ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_detail_tmp          ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_detail, table_keys=%str(segment_version_id), out_table=work.cdm_segment_detail);
+ data &tmplib..cdm_segment_detail_tmp          ;
+     set work.cdm_segment_detail;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if segment_version_id='' then segment_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_detail_tmp          , cdm_segment_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_detail using &tmpdbschema..cdm_segment_detail_tmp          
+         on (cdm_segment_detail.segment_version_id=cdm_segment_detail_tmp.segment_version_id)
+        when matched then  
+        update set cdm_segment_detail.segment_category_nm = cdm_segment_detail_tmp.segment_category_nm , cdm_segment_detail.segment_cd = cdm_segment_detail_tmp.segment_cd , cdm_segment_detail.segment_desc = cdm_segment_detail_tmp.segment_desc , cdm_segment_detail.segment_id = cdm_segment_detail_tmp.segment_id , cdm_segment_detail.segment_map_id = cdm_segment_detail_tmp.segment_map_id , cdm_segment_detail.segment_map_version_id = cdm_segment_detail_tmp.segment_map_version_id , cdm_segment_detail.segment_nm = cdm_segment_detail_tmp.segment_nm , cdm_segment_detail.segment_src_nm = cdm_segment_detail_tmp.segment_src_nm , cdm_segment_detail.segment_status_cd = cdm_segment_detail_tmp.segment_status_cd , cdm_segment_detail.source_system_cd = cdm_segment_detail_tmp.source_system_cd , cdm_segment_detail.updated_by_nm = cdm_segment_detail_tmp.updated_by_nm , cdm_segment_detail.updated_dttm = cdm_segment_detail_tmp.updated_dttm , cdm_segment_detail.valid_from_dttm = cdm_segment_detail_tmp.valid_from_dttm , cdm_segment_detail.valid_to_dttm = cdm_segment_detail_tmp.valid_to_dttm
+        when not matched then insert ( 
+        segment_category_nm,segment_cd,segment_desc,segment_id,segment_map_id,segment_map_version_id,segment_nm,segment_src_nm,segment_status_cd,segment_version_id,source_system_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_segment_detail_tmp.segment_category_nm,cdm_segment_detail_tmp.segment_cd,cdm_segment_detail_tmp.segment_desc,cdm_segment_detail_tmp.segment_id,cdm_segment_detail_tmp.segment_map_id,cdm_segment_detail_tmp.segment_map_version_id,cdm_segment_detail_tmp.segment_nm,cdm_segment_detail_tmp.segment_src_nm,cdm_segment_detail_tmp.segment_status_cd,cdm_segment_detail_tmp.segment_version_id,cdm_segment_detail_tmp.source_system_cd,cdm_segment_detail_tmp.updated_by_nm,cdm_segment_detail_tmp.updated_dttm,cdm_segment_detail_tmp.valid_from_dttm,cdm_segment_detail_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_detail_tmp          , cdm_segment_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_detail_tmp          ;
+    quit;
+    %put ######## Staging table: cdm_segment_detail_tmp           Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_detail;
+      drop table work.cdm_segment_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_map) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_map_tmp             ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_map_tmp             ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_map, table_keys=%str(segment_map_version_id), out_table=work.cdm_segment_map);
+ data &tmplib..cdm_segment_map_tmp             ;
+     set work.cdm_segment_map;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if segment_map_version_id='' then segment_map_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_map_tmp             , cdm_segment_map);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_map using &tmpdbschema..cdm_segment_map_tmp             
+         on (cdm_segment_map.segment_map_version_id=cdm_segment_map_tmp.segment_map_version_id)
+        when matched then  
+        update set cdm_segment_map.segment_map_category_nm = cdm_segment_map_tmp.segment_map_category_nm , cdm_segment_map.segment_map_cd = cdm_segment_map_tmp.segment_map_cd , cdm_segment_map.segment_map_desc = cdm_segment_map_tmp.segment_map_desc , cdm_segment_map.segment_map_id = cdm_segment_map_tmp.segment_map_id , cdm_segment_map.segment_map_nm = cdm_segment_map_tmp.segment_map_nm , cdm_segment_map.segment_map_src_nm = cdm_segment_map_tmp.segment_map_src_nm , cdm_segment_map.segment_map_status_cd = cdm_segment_map_tmp.segment_map_status_cd , cdm_segment_map.source_system_cd = cdm_segment_map_tmp.source_system_cd , cdm_segment_map.updated_by_nm = cdm_segment_map_tmp.updated_by_nm , cdm_segment_map.updated_dttm = cdm_segment_map_tmp.updated_dttm , cdm_segment_map.valid_from_dttm = cdm_segment_map_tmp.valid_from_dttm , cdm_segment_map.valid_to_dttm = cdm_segment_map_tmp.valid_to_dttm
+        when not matched then insert ( 
+        segment_map_category_nm,segment_map_cd,segment_map_desc,segment_map_id,segment_map_nm,segment_map_src_nm,segment_map_status_cd,segment_map_version_id,source_system_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_segment_map_tmp.segment_map_category_nm,cdm_segment_map_tmp.segment_map_cd,cdm_segment_map_tmp.segment_map_desc,cdm_segment_map_tmp.segment_map_id,cdm_segment_map_tmp.segment_map_nm,cdm_segment_map_tmp.segment_map_src_nm,cdm_segment_map_tmp.segment_map_status_cd,cdm_segment_map_tmp.segment_map_version_id,cdm_segment_map_tmp.source_system_cd,cdm_segment_map_tmp.updated_by_nm,cdm_segment_map_tmp.updated_dttm,cdm_segment_map_tmp.valid_from_dttm,cdm_segment_map_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_map_tmp             , cdm_segment_map, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_map_tmp             ;
+    quit;
+    %put ######## Staging table: cdm_segment_map_tmp              Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_map;
+      drop table work.cdm_segment_map;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_map;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_map_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_map_custom_attr_tmp ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_map_custom_attr_tmp ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_map_custom_attr, table_keys=%str(attribute_data_type_cd,attribute_nm,attribute_val,segment_map_version_id), out_table=work.cdm_segment_map_custom_attr);
+ data &tmplib..cdm_segment_map_custom_attr_tmp ;
+     set work.cdm_segment_map_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_data_type_cd,attribute_nm,attribute_val,segment_map_version_id)), $hex64.);
+  if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if segment_map_version_id='' then segment_map_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_map_custom_attr_tmp , cdm_segment_map_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_map_custom_attr using &tmpdbschema..cdm_segment_map_custom_attr_tmp 
+         on (cdm_segment_map_custom_attr.Hashed_pk_col = cdm_segment_map_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_segment_map_custom_attr.attribute_character_val = cdm_segment_map_custom_attr_tmp.attribute_character_val , cdm_segment_map_custom_attr.attribute_dttm_val = cdm_segment_map_custom_attr_tmp.attribute_dttm_val , cdm_segment_map_custom_attr.attribute_numeric_val = cdm_segment_map_custom_attr_tmp.attribute_numeric_val , cdm_segment_map_custom_attr.segment_map_id = cdm_segment_map_custom_attr_tmp.segment_map_id , cdm_segment_map_custom_attr.updated_by_nm = cdm_segment_map_custom_attr_tmp.updated_by_nm , cdm_segment_map_custom_attr.updated_dttm = cdm_segment_map_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,segment_map_id,segment_map_version_id,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_segment_map_custom_attr_tmp.attribute_character_val,cdm_segment_map_custom_attr_tmp.attribute_data_type_cd,cdm_segment_map_custom_attr_tmp.attribute_dttm_val,cdm_segment_map_custom_attr_tmp.attribute_nm,cdm_segment_map_custom_attr_tmp.attribute_numeric_val,cdm_segment_map_custom_attr_tmp.attribute_val,cdm_segment_map_custom_attr_tmp.segment_map_id,cdm_segment_map_custom_attr_tmp.segment_map_version_id,cdm_segment_map_custom_attr_tmp.updated_by_nm,cdm_segment_map_custom_attr_tmp.updated_dttm,cdm_segment_map_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_map_custom_attr_tmp , cdm_segment_map_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_map_custom_attr_tmp ;
+    quit;
+    %put ######## Staging table: cdm_segment_map_custom_attr_tmp  Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_map_custom_attr;
+      drop table work.cdm_segment_map_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_map_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_test) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_test_tmp            ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_test_tmp            ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_test, table_keys=%str(task_version_id,test_cd), out_table=work.cdm_segment_test);
+ data &tmplib..cdm_segment_test_tmp            ;
+     set work.cdm_segment_test;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if task_version_id='' then task_version_id='-'; if test_cd='' then test_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_test_tmp            , cdm_segment_test);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_test using &tmpdbschema..cdm_segment_test_tmp            
+         on (cdm_segment_test.task_version_id=cdm_segment_test_tmp.task_version_id and cdm_segment_test.test_cd=cdm_segment_test_tmp.test_cd)
+        when matched then  
+        update set cdm_segment_test.stratified_samp_criteria_txt = cdm_segment_test_tmp.stratified_samp_criteria_txt , cdm_segment_test.stratified_sampling_flg = cdm_segment_test_tmp.stratified_sampling_flg , cdm_segment_test.task_id = cdm_segment_test_tmp.task_id , cdm_segment_test.test_cnt = cdm_segment_test_tmp.test_cnt , cdm_segment_test.test_enabled_flg = cdm_segment_test_tmp.test_enabled_flg , cdm_segment_test.test_nm = cdm_segment_test_tmp.test_nm , cdm_segment_test.test_pct = cdm_segment_test_tmp.test_pct , cdm_segment_test.test_sizing_type_nm = cdm_segment_test_tmp.test_sizing_type_nm , cdm_segment_test.test_type_nm = cdm_segment_test_tmp.test_type_nm , cdm_segment_test.updated_dttm = cdm_segment_test_tmp.updated_dttm
+        when not matched then insert ( 
+        stratified_samp_criteria_txt,stratified_sampling_flg,task_id,task_version_id,test_cd,test_cnt,test_enabled_flg,test_nm,test_pct,test_sizing_type_nm,test_type_nm,updated_dttm
+         ) values ( 
+        cdm_segment_test_tmp.stratified_samp_criteria_txt,cdm_segment_test_tmp.stratified_sampling_flg,cdm_segment_test_tmp.task_id,cdm_segment_test_tmp.task_version_id,cdm_segment_test_tmp.test_cd,cdm_segment_test_tmp.test_cnt,cdm_segment_test_tmp.test_enabled_flg,cdm_segment_test_tmp.test_nm,cdm_segment_test_tmp.test_pct,cdm_segment_test_tmp.test_sizing_type_nm,cdm_segment_test_tmp.test_type_nm,cdm_segment_test_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_test_tmp            , cdm_segment_test, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_test_tmp            ;
+    quit;
+    %put ######## Staging table: cdm_segment_test_tmp             Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_test;
+      drop table work.cdm_segment_test;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_test;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_segment_test_x_segment) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_segment_test_x_segment_tmp  ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_test_x_segment_tmp  ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_segment_test_x_segment, table_keys=%str(segment_id,task_version_id,test_cd), out_table=work.cdm_segment_test_x_segment);
+ data &tmplib..cdm_segment_test_x_segment_tmp  ;
+     set work.cdm_segment_test_x_segment;
+  if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  if segment_id='' then segment_id='-'; if task_version_id='' then task_version_id='-'; if test_cd='' then test_cd='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_segment_test_x_segment_tmp  , cdm_segment_test_x_segment);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_segment_test_x_segment using &tmpdbschema..cdm_segment_test_x_segment_tmp  
+         on (cdm_segment_test_x_segment.segment_id=cdm_segment_test_x_segment_tmp.segment_id and cdm_segment_test_x_segment.task_version_id=cdm_segment_test_x_segment_tmp.task_version_id and cdm_segment_test_x_segment.test_cd=cdm_segment_test_x_segment_tmp.test_cd)
+        when matched then  
+        update set cdm_segment_test_x_segment.task_id = cdm_segment_test_x_segment_tmp.task_id , cdm_segment_test_x_segment.updated_dttm = cdm_segment_test_x_segment_tmp.updated_dttm
+        when not matched then insert ( 
+        segment_id,task_id,task_version_id,test_cd,updated_dttm
+         ) values ( 
+        cdm_segment_test_x_segment_tmp.segment_id,cdm_segment_test_x_segment_tmp.task_id,cdm_segment_test_x_segment_tmp.task_version_id,cdm_segment_test_x_segment_tmp.test_cd,cdm_segment_test_x_segment_tmp.updated_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_segment_test_x_segment_tmp  , cdm_segment_test_x_segment, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_segment_test_x_segment_tmp  ;
+    quit;
+    %put ######## Staging table: cdm_segment_test_x_segment_tmp   Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_segment_test_x_segment;
+      drop table work.cdm_segment_test_x_segment;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_segment_test_x_segment;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_task_custom_attr) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_task_custom_attr_tmp        ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_task_custom_attr_tmp        ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_task_custom_attr, table_keys=%str(attribute_data_type_cd,attribute_nm,attribute_val,task_version_id), out_table=work.cdm_task_custom_attr);
+ data &tmplib..cdm_task_custom_attr_tmp        ;
+     set work.cdm_task_custom_attr;
+  if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
+  Hashed_pk_col = put(sha256(catx('|',attribute_data_type_cd,attribute_nm,attribute_val,task_version_id)), $hex64.);
+  if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if task_version_id='' then task_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_task_custom_attr_tmp        , cdm_task_custom_attr);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_task_custom_attr using &tmpdbschema..cdm_task_custom_attr_tmp        
+         on (cdm_task_custom_attr.Hashed_pk_col = cdm_task_custom_attr_tmp.Hashed_pk_col)
+        when matched then  
+        update set cdm_task_custom_attr.attribute_character_val = cdm_task_custom_attr_tmp.attribute_character_val , cdm_task_custom_attr.attribute_dttm_val = cdm_task_custom_attr_tmp.attribute_dttm_val , cdm_task_custom_attr.attribute_numeric_val = cdm_task_custom_attr_tmp.attribute_numeric_val , cdm_task_custom_attr.extension_attribute_nm = cdm_task_custom_attr_tmp.extension_attribute_nm , cdm_task_custom_attr.task_id = cdm_task_custom_attr_tmp.task_id , cdm_task_custom_attr.updated_by_nm = cdm_task_custom_attr_tmp.updated_by_nm , cdm_task_custom_attr.updated_dttm = cdm_task_custom_attr_tmp.updated_dttm
+        when not matched then insert ( 
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,extension_attribute_nm,task_id,task_version_id,updated_by_nm,updated_dttm
+        ,Hashed_pk_col ) values ( 
+        cdm_task_custom_attr_tmp.attribute_character_val,cdm_task_custom_attr_tmp.attribute_data_type_cd,cdm_task_custom_attr_tmp.attribute_dttm_val,cdm_task_custom_attr_tmp.attribute_nm,cdm_task_custom_attr_tmp.attribute_numeric_val,cdm_task_custom_attr_tmp.attribute_val,cdm_task_custom_attr_tmp.extension_attribute_nm,cdm_task_custom_attr_tmp.task_id,cdm_task_custom_attr_tmp.task_version_id,cdm_task_custom_attr_tmp.updated_by_nm,cdm_task_custom_attr_tmp.updated_dttm,cdm_task_custom_attr_tmp.Hashed_pk_col
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_task_custom_attr_tmp        , cdm_task_custom_attr, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_task_custom_attr_tmp        ;
+    quit;
+    %put ######## Staging table: cdm_task_custom_attr_tmp         Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_task_custom_attr;
+      drop table work.cdm_task_custom_attr;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_task_custom_attr;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_task_detail) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_task_detail_tmp             ) ) %then %do;
+      proc sql noerrorstop;
+        drop table &tmplib..cdm_task_detail_tmp             ;
+      quit;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_task_detail, table_keys=%str(task_version_id), out_table=work.cdm_task_detail);
+ data &tmplib..cdm_task_detail_tmp             ;
+     set work.cdm_task_detail;
+  if export_dttm ne . then export_dttm = tzoneu2s(export_dttm,&timeZone_Value.);if scheduled_end_dttm ne . then scheduled_end_dttm = tzoneu2s(scheduled_end_dttm,&timeZone_Value.);if scheduled_start_dttm ne . then scheduled_start_dttm = tzoneu2s(scheduled_start_dttm,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.);if valid_from_dttm ne . then valid_from_dttm = tzoneu2s(valid_from_dttm,&timeZone_Value.);if valid_to_dttm ne . then valid_to_dttm = tzoneu2s(valid_to_dttm,&timeZone_Value.) ;
+  if task_version_id='' then task_version_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_task_detail_tmp             , cdm_task_detail);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+    connect to SQLSVR (&sql_passthru_connection.);
+        execute (merge into &dbschema..cdm_task_detail using &tmpdbschema..cdm_task_detail_tmp             
+         on (cdm_task_detail.task_version_id=cdm_task_detail_tmp.task_version_id)
+        when matched then  
+        update set cdm_task_detail.active_flg = cdm_task_detail_tmp.active_flg , cdm_task_detail.budget_unit_cost_amt = cdm_task_detail_tmp.budget_unit_cost_amt , cdm_task_detail.budget_unit_usage_amt = cdm_task_detail_tmp.budget_unit_usage_amt , cdm_task_detail.business_context_id = cdm_task_detail_tmp.business_context_id , cdm_task_detail.campaign_id = cdm_task_detail_tmp.campaign_id , cdm_task_detail.contact_channel_cd = cdm_task_detail_tmp.contact_channel_cd , cdm_task_detail.control_group_action_nm = cdm_task_detail_tmp.control_group_action_nm , cdm_task_detail.created_dt = cdm_task_detail_tmp.created_dt , cdm_task_detail.created_user_nm = cdm_task_detail_tmp.created_user_nm , cdm_task_detail.export_dttm = cdm_task_detail_tmp.export_dttm , cdm_task_detail.limit_by_total_impression_flg = cdm_task_detail_tmp.limit_by_total_impression_flg , cdm_task_detail.limit_period_unit_cnt = cdm_task_detail_tmp.limit_period_unit_cnt , cdm_task_detail.max_budget_amt = cdm_task_detail_tmp.max_budget_amt , cdm_task_detail.max_budget_offer_amt = cdm_task_detail_tmp.max_budget_offer_amt , cdm_task_detail.maximum_period_expression_cnt = cdm_task_detail_tmp.maximum_period_expression_cnt , cdm_task_detail.min_budget_amt = cdm_task_detail_tmp.min_budget_amt , cdm_task_detail.min_budget_offer_amt = cdm_task_detail_tmp.min_budget_offer_amt , cdm_task_detail.modified_status_cd = cdm_task_detail_tmp.modified_status_cd , cdm_task_detail.owner_nm = cdm_task_detail_tmp.owner_nm , cdm_task_detail.published_flg = cdm_task_detail_tmp.published_flg , cdm_task_detail.recurr_type_cd = cdm_task_detail_tmp.recurr_type_cd , cdm_task_detail.recurring_schedule_flg = cdm_task_detail_tmp.recurring_schedule_flg , cdm_task_detail.saved_flg = cdm_task_detail_tmp.saved_flg , cdm_task_detail.scheduled_end_dttm = cdm_task_detail_tmp.scheduled_end_dttm , cdm_task_detail.scheduled_flg = cdm_task_detail_tmp.scheduled_flg , cdm_task_detail.scheduled_start_dttm = cdm_task_detail_tmp.scheduled_start_dttm , cdm_task_detail.segment_tests_flg = cdm_task_detail_tmp.segment_tests_flg , cdm_task_detail.source_system_cd = cdm_task_detail_tmp.source_system_cd , cdm_task_detail.staged_flg = cdm_task_detail_tmp.staged_flg , cdm_task_detail.standard_reply_flg = cdm_task_detail_tmp.standard_reply_flg , cdm_task_detail.stratified_sampling_action_nm = cdm_task_detail_tmp.stratified_sampling_action_nm , cdm_task_detail.subject_type_nm = cdm_task_detail_tmp.subject_type_nm , cdm_task_detail.task_cd = cdm_task_detail_tmp.task_cd , cdm_task_detail.task_delivery_type_nm = cdm_task_detail_tmp.task_delivery_type_nm , cdm_task_detail.task_desc = cdm_task_detail_tmp.task_desc , cdm_task_detail.task_id = cdm_task_detail_tmp.task_id , cdm_task_detail.task_nm = cdm_task_detail_tmp.task_nm , cdm_task_detail.task_status_cd = cdm_task_detail_tmp.task_status_cd , cdm_task_detail.task_subtype_nm = cdm_task_detail_tmp.task_subtype_nm , cdm_task_detail.task_type_nm = cdm_task_detail_tmp.task_type_nm , cdm_task_detail.update_contact_history_flg = cdm_task_detail_tmp.update_contact_history_flg , cdm_task_detail.updated_by_nm = cdm_task_detail_tmp.updated_by_nm , cdm_task_detail.updated_dttm = cdm_task_detail_tmp.updated_dttm , cdm_task_detail.valid_from_dttm = cdm_task_detail_tmp.valid_from_dttm , cdm_task_detail.valid_to_dttm = cdm_task_detail_tmp.valid_to_dttm
+        when not matched then insert ( 
+        active_flg,budget_unit_cost_amt,budget_unit_usage_amt,business_context_id,campaign_id,contact_channel_cd,control_group_action_nm,created_dt,created_user_nm,export_dttm,limit_by_total_impression_flg,limit_period_unit_cnt,max_budget_amt,max_budget_offer_amt,maximum_period_expression_cnt,min_budget_amt,min_budget_offer_amt,modified_status_cd,owner_nm,published_flg,recurr_type_cd,recurring_schedule_flg,saved_flg,scheduled_end_dttm,scheduled_flg,scheduled_start_dttm,segment_tests_flg,source_system_cd,staged_flg,standard_reply_flg,stratified_sampling_action_nm,subject_type_nm,task_cd,task_delivery_type_nm,task_desc,task_id,task_nm,task_status_cd,task_subtype_nm,task_type_nm,task_version_id,update_contact_history_flg,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+         ) values ( 
+        cdm_task_detail_tmp.active_flg,cdm_task_detail_tmp.budget_unit_cost_amt,cdm_task_detail_tmp.budget_unit_usage_amt,cdm_task_detail_tmp.business_context_id,cdm_task_detail_tmp.campaign_id,cdm_task_detail_tmp.contact_channel_cd,cdm_task_detail_tmp.control_group_action_nm,cdm_task_detail_tmp.created_dt,cdm_task_detail_tmp.created_user_nm,cdm_task_detail_tmp.export_dttm,cdm_task_detail_tmp.limit_by_total_impression_flg,cdm_task_detail_tmp.limit_period_unit_cnt,cdm_task_detail_tmp.max_budget_amt,cdm_task_detail_tmp.max_budget_offer_amt,cdm_task_detail_tmp.maximum_period_expression_cnt,cdm_task_detail_tmp.min_budget_amt,cdm_task_detail_tmp.min_budget_offer_amt,cdm_task_detail_tmp.modified_status_cd,cdm_task_detail_tmp.owner_nm,cdm_task_detail_tmp.published_flg,cdm_task_detail_tmp.recurr_type_cd,cdm_task_detail_tmp.recurring_schedule_flg,cdm_task_detail_tmp.saved_flg,cdm_task_detail_tmp.scheduled_end_dttm,cdm_task_detail_tmp.scheduled_flg,cdm_task_detail_tmp.scheduled_start_dttm,cdm_task_detail_tmp.segment_tests_flg,cdm_task_detail_tmp.source_system_cd,cdm_task_detail_tmp.staged_flg,cdm_task_detail_tmp.standard_reply_flg,cdm_task_detail_tmp.stratified_sampling_action_nm,cdm_task_detail_tmp.subject_type_nm,cdm_task_detail_tmp.task_cd,cdm_task_detail_tmp.task_delivery_type_nm,cdm_task_detail_tmp.task_desc,cdm_task_detail_tmp.task_id,cdm_task_detail_tmp.task_nm,cdm_task_detail_tmp.task_status_cd,cdm_task_detail_tmp.task_subtype_nm,cdm_task_detail_tmp.task_type_nm,cdm_task_detail_tmp.task_version_id,cdm_task_detail_tmp.update_contact_history_flg,cdm_task_detail_tmp.updated_by_nm,cdm_task_detail_tmp.updated_dttm,cdm_task_detail_tmp.valid_from_dttm,cdm_task_detail_tmp.valid_to_dttm
+     );) by SQLSVR;
+    disconnect from SQLSVR;
+    quit;
+ %ErrCheck (Failed to Update/Insert into  :cdm_task_detail_tmp             , cdm_task_detail, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    proc sql noerrorstop;
+        drop table &tmplib..cdm_task_detail_tmp             ;
+    quit;
+    %put ######## Staging table: cdm_task_detail_tmp              Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  proc sql noerrorstop;
+      drop table &udmmart..cdm_task_detail;
+      drop table work.cdm_task_detail;
+  quit;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_task_detail;
 %put------------------------------------------------------------------;
 %if %sysfunc(exist(&udmmart..commitment_details) ) %then %do;
  %let errFlag=0;
@@ -2520,11 +4197,11 @@
         execute (merge into &dbschema..impression_delivered using &tmpdbschema..impression_delivered_tmp        
          on (impression_delivered.event_id=impression_delivered_tmp.event_id)
         when matched then  
-        update set impression_delivered.aud_occurrence_id = impression_delivered_tmp.aud_occurrence_id , impression_delivered.audience_id = impression_delivered_tmp.audience_id , impression_delivered.channel_nm = impression_delivered_tmp.channel_nm , impression_delivered.channel_user_id = impression_delivered_tmp.channel_user_id , impression_delivered.context_type_nm = impression_delivered_tmp.context_type_nm , impression_delivered.context_val = impression_delivered_tmp.context_val , impression_delivered.control_group_flg = impression_delivered_tmp.control_group_flg , impression_delivered.creative_id = impression_delivered_tmp.creative_id , impression_delivered.creative_version_id = impression_delivered_tmp.creative_version_id , impression_delivered.detail_id_hex = impression_delivered_tmp.detail_id_hex , impression_delivered.event_designed_id = impression_delivered_tmp.event_designed_id , impression_delivered.event_key_cd = impression_delivered_tmp.event_key_cd , impression_delivered.event_nm = impression_delivered_tmp.event_nm , impression_delivered.event_source_cd = impression_delivered_tmp.event_source_cd , impression_delivered.identity_id = impression_delivered_tmp.identity_id , impression_delivered.impression_delivered_dttm = impression_delivered_tmp.impression_delivered_dttm , impression_delivered.impression_delivered_dttm_tz = impression_delivered_tmp.impression_delivered_dttm_tz , impression_delivered.load_dttm = impression_delivered_tmp.load_dttm , impression_delivered.message_id = impression_delivered_tmp.message_id , impression_delivered.message_version_id = impression_delivered_tmp.message_version_id , impression_delivered.mobile_app_id = impression_delivered_tmp.mobile_app_id , impression_delivered.product_id = impression_delivered_tmp.product_id , impression_delivered.product_nm = impression_delivered_tmp.product_nm , impression_delivered.product_qty_no = impression_delivered_tmp.product_qty_no , impression_delivered.product_sku_no = impression_delivered_tmp.product_sku_no , impression_delivered.properties_map_doc = impression_delivered_tmp.properties_map_doc , impression_delivered.rec_group_id = impression_delivered_tmp.rec_group_id , impression_delivered.reserved_1_txt = impression_delivered_tmp.reserved_1_txt , impression_delivered.reserved_2_txt = impression_delivered_tmp.reserved_2_txt , impression_delivered.response_tracking_cd = impression_delivered_tmp.response_tracking_cd , impression_delivered.segment_id = impression_delivered_tmp.segment_id , impression_delivered.segment_version_id = impression_delivered_tmp.segment_version_id , impression_delivered.session_id_hex = impression_delivered_tmp.session_id_hex , impression_delivered.spot_id = impression_delivered_tmp.spot_id , impression_delivered.task_id = impression_delivered_tmp.task_id , impression_delivered.task_version_id = impression_delivered_tmp.task_version_id , impression_delivered.visit_id_hex = impression_delivered_tmp.visit_id_hex
+        update set impression_delivered.aud_occurrence_id = impression_delivered_tmp.aud_occurrence_id , impression_delivered.audience_id = impression_delivered_tmp.audience_id , impression_delivered.channel_nm = impression_delivered_tmp.channel_nm , impression_delivered.channel_user_id = impression_delivered_tmp.channel_user_id , impression_delivered.context_type_nm = impression_delivered_tmp.context_type_nm , impression_delivered.context_val = impression_delivered_tmp.context_val , impression_delivered.control_group_flg = impression_delivered_tmp.control_group_flg , impression_delivered.creative_id = impression_delivered_tmp.creative_id , impression_delivered.creative_version_id = impression_delivered_tmp.creative_version_id , impression_delivered.detail_id_hex = impression_delivered_tmp.detail_id_hex , impression_delivered.event_designed_id = impression_delivered_tmp.event_designed_id , impression_delivered.event_key_cd = impression_delivered_tmp.event_key_cd , impression_delivered.event_nm = impression_delivered_tmp.event_nm , impression_delivered.event_source_cd = impression_delivered_tmp.event_source_cd , impression_delivered.identity_id = impression_delivered_tmp.identity_id , impression_delivered.impression_delivered_dttm = impression_delivered_tmp.impression_delivered_dttm , impression_delivered.impression_delivered_dttm_tz = impression_delivered_tmp.impression_delivered_dttm_tz , impression_delivered.load_dttm = impression_delivered_tmp.load_dttm , impression_delivered.message_id = impression_delivered_tmp.message_id , impression_delivered.message_version_id = impression_delivered_tmp.message_version_id , impression_delivered.mobile_app_id = impression_delivered_tmp.mobile_app_id , impression_delivered.product_id = impression_delivered_tmp.product_id , impression_delivered.product_nm = impression_delivered_tmp.product_nm , impression_delivered.product_qty_no = impression_delivered_tmp.product_qty_no , impression_delivered.product_sku_no = impression_delivered_tmp.product_sku_no , impression_delivered.properties_map_doc = impression_delivered_tmp.properties_map_doc , impression_delivered.rec_group_id = impression_delivered_tmp.rec_group_id , impression_delivered.request_id = impression_delivered_tmp.request_id , impression_delivered.reserved_1_txt = impression_delivered_tmp.reserved_1_txt , impression_delivered.reserved_2_txt = impression_delivered_tmp.reserved_2_txt , impression_delivered.response_tracking_cd = impression_delivered_tmp.response_tracking_cd , impression_delivered.segment_id = impression_delivered_tmp.segment_id , impression_delivered.segment_version_id = impression_delivered_tmp.segment_version_id , impression_delivered.session_id_hex = impression_delivered_tmp.session_id_hex , impression_delivered.spot_id = impression_delivered_tmp.spot_id , impression_delivered.task_id = impression_delivered_tmp.task_id , impression_delivered.task_version_id = impression_delivered_tmp.task_version_id , impression_delivered.visit_id_hex = impression_delivered_tmp.visit_id_hex
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_delivered_dttm,impression_delivered_dttm_tz,load_dttm,message_id,message_version_id,mobile_app_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
+        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_delivered_dttm,impression_delivered_dttm_tz,load_dttm,message_id,message_version_id,mobile_app_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,request_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
          ) values ( 
-        impression_delivered_tmp.aud_occurrence_id,impression_delivered_tmp.audience_id,impression_delivered_tmp.channel_nm,impression_delivered_tmp.channel_user_id,impression_delivered_tmp.context_type_nm,impression_delivered_tmp.context_val,impression_delivered_tmp.control_group_flg,impression_delivered_tmp.creative_id,impression_delivered_tmp.creative_version_id,impression_delivered_tmp.detail_id_hex,impression_delivered_tmp.event_designed_id,impression_delivered_tmp.event_id,impression_delivered_tmp.event_key_cd,impression_delivered_tmp.event_nm,impression_delivered_tmp.event_source_cd,impression_delivered_tmp.identity_id,impression_delivered_tmp.impression_delivered_dttm,impression_delivered_tmp.impression_delivered_dttm_tz,impression_delivered_tmp.load_dttm,impression_delivered_tmp.message_id,impression_delivered_tmp.message_version_id,impression_delivered_tmp.mobile_app_id,impression_delivered_tmp.product_id,impression_delivered_tmp.product_nm,impression_delivered_tmp.product_qty_no,impression_delivered_tmp.product_sku_no,impression_delivered_tmp.properties_map_doc,impression_delivered_tmp.rec_group_id,impression_delivered_tmp.reserved_1_txt,impression_delivered_tmp.reserved_2_txt,impression_delivered_tmp.response_tracking_cd,impression_delivered_tmp.segment_id,impression_delivered_tmp.segment_version_id,impression_delivered_tmp.session_id_hex,impression_delivered_tmp.spot_id,impression_delivered_tmp.task_id,impression_delivered_tmp.task_version_id,impression_delivered_tmp.visit_id_hex
+        impression_delivered_tmp.aud_occurrence_id,impression_delivered_tmp.audience_id,impression_delivered_tmp.channel_nm,impression_delivered_tmp.channel_user_id,impression_delivered_tmp.context_type_nm,impression_delivered_tmp.context_val,impression_delivered_tmp.control_group_flg,impression_delivered_tmp.creative_id,impression_delivered_tmp.creative_version_id,impression_delivered_tmp.detail_id_hex,impression_delivered_tmp.event_designed_id,impression_delivered_tmp.event_id,impression_delivered_tmp.event_key_cd,impression_delivered_tmp.event_nm,impression_delivered_tmp.event_source_cd,impression_delivered_tmp.identity_id,impression_delivered_tmp.impression_delivered_dttm,impression_delivered_tmp.impression_delivered_dttm_tz,impression_delivered_tmp.load_dttm,impression_delivered_tmp.message_id,impression_delivered_tmp.message_version_id,impression_delivered_tmp.mobile_app_id,impression_delivered_tmp.product_id,impression_delivered_tmp.product_nm,impression_delivered_tmp.product_qty_no,impression_delivered_tmp.product_sku_no,impression_delivered_tmp.properties_map_doc,impression_delivered_tmp.rec_group_id,impression_delivered_tmp.request_id,impression_delivered_tmp.reserved_1_txt,impression_delivered_tmp.reserved_2_txt,impression_delivered_tmp.response_tracking_cd,impression_delivered_tmp.segment_id,impression_delivered_tmp.segment_version_id,impression_delivered_tmp.session_id_hex,impression_delivered_tmp.spot_id,impression_delivered_tmp.task_id,impression_delivered_tmp.task_version_id,impression_delivered_tmp.visit_id_hex
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -2569,11 +4246,11 @@
         execute (merge into &dbschema..impression_spot_viewable using &tmpdbschema..impression_spot_viewable_tmp    
          on (impression_spot_viewable.event_id=impression_spot_viewable_tmp.event_id)
         when matched then  
-        update set impression_spot_viewable.analysis_group_id = impression_spot_viewable_tmp.analysis_group_id , impression_spot_viewable.aud_occurrence_id = impression_spot_viewable_tmp.aud_occurrence_id , impression_spot_viewable.audience_id = impression_spot_viewable_tmp.audience_id , impression_spot_viewable.channel_nm = impression_spot_viewable_tmp.channel_nm , impression_spot_viewable.channel_user_id = impression_spot_viewable_tmp.channel_user_id , impression_spot_viewable.context_type_nm = impression_spot_viewable_tmp.context_type_nm , impression_spot_viewable.context_val = impression_spot_viewable_tmp.context_val , impression_spot_viewable.control_group_flg = impression_spot_viewable_tmp.control_group_flg , impression_spot_viewable.creative_id = impression_spot_viewable_tmp.creative_id , impression_spot_viewable.creative_version_id = impression_spot_viewable_tmp.creative_version_id , impression_spot_viewable.detail_id_hex = impression_spot_viewable_tmp.detail_id_hex , impression_spot_viewable.event_designed_id = impression_spot_viewable_tmp.event_designed_id , impression_spot_viewable.event_key_cd = impression_spot_viewable_tmp.event_key_cd , impression_spot_viewable.event_nm = impression_spot_viewable_tmp.event_nm , impression_spot_viewable.event_source_cd = impression_spot_viewable_tmp.event_source_cd , impression_spot_viewable.identity_id = impression_spot_viewable_tmp.identity_id , impression_spot_viewable.impression_viewable_dttm = impression_spot_viewable_tmp.impression_viewable_dttm , impression_spot_viewable.impression_viewable_dttm_tz = impression_spot_viewable_tmp.impression_viewable_dttm_tz , impression_spot_viewable.load_dttm = impression_spot_viewable_tmp.load_dttm , impression_spot_viewable.message_id = impression_spot_viewable_tmp.message_id , impression_spot_viewable.message_version_id = impression_spot_viewable_tmp.message_version_id , impression_spot_viewable.mobile_app_id = impression_spot_viewable_tmp.mobile_app_id , impression_spot_viewable.occurrence_id = impression_spot_viewable_tmp.occurrence_id , impression_spot_viewable.product_id = impression_spot_viewable_tmp.product_id , impression_spot_viewable.product_nm = impression_spot_viewable_tmp.product_nm , impression_spot_viewable.product_qty_no = impression_spot_viewable_tmp.product_qty_no , impression_spot_viewable.product_sku_no = impression_spot_viewable_tmp.product_sku_no , impression_spot_viewable.properties_map_doc = impression_spot_viewable_tmp.properties_map_doc , impression_spot_viewable.rec_group_id = impression_spot_viewable_tmp.rec_group_id , impression_spot_viewable.reserved_1_txt = impression_spot_viewable_tmp.reserved_1_txt , impression_spot_viewable.reserved_2_txt = impression_spot_viewable_tmp.reserved_2_txt , impression_spot_viewable.response_tracking_cd = impression_spot_viewable_tmp.response_tracking_cd , impression_spot_viewable.segment_id = impression_spot_viewable_tmp.segment_id , impression_spot_viewable.segment_version_id = impression_spot_viewable_tmp.segment_version_id , impression_spot_viewable.session_id_hex = impression_spot_viewable_tmp.session_id_hex , impression_spot_viewable.spot_id = impression_spot_viewable_tmp.spot_id , impression_spot_viewable.task_id = impression_spot_viewable_tmp.task_id , impression_spot_viewable.task_version_id = impression_spot_viewable_tmp.task_version_id , impression_spot_viewable.visit_id_hex = impression_spot_viewable_tmp.visit_id_hex
+        update set impression_spot_viewable.analysis_group_id = impression_spot_viewable_tmp.analysis_group_id , impression_spot_viewable.aud_occurrence_id = impression_spot_viewable_tmp.aud_occurrence_id , impression_spot_viewable.audience_id = impression_spot_viewable_tmp.audience_id , impression_spot_viewable.channel_nm = impression_spot_viewable_tmp.channel_nm , impression_spot_viewable.channel_user_id = impression_spot_viewable_tmp.channel_user_id , impression_spot_viewable.context_type_nm = impression_spot_viewable_tmp.context_type_nm , impression_spot_viewable.context_val = impression_spot_viewable_tmp.context_val , impression_spot_viewable.control_group_flg = impression_spot_viewable_tmp.control_group_flg , impression_spot_viewable.creative_id = impression_spot_viewable_tmp.creative_id , impression_spot_viewable.creative_version_id = impression_spot_viewable_tmp.creative_version_id , impression_spot_viewable.detail_id_hex = impression_spot_viewable_tmp.detail_id_hex , impression_spot_viewable.event_designed_id = impression_spot_viewable_tmp.event_designed_id , impression_spot_viewable.event_key_cd = impression_spot_viewable_tmp.event_key_cd , impression_spot_viewable.event_nm = impression_spot_viewable_tmp.event_nm , impression_spot_viewable.event_source_cd = impression_spot_viewable_tmp.event_source_cd , impression_spot_viewable.identity_id = impression_spot_viewable_tmp.identity_id , impression_spot_viewable.impression_viewable_dttm = impression_spot_viewable_tmp.impression_viewable_dttm , impression_spot_viewable.impression_viewable_dttm_tz = impression_spot_viewable_tmp.impression_viewable_dttm_tz , impression_spot_viewable.load_dttm = impression_spot_viewable_tmp.load_dttm , impression_spot_viewable.message_id = impression_spot_viewable_tmp.message_id , impression_spot_viewable.message_version_id = impression_spot_viewable_tmp.message_version_id , impression_spot_viewable.mobile_app_id = impression_spot_viewable_tmp.mobile_app_id , impression_spot_viewable.occurrence_id = impression_spot_viewable_tmp.occurrence_id , impression_spot_viewable.product_id = impression_spot_viewable_tmp.product_id , impression_spot_viewable.product_nm = impression_spot_viewable_tmp.product_nm , impression_spot_viewable.product_qty_no = impression_spot_viewable_tmp.product_qty_no , impression_spot_viewable.product_sku_no = impression_spot_viewable_tmp.product_sku_no , impression_spot_viewable.properties_map_doc = impression_spot_viewable_tmp.properties_map_doc , impression_spot_viewable.rec_group_id = impression_spot_viewable_tmp.rec_group_id , impression_spot_viewable.request_id = impression_spot_viewable_tmp.request_id , impression_spot_viewable.reserved_1_txt = impression_spot_viewable_tmp.reserved_1_txt , impression_spot_viewable.reserved_2_txt = impression_spot_viewable_tmp.reserved_2_txt , impression_spot_viewable.response_tracking_cd = impression_spot_viewable_tmp.response_tracking_cd , impression_spot_viewable.segment_id = impression_spot_viewable_tmp.segment_id , impression_spot_viewable.segment_version_id = impression_spot_viewable_tmp.segment_version_id , impression_spot_viewable.session_id_hex = impression_spot_viewable_tmp.session_id_hex , impression_spot_viewable.spot_id = impression_spot_viewable_tmp.spot_id , impression_spot_viewable.task_id = impression_spot_viewable_tmp.task_id , impression_spot_viewable.task_version_id = impression_spot_viewable_tmp.task_version_id , impression_spot_viewable.visit_id_hex = impression_spot_viewable_tmp.visit_id_hex
         when not matched then insert ( 
-        analysis_group_id,aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_viewable_dttm,impression_viewable_dttm_tz,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
+        analysis_group_id,aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_viewable_dttm,impression_viewable_dttm_tz,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,request_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
          ) values ( 
-        impression_spot_viewable_tmp.analysis_group_id,impression_spot_viewable_tmp.aud_occurrence_id,impression_spot_viewable_tmp.audience_id,impression_spot_viewable_tmp.channel_nm,impression_spot_viewable_tmp.channel_user_id,impression_spot_viewable_tmp.context_type_nm,impression_spot_viewable_tmp.context_val,impression_spot_viewable_tmp.control_group_flg,impression_spot_viewable_tmp.creative_id,impression_spot_viewable_tmp.creative_version_id,impression_spot_viewable_tmp.detail_id_hex,impression_spot_viewable_tmp.event_designed_id,impression_spot_viewable_tmp.event_id,impression_spot_viewable_tmp.event_key_cd,impression_spot_viewable_tmp.event_nm,impression_spot_viewable_tmp.event_source_cd,impression_spot_viewable_tmp.identity_id,impression_spot_viewable_tmp.impression_viewable_dttm,impression_spot_viewable_tmp.impression_viewable_dttm_tz,impression_spot_viewable_tmp.load_dttm,impression_spot_viewable_tmp.message_id,impression_spot_viewable_tmp.message_version_id,impression_spot_viewable_tmp.mobile_app_id,impression_spot_viewable_tmp.occurrence_id,impression_spot_viewable_tmp.product_id,impression_spot_viewable_tmp.product_nm,impression_spot_viewable_tmp.product_qty_no,impression_spot_viewable_tmp.product_sku_no,impression_spot_viewable_tmp.properties_map_doc,impression_spot_viewable_tmp.rec_group_id,impression_spot_viewable_tmp.reserved_1_txt,impression_spot_viewable_tmp.reserved_2_txt,impression_spot_viewable_tmp.response_tracking_cd,impression_spot_viewable_tmp.segment_id,impression_spot_viewable_tmp.segment_version_id,impression_spot_viewable_tmp.session_id_hex,impression_spot_viewable_tmp.spot_id,impression_spot_viewable_tmp.task_id,impression_spot_viewable_tmp.task_version_id,impression_spot_viewable_tmp.visit_id_hex
+        impression_spot_viewable_tmp.analysis_group_id,impression_spot_viewable_tmp.aud_occurrence_id,impression_spot_viewable_tmp.audience_id,impression_spot_viewable_tmp.channel_nm,impression_spot_viewable_tmp.channel_user_id,impression_spot_viewable_tmp.context_type_nm,impression_spot_viewable_tmp.context_val,impression_spot_viewable_tmp.control_group_flg,impression_spot_viewable_tmp.creative_id,impression_spot_viewable_tmp.creative_version_id,impression_spot_viewable_tmp.detail_id_hex,impression_spot_viewable_tmp.event_designed_id,impression_spot_viewable_tmp.event_id,impression_spot_viewable_tmp.event_key_cd,impression_spot_viewable_tmp.event_nm,impression_spot_viewable_tmp.event_source_cd,impression_spot_viewable_tmp.identity_id,impression_spot_viewable_tmp.impression_viewable_dttm,impression_spot_viewable_tmp.impression_viewable_dttm_tz,impression_spot_viewable_tmp.load_dttm,impression_spot_viewable_tmp.message_id,impression_spot_viewable_tmp.message_version_id,impression_spot_viewable_tmp.mobile_app_id,impression_spot_viewable_tmp.occurrence_id,impression_spot_viewable_tmp.product_id,impression_spot_viewable_tmp.product_nm,impression_spot_viewable_tmp.product_qty_no,impression_spot_viewable_tmp.product_sku_no,impression_spot_viewable_tmp.properties_map_doc,impression_spot_viewable_tmp.rec_group_id,impression_spot_viewable_tmp.request_id,impression_spot_viewable_tmp.reserved_1_txt,impression_spot_viewable_tmp.reserved_2_txt,impression_spot_viewable_tmp.response_tracking_cd,impression_spot_viewable_tmp.segment_id,impression_spot_viewable_tmp.segment_version_id,impression_spot_viewable_tmp.session_id_hex,impression_spot_viewable_tmp.spot_id,impression_spot_viewable_tmp.task_id,impression_spot_viewable_tmp.task_version_id,impression_spot_viewable_tmp.visit_id_hex
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -5500,11 +7177,11 @@
         execute (merge into &dbschema..md_spot using &tmpdbschema..md_spot_tmp                     
          on (md_spot.spot_version_id=md_spot_tmp.spot_version_id)
         when matched then  
-        update set md_spot.channel_nm = md_spot_tmp.channel_nm , md_spot.created_user_nm = md_spot_tmp.created_user_nm , md_spot.dimension_label_txt = md_spot_tmp.dimension_label_txt , md_spot.height_width_ratio_val_txt = md_spot_tmp.height_width_ratio_val_txt , md_spot.last_published_dttm = md_spot_tmp.last_published_dttm , md_spot.multi_page_flg = md_spot_tmp.multi_page_flg , md_spot.owner_nm = md_spot_tmp.owner_nm , md_spot.spot_desc = md_spot_tmp.spot_desc , md_spot.spot_height_val_no = md_spot_tmp.spot_height_val_no , md_spot.spot_id = md_spot_tmp.spot_id , md_spot.spot_nm = md_spot_tmp.spot_nm , md_spot.spot_status_cd = md_spot_tmp.spot_status_cd , md_spot.spot_type_nm = md_spot_tmp.spot_type_nm , md_spot.spot_width_val_no = md_spot_tmp.spot_width_val_no , md_spot.valid_from_dttm = md_spot_tmp.valid_from_dttm , md_spot.valid_to_dttm = md_spot_tmp.valid_to_dttm
+        update set md_spot.channel_nm = md_spot_tmp.channel_nm , md_spot.created_user_nm = md_spot_tmp.created_user_nm , md_spot.dimension_label_txt = md_spot_tmp.dimension_label_txt , md_spot.height_width_ratio_val_txt = md_spot_tmp.height_width_ratio_val_txt , md_spot.last_published_dttm = md_spot_tmp.last_published_dttm , md_spot.location_selector_flg = md_spot_tmp.location_selector_flg , md_spot.multi_page_flg = md_spot_tmp.multi_page_flg , md_spot.owner_nm = md_spot_tmp.owner_nm , md_spot.spot_desc = md_spot_tmp.spot_desc , md_spot.spot_height_val_no = md_spot_tmp.spot_height_val_no , md_spot.spot_id = md_spot_tmp.spot_id , md_spot.spot_key = md_spot_tmp.spot_key , md_spot.spot_nm = md_spot_tmp.spot_nm , md_spot.spot_status_cd = md_spot_tmp.spot_status_cd , md_spot.spot_type_nm = md_spot_tmp.spot_type_nm , md_spot.spot_width_val_no = md_spot_tmp.spot_width_val_no , md_spot.valid_from_dttm = md_spot_tmp.valid_from_dttm , md_spot.valid_to_dttm = md_spot_tmp.valid_to_dttm
         when not matched then insert ( 
-        channel_nm,created_user_nm,dimension_label_txt,height_width_ratio_val_txt,last_published_dttm,multi_page_flg,owner_nm,spot_desc,spot_height_val_no,spot_id,spot_nm,spot_status_cd,spot_type_nm,spot_version_id,spot_width_val_no,valid_from_dttm,valid_to_dttm
+        channel_nm,created_user_nm,dimension_label_txt,height_width_ratio_val_txt,last_published_dttm,location_selector_flg,multi_page_flg,owner_nm,spot_desc,spot_height_val_no,spot_id,spot_key,spot_nm,spot_status_cd,spot_type_nm,spot_version_id,spot_width_val_no,valid_from_dttm,valid_to_dttm
          ) values ( 
-        md_spot_tmp.channel_nm,md_spot_tmp.created_user_nm,md_spot_tmp.dimension_label_txt,md_spot_tmp.height_width_ratio_val_txt,md_spot_tmp.last_published_dttm,md_spot_tmp.multi_page_flg,md_spot_tmp.owner_nm,md_spot_tmp.spot_desc,md_spot_tmp.spot_height_val_no,md_spot_tmp.spot_id,md_spot_tmp.spot_nm,md_spot_tmp.spot_status_cd,md_spot_tmp.spot_type_nm,md_spot_tmp.spot_version_id,md_spot_tmp.spot_width_val_no,md_spot_tmp.valid_from_dttm,md_spot_tmp.valid_to_dttm
+        md_spot_tmp.channel_nm,md_spot_tmp.created_user_nm,md_spot_tmp.dimension_label_txt,md_spot_tmp.height_width_ratio_val_txt,md_spot_tmp.last_published_dttm,md_spot_tmp.location_selector_flg,md_spot_tmp.multi_page_flg,md_spot_tmp.owner_nm,md_spot_tmp.spot_desc,md_spot_tmp.spot_height_val_no,md_spot_tmp.spot_id,md_spot_tmp.spot_key,md_spot_tmp.spot_nm,md_spot_tmp.spot_status_cd,md_spot_tmp.spot_type_nm,md_spot_tmp.spot_version_id,md_spot_tmp.spot_width_val_no,md_spot_tmp.valid_from_dttm,md_spot_tmp.valid_to_dttm
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -5598,11 +7275,11 @@
         execute (merge into &dbschema..md_task using &tmpdbschema..md_task_tmp                     
          on (md_task.task_version_id=md_task_tmp.task_version_id)
         when matched then  
-        update set md_task.activity_flg = md_task_tmp.activity_flg , md_task.arbitration_method_cd = md_task_tmp.arbitration_method_cd , md_task.business_context_id = md_task_tmp.business_context_id , md_task.channel_nm = md_task_tmp.channel_nm , md_task.control_group_action_nm = md_task_tmp.control_group_action_nm , md_task.created_user_nm = md_task_tmp.created_user_nm , md_task.delivery_config_type_nm = md_task_tmp.delivery_config_type_nm , md_task.display_priority_no = md_task_tmp.display_priority_no , md_task.export_template_flg = md_task_tmp.export_template_flg , md_task.folder_path_nm = md_task_tmp.folder_path_nm , md_task.impressions_life_time_cnt = md_task_tmp.impressions_life_time_cnt , md_task.impressions_per_session_cnt = md_task_tmp.impressions_per_session_cnt , md_task.impressions_qty_period_cnt = md_task_tmp.impressions_qty_period_cnt , md_task.last_published_dttm = md_task_tmp.last_published_dttm , md_task.limit_period_unit_cnt = md_task_tmp.limit_period_unit_cnt , md_task.maximum_period_expression_cnt = md_task_tmp.maximum_period_expression_cnt , md_task.mobile_app_id = md_task_tmp.mobile_app_id , md_task.mobile_app_nm = md_task_tmp.mobile_app_nm , md_task.model_start_dttm = md_task_tmp.model_start_dttm , md_task.owner_nm = md_task_tmp.owner_nm , md_task.period_type_nm = md_task_tmp.period_type_nm , md_task.rec_scheduled_end_dttm = md_task_tmp.rec_scheduled_end_dttm , md_task.rec_scheduled_start_dttm = md_task_tmp.rec_scheduled_start_dttm , md_task.rec_scheduled_start_tm = md_task_tmp.rec_scheduled_start_tm , md_task.recurrence_day_of_month_no = md_task_tmp.recurrence_day_of_month_no , md_task.recurrence_day_of_week_txt = md_task_tmp.recurrence_day_of_week_txt , md_task.recurrence_day_of_wk_ordinal_no = md_task_tmp.recurrence_day_of_wk_ordinal_no , md_task.recurrence_days_of_week_txt = md_task_tmp.recurrence_days_of_week_txt , md_task.recurrence_frequency_cd = md_task_tmp.recurrence_frequency_cd , md_task.recurrence_monthly_type_nm = md_task_tmp.recurrence_monthly_type_nm , md_task.recurring_schedule_flg = md_task_tmp.recurring_schedule_flg , md_task.rtdm_flg = md_task_tmp.rtdm_flg , md_task.scheduled_end_dttm = md_task_tmp.scheduled_end_dttm , md_task.scheduled_flg = md_task_tmp.scheduled_flg , md_task.scheduled_start_dttm = md_task_tmp.scheduled_start_dttm , md_task.segment_tests_flg = md_task_tmp.segment_tests_flg , md_task.send_notification_locale_cd = md_task_tmp.send_notification_locale_cd , md_task.stratified_sampling_action_nm = md_task_tmp.stratified_sampling_action_nm , md_task.subject_line_source_nm = md_task_tmp.subject_line_source_nm , md_task.subject_line_txt = md_task_tmp.subject_line_txt , md_task.task_category_nm = md_task_tmp.task_category_nm , md_task.task_cd = md_task_tmp.task_cd , md_task.task_delivery_type_nm = md_task_tmp.task_delivery_type_nm , md_task.task_desc = md_task_tmp.task_desc , md_task.task_id = md_task_tmp.task_id , md_task.task_nm = md_task_tmp.task_nm , md_task.task_status_cd = md_task_tmp.task_status_cd , md_task.task_subtype_nm = md_task_tmp.task_subtype_nm , md_task.task_type_nm = md_task_tmp.task_type_nm , md_task.template_id = md_task_tmp.template_id , md_task.test_duration = md_task_tmp.test_duration , md_task.use_modeling_flg = md_task_tmp.use_modeling_flg , md_task.valid_from_dttm = md_task_tmp.valid_from_dttm , md_task.valid_to_dttm = md_task_tmp.valid_to_dttm
+        update set md_task.activity_flg = md_task_tmp.activity_flg , md_task.arbitration_method_cd = md_task_tmp.arbitration_method_cd , md_task.business_context_id = md_task_tmp.business_context_id , md_task.channel_nm = md_task_tmp.channel_nm , md_task.control_group_action_nm = md_task_tmp.control_group_action_nm , md_task.created_user_nm = md_task_tmp.created_user_nm , md_task.delivery_config_type_nm = md_task_tmp.delivery_config_type_nm , md_task.display_priority_no = md_task_tmp.display_priority_no , md_task.export_template_flg = md_task_tmp.export_template_flg , md_task.folder_path_nm = md_task_tmp.folder_path_nm , md_task.impressions_life_time_cnt = md_task_tmp.impressions_life_time_cnt , md_task.impressions_per_session_cnt = md_task_tmp.impressions_per_session_cnt , md_task.impressions_qty_period_cnt = md_task_tmp.impressions_qty_period_cnt , md_task.last_published_dttm = md_task_tmp.last_published_dttm , md_task.limit_period_unit_cnt = md_task_tmp.limit_period_unit_cnt , md_task.maximum_period_expression_cnt = md_task_tmp.maximum_period_expression_cnt , md_task.mobile_app_id = md_task_tmp.mobile_app_id , md_task.mobile_app_nm = md_task_tmp.mobile_app_nm , md_task.model_start_dttm = md_task_tmp.model_start_dttm , md_task.owner_nm = md_task_tmp.owner_nm , md_task.period_type_nm = md_task_tmp.period_type_nm , md_task.rec_scheduled_end_dttm = md_task_tmp.rec_scheduled_end_dttm , md_task.rec_scheduled_start_dttm = md_task_tmp.rec_scheduled_start_dttm , md_task.rec_scheduled_start_tm = md_task_tmp.rec_scheduled_start_tm , md_task.recurrence_day_of_month_no = md_task_tmp.recurrence_day_of_month_no , md_task.recurrence_day_of_week_txt = md_task_tmp.recurrence_day_of_week_txt , md_task.recurrence_day_of_wk_ordinal_no = md_task_tmp.recurrence_day_of_wk_ordinal_no , md_task.recurrence_days_of_week_txt = md_task_tmp.recurrence_days_of_week_txt , md_task.recurrence_frequency_cd = md_task_tmp.recurrence_frequency_cd , md_task.recurrence_monthly_type_nm = md_task_tmp.recurrence_monthly_type_nm , md_task.recurring_schedule_flg = md_task_tmp.recurring_schedule_flg , md_task.rtdm_flg = md_task_tmp.rtdm_flg , md_task.scheduled_end_dttm = md_task_tmp.scheduled_end_dttm , md_task.scheduled_flg = md_task_tmp.scheduled_flg , md_task.scheduled_start_dttm = md_task_tmp.scheduled_start_dttm , md_task.secondary_status = md_task_tmp.secondary_status , md_task.segment_tests_flg = md_task_tmp.segment_tests_flg , md_task.send_notification_locale_cd = md_task_tmp.send_notification_locale_cd , md_task.stratified_sampling_action_nm = md_task_tmp.stratified_sampling_action_nm , md_task.subject_line_source_nm = md_task_tmp.subject_line_source_nm , md_task.subject_line_txt = md_task_tmp.subject_line_txt , md_task.task_category_nm = md_task_tmp.task_category_nm , md_task.task_cd = md_task_tmp.task_cd , md_task.task_delivery_type_nm = md_task_tmp.task_delivery_type_nm , md_task.task_desc = md_task_tmp.task_desc , md_task.task_id = md_task_tmp.task_id , md_task.task_nm = md_task_tmp.task_nm , md_task.task_status_cd = md_task_tmp.task_status_cd , md_task.task_subtype_nm = md_task_tmp.task_subtype_nm , md_task.task_type_nm = md_task_tmp.task_type_nm , md_task.template_id = md_task_tmp.template_id , md_task.test_duration = md_task_tmp.test_duration , md_task.use_modeling_flg = md_task_tmp.use_modeling_flg , md_task.valid_from_dttm = md_task_tmp.valid_from_dttm , md_task.valid_to_dttm = md_task_tmp.valid_to_dttm
         when not matched then insert ( 
-        activity_flg,arbitration_method_cd,business_context_id,channel_nm,control_group_action_nm,created_user_nm,delivery_config_type_nm,display_priority_no,export_template_flg,folder_path_nm,impressions_life_time_cnt,impressions_per_session_cnt,impressions_qty_period_cnt,last_published_dttm,limit_period_unit_cnt,maximum_period_expression_cnt,mobile_app_id,mobile_app_nm,model_start_dttm,owner_nm,period_type_nm,rec_scheduled_end_dttm,rec_scheduled_start_dttm,rec_scheduled_start_tm,recurrence_day_of_month_no,recurrence_day_of_week_txt,recurrence_day_of_wk_ordinal_no,recurrence_days_of_week_txt,recurrence_frequency_cd,recurrence_monthly_type_nm,recurring_schedule_flg,rtdm_flg,scheduled_end_dttm,scheduled_flg,scheduled_start_dttm,segment_tests_flg,send_notification_locale_cd,stratified_sampling_action_nm,subject_line_source_nm,subject_line_txt,task_category_nm,task_cd,task_delivery_type_nm,task_desc,task_id,task_nm,task_status_cd,task_subtype_nm,task_type_nm,task_version_id,template_id,test_duration,use_modeling_flg,valid_from_dttm,valid_to_dttm
+        activity_flg,arbitration_method_cd,business_context_id,channel_nm,control_group_action_nm,created_user_nm,delivery_config_type_nm,display_priority_no,export_template_flg,folder_path_nm,impressions_life_time_cnt,impressions_per_session_cnt,impressions_qty_period_cnt,last_published_dttm,limit_period_unit_cnt,maximum_period_expression_cnt,mobile_app_id,mobile_app_nm,model_start_dttm,owner_nm,period_type_nm,rec_scheduled_end_dttm,rec_scheduled_start_dttm,rec_scheduled_start_tm,recurrence_day_of_month_no,recurrence_day_of_week_txt,recurrence_day_of_wk_ordinal_no,recurrence_days_of_week_txt,recurrence_frequency_cd,recurrence_monthly_type_nm,recurring_schedule_flg,rtdm_flg,scheduled_end_dttm,scheduled_flg,scheduled_start_dttm,secondary_status,segment_tests_flg,send_notification_locale_cd,stratified_sampling_action_nm,subject_line_source_nm,subject_line_txt,task_category_nm,task_cd,task_delivery_type_nm,task_desc,task_id,task_nm,task_status_cd,task_subtype_nm,task_type_nm,task_version_id,template_id,test_duration,use_modeling_flg,valid_from_dttm,valid_to_dttm
          ) values ( 
-        md_task_tmp.activity_flg,md_task_tmp.arbitration_method_cd,md_task_tmp.business_context_id,md_task_tmp.channel_nm,md_task_tmp.control_group_action_nm,md_task_tmp.created_user_nm,md_task_tmp.delivery_config_type_nm,md_task_tmp.display_priority_no,md_task_tmp.export_template_flg,md_task_tmp.folder_path_nm,md_task_tmp.impressions_life_time_cnt,md_task_tmp.impressions_per_session_cnt,md_task_tmp.impressions_qty_period_cnt,md_task_tmp.last_published_dttm,md_task_tmp.limit_period_unit_cnt,md_task_tmp.maximum_period_expression_cnt,md_task_tmp.mobile_app_id,md_task_tmp.mobile_app_nm,md_task_tmp.model_start_dttm,md_task_tmp.owner_nm,md_task_tmp.period_type_nm,md_task_tmp.rec_scheduled_end_dttm,md_task_tmp.rec_scheduled_start_dttm,md_task_tmp.rec_scheduled_start_tm,md_task_tmp.recurrence_day_of_month_no,md_task_tmp.recurrence_day_of_week_txt,md_task_tmp.recurrence_day_of_wk_ordinal_no,md_task_tmp.recurrence_days_of_week_txt,md_task_tmp.recurrence_frequency_cd,md_task_tmp.recurrence_monthly_type_nm,md_task_tmp.recurring_schedule_flg,md_task_tmp.rtdm_flg,md_task_tmp.scheduled_end_dttm,md_task_tmp.scheduled_flg,md_task_tmp.scheduled_start_dttm,md_task_tmp.segment_tests_flg,md_task_tmp.send_notification_locale_cd,md_task_tmp.stratified_sampling_action_nm,md_task_tmp.subject_line_source_nm,md_task_tmp.subject_line_txt,md_task_tmp.task_category_nm,md_task_tmp.task_cd,md_task_tmp.task_delivery_type_nm,md_task_tmp.task_desc,md_task_tmp.task_id,md_task_tmp.task_nm,md_task_tmp.task_status_cd,md_task_tmp.task_subtype_nm,md_task_tmp.task_type_nm,md_task_tmp.task_version_id,md_task_tmp.template_id,md_task_tmp.test_duration,md_task_tmp.use_modeling_flg,md_task_tmp.valid_from_dttm,md_task_tmp.valid_to_dttm
+        md_task_tmp.activity_flg,md_task_tmp.arbitration_method_cd,md_task_tmp.business_context_id,md_task_tmp.channel_nm,md_task_tmp.control_group_action_nm,md_task_tmp.created_user_nm,md_task_tmp.delivery_config_type_nm,md_task_tmp.display_priority_no,md_task_tmp.export_template_flg,md_task_tmp.folder_path_nm,md_task_tmp.impressions_life_time_cnt,md_task_tmp.impressions_per_session_cnt,md_task_tmp.impressions_qty_period_cnt,md_task_tmp.last_published_dttm,md_task_tmp.limit_period_unit_cnt,md_task_tmp.maximum_period_expression_cnt,md_task_tmp.mobile_app_id,md_task_tmp.mobile_app_nm,md_task_tmp.model_start_dttm,md_task_tmp.owner_nm,md_task_tmp.period_type_nm,md_task_tmp.rec_scheduled_end_dttm,md_task_tmp.rec_scheduled_start_dttm,md_task_tmp.rec_scheduled_start_tm,md_task_tmp.recurrence_day_of_month_no,md_task_tmp.recurrence_day_of_week_txt,md_task_tmp.recurrence_day_of_wk_ordinal_no,md_task_tmp.recurrence_days_of_week_txt,md_task_tmp.recurrence_frequency_cd,md_task_tmp.recurrence_monthly_type_nm,md_task_tmp.recurring_schedule_flg,md_task_tmp.rtdm_flg,md_task_tmp.scheduled_end_dttm,md_task_tmp.scheduled_flg,md_task_tmp.scheduled_start_dttm,md_task_tmp.secondary_status,md_task_tmp.segment_tests_flg,md_task_tmp.send_notification_locale_cd,md_task_tmp.stratified_sampling_action_nm,md_task_tmp.subject_line_source_nm,md_task_tmp.subject_line_txt,md_task_tmp.task_category_nm,md_task_tmp.task_cd,md_task_tmp.task_delivery_type_nm,md_task_tmp.task_desc,md_task_tmp.task_id,md_task_tmp.task_nm,md_task_tmp.task_status_cd,md_task_tmp.task_subtype_nm,md_task_tmp.task_type_nm,md_task_tmp.task_version_id,md_task_tmp.template_id,md_task_tmp.test_duration,md_task_tmp.use_modeling_flg,md_task_tmp.valid_from_dttm,md_task_tmp.valid_to_dttm
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7695,11 +9372,11 @@
         execute (merge into &dbschema..sms_message_clicked using &tmpdbschema..sms_message_clicked_tmp         
          on (sms_message_clicked.event_id=sms_message_clicked_tmp.event_id)
         when matched then  
-        update set sms_message_clicked.aud_occurrence_id = sms_message_clicked_tmp.aud_occurrence_id , sms_message_clicked.audience_id = sms_message_clicked_tmp.audience_id , sms_message_clicked.country_cd = sms_message_clicked_tmp.country_cd , sms_message_clicked.creative_id = sms_message_clicked_tmp.creative_id , sms_message_clicked.creative_version_id = sms_message_clicked_tmp.creative_version_id , sms_message_clicked.event_designed_id = sms_message_clicked_tmp.event_designed_id , sms_message_clicked.event_nm = sms_message_clicked_tmp.event_nm , sms_message_clicked.identity_id = sms_message_clicked_tmp.identity_id , sms_message_clicked.load_dttm = sms_message_clicked_tmp.load_dttm , sms_message_clicked.occurrence_id = sms_message_clicked_tmp.occurrence_id , sms_message_clicked.response_tracking_cd = sms_message_clicked_tmp.response_tracking_cd , sms_message_clicked.sender_id = sms_message_clicked_tmp.sender_id , sms_message_clicked.sms_click_dttm = sms_message_clicked_tmp.sms_click_dttm , sms_message_clicked.sms_click_dttm_tz = sms_message_clicked_tmp.sms_click_dttm_tz , sms_message_clicked.sms_message_id = sms_message_clicked_tmp.sms_message_id , sms_message_clicked.task_id = sms_message_clicked_tmp.task_id , sms_message_clicked.task_version_id = sms_message_clicked_tmp.task_version_id
+        update set sms_message_clicked.aud_occurrence_id = sms_message_clicked_tmp.aud_occurrence_id , sms_message_clicked.audience_id = sms_message_clicked_tmp.audience_id , sms_message_clicked.context_type_nm = sms_message_clicked_tmp.context_type_nm , sms_message_clicked.context_val = sms_message_clicked_tmp.context_val , sms_message_clicked.country_cd = sms_message_clicked_tmp.country_cd , sms_message_clicked.creative_id = sms_message_clicked_tmp.creative_id , sms_message_clicked.creative_version_id = sms_message_clicked_tmp.creative_version_id , sms_message_clicked.event_designed_id = sms_message_clicked_tmp.event_designed_id , sms_message_clicked.event_nm = sms_message_clicked_tmp.event_nm , sms_message_clicked.identity_id = sms_message_clicked_tmp.identity_id , sms_message_clicked.load_dttm = sms_message_clicked_tmp.load_dttm , sms_message_clicked.occurrence_id = sms_message_clicked_tmp.occurrence_id , sms_message_clicked.response_tracking_cd = sms_message_clicked_tmp.response_tracking_cd , sms_message_clicked.sender_id = sms_message_clicked_tmp.sender_id , sms_message_clicked.sms_click_dttm = sms_message_clicked_tmp.sms_click_dttm , sms_message_clicked.sms_click_dttm_tz = sms_message_clicked_tmp.sms_click_dttm_tz , sms_message_clicked.sms_message_id = sms_message_clicked_tmp.sms_message_id , sms_message_clicked.task_id = sms_message_clicked_tmp.task_id , sms_message_clicked.task_version_id = sms_message_clicked_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_click_dttm,sms_click_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_click_dttm,sms_click_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_clicked_tmp.aud_occurrence_id,sms_message_clicked_tmp.audience_id,sms_message_clicked_tmp.country_cd,sms_message_clicked_tmp.creative_id,sms_message_clicked_tmp.creative_version_id,sms_message_clicked_tmp.event_designed_id,sms_message_clicked_tmp.event_id,sms_message_clicked_tmp.event_nm,sms_message_clicked_tmp.identity_id,sms_message_clicked_tmp.load_dttm,sms_message_clicked_tmp.occurrence_id,sms_message_clicked_tmp.response_tracking_cd,sms_message_clicked_tmp.sender_id,sms_message_clicked_tmp.sms_click_dttm,sms_message_clicked_tmp.sms_click_dttm_tz,sms_message_clicked_tmp.sms_message_id,sms_message_clicked_tmp.task_id,sms_message_clicked_tmp.task_version_id
+        sms_message_clicked_tmp.aud_occurrence_id,sms_message_clicked_tmp.audience_id,sms_message_clicked_tmp.context_type_nm,sms_message_clicked_tmp.context_val,sms_message_clicked_tmp.country_cd,sms_message_clicked_tmp.creative_id,sms_message_clicked_tmp.creative_version_id,sms_message_clicked_tmp.event_designed_id,sms_message_clicked_tmp.event_id,sms_message_clicked_tmp.event_nm,sms_message_clicked_tmp.identity_id,sms_message_clicked_tmp.load_dttm,sms_message_clicked_tmp.occurrence_id,sms_message_clicked_tmp.response_tracking_cd,sms_message_clicked_tmp.sender_id,sms_message_clicked_tmp.sms_click_dttm,sms_message_clicked_tmp.sms_click_dttm_tz,sms_message_clicked_tmp.sms_message_id,sms_message_clicked_tmp.task_id,sms_message_clicked_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7744,11 +9421,11 @@
         execute (merge into &dbschema..sms_message_delivered using &tmpdbschema..sms_message_delivered_tmp       
          on (sms_message_delivered.event_id=sms_message_delivered_tmp.event_id)
         when matched then  
-        update set sms_message_delivered.aud_occurrence_id = sms_message_delivered_tmp.aud_occurrence_id , sms_message_delivered.audience_id = sms_message_delivered_tmp.audience_id , sms_message_delivered.country_cd = sms_message_delivered_tmp.country_cd , sms_message_delivered.creative_id = sms_message_delivered_tmp.creative_id , sms_message_delivered.creative_version_id = sms_message_delivered_tmp.creative_version_id , sms_message_delivered.event_designed_id = sms_message_delivered_tmp.event_designed_id , sms_message_delivered.event_nm = sms_message_delivered_tmp.event_nm , sms_message_delivered.identity_id = sms_message_delivered_tmp.identity_id , sms_message_delivered.load_dttm = sms_message_delivered_tmp.load_dttm , sms_message_delivered.occurrence_id = sms_message_delivered_tmp.occurrence_id , sms_message_delivered.response_tracking_cd = sms_message_delivered_tmp.response_tracking_cd , sms_message_delivered.sender_id = sms_message_delivered_tmp.sender_id , sms_message_delivered.sms_delivered_dttm = sms_message_delivered_tmp.sms_delivered_dttm , sms_message_delivered.sms_delivered_dttm_tz = sms_message_delivered_tmp.sms_delivered_dttm_tz , sms_message_delivered.sms_message_id = sms_message_delivered_tmp.sms_message_id , sms_message_delivered.task_id = sms_message_delivered_tmp.task_id , sms_message_delivered.task_version_id = sms_message_delivered_tmp.task_version_id
+        update set sms_message_delivered.aud_occurrence_id = sms_message_delivered_tmp.aud_occurrence_id , sms_message_delivered.audience_id = sms_message_delivered_tmp.audience_id , sms_message_delivered.context_type_nm = sms_message_delivered_tmp.context_type_nm , sms_message_delivered.context_val = sms_message_delivered_tmp.context_val , sms_message_delivered.country_cd = sms_message_delivered_tmp.country_cd , sms_message_delivered.creative_id = sms_message_delivered_tmp.creative_id , sms_message_delivered.creative_version_id = sms_message_delivered_tmp.creative_version_id , sms_message_delivered.event_designed_id = sms_message_delivered_tmp.event_designed_id , sms_message_delivered.event_nm = sms_message_delivered_tmp.event_nm , sms_message_delivered.identity_id = sms_message_delivered_tmp.identity_id , sms_message_delivered.load_dttm = sms_message_delivered_tmp.load_dttm , sms_message_delivered.occurrence_id = sms_message_delivered_tmp.occurrence_id , sms_message_delivered.response_tracking_cd = sms_message_delivered_tmp.response_tracking_cd , sms_message_delivered.sender_id = sms_message_delivered_tmp.sender_id , sms_message_delivered.sms_delivered_dttm = sms_message_delivered_tmp.sms_delivered_dttm , sms_message_delivered.sms_delivered_dttm_tz = sms_message_delivered_tmp.sms_delivered_dttm_tz , sms_message_delivered.sms_message_id = sms_message_delivered_tmp.sms_message_id , sms_message_delivered.task_id = sms_message_delivered_tmp.task_id , sms_message_delivered.task_version_id = sms_message_delivered_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_delivered_dttm,sms_delivered_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_delivered_dttm,sms_delivered_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_delivered_tmp.aud_occurrence_id,sms_message_delivered_tmp.audience_id,sms_message_delivered_tmp.country_cd,sms_message_delivered_tmp.creative_id,sms_message_delivered_tmp.creative_version_id,sms_message_delivered_tmp.event_designed_id,sms_message_delivered_tmp.event_id,sms_message_delivered_tmp.event_nm,sms_message_delivered_tmp.identity_id,sms_message_delivered_tmp.load_dttm,sms_message_delivered_tmp.occurrence_id,sms_message_delivered_tmp.response_tracking_cd,sms_message_delivered_tmp.sender_id,sms_message_delivered_tmp.sms_delivered_dttm,sms_message_delivered_tmp.sms_delivered_dttm_tz,sms_message_delivered_tmp.sms_message_id,sms_message_delivered_tmp.task_id,sms_message_delivered_tmp.task_version_id
+        sms_message_delivered_tmp.aud_occurrence_id,sms_message_delivered_tmp.audience_id,sms_message_delivered_tmp.context_type_nm,sms_message_delivered_tmp.context_val,sms_message_delivered_tmp.country_cd,sms_message_delivered_tmp.creative_id,sms_message_delivered_tmp.creative_version_id,sms_message_delivered_tmp.event_designed_id,sms_message_delivered_tmp.event_id,sms_message_delivered_tmp.event_nm,sms_message_delivered_tmp.identity_id,sms_message_delivered_tmp.load_dttm,sms_message_delivered_tmp.occurrence_id,sms_message_delivered_tmp.response_tracking_cd,sms_message_delivered_tmp.sender_id,sms_message_delivered_tmp.sms_delivered_dttm,sms_message_delivered_tmp.sms_delivered_dttm_tz,sms_message_delivered_tmp.sms_message_id,sms_message_delivered_tmp.task_id,sms_message_delivered_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7793,11 +9470,11 @@
         execute (merge into &dbschema..sms_message_failed using &tmpdbschema..sms_message_failed_tmp          
          on (sms_message_failed.event_id=sms_message_failed_tmp.event_id)
         when matched then  
-        update set sms_message_failed.aud_occurrence_id = sms_message_failed_tmp.aud_occurrence_id , sms_message_failed.audience_id = sms_message_failed_tmp.audience_id , sms_message_failed.country_cd = sms_message_failed_tmp.country_cd , sms_message_failed.creative_id = sms_message_failed_tmp.creative_id , sms_message_failed.creative_version_id = sms_message_failed_tmp.creative_version_id , sms_message_failed.event_designed_id = sms_message_failed_tmp.event_designed_id , sms_message_failed.event_nm = sms_message_failed_tmp.event_nm , sms_message_failed.identity_id = sms_message_failed_tmp.identity_id , sms_message_failed.load_dttm = sms_message_failed_tmp.load_dttm , sms_message_failed.occurrence_id = sms_message_failed_tmp.occurrence_id , sms_message_failed.reason_cd = sms_message_failed_tmp.reason_cd , sms_message_failed.reason_description_txt = sms_message_failed_tmp.reason_description_txt , sms_message_failed.response_tracking_cd = sms_message_failed_tmp.response_tracking_cd , sms_message_failed.sender_id = sms_message_failed_tmp.sender_id , sms_message_failed.sms_failed_dttm = sms_message_failed_tmp.sms_failed_dttm , sms_message_failed.sms_failed_dttm_tz = sms_message_failed_tmp.sms_failed_dttm_tz , sms_message_failed.sms_message_id = sms_message_failed_tmp.sms_message_id , sms_message_failed.task_id = sms_message_failed_tmp.task_id , sms_message_failed.task_version_id = sms_message_failed_tmp.task_version_id
+        update set sms_message_failed.aud_occurrence_id = sms_message_failed_tmp.aud_occurrence_id , sms_message_failed.audience_id = sms_message_failed_tmp.audience_id , sms_message_failed.context_type_nm = sms_message_failed_tmp.context_type_nm , sms_message_failed.context_val = sms_message_failed_tmp.context_val , sms_message_failed.country_cd = sms_message_failed_tmp.country_cd , sms_message_failed.creative_id = sms_message_failed_tmp.creative_id , sms_message_failed.creative_version_id = sms_message_failed_tmp.creative_version_id , sms_message_failed.event_designed_id = sms_message_failed_tmp.event_designed_id , sms_message_failed.event_nm = sms_message_failed_tmp.event_nm , sms_message_failed.identity_id = sms_message_failed_tmp.identity_id , sms_message_failed.load_dttm = sms_message_failed_tmp.load_dttm , sms_message_failed.occurrence_id = sms_message_failed_tmp.occurrence_id , sms_message_failed.reason_cd = sms_message_failed_tmp.reason_cd , sms_message_failed.reason_description_txt = sms_message_failed_tmp.reason_description_txt , sms_message_failed.response_tracking_cd = sms_message_failed_tmp.response_tracking_cd , sms_message_failed.sender_id = sms_message_failed_tmp.sender_id , sms_message_failed.sms_failed_dttm = sms_message_failed_tmp.sms_failed_dttm , sms_message_failed.sms_failed_dttm_tz = sms_message_failed_tmp.sms_failed_dttm_tz , sms_message_failed.sms_message_id = sms_message_failed_tmp.sms_message_id , sms_message_failed.task_id = sms_message_failed_tmp.task_id , sms_message_failed.task_version_id = sms_message_failed_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,reason_cd,reason_description_txt,response_tracking_cd,sender_id,sms_failed_dttm,sms_failed_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,reason_cd,reason_description_txt,response_tracking_cd,sender_id,sms_failed_dttm,sms_failed_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_failed_tmp.aud_occurrence_id,sms_message_failed_tmp.audience_id,sms_message_failed_tmp.country_cd,sms_message_failed_tmp.creative_id,sms_message_failed_tmp.creative_version_id,sms_message_failed_tmp.event_designed_id,sms_message_failed_tmp.event_id,sms_message_failed_tmp.event_nm,sms_message_failed_tmp.identity_id,sms_message_failed_tmp.load_dttm,sms_message_failed_tmp.occurrence_id,sms_message_failed_tmp.reason_cd,sms_message_failed_tmp.reason_description_txt,sms_message_failed_tmp.response_tracking_cd,sms_message_failed_tmp.sender_id,sms_message_failed_tmp.sms_failed_dttm,sms_message_failed_tmp.sms_failed_dttm_tz,sms_message_failed_tmp.sms_message_id,sms_message_failed_tmp.task_id,sms_message_failed_tmp.task_version_id
+        sms_message_failed_tmp.aud_occurrence_id,sms_message_failed_tmp.audience_id,sms_message_failed_tmp.context_type_nm,sms_message_failed_tmp.context_val,sms_message_failed_tmp.country_cd,sms_message_failed_tmp.creative_id,sms_message_failed_tmp.creative_version_id,sms_message_failed_tmp.event_designed_id,sms_message_failed_tmp.event_id,sms_message_failed_tmp.event_nm,sms_message_failed_tmp.identity_id,sms_message_failed_tmp.load_dttm,sms_message_failed_tmp.occurrence_id,sms_message_failed_tmp.reason_cd,sms_message_failed_tmp.reason_description_txt,sms_message_failed_tmp.response_tracking_cd,sms_message_failed_tmp.sender_id,sms_message_failed_tmp.sms_failed_dttm,sms_message_failed_tmp.sms_failed_dttm_tz,sms_message_failed_tmp.sms_message_id,sms_message_failed_tmp.task_id,sms_message_failed_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7842,11 +9519,11 @@
         execute (merge into &dbschema..sms_message_reply using &tmpdbschema..sms_message_reply_tmp           
          on (sms_message_reply.event_id=sms_message_reply_tmp.event_id)
         when matched then  
-        update set sms_message_reply.aud_occurrence_id = sms_message_reply_tmp.aud_occurrence_id , sms_message_reply.audience_id = sms_message_reply_tmp.audience_id , sms_message_reply.country_cd = sms_message_reply_tmp.country_cd , sms_message_reply.event_designed_id = sms_message_reply_tmp.event_designed_id , sms_message_reply.event_nm = sms_message_reply_tmp.event_nm , sms_message_reply.identity_id = sms_message_reply_tmp.identity_id , sms_message_reply.load_dttm = sms_message_reply_tmp.load_dttm , sms_message_reply.occurrence_id = sms_message_reply_tmp.occurrence_id , sms_message_reply.response_tracking_cd = sms_message_reply_tmp.response_tracking_cd , sms_message_reply.sender_id = sms_message_reply_tmp.sender_id , sms_message_reply.sms_message_id = sms_message_reply_tmp.sms_message_id , sms_message_reply.sms_reply_dttm = sms_message_reply_tmp.sms_reply_dttm , sms_message_reply.sms_reply_dttm_tz = sms_message_reply_tmp.sms_reply_dttm_tz , sms_message_reply.task_id = sms_message_reply_tmp.task_id , sms_message_reply.task_version_id = sms_message_reply_tmp.task_version_id
+        update set sms_message_reply.aud_occurrence_id = sms_message_reply_tmp.aud_occurrence_id , sms_message_reply.audience_id = sms_message_reply_tmp.audience_id , sms_message_reply.context_type_nm = sms_message_reply_tmp.context_type_nm , sms_message_reply.context_val = sms_message_reply_tmp.context_val , sms_message_reply.country_cd = sms_message_reply_tmp.country_cd , sms_message_reply.event_designed_id = sms_message_reply_tmp.event_designed_id , sms_message_reply.event_nm = sms_message_reply_tmp.event_nm , sms_message_reply.identity_id = sms_message_reply_tmp.identity_id , sms_message_reply.load_dttm = sms_message_reply_tmp.load_dttm , sms_message_reply.occurrence_id = sms_message_reply_tmp.occurrence_id , sms_message_reply.response_tracking_cd = sms_message_reply_tmp.response_tracking_cd , sms_message_reply.sender_id = sms_message_reply_tmp.sender_id , sms_message_reply.sms_content = sms_message_reply_tmp.sms_content , sms_message_reply.sms_message_id = sms_message_reply_tmp.sms_message_id , sms_message_reply.sms_reply_dttm = sms_message_reply_tmp.sms_reply_dttm , sms_message_reply.sms_reply_dttm_tz = sms_message_reply_tmp.sms_reply_dttm_tz , sms_message_reply.task_id = sms_message_reply_tmp.task_id , sms_message_reply.task_version_id = sms_message_reply_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_reply_dttm,sms_reply_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_content,sms_message_id,sms_reply_dttm,sms_reply_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_message_reply_tmp.aud_occurrence_id,sms_message_reply_tmp.audience_id,sms_message_reply_tmp.country_cd,sms_message_reply_tmp.event_designed_id,sms_message_reply_tmp.event_id,sms_message_reply_tmp.event_nm,sms_message_reply_tmp.identity_id,sms_message_reply_tmp.load_dttm,sms_message_reply_tmp.occurrence_id,sms_message_reply_tmp.response_tracking_cd,sms_message_reply_tmp.sender_id,sms_message_reply_tmp.sms_message_id,sms_message_reply_tmp.sms_reply_dttm,sms_message_reply_tmp.sms_reply_dttm_tz,sms_message_reply_tmp.task_id,sms_message_reply_tmp.task_version_id
+        sms_message_reply_tmp.aud_occurrence_id,sms_message_reply_tmp.audience_id,sms_message_reply_tmp.context_type_nm,sms_message_reply_tmp.context_val,sms_message_reply_tmp.country_cd,sms_message_reply_tmp.event_designed_id,sms_message_reply_tmp.event_id,sms_message_reply_tmp.event_nm,sms_message_reply_tmp.identity_id,sms_message_reply_tmp.load_dttm,sms_message_reply_tmp.occurrence_id,sms_message_reply_tmp.response_tracking_cd,sms_message_reply_tmp.sender_id,sms_message_reply_tmp.sms_content,sms_message_reply_tmp.sms_message_id,sms_message_reply_tmp.sms_reply_dttm,sms_message_reply_tmp.sms_reply_dttm_tz,sms_message_reply_tmp.task_id,sms_message_reply_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7891,11 +9568,11 @@
         execute (merge into &dbschema..sms_message_send using &tmpdbschema..sms_message_send_tmp            
          on (sms_message_send.event_id=sms_message_send_tmp.event_id)
         when matched then  
-        update set sms_message_send.aud_occurrence_id = sms_message_send_tmp.aud_occurrence_id , sms_message_send.audience_id = sms_message_send_tmp.audience_id , sms_message_send.country_cd = sms_message_send_tmp.country_cd , sms_message_send.creative_id = sms_message_send_tmp.creative_id , sms_message_send.creative_version_id = sms_message_send_tmp.creative_version_id , sms_message_send.event_designed_id = sms_message_send_tmp.event_designed_id , sms_message_send.event_nm = sms_message_send_tmp.event_nm , sms_message_send.fragment_cnt = sms_message_send_tmp.fragment_cnt , sms_message_send.identity_id = sms_message_send_tmp.identity_id , sms_message_send.load_dttm = sms_message_send_tmp.load_dttm , sms_message_send.occurrence_id = sms_message_send_tmp.occurrence_id , sms_message_send.response_tracking_cd = sms_message_send_tmp.response_tracking_cd , sms_message_send.sender_id = sms_message_send_tmp.sender_id , sms_message_send.sms_message_id = sms_message_send_tmp.sms_message_id , sms_message_send.sms_send_dttm = sms_message_send_tmp.sms_send_dttm , sms_message_send.sms_send_dttm_tz = sms_message_send_tmp.sms_send_dttm_tz , sms_message_send.task_id = sms_message_send_tmp.task_id , sms_message_send.task_version_id = sms_message_send_tmp.task_version_id
+        update set sms_message_send.aud_occurrence_id = sms_message_send_tmp.aud_occurrence_id , sms_message_send.audience_id = sms_message_send_tmp.audience_id , sms_message_send.context_type_nm = sms_message_send_tmp.context_type_nm , sms_message_send.context_val = sms_message_send_tmp.context_val , sms_message_send.country_cd = sms_message_send_tmp.country_cd , sms_message_send.creative_id = sms_message_send_tmp.creative_id , sms_message_send.creative_version_id = sms_message_send_tmp.creative_version_id , sms_message_send.event_designed_id = sms_message_send_tmp.event_designed_id , sms_message_send.event_nm = sms_message_send_tmp.event_nm , sms_message_send.fragment_cnt = sms_message_send_tmp.fragment_cnt , sms_message_send.identity_id = sms_message_send_tmp.identity_id , sms_message_send.load_dttm = sms_message_send_tmp.load_dttm , sms_message_send.occurrence_id = sms_message_send_tmp.occurrence_id , sms_message_send.response_tracking_cd = sms_message_send_tmp.response_tracking_cd , sms_message_send.sender_id = sms_message_send_tmp.sender_id , sms_message_send.sms_message_id = sms_message_send_tmp.sms_message_id , sms_message_send.sms_send_dttm = sms_message_send_tmp.sms_send_dttm , sms_message_send.sms_send_dttm_tz = sms_message_send_tmp.sms_send_dttm_tz , sms_message_send.task_id = sms_message_send_tmp.task_id , sms_message_send.task_version_id = sms_message_send_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,fragment_cnt,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_send_dttm,sms_send_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,fragment_cnt,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_send_dttm,sms_send_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_message_send_tmp.aud_occurrence_id,sms_message_send_tmp.audience_id,sms_message_send_tmp.country_cd,sms_message_send_tmp.creative_id,sms_message_send_tmp.creative_version_id,sms_message_send_tmp.event_designed_id,sms_message_send_tmp.event_id,sms_message_send_tmp.event_nm,sms_message_send_tmp.fragment_cnt,sms_message_send_tmp.identity_id,sms_message_send_tmp.load_dttm,sms_message_send_tmp.occurrence_id,sms_message_send_tmp.response_tracking_cd,sms_message_send_tmp.sender_id,sms_message_send_tmp.sms_message_id,sms_message_send_tmp.sms_send_dttm,sms_message_send_tmp.sms_send_dttm_tz,sms_message_send_tmp.task_id,sms_message_send_tmp.task_version_id
+        sms_message_send_tmp.aud_occurrence_id,sms_message_send_tmp.audience_id,sms_message_send_tmp.context_type_nm,sms_message_send_tmp.context_val,sms_message_send_tmp.country_cd,sms_message_send_tmp.creative_id,sms_message_send_tmp.creative_version_id,sms_message_send_tmp.event_designed_id,sms_message_send_tmp.event_id,sms_message_send_tmp.event_nm,sms_message_send_tmp.fragment_cnt,sms_message_send_tmp.identity_id,sms_message_send_tmp.load_dttm,sms_message_send_tmp.occurrence_id,sms_message_send_tmp.response_tracking_cd,sms_message_send_tmp.sender_id,sms_message_send_tmp.sms_message_id,sms_message_send_tmp.sms_send_dttm,sms_message_send_tmp.sms_send_dttm_tz,sms_message_send_tmp.task_id,sms_message_send_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7940,11 +9617,11 @@
         execute (merge into &dbschema..sms_optout using &tmpdbschema..sms_optout_tmp                  
          on (sms_optout.event_id=sms_optout_tmp.event_id)
         when matched then  
-        update set sms_optout.aud_occurrence_id = sms_optout_tmp.aud_occurrence_id , sms_optout.audience_id = sms_optout_tmp.audience_id , sms_optout.country_cd = sms_optout_tmp.country_cd , sms_optout.creative_id = sms_optout_tmp.creative_id , sms_optout.creative_version_id = sms_optout_tmp.creative_version_id , sms_optout.event_designed_id = sms_optout_tmp.event_designed_id , sms_optout.event_nm = sms_optout_tmp.event_nm , sms_optout.identity_id = sms_optout_tmp.identity_id , sms_optout.load_dttm = sms_optout_tmp.load_dttm , sms_optout.occurrence_id = sms_optout_tmp.occurrence_id , sms_optout.response_tracking_cd = sms_optout_tmp.response_tracking_cd , sms_optout.sender_id = sms_optout_tmp.sender_id , sms_optout.sms_message_id = sms_optout_tmp.sms_message_id , sms_optout.sms_optout_dttm = sms_optout_tmp.sms_optout_dttm , sms_optout.sms_optout_dttm_tz = sms_optout_tmp.sms_optout_dttm_tz , sms_optout.task_id = sms_optout_tmp.task_id , sms_optout.task_version_id = sms_optout_tmp.task_version_id
+        update set sms_optout.aud_occurrence_id = sms_optout_tmp.aud_occurrence_id , sms_optout.audience_id = sms_optout_tmp.audience_id , sms_optout.context_type_nm = sms_optout_tmp.context_type_nm , sms_optout.context_val = sms_optout_tmp.context_val , sms_optout.country_cd = sms_optout_tmp.country_cd , sms_optout.creative_id = sms_optout_tmp.creative_id , sms_optout.creative_version_id = sms_optout_tmp.creative_version_id , sms_optout.event_designed_id = sms_optout_tmp.event_designed_id , sms_optout.event_nm = sms_optout_tmp.event_nm , sms_optout.identity_id = sms_optout_tmp.identity_id , sms_optout.load_dttm = sms_optout_tmp.load_dttm , sms_optout.occurrence_id = sms_optout_tmp.occurrence_id , sms_optout.response_tracking_cd = sms_optout_tmp.response_tracking_cd , sms_optout.sender_id = sms_optout_tmp.sender_id , sms_optout.sms_message_id = sms_optout_tmp.sms_message_id , sms_optout.sms_optout_dttm = sms_optout_tmp.sms_optout_dttm , sms_optout.sms_optout_dttm_tz = sms_optout_tmp.sms_optout_dttm_tz , sms_optout.task_id = sms_optout_tmp.task_id , sms_optout.task_version_id = sms_optout_tmp.task_version_id
         when not matched then insert ( 
-        aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_optout_tmp.aud_occurrence_id,sms_optout_tmp.audience_id,sms_optout_tmp.country_cd,sms_optout_tmp.creative_id,sms_optout_tmp.creative_version_id,sms_optout_tmp.event_designed_id,sms_optout_tmp.event_id,sms_optout_tmp.event_nm,sms_optout_tmp.identity_id,sms_optout_tmp.load_dttm,sms_optout_tmp.occurrence_id,sms_optout_tmp.response_tracking_cd,sms_optout_tmp.sender_id,sms_optout_tmp.sms_message_id,sms_optout_tmp.sms_optout_dttm,sms_optout_tmp.sms_optout_dttm_tz,sms_optout_tmp.task_id,sms_optout_tmp.task_version_id
+        sms_optout_tmp.aud_occurrence_id,sms_optout_tmp.audience_id,sms_optout_tmp.context_type_nm,sms_optout_tmp.context_val,sms_optout_tmp.country_cd,sms_optout_tmp.creative_id,sms_optout_tmp.creative_version_id,sms_optout_tmp.event_designed_id,sms_optout_tmp.event_id,sms_optout_tmp.event_nm,sms_optout_tmp.identity_id,sms_optout_tmp.load_dttm,sms_optout_tmp.occurrence_id,sms_optout_tmp.response_tracking_cd,sms_optout_tmp.sender_id,sms_optout_tmp.sms_message_id,sms_optout_tmp.sms_optout_dttm,sms_optout_tmp.sms_optout_dttm_tz,sms_optout_tmp.task_id,sms_optout_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -7989,11 +9666,11 @@
         execute (merge into &dbschema..sms_optout_details using &tmpdbschema..sms_optout_details_tmp          
          on (sms_optout_details.event_id=sms_optout_details_tmp.event_id)
         when matched then  
-        update set sms_optout_details.address_val = sms_optout_details_tmp.address_val , sms_optout_details.aud_occurrence_id = sms_optout_details_tmp.aud_occurrence_id , sms_optout_details.audience_id = sms_optout_details_tmp.audience_id , sms_optout_details.country_cd = sms_optout_details_tmp.country_cd , sms_optout_details.creative_id = sms_optout_details_tmp.creative_id , sms_optout_details.creative_version_id = sms_optout_details_tmp.creative_version_id , sms_optout_details.event_designed_id = sms_optout_details_tmp.event_designed_id , sms_optout_details.event_nm = sms_optout_details_tmp.event_nm , sms_optout_details.identity_id = sms_optout_details_tmp.identity_id , sms_optout_details.load_dttm = sms_optout_details_tmp.load_dttm , sms_optout_details.occurrence_id = sms_optout_details_tmp.occurrence_id , sms_optout_details.response_tracking_cd = sms_optout_details_tmp.response_tracking_cd , sms_optout_details.sender_id = sms_optout_details_tmp.sender_id , sms_optout_details.sms_message_id = sms_optout_details_tmp.sms_message_id , sms_optout_details.sms_optout_dttm = sms_optout_details_tmp.sms_optout_dttm , sms_optout_details.sms_optout_dttm_tz = sms_optout_details_tmp.sms_optout_dttm_tz , sms_optout_details.task_id = sms_optout_details_tmp.task_id , sms_optout_details.task_version_id = sms_optout_details_tmp.task_version_id
+        update set sms_optout_details.address_val = sms_optout_details_tmp.address_val , sms_optout_details.aud_occurrence_id = sms_optout_details_tmp.aud_occurrence_id , sms_optout_details.audience_id = sms_optout_details_tmp.audience_id , sms_optout_details.context_type_nm = sms_optout_details_tmp.context_type_nm , sms_optout_details.context_val = sms_optout_details_tmp.context_val , sms_optout_details.country_cd = sms_optout_details_tmp.country_cd , sms_optout_details.creative_id = sms_optout_details_tmp.creative_id , sms_optout_details.creative_version_id = sms_optout_details_tmp.creative_version_id , sms_optout_details.event_designed_id = sms_optout_details_tmp.event_designed_id , sms_optout_details.event_nm = sms_optout_details_tmp.event_nm , sms_optout_details.identity_id = sms_optout_details_tmp.identity_id , sms_optout_details.load_dttm = sms_optout_details_tmp.load_dttm , sms_optout_details.occurrence_id = sms_optout_details_tmp.occurrence_id , sms_optout_details.response_tracking_cd = sms_optout_details_tmp.response_tracking_cd , sms_optout_details.sender_id = sms_optout_details_tmp.sender_id , sms_optout_details.sms_message_id = sms_optout_details_tmp.sms_message_id , sms_optout_details.sms_optout_dttm = sms_optout_details_tmp.sms_optout_dttm , sms_optout_details.sms_optout_dttm_tz = sms_optout_details_tmp.sms_optout_dttm_tz , sms_optout_details.task_id = sms_optout_details_tmp.task_id , sms_optout_details.task_version_id = sms_optout_details_tmp.task_version_id
         when not matched then insert ( 
-        address_val,aud_occurrence_id,audience_id,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
+        address_val,aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_optout_details_tmp.address_val,sms_optout_details_tmp.aud_occurrence_id,sms_optout_details_tmp.audience_id,sms_optout_details_tmp.country_cd,sms_optout_details_tmp.creative_id,sms_optout_details_tmp.creative_version_id,sms_optout_details_tmp.event_designed_id,sms_optout_details_tmp.event_id,sms_optout_details_tmp.event_nm,sms_optout_details_tmp.identity_id,sms_optout_details_tmp.load_dttm,sms_optout_details_tmp.occurrence_id,sms_optout_details_tmp.response_tracking_cd,sms_optout_details_tmp.sender_id,sms_optout_details_tmp.sms_message_id,sms_optout_details_tmp.sms_optout_dttm,sms_optout_details_tmp.sms_optout_dttm_tz,sms_optout_details_tmp.task_id,sms_optout_details_tmp.task_version_id
+        sms_optout_details_tmp.address_val,sms_optout_details_tmp.aud_occurrence_id,sms_optout_details_tmp.audience_id,sms_optout_details_tmp.context_type_nm,sms_optout_details_tmp.context_val,sms_optout_details_tmp.country_cd,sms_optout_details_tmp.creative_id,sms_optout_details_tmp.creative_version_id,sms_optout_details_tmp.event_designed_id,sms_optout_details_tmp.event_id,sms_optout_details_tmp.event_nm,sms_optout_details_tmp.identity_id,sms_optout_details_tmp.load_dttm,sms_optout_details_tmp.occurrence_id,sms_optout_details_tmp.response_tracking_cd,sms_optout_details_tmp.sender_id,sms_optout_details_tmp.sms_message_id,sms_optout_details_tmp.sms_optout_dttm,sms_optout_details_tmp.sms_optout_dttm_tz,sms_optout_details_tmp.task_id,sms_optout_details_tmp.task_version_id
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -8038,11 +9715,11 @@
         execute (merge into &dbschema..spot_clicked using &tmpdbschema..spot_clicked_tmp                
          on (spot_clicked.event_id=spot_clicked_tmp.event_id)
         when matched then  
-        update set spot_clicked.channel_nm = spot_clicked_tmp.channel_nm , spot_clicked.channel_user_id = spot_clicked_tmp.channel_user_id , spot_clicked.context_type_nm = spot_clicked_tmp.context_type_nm , spot_clicked.context_val = spot_clicked_tmp.context_val , spot_clicked.control_group_flg = spot_clicked_tmp.control_group_flg , spot_clicked.creative_id = spot_clicked_tmp.creative_id , spot_clicked.creative_version_id = spot_clicked_tmp.creative_version_id , spot_clicked.detail_id_hex = spot_clicked_tmp.detail_id_hex , spot_clicked.event_designed_id = spot_clicked_tmp.event_designed_id , spot_clicked.event_key_cd = spot_clicked_tmp.event_key_cd , spot_clicked.event_nm = spot_clicked_tmp.event_nm , spot_clicked.event_source_cd = spot_clicked_tmp.event_source_cd , spot_clicked.identity_id = spot_clicked_tmp.identity_id , spot_clicked.load_dttm = spot_clicked_tmp.load_dttm , spot_clicked.message_id = spot_clicked_tmp.message_id , spot_clicked.message_version_id = spot_clicked_tmp.message_version_id , spot_clicked.mobile_app_id = spot_clicked_tmp.mobile_app_id , spot_clicked.occurrence_id = spot_clicked_tmp.occurrence_id , spot_clicked.product_id = spot_clicked_tmp.product_id , spot_clicked.product_nm = spot_clicked_tmp.product_nm , spot_clicked.product_qty_no = spot_clicked_tmp.product_qty_no , spot_clicked.product_sku_no = spot_clicked_tmp.product_sku_no , spot_clicked.properties_map_doc = spot_clicked_tmp.properties_map_doc , spot_clicked.rec_group_id = spot_clicked_tmp.rec_group_id , spot_clicked.reserved_1_txt = spot_clicked_tmp.reserved_1_txt , spot_clicked.reserved_2_txt = spot_clicked_tmp.reserved_2_txt , spot_clicked.response_tracking_cd = spot_clicked_tmp.response_tracking_cd , spot_clicked.segment_id = spot_clicked_tmp.segment_id , spot_clicked.segment_version_id = spot_clicked_tmp.segment_version_id , spot_clicked.session_id_hex = spot_clicked_tmp.session_id_hex , spot_clicked.spot_clicked_dttm = spot_clicked_tmp.spot_clicked_dttm , spot_clicked.spot_clicked_dttm_tz = spot_clicked_tmp.spot_clicked_dttm_tz , spot_clicked.spot_id = spot_clicked_tmp.spot_id , spot_clicked.task_id = spot_clicked_tmp.task_id , spot_clicked.task_version_id = spot_clicked_tmp.task_version_id , spot_clicked.url_txt = spot_clicked_tmp.url_txt , spot_clicked.visit_id_hex = spot_clicked_tmp.visit_id_hex
+        update set spot_clicked.channel_nm = spot_clicked_tmp.channel_nm , spot_clicked.channel_user_id = spot_clicked_tmp.channel_user_id , spot_clicked.context_type_nm = spot_clicked_tmp.context_type_nm , spot_clicked.context_val = spot_clicked_tmp.context_val , spot_clicked.control_group_flg = spot_clicked_tmp.control_group_flg , spot_clicked.creative_id = spot_clicked_tmp.creative_id , spot_clicked.creative_version_id = spot_clicked_tmp.creative_version_id , spot_clicked.detail_id_hex = spot_clicked_tmp.detail_id_hex , spot_clicked.event_designed_id = spot_clicked_tmp.event_designed_id , spot_clicked.event_key_cd = spot_clicked_tmp.event_key_cd , spot_clicked.event_nm = spot_clicked_tmp.event_nm , spot_clicked.event_source_cd = spot_clicked_tmp.event_source_cd , spot_clicked.identity_id = spot_clicked_tmp.identity_id , spot_clicked.load_dttm = spot_clicked_tmp.load_dttm , spot_clicked.message_id = spot_clicked_tmp.message_id , spot_clicked.message_version_id = spot_clicked_tmp.message_version_id , spot_clicked.mobile_app_id = spot_clicked_tmp.mobile_app_id , spot_clicked.occurrence_id = spot_clicked_tmp.occurrence_id , spot_clicked.product_id = spot_clicked_tmp.product_id , spot_clicked.product_nm = spot_clicked_tmp.product_nm , spot_clicked.product_qty_no = spot_clicked_tmp.product_qty_no , spot_clicked.product_sku_no = spot_clicked_tmp.product_sku_no , spot_clicked.properties_map_doc = spot_clicked_tmp.properties_map_doc , spot_clicked.rec_group_id = spot_clicked_tmp.rec_group_id , spot_clicked.request_id = spot_clicked_tmp.request_id , spot_clicked.reserved_1_txt = spot_clicked_tmp.reserved_1_txt , spot_clicked.reserved_2_txt = spot_clicked_tmp.reserved_2_txt , spot_clicked.response_tracking_cd = spot_clicked_tmp.response_tracking_cd , spot_clicked.segment_id = spot_clicked_tmp.segment_id , spot_clicked.segment_version_id = spot_clicked_tmp.segment_version_id , spot_clicked.session_id_hex = spot_clicked_tmp.session_id_hex , spot_clicked.spot_clicked_dttm = spot_clicked_tmp.spot_clicked_dttm , spot_clicked.spot_clicked_dttm_tz = spot_clicked_tmp.spot_clicked_dttm_tz , spot_clicked.spot_id = spot_clicked_tmp.spot_id , spot_clicked.task_id = spot_clicked_tmp.task_id , spot_clicked.task_version_id = spot_clicked_tmp.task_version_id , spot_clicked.url_txt = spot_clicked_tmp.url_txt , spot_clicked.visit_id_hex = spot_clicked_tmp.visit_id_hex
         when not matched then insert ( 
-        channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_clicked_dttm,spot_clicked_dttm_tz,spot_id,task_id,task_version_id,url_txt,visit_id_hex
+        channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,request_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_clicked_dttm,spot_clicked_dttm_tz,spot_id,task_id,task_version_id,url_txt,visit_id_hex
          ) values ( 
-        spot_clicked_tmp.channel_nm,spot_clicked_tmp.channel_user_id,spot_clicked_tmp.context_type_nm,spot_clicked_tmp.context_val,spot_clicked_tmp.control_group_flg,spot_clicked_tmp.creative_id,spot_clicked_tmp.creative_version_id,spot_clicked_tmp.detail_id_hex,spot_clicked_tmp.event_designed_id,spot_clicked_tmp.event_id,spot_clicked_tmp.event_key_cd,spot_clicked_tmp.event_nm,spot_clicked_tmp.event_source_cd,spot_clicked_tmp.identity_id,spot_clicked_tmp.load_dttm,spot_clicked_tmp.message_id,spot_clicked_tmp.message_version_id,spot_clicked_tmp.mobile_app_id,spot_clicked_tmp.occurrence_id,spot_clicked_tmp.product_id,spot_clicked_tmp.product_nm,spot_clicked_tmp.product_qty_no,spot_clicked_tmp.product_sku_no,spot_clicked_tmp.properties_map_doc,spot_clicked_tmp.rec_group_id,spot_clicked_tmp.reserved_1_txt,spot_clicked_tmp.reserved_2_txt,spot_clicked_tmp.response_tracking_cd,spot_clicked_tmp.segment_id,spot_clicked_tmp.segment_version_id,spot_clicked_tmp.session_id_hex,spot_clicked_tmp.spot_clicked_dttm,spot_clicked_tmp.spot_clicked_dttm_tz,spot_clicked_tmp.spot_id,spot_clicked_tmp.task_id,spot_clicked_tmp.task_version_id,spot_clicked_tmp.url_txt,spot_clicked_tmp.visit_id_hex
+        spot_clicked_tmp.channel_nm,spot_clicked_tmp.channel_user_id,spot_clicked_tmp.context_type_nm,spot_clicked_tmp.context_val,spot_clicked_tmp.control_group_flg,spot_clicked_tmp.creative_id,spot_clicked_tmp.creative_version_id,spot_clicked_tmp.detail_id_hex,spot_clicked_tmp.event_designed_id,spot_clicked_tmp.event_id,spot_clicked_tmp.event_key_cd,spot_clicked_tmp.event_nm,spot_clicked_tmp.event_source_cd,spot_clicked_tmp.identity_id,spot_clicked_tmp.load_dttm,spot_clicked_tmp.message_id,spot_clicked_tmp.message_version_id,spot_clicked_tmp.mobile_app_id,spot_clicked_tmp.occurrence_id,spot_clicked_tmp.product_id,spot_clicked_tmp.product_nm,spot_clicked_tmp.product_qty_no,spot_clicked_tmp.product_sku_no,spot_clicked_tmp.properties_map_doc,spot_clicked_tmp.rec_group_id,spot_clicked_tmp.request_id,spot_clicked_tmp.reserved_1_txt,spot_clicked_tmp.reserved_2_txt,spot_clicked_tmp.response_tracking_cd,spot_clicked_tmp.segment_id,spot_clicked_tmp.segment_version_id,spot_clicked_tmp.session_id_hex,spot_clicked_tmp.spot_clicked_dttm,spot_clicked_tmp.spot_clicked_dttm_tz,spot_clicked_tmp.spot_id,spot_clicked_tmp.task_id,spot_clicked_tmp.task_version_id,spot_clicked_tmp.url_txt,spot_clicked_tmp.visit_id_hex
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;
@@ -8087,11 +9764,11 @@
         execute (merge into &dbschema..spot_requested using &tmpdbschema..spot_requested_tmp              
          on (spot_requested.event_id=spot_requested_tmp.event_id)
         when matched then  
-        update set spot_requested.channel_nm = spot_requested_tmp.channel_nm , spot_requested.channel_user_id = spot_requested_tmp.channel_user_id , spot_requested.context_type_nm = spot_requested_tmp.context_type_nm , spot_requested.context_val = spot_requested_tmp.context_val , spot_requested.detail_id_hex = spot_requested_tmp.detail_id_hex , spot_requested.event_designed_id = spot_requested_tmp.event_designed_id , spot_requested.event_nm = spot_requested_tmp.event_nm , spot_requested.event_source_cd = spot_requested_tmp.event_source_cd , spot_requested.identity_id = spot_requested_tmp.identity_id , spot_requested.load_dttm = spot_requested_tmp.load_dttm , spot_requested.mobile_app_id = spot_requested_tmp.mobile_app_id , spot_requested.session_id_hex = spot_requested_tmp.session_id_hex , spot_requested.spot_id = spot_requested_tmp.spot_id , spot_requested.spot_requested_dttm = spot_requested_tmp.spot_requested_dttm , spot_requested.spot_requested_dttm_tz = spot_requested_tmp.spot_requested_dttm_tz , spot_requested.visit_id_hex = spot_requested_tmp.visit_id_hex
+        update set spot_requested.channel_nm = spot_requested_tmp.channel_nm , spot_requested.channel_user_id = spot_requested_tmp.channel_user_id , spot_requested.context_type_nm = spot_requested_tmp.context_type_nm , spot_requested.context_val = spot_requested_tmp.context_val , spot_requested.detail_id_hex = spot_requested_tmp.detail_id_hex , spot_requested.event_designed_id = spot_requested_tmp.event_designed_id , spot_requested.event_nm = spot_requested_tmp.event_nm , spot_requested.event_source_cd = spot_requested_tmp.event_source_cd , spot_requested.identity_id = spot_requested_tmp.identity_id , spot_requested.load_dttm = spot_requested_tmp.load_dttm , spot_requested.mobile_app_id = spot_requested_tmp.mobile_app_id , spot_requested.properties_map_doc = spot_requested_tmp.properties_map_doc , spot_requested.request_id = spot_requested_tmp.request_id , spot_requested.session_id_hex = spot_requested_tmp.session_id_hex , spot_requested.spot_id = spot_requested_tmp.spot_id , spot_requested.spot_requested_dttm = spot_requested_tmp.spot_requested_dttm , spot_requested.spot_requested_dttm_tz = spot_requested_tmp.spot_requested_dttm_tz , spot_requested.visit_id_hex = spot_requested_tmp.visit_id_hex
         when not matched then insert ( 
-        channel_nm,channel_user_id,context_type_nm,context_val,detail_id_hex,event_designed_id,event_id,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,session_id_hex,spot_id,spot_requested_dttm,spot_requested_dttm_tz,visit_id_hex
+        channel_nm,channel_user_id,context_type_nm,context_val,detail_id_hex,event_designed_id,event_id,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,properties_map_doc,request_id,session_id_hex,spot_id,spot_requested_dttm,spot_requested_dttm_tz,visit_id_hex
          ) values ( 
-        spot_requested_tmp.channel_nm,spot_requested_tmp.channel_user_id,spot_requested_tmp.context_type_nm,spot_requested_tmp.context_val,spot_requested_tmp.detail_id_hex,spot_requested_tmp.event_designed_id,spot_requested_tmp.event_id,spot_requested_tmp.event_nm,spot_requested_tmp.event_source_cd,spot_requested_tmp.identity_id,spot_requested_tmp.load_dttm,spot_requested_tmp.mobile_app_id,spot_requested_tmp.session_id_hex,spot_requested_tmp.spot_id,spot_requested_tmp.spot_requested_dttm,spot_requested_tmp.spot_requested_dttm_tz,spot_requested_tmp.visit_id_hex
+        spot_requested_tmp.channel_nm,spot_requested_tmp.channel_user_id,spot_requested_tmp.context_type_nm,spot_requested_tmp.context_val,spot_requested_tmp.detail_id_hex,spot_requested_tmp.event_designed_id,spot_requested_tmp.event_id,spot_requested_tmp.event_nm,spot_requested_tmp.event_source_cd,spot_requested_tmp.identity_id,spot_requested_tmp.load_dttm,spot_requested_tmp.mobile_app_id,spot_requested_tmp.properties_map_doc,spot_requested_tmp.request_id,spot_requested_tmp.session_id_hex,spot_requested_tmp.spot_id,spot_requested_tmp.spot_requested_dttm,spot_requested_tmp.spot_requested_dttm_tz,spot_requested_tmp.visit_id_hex
      );) by SQLSVR;
     disconnect from SQLSVR;
     quit;

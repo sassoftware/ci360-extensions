@@ -26,7 +26,7 @@
 
 	%if &duplicate_keys.=0 %then %do;
 		data &out_table. /view=&out_table.;
-			set &table_nm;
+			set &udmmart..&table_nm;
 		run;
 		%put NOTE: No duplicates found in table.;
 	%end;

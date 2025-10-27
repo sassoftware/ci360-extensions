@@ -71,42 +71,31 @@
 		from new_tables_and_columns n
 		inner join CDMCNFG.DATATYPES d
 		on n.data_type=d.schema_datatype 
-		where n.upgrade_activity ? "new column" and d.rdbms="&DBNAME.";
+		where n.upgrade_activity ? "new column" and upcase(d.rdbms)=upcase("&DBNAME.");
 	quit;
 
-	data _null_;
-		set add_columns ;
-		by table_name;
-		file "&code_file_path" mod;
-		if first.table_name then do;
-			put; /* blank line */
-			put "PROC SQL;"; 
-	    	put "CONNECT TO &DBNAME (&sql_passthru_connection);"; /* add to config.sas */       	
-<<<<<<< HEAD
-			put +3 'EXECUTE (ALTER TABLE &dbschema..' table_name 'ADD ';
-=======
-			put +3 'EXECUTE (ALTER TABLE &dbschema..' table_name 'ADD (';
->>>>>>> 2f1e42029d3bc2d20e13f4d9be37477320f0e61a
-		end;
+data _null_;
+    set add_columns;
+    by table_name;
 
-		put +6 column_name data_type ' NULL' @; /* data_type is not correct */
-		if not last.table_name then put ',';
+    file "&code_file_path" mod;
 
-		if last.table_name then do;
-			put;
-<<<<<<< HEAD
-			put +3 ") BY &DBNAME;";
-=======
-			put +3 ")) BY &DBNAME;";
->>>>>>> 2f1e42029d3bc2d20e13f4d9be37477320f0e61a
-			put "DISCONNECT FROM &DBNAME;";
-			put "QUIT;"; 
-			put '%ErrCheck (Failed to alter table: ' table_name ', ' table_name ');';
-	    end; 
-	run;
+    if first.table_name then do;
+        put; /* blank line */
+        put "PROC SQL;";
+        put 'CONNECT TO &DBNAME (&sql_passthru_connection);';
+    end;
+
+    /* One EXECUTE block per column */
+    put +3 'EXECUTE (ALTER TABLE &dbschema..' table_name 
+        ' ADD ' column_name ' ' data_type ' NULL) BY &DBNAME;';
+
+    if last.table_name then do;
+        put 'DISCONNECT FROM &DBNAME;';
+        put 'QUIT;';
+        put '%ErrCheck (Failed to alter table: ' table_name ', ' table_name ');';
+    end;
+run;
 
 %mend create_upgrade_ddl;
-/*
-%include "C:\sas\ci360-udm-db-loader\config.sas"; 
-%create_upgrade_ddl;
-*/
+

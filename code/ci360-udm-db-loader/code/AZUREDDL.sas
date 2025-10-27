@@ -1,3 +1,7 @@
+/******************************************************************************/
+/* Copyright © 2023, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */
+/* SPDX-License-Identifier: Apache-2.0                                        */
+/* ****************************************************************************/
  PROC SQL ;
  connect to SQLSVR (&sql_passthru_connection.);
     EXECUTE (CREATE TABLE &dbschema..ab_test_path_assignment(
@@ -174,6 +178,387 @@
  DISCONNECT FROM SQLSVR;
  QUIT;
  %ErrCheck (Failed to create Table: cc_budget_breakup_ccbdgt, cc_budget_breakup_ccbdgt);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_activity_custom_attr(
+        activity_version_id varchar(36) NULL ,attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL
+        ,
+        activity_id varchar(36) NULL ,attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_activity_custom_attr add constraint cdm_activity_custom_attr_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_activity_custom_attr, cdm_activity_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_activity_detail(
+        activity_version_id varchar(36) NOT NULL
+        ,
+        activity_category_nm varchar(100) NULL ,activity_cd varchar(60) NULL ,activity_desc varchar(1500) NULL ,activity_id varchar(36) NULL ,activity_nm varchar(256) NULL ,last_published_dttm datetime2 NULL ,source_system_cd varchar(10) NULL ,status_cd varchar(20) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_activity_detail add constraint cdm_activity_detail_pk primary key (activity_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_activity_detail, cdm_activity_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_activity_x_task(
+        activity_version_id varchar(36) NOT NULL ,task_version_id varchar(36) NOT NULL
+        ,
+        activity_id varchar(36) NULL ,task_id varchar(36) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_activity_x_task add constraint cdm_activity_x_task_pk primary key (activity_version_id,task_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_activity_x_task, cdm_activity_x_task);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_audience_detail(
+        audience_id varchar(36) NOT NULL
+        ,
+        audience_data_source_nm varchar(100) NULL ,audience_desc varchar(1332) NULL ,audience_nm varchar(128) NULL ,audience_schedule_flg char(1) NULL ,audience_source_nm varchar(100) NULL ,create_dttm datetime2 NULL ,created_user_nm varchar(256) NULL ,delete_dttm datetime2 NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_audience_detail add constraint cdm_audience_detail_pk primary key (audience_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_audience_detail, cdm_audience_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_audience_occur_detail(
+        audience_occur_id varchar(36) NOT NULL
+        ,
+        audience_id varchar(36) NULL ,audience_size_cnt int NULL ,end_dttm datetime2 NULL ,execution_status_cd varchar(100) NULL ,occurrence_type_nm varchar(100) NULL ,start_dttm datetime2 NULL ,started_by_nm varchar(256) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_audience_occur_detail add constraint cdm_audience_occur_detail_pk primary key (audience_occur_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_audience_occur_detail, cdm_audience_occur_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_business_context(
+        business_context_id varchar(36) NOT NULL
+        ,
+        business_context_nm varchar(256) NULL ,business_context_type_cd varchar(40) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_business_context add constraint cdm_business_context_pk primary key (business_context_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_business_context, cdm_business_context);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_campaign_custom_attr(
+        attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL ,campaign_id varchar(36) NULL ,page_nm varchar(60) NULL
+        ,
+        attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,extension_attribute_nm varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_campaign_custom_attr add constraint cdm_campaign_custom_attr_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_campaign_custom_attr, cdm_campaign_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_campaign_detail(
+        campaign_id varchar(36) NOT NULL
+        ,
+        approval_dttm datetime2 NULL ,approval_given_by_nm varchar(60) NULL ,campaign_cd varchar(60) NULL ,campaign_desc varchar(1500) NULL ,campaign_folder_txt varchar(1024) NULL ,campaign_group_sk int NULL ,campaign_nm varchar(60) NULL ,campaign_owner_nm varchar(60) NULL ,campaign_status_cd varchar(3) NULL ,campaign_type_cd varchar(3) NULL ,campaign_version_no int NULL ,current_version_flg char(1) NULL ,deleted_flg char(1) NULL ,deployment_version_no int NULL ,end_dttm datetime2 NULL ,last_modified_by_user_nm varchar(60) NULL ,last_modified_dttm datetime2 NULL ,max_budget_amt decimal(17,2) NULL ,max_budget_offer_amt decimal(17,2) NULL ,min_budget_amt decimal(17,2) NULL ,min_budget_offer_amt decimal(17,2) NULL ,run_dttm datetime2 NULL ,source_system_cd varchar(10) NULL ,start_dttm datetime2 NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_campaign_detail add constraint cdm_campaign_detail_pk primary key (campaign_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_campaign_detail, cdm_campaign_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_contact_channel(
+        contact_channel_cd varchar(60) NOT NULL
+        ,
+        contact_channel_nm varchar(40) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_contact_channel add constraint cdm_contact_channel_pk primary key (contact_channel_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_contact_channel, cdm_contact_channel);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_contact_history(
+        contact_id varchar(36) NOT NULL ,contact_status_cd varchar(3) NULL ,identity_id varchar(36) NULL ,rtc_id varchar(36) NULL
+        ,
+        audience_id varchar(36) NULL ,audience_occur_id varchar(36) NULL ,contact_dt date NULL ,contact_dttm datetime2 NULL ,contact_dttm_tz datetime2 NULL ,contact_nm varchar(256) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,external_contact_info_1_id varchar(32) NULL ,external_contact_info_2_id varchar(32) NULL ,optimization_backfill_flg char(1) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_contact_history add constraint cdm_contact_history_pk primary key (contact_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_contact_history, cdm_contact_history);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_contact_status(
+        contact_status_cd varchar(3) NOT NULL
+        ,
+        contact_status_desc varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_contact_status add constraint cdm_contact_status_pk primary key (contact_status_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_contact_status, cdm_contact_status);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_content_custom_attr(
+        attribute_character_val varchar(1500) NULL ,attribute_data_type_cd varchar(30) NULL ,attribute_dttm_val datetime2 NULL ,attribute_nm varchar(256) NULL ,attribute_numeric_val decimal(17,2) NULL ,attribute_val varchar(1500) NULL ,content_version_id varchar(40) NULL
+        ,
+        content_id varchar(40) NULL ,extension_attribute_nm varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_content_custom_attr add constraint cdm_content_custom_attr_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_content_custom_attr, cdm_content_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_content_detail(
+        content_version_id varchar(40) NOT NULL
+        ,
+        active_flg char(1) NULL ,contact_content_category_nm varchar(256) NULL ,contact_content_cd varchar(60) NULL ,contact_content_class_nm varchar(100) NULL ,contact_content_desc varchar(1500) NULL ,contact_content_nm varchar(256) NULL ,contact_content_status_cd varchar(60) NULL ,contact_content_type_nm varchar(50) NULL ,content_id varchar(40) NULL ,created_dt date NULL ,created_user_nm varchar(256) NULL ,external_reference_txt varchar(1024) NULL ,external_reference_url_txt varchar(1024) NULL ,owner_nm varchar(256) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_content_detail add constraint cdm_content_detail_pk primary key (content_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_content_detail, cdm_content_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_dyn_content_custom_attr(
+        attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL ,content_hash_val varchar(32) NULL ,content_version_id varchar(40) NULL
+        ,
+        attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,content_id varchar(40) NULL ,extension_attribute_nm varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_dyn_content_custom_attr add constraint cdm_dyn_content_custom_at_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_dyn_content_custom_attr, cdm_dyn_content_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_identifier_type(
+        identifier_type_id varchar(36) NOT NULL
+        ,
+        identifier_type_desc varchar(100) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_identifier_type add constraint cdm_identifier_type_pk primary key (identifier_type_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_identifier_type, cdm_identifier_type);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_identity_attr(
+        identifier_type_id varchar(36) NOT NULL ,identity_id varchar(36) NOT NULL
+        ,
+        entry_dttm datetime2 NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,user_identifier_val varchar(5000) NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_identity_attr add constraint cdm_identity_attr_pk primary key (identifier_type_id,identity_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_identity_attr, cdm_identity_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_identity_map(
+        identity_id varchar(36) NOT NULL ,identity_type_cd varchar(40) NULL
+        ,
+        updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_identity_map add constraint cdm_identity_map_pk primary key (identity_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_identity_map, cdm_identity_map);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_identity_type(
+        identity_type_cd varchar(40) NOT NULL
+        ,
+        identity_type_desc varchar(100) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_identity_type add constraint cdm_identity_type_pk primary key (identity_type_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_identity_type, cdm_identity_type);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_occurrence_detail(
+        occurrence_id varchar(36) NOT NULL
+        ,
+        end_dttm datetime2 NULL ,execution_status_cd varchar(30) NULL ,occurrence_no int NULL ,occurrence_object_id varchar(36) NULL ,occurrence_object_type_cd varchar(60) NULL ,occurrence_type_cd varchar(30) NULL ,source_system_cd varchar(10) NULL ,start_dttm datetime2 NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_occurrence_detail add constraint cdm_occurrence_detail_pk primary key (occurrence_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_occurrence_detail, cdm_occurrence_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_response_channel(
+        response_channel_cd varchar(40) NOT NULL
+        ,
+        response_channel_nm varchar(60) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_response_channel add constraint cdm_response_channel_pk primary key (response_channel_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_response_channel, cdm_response_channel);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_response_extended_attr(
+        attribute_nm varchar(256) NOT NULL ,response_attribute_type_cd varchar(10) NOT NULL ,response_id varchar(36) NOT NULL
+        ,
+        attribute_data_type_cd varchar(30) NULL ,attribute_val varchar(1500) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_response_extended_attr add constraint cdm_response_extended_att_pk primary key (attribute_nm,response_attribute_type_cd,response_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_response_extended_attr, cdm_response_extended_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_response_history(
+        contact_id varchar(36) NULL ,content_version_id varchar(40) NULL ,identity_id varchar(36) NULL ,response_cd varchar(256) NULL ,response_channel_cd varchar(40) NULL ,response_id varchar(36) NOT NULL ,response_type_cd varchar(60) NULL ,rtc_id varchar(36) NULL
+        ,
+        audience_id varchar(36) NULL ,audience_occur_id varchar(36) NULL ,content_hash_val varchar(32) NULL ,content_id varchar(40) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,conversion_flg char(1) NULL ,external_contact_info_1_id varchar(32) NULL ,external_contact_info_2_id varchar(32) NULL ,inferred_response_flg char(1) NULL ,properties_map_doc varchar(4000) NULL ,response_dt date NULL ,response_dttm datetime2 NULL ,response_dttm_tz datetime2 NULL ,response_val_amt decimal(17,2) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_response_history add constraint cdm_response_history_pk primary key (response_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_response_history, cdm_response_history);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_response_lookup(
+        response_cd varchar(256) NOT NULL
+        ,
+        response_nm varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_response_lookup add constraint cdm_response_lookup_pk primary key (response_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_response_lookup, cdm_response_lookup);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_response_type(
+        response_type_cd varchar(60) NOT NULL
+        ,
+        response_type_desc varchar(256) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_response_type add constraint cdm_response_type_pk primary key (response_type_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_response_type, cdm_response_type);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_rtc_detail(
+        occurrence_id varchar(36) NULL ,rtc_id varchar(36) NOT NULL ,segment_version_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        ,
+        deleted_flg char(1) NULL ,execution_status_cd varchar(30) NULL ,processed_dttm datetime2 NULL ,response_tracking_flg char(1) NULL ,segment_id varchar(36) NULL ,source_system_cd varchar(10) NULL ,task_id varchar(36) NULL ,task_occurrence_no int NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_rtc_detail add constraint cdm_rtc_detail_pk primary key (rtc_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_rtc_detail, cdm_rtc_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_rtc_x_content(
+        content_version_id varchar(40) NOT NULL ,rtc_id varchar(36) NOT NULL
+        ,
+        content_hash_val varchar(32) NULL ,content_id varchar(40) NULL ,rtc_x_content_sk varchar(36) NULL ,sequence_no int NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_rtc_x_content add constraint cdm_rtc_x_content_pk primary key (content_version_id,rtc_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_rtc_x_content, cdm_rtc_x_content);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_custom_attr(
+        attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL ,segment_version_id varchar(36) NULL
+        ,
+        attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,segment_id varchar(36) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_custom_attr add constraint cdm_segment_custom_attr_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_custom_attr, cdm_segment_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_detail(
+        segment_version_id varchar(36) NOT NULL
+        ,
+        segment_category_nm varchar(100) NULL ,segment_cd varchar(60) NULL ,segment_desc varchar(1500) NULL ,segment_id varchar(36) NULL ,segment_map_id varchar(36) NULL ,segment_map_version_id varchar(36) NULL ,segment_nm varchar(256) NULL ,segment_src_nm varchar(40) NULL ,segment_status_cd varchar(20) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_detail add constraint cdm_segment_detail_pk primary key (segment_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_detail, cdm_segment_detail);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_map(
+        segment_map_version_id varchar(36) NOT NULL
+        ,
+        segment_map_category_nm varchar(100) NULL ,segment_map_cd varchar(60) NULL ,segment_map_desc varchar(1500) NULL ,segment_map_id varchar(36) NULL ,segment_map_nm varchar(256) NULL ,segment_map_src_nm varchar(40) NULL ,segment_map_status_cd varchar(20) NULL ,source_system_cd varchar(10) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_map add constraint cdm_segment_map_pk primary key (segment_map_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_map, cdm_segment_map);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_map_custom_attr(
+        attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL ,segment_map_version_id varchar(36) NULL
+        ,
+        attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,segment_map_id varchar(36) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_map_custom_attr add constraint cdm_segment_map_custom_at_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_map_custom_attr, cdm_segment_map_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_test(
+        task_version_id varchar(36) NOT NULL ,test_cd varchar(60) NOT NULL
+        ,
+        stratified_samp_criteria_txt varchar(1024) NULL ,stratified_sampling_flg char(1) NULL ,task_id varchar(36) NULL ,test_cnt int NULL ,test_enabled_flg char(1) NULL ,test_nm varchar(65) NULL ,test_pct decimal(5,2) NULL ,test_sizing_type_nm varchar(65) NULL ,test_type_nm varchar(10) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_test add constraint cdm_segment_test_pk primary key (task_version_id,test_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_test, cdm_segment_test);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_segment_test_x_segment(
+        segment_id varchar(36) NOT NULL ,task_version_id varchar(36) NOT NULL ,test_cd varchar(60) NOT NULL
+        ,
+        task_id varchar(36) NULL ,updated_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_segment_test_x_segment add constraint cdm_segment_test_x_segmen_pk primary key (segment_id,task_version_id,test_cd)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_segment_test_x_segment, cdm_segment_test_x_segment);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_task_custom_attr(
+        attribute_data_type_cd varchar(30) NULL ,attribute_nm varchar(256) NULL ,attribute_val varchar(1500) NULL ,task_version_id varchar(36) NULL
+        ,
+        attribute_character_val varchar(1500) NULL ,attribute_dttm_val datetime2 NULL ,attribute_numeric_val decimal(17,2) NULL ,extension_attribute_nm varchar(256) NULL ,task_id varchar(36) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL
+        ,Hashed_pk_col varchar(64) NOT NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_task_custom_attr add constraint cdm_task_custom_attr_pk primary key (Hashed_pk_col)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_task_custom_attr, cdm_task_custom_attr);
+ PROC SQL ;
+ connect to SQLSVR (&sql_passthru_connection.);
+    EXECUTE (CREATE TABLE &dbschema..cdm_task_detail(
+        business_context_id varchar(36) NULL ,campaign_id varchar(36) NULL ,contact_channel_cd varchar(60) NULL ,task_version_id varchar(36) NOT NULL
+        ,
+        active_flg char(1) NULL ,budget_unit_cost_amt decimal(17,2) NULL ,budget_unit_usage_amt decimal(17,2) NULL ,control_group_action_nm varchar(65) NULL ,created_dt date NULL ,created_user_nm varchar(256) NULL ,export_dttm datetime2 NULL ,limit_by_total_impression_flg char(1) NULL ,limit_period_unit_cnt int NULL ,max_budget_amt decimal(17,2) NULL ,max_budget_offer_amt decimal(17,2) NULL ,maximum_period_expression_cnt int NULL ,min_budget_amt decimal(17,2) NULL ,min_budget_offer_amt decimal(17,2) NULL ,modified_status_cd varchar(20) NULL ,owner_nm varchar(256) NULL ,published_flg char(1) NULL ,recurr_type_cd varchar(3) NULL ,recurring_schedule_flg char(1) NULL ,saved_flg char(1) NULL ,scheduled_end_dttm datetime2 NULL ,scheduled_flg char(1) NULL ,scheduled_start_dttm datetime2 NULL ,segment_tests_flg char(1) NULL ,source_system_cd varchar(10) NULL ,staged_flg char(1) NULL ,standard_reply_flg char(1) NULL ,stratified_sampling_action_nm varchar(65) NULL ,subject_type_nm varchar(60) NULL ,task_cd varchar(60) NULL ,task_delivery_type_nm varchar(60) NULL ,task_desc varchar(1500) NULL ,task_id varchar(36) NULL ,task_nm varchar(256) NULL ,task_status_cd varchar(20) NULL ,task_subtype_nm varchar(100) NULL ,task_type_nm varchar(40) NULL ,update_contact_history_flg char(1) NULL ,updated_by_nm varchar(60) NULL ,updated_dttm datetime2 NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        )) by SQLSVR;
+      execute (alter table &dbschema..cdm_task_detail add constraint cdm_task_detail_pk primary key (task_version_id)) by SQLSVR;
+ DISCONNECT FROM SQLSVR;
+ QUIT;
+ %ErrCheck (Failed to create Table: cdm_task_detail, cdm_task_detail);
  PROC SQL ;
  connect to SQLSVR (&sql_passthru_connection.);
     EXECUTE (CREATE TABLE &dbschema..commitment_details(
@@ -566,7 +951,7 @@
     EXECUTE (CREATE TABLE &dbschema..impression_delivered(
         creative_id varchar(36) NULL ,detail_id_hex varchar(32) NULL ,event_designed_id varchar(36) NULL ,event_id varchar(36) NOT NULL ,identity_id varchar(36) NULL ,session_id_hex varchar(29) NULL ,spot_id varchar(36) NULL ,task_id varchar(36) NULL ,visit_id_hex varchar(32) NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,impression_delivered_dttm datetime2 NULL ,impression_delivered_dttm_tz datetime2 NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(130) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,impression_delivered_dttm datetime2 NULL ,impression_delivered_dttm_tz datetime2 NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(130) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,request_id varchar(36) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..impression_delivered add constraint impression_delivered_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -577,7 +962,7 @@
     EXECUTE (CREATE TABLE &dbschema..impression_spot_viewable(
         creative_id varchar(36) NULL ,detail_id_hex varchar(32) NULL ,event_designed_id varchar(36) NULL ,event_id varchar(36) NOT NULL ,identity_id varchar(36) NULL ,occurrence_id varchar(36) NULL ,session_id_hex varchar(29) NULL ,spot_id varchar(36) NULL ,task_id varchar(36) NULL ,visit_id_hex varchar(32) NULL
         ,
-        analysis_group_id varchar(36) NULL ,aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,impression_viewable_dttm datetime2 NULL ,impression_viewable_dttm_tz datetime2 NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(128) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        analysis_group_id varchar(36) NULL ,aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,impression_viewable_dttm datetime2 NULL ,impression_viewable_dttm_tz datetime2 NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(128) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,request_id varchar(36) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..impression_spot_viewable add constraint impression_spot_viewable_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1242,7 +1627,7 @@
     EXECUTE (CREATE TABLE &dbschema..md_spot(
         spot_version_id varchar(36) NOT NULL
         ,
-        channel_nm varchar(40) NULL ,created_user_nm varchar(256) NULL ,dimension_label_txt varchar(156) NULL ,height_width_ratio_val_txt varchar(25) NULL ,last_published_dttm datetime2 NULL ,multi_page_flg char(1) NULL ,owner_nm varchar(256) NULL ,spot_desc varchar(1332) NULL ,spot_height_val_no varchar(10) NULL ,spot_id varchar(36) NULL ,spot_nm varchar(60) NULL ,spot_status_cd varchar(20) NULL ,spot_type_nm varchar(40) NULL ,spot_width_val_no varchar(10) NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        channel_nm varchar(40) NULL ,created_user_nm varchar(256) NULL ,dimension_label_txt varchar(156) NULL ,height_width_ratio_val_txt varchar(25) NULL ,last_published_dttm datetime2 NULL ,location_selector_flg char(1) NULL ,multi_page_flg char(1) NULL ,owner_nm varchar(256) NULL ,spot_desc varchar(1332) NULL ,spot_height_val_no varchar(10) NULL ,spot_id varchar(36) NULL ,spot_key varchar(40) NULL ,spot_nm varchar(60) NULL ,spot_status_cd varchar(20) NULL ,spot_type_nm varchar(40) NULL ,spot_width_val_no varchar(10) NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
         )) by SQLSVR;
       execute (alter table &dbschema..md_spot add constraint md_spot_pk primary key (spot_version_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1264,7 +1649,7 @@
     EXECUTE (CREATE TABLE &dbschema..md_task(
         business_context_id varchar(36) NULL ,task_version_id varchar(36) NOT NULL
         ,
-        activity_flg char(1) NULL ,arbitration_method_cd varchar(36) NULL ,channel_nm varchar(40) NULL ,control_group_action_nm varchar(65) NULL ,created_user_nm varchar(256) NULL ,delivery_config_type_nm varchar(36) NULL ,display_priority_no int NULL ,export_template_flg char(1) NULL ,folder_path_nm varchar(256) NULL ,impressions_life_time_cnt int NULL ,impressions_per_session_cnt int NULL ,impressions_qty_period_cnt int NULL ,last_published_dttm datetime2 NULL ,limit_period_unit_cnt int NULL ,maximum_period_expression_cnt int NULL ,mobile_app_id varchar(60) NULL ,mobile_app_nm varchar(60) NULL ,model_start_dttm datetime2 NULL ,owner_nm varchar(256) NULL ,period_type_nm varchar(36) NULL ,rec_scheduled_end_dttm datetime2 NULL ,rec_scheduled_start_dttm datetime2 NULL ,rec_scheduled_start_tm varchar(20) NULL ,recurrence_day_of_month_no int NULL ,recurrence_day_of_week_txt varchar(60) NULL ,recurrence_day_of_wk_ordinal_no varchar(36) NULL ,recurrence_days_of_week_txt varchar(60) NULL ,recurrence_frequency_cd varchar(36) NULL ,recurrence_monthly_type_nm varchar(36) NULL ,recurring_schedule_flg char(1) NULL ,rtdm_flg char(1) NULL ,scheduled_end_dttm datetime2 NULL ,scheduled_flg char(1) NULL ,scheduled_start_dttm datetime2 NULL ,segment_tests_flg char(1) NULL ,send_notification_locale_cd varchar(5) NULL ,stratified_sampling_action_nm varchar(65) NULL ,subject_line_source_nm varchar(100) NULL ,subject_line_txt varchar(1332) NULL ,task_category_nm varchar(100) NULL ,task_cd varchar(60) NULL ,task_delivery_type_nm varchar(60) NULL ,task_desc varchar(1332) NULL ,task_id varchar(36) NULL ,task_nm varchar(60) NULL ,task_status_cd varchar(20) NULL ,task_subtype_nm varchar(30) NULL ,task_type_nm varchar(40) NULL ,template_id varchar(36) NULL ,test_duration int NULL ,use_modeling_flg char(1) NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
+        activity_flg char(1) NULL ,arbitration_method_cd varchar(36) NULL ,channel_nm varchar(40) NULL ,control_group_action_nm varchar(65) NULL ,created_user_nm varchar(256) NULL ,delivery_config_type_nm varchar(36) NULL ,display_priority_no int NULL ,export_template_flg char(1) NULL ,folder_path_nm varchar(256) NULL ,impressions_life_time_cnt int NULL ,impressions_per_session_cnt int NULL ,impressions_qty_period_cnt int NULL ,last_published_dttm datetime2 NULL ,limit_period_unit_cnt int NULL ,maximum_period_expression_cnt int NULL ,mobile_app_id varchar(60) NULL ,mobile_app_nm varchar(60) NULL ,model_start_dttm datetime2 NULL ,owner_nm varchar(256) NULL ,period_type_nm varchar(36) NULL ,rec_scheduled_end_dttm datetime2 NULL ,rec_scheduled_start_dttm datetime2 NULL ,rec_scheduled_start_tm varchar(20) NULL ,recurrence_day_of_month_no int NULL ,recurrence_day_of_week_txt varchar(60) NULL ,recurrence_day_of_wk_ordinal_no varchar(36) NULL ,recurrence_days_of_week_txt varchar(60) NULL ,recurrence_frequency_cd varchar(36) NULL ,recurrence_monthly_type_nm varchar(36) NULL ,recurring_schedule_flg char(1) NULL ,rtdm_flg char(1) NULL ,scheduled_end_dttm datetime2 NULL ,scheduled_flg char(1) NULL ,scheduled_start_dttm datetime2 NULL ,secondary_status varchar(40) NULL ,segment_tests_flg char(1) NULL ,send_notification_locale_cd varchar(5) NULL ,stratified_sampling_action_nm varchar(65) NULL ,subject_line_source_nm varchar(100) NULL ,subject_line_txt varchar(1332) NULL ,task_category_nm varchar(100) NULL ,task_cd varchar(60) NULL ,task_delivery_type_nm varchar(60) NULL ,task_desc varchar(1332) NULL ,task_id varchar(36) NULL ,task_nm varchar(60) NULL ,task_status_cd varchar(20) NULL ,task_subtype_nm varchar(30) NULL ,task_type_nm varchar(40) NULL ,template_id varchar(36) NULL ,test_duration int NULL ,use_modeling_flg char(1) NULL ,valid_from_dttm datetime2 NULL ,valid_to_dttm datetime2 NULL
         )) by SQLSVR;
       execute (alter table &dbschema..md_task add constraint md_task_pk primary key (task_version_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1736,7 +2121,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_message_clicked(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_click_dttm datetime2 NULL ,sms_click_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_click_dttm datetime2 NULL ,sms_click_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_message_clicked add constraint sms_message_clicked_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1747,7 +2132,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_message_delivered(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_delivered_dttm datetime2 NULL ,sms_delivered_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_delivered_dttm datetime2 NULL ,sms_delivered_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_message_delivered add constraint sms_message_delivered_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1758,7 +2143,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_message_failed(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,reason_cd varchar(5) NULL ,reason_description_txt varchar(1500) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_failed_dttm datetime2 NULL ,sms_failed_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,reason_cd varchar(5) NULL ,reason_description_txt varchar(1500) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_failed_dttm datetime2 NULL ,sms_failed_dttm_tz datetime2 NULL ,sms_message_id varchar(40) NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_message_failed add constraint sms_message_failed_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1769,7 +2154,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_message_reply(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_reply_dttm datetime2 NULL ,sms_reply_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_content varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_reply_dttm datetime2 NULL ,sms_reply_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_message_reply add constraint sms_message_reply_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1780,7 +2165,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_message_send(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,fragment_cnt int NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_send_dttm datetime2 NULL ,sms_send_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,fragment_cnt int NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_send_dttm datetime2 NULL ,sms_send_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_message_send add constraint sms_message_send_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1791,7 +2176,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_optout(
         event_id varchar(36) NOT NULL
         ,
-        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_optout_dttm datetime2 NULL ,sms_optout_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_optout_dttm datetime2 NULL ,sms_optout_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_optout add constraint sms_optout_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1802,7 +2187,7 @@
     EXECUTE (CREATE TABLE &dbschema..sms_optout_details(
         event_id varchar(36) NOT NULL
         ,
-        address_val varchar(20) NULL ,aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_optout_dttm datetime2 NULL ,sms_optout_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
+        address_val varchar(20) NULL ,aud_occurrence_id varchar(36) NULL ,audience_id varchar(36) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,country_cd varchar(3) NULL ,creative_id varchar(36) NULL ,creative_version_id varchar(36) NULL ,event_designed_id varchar(36) NULL ,event_nm varchar(256) NULL ,identity_id varchar(36) NULL ,load_dttm datetime2 NULL ,occurrence_id varchar(36) NULL ,response_tracking_cd varchar(36) NULL ,sender_id varchar(40) NULL ,sms_message_id varchar(40) NULL ,sms_optout_dttm datetime2 NULL ,sms_optout_dttm_tz datetime2 NULL ,task_id varchar(36) NULL ,task_version_id varchar(36) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..sms_optout_details add constraint sms_optout_details_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1813,7 +2198,7 @@
     EXECUTE (CREATE TABLE &dbschema..spot_clicked(
         creative_id varchar(36) NULL ,detail_id_hex varchar(32) NULL ,event_designed_id varchar(36) NULL ,event_id varchar(36) NOT NULL ,identity_id varchar(36) NULL ,occurrence_id varchar(36) NULL ,session_id_hex varchar(29) NULL ,spot_id varchar(36) NULL ,task_id varchar(36) NULL ,visit_id_hex varchar(32) NULL
         ,
-        channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(128) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,spot_clicked_dttm datetime2 NULL ,spot_clicked_dttm_tz datetime2 NULL ,task_version_id varchar(36) NULL ,url_txt varchar(1332) NULL
+        channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,control_group_flg char(1) NULL ,creative_version_id varchar(36) NULL ,event_key_cd varchar(100) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,load_dttm datetime2 NULL ,message_id varchar(36) NULL ,message_version_id varchar(36) NULL ,mobile_app_id varchar(40) NULL ,product_id varchar(128) NULL ,product_nm varchar(128) NULL ,product_qty_no int NULL ,product_sku_no varchar(100) NULL ,properties_map_doc varchar(4000) NULL ,rec_group_id varchar(3) NULL ,request_id varchar(36) NULL ,reserved_1_txt varchar(100) NULL ,reserved_2_txt varchar(100) NULL ,response_tracking_cd varchar(36) NULL ,segment_id varchar(36) NULL ,segment_version_id varchar(36) NULL ,spot_clicked_dttm datetime2 NULL ,spot_clicked_dttm_tz datetime2 NULL ,task_version_id varchar(36) NULL ,url_txt varchar(1332) NULL
         )) by SQLSVR;
       execute (alter table &dbschema..spot_clicked add constraint spot_clicked_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
@@ -1824,7 +2209,7 @@
     EXECUTE (CREATE TABLE &dbschema..spot_requested(
         detail_id_hex varchar(32) NULL ,event_designed_id varchar(36) NULL ,event_id varchar(36) NOT NULL ,identity_id varchar(36) NULL ,session_id_hex varchar(29) NULL ,spot_id varchar(36) NULL ,visit_id_hex varchar(32) NULL
         ,
-        channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,load_dttm datetime2 NULL ,mobile_app_id varchar(40) NULL ,spot_requested_dttm datetime2 NULL ,spot_requested_dttm_tz datetime2 NULL
+        channel_nm varchar(40) NULL ,channel_user_id varchar(300) NULL ,context_type_nm varchar(256) NULL ,context_val varchar(256) NULL ,event_nm varchar(256) NULL ,event_source_cd varchar(100) NULL ,load_dttm datetime2 NULL ,mobile_app_id varchar(40) NULL ,properties_map_doc varchar(4000) NULL ,request_id varchar(36) NULL ,spot_requested_dttm datetime2 NULL ,spot_requested_dttm_tz datetime2 NULL
         )) by SQLSVR;
       execute (alter table &dbschema..spot_requested add constraint spot_requested_pk primary key (event_id)) by SQLSVR;
  DISCONNECT FROM SQLSVR;
