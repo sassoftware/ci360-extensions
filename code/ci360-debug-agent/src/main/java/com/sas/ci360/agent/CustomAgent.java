@@ -79,7 +79,7 @@ public class CustomAgent {
 								}
 
 								// update stats
-								statsHashMap.compute(Agent.STATS_EVENT_COUNT, (k, v) -> v == null ? 1 : v + 1);
+								statsHashMap.compute(STATS_EVENT_COUNT, (k, v) -> v == null ? 1 : v + 1);
 								statsHashMap.compute(eventName, (k, v) -> v == null ? 1 : v + 1);
 
 								try {
