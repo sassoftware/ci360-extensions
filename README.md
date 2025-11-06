@@ -58,7 +58,7 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__Azure Blob Storage__](code/ci360-azure-blob-storage-bulk-connector): Upload CI360 generated customer data to Azure Blob storage
 - [__CI360 Match__](code/ci360-match-bulk-connector): Sync CI360 targeted audiences to CI360 Match
 - [__Optilyz Connector__](code/ci360-optilyz-bulk-connector): Send customer audiences and attributes generated in CI360 from various sources to Optilyz for direct mail automation
-- [__CI360 Direct Send to Scheduler__]: Allows a CI 360 User to create deployed jobs from the CI 360 tenant for Direct Marketing Tasks, Bulk Email Tasks and Direct Segment Maps for a SAS Administrator to schedule on-prem in the SAS LSF scheduler.
+- [__CI360 Direct Send to Scheduler__](code/ci360-engage-direct-send-to-scheduler/): Allows a CI 360 User to create deployed jobs from the CI 360 tenant for Direct Marketing Tasks, Bulk Email Tasks and Direct Segment Maps for a SAS Administrator to schedule on-prem in the SAS LSF scheduler.
 
 ### Utilities
 
