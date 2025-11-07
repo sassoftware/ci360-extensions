@@ -87,6 +87,8 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 Direct Merge Variables__](code/ci360-direct-merge-variables): This stored process is intended to be used as a post process in the CI360 Engage Direct DM Task.   It updates any SAS datasets exported in that task, with corresponding dataitems from other SAS datasets.
 
+- [__CI360 REST API Collections__](code/ci360-rest-api-collections/): An Insomnia collection of REST API endpoints for SAS Customer Intelligence 360 (CI 360), designed to make learning and testing easy for developers, consultants and system administrators.​ 
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
