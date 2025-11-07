@@ -1,0 +1,3881 @@
+type: collection.insomnia.rest/5.0
+name: SAS CI 360 REST APIs
+meta:
+  id: wrk_764dc19dd31e434c97c893caeb461930
+  created: 1729073462770
+  modified: 1729080606819
+  description: This collection demos various REST APIs of SAS CI 360.
+collection:
+  - name: SAS CI360 REST APIs
+    meta:
+      id: fld_0a1e48ba9c0148fba7921efeeea745cd
+      created: 1737010061265
+      modified: 1761891993489
+      sortKey: -1729196961325.8125
+      description: |
+        SAS Customer Intelligence 360 REST API Collection
+
+        You can find the documenation for CI 360 REST APIs online here: https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintapis/ch-rest-apis.htm
+    children:
+      - name: Marketing Gateway
+        meta:
+          id: fld_359adb9be4f14941b4b84f02f363f34b
+          created: 1729080766172
+          modified: 1760082200360
+          sortKey: -1737010170849
+          description: ""
+        children:
+          - name: External Events
+            meta:
+              id: fld_21b6e90f359c47bcac030e7631ca3a1e
+              created: 1729073860167
+              modified: 1759931180153
+              sortKey: -1729080770675
+              description: ""
+            children:
+              - name: Single External Events
+                meta:
+                  id: fld_f310064e28fb42de8abf0aaf55976cd6
+                  created: 1729073895687
+                  modified: 1758870757432
+                  sortKey: -1729073895687
+                  description: ""
+                children:
+                  - url: "{{base_url}}/marketingGateway/events"
+                    name: Inject Single External Event
+                    meta:
+                      id: req_ddf4d6869ff8477a9ee51b642c6da489
+                      created: 1729073489638
+                      modified: 1758870737053
+                      isPrivate: false
+                      description: ""
+                      sortKey: -1729073936901
+                    method: POST
+                    body:
+                      mimeType: application/json
+                      text: >-
+                        {
+                        	"eventName": "incoming_call",
+                        	"customer_id": "10001",
+                        	"applicationId": "{{ _['application-id'] }}",
+                        	"attributes":{
+                        		"ci360_nf_image_url": "https://avatars.githubusercontent.com/u/5289877?s=200&v=4",
+                                "reason":"This is a cool demo of live web push. Time:",
+                                "category":"#12345",
+                        		"mobile_number":"123456789",
+                        		"caller_name":"Test10"
+                            }	
+                        }
+                    headers:
+                      - name: Content-Type
+                        value: application/json
+                      - name: User-Agent
+                        value: insomnia/10.0.0
+                    settings:
+                      renderRequestBody: true
+                      encodeUrl: true
+                      followRedirects: global
+                      cookies:
+                        send: true
+                        store: true
+                      rebuildPath: true
+              - name: Bulk External Events
+                meta:
+                  id: fld_ee81f34ed9b9401b9c547f1339928f18
+                  created: 1729073976462
+                  modified: 1759931180153
+                  sortKey: -1729073976462
+                  description: ""
+                children:
+                  - url: "{{base_url}}/marketingGateway/bulkEventsFileLocation"
+                    name: 1. Request File Location
+                    meta:
+                      id: req_6614d24649dc435887473444f0adf822
+                      created: 1729074037812
+                      modified: 1729138964630
+                      isPrivate: false
+                      description: ""
+                      sortKey: -1729074745654
+                    method: POST
+                    body:
+                      mimeType: application/json
+                      text: |-
+                        {
+                          "version":1,
+                          "applicationId":"{{ _['application-id'] }}"
+                        }
+                    headers:
+                      - name: Content-Type
+                        value: application/json
+                      - name: User-Agent
+                        value: insomnia/10.0.0
+                    settings:
+                      renderRequestBody: true
+                      encodeUrl: true
+                      followRedirects: global
+                      cookies:
+                        send: true
+                        store: true
+                      rebuildPath: true
+                  - url: "{% response 'body', 'req_6614d24649dc435887473444f0adf822',
+                      'b64::JC5saW5rcy4wLmhyZWY=::46b', 'never', 60 %}"
+                    name: 2. Upload CSV File Location
+                    meta:
+                      id: req_8ea217774a314a368c8b95d389f8545a
+                      created: 1729074745554
+                      modified: 1743652827921
+                      isPrivate: false
+                      description: 'The URL for upload request is obtained from the result of the
+                        "Request File Location" API call. If you have not made
+                        that call already in this collection, upload call will
+                        fail. Also keep in mind that the URL has a an expiry. '
+                      sortKey: -1729074745554
+                    method: PUT
+                    body:
+                      mimeType: application/octet-stream
+                      fileName: C:\Users\sinswr\OneDrive -
+                        SAS\Sudheesh_ext\desktop_v1\2_bulk_external_event_upload_file.csv
+                    headers:
+                      - name: Content-Type
+                        value: "{% response 'body', 'req_6614d24649dc435887473444f0adf822',
+                          'b64::JC5saW5rcy4wLnR5cGU=::46b', 'never', 60 %}"
+                      - name: User-Agent
+                        value: insomnia/10.0.0
+                    authentication:
+                      type: none
+                    settings:
+                      renderRequestBody: true
+                      encodeUrl: true
+                      followRedirects: global
+                      cookies:
+                        send: true
+                        store: true
+                      rebuildPath: true
+          - name: Agent Download and Access Point Configurations
+            meta:
+              id: fld_abdc230a4b2c449497cdd4cec754f2cb
+              created: 1729080812016
+              modified: 1729244215393
+              sortKey: -1729080770775
+              description: ""
+            children:
+              - url: "{{base_url}}/marketingGateway/configuration"
+                name: 1. Get the Configuration for Access Point
+                meta:
+                  id: req_ff338c3d52b948d196452613ba3fc7b3
+                  created: 1729080875623
+                  modified: 1729138913301
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729081620409
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{base_url}}/marketingGateway/agent"
+                name: 2. Download General Agent
+                meta:
+                  id: req_5bfbc81862b5455891ce4bdd34a0b3a5
+                  created: 1729081096685
+                  modified: 1729138925479
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729081620359
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                  - name: Content-Type
+                    value: application/zip
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{base_url}}/marketingGateway/diag"
+                name: 3. Download Diagnostic Agent
+                meta:
+                  id: req_3aa7501cc50445378a029818adc5ac7e
+                  created: 1729081326772
+                  modified: 1729138943433
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729081620334
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                  - name: Content-Type
+                    value: application/zip
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{base_url}}/marketingGateway/satellite"
+                name: 4. Download Direct Agent
+                meta:
+                  id: req_a5ae49d09ebd44999578949ac6d97aad
+                  created: 1729081389581
+                  modified: 1729138948583
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729081620321.5
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                  - name: Content-Type
+                    value: application/zip
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{base_url}}/marketingGateway/optimize"
+                name: 5. Download Optimize Agent
+                meta:
+                  id: req_1e05d454fa8e4162bfb835ca31b89a6d
+                  created: 1729081459537
+                  modified: 1729138953014
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729081620309
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                  - name: Content-Type
+                    value: application/zip
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: Marketing Design
+        meta:
+          id: fld_90e0ff7332ec4fe6af9fca71be44bab3
+          created: 1729090450882
+          modified: 1756988647971
+          sortKey: -1737010170749
+          description: ""
+        children:
+          - name: Tasks
+            meta:
+              id: fld_9af20690c8be486daa6dac0d106a42fa
+              created: 1729091699486
+              modified: 1756988647971
+              sortKey: -1729091699486
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingDesign/tasks"
+                name: 1. List All Tasks
+                meta:
+                  id: req_548164767d9c4e888e075e67a7ec5d74
+                  created: 1729090626909
+                  modified: 1729091714978
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729091714941
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingDesign/tasks"
+                name: 2. Filter Tasks by Channel
+                meta:
+                  id: req_bbc841e18ff94114b90bc252d47e0378
+                  created: 1729090808865
+                  modified: 1729091717138
+                  isPrivate: false
+                  description: 'Channel: "web" "email" "mobile" "direct" "external"'
+                  sortKey: -1729091714841
+                method: GET
+                parameters:
+                  - name: channel
+                    value: external
+                    disabled: false
+                    id: pair_02efb8aa499b4cb89039bf913c093a36
+                  - name: sortBy
+                    value: lastModifiedTimeStamp:descending
+                    disabled: false
+                    id: pair_7046f7ba5e7b4b729fc71092b9d4bd5d
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingDesign/tasks"
+                name: 3. Filter Tasks by Name
+                meta:
+                  id: req_658556cbe96d4f77871b7f66656d12f5
+                  created: 1729091173703
+                  modified: 1756988493466
+                  isPrivate: false
+                  description: 'Channel: "web" "email" "mobile" "direct" "external"'
+                  sortKey: -1729091714741
+                method: GET
+                parameters:
+                  - name: name
+                    value: in-app test
+                    disabled: false
+                    id: pair_02efb8aa499b4cb89039bf913c093a36
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingDesign/tasks/{% response 'body',
+                  'req_658556cbe96d4f77871b7f66656d12f5',
+                  'b64::JC5pdGVtcy4wLnRhc2tJZA==::46b', 'never', 60 %}"
+                name: 4. Get Details of a Specific Task
+                meta:
+                  id: req_9d218fd4f6db4d858256fb79e7156b1a
+                  created: 1729091303073
+                  modified: 1756988195840
+                  isPrivate: false
+                  description: 'Channel: "web" "email" "mobile" "direct" "external"'
+                  sortKey: -1729091714641
+                method: GET
+                parameters:
+                  - name: name
+                    value: CJ T2
+                    disabled: true
+                    id: pair_02efb8aa499b4cb89039bf913c093a36
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingDesign/tasks/{% response 'body',
+                  'req_658556cbe96d4f77871b7f66656d12f5',
+                  'b64::JC5pdGVtcy4wLnRhc2tJZA==::46b', 'never', 60
+                  %}/relatedResources"
+                name: 5. Get the related resources of Specific Task
+                meta:
+                  id: req_1edefc8e8dfa49fc8f32a95ff33c6ced
+                  created: 1729091493411
+                  modified: 1729139091309
+                  isPrivate: false
+                  description: 'Channel: "web" "email" "mobile" "direct" "external"'
+                  sortKey: -1729091714541
+                method: GET
+                parameters:
+                  - name: name
+                    value: CJ T2
+                    disabled: true
+                    id: pair_02efb8aa499b4cb89039bf913c093a36
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: Marketing Data
+        meta:
+          id: fld_a72429302cb64d7dbe974e950f8cebbc
+          created: 1729139152250
+          modified: 1759925531999
+          sortKey: -1737010170649
+          description: ""
+        children:
+          - name: Customer Tables
+            meta:
+              id: fld_99981dc81ee348b4bb107e57afcf1eb7
+              created: 1729139222803
+              modified: 1756982389799
+              sortKey: -1729139223003
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingData/tables"
+                name: 1. List All Customer Tables
+                meta:
+                  id: req_b0af1b8248894aa2ad98bb587f4d7002
+                  created: 1729139253312
+                  modified: 1729139439173
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729139253312
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: false
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables/{% response 'body',
+                  'req_74b04d988b8841d49dc103cb32bc8486', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 5. Get Details of a Specific Table
+                meta:
+                  id: req_7f32aa51385c4a99861dcc672930547b
+                  created: 1729139460585
+                  modified: 1729140262490
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729103599433.75
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: true
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_8d4a4dcafbf54b058ffc9ab3a746d3ff
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables"
+                name: 2. Filter Customer Tables by Type
+                meta:
+                  id: req_c44c0ae4f85d4a59a0f9ae8742c9728f
+                  created: 1729139606923
+                  modified: 1729139625968
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729127368719.25
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: false
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: type
+                    value: importedList
+                    disabled: false
+                    id: pair_f97fb9f8561346bf874158818b4fe75a
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables"
+                name: 3. Filter Customer Tables by Name
+                meta:
+                  id: req_b7fc00e69e0e43d1b8a140c6aa6c0136
+                  created: 1729139677734
+                  modified: 1756971084099
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729121426422.875
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: false
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: name
+                    value: cust_tansient_name
+                    disabled: false
+                    id: pair_f97fb9f8561346bf874158818b4fe75a
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables"
+                name: 4. Create a Customer Table
+                meta:
+                  id: req_74b04d988b8841d49dc103cb32bc8486
+                  created: 1729139932874
+                  modified: 1729140229809
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729103599533.75
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                    	"name": "ABC_segmentation_API_Test",
+                    	"description": "ABC_Segmentation Descriptor - Date",
+                    	"type": "customer",
+                    	"makeAvailableForTargeting": true,
+                    	"dataItems": [
+                    		{
+                    			"name": "loginid",
+                    			"label": "Login ID Segmentation1",
+                    			"description": "Login ID",
+                    			"type": "STRING",
+                    			"excludeFromAnalytics": true,
+                    			"identityType": "login_id",
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": true,
+                    			"key": true,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": false
+                    		},
+                    		{
+                    			"name": "email_segmentation1",
+                    			"label": "Email Segmentation1",
+                    			"description": "Email ID",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": false,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "firstname_segmentation1",
+                    			"label": "First Name Segmentation1",
+                    			"description": "First Name",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": false,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "hotelpreference_segmentation1",
+                    			"label": "Hotel Preference Segmentation1",
+                    			"description": "Hotel Preference",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "age_segmentation1",
+                    			"label": "Age Segmentation1",
+                    			"description": "Age",
+                    			"type": "INT",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "contactlang_segmentation1",
+                    			"label": "Contact Language Segmentation1",
+                    			"description": "Contact Language",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "gender_segmentation1",
+                    			"label": "Gender Segmentation1",
+                    			"description": "Gender",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "state_segmentation1",
+                    			"label": "State of Residence Segmentation1",
+                    			"description": "State of Residence",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "mailok_segmentation1",
+                    			"label": "Mail OK Flag Segmentation1",
+                    			"description": "Mail OK Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "donotmarket_segmentation1",
+                    			"label": "Do Not Market Flag Segmentation1",
+                    			"description": "Do Not Market Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": false
+                    		},
+                    		{
+                    			"name": "ownrent_segmentation1",
+                    			"label": "Own/Rent Flag Segmentation1",
+                    			"description": "Own/Rent Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "yearsthere_segmentation1",
+                    			"label": "Years at Current Residence Segmentation1",
+                    			"description": "Years at Current Residence",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "employ_segmentation1",
+                    			"label": "Employment Type Segmentation1",
+                    			"description": "Employment Type",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "yearsemp_segmentation1",
+                    			"label": "Number of Years with Employer Segmentation1",
+                    			"description": "Number of years with current employer",
+                    			"type": "SMALLINT",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "income_segmentation1",
+                    			"label": "Annual Income Segmentation1",
+                    			"description": "Annual Income",
+                    			"type": "DOUBLE",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "suppincome_segmentation1",
+                    			"label": "Supplemental Income Segmentation1",
+                    			"description": "Supplemental Income",
+                    			"type": "DOUBLE",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "employee_segmentation1",
+                    			"label": "Employee Flag Segmentation1",
+                    			"description": "Employee Flag",
+                    			"type": "BOOLEAN",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "deceased_segmentation1",
+                    			"label": "Deceased Flag Segmentation1",
+                    			"description": "Deceased Flag",
+                    			"type": "BOOLEAN",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		}
+                    	]
+                    	
+                    }
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: true
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_8d4a4dcafbf54b058ffc9ab3a746d3ff
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables/{% response 'body',
+                  'req_74b04d988b8841d49dc103cb32bc8486', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 6. Update a Customer Table
+                meta:
+                  id: req_63d8fb85f789496998d46b4c7a6ae590
+                  created: 1729140291046
+                  modified: 1729140575631
+                  isPrivate: false
+                  description: It is better to create the template of the Customer Table from UI,
+                    and then GET the JSON representation of that table object
+                    using the API and use that with necessary modifications to
+                    make the Create Table calls.
+                  sortKey: -1729103599333.75
+                method: PATCH
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                    	"name": "ABC_segmentation_API_Test",
+                    	"description": "ABC_Segmentation Descriptor - Hello",
+                    	"type": "customer",
+                    	"makeAvailableForTargeting": true,
+                    	"dataItems": [
+                    		{
+                    			"name": "loginid",
+                    			"label": "Login ID Segmentation1",
+                    			"description": "Login ID",
+                    			"type": "STRING",
+                    			"excludeFromAnalytics": true,
+                    			"identityType": "login_id",
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": true,
+                    			"key": true,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": false
+                    		},
+                    		{
+                    			"name": "email_segmentation1",
+                    			"label": "Email Segmentation1",
+                    			"description": "Email ID",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": false,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "firstname_segmentation1",
+                    			"label": "First Name Segmentation1",
+                    			"description": "First Name",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": false,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": false,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "hotelpreference_segmentation1",
+                    			"label": "Hotel Preference Segmentation1",
+                    			"description": "Hotel Preference",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "age_segmentation1",
+                    			"label": "Age Segmentation1",
+                    			"description": "Age",
+                    			"type": "INT",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "contactlang_segmentation1",
+                    			"label": "Contact Language Segmentation1",
+                    			"description": "Contact Language",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "gender_segmentation1",
+                    			"label": "Gender Segmentation1",
+                    			"description": "Gender",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "state_segmentation1",
+                    			"label": "State of Residence Segmentation1",
+                    			"description": "State of Residence",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "mailok_segmentation1",
+                    			"label": "Mail OK Flag Segmentation1",
+                    			"description": "Mail OK Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "donotmarket_segmentation1",
+                    			"label": "Do Not Market Flag Segmentation1",
+                    			"description": "Do Not Market Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": false
+                    		},
+                    		{
+                    			"name": "ownrent_segmentation1",
+                    			"label": "Own/Rent Flag Segmentation1",
+                    			"description": "Own/Rent Flag",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "yearsthere_segmentation1",
+                    			"label": "Years at Current Residence Segmentation1",
+                    			"description": "Years at Current Residence",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "employ_segmentation1",
+                    			"label": "Employment Type Segmentation1",
+                    			"description": "Employment Type",
+                    			"type": "STRING",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "yearsemp_segmentation1",
+                    			"label": "Number of Years with Employer Segmentation1",
+                    			"description": "Number of years with current employer",
+                    			"type": "SMALLINT",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "income_segmentation1",
+                    			"label": "Annual Income Segmentation1",
+                    			"description": "Annual Income",
+                    			"type": "DOUBLE",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "suppincome_segmentation1",
+                    			"label": "Supplemental Income Segmentation1",
+                    			"description": "Supplemental Income",
+                    			"type": "DOUBLE",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": false,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": true,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": false,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "employee_segmentation1",
+                    			"label": "Employee Flag Segmentation1",
+                    			"description": "Employee Flag",
+                    			"type": "BOOLEAN",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		},
+                    		{
+                    			"name": "deceased_segmentation1",
+                    			"label": "Deceased Flag Segmentation1",
+                    			"description": "Deceased Flag",
+                    			"type": "BOOLEAN",
+                    			"tags": [
+                    				"DEMOGRAPHICS"
+                    			],
+                    			"excludeFromAnalytics": true,
+                    			"segmentation": true,
+                    			"identityAttribute": false,
+                    			"segmentProfilingField": false,
+                    			"identity": false,
+                    			"key": false,
+                    			"uniqueValuesAvailable": true,
+                    			"availableForTargeting": true,
+                    			"channelContactInformation": true
+                    		}
+                    	]
+                    	
+                    }
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: true
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_8d4a4dcafbf54b058ffc9ab3a746d3ff
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tables/{% response 'body',
+                  'req_74b04d988b8841d49dc103cb32bc8486', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 7. Delete a Customer Table
+                meta:
+                  id: req_e8366f7102ae44cc94bf80fab6cef604
+                  created: 1729140414658
+                  modified: 1729140421938
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729097657137.375
+                method: DELETE
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: true
+                    id: pair_bf86c7152e2e47ff9e5a41e17598902f
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_8d4a4dcafbf54b058ffc9ab3a746d3ff
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Import Data To Customer Table
+            meta:
+              id: fld_118b87c0b97d4acfa2dff2b3d834db35
+              created: 1729141016186
+              modified: 1756982392317
+              sortKey: -1729139222978
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingData/fileTransferLocation "
+                name: 1. Create a File Transfer Location Link
+                meta:
+                  id: req_9966d9bcb47643be96938f2a6bf3da11
+                  created: 1729141454525
+                  modified: 1729142724087
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729141581797
+                method: POST
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{% response 'body', 'req_9966d9bcb47643be96938f2a6bf3da11',
+                  'b64::JC5zaWduZWRVUkw=::46b', 'never', 60 %}"
+                name: 2. Upload CSV file to S3 Link
+                meta:
+                  id: req_f2ed3c78a78d435b96b96ade6a98a2bf
+                  created: 1729141581697
+                  modified: 1729143696844
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729141581697
+                method: PUT
+                body:
+                  mimeType: application/octet-stream
+                  fileName: C:\Users\sinswr\OneDrive - SAS\Desktop\data_upload.csv
+                headers:
+                  - name: Content-Type
+                    value: application/octet-stream
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                authentication:
+                  type: none
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/importRequestJobs"
+                name: 3. Create and Run an Import Job Request
+                meta:
+                  id: req_7d8e37dc73eb4d1d8163eb1b32946ee5
+                  created: 1729142034902
+                  modified: 1756801827525
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729141581597
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                      "name": "API test import",
+                      "dataDescriptorId": "{% response 'body', 'req_74b04d988b8841d49dc103cb32bc8486', 'b64::JC5pZA==::46b', 'never', 60 %}",
+                      "fieldDelimiter": ",",
+                      "fileLocation": "{% response 'body', 'req_9966d9bcb47643be96938f2a6bf3da11', 'b64::JC5zaWduZWRVUkw=::46b', 'never', 60 %}",
+                      "fileType": "CSV",
+                      "headerRowIncluded": true,
+                      "updateMode": "upsert"
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/importRequestJobs/{% response 'body',
+                  'req_7d8e37dc73eb4d1d8163eb1b32946ee5', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 4. Get Details of the Import Job
+                meta:
+                  id: req_065b92f378d14ede826f2d6a2c5a4df5
+                  created: 1729142214006
+                  modified: 1729142249704
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729140417454.5
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/importRequestJobs"
+                name: 5. List All Import Jobs
+                meta:
+                  id: req_62a6265f285b40a683233b5d7a5597a9
+                  created: 1729142399554
+                  modified: 1729142552715
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729139835383.25
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "10000"
+                    disabled: false
+                    id: pair_d58bf34894ea42c9b9df806e54032d96
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/importRequestJobs"
+                name: 6. Filter Import Jobs by Customer Table
+                meta:
+                  id: req_b724ca25ff974159ac2047cff4b7e451
+                  created: 1729142466257
+                  modified: 1729150695968
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729139544347.625
+                method: GET
+                parameters:
+                  - name: dataDescriptorId
+                    value: "{% response 'body', 'req_7d8e37dc73eb4d1d8163eb1b32946ee5',
+                      'b64::JC5kYXRhRGVzY3JpcHRvcklk::46b', 'never', 60 %}"
+                    disabled: false
+                    id: pair_e33760f51fa1415797a2c09c8326ba64
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Table Jobs
+            meta:
+              id: fld_c5f8d46fe38b4a5d80460aa23a264e85
+              created: 1729143990065
+              modified: 1729145479586
+              sortKey: -1729139222971.75
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingData/tableJobs"
+                name: 1. Download Data from Customer Table
+                meta:
+                  id: req_7e4e459ac1cc4dcab5ceda87ab001d76
+                  created: 1729144022955
+                  modified: 1729144490464
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729144022955
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                      "jobType": "TABLE_DOWNLOAD",
+                      "dataDescriptorId": "{% response 'body', 'req_7d8e37dc73eb4d1d8163eb1b32946ee5', 'b64::JC5kYXRhRGVzY3JpcHRvcklk::46b', 'never', 60 %}"
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tableJobs"
+                name: 2. Create an Export Contact Preference Job
+                meta:
+                  id: req_7fedfc1b709846fd90cc22cbab7a8609
+                  created: 1729144483517
+                  modified: 1729144559344
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729142802376
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                      "jobType": "CONTACT_PREFERENCE_EXPORT" 
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/tableJobs/{% response 'body',
+                  'req_7fedfc1b709846fd90cc22cbab7a8609', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 3. Get Status of Export Job
+                meta:
+                  id: req_441cbf00637641ed8b8a94346c7feb74
+                  created: 1729144582749
+                  modified: 1729144621635
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729142192086.5
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Customer Jobs (GDPR)
+            meta:
+              id: fld_804488308fc347dca811cc13103f5a55
+              created: 1729145468797
+              modified: 1729154170553
+              sortKey: -1729139222970.1875
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingData/customerJobs"
+                name: 1. Create GDPR Export Job
+                meta:
+                  id: req_1c482f14e699411f96da9ba2ea4e7a80
+                  created: 1729145486533
+                  modified: 1756800391199
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729145589484
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                      "jobType": "GDPR_EXPORT",
+                      "identityType": "subject_id",
+                      "identityList": [
+                        "10001"
+                      ],
+                      "outputIdentityTypes": [
+                        "login_id",
+                        "subject_id",
+                        "visitor_id"
+                      ]
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/customerJobs/{% response 'body',
+                  'req_1c482f14e699411f96da9ba2ea4e7a80', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 2. Get Status of the GDPR Job - Export
+                meta:
+                  id: req_8a3fd552cadf4292ada4845f384c45ed
+                  created: 1729145589384
+                  modified: 1729148486391
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729145589459
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/customerJobs"
+                name: 3. GDPR Delete
+                meta:
+                  id: req_269964a9b14746368e4aecb7790a42b3
+                  created: 1729145969330
+                  modified: 1729148808108
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729145589434
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                      "jobType": "GDPR_DELETE",
+                      "identityType": "customer_id",
+                      "identityList": [
+                        "10001"
+                      ]
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/customerJobs/{% response 'body',
+                  'req_269964a9b14746368e4aecb7790a42b3', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 4. Get Status of the GDPR Job - Delete
+                meta:
+                  id: req_66372df813294ecd9ed942008f4a6c43
+                  created: 1729148511252
+                  modified: 1729148547508
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729145589334
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.0.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Identity Record
+            meta:
+              id: fld_7302e9a874714939bd8fb504adecf6a0
+              created: 1729154162998
+              modified: 1729246494274
+              sortKey: -1729139222969.7969
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingData/identityRecords"
+                name: 1. Get Record Id using Identity type Filter
+                meta:
+                  id: req_25a5b701498440d0984378b9cbe128b2
+                  created: 1729154175642
+                  modified: 1729154489187
+                  isPrivate: false
+                  description: |-
+                    The parameter name must be one of these values:
+
+                    emailId
+
+                    customerId
+
+                    deviceId
+
+                    loginId
+
+                    identityId
+
+                    subjectId
+
+                    visitorId
+                  sortKey: -1729154175642
+                method: GET
+                parameters:
+                  - name: customerId
+                    value: "10002"
+                    disabled: false
+                    id: pair_758878954434418d91afd60362498e37
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingData/identityRecords/{% response 'body',
+                  'req_25a5b701498440d0984378b9cbe128b2', 'b64::JC5pZA==::46b',
+                  'never', 60 %}"
+                name: 2. Get Identity Details
+                meta:
+                  id: req_5bdf7b707a394b2c8d1ea7bea0241252
+                  created: 1729154342982
+                  modified: 1729154386320
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729149882563
+                method: GET
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_ae6afff7cf394550bfea0e14f94d9fe6
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: Marketing Administration
+        meta:
+          id: fld_6943cbbc3384494ab8c7bf3adb171e2f
+          created: 1729154926444
+          modified: 1759926164992
+          sortKey: -1737010170449
+          description: ""
+        children:
+          - name: Token Management
+            meta:
+              id: fld_b26535c21daa4b5ebcf8f6af189a4e83
+              created: 1729155112590
+              modified: 1759926164992
+              sortKey: -1729155112790
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingAdmin/tokenManagement/accessPoints"
+                name: 2. List All Access Points
+                meta:
+                  id: req_f0955a439ccc4652aabadbbdd580fc73
+                  created: 1729155123214
+                  modified: 1729157139204
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729156138076
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "1000"
+                    disabled: false
+                    id: pair_709d58b7dd3b49a6a390758543e4a505
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{{ _['internal-temp-jwt'] }}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/token"
+                name: 1. Generate a Temporary JWT
+                meta:
+                  id: req_d3f28b0cf14d44ef8612600b6af6fc0a
+                  created: 1729156137976
+                  modified: 1739511308777
+                  isPrivate: false
+                  description: This API call has an "After-Response" script that updates the
+                    enviornment variable with temp JWT.
+                  sortKey: -1729156138176
+                method: POST
+                body:
+                  mimeType: application/x-www-form-urlencoded
+                  params:
+                    - name: grant_type
+                      value: password
+                      disabled: false
+                      id: pair_b20215f2bb734775b8b4319d53d55098
+                    - name: username
+                      value: "{{ _['api-user'] }}"
+                      disabled: false
+                      id: pair_68323998b7f84a00adeb24af029b41d7
+                    - name: password
+                      value: "{{ _['api-secret'] }}"
+                      disabled: false
+                      id: pair_18ea7f7839b84d229f531f7a91adb8e7
+                headers:
+                  - name: Content-Type
+                    value: application/x-www-form-urlencoded
+                scripts:
+                  afterResponse: >-
+                    const jsonBody = insomnia.response.json();
+
+                    insomnia.environment.set("internal-temp-jwt",
+                    jsonBody.access_token);
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingAdmin/tokenManagement/accessPoints/{% response
+                  'body', 'req_f0955a439ccc4652aabadbbdd580fc73',
+                  'b64::JC5pdGVtcy4wLmlk::46b', 'no-history', 60 %}/tokens"
+                name: 3. Get a summary of access tokens
+                meta:
+                  id: req_300d2a3abb40488fa41c08fc7b1b63c8
+                  created: 1729156846073
+                  modified: 1729157380329
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729156137976
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{{ _['internal-temp-jwt'] }}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingAdmin/tokenManagement/accessPoints/{% response
+                  'body', 'req_f0955a439ccc4652aabadbbdd580fc73',
+                  'b64::JC5pdGVtcy4wLmlk::46b', 'no-history', 60 %}/tokens/{%
+                  response 'body', 'req_300d2a3abb40488fa41c08fc7b1b63c8',
+                  'b64::JC5pdGVtcy4wLnRva2VuX2lk::46b', 'never', 60 %}"
+                name: 4. Get Details of a Specific Access Token
+                meta:
+                  id: req_e696e50189104ff5bed8d2d4864c0347
+                  created: 1729157563952
+                  modified: 1729157625000
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729155569345.5
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{{ _['internal-temp-jwt'] }}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingAdmin/tokenManagement/accessPoints/{% response
+                  'body', 'req_f0955a439ccc4652aabadbbdd580fc73',
+                  'b64::JC5pdGVtcy4wLmlk::46b', 'no-history', 60 %}/tokens/{%
+                  response 'body', 'req_300d2a3abb40488fa41c08fc7b1b63c8',
+                  'b64::JC5pdGVtcy4wLnRva2VuX2lk::46b', 'never', 60 %}/enabled"
+                name: 5. Update Status of a Specific Access Token
+                meta:
+                  id: req_c6d08785051f4955955f3e63ed6ad2d6
+                  created: 1729157678172
+                  modified: 1729157916242
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729155285030.25
+                method: PUT
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                      "enabled": true
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{{ _['internal-temp-jwt'] }}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingAdmin/tokenManagement/accessPoints/{% response
+                  'body', 'req_f0955a439ccc4652aabadbbdd580fc73',
+                  'b64::JC5pdGVtcy4wLmlk::46b', 'no-history', 60 %}/tokens/{%
+                  response 'body', 'req_300d2a3abb40488fa41c08fc7b1b63c8',
+                  'b64::JC5pdGVtcy4wLnRva2VuX2lk::46b', 'never', 60 %}"
+                name: 5. Delete an access token
+                meta:
+                  id: req_dddb17c7adf94a27b6edf9543c35f105
+                  created: 1729158007802
+                  modified: 1729158022043
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729155142872.625
+                method: DELETE
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{{ _['internal-temp-jwt'] }}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Audit Records
+            meta:
+              id: fld_ed87f6a4b557479684b888ef2d247b75
+              created: 1729158225726
+              modified: 1744086220913
+              sortKey: -1729155112690
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingAdmin/auditRecords"
+                name: Get Audit Records
+                meta:
+                  id: req_eb17c40542a8492fa2aa392f396ce31c
+                  created: 1729155000715
+                  modified: 1744086062787
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729158242543
+                method: GET
+                parameters:
+                  - name: dataRangeStartTimeStamp
+                    value: 2025-04-01T05:00Z
+                    disabled: false
+                    id: pair_762c684911634522a2a970e6de91716d
+                  - name: dataRangeEndTimeStamp
+                    value: 2025-04-09T05:00Z
+                    disabled: false
+                    id: pair_8bc55842cffd4cb1a6cbf8a95170f37b
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                authentication:
+                  type: bearer
+                  token: "{% response 'body', 'req_d3f28b0cf14d44ef8612600b6af6fc0a',
+                    'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'when-expired', 43200 %}"
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: Marketing Audience
+        meta:
+          id: fld_2ce1173b713645eb8cfbbff52d18d76f
+          created: 1729160042449
+          modified: 1758256819466
+          sortKey: -1737010170549
+          description: ""
+        children:
+          - url: "{{ _.base_url }}/marketingAudience/audiences"
+            name: 1. List All Audiences
+            meta:
+              id: req_a782c870fd1a4574bba78ce511000d19
+              created: 1729160148840
+              modified: 1729160208771
+              isPrivate: false
+              description: ""
+              sortKey: -1729160148840
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_de4a5ef47bf649c29f84dd8841b71ef1',
+              'b64::JC5pdGVtcy4wLmF1ZGllbmNlSWQ=::46b', 'never', 60 %}"
+            name: 4. Get details of a Specific Audiences
+            meta:
+              id: req_42471dc9fb2d46968cc6bbd1dbb3a6ac
+              created: 1729160276005
+              modified: 1729232585527
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719079.75
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences"
+            name: 2. Create an Audience
+            meta:
+              id: req_0b71998f714a4191be36b06609e9daa9
+              created: 1729167462355
+              modified: 1747391505856
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719117.25
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"name": "Test_Data",
+                	"source": "customer_defined",
+                	"expiration": 90,
+                	"daysUntilExpires": 90,
+                	"audienceType": "upload",
+                	"identityType": "subject_id",
+                	"identityColumnName": "Subject_ID",
+                	"emailColumnName": "Email_Address",
+                	"dataItems": [
+                		{
+                			"columnNumber": 1,
+                			"label": "Subject_ID",
+                			"dataType": "character",
+                			"usedForTracking": false
+                		},
+                		{
+                			"columnNumber": 2,
+                			"label": "Channel_Preference",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 3,
+                			"label": "Mobile_Number",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 4,
+                			"label": "Email_Address",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 5,
+                			"label": "First_Name",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 6,
+                			"label": "Last_Name",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 7,
+                			"label": "Offer_Code",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 8,
+                			"label": "Segment",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		}
+                	]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences"
+            name: 3. Filter Audiences by Name
+            meta:
+              id: req_de4a5ef47bf649c29f84dd8841b71ef1
+              created: 1729228984774
+              modified: 1747111600563
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719092.25
+            method: GET
+            parameters:
+              - name: name
+                value: "{% response 'body', 'req_0b71998f714a4191be36b06609e9daa9',
+                  'b64::JC5uYW1l::46b', 'never', 60 %}"
+                disabled: false
+                id: pair_cd219486e1e54590bb3578678dd2a1c0
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingData/fileTransferLocation "
+            name: 5. Create a File Transfer Location Link for upload
+            meta:
+              id: req_a8d7276a73da485192d95d5b1fdfd5cb
+              created: 1729229340928
+              modified: 1729229436739
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719067.25
+            method: POST
+            headers:
+              - name: User-Agent
+                value: insomnia/10.0.0
+            authentication:
+              type: bearer
+              token: "{{ _.JWT }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_de4a5ef47bf649c29f84dd8841b71ef1',
+              'b64::JC5pdGVtcy4wLmF1ZGllbmNlSWQ=::46b', 'never', 60 %}/data"
+            name: 7. Upload an audience data file
+            meta:
+              id: req_ec7588d01b274e9a82f2b88d7732e7f2
+              created: 1729229459160
+              modified: 1747388750826
+              isPrivate: false
+              description: ""
+              sortKey: -1729158718967.25
+            method: PUT
+            body:
+              mimeType: application/json
+              text: >-
+                {
+                  "name": "Test data upload job for audience - Test_Data",
+                  "audienceId": "{% response 'body', 'req_de4a5ef47bf649c29f84dd8841b71ef1', 'b64::JC5pdGVtcy4wLmF1ZGllbmNlSWQ=::46b', 'never', 60 %}",
+                  "fileLocation": "{% response 'body', 'req_a8d7276a73da485192d95d5b1fdfd5cb', 'b64::JC5zaWduZWRVUkw=::46b', 'never', 60 %}",
+                  "headerRowIncluded": true
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{% response 'body', 'req_a8d7276a73da485192d95d5b1fdfd5cb',
+              'b64::JC5zaWduZWRVUkw=::46b', 'never', 60 %}"
+            name: 6. Upload CSV file to S3 Link - Audience
+            meta:
+              id: req_12ddb454278044ceb76eb0b47b3dacdc
+              created: 1729229716878
+              modified: 1747388602411
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719017.25
+            method: PUT
+            body:
+              mimeType: application/octet-stream
+              fileName: C:\Users\sinswr\SAS\GCI - Enablement Material - Documents\Course - 360
+                MasterClass\WIP\ES - Scheduled Journeys\WIP\Presentations\6.
+                Testing Journeys\demo-assets\Test_Data.csv
+            headers:
+              - name: Content-Type
+                value: text/csv
+              - name: User-Agent
+                value: insomnia/10.0.0
+            authentication:
+              type: none
+            scripts:
+              preRequest: |-
+                console.log('Headers after removing Authorization+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++:');
+                // Remove the 'Authorization' header if it exists
+                insomnia.request.removeHeader('Authorization');
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_ec7588d01b274e9a82f2b88d7732e7f2',
+              'b64::JC5hdWRpZW5jZUlk::46b', 'never', 60 %}/history"
+            name: 8. List All Uploads for a Specific Audience
+            meta:
+              id: req_077643222b1042f982b19b8e5b9858ad
+              created: 1729230144108
+              modified: 1747742007697
+              isPrivate: false
+              description: ""
+              sortKey: -1729158718867.25
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_077643222b1042f982b19b8e5b9858ad',
+              'b64::JC5pdGVtcy4wLmF1ZGllbmNlSWQ=::46b', 'never', 60
+              %}/history/{% response 'body',
+              'req_077643222b1042f982b19b8e5b9858ad',
+              'b64::JC5pdGVtcy4wLmhpc3RvcnlJZA==::46b', 'never', 60 %}"
+            name: 8. Get Details of an Upload Job
+            meta:
+              id: req_0c38c747838a4bf4a835cce4bd006a09
+              created: 1729230401315
+              modified: 1729230506705
+              isPrivate: false
+              description: ""
+              sortKey: -1729158480705.125
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_0b71998f714a4191be36b06609e9daa9',
+              'b64::JC5hdWRpZW5jZUlk::46b', 'never', 60 %}"
+            name: 9. Delete a Specific Audiences
+            meta:
+              id: req_51520a33329f4f708b82ea9f04e8c0d3
+              created: 1729230899977
+              modified: 1729230948247
+              isPrivate: false
+              description: ""
+              sortKey: -1729158480605.125
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingAudience/audiences/{% response 'body',
+              'req_de4a5ef47bf649c29f84dd8841b71ef1',
+              'b64::JC5pdGVtcy4wLmF1ZGllbmNlSWQ=::46b', 'never', 60 %}"
+            name: 5. Update an Existing Audience (PUT)
+            meta:
+              id: req_18c33696b46c47bd9c4420d2de96bc56
+              created: 1729576731014
+              modified: 1729580812665
+              isPrivate: false
+              description: ""
+              sortKey: -1729158719073.5
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"name": "Custom Audience - API Sample 4 - PUT",
+                	"status": "inactive",
+                	"modifiedTimestamp": "2024-10-18T05:56:07.733Z",
+                	"modifiedBy": "API-bct05-collection",
+                	"source": "customer_defined",
+                	"iconName": "CsvFile",
+                	"expiration": 90,
+                	"daysUntilExpires": -1,
+                	"totalRecords": -1,
+                	"audienceType": "upload",
+                	"identityType": "customer_id",
+                	"identityColumnName": "Subject - Id",
+                	"emailColumnName": "Email Address",
+                	"dataItems": [
+                		{
+                			"columnNumber": 1,
+                			"label": "Subject - Id",
+                			"dataType": "character",
+                			"usedForTracking": false
+                		},
+                		{
+                			"columnNumber": 2,
+                			"label": "Email Address",
+                			"dataType": "character",
+                			"usedForTracking": true
+                		},
+                		{
+                			"columnNumber": 3,
+                			"label": "Mobile #",
+                			"dataType": "character",
+                			"usedForTracking": false
+                		}
+                		,
+                		{
+                			"columnNumber": 4,
+                			"label": "Secondary Mobile #",
+                			"dataType": "character",
+                			"usedForTracking": false
+                		}
+                	]
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        authentication:
+          type: bearer
+          disabled: false
+          token: "{{ _['internal-temp-jwt'] }}"
+      - name: Marketing Execution
+        meta:
+          id: fld_4ead4859b7c1400985c633df937d202a
+          created: 1729233880187
+          modified: 1738730853435
+          sortKey: -1737010170949
+          description: ""
+        children:
+          - name: Task Jobs
+            meta:
+              id: fld_ff7644532f4a4c2c8571c8e66fbab621
+              created: 1729234181273
+              modified: 1729242427462
+              sortKey: -1729234210933
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingExecution/taskJobs"
+                name: 1. Create Job to Execute a Bulk Task
+                meta:
+                  id: req_f4fac2f8e2684d689f556cf8d63bc29b
+                  created: 1729240928266
+                  modified: 1729242519814
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729240931972
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                      "taskId": "{% response 'body', 'req_658556cbe96d4f77871b7f66656d12f5', 'b64::JC5pdGVtcy4wLnRhc2tJZA==::46b', 'never', 60 %}",
+                      "taskName": "{% response 'body', 'req_658556cbe96d4f77871b7f66656d12f5', 'b64::JC5pdGVtcy4wLm5hbWU=::46b', 'never', 60 %}",
+                      "overrideSchedule": true
+                    }
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_a5cf94800ad24c8891b74728e9503e15
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingExecution/taskJobs/{% response 'body',
+                  'req_f4fac2f8e2684d689f556cf8d63bc29b',
+                  'b64::JC50YXNrSm9iSWQ=::46b', 'never', 60 %}"
+                name: 2. Get the Task Job Details
+                meta:
+                  id: req_b025af4a9b09476dbe2b2f63cd429425
+                  created: 1729241683218
+                  modified: 1736749129155
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729237572964.5
+                method: GET
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_ca2698374c67495fbac0baaef4409f0b
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Occurrences
+            meta:
+              id: fld_5a6355ab7bd346eaafcdc3d2196bca1b
+              created: 1729234210833
+              modified: 1729242425990
+              sortKey: -1729234210983
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingExecution/occurrences"
+                name: 1. List All Occurrences
+                meta:
+                  id: req_6a9c31b1889f425e876a14f1b60d0aa5
+                  created: 1729234213957
+                  modified: 1729249808892
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729234213957
+                method: GET
+                parameters:
+                  - name: limit
+                    value: "500"
+                    disabled: false
+                    id: pair_857972c79a7843a5bd541cf655f9049e
+                  - name: startTimeFrom
+                    value: 2024-01-01T01:15:22Z
+                    disabled: true
+                    id: pair_3ff0ad95c91b4ec2a86bd11108cf3c73
+                  - name: startTimeFrom
+                    value: 2024-01-02T00:00%2B00:00
+                    disabled: false
+                    id: pair_a80b7dd6b6264ece89102e8fd8cf36ca
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingExecution/occurrences/{% response 'body',
+                  'req_6a9c31b1889f425e876a14f1b60d0aa5',
+                  'b64::JC5vY2N1cnJlbmNlcy4xMC5vY2N1cnJlbmNlSWQ=::46b', 'never',
+                  60 %}"
+                name: 2. Get Details of a Specific Occurrences
+                meta:
+                  id: req_185e6b0c1f3d4fceabe105aff86f6db2
+                  created: 1729235117631
+                  modified: 1729235249550
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729197181398.5
+                method: GET
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_857972c79a7843a5bd541cf655f9049e
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: Segment Map Jobs
+            meta:
+              id: fld_7f4823d9109b4aba89a7d92d7200851c
+              created: 1729242355444
+              modified: 1729242424843
+              sortKey: -1729234210883
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/marketingExecution/segmentMapJobs"
+                name: 1. Create Job to Execute a Segment Map
+                meta:
+                  id: req_59166361df00458e81f9434170623a32
+                  created: 1729242470053
+                  modified: 1729242575110
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729242472282
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: |-
+                    {
+                      
+                      "segmentMapName": "CC_Age split by gender"
+                      
+                    }
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_961396c3e9cb491cbdaab60a87abf996
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/marketingExecution/segmentMapJobs/{% response 'body',
+                  'req_59166361df00458e81f9434170623a32',
+                  'b64::JC5zZWdtZW50TWFwSm9iSWQ=::46b', 'never', 60 %}"
+                name: 2. Get the Segment Map Job Details
+                meta:
+                  id: req_4599cb00be324a9c943eb7a7d36f8f49
+                  created: 1729242628481
+                  modified: 1729242660574
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1729241702127
+                method: GET
+                parameters:
+                  - name: ""
+                    value: ""
+                    disabled: false
+                    id: pair_961396c3e9cb491cbdaab60a87abf996
+                headers:
+                  - name: User-Agent
+                    value: insomnia/10.1.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: Copy Item
+        meta:
+          id: fld_249b5c8134eb41a3beab7d4e38cb2291
+          created: 1729493281324
+          modified: 1737010170403
+          sortKey: -1737010170349
+          description: ""
+        children:
+          - url: "{{ _.base_url }}/marketingPromotion/promotionPackageJob"
+            name: 1. Create a Promotion Package Job
+            meta:
+              id: req_e6e56d76bcf042c29a241836fc6c048a
+              created: 1729493285776
+              modified: 1729495583019
+              isPrivate: false
+              description: >-
+                objectType
+
+
+                string non-empty
+
+                Enum: "calculatedDataItem" "creative" "exportTemplates"
+                "message" "segment" "task"
+
+                The type of the item. The task object type refers to direct
+                marketing tasks only.
+              sortKey: -1729493568797
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "objectId": "7354990c-4b80-45d2-925a-323d1d38168d",
+                  "objectType": "creative",
+                  "dependencies": "true"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.1.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingPromotion/promotionJob/{% response 'body',
+              'req_f0a84ee5e2bd4d109808aa27cac0dba6',
+              'b64::JC5wcm9tb3RlSm9iSWQ=::46b', 'never', 60 %}"
+            name: 3. Get Status Promotion Package Job
+            meta:
+              id: req_7d914d76fb9c478c9f8efdd950ccff02
+              created: 1729493568697
+              modified: 1729497365158
+              isPrivate: false
+              description: ""
+              sortKey: -1729493568697
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.1.0
+            authentication:
+              type: bearer
+              token: "{{ _['copy-item-destination-JWT'] }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingPromotion/promotionJob"
+            name: 2. Copy a Promotion Package (Destination Tenant JWT needed)
+            meta:
+              id: req_f0a84ee5e2bd4d109808aa27cac0dba6
+              created: 1729496156948
+              modified: 1729496598264
+              isPrivate: false
+              description: >-
+                objectType
+
+
+                string non-empty
+
+                Enum: "calculatedDataItem" "creative" "exportTemplates"
+                "message" "segment" "task"
+
+                The type of the item. The task object type refers to direct
+                marketing tasks only.
+              sortKey: -1729493568747
+            method: POST
+            body:
+              mimeType: application/json
+              text: >-
+                {
+                  "promotionPackageId": "{% response 'body', 'req_e6e56d76bcf042c29a241836fc6c048a', 'b64::JC5wcm9tb3Rpb25QYWNrYWdlSWQ=::46b', 'never', 60 %}"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.1.0
+            authentication:
+              type: bearer
+              token: "{{ _['copy-item-destination-JWT'] }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{{ _.JWT }}"
+      - name: SCIM
+        meta:
+          id: fld_3cf872a6858f4ab9bc45f0057ad6e7a1
+          created: 1736311767557
+          modified: 1762402062603
+          sortKey: -1737010171049
+          description: Refer online doc for other APIs.
+        children:
+          - url: "{{ _.base_url }}/scim/v2/Users?getUserRoles=true&getUserGroups=true"
+            name: 1. List Users
+            meta:
+              id: req_4b40a78ab0394baebcf41a7b322a6611
+              created: 1736311791564
+              modified: 1744085790297
+              isPrivate: false
+              description: ""
+              sortKey: -1736311791564
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_d3f28b0cf14d44ef8612600b6af6fc0a',
+            'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'when-expired', 43200 %}"
+      - name: Container Image Management
+        meta:
+          id: fld_ffde0e8b2db74e34b6c9a5549e22393e
+          created: 1759925538371
+          modified: 1761884873170
+          sortKey: -1737010171249
+          description: ""
+        children:
+          - url: "{{ _.base_url }}/marketingContainerImage/images"
+            name: List Images
+            meta:
+              id: req_af0c5fa22208485a9a9cf3b0665fba51
+              created: 1759925551914
+              modified: 1759926187389
+              isPrivate: false
+              description: ""
+              sortKey: -1759925580548
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.base_url }}/marketingContainerImage/token"
+            name: Token Generation
+            meta:
+              id: req_883ee6c8be8d48f29892a321f6f62b3d
+              created: 1759926216267
+              modified: 1759926223841
+              isPrivate: false
+              description: ""
+              sortKey: -1752749374926.5
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_d3f28b0cf14d44ef8612600b6af6fc0a',
+            'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'when-expired', 43200 %}"
+      - name: Server Side (Coming Soon)
+        meta:
+          id: fld_c102d571b75042e3b3c0ca66ea9316f5
+          created: 1761885436697
+          modified: 1761892480693
+          sortKey: -1761885436697
+          description: >
+            This feature is in the early stages, and support for this is not yet
+            enabled on all CI 360 tenant.
+        children:
+          - name: "Data Collection: Event Tracking: Preview"
+            meta:
+              id: fld_886ece3e3b6040db9fb7b3a7f5c6c06a
+              created: 1761720555005
+              modified: 1761891993489
+              sortKey: -1761885466009
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Load Event: Example"
+                meta:
+                  id: req_9ed8482ae51a40168b30d3a73128fe4d
+                  created: 1761720086435
+                  modified: 1761892147710
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720587107
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                      //Required
+                      "eventName": "load",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com",
+                      //Required
+                      "uri": "https://www.example.com/product/12345",
+                      "properties": {
+                        "referrer": "https://referrerUri",
+                        "page_title": "PageTitle",
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        "class1_id": "C1",
+                    	...
+                      	"class15_id": "C15",
+                      	//for mobile
+                      	"mobile_app_id": "app-456",
+                      	"user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                      	"ip": "192.168.1.1",
+                      	"origination_type": "campaign",
+                      	"origination_name": "summer2025",
+                      	"origination_placement": "header-banner",
+                      	"origination_creative": "creative-abc",
+                      	"origination_tracking_code": "track-001",
+                      	//For mobile
+                      	"app_version": "1.2.3",
+                      	"device_language": "en-US",
+                      	"manufacturer": "Apple",
+                      	"mobile_country_code": "310",
+                      	"carrier_name": "AT&T",
+                      	"network_code": "260",
+                      	"browser_nm": "Chrome",
+                      	"browser_version_no": "117.0.5938.132",
+                      	"country_nm": "United States",
+                      	"country_cd": "US",
+                      	"state_region_cd": "CA",
+                      	"region_nm": "California",
+                      	"city_nm": "San Francisco",
+                      	"latitude": "37.7749",
+                      	"longitude": "-122.4194",
+                      	"organization_nm": "ExampleCorp",
+                      	"postal_cd": "94103",
+                      	"metro_cd": "807",
+                      	"device_nm": "iPhone 13 Pro",
+                      	"device_type_nm": "Smartphone",
+                      	"platform_desc": "iOS 15",
+                      	"platform_type_nm": "iOS",
+                      	"user_language_cd": "en"
+                      	}
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Submit Event: Example"
+                meta:
+                  id: req_66abaee80f274a32b9fea3e52690ae5d
+                  created: 1761720270196
+                  modified: 1761892191550
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586925.75
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "submit",
+                      //Required
+                      "channel": "web",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456"
+                      },
+                      "form": {
+                        //Required with either formId, or formName
+                        "formId": "form-001",
+                        "formName": "SignupForm",
+                        "attempts": "2",
+                        "formFields": [
+                          {"name": "firstName", "id": "firstNameId", "value": "John", "changes": "1"},
+                          {"name": "lastName", "id": "lastNameId", "value":
+                    "Joe", "changes": "3"} 
+
+                        ]
+                      }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Cart Action Event: Example"
+                meta:
+                  id: req_db137168f7074667ac0a41bfeb0331b1
+                  created: 1761720295001
+                  modified: 1761892162018
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720587007
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "cartAction",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      //Required
+                      "apiEventKey": "event-cart",
+                      "properties": {
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "productGroup": "Electronics",
+                        "quantity": "10",
+                        "unitPrice": 199.99,
+                        "currency_cd": "USD",
+                        "displayed_cart_items_no": "10",
+                        "displayed_cart_amt": "200.00",
+                        "availability_message": "In Stock",
+                        "savings_message": "Save $50 today!",
+                        "shipping_message": "Free shipping on orders over $100",
+                        "customProperty1": "value1",
+                        "customProperty2": "value2"
+                      },
+                      "cartAction": {
+                        //Required
+                        "cartAction": "add|update|remove",
+                        //Required one of them from cartId, cartName
+                        "cartId": "cart-789",
+                        "cartName": "MainCart",
+                        //Required with one of them from productId, productName, productSku
+                        "productId": "prod-123",
+                        "productName": "SuperWidget",
+                        "productSku": "SW-001"
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Media Event: Example"
+                meta:
+                  id: req_552c1d508ed64e14b78795a5c2bc190e
+                  created: 1761720331464
+                  modified: 1761892230607
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586921.0625
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "media",
+                      //Required
+                      "channel": "web",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345"
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456"
+                      },
+                      //Required
+                      "media": {
+                        "mediaAction": "start|stop",
+                        "mediaUrl": "https://cdn.example.com/video.mp4",
+                        "mediaPlayer": "HTML5",
+                        "mediaId": "media-001",
+                        "position": "0",
+                        "duration": "30"
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Cart Event: Example"
+                meta:
+                  id: req_e3d9e9cac1164552b86a5427b0e6b226
+                  created: 1761720346353
+                  modified: 1761892169128
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586957
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "cart",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com",   "url": "https://www.example.com/product/12345",
+                      //Required
+                      "apiEventKey": "event-cart",
+                      "properties": {
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "productGroup": "Electronics",
+                        "quantity": "10",
+                        "unitPrice": 199.99,
+                        "currency_cd": "USD",
+                        "displayed_cart_items_no": "10",
+                        "displayed_cart_amt": "200.00",
+                        "availabilityMessage": "In Stock",
+                        "savingsMessage": "Save $50 today!",
+                        "shippingMessage": "Free shipping on orders over $100",
+                        "customProperty1": "value1",
+                        "customProperty2": "value2"
+                      },
+                      //Required
+                      "cart": {
+                        "cartAction": "cartview|checkout|purchase",
+                        "cartId": "cart-789",
+                        "cartName": "MainCart",
+                        "cartItems": [
+                            {
+                      			"product_id": "P001",
+                      			"product_name": "SuperWidget",
+                      			"product_sku": "SW-001",
+                      			"product_group": "Widgets",
+                      			"product_quantity": "2",
+                      			"product_unit_price": "19.99",
+                      			"currency_cd": "USD",
+                      			"availability_message": "In Stock",
+                      			"savings_message": "Save 20% today!",
+                      			"shipping_message": "Free shipping on orders over $50"
+                    		},
+                    		{
+                      			"product_id": "P002",
+                      			"product_name": "SubWidget",
+                      			"product_sku": "SW-002",
+                      			"product_group": "Widgets",
+                      			"product_quantity": "3",
+                      			"product_unit_price": "10.99",
+                      			"currency_cd": "USD",
+                      			"availability_message": "In Stock",
+                      			"savings_message": "Save 40% today!",
+                      			"shipping_message": "Free shipping on orders over $50"
+                    		}
+                        ]
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Custom Event: Example"
+                meta:
+                  id: req_0e7cc6104e4e41168c785ce3ec3e537e
+                  created: 1761720363529
+                  modified: 1761892198482
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586922.625
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "custom",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      //Required
+                      "apiEventKey": "event-customer-key",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456"
+                      },
+                      //Required
+                      "custom": {
+                        "customName": "Spring Promo",
+                        "customGroupName": "Seasonal Campaigns",
+                        "customRevenue": "4500.75"  
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Internal Search Event: Example"
+                meta:
+                  id: req_5af5fb02afa74f3ea1ca69a515db5302
+                  created: 1761720403115
+                  modified: 1761892236631
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586920.2812
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+
+                        //Required
+                      "eventName": "internalSearch",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      //Required
+                      "apiEventKey": "event-search-key",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "resultsDisplayed": "100"
+                      },
+                      //Required
+                      "search": {
+                        "searchName": "SiteSearch",
+                        "searchTerm": "laptop",
+                        "searchFieldId": "field-001",
+                        "searchFieldName": "SearchBar",
+                        "resultsDisplayFlag": true
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Product View Event: Example"
+                meta:
+                  id: req_1fffe3fd91ef4f499c46a4f2b91dbc1f
+                  created: 1761720417827
+                  modified: 1761892183103
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586932
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "productView",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      //Required
+                      "apiEventKey": "event-product-viewed",
+                      "properties": {
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "product_group": "Electronics",
+                        "product_unit_price": 199.99,
+                        "availability_message": "In Stock",
+                        "savings_message": "Save $50 today!",
+                        "shipping_message": "Free shipping on orders over $100",
+                        "customProperty1": "value1",
+                        "customProperty2": "value2"
+                      },
+                      "product": {
+                        //Required with one of them from productId, productName, productSku 
+                        "productId": "prod-123",
+                        "productName": "SuperWidget",
+                        "productSku": "SW-001"
+
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Events: Promotion Event: Example"
+                meta:
+                  id: req_1e9150df0a1c48c09ff8793dcfc7299a
+                  created: 1761720444192
+                  modified: 1761892242149
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586920.086
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "promotion",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                       //Required
+                      "apiEventKey": "event-promotion-key",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                    	"creative": "Fall_Banner_01",
+                        "placementId": "Homepage Top Banner",
+                        "trackingCode": "FALL2025-BN01"
+                      },
+                      //Required
+                      "promotion": {
+                        "promotionType": "banner",
+                        "promotionName": "Fall Savings",
+                        "recordType": "seasonal"
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Document Event: Example"
+                meta:
+                  id: req_1fa0d3abbab84021a7ddfdec51b6f73a
+                  created: 1761720460480
+                  modified: 1761892208427
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586921.8438
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "document",
+                      //Required
+                      "channel": "web",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345"
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                    	"anchor_name":"theName",
+                    	"anchor_id":"theId",
+                    	"targetSelectorPath":"theSelectorPath",
+                    	"targetInnerText":"theAltText"
+                      },
+                      //Required
+                      "document": {
+                        "document_url": "https://download.example.com/doc.pdf"
+                      }
+                    }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Spot Viewable Event: Example"
+                meta:
+                  id: req_b51080e6b4d44088b47d8835aeaeb0cd
+                  created: 1761720486774
+                  modified: 1761892216636
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586921.4531
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "spot_viewable",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "requestId": "req123"
+                      },
+                      "spot": {
+                        //Required with either formId, or formName
+                        "spotId": "spot-001",
+                        "taskId": "task-001",
+                        "creativeId": "creative-001",
+                        //For spot_clicked
+                        "linkUrl": "https://www.example.com/spot"
+                      }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/"
+                name: "Spot Clicked Event: Example"
+                meta:
+                  id: req_992d6e91b8d34177b481ee7a842749ab
+                  created: 1761720501395
+                  modified: 1761892223239
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720586921.2578
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: >-
+                    {
+                       //Required
+                      "eventName": "spot_clicked",
+                      //Required
+                      "channel": "web|mobile",
+                      //Required 
+                      "clientTimeStamp": 1695638473000,
+                      //Required with VisitorId, or identityType and IdentityValue
+                      "visitorId": "visitor-123",
+                      "identityType": "email",
+                      "identityValue": "user@example.com", 
+                      "uri": "https://www.example.com/product/12345",
+                      "properties": {
+                        "customProperty1": "value1",
+                        "customProperty2": "value2",
+                        //Required for mobile
+                        "mobile_app_id": "app-456",
+                        "requestId": "req123"
+                      },
+                      "spot": {
+                        //Required with either formId, or formName
+                        "spotId": "spot-001",
+                        "taskId": "task-001",
+                        "creativeId": "creative-001",
+                        //For spot_clicked
+                        "linkUrl": "https://www.example.com/spot"
+                      }
+                headers:
+                  - name: Content-Type
+                    value: application/x-ndjson
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: "Data Collection: Identity: Preview"
+            meta:
+              id: fld_1174b64783a84b24add429033191a25d
+              created: 1761720685592
+              modified: 1761885533612
+              sortKey: -1761885465909
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/{{ _['tenant-id'] }}/init"
+                name: "Visitor ID: Init"
+                meta:
+                  id: req_9081bd59f89e40c581ea086888ff3a44
+                  created: 1761718978820
+                  modified: 1761892304312
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720694875
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                  - name: Content-Type
+                    value: application/x-ndjson
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/i/{{ _['tenant-id'] }}/id_type={{
+                  _.id_type }}/id_value={{ _.id_value }}"
+                name: Identity Event
+                meta:
+                  id: req_8e84c3413cd54b8180cb00fd6ab7add1
+                  created: 1761719337566
+                  modified: 1761892278166
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720694975
+                method: POST
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/d/{{ _['tenant-id'] }}/{{
+                  _.visitor_id }}"
+                name: "Visitor ID: Detach Identity"
+                meta:
+                  id: req_765edd51ff6d4395ab42cc1e86eec013
+                  created: 1761719395967
+                  modified: 1761892271046
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720695075
+                method: DELETE
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/t/{{ _.event_path }}/d/{{ _['tenant-id'] }}/{{
+                  _.visitor_id }}"
+                name: "Visitor ID: Attach Identity"
+                meta:
+                  id: req_d71c0b44dad3474fa386260a902021f2
+                  created: 1761719420169
+                  modified: 1761892264114
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720695175
+                method: POST
+                body:
+                  mimeType: application/json
+                  text: '{"visitorId": "{value}"}'
+                headers:
+                  - name: Content-Type
+                    value: application/json
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+          - name: "Content Request: GA"
+            meta:
+              id: fld_89404655abc14f919d2ed14d63dee9f1
+              created: 1761720737299
+              modified: 1761886831015
+              sortKey: -1761885465809
+              description: ""
+            children:
+              - url: "{{ _.base_url }}/{{ _.content_path }}/{{ _['tenant-id']
+                  }}/id_type=_ci360_id/spotid={{ _.spot_id }}"
+                name: "Content Request: anonymous"
+                meta:
+                  id: req_08921082c9dc45749e6eb6f5f3aea3e8
+                  created: 1761717684752
+                  modified: 1761892333926
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720751160
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+              - url: "{{ _.base_url }}/{{ _.content_path }}/{{ _['tenant-id'] }}/id_type={{
+                  _.id_type }}/id_value={{ _.id_value }}/spotid={{ _.spot_id
+                  }}/{{ _.spot_attr }}"
+                name: "Content Request: known user"
+                meta:
+                  id: req_0de40e20095f4c2c860542ded7df8b1b
+                  created: 1761718358898
+                  modified: 1761892339390
+                  isPrivate: false
+                  description: ""
+                  sortKey: -1761720751060
+                method: GET
+                headers:
+                  - name: User-Agent
+                    value: insomnia/11.2.0
+                settings:
+                  renderRequestBody: true
+                  encodeUrl: true
+                  followRedirects: global
+                  cookies:
+                    send: true
+                    store: true
+                  rebuildPath: true
+    scripts:
+      preRequest: |
+        const CryptoJS = require('crypto-js');
+
+        // Function to Base64 encode a string
+        function base64Encode(str) {
+          return btoa(unescape(encodeURIComponent(str)));
+        }
+
+        // Function to generate a JWT
+        function createJwt(tenantId, secret) {
+          // Define header and payload
+          const header = { alg: 'HS256', typ: 'JWT' };
+          const payload = { clientID: tenantId };
+
+          // Base64 encode the secret
+          const encodedSecret = base64Encode(secret);
+
+          // Base64 URL-safe encode header and payload
+          const encodedHeader = base64Encode(JSON.stringify(header))
+            .replace(/=/g, '')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
+          const encodedPayload = base64Encode(JSON.stringify(payload))
+            .replace(/=/g, '')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
+
+          // Concatenate header and payload
+          const message = `${encodedHeader}.${encodedPayload}`;
+
+          // Generate HMAC-SHA256 signature
+          const signature = CryptoJS.HmacSHA256(message, encodedSecret);
+          const encodedSignature = CryptoJS.enc.Base64.stringify(signature)
+            .replace(/=/g, '')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
+
+          // Return the full JWT
+          return `${message}.${encodedSignature}`;
+        }
+
+        // Input values
+        const tenantId = insomnia.environment.get("tenant-id");
+        const secret = insomnia.environment.get("client-secret");
+
+        // Generate the JWT
+        const token = createJwt(tenantId, secret);
+
+        // Output the token
+        insomnia.environment.set("JWT",token)
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_46dd304bbf9d849c80f550dcba20682c774d5627
+    created: 1729073462778
+    modified: 1761891993483
+environments:
+  name: Base Environment
+  meta:
+    id: env_46dd304bbf9d849c80f550dcba20682c774d5627
+    created: 1729073462775
+    modified: 1761891993487
+    isPrivate: false
+  subEnvironments:
+    - name: SAS CI 360 Tenant - Public
+      meta:
+        id: env_5c4f41539b2b487dba5fe9ea4633cfe2
+        created: 1729074310669
+        modified: 1761886122020
+        isPrivate: false
+        sortKey: 1729074310669
+      data:
+        base_url: https://ENTER YOUR TENANT'S EXTERNAL API GATEWAY URL
+        tenant-id: ENTER YOUR TENANT ID
+        client-secret: ENTER YOUR CLIENT SECRET HERE
+        application-id: ENTER YOUR APPLICATION ID HERE
+        api-user: ENTER YOU API USER NAME FROM CI360
+        api-secret: ENTER THE SECRET FOR THE SAME API USER
+        copy-item-destination-JWT: ENTER THE STATIC JWT OR ACCESS TOKEN FOR DESTINATION TENANT
+        internal-temp-jwt: This is automatically added.
+        JWT: This is automatically generated.
+        content_path: content
+        full_endpoint: "{{ _.base_url }}{{ _.content_path }}/{{ _['tenant-id'] }}/"
+        id_type: ENTER THE IDENTITY TYPE HERE [customer_id, login_id, subject_id]
+        id_value: ENTER THE IDENTITY VALUE HERE
+        spot_id: ENTER THE SPOT ID HERE
+        spot_key: ENTER THE SPOT KEY HERE
+        spot_attr: ENTER THE SPOT ATTRIBUTE HERE [ FOR EXAMPLE, topic=iphone]
+        event_path: events
+        channel_type: web
+      color: "#00ff00"
