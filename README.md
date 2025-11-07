@@ -89,6 +89,10 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 REST API Collections__](code/ci360-rest-api-collections/): An Insomnia collection of REST API endpoints for SAS Customer Intelligence 360 (CI 360), designed to make learning and testing easy for developers, consultants and system administrators.​ 
 
+- [__.NET MAUI CI 360 SDK Bindings__](code/ci360-sdk-dotnet-maui-master/): Access native ci360 SDK APIs from C# in a MAUI app.
+
+- [__CSS Selector Guide__](code/ci360-css-selector-guide/): a guide that takes through how to use CSS selectors and how to use lesser known selectors that might prove useful for collecting data from a customer's website without the need to use the JS API
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
