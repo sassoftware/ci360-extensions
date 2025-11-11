@@ -1,0 +1,18 @@
+services:
+  ci360-mcp-server:
+    build: .
+    container_name: ci360-mcp-server
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./app/logs:/app/logs
+      - ./app/data:/app/data
+      - ./app/config:/app/config
+    restart: unless-stopped
+    networks:
+      - mcp-network
+networks:
+  mcp-network:
+    driver: bridge

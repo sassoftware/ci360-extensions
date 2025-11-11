@@ -93,6 +93,8 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CSS Selector Guide__](code/ci360-css-selector-guide/): a guide that takes through how to use CSS selectors and how to use lesser known selectors that might prove useful for collecting data from a customer's website without the need to use the JS API
 
+- [__CI360 MCP Content Server__](code/ci360-server-side-example/): The CI360 MCP (Model Context Protocol) Content Server is a FastAPI-based orchestration layer for SAS CI360 (Customer Intelligence 360). This system integrates with SAS CI360 APIs to deliver targeted marketing content and track user behavior in real time.
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
