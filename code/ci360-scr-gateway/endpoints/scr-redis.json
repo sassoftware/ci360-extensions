@@ -1,0 +1,18 @@
+{
+  "id": "scr-redis",
+  "endpoint": "https://host.docker.internal:8443/scr-redis",
+  "payload": {
+    "inputs": {
+      "customer_id": "${event.properties.subject_id}",
+      "some_number": 122,
+      "some_text": "abc",
+      "name" : "${event.properties.name}",
+      "text": "${event.outboundProperties.properties.greeting}",
+      "dttm_raw": "${event.date.generatedTimestamp}",
+      "dttm_str": "$str{event.date.generatedTimestamp}",
+      "dttm_iso": "$timestamp{event.date.generatedTimestamp}",
+      "call_id": "${record.call_id}"
+    }
+  }
+}
+

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateways-svc
+  labels:
+    app.kubernetes.io/name: gateways-svc
+spec:
+  selector:
+    app.kubernetes.io/name: gateways
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+  type: ClusterIP
+

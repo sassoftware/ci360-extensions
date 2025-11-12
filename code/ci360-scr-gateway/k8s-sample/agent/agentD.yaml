@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: agent
+    workload.sas.com/class: runtime
+  name: agent-scr
+spec:
+  # modify replicas to support the requirements
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: agent
+  template:
+    metadata:
+      labels:
+        app: app-agent
+        app.kubernetes.io/name: agent
+        workload.sas.com/class: runtime
+    spec:       
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: workload.sas.com/class
+                operator: In
+                values:
+                - runtime
+      containers:
+        - image: ******/scr:agent
+          imagePullPolicy: Always            # IfNotPresent or Always
+          name: app-agent
+          envFrom:
+            - configMapRef:
+               name: scr-map
+          resources:
+            requests:       # Minimum amount of resources requested
+              cpu: 100m
+              memory: 128Mi
+            limits:         # Maximum amount of resources requested
+              cpu: 1000m
+              memory: 2048Mi           
+          volumeMounts:
+            - name: scr-agent
+              mountPath: /app/endpoints
+      volumes:
+        - name: scr-agent
+          persistentVolumeClaim:
+            claimName: gateway-pvc-claim
+      tolerations:
+      - effect: NoSchedule
+        key: workload/class
+        operator: Equal
+        value: decision
