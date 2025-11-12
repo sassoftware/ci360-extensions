@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: scr
+      POSTGRES_PASSWORD: gateway
+      POSTGRES_DB: scr_gateway
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U scr -d scr_gateway"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:80"
+    environment:
+      WORKERS: 1
+#      CA_CERT_PATH: /app/certs/server.crt
+      USE_DB: true
+      DATABASE_URL: postgresql+asyncpg://scr:gateway@postgres/scr_gateway
+      SQL_ECHO: true
+    volumes:
+      - ./endpoints:/app/endpoints
+#      - ./https-test/certs/server.crt:/app/certs/server.crt
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  agent:
+    build: ./agent
+    env_file: ./360.env
+    links:
+      - gateway:gateway.local

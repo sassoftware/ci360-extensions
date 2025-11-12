@@ -1,0 +1,16 @@
+{
+  "id": "scr-solo",
+  "endpoint": "http://host.docker.internal:8081/scr-solo",
+  "payload": {
+    "inputs": {
+      "customer_id": "${event.properties.subject_id}",
+      "name" : "${event.outboundProperties.properties.greeting}",
+      "rtc": "${event.contactResponse.responseTrackingCode}",
+      "dttm": "${date.generatedTimestamp}"
+    },
+    "metadata": {
+      "client_id": "NAS",
+      "activityId": "${record.call_id}"
+    }
+  }
+}

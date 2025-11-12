@@ -1,0 +1,26 @@
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "8000:80"
+    environment:
+      WORKERS: 1
+      USE_DB: "false"
+      VERIFY_SSL: "false"
+#      CA_CERT_PATH: /app/certs/server.crt
+    volumes:
+      - ./endpoints:/app/endpoints
+#      - ./https-test/certs/server.crt:/app/certs/server.crt
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  agent:
+    build: ./agent
+    env_file: ./360.env
+    links:
+      - gateway:gateway.local

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+  <logger name="com.sas.mkt.apigw.sdk" level="DEBUG"></logger>
+  <logger name="org.springframework" level="INFO"></logger>
+  <logger name="org.apache" level="INFO"></logger>
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

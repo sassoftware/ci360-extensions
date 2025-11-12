@@ -1,0 +1,65 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: gateways
+    workload.sas.com/class: runtime
+  name: gateways-scr
+spec:
+  # modify replicas to support the requirements
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gateways
+  template:
+    metadata:
+      labels:
+        app: app-gateways
+        app.kubernetes.io/name: gateways
+        workload.sas.com/class: runtime
+    spec:       
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: workload.sas.com/class
+                operator: In
+                values:
+                - runtime
+      containers:
+        - image: *****/scr:gateway
+          imagePullPolicy: Always            # IfNotPresent or Always
+          name: app-gateways
+          envFrom:
+            - configMapRef:
+               name: scr-map
+          resources:
+            requests:       # Minimum amount of resources requested
+              cpu: 100m
+              memory: 128Mi
+            limits:         # Maximum amount of resources requested
+              cpu: 1000m
+              memory: 2048Mi
+          ports:
+            - containerPort: 80 # The container exposes this port
+              name: http      # Name the port "http"
+          volumeMounts:
+            - name: scr-gateways
+              mountPath: /app/endpoints
+          volumeMounts:
+            - name: custom-certs
+              mountPath: /app/certs/
+      volumes:
+        - name: scr-gateways
+          persistentVolumeClaim:
+            claimName: gateway-pvc-claim
+        - name: custom-certs
+          persistentVolumeClaim:
+            claimName: gateway-pvc-claim
+      tolerations:
+      - effect: NoSchedule
+        key: workload/class
+        operator: Equal
+        value: decision
