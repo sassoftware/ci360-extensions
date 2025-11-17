@@ -1,8 +1,8 @@
 {
     "name":"Snowy",
-    "latest_version":4.0,
-    "message":"A new version of Snowy (4.0) is available. Ability to intercept and display the Connector payload.",
-    "DIAG_VERSION":"diag16(2410)",
-    "SDK_VERSION":"sdk17(2410)",
-    "date":"11-Oct-2024"
+    "latest_version":4.1,
+    "message":"A new version of Snowy (4.1) is available. Updated user interface and easy to use expanded view of the event information in the table view. Also introduced new Dart and Light themes.",
+    "DIAG_VERSION":"diag20(2508)",
+    "SDK_VERSION":"sdk21(2508)",
+    "date":"17-Nov-2025"
 }

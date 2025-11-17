@@ -1,6 +1,6 @@
 {
     "name": "Snowy:  Monitor SAS CI 360 Network Traffic",
-    "version": "4.0",
+    "version": "4.1",
     "description": "An easier way to monitor the SAS CI 360 network traffic and stream events directly to the browser extension, with the ability to search the form and event data. For example, you can use this extension to filter and find out the identity event or search for any other kind of event type or input field. Also, if you are streaming events to CI 360 Access Point, you can stream them directly to your browser, no need to run an Agent.",
     "permissions": [
         "webRequest",
