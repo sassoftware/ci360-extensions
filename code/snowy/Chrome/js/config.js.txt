@@ -1,0 +1,59 @@
+﻿// Configuration
+const CONFIG = {
+    CONSOLE_DEFAULTS: {
+        collapsed: true,
+        maxLogs: 1000
+    },
+    DISPLAY_DEFAULTS: {
+        showIdentityId: true,
+        showTenantId: true,
+        showActiveAgent: true
+    },
+    THEME_DEFAULTS: {
+        theme: 'light',
+        colorPreference: 'default'
+    },
+    STORAGE_KEYS: {
+        theme: 'theme',
+        colorPreference: 'colorPreference',
+        consoleCollapsed: 'consoleCollapsed',
+        showIdentityId: 'showIdentityId',
+        showTenantId: 'showTenantId',
+        showActiveAgent: 'showActiveAgent',
+        identityId: 'identityId'
+    }
+};
+
+// Utility Functions
+const Utils = {
+    getStorageItem(key, defaultValue = null) {
+        return localStorage.getItem(key) || defaultValue;
+    },
+    
+    setStorageItem(key, value) {
+        localStorage.setItem(key, value);
+    },
+    
+    getStorageBoolean(key, defaultValue = false) {
+        const stored = localStorage.getItem(key);
+        if (stored === null) {
+            return defaultValue;
+        }
+        return stored === 'true';
+    },
+    
+    formatTimestamp() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return ${hours}::;
+    },
+    
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+};
