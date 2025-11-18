@@ -1,0 +1,7 @@
+02/10/2022   Raja Marla    V1
+02/13/2022   Raja Marla    Allow for saving of SAS datasets to a permanent SAS library
+02/17/2022   Raja Marla    Updated parser binaries to handle tasks terminating with an ERROR log line
+02/21/2022   Raja Marla    Added install.txt file and updated 0_ParseLog.sas to make it easier to use
+03/15/2022   Raja Marla    Added support for Japanese language/Shift-JIS encoded log file/output files
+06/20/2022   Raja Marla    The log parser can now extract SQL from log, with the option  -sql=Y
+03/27/2023   Raja Marla    (Better) Detect task failures prior to processing the user request 
