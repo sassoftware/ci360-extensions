@@ -1,0 +1,30 @@
+Windows Installation
+
+1. Download the git package and unzip it to a folder of your choice.  Pick a folder path with no spaces in the name.
+2. You should get a see a new folder: engage_direct_dm_agent_onpremlog_parser
+3. Open Enterprise Guide, and navigate to the sas folder (under engage_direct_dm_agent_onpremlog_parser)
+4. Open 0_ParseLog.sas
+	Review the comments at the top
+	Update the two lines to match with your folder locations (Remember no spaces in the path).  This is lines #11-12:
+		%let logfl=
+		%let workdir= 
+        If you are working with log files encoded with Shift-JIS, you will need to add the additional switch on line 22.  Update as under:
+	"&workdir.dirlogparse -f &logfl. -o &workdir. -e sjis";
+5. After successful execution of 0_ParseLog.sas, run each of the following sas reports (as needed): 2a, 2b, 2c and 2d. You will need to copy the
+   %let workdir=  content from step#4 to each of the sas report code
+
+
+Linux Installation
+
+1. Download (or clone) the git package and unzip it to a directory of your choice.  Pick a directory path with no spaces in the name.
+2. You should get a see a new folder: engage_direct_dm_agent_onpremlog_parser
+3. Use Enterprise Guide or SAS Studio, to execute the SAS files
+4. Start with 0_ParseLog.sas
+	Review the comments at the top
+	Update the two lines to match with your directory locations (Remember no spaces in the path).  This is lines #15-16:
+		%let logfl=
+		%let workdir= 
+        If you are working with log files encoded with Shift-JIS, you will need to add the additional switch on line 22.  Update as under:
+	"&workdir.dirlogparse -f &logfl. -o &workdir. -e sjis";
+5. After successful execution of 0_ParseLog.sas, run each of the following sas reports (as needed): 2a, 2b, 2c and 2d. You will need to copy the
+   %let workdir=  content from step#4 to each of the sas report code files
