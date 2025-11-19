@@ -137,9 +137,10 @@ Its value should match the `id` of the SCR endpoint JSON definition.
 
 ### Gateway Environment Variables
 
-| Variable       | Description                                           | Example Value                              |
-|----------------|-------------------------------------------------------|--------------------------------------------|
-| VERIFY_SSL     | Set to `false` for testing without SSL verification   | true                                       |
-| CA_CERT_PATH   | Path to certificate file(s) for SCR endpoints         | /app/certs/server.crt                      |
-| USE_DB         | Log requests to database                              | true                                       |
-| DATABASE_URL   | Database connection string (if `USE_DB=true`)         | postgresql+asyncpg://scr:gateway@postgres/ |
+| Variable          | Description                                                       | Example Value                              |
+|-------------------|-------------------------------------------------------------------|--------------------------------------------|
+| VERIFY_SSL        | Set to `false` for testing without SSL verification               | true                                       |
+| CA_CERT_PATH      | Path to certificate file(s) for SCR endpoints                     | /app/certs/server.crt                      |
+| USE_DB            | Log requests to database                                          | true                                       |
+| DATABASE_URL      | Database connection string (if `USE_DB=true`)                     | postgresql+asyncpg://scr:gateway@postgres/ |
+| HTTP_READ_TIMEOUT | Http timeout in seconds for SCR calls - defaults to 30 if not set | 30                                         |
