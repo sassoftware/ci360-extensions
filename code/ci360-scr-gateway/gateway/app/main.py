@@ -10,6 +10,8 @@ from db import engine, USE_DB
 from models import Base
 import os
 
+DEFAULT_HTTP_READ_TIMEOUT = 30.0
+
 #
 # Lifespan
 #
@@ -20,6 +22,14 @@ async def lifespan(app: FastAPI):
   # Setup
   VERIFY_SSL = os.getenv('VERIFY_SSL', 'true').strip().lower() != 'false'
   CA_CERT_PATH = os.getenv('CA_CERT_PATH')
+
+  try:
+    HTTP_READ_TIMEOUT = float(os.getenv('HTTP_READ_TIMEOUT', DEFAULT_HTTP_READ_TIMEOUT))
+    if HTTP_READ_TIMEOUT <= 0:
+      raise ValueError
+  except ValueError:
+    HTTP_READ_TIMEOUT = DEFAULT_HTTP_READ_TIMEOUT
+    logger.warning(f'⚠️ Invalid HTTP_READ_TIMEOUT set. Using default {HTTP_READ_TIMEOUT}s')
 
   if CA_CERT_PATH and os.path.exists(CA_CERT_PATH):
     logger.info(f'🔒 Using custom CA cert: {CA_CERT_PATH}')
@@ -34,7 +44,13 @@ async def lifespan(app: FastAPI):
   else:
     logger.info('✅ Using default CA store for HTTPS verification')
 
-  app.state.http_client = httpx.AsyncClient(verify=CA_CERT_PATH or VERIFY_SSL)
+  timeout = httpx.Timeout(
+    connect = 5.0,  
+    read    = HTTP_READ_TIMEOUT,
+    write   = 5.0,
+    pool    = 5.0
+  )
+  app.state.http_client = httpx.AsyncClient(verify=CA_CERT_PATH or VERIFY_SSL, timeout=timeout)
   app.state.scr_gateway = SCRGateway('/app/endpoints')
 
   if USE_DB:
