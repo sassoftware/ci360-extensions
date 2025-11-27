@@ -14,8 +14,8 @@ options notes;
 %let DSC_TENANT_ID=%str(XXXXXXXXXXXXXXXXX);
 %let DSC_SECRET_KEY=%str(XXXXXXXXXXXXXXXXXXXXXXXXXXX);
 %let External_gateway=https://<external gateway host>/marketingGateway;
-%let SCHEMA_VERSION=18;
-%let previous_schema_version=17;
+%let SCHEMA_VERSION=19;
+%let previous_schema_version=18;
 
 
 
@@ -69,6 +69,7 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 %let dbpath=; /* NOT USED with MSSQL - database path value */
 %let dbdns=mydbdns; /* NOT USED with MSSQL - database DNS name */
 %let dbport=8080; /* NOT USED with MSSQL - database connection port number  */
+%let dbserver="my server "; /* Used for Redshift connection */
 
 /* Staging schema details */
 %let tmplib=tempLib;
@@ -80,13 +81,13 @@ proc printto log="&UtilityLocation.&slash.logs&slash.udmloader_%left(%sysfunc(da
 %let tmpdbpath=&dbpath.;
 %let tmpdbdns=&dbdns.;
 %let tmpdbport=&dbport.;
-
+%let dbserver=&dbserver;
 /* ------Parameters for MS SQL Server - End------*/
 
 /*------ Connection String for MSSQL, AZURE SQL and Redshift -----*/
 /*%let sql_passthru_connection =%str(noprompt="uid=&dbuser;pwd=&dbpass;dsn=&dbdns;"); /* connection string for AZURE */
 /*%let sql_passthru_connection =%str(DATASRC=&dbsrc. user=&dbuser. pass=&dbpass.);*/ /* connection string for MSSQL */
-%let sql_passthru_connection =%str(SERVER=&dbsrc. PORT=&dbport. USER=&dbuser. PASSWORD=&dbpass. DATABASE=&dbschema.);/* connection string for Redshift */
+%let sql_passthru_connection =%str(SERVER=&dbserver. PORT=&dbport. USER=&dbuser. PASSWORD=&dbpass. DATABASE=&dbschema.);/* connection string for Redshift */
 /*------ Connection String for MSSQL, AZURE SQL and Redshift - End -----*/
 
 /*Common Configurations */

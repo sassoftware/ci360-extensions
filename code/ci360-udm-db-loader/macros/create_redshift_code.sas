@@ -177,7 +177,7 @@
 		put +4 '%end;';
 		put +1 '%if &errFlag = 0 %then %do;';
 		put +2 'PROC SQL NOERRORSTOP;';
-/*		put +6 'drop table &udmmart..' %trim("&table_name") ';';*/
+		put +6 'drop table &udmmart..' %trim("&table_name") ';';
 		put +6 'DROP TABLE work.' %trim("&table_name") ';';
 		put +2 'QUIT;';
 		put +1 '%end;';

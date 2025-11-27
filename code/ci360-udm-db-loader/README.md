@@ -8,11 +8,12 @@ The utility is capable of automatically generating database-specific Data Defini
 - Microsoft SQL Server
 - SQL Server on Azure 
 - Redshift
+- Oracle
 
-This tool will support multiple target databases. Next up are Oracle and Postgres.
+This tool will support multiple target databases. Next up is Postgres.
 
 ## Supported UDM Schema Version
-This tool contains metadata for UDM schema version 18. 
+This tool contains metadata for UDM schema version 19. 
 
 ## Pre-requisites
 
