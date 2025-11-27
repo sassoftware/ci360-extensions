@@ -42,6 +42,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..ab_test_path_assignment;
       DROP TABLE work.ab_test_path_assignment;
   QUIT;
  %end;
@@ -90,6 +91,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..abt_attribution;
       DROP TABLE work.abt_attribution;
   QUIT;
  %end;
@@ -138,6 +140,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..activity_conversion;
       DROP TABLE work.activity_conversion;
   QUIT;
  %end;
@@ -186,6 +189,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..activity_flow_in;
       DROP TABLE work.activity_flow_in;
   QUIT;
  %end;
@@ -234,6 +238,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..activity_start;
       DROP TABLE work.activity_start;
   QUIT;
  %end;
@@ -282,6 +287,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..advertising_contact;
       DROP TABLE work.advertising_contact;
   QUIT;
  %end;
@@ -312,11 +318,11 @@
         execute (MERGE INTO &dbschema..asset_details using &tmpdbschema..asset_details_tmp               
          ON (asset_details.asset_id=asset_details_tmp.asset_id)
         WHEN MATCHED THEN  
-        UPDATE SET asset_deleted_flg = asset_details_tmp.asset_deleted_flg , asset_desc = asset_details_tmp.asset_desc , asset_locked_by_usernm = asset_details_tmp.asset_locked_by_usernm , asset_locked_dttm = asset_details_tmp.asset_locked_dttm , asset_locked_flg = asset_details_tmp.asset_locked_flg , asset_nm = asset_details_tmp.asset_nm , asset_owner_usernm = asset_details_tmp.asset_owner_usernm , asset_process_status = asset_details_tmp.asset_process_status , asset_sk = asset_details_tmp.asset_sk , asset_source_nm = asset_details_tmp.asset_source_nm , asset_source_type = asset_details_tmp.asset_source_type , created_by_usernm = asset_details_tmp.created_by_usernm , created_dttm = asset_details_tmp.created_dttm , download_disabled_by_usernm = asset_details_tmp.download_disabled_by_usernm , download_disabled_dttm = asset_details_tmp.download_disabled_dttm , download_disabled_flg = asset_details_tmp.download_disabled_flg , entity_attribute_enabled_flg = asset_details_tmp.entity_attribute_enabled_flg , entity_revision_enabled_flg = asset_details_tmp.entity_revision_enabled_flg , entity_status_cd = asset_details_tmp.entity_status_cd , entity_subtype_enabled_flg = asset_details_tmp.entity_subtype_enabled_flg , entity_subtype_nm = asset_details_tmp.entity_subtype_nm , entity_table_nm = asset_details_tmp.entity_table_nm , entity_type_nm = asset_details_tmp.entity_type_nm , entity_type_usage_cd = asset_details_tmp.entity_type_usage_cd , expired_dttm = asset_details_tmp.expired_dttm , expired_flg = asset_details_tmp.expired_flg , external_sharing_error_msg = asset_details_tmp.external_sharing_error_msg , folder_deleted_flg = asset_details_tmp.folder_deleted_flg , folder_desc = asset_details_tmp.folder_desc , folder_entity_status_cd = asset_details_tmp.folder_entity_status_cd , folder_id = asset_details_tmp.folder_id , folder_level = asset_details_tmp.folder_level , folder_nm = asset_details_tmp.folder_nm , folder_owner_usernm = asset_details_tmp.folder_owner_usernm , folder_path = asset_details_tmp.folder_path , folder_sk = asset_details_tmp.folder_sk , last_modified_by_usernm = asset_details_tmp.last_modified_by_usernm , last_modified_dttm = asset_details_tmp.last_modified_dttm , load_dttm = asset_details_tmp.load_dttm , process_id = asset_details_tmp.process_id , process_task_id = asset_details_tmp.process_task_id , public_link = asset_details_tmp.public_link , public_media_id = asset_details_tmp.public_media_id , public_url = asset_details_tmp.public_url , recycled_by_usernm = asset_details_tmp.recycled_by_usernm , recycled_dttm = asset_details_tmp.recycled_dttm , total_user_rating_val = asset_details_tmp.total_user_rating_val , user_rating_cnt = asset_details_tmp.user_rating_cnt
+        UPDATE SET asset_deleted_flg = asset_details_tmp.asset_deleted_flg , asset_desc = asset_details_tmp.asset_desc , asset_locked_by_usernm = asset_details_tmp.asset_locked_by_usernm , asset_locked_dttm = asset_details_tmp.asset_locked_dttm , asset_locked_flg = asset_details_tmp.asset_locked_flg , asset_nm = asset_details_tmp.asset_nm , asset_owner_usernm = asset_details_tmp.asset_owner_usernm , asset_process_status = asset_details_tmp.asset_process_status , asset_sk = asset_details_tmp.asset_sk , asset_source_nm = asset_details_tmp.asset_source_nm , asset_source_type = asset_details_tmp.asset_source_type , average_user_rating_val = asset_details_tmp.average_user_rating_val , created_by_usernm = asset_details_tmp.created_by_usernm , created_dttm = asset_details_tmp.created_dttm , download_disabled_by_usernm = asset_details_tmp.download_disabled_by_usernm , download_disabled_dttm = asset_details_tmp.download_disabled_dttm , download_disabled_flg = asset_details_tmp.download_disabled_flg , entity_attribute_enabled_flg = asset_details_tmp.entity_attribute_enabled_flg , entity_revision_enabled_flg = asset_details_tmp.entity_revision_enabled_flg , entity_status_cd = asset_details_tmp.entity_status_cd , entity_subtype_enabled_flg = asset_details_tmp.entity_subtype_enabled_flg , entity_subtype_nm = asset_details_tmp.entity_subtype_nm , entity_table_nm = asset_details_tmp.entity_table_nm , entity_type_nm = asset_details_tmp.entity_type_nm , entity_type_usage_cd = asset_details_tmp.entity_type_usage_cd , expired_dttm = asset_details_tmp.expired_dttm , expired_flg = asset_details_tmp.expired_flg , external_sharing_error_dt = asset_details_tmp.external_sharing_error_dt , external_sharing_error_msg = asset_details_tmp.external_sharing_error_msg , folder_deleted_flg = asset_details_tmp.folder_deleted_flg , folder_desc = asset_details_tmp.folder_desc , folder_entity_status_cd = asset_details_tmp.folder_entity_status_cd , folder_id = asset_details_tmp.folder_id , folder_level = asset_details_tmp.folder_level , folder_nm = asset_details_tmp.folder_nm , folder_owner_usernm = asset_details_tmp.folder_owner_usernm , folder_path = asset_details_tmp.folder_path , folder_sk = asset_details_tmp.folder_sk , last_modified_by_usernm = asset_details_tmp.last_modified_by_usernm , last_modified_dttm = asset_details_tmp.last_modified_dttm , load_dttm = asset_details_tmp.load_dttm , process_id = asset_details_tmp.process_id , process_task_id = asset_details_tmp.process_task_id , public_link = asset_details_tmp.public_link , public_media_id = asset_details_tmp.public_media_id , public_url = asset_details_tmp.public_url , recycled_by_usernm = asset_details_tmp.recycled_by_usernm , recycled_dttm = asset_details_tmp.recycled_dttm , total_user_rating_val = asset_details_tmp.total_user_rating_val , user_rating_cnt = asset_details_tmp.user_rating_cnt
         WHEN NOT MATCHED THEN INSERT ( 
-        asset_deleted_flg,asset_desc,asset_id,asset_locked_by_usernm,asset_locked_dttm,asset_locked_flg,asset_nm,asset_owner_usernm,asset_process_status,asset_sk,asset_source_nm,asset_source_type,created_by_usernm,created_dttm,download_disabled_by_usernm,download_disabled_dttm,download_disabled_flg,entity_attribute_enabled_flg,entity_revision_enabled_flg,entity_status_cd,entity_subtype_enabled_flg,entity_subtype_nm,entity_table_nm,entity_type_nm,entity_type_usage_cd,expired_dttm,expired_flg,external_sharing_error_msg,folder_deleted_flg,folder_desc,folder_entity_status_cd,folder_id,folder_level,folder_nm,folder_owner_usernm,folder_path,folder_sk,last_modified_by_usernm,last_modified_dttm,load_dttm,process_id,process_task_id,public_link,public_media_id,public_url,recycled_by_usernm,recycled_dttm,total_user_rating_val,user_rating_cnt
+        asset_deleted_flg,asset_desc,asset_id,asset_locked_by_usernm,asset_locked_dttm,asset_locked_flg,asset_nm,asset_owner_usernm,asset_process_status,asset_sk,asset_source_nm,asset_source_type,average_user_rating_val,created_by_usernm,created_dttm,download_disabled_by_usernm,download_disabled_dttm,download_disabled_flg,entity_attribute_enabled_flg,entity_revision_enabled_flg,entity_status_cd,entity_subtype_enabled_flg,entity_subtype_nm,entity_table_nm,entity_type_nm,entity_type_usage_cd,expired_dttm,expired_flg,external_sharing_error_dt,external_sharing_error_msg,folder_deleted_flg,folder_desc,folder_entity_status_cd,folder_id,folder_level,folder_nm,folder_owner_usernm,folder_path,folder_sk,last_modified_by_usernm,last_modified_dttm,load_dttm,process_id,process_task_id,public_link,public_media_id,public_url,recycled_by_usernm,recycled_dttm,total_user_rating_val,user_rating_cnt
          ) values ( 
-        asset_details_tmp.asset_deleted_flg,asset_details_tmp.asset_desc,asset_details_tmp.asset_id,asset_details_tmp.asset_locked_by_usernm,asset_details_tmp.asset_locked_dttm,asset_details_tmp.asset_locked_flg,asset_details_tmp.asset_nm,asset_details_tmp.asset_owner_usernm,asset_details_tmp.asset_process_status,asset_details_tmp.asset_sk,asset_details_tmp.asset_source_nm,asset_details_tmp.asset_source_type,asset_details_tmp.created_by_usernm,asset_details_tmp.created_dttm,asset_details_tmp.download_disabled_by_usernm,asset_details_tmp.download_disabled_dttm,asset_details_tmp.download_disabled_flg,asset_details_tmp.entity_attribute_enabled_flg,asset_details_tmp.entity_revision_enabled_flg,asset_details_tmp.entity_status_cd,asset_details_tmp.entity_subtype_enabled_flg,asset_details_tmp.entity_subtype_nm,asset_details_tmp.entity_table_nm,asset_details_tmp.entity_type_nm,asset_details_tmp.entity_type_usage_cd,asset_details_tmp.expired_dttm,asset_details_tmp.expired_flg,asset_details_tmp.external_sharing_error_msg,asset_details_tmp.folder_deleted_flg,asset_details_tmp.folder_desc,asset_details_tmp.folder_entity_status_cd,asset_details_tmp.folder_id,asset_details_tmp.folder_level,asset_details_tmp.folder_nm,asset_details_tmp.folder_owner_usernm,asset_details_tmp.folder_path,asset_details_tmp.folder_sk,asset_details_tmp.last_modified_by_usernm,asset_details_tmp.last_modified_dttm,asset_details_tmp.load_dttm,asset_details_tmp.process_id,asset_details_tmp.process_task_id,asset_details_tmp.public_link,asset_details_tmp.public_media_id,asset_details_tmp.public_url,asset_details_tmp.recycled_by_usernm,asset_details_tmp.recycled_dttm,asset_details_tmp.total_user_rating_val,asset_details_tmp.user_rating_cnt
+        asset_details_tmp.asset_deleted_flg,asset_details_tmp.asset_desc,asset_details_tmp.asset_id,asset_details_tmp.asset_locked_by_usernm,asset_details_tmp.asset_locked_dttm,asset_details_tmp.asset_locked_flg,asset_details_tmp.asset_nm,asset_details_tmp.asset_owner_usernm,asset_details_tmp.asset_process_status,asset_details_tmp.asset_sk,asset_details_tmp.asset_source_nm,asset_details_tmp.asset_source_type,asset_details_tmp.average_user_rating_val,asset_details_tmp.created_by_usernm,asset_details_tmp.created_dttm,asset_details_tmp.download_disabled_by_usernm,asset_details_tmp.download_disabled_dttm,asset_details_tmp.download_disabled_flg,asset_details_tmp.entity_attribute_enabled_flg,asset_details_tmp.entity_revision_enabled_flg,asset_details_tmp.entity_status_cd,asset_details_tmp.entity_subtype_enabled_flg,asset_details_tmp.entity_subtype_nm,asset_details_tmp.entity_table_nm,asset_details_tmp.entity_type_nm,asset_details_tmp.entity_type_usage_cd,asset_details_tmp.expired_dttm,asset_details_tmp.expired_flg,asset_details_tmp.external_sharing_error_dt,asset_details_tmp.external_sharing_error_msg,asset_details_tmp.folder_deleted_flg,asset_details_tmp.folder_desc,asset_details_tmp.folder_entity_status_cd,asset_details_tmp.folder_id,asset_details_tmp.folder_level,asset_details_tmp.folder_nm,asset_details_tmp.folder_owner_usernm,asset_details_tmp.folder_path,asset_details_tmp.folder_sk,asset_details_tmp.last_modified_by_usernm,asset_details_tmp.last_modified_dttm,asset_details_tmp.load_dttm,asset_details_tmp.process_id,asset_details_tmp.process_task_id,asset_details_tmp.public_link,asset_details_tmp.public_media_id,asset_details_tmp.public_url,asset_details_tmp.recycled_by_usernm,asset_details_tmp.recycled_dttm,asset_details_tmp.total_user_rating_val,asset_details_tmp.user_rating_cnt
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -330,6 +336,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..asset_details;
       DROP TABLE work.asset_details;
   QUIT;
  %end;
@@ -378,6 +385,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..asset_details_custom_prop;
       DROP TABLE work.asset_details_custom_prop;
   QUIT;
  %end;
@@ -426,6 +434,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..asset_folder_details;
       DROP TABLE work.asset_folder_details;
   QUIT;
  %end;
@@ -456,11 +465,11 @@
         execute (MERGE INTO &dbschema..asset_rendition_details using &tmpdbschema..asset_rendition_details_tmp     
          ON (asset_rendition_details.asset_id=asset_rendition_details_tmp.asset_id and asset_rendition_details.rendition_id=asset_rendition_details_tmp.rendition_id and asset_rendition_details.revision_id=asset_rendition_details_tmp.revision_id and asset_rendition_details.revision_no=asset_rendition_details_tmp.revision_no)
         WHEN MATCHED THEN  
-        UPDATE SET created_by_usernm = asset_rendition_details_tmp.created_by_usernm , created_dttm = asset_rendition_details_tmp.created_dttm , current_revision_flg = asset_rendition_details_tmp.current_revision_flg , download_cnt = asset_rendition_details_tmp.download_cnt , entity_status_cd = asset_rendition_details_tmp.entity_status_cd , file_format = asset_rendition_details_tmp.file_format , file_nm = asset_rendition_details_tmp.file_nm , file_size = asset_rendition_details_tmp.file_size , last_modified_by_usernm = asset_rendition_details_tmp.last_modified_by_usernm , last_modified_dttm = asset_rendition_details_tmp.last_modified_dttm , last_modified_status_cd = asset_rendition_details_tmp.last_modified_status_cd , load_dttm = asset_rendition_details_tmp.load_dttm , media_depth = asset_rendition_details_tmp.media_depth , media_height = asset_rendition_details_tmp.media_height , media_width = asset_rendition_details_tmp.media_width , rend_deleted_flg = asset_rendition_details_tmp.rend_deleted_flg , rend_duration = asset_rendition_details_tmp.rend_duration , rendition_generated_type_cd = asset_rendition_details_tmp.rendition_generated_type_cd , rendition_nm = asset_rendition_details_tmp.rendition_nm , rendition_type_cd = asset_rendition_details_tmp.rendition_type_cd , rev_deleted_flg = asset_rendition_details_tmp.rev_deleted_flg , revision_comment_txt = asset_rendition_details_tmp.revision_comment_txt
+        UPDATE SET created_by_usernm = asset_rendition_details_tmp.created_by_usernm , created_dttm = asset_rendition_details_tmp.created_dttm , current_revision_flg = asset_rendition_details_tmp.current_revision_flg , download_cnt = asset_rendition_details_tmp.download_cnt , entity_status_cd = asset_rendition_details_tmp.entity_status_cd , file_format = asset_rendition_details_tmp.file_format , file_nm = asset_rendition_details_tmp.file_nm , file_size = asset_rendition_details_tmp.file_size , last_modified_by_usernm = asset_rendition_details_tmp.last_modified_by_usernm , last_modified_dttm = asset_rendition_details_tmp.last_modified_dttm , last_modified_status_cd = asset_rendition_details_tmp.last_modified_status_cd , load_dttm = asset_rendition_details_tmp.load_dttm , media_depth = asset_rendition_details_tmp.media_depth , media_dpi = asset_rendition_details_tmp.media_dpi , media_height = asset_rendition_details_tmp.media_height , media_width = asset_rendition_details_tmp.media_width , rend_deleted_flg = asset_rendition_details_tmp.rend_deleted_flg , rend_duration = asset_rendition_details_tmp.rend_duration , rendition_generated_type_cd = asset_rendition_details_tmp.rendition_generated_type_cd , rendition_nm = asset_rendition_details_tmp.rendition_nm , rendition_type_cd = asset_rendition_details_tmp.rendition_type_cd , rev_deleted_flg = asset_rendition_details_tmp.rev_deleted_flg , revision_comment_txt = asset_rendition_details_tmp.revision_comment_txt
         WHEN NOT MATCHED THEN INSERT ( 
-        asset_id,created_by_usernm,created_dttm,current_revision_flg,download_cnt,entity_status_cd,file_format,file_nm,file_size,last_modified_by_usernm,last_modified_dttm,last_modified_status_cd,load_dttm,media_depth,media_height,media_width,rend_deleted_flg,rend_duration,rendition_generated_type_cd,rendition_id,rendition_nm,rendition_type_cd,rev_deleted_flg,revision_comment_txt,revision_id,revision_no
+        asset_id,created_by_usernm,created_dttm,current_revision_flg,download_cnt,entity_status_cd,file_format,file_nm,file_size,last_modified_by_usernm,last_modified_dttm,last_modified_status_cd,load_dttm,media_depth,media_dpi,media_height,media_width,rend_deleted_flg,rend_duration,rendition_generated_type_cd,rendition_id,rendition_nm,rendition_type_cd,rev_deleted_flg,revision_comment_txt,revision_id,revision_no
          ) values ( 
-        asset_rendition_details_tmp.asset_id,asset_rendition_details_tmp.created_by_usernm,asset_rendition_details_tmp.created_dttm,asset_rendition_details_tmp.current_revision_flg,asset_rendition_details_tmp.download_cnt,asset_rendition_details_tmp.entity_status_cd,asset_rendition_details_tmp.file_format,asset_rendition_details_tmp.file_nm,asset_rendition_details_tmp.file_size,asset_rendition_details_tmp.last_modified_by_usernm,asset_rendition_details_tmp.last_modified_dttm,asset_rendition_details_tmp.last_modified_status_cd,asset_rendition_details_tmp.load_dttm,asset_rendition_details_tmp.media_depth,asset_rendition_details_tmp.media_height,asset_rendition_details_tmp.media_width,asset_rendition_details_tmp.rend_deleted_flg,asset_rendition_details_tmp.rend_duration,asset_rendition_details_tmp.rendition_generated_type_cd,asset_rendition_details_tmp.rendition_id,asset_rendition_details_tmp.rendition_nm,asset_rendition_details_tmp.rendition_type_cd,asset_rendition_details_tmp.rev_deleted_flg,asset_rendition_details_tmp.revision_comment_txt,asset_rendition_details_tmp.revision_id,asset_rendition_details_tmp.revision_no
+        asset_rendition_details_tmp.asset_id,asset_rendition_details_tmp.created_by_usernm,asset_rendition_details_tmp.created_dttm,asset_rendition_details_tmp.current_revision_flg,asset_rendition_details_tmp.download_cnt,asset_rendition_details_tmp.entity_status_cd,asset_rendition_details_tmp.file_format,asset_rendition_details_tmp.file_nm,asset_rendition_details_tmp.file_size,asset_rendition_details_tmp.last_modified_by_usernm,asset_rendition_details_tmp.last_modified_dttm,asset_rendition_details_tmp.last_modified_status_cd,asset_rendition_details_tmp.load_dttm,asset_rendition_details_tmp.media_depth,asset_rendition_details_tmp.media_dpi,asset_rendition_details_tmp.media_height,asset_rendition_details_tmp.media_width,asset_rendition_details_tmp.rend_deleted_flg,asset_rendition_details_tmp.rend_duration,asset_rendition_details_tmp.rendition_generated_type_cd,asset_rendition_details_tmp.rendition_id,asset_rendition_details_tmp.rendition_nm,asset_rendition_details_tmp.rendition_type_cd,asset_rendition_details_tmp.rev_deleted_flg,asset_rendition_details_tmp.revision_comment_txt,asset_rendition_details_tmp.revision_id,asset_rendition_details_tmp.revision_no
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -474,6 +483,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..asset_rendition_details;
       DROP TABLE work.asset_rendition_details;
   QUIT;
  %end;
@@ -522,6 +532,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..asset_revision;
       DROP TABLE work.asset_revision;
   QUIT;
  %end;
@@ -570,6 +581,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..audience_membership_change;
       DROP TABLE work.audience_membership_change;
   QUIT;
  %end;
@@ -618,6 +630,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..business_process_details;
       DROP TABLE work.business_process_details;
   QUIT;
  %end;
@@ -648,11 +661,11 @@
         execute (MERGE INTO &dbschema..cart_activity_details using &tmpdbschema..cart_activity_details_tmp       
          ON (cart_activity_details.activity_dttm=cart_activity_details_tmp.activity_dttm and cart_activity_details.detail_id=cart_activity_details_tmp.detail_id and cart_activity_details.product_id=cart_activity_details_tmp.product_id and cart_activity_details.product_nm=cart_activity_details_tmp.product_nm and cart_activity_details.product_sku=cart_activity_details_tmp.product_sku)
         WHEN MATCHED THEN  
-        UPDATE SET activity_cd = cart_activity_details_tmp.activity_cd , activity_dttm_tz = cart_activity_details_tmp.activity_dttm_tz , availability_message_txt = cart_activity_details_tmp.availability_message_txt , cart_activity_sk = cart_activity_details_tmp.cart_activity_sk , cart_id = cart_activity_details_tmp.cart_id , cart_nm = cart_activity_details_tmp.cart_nm , channel_nm = cart_activity_details_tmp.channel_nm , currency_cd = cart_activity_details_tmp.currency_cd , detail_id_hex = cart_activity_details_tmp.detail_id_hex , displayed_cart_items_no = cart_activity_details_tmp.displayed_cart_items_no , event_designed_id = cart_activity_details_tmp.event_designed_id , event_id = cart_activity_details_tmp.event_id , event_key_cd = cart_activity_details_tmp.event_key_cd , event_nm = cart_activity_details_tmp.event_nm , event_source_cd = cart_activity_details_tmp.event_source_cd , identity_id = cart_activity_details_tmp.identity_id , load_dttm = cart_activity_details_tmp.load_dttm , mobile_app_id = cart_activity_details_tmp.mobile_app_id , product_group_nm = cart_activity_details_tmp.product_group_nm , properties_map_doc = cart_activity_details_tmp.properties_map_doc , quantity_val = cart_activity_details_tmp.quantity_val , saving_message_txt = cart_activity_details_tmp.saving_message_txt , session_id = cart_activity_details_tmp.session_id , session_id_hex = cart_activity_details_tmp.session_id_hex , shipping_message_txt = cart_activity_details_tmp.shipping_message_txt , visit_id = cart_activity_details_tmp.visit_id , visit_id_hex = cart_activity_details_tmp.visit_id_hex
+        UPDATE SET activity_cd = cart_activity_details_tmp.activity_cd , activity_dttm_tz = cart_activity_details_tmp.activity_dttm_tz , availability_message_txt = cart_activity_details_tmp.availability_message_txt , cart_activity_sk = cart_activity_details_tmp.cart_activity_sk , cart_id = cart_activity_details_tmp.cart_id , cart_nm = cart_activity_details_tmp.cart_nm , channel_nm = cart_activity_details_tmp.channel_nm , currency_cd = cart_activity_details_tmp.currency_cd , detail_id_hex = cart_activity_details_tmp.detail_id_hex , displayed_cart_amt = cart_activity_details_tmp.displayed_cart_amt , displayed_cart_items_no = cart_activity_details_tmp.displayed_cart_items_no , event_designed_id = cart_activity_details_tmp.event_designed_id , event_id = cart_activity_details_tmp.event_id , event_key_cd = cart_activity_details_tmp.event_key_cd , event_nm = cart_activity_details_tmp.event_nm , event_source_cd = cart_activity_details_tmp.event_source_cd , identity_id = cart_activity_details_tmp.identity_id , load_dttm = cart_activity_details_tmp.load_dttm , mobile_app_id = cart_activity_details_tmp.mobile_app_id , product_group_nm = cart_activity_details_tmp.product_group_nm , properties_map_doc = cart_activity_details_tmp.properties_map_doc , quantity_val = cart_activity_details_tmp.quantity_val , saving_message_txt = cart_activity_details_tmp.saving_message_txt , session_id = cart_activity_details_tmp.session_id , session_id_hex = cart_activity_details_tmp.session_id_hex , shipping_message_txt = cart_activity_details_tmp.shipping_message_txt , unit_price_amt = cart_activity_details_tmp.unit_price_amt , visit_id = cart_activity_details_tmp.visit_id , visit_id_hex = cart_activity_details_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_cd,activity_dttm,activity_dttm_tz,availability_message_txt,cart_activity_sk,cart_id,cart_nm,channel_nm,currency_cd,detail_id,detail_id_hex,displayed_cart_items_no,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,quantity_val,saving_message_txt,session_id,session_id_hex,shipping_message_txt,visit_id,visit_id_hex
+        activity_cd,activity_dttm,activity_dttm_tz,availability_message_txt,cart_activity_sk,cart_id,cart_nm,channel_nm,currency_cd,detail_id,detail_id_hex,displayed_cart_amt,displayed_cart_items_no,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,quantity_val,saving_message_txt,session_id,session_id_hex,shipping_message_txt,unit_price_amt,visit_id,visit_id_hex
          ) values ( 
-        cart_activity_details_tmp.activity_cd,cart_activity_details_tmp.activity_dttm,cart_activity_details_tmp.activity_dttm_tz,cart_activity_details_tmp.availability_message_txt,cart_activity_details_tmp.cart_activity_sk,cart_activity_details_tmp.cart_id,cart_activity_details_tmp.cart_nm,cart_activity_details_tmp.channel_nm,cart_activity_details_tmp.currency_cd,cart_activity_details_tmp.detail_id,cart_activity_details_tmp.detail_id_hex,cart_activity_details_tmp.displayed_cart_items_no,cart_activity_details_tmp.event_designed_id,cart_activity_details_tmp.event_id,cart_activity_details_tmp.event_key_cd,cart_activity_details_tmp.event_nm,cart_activity_details_tmp.event_source_cd,cart_activity_details_tmp.identity_id,cart_activity_details_tmp.load_dttm,cart_activity_details_tmp.mobile_app_id,cart_activity_details_tmp.product_group_nm,cart_activity_details_tmp.product_id,cart_activity_details_tmp.product_nm,cart_activity_details_tmp.product_sku,cart_activity_details_tmp.properties_map_doc,cart_activity_details_tmp.quantity_val,cart_activity_details_tmp.saving_message_txt,cart_activity_details_tmp.session_id,cart_activity_details_tmp.session_id_hex,cart_activity_details_tmp.shipping_message_txt,cart_activity_details_tmp.visit_id,cart_activity_details_tmp.visit_id_hex
+        cart_activity_details_tmp.activity_cd,cart_activity_details_tmp.activity_dttm,cart_activity_details_tmp.activity_dttm_tz,cart_activity_details_tmp.availability_message_txt,cart_activity_details_tmp.cart_activity_sk,cart_activity_details_tmp.cart_id,cart_activity_details_tmp.cart_nm,cart_activity_details_tmp.channel_nm,cart_activity_details_tmp.currency_cd,cart_activity_details_tmp.detail_id,cart_activity_details_tmp.detail_id_hex,cart_activity_details_tmp.displayed_cart_amt,cart_activity_details_tmp.displayed_cart_items_no,cart_activity_details_tmp.event_designed_id,cart_activity_details_tmp.event_id,cart_activity_details_tmp.event_key_cd,cart_activity_details_tmp.event_nm,cart_activity_details_tmp.event_source_cd,cart_activity_details_tmp.identity_id,cart_activity_details_tmp.load_dttm,cart_activity_details_tmp.mobile_app_id,cart_activity_details_tmp.product_group_nm,cart_activity_details_tmp.product_id,cart_activity_details_tmp.product_nm,cart_activity_details_tmp.product_sku,cart_activity_details_tmp.properties_map_doc,cart_activity_details_tmp.quantity_val,cart_activity_details_tmp.saving_message_txt,cart_activity_details_tmp.session_id,cart_activity_details_tmp.session_id_hex,cart_activity_details_tmp.shipping_message_txt,cart_activity_details_tmp.unit_price_amt,cart_activity_details_tmp.visit_id,cart_activity_details_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -666,6 +679,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cart_activity_details;
       DROP TABLE work.cart_activity_details;
   QUIT;
  %end;
@@ -696,11 +710,11 @@
         execute (MERGE INTO &dbschema..cc_budget_breakup using &tmpdbschema..cc_budget_breakup_tmp           
          ON (cc_budget_breakup.cost_center_id=cc_budget_breakup_tmp.cost_center_id and cc_budget_breakup.planning_id=cc_budget_breakup_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cc_desc = cc_budget_breakup_tmp.cc_desc , cc_nm = cc_budget_breakup_tmp.cc_nm , cc_obsolete_flg = cc_budget_breakup_tmp.cc_obsolete_flg , cc_owner_usernm = cc_budget_breakup_tmp.cc_owner_usernm , created_by_usernm = cc_budget_breakup_tmp.created_by_usernm , created_dttm = cc_budget_breakup_tmp.created_dttm , fin_accnt_desc = cc_budget_breakup_tmp.fin_accnt_desc , fin_accnt_nm = cc_budget_breakup_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = cc_budget_breakup_tmp.fin_accnt_obsolete_flg , gen_ledger_cd = cc_budget_breakup_tmp.gen_ledger_cd , last_modified_dttm = cc_budget_breakup_tmp.last_modified_dttm , last_modified_usernm = cc_budget_breakup_tmp.last_modified_usernm , load_dttm = cc_budget_breakup_tmp.load_dttm , planning_nm = cc_budget_breakup_tmp.planning_nm
+        UPDATE SET cc_budget_distribution = cc_budget_breakup_tmp.cc_budget_distribution , cc_desc = cc_budget_breakup_tmp.cc_desc , cc_nm = cc_budget_breakup_tmp.cc_nm , cc_obsolete_flg = cc_budget_breakup_tmp.cc_obsolete_flg , cc_owner_usernm = cc_budget_breakup_tmp.cc_owner_usernm , created_by_usernm = cc_budget_breakup_tmp.created_by_usernm , created_dttm = cc_budget_breakup_tmp.created_dttm , fin_accnt_desc = cc_budget_breakup_tmp.fin_accnt_desc , fin_accnt_nm = cc_budget_breakup_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = cc_budget_breakup_tmp.fin_accnt_obsolete_flg , gen_ledger_cd = cc_budget_breakup_tmp.gen_ledger_cd , last_modified_dttm = cc_budget_breakup_tmp.last_modified_dttm , last_modified_usernm = cc_budget_breakup_tmp.last_modified_usernm , load_dttm = cc_budget_breakup_tmp.load_dttm , planning_nm = cc_budget_breakup_tmp.planning_nm
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_desc,cc_nm,cc_obsolete_flg,cc_owner_usernm,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm,planning_id,planning_nm
+        cc_budget_distribution,cc_desc,cc_nm,cc_obsolete_flg,cc_owner_usernm,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm,planning_id,planning_nm
          ) values ( 
-        cc_budget_breakup_tmp.cc_desc,cc_budget_breakup_tmp.cc_nm,cc_budget_breakup_tmp.cc_obsolete_flg,cc_budget_breakup_tmp.cc_owner_usernm,cc_budget_breakup_tmp.cost_center_id,cc_budget_breakup_tmp.created_by_usernm,cc_budget_breakup_tmp.created_dttm,cc_budget_breakup_tmp.fin_accnt_desc,cc_budget_breakup_tmp.fin_accnt_nm,cc_budget_breakup_tmp.fin_accnt_obsolete_flg,cc_budget_breakup_tmp.gen_ledger_cd,cc_budget_breakup_tmp.last_modified_dttm,cc_budget_breakup_tmp.last_modified_usernm,cc_budget_breakup_tmp.load_dttm,cc_budget_breakup_tmp.planning_id,cc_budget_breakup_tmp.planning_nm
+        cc_budget_breakup_tmp.cc_budget_distribution,cc_budget_breakup_tmp.cc_desc,cc_budget_breakup_tmp.cc_nm,cc_budget_breakup_tmp.cc_obsolete_flg,cc_budget_breakup_tmp.cc_owner_usernm,cc_budget_breakup_tmp.cost_center_id,cc_budget_breakup_tmp.created_by_usernm,cc_budget_breakup_tmp.created_dttm,cc_budget_breakup_tmp.fin_accnt_desc,cc_budget_breakup_tmp.fin_accnt_nm,cc_budget_breakup_tmp.fin_accnt_obsolete_flg,cc_budget_breakup_tmp.gen_ledger_cd,cc_budget_breakup_tmp.last_modified_dttm,cc_budget_breakup_tmp.last_modified_usernm,cc_budget_breakup_tmp.load_dttm,cc_budget_breakup_tmp.planning_id,cc_budget_breakup_tmp.planning_nm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -714,6 +728,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cc_budget_breakup;
       DROP TABLE work.cc_budget_breakup;
   QUIT;
  %end;
@@ -744,11 +759,11 @@
         execute (MERGE INTO &dbschema..cc_budget_breakup_ccbdgt using &tmpdbschema..cc_budget_breakup_ccbdgt_tmp    
          ON (cc_budget_breakup_ccbdgt.cost_center_id=cc_budget_breakup_ccbdgt_tmp.cost_center_id and cc_budget_breakup_ccbdgt.fp_id=cc_budget_breakup_ccbdgt_tmp.fp_id and cc_budget_breakup_ccbdgt.planning_id=cc_budget_breakup_ccbdgt_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cc_bdgt_budget_desc = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_cnt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_desc = cc_budget_breakup_ccbdgt_tmp.cc_desc , cc_nm = cc_budget_breakup_ccbdgt_tmp.cc_nm , cc_number = cc_budget_breakup_ccbdgt_tmp.cc_number , cc_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = cc_budget_breakup_ccbdgt_tmp.cc_owner_usernm , created_by_usernm = cc_budget_breakup_ccbdgt_tmp.created_by_usernm , created_dttm = cc_budget_breakup_ccbdgt_tmp.created_dttm , fin_accnt_desc = cc_budget_breakup_ccbdgt_tmp.fin_accnt_desc , fin_accnt_nm = cc_budget_breakup_ccbdgt_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.fin_accnt_obsolete_flg , fp_cls_ver = cc_budget_breakup_ccbdgt_tmp.fp_cls_ver , fp_desc = cc_budget_breakup_ccbdgt_tmp.fp_desc , fp_nm = cc_budget_breakup_ccbdgt_tmp.fp_nm , fp_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.fp_obsolete_flg , gen_ledger_cd = cc_budget_breakup_ccbdgt_tmp.gen_ledger_cd , last_modified_dttm = cc_budget_breakup_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = cc_budget_breakup_ccbdgt_tmp.last_modified_usernm , load_dttm = cc_budget_breakup_ccbdgt_tmp.load_dttm , planning_nm = cc_budget_breakup_ccbdgt_tmp.planning_nm
+        UPDATE SET cc_bdgt_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_amt , cc_bdgt_budget_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_amt , cc_bdgt_budget_desc = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt , cc_bdgt_cmtmnt_invoice_cnt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_bdgt_cmtmnt_outstanding_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt , cc_bdgt_cmtmnt_overspent_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt , cc_bdgt_committed_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_committed_amt , cc_bdgt_direct_invoice_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_direct_invoice_amt , cc_bdgt_invoiced_amt = cc_budget_breakup_ccbdgt_tmp.cc_bdgt_invoiced_amt , cc_budget_distribution = cc_budget_breakup_ccbdgt_tmp.cc_budget_distribution , cc_desc = cc_budget_breakup_ccbdgt_tmp.cc_desc , cc_level_expense = cc_budget_breakup_ccbdgt_tmp.cc_level_expense , cc_lvl_distribution = cc_budget_breakup_ccbdgt_tmp.cc_lvl_distribution , cc_nm = cc_budget_breakup_ccbdgt_tmp.cc_nm , cc_number = cc_budget_breakup_ccbdgt_tmp.cc_number , cc_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = cc_budget_breakup_ccbdgt_tmp.cc_owner_usernm , cc_rldup_child_bdgt = cc_budget_breakup_ccbdgt_tmp.cc_rldup_child_bdgt , cc_rldup_total_expense = cc_budget_breakup_ccbdgt_tmp.cc_rldup_total_expense , created_by_usernm = cc_budget_breakup_ccbdgt_tmp.created_by_usernm , created_dttm = cc_budget_breakup_ccbdgt_tmp.created_dttm , fin_accnt_desc = cc_budget_breakup_ccbdgt_tmp.fin_accnt_desc , fin_accnt_nm = cc_budget_breakup_ccbdgt_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.fin_accnt_obsolete_flg , fp_cls_ver = cc_budget_breakup_ccbdgt_tmp.fp_cls_ver , fp_desc = cc_budget_breakup_ccbdgt_tmp.fp_desc , fp_end_dt = cc_budget_breakup_ccbdgt_tmp.fp_end_dt , fp_nm = cc_budget_breakup_ccbdgt_tmp.fp_nm , fp_obsolete_flg = cc_budget_breakup_ccbdgt_tmp.fp_obsolete_flg , fp_start_dt = cc_budget_breakup_ccbdgt_tmp.fp_start_dt , gen_ledger_cd = cc_budget_breakup_ccbdgt_tmp.gen_ledger_cd , last_modified_dttm = cc_budget_breakup_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = cc_budget_breakup_ccbdgt_tmp.last_modified_usernm , load_dttm = cc_budget_breakup_ccbdgt_tmp.load_dttm , planning_nm = cc_budget_breakup_ccbdgt_tmp.planning_nm
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_cnt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,fp_cls_ver,fp_desc,fp_id,fp_nm,fp_obsolete_flg,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm,planning_id,planning_nm
+        cc_bdgt_amt,cc_bdgt_budget_amt,cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_amt,cc_bdgt_cmtmnt_invoice_cnt,cc_bdgt_cmtmnt_outstanding_amt,cc_bdgt_cmtmnt_overspent_amt,cc_bdgt_committed_amt,cc_bdgt_direct_invoice_amt,cc_bdgt_invoiced_amt,cc_budget_distribution,cc_desc,cc_level_expense,cc_lvl_distribution,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cc_rldup_child_bdgt,cc_rldup_total_expense,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,fp_cls_ver,fp_desc,fp_end_dt,fp_id,fp_nm,fp_obsolete_flg,fp_start_dt,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm,planning_id,planning_nm
          ) values ( 
-        cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_desc,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,cc_budget_breakup_ccbdgt_tmp.cc_desc,cc_budget_breakup_ccbdgt_tmp.cc_nm,cc_budget_breakup_ccbdgt_tmp.cc_number,cc_budget_breakup_ccbdgt_tmp.cc_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.cc_owner_usernm,cc_budget_breakup_ccbdgt_tmp.cost_center_id,cc_budget_breakup_ccbdgt_tmp.created_by_usernm,cc_budget_breakup_ccbdgt_tmp.created_dttm,cc_budget_breakup_ccbdgt_tmp.fin_accnt_desc,cc_budget_breakup_ccbdgt_tmp.fin_accnt_nm,cc_budget_breakup_ccbdgt_tmp.fin_accnt_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.fp_cls_ver,cc_budget_breakup_ccbdgt_tmp.fp_desc,cc_budget_breakup_ccbdgt_tmp.fp_id,cc_budget_breakup_ccbdgt_tmp.fp_nm,cc_budget_breakup_ccbdgt_tmp.fp_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.gen_ledger_cd,cc_budget_breakup_ccbdgt_tmp.last_modified_dttm,cc_budget_breakup_ccbdgt_tmp.last_modified_usernm,cc_budget_breakup_ccbdgt_tmp.load_dttm,cc_budget_breakup_ccbdgt_tmp.planning_id,cc_budget_breakup_ccbdgt_tmp.planning_nm
+        cc_budget_breakup_ccbdgt_tmp.cc_bdgt_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_budget_desc,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_committed_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_direct_invoice_amt,cc_budget_breakup_ccbdgt_tmp.cc_bdgt_invoiced_amt,cc_budget_breakup_ccbdgt_tmp.cc_budget_distribution,cc_budget_breakup_ccbdgt_tmp.cc_desc,cc_budget_breakup_ccbdgt_tmp.cc_level_expense,cc_budget_breakup_ccbdgt_tmp.cc_lvl_distribution,cc_budget_breakup_ccbdgt_tmp.cc_nm,cc_budget_breakup_ccbdgt_tmp.cc_number,cc_budget_breakup_ccbdgt_tmp.cc_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.cc_owner_usernm,cc_budget_breakup_ccbdgt_tmp.cc_rldup_child_bdgt,cc_budget_breakup_ccbdgt_tmp.cc_rldup_total_expense,cc_budget_breakup_ccbdgt_tmp.cost_center_id,cc_budget_breakup_ccbdgt_tmp.created_by_usernm,cc_budget_breakup_ccbdgt_tmp.created_dttm,cc_budget_breakup_ccbdgt_tmp.fin_accnt_desc,cc_budget_breakup_ccbdgt_tmp.fin_accnt_nm,cc_budget_breakup_ccbdgt_tmp.fin_accnt_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.fp_cls_ver,cc_budget_breakup_ccbdgt_tmp.fp_desc,cc_budget_breakup_ccbdgt_tmp.fp_end_dt,cc_budget_breakup_ccbdgt_tmp.fp_id,cc_budget_breakup_ccbdgt_tmp.fp_nm,cc_budget_breakup_ccbdgt_tmp.fp_obsolete_flg,cc_budget_breakup_ccbdgt_tmp.fp_start_dt,cc_budget_breakup_ccbdgt_tmp.gen_ledger_cd,cc_budget_breakup_ccbdgt_tmp.last_modified_dttm,cc_budget_breakup_ccbdgt_tmp.last_modified_usernm,cc_budget_breakup_ccbdgt_tmp.load_dttm,cc_budget_breakup_ccbdgt_tmp.planning_id,cc_budget_breakup_ccbdgt_tmp.planning_nm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -762,6 +777,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cc_budget_breakup_ccbdgt;
       DROP TABLE work.cc_budget_breakup_ccbdgt;
   QUIT;
  %end;
@@ -793,11 +809,11 @@
         execute (MERGE INTO &dbschema..cdm_activity_custom_attr using &tmpdbschema..cdm_activity_custom_attr_tmp    
          ON (cdm_activity_custom_attr.Hashed_pk_col = cdm_activity_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET activity_id = cdm_activity_custom_attr_tmp.activity_id , attribute_character_val = cdm_activity_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_activity_custom_attr_tmp.attribute_dttm_val , updated_by_nm = cdm_activity_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_activity_custom_attr_tmp.updated_dttm
+        UPDATE SET activity_id = cdm_activity_custom_attr_tmp.activity_id , attribute_character_val = cdm_activity_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_activity_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_activity_custom_attr_tmp.attribute_numeric_val , updated_by_nm = cdm_activity_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_activity_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_id,activity_version_id,attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,updated_by_nm,updated_dttm
+        activity_id,activity_version_id,attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_activity_custom_attr_tmp.activity_id,cdm_activity_custom_attr_tmp.activity_version_id,cdm_activity_custom_attr_tmp.attribute_character_val,cdm_activity_custom_attr_tmp.attribute_data_type_cd,cdm_activity_custom_attr_tmp.attribute_dttm_val,cdm_activity_custom_attr_tmp.attribute_nm,cdm_activity_custom_attr_tmp.attribute_val,cdm_activity_custom_attr_tmp.updated_by_nm,cdm_activity_custom_attr_tmp.updated_dttm,cdm_activity_custom_attr_tmp.Hashed_pk_col
+        cdm_activity_custom_attr_tmp.activity_id,cdm_activity_custom_attr_tmp.activity_version_id,cdm_activity_custom_attr_tmp.attribute_character_val,cdm_activity_custom_attr_tmp.attribute_data_type_cd,cdm_activity_custom_attr_tmp.attribute_dttm_val,cdm_activity_custom_attr_tmp.attribute_nm,cdm_activity_custom_attr_tmp.attribute_numeric_val,cdm_activity_custom_attr_tmp.attribute_val,cdm_activity_custom_attr_tmp.updated_by_nm,cdm_activity_custom_attr_tmp.updated_dttm,cdm_activity_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -811,6 +827,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_activity_custom_attr;
       DROP TABLE work.cdm_activity_custom_attr;
   QUIT;
  %end;
@@ -859,6 +876,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_activity_detail;
       DROP TABLE work.cdm_activity_detail;
   QUIT;
  %end;
@@ -907,6 +925,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_activity_x_task;
       DROP TABLE work.cdm_activity_x_task;
   QUIT;
  %end;
@@ -955,6 +974,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_audience_detail;
       DROP TABLE work.cdm_audience_detail;
   QUIT;
  %end;
@@ -1003,6 +1023,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_audience_occur_detail;
       DROP TABLE work.cdm_audience_occur_detail;
   QUIT;
  %end;
@@ -1011,6 +1032,54 @@
  %end;
  %end;
  %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_audience_occur_detail;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..cdm_audience_x_segment) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..cdm_audience_x_segment_tmp      ) ) %then %do;
+      PROC SQL NOERRORSTOP;
+        DROP TABLE &tmplib..cdm_audience_x_segment_tmp      ;
+      QUIT;
+ %end;
+ %check_duplicate_from_source(table_nm=cdm_audience_x_segment, table_keys=%str(audience_id), out_table=work.cdm_audience_x_segment);
+ data &tmplib..cdm_audience_x_segment_tmp      ;
+     set work.cdm_audience_x_segment;
+  if audience_id='' then audience_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :cdm_audience_x_segment_tmp      , cdm_audience_x_segment);
+ %if &errFlag = 0 %then %do;
+    PROC SQL NOERRORSTOP;
+    CONNECT TO REDSHIFT (&sql_passthru_connection.);
+        execute (MERGE INTO &dbschema..cdm_audience_x_segment using &tmpdbschema..cdm_audience_x_segment_tmp      
+         ON (cdm_audience_x_segment.audience_id=cdm_audience_x_segment_tmp.audience_id)
+        WHEN MATCHED THEN  
+        UPDATE SET segment_id = cdm_audience_x_segment_tmp.segment_id
+        WHEN NOT MATCHED THEN INSERT ( 
+        audience_id,segment_id
+         ) values ( 
+        cdm_audience_x_segment_tmp.audience_id,cdm_audience_x_segment_tmp.segment_id
+     );) BY REDSHIFT;
+    DISCONNECT FROM REDSHIFT;
+    QUIT;
+ %ErrCheck (Failed to Update/Insert into  :cdm_audience_x_segment_tmp      , cdm_audience_x_segment, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    PROC SQL NOERRORSTOP;
+        DROP TABLE &tmplib..cdm_audience_x_segment_tmp      ;
+    QUIT;
+    %put ######## Staging table: cdm_audience_x_segment_tmp       Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_audience_x_segment;
+      DROP TABLE work.cdm_audience_x_segment;
+  QUIT;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table cdm_audience_x_segment;
 %put------------------------------------------------------------------;
 %if %sysfunc(exist(&udmmart..cdm_business_context) ) %then %do;
  %let errFlag=0;
@@ -1051,6 +1120,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_business_context;
       DROP TABLE work.cdm_business_context;
   QUIT;
  %end;
@@ -1082,11 +1152,11 @@
         execute (MERGE INTO &dbschema..cdm_campaign_custom_attr using &tmpdbschema..cdm_campaign_custom_attr_tmp    
          ON (cdm_campaign_custom_attr.Hashed_pk_col = cdm_campaign_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET attribute_character_val = cdm_campaign_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_campaign_custom_attr_tmp.attribute_dttm_val , extension_attribute_nm = cdm_campaign_custom_attr_tmp.extension_attribute_nm , updated_by_nm = cdm_campaign_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_campaign_custom_attr_tmp.updated_dttm
+        UPDATE SET attribute_character_val = cdm_campaign_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_campaign_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_campaign_custom_attr_tmp.attribute_numeric_val , extension_attribute_nm = cdm_campaign_custom_attr_tmp.extension_attribute_nm , updated_by_nm = cdm_campaign_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_campaign_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,campaign_id,extension_attribute_nm,page_nm,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,campaign_id,extension_attribute_nm,page_nm,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_campaign_custom_attr_tmp.attribute_character_val,cdm_campaign_custom_attr_tmp.attribute_data_type_cd,cdm_campaign_custom_attr_tmp.attribute_dttm_val,cdm_campaign_custom_attr_tmp.attribute_nm,cdm_campaign_custom_attr_tmp.attribute_val,cdm_campaign_custom_attr_tmp.campaign_id,cdm_campaign_custom_attr_tmp.extension_attribute_nm,cdm_campaign_custom_attr_tmp.page_nm,cdm_campaign_custom_attr_tmp.updated_by_nm,cdm_campaign_custom_attr_tmp.updated_dttm,cdm_campaign_custom_attr_tmp.Hashed_pk_col
+        cdm_campaign_custom_attr_tmp.attribute_character_val,cdm_campaign_custom_attr_tmp.attribute_data_type_cd,cdm_campaign_custom_attr_tmp.attribute_dttm_val,cdm_campaign_custom_attr_tmp.attribute_nm,cdm_campaign_custom_attr_tmp.attribute_numeric_val,cdm_campaign_custom_attr_tmp.attribute_val,cdm_campaign_custom_attr_tmp.campaign_id,cdm_campaign_custom_attr_tmp.extension_attribute_nm,cdm_campaign_custom_attr_tmp.page_nm,cdm_campaign_custom_attr_tmp.updated_by_nm,cdm_campaign_custom_attr_tmp.updated_dttm,cdm_campaign_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1100,6 +1170,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_campaign_custom_attr;
       DROP TABLE work.cdm_campaign_custom_attr;
   QUIT;
  %end;
@@ -1130,11 +1201,11 @@
         execute (MERGE INTO &dbschema..cdm_campaign_detail using &tmpdbschema..cdm_campaign_detail_tmp         
          ON (cdm_campaign_detail.campaign_id=cdm_campaign_detail_tmp.campaign_id)
         WHEN MATCHED THEN  
-        UPDATE SET approval_dttm = cdm_campaign_detail_tmp.approval_dttm , approval_given_by_nm = cdm_campaign_detail_tmp.approval_given_by_nm , campaign_cd = cdm_campaign_detail_tmp.campaign_cd , campaign_desc = cdm_campaign_detail_tmp.campaign_desc , campaign_folder_txt = cdm_campaign_detail_tmp.campaign_folder_txt , campaign_group_sk = cdm_campaign_detail_tmp.campaign_group_sk , campaign_nm = cdm_campaign_detail_tmp.campaign_nm , campaign_owner_nm = cdm_campaign_detail_tmp.campaign_owner_nm , campaign_status_cd = cdm_campaign_detail_tmp.campaign_status_cd , campaign_type_cd = cdm_campaign_detail_tmp.campaign_type_cd , campaign_version_no = cdm_campaign_detail_tmp.campaign_version_no , current_version_flg = cdm_campaign_detail_tmp.current_version_flg , deleted_flg = cdm_campaign_detail_tmp.deleted_flg , deployment_version_no = cdm_campaign_detail_tmp.deployment_version_no , end_dttm = cdm_campaign_detail_tmp.end_dttm , last_modified_by_user_nm = cdm_campaign_detail_tmp.last_modified_by_user_nm , last_modified_dttm = cdm_campaign_detail_tmp.last_modified_dttm , run_dttm = cdm_campaign_detail_tmp.run_dttm , source_system_cd = cdm_campaign_detail_tmp.source_system_cd , start_dttm = cdm_campaign_detail_tmp.start_dttm , updated_by_nm = cdm_campaign_detail_tmp.updated_by_nm , updated_dttm = cdm_campaign_detail_tmp.updated_dttm , valid_from_dttm = cdm_campaign_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_campaign_detail_tmp.valid_to_dttm
+        UPDATE SET approval_dttm = cdm_campaign_detail_tmp.approval_dttm , approval_given_by_nm = cdm_campaign_detail_tmp.approval_given_by_nm , campaign_cd = cdm_campaign_detail_tmp.campaign_cd , campaign_desc = cdm_campaign_detail_tmp.campaign_desc , campaign_folder_txt = cdm_campaign_detail_tmp.campaign_folder_txt , campaign_group_sk = cdm_campaign_detail_tmp.campaign_group_sk , campaign_nm = cdm_campaign_detail_tmp.campaign_nm , campaign_owner_nm = cdm_campaign_detail_tmp.campaign_owner_nm , campaign_status_cd = cdm_campaign_detail_tmp.campaign_status_cd , campaign_type_cd = cdm_campaign_detail_tmp.campaign_type_cd , campaign_version_no = cdm_campaign_detail_tmp.campaign_version_no , current_version_flg = cdm_campaign_detail_tmp.current_version_flg , deleted_flg = cdm_campaign_detail_tmp.deleted_flg , deployment_version_no = cdm_campaign_detail_tmp.deployment_version_no , end_dttm = cdm_campaign_detail_tmp.end_dttm , last_modified_by_user_nm = cdm_campaign_detail_tmp.last_modified_by_user_nm , last_modified_dttm = cdm_campaign_detail_tmp.last_modified_dttm , max_budget_amt = cdm_campaign_detail_tmp.max_budget_amt , max_budget_offer_amt = cdm_campaign_detail_tmp.max_budget_offer_amt , min_budget_amt = cdm_campaign_detail_tmp.min_budget_amt , min_budget_offer_amt = cdm_campaign_detail_tmp.min_budget_offer_amt , run_dttm = cdm_campaign_detail_tmp.run_dttm , source_system_cd = cdm_campaign_detail_tmp.source_system_cd , start_dttm = cdm_campaign_detail_tmp.start_dttm , updated_by_nm = cdm_campaign_detail_tmp.updated_by_nm , updated_dttm = cdm_campaign_detail_tmp.updated_dttm , valid_from_dttm = cdm_campaign_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_campaign_detail_tmp.valid_to_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        approval_dttm,approval_given_by_nm,campaign_cd,campaign_desc,campaign_folder_txt,campaign_group_sk,campaign_id,campaign_nm,campaign_owner_nm,campaign_status_cd,campaign_type_cd,campaign_version_no,current_version_flg,deleted_flg,deployment_version_no,end_dttm,last_modified_by_user_nm,last_modified_dttm,run_dttm,source_system_cd,start_dttm,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+        approval_dttm,approval_given_by_nm,campaign_cd,campaign_desc,campaign_folder_txt,campaign_group_sk,campaign_id,campaign_nm,campaign_owner_nm,campaign_status_cd,campaign_type_cd,campaign_version_no,current_version_flg,deleted_flg,deployment_version_no,end_dttm,last_modified_by_user_nm,last_modified_dttm,max_budget_amt,max_budget_offer_amt,min_budget_amt,min_budget_offer_amt,run_dttm,source_system_cd,start_dttm,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
          ) values ( 
-        cdm_campaign_detail_tmp.approval_dttm,cdm_campaign_detail_tmp.approval_given_by_nm,cdm_campaign_detail_tmp.campaign_cd,cdm_campaign_detail_tmp.campaign_desc,cdm_campaign_detail_tmp.campaign_folder_txt,cdm_campaign_detail_tmp.campaign_group_sk,cdm_campaign_detail_tmp.campaign_id,cdm_campaign_detail_tmp.campaign_nm,cdm_campaign_detail_tmp.campaign_owner_nm,cdm_campaign_detail_tmp.campaign_status_cd,cdm_campaign_detail_tmp.campaign_type_cd,cdm_campaign_detail_tmp.campaign_version_no,cdm_campaign_detail_tmp.current_version_flg,cdm_campaign_detail_tmp.deleted_flg,cdm_campaign_detail_tmp.deployment_version_no,cdm_campaign_detail_tmp.end_dttm,cdm_campaign_detail_tmp.last_modified_by_user_nm,cdm_campaign_detail_tmp.last_modified_dttm,cdm_campaign_detail_tmp.run_dttm,cdm_campaign_detail_tmp.source_system_cd,cdm_campaign_detail_tmp.start_dttm,cdm_campaign_detail_tmp.updated_by_nm,cdm_campaign_detail_tmp.updated_dttm,cdm_campaign_detail_tmp.valid_from_dttm,cdm_campaign_detail_tmp.valid_to_dttm
+        cdm_campaign_detail_tmp.approval_dttm,cdm_campaign_detail_tmp.approval_given_by_nm,cdm_campaign_detail_tmp.campaign_cd,cdm_campaign_detail_tmp.campaign_desc,cdm_campaign_detail_tmp.campaign_folder_txt,cdm_campaign_detail_tmp.campaign_group_sk,cdm_campaign_detail_tmp.campaign_id,cdm_campaign_detail_tmp.campaign_nm,cdm_campaign_detail_tmp.campaign_owner_nm,cdm_campaign_detail_tmp.campaign_status_cd,cdm_campaign_detail_tmp.campaign_type_cd,cdm_campaign_detail_tmp.campaign_version_no,cdm_campaign_detail_tmp.current_version_flg,cdm_campaign_detail_tmp.deleted_flg,cdm_campaign_detail_tmp.deployment_version_no,cdm_campaign_detail_tmp.end_dttm,cdm_campaign_detail_tmp.last_modified_by_user_nm,cdm_campaign_detail_tmp.last_modified_dttm,cdm_campaign_detail_tmp.max_budget_amt,cdm_campaign_detail_tmp.max_budget_offer_amt,cdm_campaign_detail_tmp.min_budget_amt,cdm_campaign_detail_tmp.min_budget_offer_amt,cdm_campaign_detail_tmp.run_dttm,cdm_campaign_detail_tmp.source_system_cd,cdm_campaign_detail_tmp.start_dttm,cdm_campaign_detail_tmp.updated_by_nm,cdm_campaign_detail_tmp.updated_dttm,cdm_campaign_detail_tmp.valid_from_dttm,cdm_campaign_detail_tmp.valid_to_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1148,6 +1219,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_campaign_detail;
       DROP TABLE work.cdm_campaign_detail;
   QUIT;
  %end;
@@ -1196,6 +1268,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_contact_channel;
       DROP TABLE work.cdm_contact_channel;
   QUIT;
  %end;
@@ -1226,11 +1299,11 @@
         execute (MERGE INTO &dbschema..cdm_contact_history using &tmpdbschema..cdm_contact_history_tmp         
          ON (cdm_contact_history.contact_id=cdm_contact_history_tmp.contact_id)
         WHEN MATCHED THEN  
-        UPDATE SET audience_id = cdm_contact_history_tmp.audience_id , audience_occur_id = cdm_contact_history_tmp.audience_occur_id , contact_dttm = cdm_contact_history_tmp.contact_dttm , contact_dttm_tz = cdm_contact_history_tmp.contact_dttm_tz , contact_nm = cdm_contact_history_tmp.contact_nm , contact_status_cd = cdm_contact_history_tmp.contact_status_cd , context_type_nm = cdm_contact_history_tmp.context_type_nm , context_val = cdm_contact_history_tmp.context_val , control_group_flg = cdm_contact_history_tmp.control_group_flg , external_contact_info_1_id = cdm_contact_history_tmp.external_contact_info_1_id , external_contact_info_2_id = cdm_contact_history_tmp.external_contact_info_2_id , identity_id = cdm_contact_history_tmp.identity_id , optimization_backfill_flg = cdm_contact_history_tmp.optimization_backfill_flg , rtc_id = cdm_contact_history_tmp.rtc_id , source_system_cd = cdm_contact_history_tmp.source_system_cd , updated_by_nm = cdm_contact_history_tmp.updated_by_nm , updated_dttm = cdm_contact_history_tmp.updated_dttm
+        UPDATE SET audience_id = cdm_contact_history_tmp.audience_id , audience_occur_id = cdm_contact_history_tmp.audience_occur_id , contact_dt = cdm_contact_history_tmp.contact_dt , contact_dttm = cdm_contact_history_tmp.contact_dttm , contact_dttm_tz = cdm_contact_history_tmp.contact_dttm_tz , contact_nm = cdm_contact_history_tmp.contact_nm , contact_status_cd = cdm_contact_history_tmp.contact_status_cd , context_type_nm = cdm_contact_history_tmp.context_type_nm , context_val = cdm_contact_history_tmp.context_val , control_group_flg = cdm_contact_history_tmp.control_group_flg , external_contact_info_1_id = cdm_contact_history_tmp.external_contact_info_1_id , external_contact_info_2_id = cdm_contact_history_tmp.external_contact_info_2_id , identity_id = cdm_contact_history_tmp.identity_id , optimization_backfill_flg = cdm_contact_history_tmp.optimization_backfill_flg , rtc_id = cdm_contact_history_tmp.rtc_id , source_system_cd = cdm_contact_history_tmp.source_system_cd , updated_by_nm = cdm_contact_history_tmp.updated_by_nm , updated_dttm = cdm_contact_history_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        audience_id,audience_occur_id,contact_dttm,contact_dttm_tz,contact_id,contact_nm,contact_status_cd,context_type_nm,context_val,control_group_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,optimization_backfill_flg,rtc_id,source_system_cd,updated_by_nm,updated_dttm
+        audience_id,audience_occur_id,contact_dt,contact_dttm,contact_dttm_tz,contact_id,contact_nm,contact_status_cd,context_type_nm,context_val,control_group_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,optimization_backfill_flg,rtc_id,source_system_cd,updated_by_nm,updated_dttm
          ) values ( 
-        cdm_contact_history_tmp.audience_id,cdm_contact_history_tmp.audience_occur_id,cdm_contact_history_tmp.contact_dttm,cdm_contact_history_tmp.contact_dttm_tz,cdm_contact_history_tmp.contact_id,cdm_contact_history_tmp.contact_nm,cdm_contact_history_tmp.contact_status_cd,cdm_contact_history_tmp.context_type_nm,cdm_contact_history_tmp.context_val,cdm_contact_history_tmp.control_group_flg,cdm_contact_history_tmp.external_contact_info_1_id,cdm_contact_history_tmp.external_contact_info_2_id,cdm_contact_history_tmp.identity_id,cdm_contact_history_tmp.optimization_backfill_flg,cdm_contact_history_tmp.rtc_id,cdm_contact_history_tmp.source_system_cd,cdm_contact_history_tmp.updated_by_nm,cdm_contact_history_tmp.updated_dttm
+        cdm_contact_history_tmp.audience_id,cdm_contact_history_tmp.audience_occur_id,cdm_contact_history_tmp.contact_dt,cdm_contact_history_tmp.contact_dttm,cdm_contact_history_tmp.contact_dttm_tz,cdm_contact_history_tmp.contact_id,cdm_contact_history_tmp.contact_nm,cdm_contact_history_tmp.contact_status_cd,cdm_contact_history_tmp.context_type_nm,cdm_contact_history_tmp.context_val,cdm_contact_history_tmp.control_group_flg,cdm_contact_history_tmp.external_contact_info_1_id,cdm_contact_history_tmp.external_contact_info_2_id,cdm_contact_history_tmp.identity_id,cdm_contact_history_tmp.optimization_backfill_flg,cdm_contact_history_tmp.rtc_id,cdm_contact_history_tmp.source_system_cd,cdm_contact_history_tmp.updated_by_nm,cdm_contact_history_tmp.updated_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1244,6 +1317,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_contact_history;
       DROP TABLE work.cdm_contact_history;
   QUIT;
  %end;
@@ -1292,6 +1366,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_contact_status;
       DROP TABLE work.cdm_contact_status;
   QUIT;
  %end;
@@ -1309,11 +1384,11 @@
         DROP TABLE &tmplib..cdm_content_custom_attr_tmp     ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=cdm_content_custom_attr, table_keys=%str(attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,content_version_id), out_table=work.cdm_content_custom_attr);
+ %check_duplicate_from_source(table_nm=cdm_content_custom_attr, table_keys=%str(attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_version_id), out_table=work.cdm_content_custom_attr);
  data &tmplib..cdm_content_custom_attr_tmp     ;
      set work.cdm_content_custom_attr;
   if attribute_dttm_val ne . then attribute_dttm_val = tzoneu2s(attribute_dttm_val,&timeZone_Value.);if updated_dttm ne . then updated_dttm = tzoneu2s(updated_dttm,&timeZone_Value.) ;
-  Hashed_pk_col = put(sha256(catx('|',attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,content_version_id)), $hex64.);
+  Hashed_pk_col = put(sha256(catx('|',attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_version_id)), $hex64.);
   if attribute_character_val='' then attribute_character_val='-'; if attribute_data_type_cd='' then attribute_data_type_cd='-'; if attribute_nm='' then attribute_nm='-'; if attribute_val='' then attribute_val='-'; if content_version_id='' then content_version_id='-';
  run;
  %ErrCheck (Failed to Append Data to :cdm_content_custom_attr_tmp     , cdm_content_custom_attr);
@@ -1325,9 +1400,9 @@
         WHEN MATCHED THEN  
         UPDATE SET content_id = cdm_content_custom_attr_tmp.content_id , extension_attribute_nm = cdm_content_custom_attr_tmp.extension_attribute_nm , updated_by_nm = cdm_content_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_content_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_content_custom_attr_tmp.attribute_character_val,cdm_content_custom_attr_tmp.attribute_data_type_cd,cdm_content_custom_attr_tmp.attribute_dttm_val,cdm_content_custom_attr_tmp.attribute_nm,cdm_content_custom_attr_tmp.attribute_val,cdm_content_custom_attr_tmp.content_id,cdm_content_custom_attr_tmp.content_version_id,cdm_content_custom_attr_tmp.extension_attribute_nm,cdm_content_custom_attr_tmp.updated_by_nm,cdm_content_custom_attr_tmp.updated_dttm,cdm_content_custom_attr_tmp.Hashed_pk_col
+        cdm_content_custom_attr_tmp.attribute_character_val,cdm_content_custom_attr_tmp.attribute_data_type_cd,cdm_content_custom_attr_tmp.attribute_dttm_val,cdm_content_custom_attr_tmp.attribute_nm,cdm_content_custom_attr_tmp.attribute_numeric_val,cdm_content_custom_attr_tmp.attribute_val,cdm_content_custom_attr_tmp.content_id,cdm_content_custom_attr_tmp.content_version_id,cdm_content_custom_attr_tmp.extension_attribute_nm,cdm_content_custom_attr_tmp.updated_by_nm,cdm_content_custom_attr_tmp.updated_dttm,cdm_content_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1341,6 +1416,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_content_custom_attr;
       DROP TABLE work.cdm_content_custom_attr;
   QUIT;
  %end;
@@ -1371,11 +1447,11 @@
         execute (MERGE INTO &dbschema..cdm_content_detail using &tmpdbschema..cdm_content_detail_tmp          
          ON (cdm_content_detail.content_version_id=cdm_content_detail_tmp.content_version_id)
         WHEN MATCHED THEN  
-        UPDATE SET active_flg = cdm_content_detail_tmp.active_flg , contact_content_category_nm = cdm_content_detail_tmp.contact_content_category_nm , contact_content_cd = cdm_content_detail_tmp.contact_content_cd , contact_content_class_nm = cdm_content_detail_tmp.contact_content_class_nm , contact_content_desc = cdm_content_detail_tmp.contact_content_desc , contact_content_nm = cdm_content_detail_tmp.contact_content_nm , contact_content_status_cd = cdm_content_detail_tmp.contact_content_status_cd , contact_content_type_nm = cdm_content_detail_tmp.contact_content_type_nm , content_id = cdm_content_detail_tmp.content_id , created_user_nm = cdm_content_detail_tmp.created_user_nm , external_reference_txt = cdm_content_detail_tmp.external_reference_txt , external_reference_url_txt = cdm_content_detail_tmp.external_reference_url_txt , owner_nm = cdm_content_detail_tmp.owner_nm , source_system_cd = cdm_content_detail_tmp.source_system_cd , updated_by_nm = cdm_content_detail_tmp.updated_by_nm , updated_dttm = cdm_content_detail_tmp.updated_dttm , valid_from_dttm = cdm_content_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_content_detail_tmp.valid_to_dttm
+        UPDATE SET active_flg = cdm_content_detail_tmp.active_flg , contact_content_category_nm = cdm_content_detail_tmp.contact_content_category_nm , contact_content_cd = cdm_content_detail_tmp.contact_content_cd , contact_content_class_nm = cdm_content_detail_tmp.contact_content_class_nm , contact_content_desc = cdm_content_detail_tmp.contact_content_desc , contact_content_nm = cdm_content_detail_tmp.contact_content_nm , contact_content_status_cd = cdm_content_detail_tmp.contact_content_status_cd , contact_content_type_nm = cdm_content_detail_tmp.contact_content_type_nm , content_id = cdm_content_detail_tmp.content_id , created_dt = cdm_content_detail_tmp.created_dt , created_user_nm = cdm_content_detail_tmp.created_user_nm , external_reference_txt = cdm_content_detail_tmp.external_reference_txt , external_reference_url_txt = cdm_content_detail_tmp.external_reference_url_txt , owner_nm = cdm_content_detail_tmp.owner_nm , source_system_cd = cdm_content_detail_tmp.source_system_cd , updated_by_nm = cdm_content_detail_tmp.updated_by_nm , updated_dttm = cdm_content_detail_tmp.updated_dttm , valid_from_dttm = cdm_content_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_content_detail_tmp.valid_to_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        active_flg,contact_content_category_nm,contact_content_cd,contact_content_class_nm,contact_content_desc,contact_content_nm,contact_content_status_cd,contact_content_type_nm,content_id,content_version_id,created_user_nm,external_reference_txt,external_reference_url_txt,owner_nm,source_system_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+        active_flg,contact_content_category_nm,contact_content_cd,contact_content_class_nm,contact_content_desc,contact_content_nm,contact_content_status_cd,contact_content_type_nm,content_id,content_version_id,created_dt,created_user_nm,external_reference_txt,external_reference_url_txt,owner_nm,source_system_cd,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
          ) values ( 
-        cdm_content_detail_tmp.active_flg,cdm_content_detail_tmp.contact_content_category_nm,cdm_content_detail_tmp.contact_content_cd,cdm_content_detail_tmp.contact_content_class_nm,cdm_content_detail_tmp.contact_content_desc,cdm_content_detail_tmp.contact_content_nm,cdm_content_detail_tmp.contact_content_status_cd,cdm_content_detail_tmp.contact_content_type_nm,cdm_content_detail_tmp.content_id,cdm_content_detail_tmp.content_version_id,cdm_content_detail_tmp.created_user_nm,cdm_content_detail_tmp.external_reference_txt,cdm_content_detail_tmp.external_reference_url_txt,cdm_content_detail_tmp.owner_nm,cdm_content_detail_tmp.source_system_cd,cdm_content_detail_tmp.updated_by_nm,cdm_content_detail_tmp.updated_dttm,cdm_content_detail_tmp.valid_from_dttm,cdm_content_detail_tmp.valid_to_dttm
+        cdm_content_detail_tmp.active_flg,cdm_content_detail_tmp.contact_content_category_nm,cdm_content_detail_tmp.contact_content_cd,cdm_content_detail_tmp.contact_content_class_nm,cdm_content_detail_tmp.contact_content_desc,cdm_content_detail_tmp.contact_content_nm,cdm_content_detail_tmp.contact_content_status_cd,cdm_content_detail_tmp.contact_content_type_nm,cdm_content_detail_tmp.content_id,cdm_content_detail_tmp.content_version_id,cdm_content_detail_tmp.created_dt,cdm_content_detail_tmp.created_user_nm,cdm_content_detail_tmp.external_reference_txt,cdm_content_detail_tmp.external_reference_url_txt,cdm_content_detail_tmp.owner_nm,cdm_content_detail_tmp.source_system_cd,cdm_content_detail_tmp.updated_by_nm,cdm_content_detail_tmp.updated_dttm,cdm_content_detail_tmp.valid_from_dttm,cdm_content_detail_tmp.valid_to_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1389,6 +1465,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_content_detail;
       DROP TABLE work.cdm_content_detail;
   QUIT;
  %end;
@@ -1420,11 +1497,11 @@
         execute (MERGE INTO &dbschema..cdm_dyn_content_custom_attr using &tmpdbschema..cdm_dyn_content_custom_attr_tmp 
          ON (cdm_dyn_content_custom_attr.Hashed_pk_col = cdm_dyn_content_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET attribute_character_val = cdm_dyn_content_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_dyn_content_custom_attr_tmp.attribute_dttm_val , content_id = cdm_dyn_content_custom_attr_tmp.content_id , extension_attribute_nm = cdm_dyn_content_custom_attr_tmp.extension_attribute_nm , updated_by_nm = cdm_dyn_content_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_dyn_content_custom_attr_tmp.updated_dttm
+        UPDATE SET attribute_character_val = cdm_dyn_content_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_dyn_content_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_dyn_content_custom_attr_tmp.attribute_numeric_val , content_id = cdm_dyn_content_custom_attr_tmp.content_id , extension_attribute_nm = cdm_dyn_content_custom_attr_tmp.extension_attribute_nm , updated_by_nm = cdm_dyn_content_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_dyn_content_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,content_hash_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,content_hash_val,content_id,content_version_id,extension_attribute_nm,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_dyn_content_custom_attr_tmp.attribute_character_val,cdm_dyn_content_custom_attr_tmp.attribute_data_type_cd,cdm_dyn_content_custom_attr_tmp.attribute_dttm_val,cdm_dyn_content_custom_attr_tmp.attribute_nm,cdm_dyn_content_custom_attr_tmp.attribute_val,cdm_dyn_content_custom_attr_tmp.content_hash_val,cdm_dyn_content_custom_attr_tmp.content_id,cdm_dyn_content_custom_attr_tmp.content_version_id,cdm_dyn_content_custom_attr_tmp.extension_attribute_nm,cdm_dyn_content_custom_attr_tmp.updated_by_nm,cdm_dyn_content_custom_attr_tmp.updated_dttm,cdm_dyn_content_custom_attr_tmp.Hashed_pk_col
+        cdm_dyn_content_custom_attr_tmp.attribute_character_val,cdm_dyn_content_custom_attr_tmp.attribute_data_type_cd,cdm_dyn_content_custom_attr_tmp.attribute_dttm_val,cdm_dyn_content_custom_attr_tmp.attribute_nm,cdm_dyn_content_custom_attr_tmp.attribute_numeric_val,cdm_dyn_content_custom_attr_tmp.attribute_val,cdm_dyn_content_custom_attr_tmp.content_hash_val,cdm_dyn_content_custom_attr_tmp.content_id,cdm_dyn_content_custom_attr_tmp.content_version_id,cdm_dyn_content_custom_attr_tmp.extension_attribute_nm,cdm_dyn_content_custom_attr_tmp.updated_by_nm,cdm_dyn_content_custom_attr_tmp.updated_dttm,cdm_dyn_content_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1438,6 +1515,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_dyn_content_custom_attr;
       DROP TABLE work.cdm_dyn_content_custom_attr;
   QUIT;
  %end;
@@ -1486,6 +1564,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_identifier_type;
       DROP TABLE work.cdm_identifier_type;
   QUIT;
  %end;
@@ -1534,6 +1613,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_identity_attr;
       DROP TABLE work.cdm_identity_attr;
   QUIT;
  %end;
@@ -1582,6 +1662,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_identity_map;
       DROP TABLE work.cdm_identity_map;
   QUIT;
  %end;
@@ -1630,6 +1711,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_identity_type;
       DROP TABLE work.cdm_identity_type;
   QUIT;
  %end;
@@ -1678,6 +1760,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_occurrence_detail;
       DROP TABLE work.cdm_occurrence_detail;
   QUIT;
  %end;
@@ -1726,6 +1809,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_response_channel;
       DROP TABLE work.cdm_response_channel;
   QUIT;
  %end;
@@ -1774,6 +1858,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_response_extended_attr;
       DROP TABLE work.cdm_response_extended_attr;
   QUIT;
  %end;
@@ -1804,11 +1889,11 @@
         execute (MERGE INTO &dbschema..cdm_response_history using &tmpdbschema..cdm_response_history_tmp        
          ON (cdm_response_history.response_id=cdm_response_history_tmp.response_id)
         WHEN MATCHED THEN  
-        UPDATE SET audience_id = cdm_response_history_tmp.audience_id , audience_occur_id = cdm_response_history_tmp.audience_occur_id , contact_id = cdm_response_history_tmp.contact_id , content_hash_val = cdm_response_history_tmp.content_hash_val , content_id = cdm_response_history_tmp.content_id , content_version_id = cdm_response_history_tmp.content_version_id , context_type_nm = cdm_response_history_tmp.context_type_nm , context_val = cdm_response_history_tmp.context_val , conversion_flg = cdm_response_history_tmp.conversion_flg , external_contact_info_1_id = cdm_response_history_tmp.external_contact_info_1_id , external_contact_info_2_id = cdm_response_history_tmp.external_contact_info_2_id , identity_id = cdm_response_history_tmp.identity_id , inferred_response_flg = cdm_response_history_tmp.inferred_response_flg , properties_map_doc = cdm_response_history_tmp.properties_map_doc , response_cd = cdm_response_history_tmp.response_cd , response_channel_cd = cdm_response_history_tmp.response_channel_cd , response_dttm = cdm_response_history_tmp.response_dttm , response_dttm_tz = cdm_response_history_tmp.response_dttm_tz , response_type_cd = cdm_response_history_tmp.response_type_cd , rtc_id = cdm_response_history_tmp.rtc_id , source_system_cd = cdm_response_history_tmp.source_system_cd , updated_by_nm = cdm_response_history_tmp.updated_by_nm , updated_dttm = cdm_response_history_tmp.updated_dttm
+        UPDATE SET audience_id = cdm_response_history_tmp.audience_id , audience_occur_id = cdm_response_history_tmp.audience_occur_id , contact_id = cdm_response_history_tmp.contact_id , content_hash_val = cdm_response_history_tmp.content_hash_val , content_id = cdm_response_history_tmp.content_id , content_version_id = cdm_response_history_tmp.content_version_id , context_type_nm = cdm_response_history_tmp.context_type_nm , context_val = cdm_response_history_tmp.context_val , conversion_flg = cdm_response_history_tmp.conversion_flg , external_contact_info_1_id = cdm_response_history_tmp.external_contact_info_1_id , external_contact_info_2_id = cdm_response_history_tmp.external_contact_info_2_id , identity_id = cdm_response_history_tmp.identity_id , inferred_response_flg = cdm_response_history_tmp.inferred_response_flg , properties_map_doc = cdm_response_history_tmp.properties_map_doc , response_cd = cdm_response_history_tmp.response_cd , response_channel_cd = cdm_response_history_tmp.response_channel_cd , response_dt = cdm_response_history_tmp.response_dt , response_dttm = cdm_response_history_tmp.response_dttm , response_dttm_tz = cdm_response_history_tmp.response_dttm_tz , response_type_cd = cdm_response_history_tmp.response_type_cd , response_val_amt = cdm_response_history_tmp.response_val_amt , rtc_id = cdm_response_history_tmp.rtc_id , source_system_cd = cdm_response_history_tmp.source_system_cd , updated_by_nm = cdm_response_history_tmp.updated_by_nm , updated_dttm = cdm_response_history_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        audience_id,audience_occur_id,contact_id,content_hash_val,content_id,content_version_id,context_type_nm,context_val,conversion_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,inferred_response_flg,properties_map_doc,response_cd,response_channel_cd,response_dttm,response_dttm_tz,response_id,response_type_cd,rtc_id,source_system_cd,updated_by_nm,updated_dttm
+        audience_id,audience_occur_id,contact_id,content_hash_val,content_id,content_version_id,context_type_nm,context_val,conversion_flg,external_contact_info_1_id,external_contact_info_2_id,identity_id,inferred_response_flg,properties_map_doc,response_cd,response_channel_cd,response_dt,response_dttm,response_dttm_tz,response_id,response_type_cd,response_val_amt,rtc_id,source_system_cd,updated_by_nm,updated_dttm
          ) values ( 
-        cdm_response_history_tmp.audience_id,cdm_response_history_tmp.audience_occur_id,cdm_response_history_tmp.contact_id,cdm_response_history_tmp.content_hash_val,cdm_response_history_tmp.content_id,cdm_response_history_tmp.content_version_id,cdm_response_history_tmp.context_type_nm,cdm_response_history_tmp.context_val,cdm_response_history_tmp.conversion_flg,cdm_response_history_tmp.external_contact_info_1_id,cdm_response_history_tmp.external_contact_info_2_id,cdm_response_history_tmp.identity_id,cdm_response_history_tmp.inferred_response_flg,cdm_response_history_tmp.properties_map_doc,cdm_response_history_tmp.response_cd,cdm_response_history_tmp.response_channel_cd,cdm_response_history_tmp.response_dttm,cdm_response_history_tmp.response_dttm_tz,cdm_response_history_tmp.response_id,cdm_response_history_tmp.response_type_cd,cdm_response_history_tmp.rtc_id,cdm_response_history_tmp.source_system_cd,cdm_response_history_tmp.updated_by_nm,cdm_response_history_tmp.updated_dttm
+        cdm_response_history_tmp.audience_id,cdm_response_history_tmp.audience_occur_id,cdm_response_history_tmp.contact_id,cdm_response_history_tmp.content_hash_val,cdm_response_history_tmp.content_id,cdm_response_history_tmp.content_version_id,cdm_response_history_tmp.context_type_nm,cdm_response_history_tmp.context_val,cdm_response_history_tmp.conversion_flg,cdm_response_history_tmp.external_contact_info_1_id,cdm_response_history_tmp.external_contact_info_2_id,cdm_response_history_tmp.identity_id,cdm_response_history_tmp.inferred_response_flg,cdm_response_history_tmp.properties_map_doc,cdm_response_history_tmp.response_cd,cdm_response_history_tmp.response_channel_cd,cdm_response_history_tmp.response_dt,cdm_response_history_tmp.response_dttm,cdm_response_history_tmp.response_dttm_tz,cdm_response_history_tmp.response_id,cdm_response_history_tmp.response_type_cd,cdm_response_history_tmp.response_val_amt,cdm_response_history_tmp.rtc_id,cdm_response_history_tmp.source_system_cd,cdm_response_history_tmp.updated_by_nm,cdm_response_history_tmp.updated_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -1822,6 +1907,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_response_history;
       DROP TABLE work.cdm_response_history;
   QUIT;
  %end;
@@ -1870,6 +1956,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_response_lookup;
       DROP TABLE work.cdm_response_lookup;
   QUIT;
  %end;
@@ -1918,6 +2005,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_response_type;
       DROP TABLE work.cdm_response_type;
   QUIT;
  %end;
@@ -1966,6 +2054,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_rtc_detail;
       DROP TABLE work.cdm_rtc_detail;
   QUIT;
  %end;
@@ -2014,6 +2103,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_rtc_x_content;
       DROP TABLE work.cdm_rtc_x_content;
   QUIT;
  %end;
@@ -2045,11 +2135,11 @@
         execute (MERGE INTO &dbschema..cdm_segment_custom_attr using &tmpdbschema..cdm_segment_custom_attr_tmp     
          ON (cdm_segment_custom_attr.Hashed_pk_col = cdm_segment_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET attribute_character_val = cdm_segment_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_segment_custom_attr_tmp.attribute_dttm_val , segment_id = cdm_segment_custom_attr_tmp.segment_id , updated_by_nm = cdm_segment_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_segment_custom_attr_tmp.updated_dttm
+        UPDATE SET attribute_character_val = cdm_segment_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_segment_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_segment_custom_attr_tmp.attribute_numeric_val , segment_id = cdm_segment_custom_attr_tmp.segment_id , updated_by_nm = cdm_segment_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_segment_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,segment_id,segment_version_id,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,segment_id,segment_version_id,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_segment_custom_attr_tmp.attribute_character_val,cdm_segment_custom_attr_tmp.attribute_data_type_cd,cdm_segment_custom_attr_tmp.attribute_dttm_val,cdm_segment_custom_attr_tmp.attribute_nm,cdm_segment_custom_attr_tmp.attribute_val,cdm_segment_custom_attr_tmp.segment_id,cdm_segment_custom_attr_tmp.segment_version_id,cdm_segment_custom_attr_tmp.updated_by_nm,cdm_segment_custom_attr_tmp.updated_dttm,cdm_segment_custom_attr_tmp.Hashed_pk_col
+        cdm_segment_custom_attr_tmp.attribute_character_val,cdm_segment_custom_attr_tmp.attribute_data_type_cd,cdm_segment_custom_attr_tmp.attribute_dttm_val,cdm_segment_custom_attr_tmp.attribute_nm,cdm_segment_custom_attr_tmp.attribute_numeric_val,cdm_segment_custom_attr_tmp.attribute_val,cdm_segment_custom_attr_tmp.segment_id,cdm_segment_custom_attr_tmp.segment_version_id,cdm_segment_custom_attr_tmp.updated_by_nm,cdm_segment_custom_attr_tmp.updated_dttm,cdm_segment_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2063,6 +2153,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_custom_attr;
       DROP TABLE work.cdm_segment_custom_attr;
   QUIT;
  %end;
@@ -2111,6 +2202,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_detail;
       DROP TABLE work.cdm_segment_detail;
   QUIT;
  %end;
@@ -2159,6 +2251,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_map;
       DROP TABLE work.cdm_segment_map;
   QUIT;
  %end;
@@ -2190,11 +2283,11 @@
         execute (MERGE INTO &dbschema..cdm_segment_map_custom_attr using &tmpdbschema..cdm_segment_map_custom_attr_tmp 
          ON (cdm_segment_map_custom_attr.Hashed_pk_col = cdm_segment_map_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET attribute_character_val = cdm_segment_map_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_segment_map_custom_attr_tmp.attribute_dttm_val , segment_map_id = cdm_segment_map_custom_attr_tmp.segment_map_id , updated_by_nm = cdm_segment_map_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_segment_map_custom_attr_tmp.updated_dttm
+        UPDATE SET attribute_character_val = cdm_segment_map_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_segment_map_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_segment_map_custom_attr_tmp.attribute_numeric_val , segment_map_id = cdm_segment_map_custom_attr_tmp.segment_map_id , updated_by_nm = cdm_segment_map_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_segment_map_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,segment_map_id,segment_map_version_id,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,segment_map_id,segment_map_version_id,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_segment_map_custom_attr_tmp.attribute_character_val,cdm_segment_map_custom_attr_tmp.attribute_data_type_cd,cdm_segment_map_custom_attr_tmp.attribute_dttm_val,cdm_segment_map_custom_attr_tmp.attribute_nm,cdm_segment_map_custom_attr_tmp.attribute_val,cdm_segment_map_custom_attr_tmp.segment_map_id,cdm_segment_map_custom_attr_tmp.segment_map_version_id,cdm_segment_map_custom_attr_tmp.updated_by_nm,cdm_segment_map_custom_attr_tmp.updated_dttm,cdm_segment_map_custom_attr_tmp.Hashed_pk_col
+        cdm_segment_map_custom_attr_tmp.attribute_character_val,cdm_segment_map_custom_attr_tmp.attribute_data_type_cd,cdm_segment_map_custom_attr_tmp.attribute_dttm_val,cdm_segment_map_custom_attr_tmp.attribute_nm,cdm_segment_map_custom_attr_tmp.attribute_numeric_val,cdm_segment_map_custom_attr_tmp.attribute_val,cdm_segment_map_custom_attr_tmp.segment_map_id,cdm_segment_map_custom_attr_tmp.segment_map_version_id,cdm_segment_map_custom_attr_tmp.updated_by_nm,cdm_segment_map_custom_attr_tmp.updated_dttm,cdm_segment_map_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2208,6 +2301,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_map_custom_attr;
       DROP TABLE work.cdm_segment_map_custom_attr;
   QUIT;
  %end;
@@ -2238,11 +2332,11 @@
         execute (MERGE INTO &dbschema..cdm_segment_test using &tmpdbschema..cdm_segment_test_tmp            
          ON (cdm_segment_test.task_version_id=cdm_segment_test_tmp.task_version_id and cdm_segment_test.test_cd=cdm_segment_test_tmp.test_cd)
         WHEN MATCHED THEN  
-        UPDATE SET stratified_samp_criteria_txt = cdm_segment_test_tmp.stratified_samp_criteria_txt , stratified_sampling_flg = cdm_segment_test_tmp.stratified_sampling_flg , task_id = cdm_segment_test_tmp.task_id , test_cnt = cdm_segment_test_tmp.test_cnt , test_enabled_flg = cdm_segment_test_tmp.test_enabled_flg , test_nm = cdm_segment_test_tmp.test_nm , test_sizing_type_nm = cdm_segment_test_tmp.test_sizing_type_nm , test_type_nm = cdm_segment_test_tmp.test_type_nm , updated_dttm = cdm_segment_test_tmp.updated_dttm
+        UPDATE SET stratified_samp_criteria_txt = cdm_segment_test_tmp.stratified_samp_criteria_txt , stratified_sampling_flg = cdm_segment_test_tmp.stratified_sampling_flg , task_id = cdm_segment_test_tmp.task_id , test_cnt = cdm_segment_test_tmp.test_cnt , test_enabled_flg = cdm_segment_test_tmp.test_enabled_flg , test_nm = cdm_segment_test_tmp.test_nm , test_pct = cdm_segment_test_tmp.test_pct , test_sizing_type_nm = cdm_segment_test_tmp.test_sizing_type_nm , test_type_nm = cdm_segment_test_tmp.test_type_nm , updated_dttm = cdm_segment_test_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        stratified_samp_criteria_txt,stratified_sampling_flg,task_id,task_version_id,test_cd,test_cnt,test_enabled_flg,test_nm,test_sizing_type_nm,test_type_nm,updated_dttm
+        stratified_samp_criteria_txt,stratified_sampling_flg,task_id,task_version_id,test_cd,test_cnt,test_enabled_flg,test_nm,test_pct,test_sizing_type_nm,test_type_nm,updated_dttm
          ) values ( 
-        cdm_segment_test_tmp.stratified_samp_criteria_txt,cdm_segment_test_tmp.stratified_sampling_flg,cdm_segment_test_tmp.task_id,cdm_segment_test_tmp.task_version_id,cdm_segment_test_tmp.test_cd,cdm_segment_test_tmp.test_cnt,cdm_segment_test_tmp.test_enabled_flg,cdm_segment_test_tmp.test_nm,cdm_segment_test_tmp.test_sizing_type_nm,cdm_segment_test_tmp.test_type_nm,cdm_segment_test_tmp.updated_dttm
+        cdm_segment_test_tmp.stratified_samp_criteria_txt,cdm_segment_test_tmp.stratified_sampling_flg,cdm_segment_test_tmp.task_id,cdm_segment_test_tmp.task_version_id,cdm_segment_test_tmp.test_cd,cdm_segment_test_tmp.test_cnt,cdm_segment_test_tmp.test_enabled_flg,cdm_segment_test_tmp.test_nm,cdm_segment_test_tmp.test_pct,cdm_segment_test_tmp.test_sizing_type_nm,cdm_segment_test_tmp.test_type_nm,cdm_segment_test_tmp.updated_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2256,6 +2350,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_test;
       DROP TABLE work.cdm_segment_test;
   QUIT;
  %end;
@@ -2304,6 +2399,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_segment_test_x_segment;
       DROP TABLE work.cdm_segment_test_x_segment;
   QUIT;
  %end;
@@ -2335,11 +2431,11 @@
         execute (MERGE INTO &dbschema..cdm_task_custom_attr using &tmpdbschema..cdm_task_custom_attr_tmp        
          ON (cdm_task_custom_attr.Hashed_pk_col = cdm_task_custom_attr_tmp.Hashed_pk_col)
         WHEN MATCHED THEN  
-        UPDATE SET attribute_character_val = cdm_task_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_task_custom_attr_tmp.attribute_dttm_val , extension_attribute_nm = cdm_task_custom_attr_tmp.extension_attribute_nm , task_id = cdm_task_custom_attr_tmp.task_id , updated_by_nm = cdm_task_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_task_custom_attr_tmp.updated_dttm
+        UPDATE SET attribute_character_val = cdm_task_custom_attr_tmp.attribute_character_val , attribute_dttm_val = cdm_task_custom_attr_tmp.attribute_dttm_val , attribute_numeric_val = cdm_task_custom_attr_tmp.attribute_numeric_val , extension_attribute_nm = cdm_task_custom_attr_tmp.extension_attribute_nm , task_id = cdm_task_custom_attr_tmp.task_id , updated_by_nm = cdm_task_custom_attr_tmp.updated_by_nm , updated_dttm = cdm_task_custom_attr_tmp.updated_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_val,extension_attribute_nm,task_id,task_version_id,updated_by_nm,updated_dttm
+        attribute_character_val,attribute_data_type_cd,attribute_dttm_val,attribute_nm,attribute_numeric_val,attribute_val,extension_attribute_nm,task_id,task_version_id,updated_by_nm,updated_dttm
         ,Hashed_pk_col ) VALUES ( 
-        cdm_task_custom_attr_tmp.attribute_character_val,cdm_task_custom_attr_tmp.attribute_data_type_cd,cdm_task_custom_attr_tmp.attribute_dttm_val,cdm_task_custom_attr_tmp.attribute_nm,cdm_task_custom_attr_tmp.attribute_val,cdm_task_custom_attr_tmp.extension_attribute_nm,cdm_task_custom_attr_tmp.task_id,cdm_task_custom_attr_tmp.task_version_id,cdm_task_custom_attr_tmp.updated_by_nm,cdm_task_custom_attr_tmp.updated_dttm,cdm_task_custom_attr_tmp.Hashed_pk_col
+        cdm_task_custom_attr_tmp.attribute_character_val,cdm_task_custom_attr_tmp.attribute_data_type_cd,cdm_task_custom_attr_tmp.attribute_dttm_val,cdm_task_custom_attr_tmp.attribute_nm,cdm_task_custom_attr_tmp.attribute_numeric_val,cdm_task_custom_attr_tmp.attribute_val,cdm_task_custom_attr_tmp.extension_attribute_nm,cdm_task_custom_attr_tmp.task_id,cdm_task_custom_attr_tmp.task_version_id,cdm_task_custom_attr_tmp.updated_by_nm,cdm_task_custom_attr_tmp.updated_dttm,cdm_task_custom_attr_tmp.Hashed_pk_col
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2353,6 +2449,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_task_custom_attr;
       DROP TABLE work.cdm_task_custom_attr;
   QUIT;
  %end;
@@ -2383,11 +2480,11 @@
         execute (MERGE INTO &dbschema..cdm_task_detail using &tmpdbschema..cdm_task_detail_tmp             
          ON (cdm_task_detail.task_version_id=cdm_task_detail_tmp.task_version_id)
         WHEN MATCHED THEN  
-        UPDATE SET active_flg = cdm_task_detail_tmp.active_flg , business_context_id = cdm_task_detail_tmp.business_context_id , campaign_id = cdm_task_detail_tmp.campaign_id , contact_channel_cd = cdm_task_detail_tmp.contact_channel_cd , control_group_action_nm = cdm_task_detail_tmp.control_group_action_nm , created_user_nm = cdm_task_detail_tmp.created_user_nm , export_dttm = cdm_task_detail_tmp.export_dttm , limit_by_total_impression_flg = cdm_task_detail_tmp.limit_by_total_impression_flg , limit_period_unit_cnt = cdm_task_detail_tmp.limit_period_unit_cnt , maximum_period_expression_cnt = cdm_task_detail_tmp.maximum_period_expression_cnt , modified_status_cd = cdm_task_detail_tmp.modified_status_cd , owner_nm = cdm_task_detail_tmp.owner_nm , published_flg = cdm_task_detail_tmp.published_flg , recurr_type_cd = cdm_task_detail_tmp.recurr_type_cd , recurring_schedule_flg = cdm_task_detail_tmp.recurring_schedule_flg , saved_flg = cdm_task_detail_tmp.saved_flg , scheduled_end_dttm = cdm_task_detail_tmp.scheduled_end_dttm , scheduled_flg = cdm_task_detail_tmp.scheduled_flg , scheduled_start_dttm = cdm_task_detail_tmp.scheduled_start_dttm , segment_tests_flg = cdm_task_detail_tmp.segment_tests_flg , source_system_cd = cdm_task_detail_tmp.source_system_cd , staged_flg = cdm_task_detail_tmp.staged_flg , standard_reply_flg = cdm_task_detail_tmp.standard_reply_flg , stratified_sampling_action_nm = cdm_task_detail_tmp.stratified_sampling_action_nm , subject_type_nm = cdm_task_detail_tmp.subject_type_nm , task_cd = cdm_task_detail_tmp.task_cd , task_delivery_type_nm = cdm_task_detail_tmp.task_delivery_type_nm , task_desc = cdm_task_detail_tmp.task_desc , task_id = cdm_task_detail_tmp.task_id , task_nm = cdm_task_detail_tmp.task_nm , task_status_cd = cdm_task_detail_tmp.task_status_cd , task_subtype_nm = cdm_task_detail_tmp.task_subtype_nm , task_type_nm = cdm_task_detail_tmp.task_type_nm , update_contact_history_flg = cdm_task_detail_tmp.update_contact_history_flg , updated_by_nm = cdm_task_detail_tmp.updated_by_nm , updated_dttm = cdm_task_detail_tmp.updated_dttm , valid_from_dttm = cdm_task_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_task_detail_tmp.valid_to_dttm
+        UPDATE SET active_flg = cdm_task_detail_tmp.active_flg , budget_unit_cost_amt = cdm_task_detail_tmp.budget_unit_cost_amt , budget_unit_usage_amt = cdm_task_detail_tmp.budget_unit_usage_amt , business_context_id = cdm_task_detail_tmp.business_context_id , campaign_id = cdm_task_detail_tmp.campaign_id , contact_channel_cd = cdm_task_detail_tmp.contact_channel_cd , control_group_action_nm = cdm_task_detail_tmp.control_group_action_nm , created_dt = cdm_task_detail_tmp.created_dt , created_user_nm = cdm_task_detail_tmp.created_user_nm , export_dttm = cdm_task_detail_tmp.export_dttm , limit_by_total_impression_flg = cdm_task_detail_tmp.limit_by_total_impression_flg , limit_period_unit_cnt = cdm_task_detail_tmp.limit_period_unit_cnt , max_budget_amt = cdm_task_detail_tmp.max_budget_amt , max_budget_offer_amt = cdm_task_detail_tmp.max_budget_offer_amt , maximum_period_expression_cnt = cdm_task_detail_tmp.maximum_period_expression_cnt , min_budget_amt = cdm_task_detail_tmp.min_budget_amt , min_budget_offer_amt = cdm_task_detail_tmp.min_budget_offer_amt , modified_status_cd = cdm_task_detail_tmp.modified_status_cd , owner_nm = cdm_task_detail_tmp.owner_nm , published_flg = cdm_task_detail_tmp.published_flg , recurr_type_cd = cdm_task_detail_tmp.recurr_type_cd , recurring_schedule_flg = cdm_task_detail_tmp.recurring_schedule_flg , saved_flg = cdm_task_detail_tmp.saved_flg , scheduled_end_dttm = cdm_task_detail_tmp.scheduled_end_dttm , scheduled_flg = cdm_task_detail_tmp.scheduled_flg , scheduled_start_dttm = cdm_task_detail_tmp.scheduled_start_dttm , segment_tests_flg = cdm_task_detail_tmp.segment_tests_flg , source_system_cd = cdm_task_detail_tmp.source_system_cd , staged_flg = cdm_task_detail_tmp.staged_flg , standard_reply_flg = cdm_task_detail_tmp.standard_reply_flg , stratified_sampling_action_nm = cdm_task_detail_tmp.stratified_sampling_action_nm , subject_type_nm = cdm_task_detail_tmp.subject_type_nm , task_cd = cdm_task_detail_tmp.task_cd , task_delivery_type_nm = cdm_task_detail_tmp.task_delivery_type_nm , task_desc = cdm_task_detail_tmp.task_desc , task_id = cdm_task_detail_tmp.task_id , task_nm = cdm_task_detail_tmp.task_nm , task_status_cd = cdm_task_detail_tmp.task_status_cd , task_subtype_nm = cdm_task_detail_tmp.task_subtype_nm , task_type_nm = cdm_task_detail_tmp.task_type_nm , update_contact_history_flg = cdm_task_detail_tmp.update_contact_history_flg , updated_by_nm = cdm_task_detail_tmp.updated_by_nm , updated_dttm = cdm_task_detail_tmp.updated_dttm , valid_from_dttm = cdm_task_detail_tmp.valid_from_dttm , valid_to_dttm = cdm_task_detail_tmp.valid_to_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        active_flg,business_context_id,campaign_id,contact_channel_cd,control_group_action_nm,created_user_nm,export_dttm,limit_by_total_impression_flg,limit_period_unit_cnt,maximum_period_expression_cnt,modified_status_cd,owner_nm,published_flg,recurr_type_cd,recurring_schedule_flg,saved_flg,scheduled_end_dttm,scheduled_flg,scheduled_start_dttm,segment_tests_flg,source_system_cd,staged_flg,standard_reply_flg,stratified_sampling_action_nm,subject_type_nm,task_cd,task_delivery_type_nm,task_desc,task_id,task_nm,task_status_cd,task_subtype_nm,task_type_nm,task_version_id,update_contact_history_flg,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
+        active_flg,budget_unit_cost_amt,budget_unit_usage_amt,business_context_id,campaign_id,contact_channel_cd,control_group_action_nm,created_dt,created_user_nm,export_dttm,limit_by_total_impression_flg,limit_period_unit_cnt,max_budget_amt,max_budget_offer_amt,maximum_period_expression_cnt,min_budget_amt,min_budget_offer_amt,modified_status_cd,owner_nm,published_flg,recurr_type_cd,recurring_schedule_flg,saved_flg,scheduled_end_dttm,scheduled_flg,scheduled_start_dttm,segment_tests_flg,source_system_cd,staged_flg,standard_reply_flg,stratified_sampling_action_nm,subject_type_nm,task_cd,task_delivery_type_nm,task_desc,task_id,task_nm,task_status_cd,task_subtype_nm,task_type_nm,task_version_id,update_contact_history_flg,updated_by_nm,updated_dttm,valid_from_dttm,valid_to_dttm
          ) values ( 
-        cdm_task_detail_tmp.active_flg,cdm_task_detail_tmp.business_context_id,cdm_task_detail_tmp.campaign_id,cdm_task_detail_tmp.contact_channel_cd,cdm_task_detail_tmp.control_group_action_nm,cdm_task_detail_tmp.created_user_nm,cdm_task_detail_tmp.export_dttm,cdm_task_detail_tmp.limit_by_total_impression_flg,cdm_task_detail_tmp.limit_period_unit_cnt,cdm_task_detail_tmp.maximum_period_expression_cnt,cdm_task_detail_tmp.modified_status_cd,cdm_task_detail_tmp.owner_nm,cdm_task_detail_tmp.published_flg,cdm_task_detail_tmp.recurr_type_cd,cdm_task_detail_tmp.recurring_schedule_flg,cdm_task_detail_tmp.saved_flg,cdm_task_detail_tmp.scheduled_end_dttm,cdm_task_detail_tmp.scheduled_flg,cdm_task_detail_tmp.scheduled_start_dttm,cdm_task_detail_tmp.segment_tests_flg,cdm_task_detail_tmp.source_system_cd,cdm_task_detail_tmp.staged_flg,cdm_task_detail_tmp.standard_reply_flg,cdm_task_detail_tmp.stratified_sampling_action_nm,cdm_task_detail_tmp.subject_type_nm,cdm_task_detail_tmp.task_cd,cdm_task_detail_tmp.task_delivery_type_nm,cdm_task_detail_tmp.task_desc,cdm_task_detail_tmp.task_id,cdm_task_detail_tmp.task_nm,cdm_task_detail_tmp.task_status_cd,cdm_task_detail_tmp.task_subtype_nm,cdm_task_detail_tmp.task_type_nm,cdm_task_detail_tmp.task_version_id,cdm_task_detail_tmp.update_contact_history_flg,cdm_task_detail_tmp.updated_by_nm,cdm_task_detail_tmp.updated_dttm,cdm_task_detail_tmp.valid_from_dttm,cdm_task_detail_tmp.valid_to_dttm
+        cdm_task_detail_tmp.active_flg,cdm_task_detail_tmp.budget_unit_cost_amt,cdm_task_detail_tmp.budget_unit_usage_amt,cdm_task_detail_tmp.business_context_id,cdm_task_detail_tmp.campaign_id,cdm_task_detail_tmp.contact_channel_cd,cdm_task_detail_tmp.control_group_action_nm,cdm_task_detail_tmp.created_dt,cdm_task_detail_tmp.created_user_nm,cdm_task_detail_tmp.export_dttm,cdm_task_detail_tmp.limit_by_total_impression_flg,cdm_task_detail_tmp.limit_period_unit_cnt,cdm_task_detail_tmp.max_budget_amt,cdm_task_detail_tmp.max_budget_offer_amt,cdm_task_detail_tmp.maximum_period_expression_cnt,cdm_task_detail_tmp.min_budget_amt,cdm_task_detail_tmp.min_budget_offer_amt,cdm_task_detail_tmp.modified_status_cd,cdm_task_detail_tmp.owner_nm,cdm_task_detail_tmp.published_flg,cdm_task_detail_tmp.recurr_type_cd,cdm_task_detail_tmp.recurring_schedule_flg,cdm_task_detail_tmp.saved_flg,cdm_task_detail_tmp.scheduled_end_dttm,cdm_task_detail_tmp.scheduled_flg,cdm_task_detail_tmp.scheduled_start_dttm,cdm_task_detail_tmp.segment_tests_flg,cdm_task_detail_tmp.source_system_cd,cdm_task_detail_tmp.staged_flg,cdm_task_detail_tmp.standard_reply_flg,cdm_task_detail_tmp.stratified_sampling_action_nm,cdm_task_detail_tmp.subject_type_nm,cdm_task_detail_tmp.task_cd,cdm_task_detail_tmp.task_delivery_type_nm,cdm_task_detail_tmp.task_desc,cdm_task_detail_tmp.task_id,cdm_task_detail_tmp.task_nm,cdm_task_detail_tmp.task_status_cd,cdm_task_detail_tmp.task_subtype_nm,cdm_task_detail_tmp.task_type_nm,cdm_task_detail_tmp.task_version_id,cdm_task_detail_tmp.update_contact_history_flg,cdm_task_detail_tmp.updated_by_nm,cdm_task_detail_tmp.updated_dttm,cdm_task_detail_tmp.valid_from_dttm,cdm_task_detail_tmp.valid_to_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2401,6 +2498,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..cdm_task_detail;
       DROP TABLE work.cdm_task_detail;
   QUIT;
  %end;
@@ -2431,11 +2529,11 @@
         execute (MERGE INTO &dbschema..commitment_details using &tmpdbschema..commitment_details_tmp          
          ON (commitment_details.cmtmnt_id=commitment_details_tmp.cmtmnt_id and commitment_details.planning_id=commitment_details_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cmtmnt_closure_note = commitment_details_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_details_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_details_tmp.cmtmnt_desc , cmtmnt_nm = commitment_details_tmp.cmtmnt_nm , cmtmnt_no = commitment_details_tmp.cmtmnt_no , cmtmnt_payment_dttm = commitment_details_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_details_tmp.cmtmnt_status , created_by_usernm = commitment_details_tmp.created_by_usernm , created_dttm = commitment_details_tmp.created_dttm , last_modified_dttm = commitment_details_tmp.last_modified_dttm , last_modified_usernm = commitment_details_tmp.last_modified_usernm , load_dttm = commitment_details_tmp.load_dttm , planning_currency_cd = commitment_details_tmp.planning_currency_cd , planning_nm = commitment_details_tmp.planning_nm , vendor_currency_cd = commitment_details_tmp.vendor_currency_cd , vendor_id = commitment_details_tmp.vendor_id , vendor_nm = commitment_details_tmp.vendor_nm , vendor_number = commitment_details_tmp.vendor_number , vendor_obsolete_flg = commitment_details_tmp.vendor_obsolete_flg
+        UPDATE SET cmtmnt_amt = commitment_details_tmp.cmtmnt_amt , cmtmnt_closure_note = commitment_details_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_details_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_details_tmp.cmtmnt_desc , cmtmnt_nm = commitment_details_tmp.cmtmnt_nm , cmtmnt_no = commitment_details_tmp.cmtmnt_no , cmtmnt_outstanding_amt = commitment_details_tmp.cmtmnt_outstanding_amt , cmtmnt_overspent_amt = commitment_details_tmp.cmtmnt_overspent_amt , cmtmnt_payment_dttm = commitment_details_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_details_tmp.cmtmnt_status , created_by_usernm = commitment_details_tmp.created_by_usernm , created_dttm = commitment_details_tmp.created_dttm , last_modified_dttm = commitment_details_tmp.last_modified_dttm , last_modified_usernm = commitment_details_tmp.last_modified_usernm , load_dttm = commitment_details_tmp.load_dttm , planning_currency_cd = commitment_details_tmp.planning_currency_cd , planning_nm = commitment_details_tmp.planning_nm , vendor_amt = commitment_details_tmp.vendor_amt , vendor_currency_cd = commitment_details_tmp.vendor_currency_cd , vendor_id = commitment_details_tmp.vendor_id , vendor_nm = commitment_details_tmp.vendor_nm , vendor_number = commitment_details_tmp.vendor_number , vendor_obsolete_flg = commitment_details_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_payment_dttm,cmtmnt_status,created_by_usernm,created_dttm,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cmtmnt_amt,cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_outstanding_amt,cmtmnt_overspent_amt,cmtmnt_payment_dttm,cmtmnt_status,created_by_usernm,created_dttm,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_amt,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        commitment_details_tmp.cmtmnt_closure_note,commitment_details_tmp.cmtmnt_created_dttm,commitment_details_tmp.cmtmnt_desc,commitment_details_tmp.cmtmnt_id,commitment_details_tmp.cmtmnt_nm,commitment_details_tmp.cmtmnt_no,commitment_details_tmp.cmtmnt_payment_dttm,commitment_details_tmp.cmtmnt_status,commitment_details_tmp.created_by_usernm,commitment_details_tmp.created_dttm,commitment_details_tmp.last_modified_dttm,commitment_details_tmp.last_modified_usernm,commitment_details_tmp.load_dttm,commitment_details_tmp.planning_currency_cd,commitment_details_tmp.planning_id,commitment_details_tmp.planning_nm,commitment_details_tmp.vendor_currency_cd,commitment_details_tmp.vendor_id,commitment_details_tmp.vendor_nm,commitment_details_tmp.vendor_number,commitment_details_tmp.vendor_obsolete_flg
+        commitment_details_tmp.cmtmnt_amt,commitment_details_tmp.cmtmnt_closure_note,commitment_details_tmp.cmtmnt_created_dttm,commitment_details_tmp.cmtmnt_desc,commitment_details_tmp.cmtmnt_id,commitment_details_tmp.cmtmnt_nm,commitment_details_tmp.cmtmnt_no,commitment_details_tmp.cmtmnt_outstanding_amt,commitment_details_tmp.cmtmnt_overspent_amt,commitment_details_tmp.cmtmnt_payment_dttm,commitment_details_tmp.cmtmnt_status,commitment_details_tmp.created_by_usernm,commitment_details_tmp.created_dttm,commitment_details_tmp.last_modified_dttm,commitment_details_tmp.last_modified_usernm,commitment_details_tmp.load_dttm,commitment_details_tmp.planning_currency_cd,commitment_details_tmp.planning_id,commitment_details_tmp.planning_nm,commitment_details_tmp.vendor_amt,commitment_details_tmp.vendor_currency_cd,commitment_details_tmp.vendor_id,commitment_details_tmp.vendor_nm,commitment_details_tmp.vendor_number,commitment_details_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2449,6 +2547,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..commitment_details;
       DROP TABLE work.commitment_details;
   QUIT;
  %end;
@@ -2479,11 +2578,11 @@
         execute (MERGE INTO &dbschema..commitment_line_items using &tmpdbschema..commitment_line_items_tmp       
          ON (commitment_line_items.cmtmnt_id=commitment_line_items_tmp.cmtmnt_id and commitment_line_items.item_nm=commitment_line_items_tmp.item_nm and commitment_line_items.item_number=commitment_line_items_tmp.item_number and commitment_line_items.planning_id=commitment_line_items_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cc_desc = commitment_line_items_tmp.cc_desc , cc_nm = commitment_line_items_tmp.cc_nm , cc_owner_usernm = commitment_line_items_tmp.cc_owner_usernm , ccat_nm = commitment_line_items_tmp.ccat_nm , cmtmnt_closure_note = commitment_line_items_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_line_items_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_line_items_tmp.cmtmnt_desc , cmtmnt_nm = commitment_line_items_tmp.cmtmnt_nm , cmtmnt_no = commitment_line_items_tmp.cmtmnt_no , cmtmnt_payment_dttm = commitment_line_items_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_line_items_tmp.cmtmnt_status , cost_center_id = commitment_line_items_tmp.cost_center_id , created_by_usernm = commitment_line_items_tmp.created_by_usernm , created_dttm = commitment_line_items_tmp.created_dttm , fin_acc_nm = commitment_line_items_tmp.fin_acc_nm , gen_ledger_cd = commitment_line_items_tmp.gen_ledger_cd , item_alloc_unit = commitment_line_items_tmp.item_alloc_unit , item_qty = commitment_line_items_tmp.item_qty , item_vend_alloc_unit = commitment_line_items_tmp.item_vend_alloc_unit , last_modified_dttm = commitment_line_items_tmp.last_modified_dttm , last_modified_usernm = commitment_line_items_tmp.last_modified_usernm , load_dttm = commitment_line_items_tmp.load_dttm , planning_currency_cd = commitment_line_items_tmp.planning_currency_cd , planning_nm = commitment_line_items_tmp.planning_nm , vendor_currency_cd = commitment_line_items_tmp.vendor_currency_cd , vendor_id = commitment_line_items_tmp.vendor_id , vendor_nm = commitment_line_items_tmp.vendor_nm , vendor_number = commitment_line_items_tmp.vendor_number , vendor_obsolete_flg = commitment_line_items_tmp.vendor_obsolete_flg
+        UPDATE SET cc_allocated_amt = commitment_line_items_tmp.cc_allocated_amt , cc_available_amt = commitment_line_items_tmp.cc_available_amt , cc_desc = commitment_line_items_tmp.cc_desc , cc_nm = commitment_line_items_tmp.cc_nm , cc_owner_usernm = commitment_line_items_tmp.cc_owner_usernm , cc_recon_alloc_amt = commitment_line_items_tmp.cc_recon_alloc_amt , ccat_nm = commitment_line_items_tmp.ccat_nm , cmtmnt_amt = commitment_line_items_tmp.cmtmnt_amt , cmtmnt_closure_note = commitment_line_items_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_line_items_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_line_items_tmp.cmtmnt_desc , cmtmnt_nm = commitment_line_items_tmp.cmtmnt_nm , cmtmnt_no = commitment_line_items_tmp.cmtmnt_no , cmtmnt_outstanding_amt = commitment_line_items_tmp.cmtmnt_outstanding_amt , cmtmnt_overspent_amt = commitment_line_items_tmp.cmtmnt_overspent_amt , cmtmnt_payment_dttm = commitment_line_items_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_line_items_tmp.cmtmnt_status , cost_center_id = commitment_line_items_tmp.cost_center_id , created_by_usernm = commitment_line_items_tmp.created_by_usernm , created_dttm = commitment_line_items_tmp.created_dttm , fin_acc_nm = commitment_line_items_tmp.fin_acc_nm , gen_ledger_cd = commitment_line_items_tmp.gen_ledger_cd , item_alloc_amt = commitment_line_items_tmp.item_alloc_amt , item_alloc_unit = commitment_line_items_tmp.item_alloc_unit , item_qty = commitment_line_items_tmp.item_qty , item_rate = commitment_line_items_tmp.item_rate , item_vend_alloc_amt = commitment_line_items_tmp.item_vend_alloc_amt , item_vend_alloc_unit = commitment_line_items_tmp.item_vend_alloc_unit , last_modified_dttm = commitment_line_items_tmp.last_modified_dttm , last_modified_usernm = commitment_line_items_tmp.last_modified_usernm , load_dttm = commitment_line_items_tmp.load_dttm , planning_currency_cd = commitment_line_items_tmp.planning_currency_cd , planning_nm = commitment_line_items_tmp.planning_nm , vendor_amt = commitment_line_items_tmp.vendor_amt , vendor_currency_cd = commitment_line_items_tmp.vendor_currency_cd , vendor_id = commitment_line_items_tmp.vendor_id , vendor_nm = commitment_line_items_tmp.vendor_nm , vendor_number = commitment_line_items_tmp.vendor_number , vendor_obsolete_flg = commitment_line_items_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_desc,cc_nm,cc_owner_usernm,ccat_nm,cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_payment_dttm,cmtmnt_status,cost_center_id,created_by_usernm,created_dttm,fin_acc_nm,gen_ledger_cd,item_alloc_unit,item_nm,item_number,item_qty,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cc_allocated_amt,cc_available_amt,cc_desc,cc_nm,cc_owner_usernm,cc_recon_alloc_amt,ccat_nm,cmtmnt_amt,cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_outstanding_amt,cmtmnt_overspent_amt,cmtmnt_payment_dttm,cmtmnt_status,cost_center_id,created_by_usernm,created_dttm,fin_acc_nm,gen_ledger_cd,item_alloc_amt,item_alloc_unit,item_nm,item_number,item_qty,item_rate,item_vend_alloc_amt,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_amt,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        commitment_line_items_tmp.cc_desc,commitment_line_items_tmp.cc_nm,commitment_line_items_tmp.cc_owner_usernm,commitment_line_items_tmp.ccat_nm,commitment_line_items_tmp.cmtmnt_closure_note,commitment_line_items_tmp.cmtmnt_created_dttm,commitment_line_items_tmp.cmtmnt_desc,commitment_line_items_tmp.cmtmnt_id,commitment_line_items_tmp.cmtmnt_nm,commitment_line_items_tmp.cmtmnt_no,commitment_line_items_tmp.cmtmnt_payment_dttm,commitment_line_items_tmp.cmtmnt_status,commitment_line_items_tmp.cost_center_id,commitment_line_items_tmp.created_by_usernm,commitment_line_items_tmp.created_dttm,commitment_line_items_tmp.fin_acc_nm,commitment_line_items_tmp.gen_ledger_cd,commitment_line_items_tmp.item_alloc_unit,commitment_line_items_tmp.item_nm,commitment_line_items_tmp.item_number,commitment_line_items_tmp.item_qty,commitment_line_items_tmp.item_vend_alloc_unit,commitment_line_items_tmp.last_modified_dttm,commitment_line_items_tmp.last_modified_usernm,commitment_line_items_tmp.load_dttm,commitment_line_items_tmp.planning_currency_cd,commitment_line_items_tmp.planning_id,commitment_line_items_tmp.planning_nm,commitment_line_items_tmp.vendor_currency_cd,commitment_line_items_tmp.vendor_id,commitment_line_items_tmp.vendor_nm,commitment_line_items_tmp.vendor_number,commitment_line_items_tmp.vendor_obsolete_flg
+        commitment_line_items_tmp.cc_allocated_amt,commitment_line_items_tmp.cc_available_amt,commitment_line_items_tmp.cc_desc,commitment_line_items_tmp.cc_nm,commitment_line_items_tmp.cc_owner_usernm,commitment_line_items_tmp.cc_recon_alloc_amt,commitment_line_items_tmp.ccat_nm,commitment_line_items_tmp.cmtmnt_amt,commitment_line_items_tmp.cmtmnt_closure_note,commitment_line_items_tmp.cmtmnt_created_dttm,commitment_line_items_tmp.cmtmnt_desc,commitment_line_items_tmp.cmtmnt_id,commitment_line_items_tmp.cmtmnt_nm,commitment_line_items_tmp.cmtmnt_no,commitment_line_items_tmp.cmtmnt_outstanding_amt,commitment_line_items_tmp.cmtmnt_overspent_amt,commitment_line_items_tmp.cmtmnt_payment_dttm,commitment_line_items_tmp.cmtmnt_status,commitment_line_items_tmp.cost_center_id,commitment_line_items_tmp.created_by_usernm,commitment_line_items_tmp.created_dttm,commitment_line_items_tmp.fin_acc_nm,commitment_line_items_tmp.gen_ledger_cd,commitment_line_items_tmp.item_alloc_amt,commitment_line_items_tmp.item_alloc_unit,commitment_line_items_tmp.item_nm,commitment_line_items_tmp.item_number,commitment_line_items_tmp.item_qty,commitment_line_items_tmp.item_rate,commitment_line_items_tmp.item_vend_alloc_amt,commitment_line_items_tmp.item_vend_alloc_unit,commitment_line_items_tmp.last_modified_dttm,commitment_line_items_tmp.last_modified_usernm,commitment_line_items_tmp.load_dttm,commitment_line_items_tmp.planning_currency_cd,commitment_line_items_tmp.planning_id,commitment_line_items_tmp.planning_nm,commitment_line_items_tmp.vendor_amt,commitment_line_items_tmp.vendor_currency_cd,commitment_line_items_tmp.vendor_id,commitment_line_items_tmp.vendor_nm,commitment_line_items_tmp.vendor_number,commitment_line_items_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2497,6 +2596,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..commitment_line_items;
       DROP TABLE work.commitment_line_items;
   QUIT;
  %end;
@@ -2527,11 +2627,11 @@
         execute (MERGE INTO &dbschema..commitment_line_items_ccbdgt using &tmpdbschema..commitment_line_items_ccbdgt_tmp
          ON (commitment_line_items_ccbdgt.cmtmnt_id=commitment_line_items_ccbdgt_tmp.cmtmnt_id and commitment_line_items_ccbdgt.item_number=commitment_line_items_ccbdgt_tmp.item_number)
         WHEN MATCHED THEN  
-        UPDATE SET cc_bdgt_budget_desc = commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_cnt = commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_desc = commitment_line_items_ccbdgt_tmp.cc_desc , cc_nm = commitment_line_items_ccbdgt_tmp.cc_nm , cc_number = commitment_line_items_ccbdgt_tmp.cc_number , cc_obsolete_flg = commitment_line_items_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = commitment_line_items_ccbdgt_tmp.cc_owner_usernm , ccat_nm = commitment_line_items_ccbdgt_tmp.ccat_nm , cmtmnt_closure_note = commitment_line_items_ccbdgt_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_line_items_ccbdgt_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_line_items_ccbdgt_tmp.cmtmnt_desc , cmtmnt_nm = commitment_line_items_ccbdgt_tmp.cmtmnt_nm , cmtmnt_no = commitment_line_items_ccbdgt_tmp.cmtmnt_no , cmtmnt_payment_dttm = commitment_line_items_ccbdgt_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_line_items_ccbdgt_tmp.cmtmnt_status , cost_center_id = commitment_line_items_ccbdgt_tmp.cost_center_id , created_by_usernm = commitment_line_items_ccbdgt_tmp.created_by_usernm , created_dttm = commitment_line_items_ccbdgt_tmp.created_dttm , fin_acc_nm = commitment_line_items_ccbdgt_tmp.fin_acc_nm , fp_cls_ver = commitment_line_items_ccbdgt_tmp.fp_cls_ver , fp_desc = commitment_line_items_ccbdgt_tmp.fp_desc , fp_id = commitment_line_items_ccbdgt_tmp.fp_id , fp_nm = commitment_line_items_ccbdgt_tmp.fp_nm , fp_obsolete_flg = commitment_line_items_ccbdgt_tmp.fp_obsolete_flg , gen_ledger_cd = commitment_line_items_ccbdgt_tmp.gen_ledger_cd , item_alloc_unit = commitment_line_items_ccbdgt_tmp.item_alloc_unit , item_nm = commitment_line_items_ccbdgt_tmp.item_nm , item_qty = commitment_line_items_ccbdgt_tmp.item_qty , item_vend_alloc_unit = commitment_line_items_ccbdgt_tmp.item_vend_alloc_unit , last_modified_dttm = commitment_line_items_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = commitment_line_items_ccbdgt_tmp.last_modified_usernm , load_dttm = commitment_line_items_ccbdgt_tmp.load_dttm , planning_currency_cd = commitment_line_items_ccbdgt_tmp.planning_currency_cd , planning_id = commitment_line_items_ccbdgt_tmp.planning_id , planning_nm = commitment_line_items_ccbdgt_tmp.planning_nm , vendor_currency_cd = commitment_line_items_ccbdgt_tmp.vendor_currency_cd , vendor_id = commitment_line_items_ccbdgt_tmp.vendor_id , vendor_nm = commitment_line_items_ccbdgt_tmp.vendor_nm , vendor_number = commitment_line_items_ccbdgt_tmp.vendor_number , vendor_obsolete_flg = commitment_line_items_ccbdgt_tmp.vendor_obsolete_flg
+        UPDATE SET cc_allocated_amt = commitment_line_items_ccbdgt_tmp.cc_allocated_amt , cc_available_amt = commitment_line_items_ccbdgt_tmp.cc_available_amt , cc_bdgt_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_amt , cc_bdgt_budget_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_amt , cc_bdgt_budget_desc = commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt , cc_bdgt_cmtmnt_invoice_cnt = commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_bdgt_cmtmnt_outstanding_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt , cc_bdgt_cmtmnt_overspent_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt , cc_bdgt_committed_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_committed_amt , cc_bdgt_direct_invoice_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_direct_invoice_amt , cc_bdgt_invoiced_amt = commitment_line_items_ccbdgt_tmp.cc_bdgt_invoiced_amt , cc_desc = commitment_line_items_ccbdgt_tmp.cc_desc , cc_nm = commitment_line_items_ccbdgt_tmp.cc_nm , cc_number = commitment_line_items_ccbdgt_tmp.cc_number , cc_obsolete_flg = commitment_line_items_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = commitment_line_items_ccbdgt_tmp.cc_owner_usernm , cc_recon_alloc_amt = commitment_line_items_ccbdgt_tmp.cc_recon_alloc_amt , ccat_nm = commitment_line_items_ccbdgt_tmp.ccat_nm , cmtmnt_amt = commitment_line_items_ccbdgt_tmp.cmtmnt_amt , cmtmnt_closure_note = commitment_line_items_ccbdgt_tmp.cmtmnt_closure_note , cmtmnt_created_dttm = commitment_line_items_ccbdgt_tmp.cmtmnt_created_dttm , cmtmnt_desc = commitment_line_items_ccbdgt_tmp.cmtmnt_desc , cmtmnt_nm = commitment_line_items_ccbdgt_tmp.cmtmnt_nm , cmtmnt_no = commitment_line_items_ccbdgt_tmp.cmtmnt_no , cmtmnt_outstanding_amt = commitment_line_items_ccbdgt_tmp.cmtmnt_outstanding_amt , cmtmnt_overspent_amt = commitment_line_items_ccbdgt_tmp.cmtmnt_overspent_amt , cmtmnt_payment_dttm = commitment_line_items_ccbdgt_tmp.cmtmnt_payment_dttm , cmtmnt_status = commitment_line_items_ccbdgt_tmp.cmtmnt_status , cost_center_id = commitment_line_items_ccbdgt_tmp.cost_center_id , created_by_usernm = commitment_line_items_ccbdgt_tmp.created_by_usernm , created_dttm = commitment_line_items_ccbdgt_tmp.created_dttm , fin_acc_nm = commitment_line_items_ccbdgt_tmp.fin_acc_nm , fp_cls_ver = commitment_line_items_ccbdgt_tmp.fp_cls_ver , fp_desc = commitment_line_items_ccbdgt_tmp.fp_desc , fp_end_dt = commitment_line_items_ccbdgt_tmp.fp_end_dt , fp_id = commitment_line_items_ccbdgt_tmp.fp_id , fp_nm = commitment_line_items_ccbdgt_tmp.fp_nm , fp_obsolete_flg = commitment_line_items_ccbdgt_tmp.fp_obsolete_flg , fp_start_dt = commitment_line_items_ccbdgt_tmp.fp_start_dt , gen_ledger_cd = commitment_line_items_ccbdgt_tmp.gen_ledger_cd , item_alloc_amt = commitment_line_items_ccbdgt_tmp.item_alloc_amt , item_alloc_unit = commitment_line_items_ccbdgt_tmp.item_alloc_unit , item_nm = commitment_line_items_ccbdgt_tmp.item_nm , item_qty = commitment_line_items_ccbdgt_tmp.item_qty , item_rate = commitment_line_items_ccbdgt_tmp.item_rate , item_vend_alloc_amt = commitment_line_items_ccbdgt_tmp.item_vend_alloc_amt , item_vend_alloc_unit = commitment_line_items_ccbdgt_tmp.item_vend_alloc_unit , last_modified_dttm = commitment_line_items_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = commitment_line_items_ccbdgt_tmp.last_modified_usernm , load_dttm = commitment_line_items_ccbdgt_tmp.load_dttm , planning_currency_cd = commitment_line_items_ccbdgt_tmp.planning_currency_cd , planning_id = commitment_line_items_ccbdgt_tmp.planning_id , planning_nm = commitment_line_items_ccbdgt_tmp.planning_nm , vendor_amt = commitment_line_items_ccbdgt_tmp.vendor_amt , vendor_currency_cd = commitment_line_items_ccbdgt_tmp.vendor_currency_cd , vendor_id = commitment_line_items_ccbdgt_tmp.vendor_id , vendor_nm = commitment_line_items_ccbdgt_tmp.vendor_nm , vendor_number = commitment_line_items_ccbdgt_tmp.vendor_number , vendor_obsolete_flg = commitment_line_items_ccbdgt_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_cnt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,ccat_nm,cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_payment_dttm,cmtmnt_status,cost_center_id,created_by_usernm,created_dttm,fin_acc_nm,fp_cls_ver,fp_desc,fp_id,fp_nm,fp_obsolete_flg,gen_ledger_cd,item_alloc_unit,item_nm,item_number,item_qty,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cc_allocated_amt,cc_available_amt,cc_bdgt_amt,cc_bdgt_budget_amt,cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_amt,cc_bdgt_cmtmnt_invoice_cnt,cc_bdgt_cmtmnt_outstanding_amt,cc_bdgt_cmtmnt_overspent_amt,cc_bdgt_committed_amt,cc_bdgt_direct_invoice_amt,cc_bdgt_invoiced_amt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cc_recon_alloc_amt,ccat_nm,cmtmnt_amt,cmtmnt_closure_note,cmtmnt_created_dttm,cmtmnt_desc,cmtmnt_id,cmtmnt_nm,cmtmnt_no,cmtmnt_outstanding_amt,cmtmnt_overspent_amt,cmtmnt_payment_dttm,cmtmnt_status,cost_center_id,created_by_usernm,created_dttm,fin_acc_nm,fp_cls_ver,fp_desc,fp_end_dt,fp_id,fp_nm,fp_obsolete_flg,fp_start_dt,gen_ledger_cd,item_alloc_amt,item_alloc_unit,item_nm,item_number,item_qty,item_rate,item_vend_alloc_amt,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,planning_currency_cd,planning_id,planning_nm,vendor_amt,vendor_currency_cd,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_desc,commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,commitment_line_items_ccbdgt_tmp.cc_desc,commitment_line_items_ccbdgt_tmp.cc_nm,commitment_line_items_ccbdgt_tmp.cc_number,commitment_line_items_ccbdgt_tmp.cc_obsolete_flg,commitment_line_items_ccbdgt_tmp.cc_owner_usernm,commitment_line_items_ccbdgt_tmp.ccat_nm,commitment_line_items_ccbdgt_tmp.cmtmnt_closure_note,commitment_line_items_ccbdgt_tmp.cmtmnt_created_dttm,commitment_line_items_ccbdgt_tmp.cmtmnt_desc,commitment_line_items_ccbdgt_tmp.cmtmnt_id,commitment_line_items_ccbdgt_tmp.cmtmnt_nm,commitment_line_items_ccbdgt_tmp.cmtmnt_no,commitment_line_items_ccbdgt_tmp.cmtmnt_payment_dttm,commitment_line_items_ccbdgt_tmp.cmtmnt_status,commitment_line_items_ccbdgt_tmp.cost_center_id,commitment_line_items_ccbdgt_tmp.created_by_usernm,commitment_line_items_ccbdgt_tmp.created_dttm,commitment_line_items_ccbdgt_tmp.fin_acc_nm,commitment_line_items_ccbdgt_tmp.fp_cls_ver,commitment_line_items_ccbdgt_tmp.fp_desc,commitment_line_items_ccbdgt_tmp.fp_id,commitment_line_items_ccbdgt_tmp.fp_nm,commitment_line_items_ccbdgt_tmp.fp_obsolete_flg,commitment_line_items_ccbdgt_tmp.gen_ledger_cd,commitment_line_items_ccbdgt_tmp.item_alloc_unit,commitment_line_items_ccbdgt_tmp.item_nm,commitment_line_items_ccbdgt_tmp.item_number,commitment_line_items_ccbdgt_tmp.item_qty,commitment_line_items_ccbdgt_tmp.item_vend_alloc_unit,commitment_line_items_ccbdgt_tmp.last_modified_dttm,commitment_line_items_ccbdgt_tmp.last_modified_usernm,commitment_line_items_ccbdgt_tmp.load_dttm,commitment_line_items_ccbdgt_tmp.planning_currency_cd,commitment_line_items_ccbdgt_tmp.planning_id,commitment_line_items_ccbdgt_tmp.planning_nm,commitment_line_items_ccbdgt_tmp.vendor_currency_cd,commitment_line_items_ccbdgt_tmp.vendor_id,commitment_line_items_ccbdgt_tmp.vendor_nm,commitment_line_items_ccbdgt_tmp.vendor_number,commitment_line_items_ccbdgt_tmp.vendor_obsolete_flg
+        commitment_line_items_ccbdgt_tmp.cc_allocated_amt,commitment_line_items_ccbdgt_tmp.cc_available_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_budget_desc,commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_committed_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_direct_invoice_amt,commitment_line_items_ccbdgt_tmp.cc_bdgt_invoiced_amt,commitment_line_items_ccbdgt_tmp.cc_desc,commitment_line_items_ccbdgt_tmp.cc_nm,commitment_line_items_ccbdgt_tmp.cc_number,commitment_line_items_ccbdgt_tmp.cc_obsolete_flg,commitment_line_items_ccbdgt_tmp.cc_owner_usernm,commitment_line_items_ccbdgt_tmp.cc_recon_alloc_amt,commitment_line_items_ccbdgt_tmp.ccat_nm,commitment_line_items_ccbdgt_tmp.cmtmnt_amt,commitment_line_items_ccbdgt_tmp.cmtmnt_closure_note,commitment_line_items_ccbdgt_tmp.cmtmnt_created_dttm,commitment_line_items_ccbdgt_tmp.cmtmnt_desc,commitment_line_items_ccbdgt_tmp.cmtmnt_id,commitment_line_items_ccbdgt_tmp.cmtmnt_nm,commitment_line_items_ccbdgt_tmp.cmtmnt_no,commitment_line_items_ccbdgt_tmp.cmtmnt_outstanding_amt,commitment_line_items_ccbdgt_tmp.cmtmnt_overspent_amt,commitment_line_items_ccbdgt_tmp.cmtmnt_payment_dttm,commitment_line_items_ccbdgt_tmp.cmtmnt_status,commitment_line_items_ccbdgt_tmp.cost_center_id,commitment_line_items_ccbdgt_tmp.created_by_usernm,commitment_line_items_ccbdgt_tmp.created_dttm,commitment_line_items_ccbdgt_tmp.fin_acc_nm,commitment_line_items_ccbdgt_tmp.fp_cls_ver,commitment_line_items_ccbdgt_tmp.fp_desc,commitment_line_items_ccbdgt_tmp.fp_end_dt,commitment_line_items_ccbdgt_tmp.fp_id,commitment_line_items_ccbdgt_tmp.fp_nm,commitment_line_items_ccbdgt_tmp.fp_obsolete_flg,commitment_line_items_ccbdgt_tmp.fp_start_dt,commitment_line_items_ccbdgt_tmp.gen_ledger_cd,commitment_line_items_ccbdgt_tmp.item_alloc_amt,commitment_line_items_ccbdgt_tmp.item_alloc_unit,commitment_line_items_ccbdgt_tmp.item_nm,commitment_line_items_ccbdgt_tmp.item_number,commitment_line_items_ccbdgt_tmp.item_qty,commitment_line_items_ccbdgt_tmp.item_rate,commitment_line_items_ccbdgt_tmp.item_vend_alloc_amt,commitment_line_items_ccbdgt_tmp.item_vend_alloc_unit,commitment_line_items_ccbdgt_tmp.last_modified_dttm,commitment_line_items_ccbdgt_tmp.last_modified_usernm,commitment_line_items_ccbdgt_tmp.load_dttm,commitment_line_items_ccbdgt_tmp.planning_currency_cd,commitment_line_items_ccbdgt_tmp.planning_id,commitment_line_items_ccbdgt_tmp.planning_nm,commitment_line_items_ccbdgt_tmp.vendor_amt,commitment_line_items_ccbdgt_tmp.vendor_currency_cd,commitment_line_items_ccbdgt_tmp.vendor_id,commitment_line_items_ccbdgt_tmp.vendor_nm,commitment_line_items_ccbdgt_tmp.vendor_number,commitment_line_items_ccbdgt_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2545,6 +2645,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..commitment_line_items_ccbdgt;
       DROP TABLE work.commitment_line_items_ccbdgt;
   QUIT;
  %end;
@@ -2593,6 +2694,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..contact_history;
       DROP TABLE work.contact_history;
   QUIT;
  %end;
@@ -2623,11 +2725,11 @@
         execute (MERGE INTO &dbschema..conversion_milestone using &tmpdbschema..conversion_milestone_tmp        
          ON (conversion_milestone.event_id=conversion_milestone_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET activity_id = conversion_milestone_tmp.activity_id , analysis_group_id = conversion_milestone_tmp.analysis_group_id , aud_occurrence_id = conversion_milestone_tmp.aud_occurrence_id , audience_id = conversion_milestone_tmp.audience_id , channel_nm = conversion_milestone_tmp.channel_nm , channel_user_id = conversion_milestone_tmp.channel_user_id , context_type_nm = conversion_milestone_tmp.context_type_nm , context_val = conversion_milestone_tmp.context_val , control_group_flg = conversion_milestone_tmp.control_group_flg , conversion_milestone_dttm = conversion_milestone_tmp.conversion_milestone_dttm , conversion_milestone_dttm_tz = conversion_milestone_tmp.conversion_milestone_dttm_tz , creative_id = conversion_milestone_tmp.creative_id , creative_version_id = conversion_milestone_tmp.creative_version_id , detail_id_hex = conversion_milestone_tmp.detail_id_hex , event_designed_id = conversion_milestone_tmp.event_designed_id , event_nm = conversion_milestone_tmp.event_nm , goal_id = conversion_milestone_tmp.goal_id , identity_id = conversion_milestone_tmp.identity_id , journey_id = conversion_milestone_tmp.journey_id , journey_occurrence_id = conversion_milestone_tmp.journey_occurrence_id , load_dttm = conversion_milestone_tmp.load_dttm , message_id = conversion_milestone_tmp.message_id , message_version_id = conversion_milestone_tmp.message_version_id , mobile_app_id = conversion_milestone_tmp.mobile_app_id , occurrence_id = conversion_milestone_tmp.occurrence_id , parent_event_designed_id = conversion_milestone_tmp.parent_event_designed_id , properties_map_doc = conversion_milestone_tmp.properties_map_doc , rec_group_id = conversion_milestone_tmp.rec_group_id , reserved_1_txt = conversion_milestone_tmp.reserved_1_txt , reserved_2_txt = conversion_milestone_tmp.reserved_2_txt , response_tracking_cd = conversion_milestone_tmp.response_tracking_cd , segment_id = conversion_milestone_tmp.segment_id , segment_version_id = conversion_milestone_tmp.segment_version_id , session_id_hex = conversion_milestone_tmp.session_id_hex , spot_id = conversion_milestone_tmp.spot_id , subject_line_txt = conversion_milestone_tmp.subject_line_txt , task_id = conversion_milestone_tmp.task_id , task_version_id = conversion_milestone_tmp.task_version_id , test_flg = conversion_milestone_tmp.test_flg , visit_id_hex = conversion_milestone_tmp.visit_id_hex
+        UPDATE SET activity_id = conversion_milestone_tmp.activity_id , analysis_group_id = conversion_milestone_tmp.analysis_group_id , aud_occurrence_id = conversion_milestone_tmp.aud_occurrence_id , audience_id = conversion_milestone_tmp.audience_id , channel_nm = conversion_milestone_tmp.channel_nm , channel_user_id = conversion_milestone_tmp.channel_user_id , context_type_nm = conversion_milestone_tmp.context_type_nm , context_val = conversion_milestone_tmp.context_val , control_group_flg = conversion_milestone_tmp.control_group_flg , conversion_milestone_dttm = conversion_milestone_tmp.conversion_milestone_dttm , conversion_milestone_dttm_tz = conversion_milestone_tmp.conversion_milestone_dttm_tz , creative_id = conversion_milestone_tmp.creative_id , creative_version_id = conversion_milestone_tmp.creative_version_id , detail_id_hex = conversion_milestone_tmp.detail_id_hex , event_designed_id = conversion_milestone_tmp.event_designed_id , event_nm = conversion_milestone_tmp.event_nm , goal_id = conversion_milestone_tmp.goal_id , identity_id = conversion_milestone_tmp.identity_id , journey_id = conversion_milestone_tmp.journey_id , journey_occurrence_id = conversion_milestone_tmp.journey_occurrence_id , load_dttm = conversion_milestone_tmp.load_dttm , message_id = conversion_milestone_tmp.message_id , message_version_id = conversion_milestone_tmp.message_version_id , mobile_app_id = conversion_milestone_tmp.mobile_app_id , occurrence_id = conversion_milestone_tmp.occurrence_id , parent_event_designed_id = conversion_milestone_tmp.parent_event_designed_id , properties_map_doc = conversion_milestone_tmp.properties_map_doc , rec_group_id = conversion_milestone_tmp.rec_group_id , reserved_1_txt = conversion_milestone_tmp.reserved_1_txt , reserved_2_txt = conversion_milestone_tmp.reserved_2_txt , response_tracking_cd = conversion_milestone_tmp.response_tracking_cd , segment_id = conversion_milestone_tmp.segment_id , segment_version_id = conversion_milestone_tmp.segment_version_id , session_id_hex = conversion_milestone_tmp.session_id_hex , spot_id = conversion_milestone_tmp.spot_id , subject_line_txt = conversion_milestone_tmp.subject_line_txt , task_id = conversion_milestone_tmp.task_id , task_version_id = conversion_milestone_tmp.task_version_id , test_flg = conversion_milestone_tmp.test_flg , total_cost_amt = conversion_milestone_tmp.total_cost_amt , visit_id_hex = conversion_milestone_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_id,analysis_group_id,aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,conversion_milestone_dttm,conversion_milestone_dttm_tz,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_nm,goal_id,identity_id,journey_id,journey_occurrence_id,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,parent_event_designed_id,properties_map_doc,rec_group_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,subject_line_txt,task_id,task_version_id,test_flg,visit_id_hex
+        activity_id,analysis_group_id,aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,conversion_milestone_dttm,conversion_milestone_dttm_tz,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_nm,goal_id,identity_id,journey_id,journey_occurrence_id,load_dttm,message_id,message_version_id,mobile_app_id,occurrence_id,parent_event_designed_id,properties_map_doc,rec_group_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,subject_line_txt,task_id,task_version_id,test_flg,total_cost_amt,visit_id_hex
          ) values ( 
-        conversion_milestone_tmp.activity_id,conversion_milestone_tmp.analysis_group_id,conversion_milestone_tmp.aud_occurrence_id,conversion_milestone_tmp.audience_id,conversion_milestone_tmp.channel_nm,conversion_milestone_tmp.channel_user_id,conversion_milestone_tmp.context_type_nm,conversion_milestone_tmp.context_val,conversion_milestone_tmp.control_group_flg,conversion_milestone_tmp.conversion_milestone_dttm,conversion_milestone_tmp.conversion_milestone_dttm_tz,conversion_milestone_tmp.creative_id,conversion_milestone_tmp.creative_version_id,conversion_milestone_tmp.detail_id_hex,conversion_milestone_tmp.event_designed_id,conversion_milestone_tmp.event_id,conversion_milestone_tmp.event_nm,conversion_milestone_tmp.goal_id,conversion_milestone_tmp.identity_id,conversion_milestone_tmp.journey_id,conversion_milestone_tmp.journey_occurrence_id,conversion_milestone_tmp.load_dttm,conversion_milestone_tmp.message_id,conversion_milestone_tmp.message_version_id,conversion_milestone_tmp.mobile_app_id,conversion_milestone_tmp.occurrence_id,conversion_milestone_tmp.parent_event_designed_id,conversion_milestone_tmp.properties_map_doc,conversion_milestone_tmp.rec_group_id,conversion_milestone_tmp.reserved_1_txt,conversion_milestone_tmp.reserved_2_txt,conversion_milestone_tmp.response_tracking_cd,conversion_milestone_tmp.segment_id,conversion_milestone_tmp.segment_version_id,conversion_milestone_tmp.session_id_hex,conversion_milestone_tmp.spot_id,conversion_milestone_tmp.subject_line_txt,conversion_milestone_tmp.task_id,conversion_milestone_tmp.task_version_id,conversion_milestone_tmp.test_flg,conversion_milestone_tmp.visit_id_hex
+        conversion_milestone_tmp.activity_id,conversion_milestone_tmp.analysis_group_id,conversion_milestone_tmp.aud_occurrence_id,conversion_milestone_tmp.audience_id,conversion_milestone_tmp.channel_nm,conversion_milestone_tmp.channel_user_id,conversion_milestone_tmp.context_type_nm,conversion_milestone_tmp.context_val,conversion_milestone_tmp.control_group_flg,conversion_milestone_tmp.conversion_milestone_dttm,conversion_milestone_tmp.conversion_milestone_dttm_tz,conversion_milestone_tmp.creative_id,conversion_milestone_tmp.creative_version_id,conversion_milestone_tmp.detail_id_hex,conversion_milestone_tmp.event_designed_id,conversion_milestone_tmp.event_id,conversion_milestone_tmp.event_nm,conversion_milestone_tmp.goal_id,conversion_milestone_tmp.identity_id,conversion_milestone_tmp.journey_id,conversion_milestone_tmp.journey_occurrence_id,conversion_milestone_tmp.load_dttm,conversion_milestone_tmp.message_id,conversion_milestone_tmp.message_version_id,conversion_milestone_tmp.mobile_app_id,conversion_milestone_tmp.occurrence_id,conversion_milestone_tmp.parent_event_designed_id,conversion_milestone_tmp.properties_map_doc,conversion_milestone_tmp.rec_group_id,conversion_milestone_tmp.reserved_1_txt,conversion_milestone_tmp.reserved_2_txt,conversion_milestone_tmp.response_tracking_cd,conversion_milestone_tmp.segment_id,conversion_milestone_tmp.segment_version_id,conversion_milestone_tmp.session_id_hex,conversion_milestone_tmp.spot_id,conversion_milestone_tmp.subject_line_txt,conversion_milestone_tmp.task_id,conversion_milestone_tmp.task_version_id,conversion_milestone_tmp.test_flg,conversion_milestone_tmp.total_cost_amt,conversion_milestone_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2641,6 +2743,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..conversion_milestone;
       DROP TABLE work.conversion_milestone;
   QUIT;
  %end;
@@ -2671,11 +2774,11 @@
         execute (MERGE INTO &dbschema..custom_events using &tmpdbschema..custom_events_tmp               
          ON (custom_events.event_id=custom_events_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET channel_nm = custom_events_tmp.channel_nm , channel_user_id = custom_events_tmp.channel_user_id , custom_event_dttm = custom_events_tmp.custom_event_dttm , custom_event_dttm_tz = custom_events_tmp.custom_event_dttm_tz , custom_event_group_nm = custom_events_tmp.custom_event_group_nm , custom_event_nm = custom_events_tmp.custom_event_nm , custom_events_sk = custom_events_tmp.custom_events_sk , detail_id = custom_events_tmp.detail_id , detail_id_hex = custom_events_tmp.detail_id_hex , event_designed_id = custom_events_tmp.event_designed_id , event_key_cd = custom_events_tmp.event_key_cd , event_nm = custom_events_tmp.event_nm , event_source_cd = custom_events_tmp.event_source_cd , event_type_nm = custom_events_tmp.event_type_nm , identity_id = custom_events_tmp.identity_id , load_dttm = custom_events_tmp.load_dttm , mobile_app_id = custom_events_tmp.mobile_app_id , page_id = custom_events_tmp.page_id , properties_map_doc = custom_events_tmp.properties_map_doc , reserved_1_txt = custom_events_tmp.reserved_1_txt , reserved_2_txt = custom_events_tmp.reserved_2_txt , session_id = custom_events_tmp.session_id , session_id_hex = custom_events_tmp.session_id_hex , visit_id = custom_events_tmp.visit_id , visit_id_hex = custom_events_tmp.visit_id_hex
+        UPDATE SET channel_nm = custom_events_tmp.channel_nm , channel_user_id = custom_events_tmp.channel_user_id , custom_event_dttm = custom_events_tmp.custom_event_dttm , custom_event_dttm_tz = custom_events_tmp.custom_event_dttm_tz , custom_event_group_nm = custom_events_tmp.custom_event_group_nm , custom_event_nm = custom_events_tmp.custom_event_nm , custom_events_sk = custom_events_tmp.custom_events_sk , custom_revenue_amt = custom_events_tmp.custom_revenue_amt , detail_id = custom_events_tmp.detail_id , detail_id_hex = custom_events_tmp.detail_id_hex , event_designed_id = custom_events_tmp.event_designed_id , event_key_cd = custom_events_tmp.event_key_cd , event_nm = custom_events_tmp.event_nm , event_source_cd = custom_events_tmp.event_source_cd , event_type_nm = custom_events_tmp.event_type_nm , identity_id = custom_events_tmp.identity_id , load_dttm = custom_events_tmp.load_dttm , mobile_app_id = custom_events_tmp.mobile_app_id , page_id = custom_events_tmp.page_id , properties_map_doc = custom_events_tmp.properties_map_doc , reserved_1_txt = custom_events_tmp.reserved_1_txt , reserved_2_txt = custom_events_tmp.reserved_2_txt , session_id = custom_events_tmp.session_id , session_id_hex = custom_events_tmp.session_id_hex , visit_id = custom_events_tmp.visit_id , visit_id_hex = custom_events_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        channel_nm,channel_user_id,custom_event_dttm,custom_event_dttm_tz,custom_event_group_nm,custom_event_nm,custom_events_sk,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,event_type_nm,identity_id,load_dttm,mobile_app_id,page_id,properties_map_doc,reserved_1_txt,reserved_2_txt,session_id,session_id_hex,visit_id,visit_id_hex
+        channel_nm,channel_user_id,custom_event_dttm,custom_event_dttm_tz,custom_event_group_nm,custom_event_nm,custom_events_sk,custom_revenue_amt,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,event_type_nm,identity_id,load_dttm,mobile_app_id,page_id,properties_map_doc,reserved_1_txt,reserved_2_txt,session_id,session_id_hex,visit_id,visit_id_hex
          ) values ( 
-        custom_events_tmp.channel_nm,custom_events_tmp.channel_user_id,custom_events_tmp.custom_event_dttm,custom_events_tmp.custom_event_dttm_tz,custom_events_tmp.custom_event_group_nm,custom_events_tmp.custom_event_nm,custom_events_tmp.custom_events_sk,custom_events_tmp.detail_id,custom_events_tmp.detail_id_hex,custom_events_tmp.event_designed_id,custom_events_tmp.event_id,custom_events_tmp.event_key_cd,custom_events_tmp.event_nm,custom_events_tmp.event_source_cd,custom_events_tmp.event_type_nm,custom_events_tmp.identity_id,custom_events_tmp.load_dttm,custom_events_tmp.mobile_app_id,custom_events_tmp.page_id,custom_events_tmp.properties_map_doc,custom_events_tmp.reserved_1_txt,custom_events_tmp.reserved_2_txt,custom_events_tmp.session_id,custom_events_tmp.session_id_hex,custom_events_tmp.visit_id,custom_events_tmp.visit_id_hex
+        custom_events_tmp.channel_nm,custom_events_tmp.channel_user_id,custom_events_tmp.custom_event_dttm,custom_events_tmp.custom_event_dttm_tz,custom_events_tmp.custom_event_group_nm,custom_events_tmp.custom_event_nm,custom_events_tmp.custom_events_sk,custom_events_tmp.custom_revenue_amt,custom_events_tmp.detail_id,custom_events_tmp.detail_id_hex,custom_events_tmp.event_designed_id,custom_events_tmp.event_id,custom_events_tmp.event_key_cd,custom_events_tmp.event_nm,custom_events_tmp.event_source_cd,custom_events_tmp.event_type_nm,custom_events_tmp.identity_id,custom_events_tmp.load_dttm,custom_events_tmp.mobile_app_id,custom_events_tmp.page_id,custom_events_tmp.properties_map_doc,custom_events_tmp.reserved_1_txt,custom_events_tmp.reserved_2_txt,custom_events_tmp.session_id,custom_events_tmp.session_id_hex,custom_events_tmp.visit_id,custom_events_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2689,6 +2792,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..custom_events;
       DROP TABLE work.custom_events;
   QUIT;
  %end;
@@ -2719,11 +2823,11 @@
         execute (MERGE INTO &dbschema..custom_events_ext using &tmpdbschema..custom_events_ext_tmp           
          ON (custom_events_ext.custom_events_sk=custom_events_ext_tmp.custom_events_sk)
         WHEN MATCHED THEN  
-        UPDATE SET event_designed_id = custom_events_ext_tmp.event_designed_id , load_dttm = custom_events_ext_tmp.load_dttm
+        UPDATE SET custom_revenue_amt = custom_events_ext_tmp.custom_revenue_amt , event_designed_id = custom_events_ext_tmp.event_designed_id , load_dttm = custom_events_ext_tmp.load_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        custom_events_sk,event_designed_id,load_dttm
+        custom_events_sk,custom_revenue_amt,event_designed_id,load_dttm
          ) values ( 
-        custom_events_ext_tmp.custom_events_sk,custom_events_ext_tmp.event_designed_id,custom_events_ext_tmp.load_dttm
+        custom_events_ext_tmp.custom_events_sk,custom_events_ext_tmp.custom_revenue_amt,custom_events_ext_tmp.event_designed_id,custom_events_ext_tmp.load_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2737,6 +2841,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..custom_events_ext;
       DROP TABLE work.custom_events_ext;
   QUIT;
  %end;
@@ -2766,11 +2871,11 @@
         execute (MERGE INTO &dbschema..daily_usage using &tmpdbschema..daily_usage_tmp                 
          ON (daily_usage.event_day=daily_usage_tmp.event_day)
         WHEN MATCHED THEN  
-        UPDATE SET admin_user_cnt = daily_usage_tmp.admin_user_cnt , api_usage_str = daily_usage_tmp.api_usage_str , audience_usage_cnt = daily_usage_tmp.audience_usage_cnt , bc_subjcnt_str = daily_usage_tmp.bc_subjcnt_str , email_preview_cnt = daily_usage_tmp.email_preview_cnt , email_send_cnt = daily_usage_tmp.email_send_cnt , facebook_ads_cnt = daily_usage_tmp.facebook_ads_cnt , google_ads_cnt = daily_usage_tmp.google_ads_cnt , linkedin_ads_cnt = daily_usage_tmp.linkedin_ads_cnt , mob_impr_cnt = daily_usage_tmp.mob_impr_cnt , mob_sesn_cnt = daily_usage_tmp.mob_sesn_cnt , mobile_in_app_msg_cnt = daily_usage_tmp.mobile_in_app_msg_cnt , mobile_push_cnt = daily_usage_tmp.mobile_push_cnt , outbound_api_cnt = daily_usage_tmp.outbound_api_cnt , plan_users_cnt = daily_usage_tmp.plan_users_cnt , web_impr_cnt = daily_usage_tmp.web_impr_cnt , web_sesn_cnt = daily_usage_tmp.web_sesn_cnt
+        UPDATE SET admin_user_cnt = daily_usage_tmp.admin_user_cnt , api_usage_str = daily_usage_tmp.api_usage_str , asset_size = daily_usage_tmp.asset_size , audience_usage_cnt = daily_usage_tmp.audience_usage_cnt , bc_subjcnt_str = daily_usage_tmp.bc_subjcnt_str , customer_profiles_processed_str = daily_usage_tmp.customer_profiles_processed_str , db_size = daily_usage_tmp.db_size , email_preview_cnt = daily_usage_tmp.email_preview_cnt , email_send_cnt = daily_usage_tmp.email_send_cnt , facebook_ads_cnt = daily_usage_tmp.facebook_ads_cnt , google_ads_cnt = daily_usage_tmp.google_ads_cnt , linkedin_ads_cnt = daily_usage_tmp.linkedin_ads_cnt , mob_impr_cnt = daily_usage_tmp.mob_impr_cnt , mob_sesn_cnt = daily_usage_tmp.mob_sesn_cnt , mobile_in_app_msg_cnt = daily_usage_tmp.mobile_in_app_msg_cnt , mobile_push_cnt = daily_usage_tmp.mobile_push_cnt , outbound_api_cnt = daily_usage_tmp.outbound_api_cnt , plan_users_cnt = daily_usage_tmp.plan_users_cnt , web_impr_cnt = daily_usage_tmp.web_impr_cnt , web_sesn_cnt = daily_usage_tmp.web_sesn_cnt
         WHEN NOT MATCHED THEN INSERT ( 
-        admin_user_cnt,api_usage_str,audience_usage_cnt,bc_subjcnt_str,email_preview_cnt,email_send_cnt,event_day,facebook_ads_cnt,google_ads_cnt,linkedin_ads_cnt,mob_impr_cnt,mob_sesn_cnt,mobile_in_app_msg_cnt,mobile_push_cnt,outbound_api_cnt,plan_users_cnt,web_impr_cnt,web_sesn_cnt
+        admin_user_cnt,api_usage_str,asset_size,audience_usage_cnt,bc_subjcnt_str,customer_profiles_processed_str,db_size,email_preview_cnt,email_send_cnt,event_day,facebook_ads_cnt,google_ads_cnt,linkedin_ads_cnt,mob_impr_cnt,mob_sesn_cnt,mobile_in_app_msg_cnt,mobile_push_cnt,outbound_api_cnt,plan_users_cnt,web_impr_cnt,web_sesn_cnt
          ) values ( 
-        daily_usage_tmp.admin_user_cnt,daily_usage_tmp.api_usage_str,daily_usage_tmp.audience_usage_cnt,daily_usage_tmp.bc_subjcnt_str,daily_usage_tmp.email_preview_cnt,daily_usage_tmp.email_send_cnt,daily_usage_tmp.event_day,daily_usage_tmp.facebook_ads_cnt,daily_usage_tmp.google_ads_cnt,daily_usage_tmp.linkedin_ads_cnt,daily_usage_tmp.mob_impr_cnt,daily_usage_tmp.mob_sesn_cnt,daily_usage_tmp.mobile_in_app_msg_cnt,daily_usage_tmp.mobile_push_cnt,daily_usage_tmp.outbound_api_cnt,daily_usage_tmp.plan_users_cnt,daily_usage_tmp.web_impr_cnt,daily_usage_tmp.web_sesn_cnt
+        daily_usage_tmp.admin_user_cnt,daily_usage_tmp.api_usage_str,daily_usage_tmp.asset_size,daily_usage_tmp.audience_usage_cnt,daily_usage_tmp.bc_subjcnt_str,daily_usage_tmp.customer_profiles_processed_str,daily_usage_tmp.db_size,daily_usage_tmp.email_preview_cnt,daily_usage_tmp.email_send_cnt,daily_usage_tmp.event_day,daily_usage_tmp.facebook_ads_cnt,daily_usage_tmp.google_ads_cnt,daily_usage_tmp.linkedin_ads_cnt,daily_usage_tmp.mob_impr_cnt,daily_usage_tmp.mob_sesn_cnt,daily_usage_tmp.mobile_in_app_msg_cnt,daily_usage_tmp.mobile_push_cnt,daily_usage_tmp.outbound_api_cnt,daily_usage_tmp.plan_users_cnt,daily_usage_tmp.web_impr_cnt,daily_usage_tmp.web_sesn_cnt
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2784,6 +2889,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..daily_usage;
       DROP TABLE work.daily_usage;
   QUIT;
  %end;
@@ -2814,11 +2920,11 @@
         execute (MERGE INTO &dbschema..data_view_details using &tmpdbschema..data_view_details_tmp           
          ON (data_view_details.detail_id_hex=data_view_details_tmp.detail_id_hex and data_view_details.event_id=data_view_details_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET channel_user_id = data_view_details_tmp.channel_user_id , data_view_dttm = data_view_details_tmp.data_view_dttm , data_view_dttm_tz = data_view_details_tmp.data_view_dttm_tz , detail_id = data_view_details_tmp.detail_id , event_designed_id = data_view_details_tmp.event_designed_id , event_nm = data_view_details_tmp.event_nm , identity_id = data_view_details_tmp.identity_id , load_dttm = data_view_details_tmp.load_dttm , parent_event_designed_id = data_view_details_tmp.parent_event_designed_id , properties_map_doc = data_view_details_tmp.properties_map_doc , reserved_1_txt = data_view_details_tmp.reserved_1_txt , reserved_2_txt = data_view_details_tmp.reserved_2_txt , session_id = data_view_details_tmp.session_id , session_id_hex = data_view_details_tmp.session_id_hex , visit_id = data_view_details_tmp.visit_id , visit_id_hex = data_view_details_tmp.visit_id_hex
+        UPDATE SET channel_user_id = data_view_details_tmp.channel_user_id , data_view_dttm = data_view_details_tmp.data_view_dttm , data_view_dttm_tz = data_view_details_tmp.data_view_dttm_tz , detail_id = data_view_details_tmp.detail_id , event_designed_id = data_view_details_tmp.event_designed_id , event_nm = data_view_details_tmp.event_nm , identity_id = data_view_details_tmp.identity_id , load_dttm = data_view_details_tmp.load_dttm , parent_event_designed_id = data_view_details_tmp.parent_event_designed_id , properties_map_doc = data_view_details_tmp.properties_map_doc , reserved_1_txt = data_view_details_tmp.reserved_1_txt , reserved_2_txt = data_view_details_tmp.reserved_2_txt , session_id = data_view_details_tmp.session_id , session_id_hex = data_view_details_tmp.session_id_hex , total_cost_amt = data_view_details_tmp.total_cost_amt , visit_id = data_view_details_tmp.visit_id , visit_id_hex = data_view_details_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        channel_user_id,data_view_dttm,data_view_dttm_tz,detail_id,detail_id_hex,event_designed_id,event_id,event_nm,identity_id,load_dttm,parent_event_designed_id,properties_map_doc,reserved_1_txt,reserved_2_txt,session_id,session_id_hex,visit_id,visit_id_hex
+        channel_user_id,data_view_dttm,data_view_dttm_tz,detail_id,detail_id_hex,event_designed_id,event_id,event_nm,identity_id,load_dttm,parent_event_designed_id,properties_map_doc,reserved_1_txt,reserved_2_txt,session_id,session_id_hex,total_cost_amt,visit_id,visit_id_hex
          ) values ( 
-        data_view_details_tmp.channel_user_id,data_view_details_tmp.data_view_dttm,data_view_details_tmp.data_view_dttm_tz,data_view_details_tmp.detail_id,data_view_details_tmp.detail_id_hex,data_view_details_tmp.event_designed_id,data_view_details_tmp.event_id,data_view_details_tmp.event_nm,data_view_details_tmp.identity_id,data_view_details_tmp.load_dttm,data_view_details_tmp.parent_event_designed_id,data_view_details_tmp.properties_map_doc,data_view_details_tmp.reserved_1_txt,data_view_details_tmp.reserved_2_txt,data_view_details_tmp.session_id,data_view_details_tmp.session_id_hex,data_view_details_tmp.visit_id,data_view_details_tmp.visit_id_hex
+        data_view_details_tmp.channel_user_id,data_view_details_tmp.data_view_dttm,data_view_details_tmp.data_view_dttm_tz,data_view_details_tmp.detail_id,data_view_details_tmp.detail_id_hex,data_view_details_tmp.event_designed_id,data_view_details_tmp.event_id,data_view_details_tmp.event_nm,data_view_details_tmp.identity_id,data_view_details_tmp.load_dttm,data_view_details_tmp.parent_event_designed_id,data_view_details_tmp.properties_map_doc,data_view_details_tmp.reserved_1_txt,data_view_details_tmp.reserved_2_txt,data_view_details_tmp.session_id,data_view_details_tmp.session_id_hex,data_view_details_tmp.total_cost_amt,data_view_details_tmp.visit_id,data_view_details_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2832,6 +2938,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..data_view_details;
       DROP TABLE work.data_view_details;
   QUIT;
  %end;
@@ -2862,11 +2969,11 @@
         execute (MERGE INTO &dbschema..dbt_adv_campaign_visitors using &tmpdbschema..dbt_adv_campaign_visitors_tmp   
          ON (dbt_adv_campaign_visitors.session_id=dbt_adv_campaign_visitors_tmp.session_id and dbt_adv_campaign_visitors.visit_id=dbt_adv_campaign_visitors_tmp.visit_id)
         WHEN MATCHED THEN  
-        UPDATE SET average_visit_duration = dbt_adv_campaign_visitors_tmp.average_visit_duration , bouncer = dbt_adv_campaign_visitors_tmp.bouncer , bouncers = dbt_adv_campaign_visitors_tmp.bouncers , br_browser_name = dbt_adv_campaign_visitors_tmp.br_browser_name , br_browser_version = dbt_adv_campaign_visitors_tmp.br_browser_version , co_conversions = dbt_adv_campaign_visitors_tmp.co_conversions , cu_customer_id = dbt_adv_campaign_visitors_tmp.cu_customer_id , device_name = dbt_adv_campaign_visitors_tmp.device_name , device_type = dbt_adv_campaign_visitors_tmp.device_type , ge_city = dbt_adv_campaign_visitors_tmp.ge_city , ge_country = dbt_adv_campaign_visitors_tmp.ge_country , ge_state_region = dbt_adv_campaign_visitors_tmp.ge_state_region , landing_page = dbt_adv_campaign_visitors_tmp.landing_page , landing_page_url = dbt_adv_campaign_visitors_tmp.landing_page_url , landing_page_url_domain = dbt_adv_campaign_visitors_tmp.landing_page_url_domain , new_visitors = dbt_adv_campaign_visitors_tmp.new_visitors , page_views = dbt_adv_campaign_visitors_tmp.page_views , pl_device_operating_system = dbt_adv_campaign_visitors_tmp.pl_device_operating_system , return_visitors = dbt_adv_campaign_visitors_tmp.return_visitors , se_external_search_engine = dbt_adv_campaign_visitors_tmp.se_external_search_engine , se_external_search_engine_domain = dbt_adv_campaign_visitors_tmp.se_external_search_engine_domain , se_external_search_engine_phrase = dbt_adv_campaign_visitors_tmp.se_external_search_engine_phrase , session_complete_load_dttm = dbt_adv_campaign_visitors_tmp.session_complete_load_dttm , session_start_dttm = dbt_adv_campaign_visitors_tmp.session_start_dttm , session_start_dttm_tz = dbt_adv_campaign_visitors_tmp.session_start_dttm_tz , visit_dttm = dbt_adv_campaign_visitors_tmp.visit_dttm , visit_dttm_tz = dbt_adv_campaign_visitors_tmp.visit_dttm_tz , visit_origination_creative = dbt_adv_campaign_visitors_tmp.visit_origination_creative , visit_origination_name = dbt_adv_campaign_visitors_tmp.visit_origination_name , visit_origination_placement = dbt_adv_campaign_visitors_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_adv_campaign_visitors_tmp.visit_origination_tracking_code , visit_origination_type = dbt_adv_campaign_visitors_tmp.visit_origination_type , visitor_id = dbt_adv_campaign_visitors_tmp.visitor_id , visitor_type = dbt_adv_campaign_visitors_tmp.visitor_type , visits = dbt_adv_campaign_visitors_tmp.visits
+        UPDATE SET average_visit_duration = dbt_adv_campaign_visitors_tmp.average_visit_duration , bouncer = dbt_adv_campaign_visitors_tmp.bouncer , bouncers = dbt_adv_campaign_visitors_tmp.bouncers , br_browser_name = dbt_adv_campaign_visitors_tmp.br_browser_name , br_browser_version = dbt_adv_campaign_visitors_tmp.br_browser_version , co_conversions = dbt_adv_campaign_visitors_tmp.co_conversions , cu_customer_id = dbt_adv_campaign_visitors_tmp.cu_customer_id , device_name = dbt_adv_campaign_visitors_tmp.device_name , device_type = dbt_adv_campaign_visitors_tmp.device_type , ge_city = dbt_adv_campaign_visitors_tmp.ge_city , ge_country = dbt_adv_campaign_visitors_tmp.ge_country , ge_latitude = dbt_adv_campaign_visitors_tmp.ge_latitude , ge_longitude = dbt_adv_campaign_visitors_tmp.ge_longitude , ge_state_region = dbt_adv_campaign_visitors_tmp.ge_state_region , landing_page = dbt_adv_campaign_visitors_tmp.landing_page , landing_page_url = dbt_adv_campaign_visitors_tmp.landing_page_url , landing_page_url_domain = dbt_adv_campaign_visitors_tmp.landing_page_url_domain , new_visitors = dbt_adv_campaign_visitors_tmp.new_visitors , page_views = dbt_adv_campaign_visitors_tmp.page_views , pl_device_operating_system = dbt_adv_campaign_visitors_tmp.pl_device_operating_system , return_visitors = dbt_adv_campaign_visitors_tmp.return_visitors , rv_revenue = dbt_adv_campaign_visitors_tmp.rv_revenue , se_external_search_engine = dbt_adv_campaign_visitors_tmp.se_external_search_engine , se_external_search_engine_domain = dbt_adv_campaign_visitors_tmp.se_external_search_engine_domain , se_external_search_engine_phrase = dbt_adv_campaign_visitors_tmp.se_external_search_engine_phrase , session_complete_load_dttm = dbt_adv_campaign_visitors_tmp.session_complete_load_dttm , session_start_dttm = dbt_adv_campaign_visitors_tmp.session_start_dttm , session_start_dttm_tz = dbt_adv_campaign_visitors_tmp.session_start_dttm_tz , visit_dttm = dbt_adv_campaign_visitors_tmp.visit_dttm , visit_dttm_tz = dbt_adv_campaign_visitors_tmp.visit_dttm_tz , visit_origination_creative = dbt_adv_campaign_visitors_tmp.visit_origination_creative , visit_origination_name = dbt_adv_campaign_visitors_tmp.visit_origination_name , visit_origination_placement = dbt_adv_campaign_visitors_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_adv_campaign_visitors_tmp.visit_origination_tracking_code , visit_origination_type = dbt_adv_campaign_visitors_tmp.visit_origination_type , visitor_id = dbt_adv_campaign_visitors_tmp.visitor_id , visitor_type = dbt_adv_campaign_visitors_tmp.visitor_type , visits = dbt_adv_campaign_visitors_tmp.visits
         WHEN NOT MATCHED THEN INSERT ( 
-        average_visit_duration,bouncer,bouncers,br_browser_name,br_browser_version,co_conversions,cu_customer_id,device_name,device_type,ge_city,ge_country,ge_state_region,landing_page,landing_page_url,landing_page_url_domain,new_visitors,page_views,pl_device_operating_system,return_visitors,se_external_search_engine,se_external_search_engine_domain,se_external_search_engine_phrase,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_dttm,visit_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type,visits
+        average_visit_duration,bouncer,bouncers,br_browser_name,br_browser_version,co_conversions,cu_customer_id,device_name,device_type,ge_city,ge_country,ge_latitude,ge_longitude,ge_state_region,landing_page,landing_page_url,landing_page_url_domain,new_visitors,page_views,pl_device_operating_system,return_visitors,rv_revenue,se_external_search_engine,se_external_search_engine_domain,se_external_search_engine_phrase,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_dttm,visit_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type,visits
          ) values ( 
-        dbt_adv_campaign_visitors_tmp.average_visit_duration,dbt_adv_campaign_visitors_tmp.bouncer,dbt_adv_campaign_visitors_tmp.bouncers,dbt_adv_campaign_visitors_tmp.br_browser_name,dbt_adv_campaign_visitors_tmp.br_browser_version,dbt_adv_campaign_visitors_tmp.co_conversions,dbt_adv_campaign_visitors_tmp.cu_customer_id,dbt_adv_campaign_visitors_tmp.device_name,dbt_adv_campaign_visitors_tmp.device_type,dbt_adv_campaign_visitors_tmp.ge_city,dbt_adv_campaign_visitors_tmp.ge_country,dbt_adv_campaign_visitors_tmp.ge_state_region,dbt_adv_campaign_visitors_tmp.landing_page,dbt_adv_campaign_visitors_tmp.landing_page_url,dbt_adv_campaign_visitors_tmp.landing_page_url_domain,dbt_adv_campaign_visitors_tmp.new_visitors,dbt_adv_campaign_visitors_tmp.page_views,dbt_adv_campaign_visitors_tmp.pl_device_operating_system,dbt_adv_campaign_visitors_tmp.return_visitors,dbt_adv_campaign_visitors_tmp.se_external_search_engine,dbt_adv_campaign_visitors_tmp.se_external_search_engine_domain,dbt_adv_campaign_visitors_tmp.se_external_search_engine_phrase,dbt_adv_campaign_visitors_tmp.session_complete_load_dttm,dbt_adv_campaign_visitors_tmp.session_id,dbt_adv_campaign_visitors_tmp.session_start_dttm,dbt_adv_campaign_visitors_tmp.session_start_dttm_tz,dbt_adv_campaign_visitors_tmp.visit_dttm,dbt_adv_campaign_visitors_tmp.visit_dttm_tz,dbt_adv_campaign_visitors_tmp.visit_id,dbt_adv_campaign_visitors_tmp.visit_origination_creative,dbt_adv_campaign_visitors_tmp.visit_origination_name,dbt_adv_campaign_visitors_tmp.visit_origination_placement,dbt_adv_campaign_visitors_tmp.visit_origination_tracking_code,dbt_adv_campaign_visitors_tmp.visit_origination_type,dbt_adv_campaign_visitors_tmp.visitor_id,dbt_adv_campaign_visitors_tmp.visitor_type,dbt_adv_campaign_visitors_tmp.visits
+        dbt_adv_campaign_visitors_tmp.average_visit_duration,dbt_adv_campaign_visitors_tmp.bouncer,dbt_adv_campaign_visitors_tmp.bouncers,dbt_adv_campaign_visitors_tmp.br_browser_name,dbt_adv_campaign_visitors_tmp.br_browser_version,dbt_adv_campaign_visitors_tmp.co_conversions,dbt_adv_campaign_visitors_tmp.cu_customer_id,dbt_adv_campaign_visitors_tmp.device_name,dbt_adv_campaign_visitors_tmp.device_type,dbt_adv_campaign_visitors_tmp.ge_city,dbt_adv_campaign_visitors_tmp.ge_country,dbt_adv_campaign_visitors_tmp.ge_latitude,dbt_adv_campaign_visitors_tmp.ge_longitude,dbt_adv_campaign_visitors_tmp.ge_state_region,dbt_adv_campaign_visitors_tmp.landing_page,dbt_adv_campaign_visitors_tmp.landing_page_url,dbt_adv_campaign_visitors_tmp.landing_page_url_domain,dbt_adv_campaign_visitors_tmp.new_visitors,dbt_adv_campaign_visitors_tmp.page_views,dbt_adv_campaign_visitors_tmp.pl_device_operating_system,dbt_adv_campaign_visitors_tmp.return_visitors,dbt_adv_campaign_visitors_tmp.rv_revenue,dbt_adv_campaign_visitors_tmp.se_external_search_engine,dbt_adv_campaign_visitors_tmp.se_external_search_engine_domain,dbt_adv_campaign_visitors_tmp.se_external_search_engine_phrase,dbt_adv_campaign_visitors_tmp.session_complete_load_dttm,dbt_adv_campaign_visitors_tmp.session_id,dbt_adv_campaign_visitors_tmp.session_start_dttm,dbt_adv_campaign_visitors_tmp.session_start_dttm_tz,dbt_adv_campaign_visitors_tmp.visit_dttm,dbt_adv_campaign_visitors_tmp.visit_dttm_tz,dbt_adv_campaign_visitors_tmp.visit_id,dbt_adv_campaign_visitors_tmp.visit_origination_creative,dbt_adv_campaign_visitors_tmp.visit_origination_name,dbt_adv_campaign_visitors_tmp.visit_origination_placement,dbt_adv_campaign_visitors_tmp.visit_origination_tracking_code,dbt_adv_campaign_visitors_tmp.visit_origination_type,dbt_adv_campaign_visitors_tmp.visitor_id,dbt_adv_campaign_visitors_tmp.visitor_type,dbt_adv_campaign_visitors_tmp.visits
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -2880,6 +2987,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_adv_campaign_visitors;
       DROP TABLE work.dbt_adv_campaign_visitors;
   QUIT;
  %end;
@@ -2928,6 +3036,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_business_process;
       DROP TABLE work.dbt_business_process;
   QUIT;
  %end;
@@ -2977,6 +3086,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_content;
       DROP TABLE work.dbt_content;
   QUIT;
  %end;
@@ -3025,6 +3135,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_documents;
       DROP TABLE work.dbt_documents;
   QUIT;
  %end;
@@ -3055,11 +3166,11 @@
         execute (MERGE INTO &dbschema..dbt_ecommerce using &tmpdbschema..dbt_ecommerce_tmp               
          ON (dbt_ecommerce.product_activity_dttm=dbt_ecommerce_tmp.product_activity_dttm and dbt_ecommerce.product_id=dbt_ecommerce_tmp.product_id and dbt_ecommerce.session_id=dbt_ecommerce_tmp.session_id)
         WHEN MATCHED THEN  
-        UPDATE SET basket_adds = dbt_ecommerce_tmp.basket_adds , basket_adds_units = dbt_ecommerce_tmp.basket_adds_units , basket_id = dbt_ecommerce_tmp.basket_id , basket_removes = dbt_ecommerce_tmp.basket_removes , basket_removes_units = dbt_ecommerce_tmp.basket_removes_units , baskets_abandoned = dbt_ecommerce_tmp.baskets_abandoned , baskets_completed = dbt_ecommerce_tmp.baskets_completed , baskets_started = dbt_ecommerce_tmp.baskets_started , bouncer = dbt_ecommerce_tmp.bouncer , cu_customer_id = dbt_ecommerce_tmp.cu_customer_id , device_name = dbt_ecommerce_tmp.device_name , device_type = dbt_ecommerce_tmp.device_type , product_activity_dttm_tz = dbt_ecommerce_tmp.product_activity_dttm_tz , product_group_name = dbt_ecommerce_tmp.product_group_name , product_name = dbt_ecommerce_tmp.product_name , product_purchase_units = dbt_ecommerce_tmp.product_purchase_units , product_purchases = dbt_ecommerce_tmp.product_purchases , product_sku = dbt_ecommerce_tmp.product_sku , product_views = dbt_ecommerce_tmp.product_views , session_complete_load_dttm = dbt_ecommerce_tmp.session_complete_load_dttm , session_start_dttm = dbt_ecommerce_tmp.session_start_dttm , session_start_dttm_tz = dbt_ecommerce_tmp.session_start_dttm_tz , visit_id = dbt_ecommerce_tmp.visit_id , visit_origination_creative = dbt_ecommerce_tmp.visit_origination_creative , visit_origination_name = dbt_ecommerce_tmp.visit_origination_name , visit_origination_placement = dbt_ecommerce_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_ecommerce_tmp.visit_origination_tracking_code , visit_origination_type = dbt_ecommerce_tmp.visit_origination_type , visitor_id = dbt_ecommerce_tmp.visitor_id , visitor_type = dbt_ecommerce_tmp.visitor_type
+        UPDATE SET basket_adds = dbt_ecommerce_tmp.basket_adds , basket_adds_revenue = dbt_ecommerce_tmp.basket_adds_revenue , basket_adds_units = dbt_ecommerce_tmp.basket_adds_units , basket_id = dbt_ecommerce_tmp.basket_id , basket_removes = dbt_ecommerce_tmp.basket_removes , basket_removes_revenue = dbt_ecommerce_tmp.basket_removes_revenue , basket_removes_units = dbt_ecommerce_tmp.basket_removes_units , baskets_abandoned = dbt_ecommerce_tmp.baskets_abandoned , baskets_completed = dbt_ecommerce_tmp.baskets_completed , baskets_started = dbt_ecommerce_tmp.baskets_started , bouncer = dbt_ecommerce_tmp.bouncer , cu_customer_id = dbt_ecommerce_tmp.cu_customer_id , device_name = dbt_ecommerce_tmp.device_name , device_type = dbt_ecommerce_tmp.device_type , product_activity_dttm_tz = dbt_ecommerce_tmp.product_activity_dttm_tz , product_group_name = dbt_ecommerce_tmp.product_group_name , product_name = dbt_ecommerce_tmp.product_name , product_purchase_revenues = dbt_ecommerce_tmp.product_purchase_revenues , product_purchase_units = dbt_ecommerce_tmp.product_purchase_units , product_purchases = dbt_ecommerce_tmp.product_purchases , product_sku = dbt_ecommerce_tmp.product_sku , product_views = dbt_ecommerce_tmp.product_views , session_complete_load_dttm = dbt_ecommerce_tmp.session_complete_load_dttm , session_start_dttm = dbt_ecommerce_tmp.session_start_dttm , session_start_dttm_tz = dbt_ecommerce_tmp.session_start_dttm_tz , visit_id = dbt_ecommerce_tmp.visit_id , visit_origination_creative = dbt_ecommerce_tmp.visit_origination_creative , visit_origination_name = dbt_ecommerce_tmp.visit_origination_name , visit_origination_placement = dbt_ecommerce_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_ecommerce_tmp.visit_origination_tracking_code , visit_origination_type = dbt_ecommerce_tmp.visit_origination_type , visitor_id = dbt_ecommerce_tmp.visitor_id , visitor_type = dbt_ecommerce_tmp.visitor_type
         WHEN NOT MATCHED THEN INSERT ( 
-        basket_adds,basket_adds_units,basket_id,basket_removes,basket_removes_units,baskets_abandoned,baskets_completed,baskets_started,bouncer,cu_customer_id,device_name,device_type,product_activity_dttm,product_activity_dttm_tz,product_group_name,product_id,product_name,product_purchase_units,product_purchases,product_sku,product_views,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type
+        basket_adds,basket_adds_revenue,basket_adds_units,basket_id,basket_removes,basket_removes_revenue,basket_removes_units,baskets_abandoned,baskets_completed,baskets_started,bouncer,cu_customer_id,device_name,device_type,product_activity_dttm,product_activity_dttm_tz,product_group_name,product_id,product_name,product_purchase_revenues,product_purchase_units,product_purchases,product_sku,product_views,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type
          ) values ( 
-        dbt_ecommerce_tmp.basket_adds,dbt_ecommerce_tmp.basket_adds_units,dbt_ecommerce_tmp.basket_id,dbt_ecommerce_tmp.basket_removes,dbt_ecommerce_tmp.basket_removes_units,dbt_ecommerce_tmp.baskets_abandoned,dbt_ecommerce_tmp.baskets_completed,dbt_ecommerce_tmp.baskets_started,dbt_ecommerce_tmp.bouncer,dbt_ecommerce_tmp.cu_customer_id,dbt_ecommerce_tmp.device_name,dbt_ecommerce_tmp.device_type,dbt_ecommerce_tmp.product_activity_dttm,dbt_ecommerce_tmp.product_activity_dttm_tz,dbt_ecommerce_tmp.product_group_name,dbt_ecommerce_tmp.product_id,dbt_ecommerce_tmp.product_name,dbt_ecommerce_tmp.product_purchase_units,dbt_ecommerce_tmp.product_purchases,dbt_ecommerce_tmp.product_sku,dbt_ecommerce_tmp.product_views,dbt_ecommerce_tmp.session_complete_load_dttm,dbt_ecommerce_tmp.session_id,dbt_ecommerce_tmp.session_start_dttm,dbt_ecommerce_tmp.session_start_dttm_tz,dbt_ecommerce_tmp.visit_id,dbt_ecommerce_tmp.visit_origination_creative,dbt_ecommerce_tmp.visit_origination_name,dbt_ecommerce_tmp.visit_origination_placement,dbt_ecommerce_tmp.visit_origination_tracking_code,dbt_ecommerce_tmp.visit_origination_type,dbt_ecommerce_tmp.visitor_id,dbt_ecommerce_tmp.visitor_type
+        dbt_ecommerce_tmp.basket_adds,dbt_ecommerce_tmp.basket_adds_revenue,dbt_ecommerce_tmp.basket_adds_units,dbt_ecommerce_tmp.basket_id,dbt_ecommerce_tmp.basket_removes,dbt_ecommerce_tmp.basket_removes_revenue,dbt_ecommerce_tmp.basket_removes_units,dbt_ecommerce_tmp.baskets_abandoned,dbt_ecommerce_tmp.baskets_completed,dbt_ecommerce_tmp.baskets_started,dbt_ecommerce_tmp.bouncer,dbt_ecommerce_tmp.cu_customer_id,dbt_ecommerce_tmp.device_name,dbt_ecommerce_tmp.device_type,dbt_ecommerce_tmp.product_activity_dttm,dbt_ecommerce_tmp.product_activity_dttm_tz,dbt_ecommerce_tmp.product_group_name,dbt_ecommerce_tmp.product_id,dbt_ecommerce_tmp.product_name,dbt_ecommerce_tmp.product_purchase_revenues,dbt_ecommerce_tmp.product_purchase_units,dbt_ecommerce_tmp.product_purchases,dbt_ecommerce_tmp.product_sku,dbt_ecommerce_tmp.product_views,dbt_ecommerce_tmp.session_complete_load_dttm,dbt_ecommerce_tmp.session_id,dbt_ecommerce_tmp.session_start_dttm,dbt_ecommerce_tmp.session_start_dttm_tz,dbt_ecommerce_tmp.visit_id,dbt_ecommerce_tmp.visit_origination_creative,dbt_ecommerce_tmp.visit_origination_name,dbt_ecommerce_tmp.visit_origination_placement,dbt_ecommerce_tmp.visit_origination_tracking_code,dbt_ecommerce_tmp.visit_origination_type,dbt_ecommerce_tmp.visitor_id,dbt_ecommerce_tmp.visitor_type
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -3073,6 +3184,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_ecommerce;
       DROP TABLE work.dbt_ecommerce;
   QUIT;
  %end;
@@ -3121,6 +3233,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_forms;
       DROP TABLE work.dbt_forms;
   QUIT;
  %end;
@@ -3151,11 +3264,11 @@
         execute (MERGE INTO &dbschema..dbt_goals using &tmpdbschema..dbt_goals_tmp                   
          ON (dbt_goals.goal_reached_dttm=dbt_goals_tmp.goal_reached_dttm and dbt_goals.session_id=dbt_goals_tmp.session_id)
         WHEN MATCHED THEN  
-        UPDATE SET bouncer = dbt_goals_tmp.bouncer , cu_customer_id = dbt_goals_tmp.cu_customer_id , device_name = dbt_goals_tmp.device_name , device_type = dbt_goals_tmp.device_type , goal_group_name = dbt_goals_tmp.goal_group_name , goal_name = dbt_goals_tmp.goal_name , goal_reached_dttm_tz = dbt_goals_tmp.goal_reached_dttm_tz , goals = dbt_goals_tmp.goals , session_complete_load_dttm = dbt_goals_tmp.session_complete_load_dttm , session_start_dttm = dbt_goals_tmp.session_start_dttm , session_start_dttm_tz = dbt_goals_tmp.session_start_dttm_tz , visit_id = dbt_goals_tmp.visit_id , visit_origination_creative = dbt_goals_tmp.visit_origination_creative , visit_origination_name = dbt_goals_tmp.visit_origination_name , visit_origination_placement = dbt_goals_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_goals_tmp.visit_origination_tracking_code , visit_origination_type = dbt_goals_tmp.visit_origination_type , visitor_id = dbt_goals_tmp.visitor_id , visitor_type = dbt_goals_tmp.visitor_type , visits = dbt_goals_tmp.visits
+        UPDATE SET bouncer = dbt_goals_tmp.bouncer , cu_customer_id = dbt_goals_tmp.cu_customer_id , device_name = dbt_goals_tmp.device_name , device_type = dbt_goals_tmp.device_type , goal_group_name = dbt_goals_tmp.goal_group_name , goal_name = dbt_goals_tmp.goal_name , goal_reached_dttm_tz = dbt_goals_tmp.goal_reached_dttm_tz , goal_revenue = dbt_goals_tmp.goal_revenue , goals = dbt_goals_tmp.goals , session_complete_load_dttm = dbt_goals_tmp.session_complete_load_dttm , session_start_dttm = dbt_goals_tmp.session_start_dttm , session_start_dttm_tz = dbt_goals_tmp.session_start_dttm_tz , visit_id = dbt_goals_tmp.visit_id , visit_origination_creative = dbt_goals_tmp.visit_origination_creative , visit_origination_name = dbt_goals_tmp.visit_origination_name , visit_origination_placement = dbt_goals_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_goals_tmp.visit_origination_tracking_code , visit_origination_type = dbt_goals_tmp.visit_origination_type , visitor_id = dbt_goals_tmp.visitor_id , visitor_type = dbt_goals_tmp.visitor_type , visits = dbt_goals_tmp.visits
         WHEN NOT MATCHED THEN INSERT ( 
-        bouncer,cu_customer_id,device_name,device_type,goal_group_name,goal_name,goal_reached_dttm,goal_reached_dttm_tz,goals,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type,visits
+        bouncer,cu_customer_id,device_name,device_type,goal_group_name,goal_name,goal_reached_dttm,goal_reached_dttm_tz,goal_revenue,goals,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type,visits
          ) values ( 
-        dbt_goals_tmp.bouncer,dbt_goals_tmp.cu_customer_id,dbt_goals_tmp.device_name,dbt_goals_tmp.device_type,dbt_goals_tmp.goal_group_name,dbt_goals_tmp.goal_name,dbt_goals_tmp.goal_reached_dttm,dbt_goals_tmp.goal_reached_dttm_tz,dbt_goals_tmp.goals,dbt_goals_tmp.session_complete_load_dttm,dbt_goals_tmp.session_id,dbt_goals_tmp.session_start_dttm,dbt_goals_tmp.session_start_dttm_tz,dbt_goals_tmp.visit_id,dbt_goals_tmp.visit_origination_creative,dbt_goals_tmp.visit_origination_name,dbt_goals_tmp.visit_origination_placement,dbt_goals_tmp.visit_origination_tracking_code,dbt_goals_tmp.visit_origination_type,dbt_goals_tmp.visitor_id,dbt_goals_tmp.visitor_type,dbt_goals_tmp.visits
+        dbt_goals_tmp.bouncer,dbt_goals_tmp.cu_customer_id,dbt_goals_tmp.device_name,dbt_goals_tmp.device_type,dbt_goals_tmp.goal_group_name,dbt_goals_tmp.goal_name,dbt_goals_tmp.goal_reached_dttm,dbt_goals_tmp.goal_reached_dttm_tz,dbt_goals_tmp.goal_revenue,dbt_goals_tmp.goals,dbt_goals_tmp.session_complete_load_dttm,dbt_goals_tmp.session_id,dbt_goals_tmp.session_start_dttm,dbt_goals_tmp.session_start_dttm_tz,dbt_goals_tmp.visit_id,dbt_goals_tmp.visit_origination_creative,dbt_goals_tmp.visit_origination_name,dbt_goals_tmp.visit_origination_placement,dbt_goals_tmp.visit_origination_tracking_code,dbt_goals_tmp.visit_origination_type,dbt_goals_tmp.visitor_id,dbt_goals_tmp.visitor_type,dbt_goals_tmp.visits
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -3169,6 +3282,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_goals;
       DROP TABLE work.dbt_goals;
   QUIT;
  %end;
@@ -3186,7 +3300,7 @@
         DROP TABLE &tmplib..dbt_media_consumption_tmp       ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=dbt_media_consumption, table_keys=%str(detail_id,interactions_count,media_completion_rate,media_section,visit_id), out_table=work.dbt_media_consumption);
+ %check_duplicate_from_source(table_nm=dbt_media_consumption, table_keys=%str(detail_id,interactions_count,maximum_progress,media_completion_rate,media_section,visit_id), out_table=work.dbt_media_consumption);
  data &tmplib..dbt_media_consumption_tmp       ;
      set work.dbt_media_consumption;
   if media_start_dttm ne . then media_start_dttm = tzoneu2s(media_start_dttm,&timeZone_Value.);if media_start_dttm_tz ne . then media_start_dttm_tz = tzoneu2s(media_start_dttm_tz,&timeZone_Value.);if session_complete_load_dttm ne . then session_complete_load_dttm = tzoneu2s(session_complete_load_dttm,&timeZone_Value.);if session_start_dttm ne . then session_start_dttm = tzoneu2s(session_start_dttm,&timeZone_Value.);if session_start_dttm_tz ne . then session_start_dttm_tz = tzoneu2s(session_start_dttm_tz,&timeZone_Value.) ;
@@ -3197,13 +3311,13 @@
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..dbt_media_consumption using &tmpdbschema..dbt_media_consumption_tmp       
-         ON (dbt_media_consumption.detail_id=dbt_media_consumption_tmp.detail_id and dbt_media_consumption.interactions_count=dbt_media_consumption_tmp.interactions_count and dbt_media_consumption.media_completion_rate=dbt_media_consumption_tmp.media_completion_rate and dbt_media_consumption.media_section=dbt_media_consumption_tmp.media_section and dbt_media_consumption.visit_id=dbt_media_consumption_tmp.visit_id)
+         ON (dbt_media_consumption.detail_id=dbt_media_consumption_tmp.detail_id and dbt_media_consumption.interactions_count=dbt_media_consumption_tmp.interactions_count and dbt_media_consumption.maximum_progress=dbt_media_consumption_tmp.maximum_progress and dbt_media_consumption.media_completion_rate=dbt_media_consumption_tmp.media_completion_rate and dbt_media_consumption.media_section=dbt_media_consumption_tmp.media_section and dbt_media_consumption.visit_id=dbt_media_consumption_tmp.visit_id)
         WHEN MATCHED THEN  
-        UPDATE SET bouncer = dbt_media_consumption_tmp.bouncer , counter = dbt_media_consumption_tmp.counter , cu_customer_id = dbt_media_consumption_tmp.cu_customer_id , device_name = dbt_media_consumption_tmp.device_name , device_type = dbt_media_consumption_tmp.device_type , media_name = dbt_media_consumption_tmp.media_name , media_section_view = dbt_media_consumption_tmp.media_section_view , media_start_dttm = dbt_media_consumption_tmp.media_start_dttm , media_start_dttm_tz = dbt_media_consumption_tmp.media_start_dttm_tz , media_uri_txt = dbt_media_consumption_tmp.media_uri_txt , session_complete_load_dttm = dbt_media_consumption_tmp.session_complete_load_dttm , session_id = dbt_media_consumption_tmp.session_id , session_start_dttm = dbt_media_consumption_tmp.session_start_dttm , session_start_dttm_tz = dbt_media_consumption_tmp.session_start_dttm_tz , views = dbt_media_consumption_tmp.views , views_completed = dbt_media_consumption_tmp.views_completed , views_started = dbt_media_consumption_tmp.views_started , visit_origination_creative = dbt_media_consumption_tmp.visit_origination_creative , visit_origination_name = dbt_media_consumption_tmp.visit_origination_name , visit_origination_placement = dbt_media_consumption_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_media_consumption_tmp.visit_origination_tracking_code , visit_origination_type = dbt_media_consumption_tmp.visit_origination_type , visitor_id = dbt_media_consumption_tmp.visitor_id , visitor_type = dbt_media_consumption_tmp.visitor_type
+        UPDATE SET bouncer = dbt_media_consumption_tmp.bouncer , content_viewed = dbt_media_consumption_tmp.content_viewed , counter = dbt_media_consumption_tmp.counter , cu_customer_id = dbt_media_consumption_tmp.cu_customer_id , device_name = dbt_media_consumption_tmp.device_name , device_type = dbt_media_consumption_tmp.device_type , duration = dbt_media_consumption_tmp.duration , media_name = dbt_media_consumption_tmp.media_name , media_section_view = dbt_media_consumption_tmp.media_section_view , media_start_dttm = dbt_media_consumption_tmp.media_start_dttm , media_start_dttm_tz = dbt_media_consumption_tmp.media_start_dttm_tz , media_uri_txt = dbt_media_consumption_tmp.media_uri_txt , session_complete_load_dttm = dbt_media_consumption_tmp.session_complete_load_dttm , session_id = dbt_media_consumption_tmp.session_id , session_start_dttm = dbt_media_consumption_tmp.session_start_dttm , session_start_dttm_tz = dbt_media_consumption_tmp.session_start_dttm_tz , time_viewing = dbt_media_consumption_tmp.time_viewing , views = dbt_media_consumption_tmp.views , views_completed = dbt_media_consumption_tmp.views_completed , views_started = dbt_media_consumption_tmp.views_started , visit_origination_creative = dbt_media_consumption_tmp.visit_origination_creative , visit_origination_name = dbt_media_consumption_tmp.visit_origination_name , visit_origination_placement = dbt_media_consumption_tmp.visit_origination_placement , visit_origination_tracking_code = dbt_media_consumption_tmp.visit_origination_tracking_code , visit_origination_type = dbt_media_consumption_tmp.visit_origination_type , visitor_id = dbt_media_consumption_tmp.visitor_id , visitor_type = dbt_media_consumption_tmp.visitor_type
         WHEN NOT MATCHED THEN INSERT ( 
-        bouncer,counter,cu_customer_id,detail_id,device_name,device_type,interactions_count,media_completion_rate,media_name,media_section,media_section_view,media_start_dttm,media_start_dttm_tz,media_uri_txt,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,views,views_completed,views_started,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type
+        bouncer,content_viewed,counter,cu_customer_id,detail_id,device_name,device_type,duration,interactions_count,maximum_progress,media_completion_rate,media_name,media_section,media_section_view,media_start_dttm,media_start_dttm_tz,media_uri_txt,session_complete_load_dttm,session_id,session_start_dttm,session_start_dttm_tz,time_viewing,views,views_completed,views_started,visit_id,visit_origination_creative,visit_origination_name,visit_origination_placement,visit_origination_tracking_code,visit_origination_type,visitor_id,visitor_type
          ) values ( 
-        dbt_media_consumption_tmp.bouncer,dbt_media_consumption_tmp.counter,dbt_media_consumption_tmp.cu_customer_id,dbt_media_consumption_tmp.detail_id,dbt_media_consumption_tmp.device_name,dbt_media_consumption_tmp.device_type,dbt_media_consumption_tmp.interactions_count,dbt_media_consumption_tmp.media_completion_rate,dbt_media_consumption_tmp.media_name,dbt_media_consumption_tmp.media_section,dbt_media_consumption_tmp.media_section_view,dbt_media_consumption_tmp.media_start_dttm,dbt_media_consumption_tmp.media_start_dttm_tz,dbt_media_consumption_tmp.media_uri_txt,dbt_media_consumption_tmp.session_complete_load_dttm,dbt_media_consumption_tmp.session_id,dbt_media_consumption_tmp.session_start_dttm,dbt_media_consumption_tmp.session_start_dttm_tz,dbt_media_consumption_tmp.views,dbt_media_consumption_tmp.views_completed,dbt_media_consumption_tmp.views_started,dbt_media_consumption_tmp.visit_id,dbt_media_consumption_tmp.visit_origination_creative,dbt_media_consumption_tmp.visit_origination_name,dbt_media_consumption_tmp.visit_origination_placement,dbt_media_consumption_tmp.visit_origination_tracking_code,dbt_media_consumption_tmp.visit_origination_type,dbt_media_consumption_tmp.visitor_id,dbt_media_consumption_tmp.visitor_type
+        dbt_media_consumption_tmp.bouncer,dbt_media_consumption_tmp.content_viewed,dbt_media_consumption_tmp.counter,dbt_media_consumption_tmp.cu_customer_id,dbt_media_consumption_tmp.detail_id,dbt_media_consumption_tmp.device_name,dbt_media_consumption_tmp.device_type,dbt_media_consumption_tmp.duration,dbt_media_consumption_tmp.interactions_count,dbt_media_consumption_tmp.maximum_progress,dbt_media_consumption_tmp.media_completion_rate,dbt_media_consumption_tmp.media_name,dbt_media_consumption_tmp.media_section,dbt_media_consumption_tmp.media_section_view,dbt_media_consumption_tmp.media_start_dttm,dbt_media_consumption_tmp.media_start_dttm_tz,dbt_media_consumption_tmp.media_uri_txt,dbt_media_consumption_tmp.session_complete_load_dttm,dbt_media_consumption_tmp.session_id,dbt_media_consumption_tmp.session_start_dttm,dbt_media_consumption_tmp.session_start_dttm_tz,dbt_media_consumption_tmp.time_viewing,dbt_media_consumption_tmp.views,dbt_media_consumption_tmp.views_completed,dbt_media_consumption_tmp.views_started,dbt_media_consumption_tmp.visit_id,dbt_media_consumption_tmp.visit_origination_creative,dbt_media_consumption_tmp.visit_origination_name,dbt_media_consumption_tmp.visit_origination_placement,dbt_media_consumption_tmp.visit_origination_tracking_code,dbt_media_consumption_tmp.visit_origination_type,dbt_media_consumption_tmp.visitor_id,dbt_media_consumption_tmp.visitor_type
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -3217,6 +3331,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_media_consumption;
       DROP TABLE work.dbt_media_consumption;
   QUIT;
  %end;
@@ -3265,6 +3380,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_promotions;
       DROP TABLE work.dbt_promotions;
   QUIT;
  %end;
@@ -3313,6 +3429,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..dbt_search;
       DROP TABLE work.dbt_search;
   QUIT;
  %end;
@@ -3361,6 +3478,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..direct_contact;
       DROP TABLE work.direct_contact;
   QUIT;
  %end;
@@ -3410,6 +3528,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..document_details;
       DROP TABLE work.document_details;
   QUIT;
  %end;
@@ -3458,6 +3577,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_bounce;
       DROP TABLE work.email_bounce;
   QUIT;
  %end;
@@ -3506,6 +3626,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_click;
       DROP TABLE work.email_click;
   QUIT;
  %end;
@@ -3554,6 +3675,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_complaint;
       DROP TABLE work.email_complaint;
   QUIT;
  %end;
@@ -3602,6 +3724,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_open;
       DROP TABLE work.email_open;
   QUIT;
  %end;
@@ -3650,6 +3773,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_optout;
       DROP TABLE work.email_optout;
   QUIT;
  %end;
@@ -3698,6 +3822,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_optout_details;
       DROP TABLE work.email_optout_details;
   QUIT;
  %end;
@@ -3746,6 +3871,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_reply;
       DROP TABLE work.email_reply;
   QUIT;
  %end;
@@ -3794,6 +3920,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_send;
       DROP TABLE work.email_send;
   QUIT;
  %end;
@@ -3842,6 +3969,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..email_view;
       DROP TABLE work.email_view;
   QUIT;
  %end;
@@ -3890,6 +4018,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..external_event;
       DROP TABLE work.external_event;
   QUIT;
  %end;
@@ -3920,11 +4049,11 @@
         execute (MERGE INTO &dbschema..fiscal_cc_budget using &tmpdbschema..fiscal_cc_budget_tmp            
          ON (fiscal_cc_budget.cost_center_id=fiscal_cc_budget_tmp.cost_center_id and fiscal_cc_budget.fp_id=fiscal_cc_budget_tmp.fp_id)
         WHEN MATCHED THEN  
-        UPDATE SET cc_bdgt_budget_desc = fiscal_cc_budget_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_cnt = fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_desc = fiscal_cc_budget_tmp.cc_desc , cc_nm = fiscal_cc_budget_tmp.cc_nm , cc_number = fiscal_cc_budget_tmp.cc_number , cc_obsolete_flg = fiscal_cc_budget_tmp.cc_obsolete_flg , cc_owner_usernm = fiscal_cc_budget_tmp.cc_owner_usernm , created_by_usernm = fiscal_cc_budget_tmp.created_by_usernm , created_dttm = fiscal_cc_budget_tmp.created_dttm , fin_accnt_desc = fiscal_cc_budget_tmp.fin_accnt_desc , fin_accnt_nm = fiscal_cc_budget_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = fiscal_cc_budget_tmp.fin_accnt_obsolete_flg , fp_cls_ver = fiscal_cc_budget_tmp.fp_cls_ver , fp_desc = fiscal_cc_budget_tmp.fp_desc , fp_nm = fiscal_cc_budget_tmp.fp_nm , fp_obsolete_flg = fiscal_cc_budget_tmp.fp_obsolete_flg , gen_ledger_cd = fiscal_cc_budget_tmp.gen_ledger_cd , last_modified_dttm = fiscal_cc_budget_tmp.last_modified_dttm , last_modified_usernm = fiscal_cc_budget_tmp.last_modified_usernm , load_dttm = fiscal_cc_budget_tmp.load_dttm
+        UPDATE SET cc_bdgt_amt = fiscal_cc_budget_tmp.cc_bdgt_amt , cc_bdgt_budget_amt = fiscal_cc_budget_tmp.cc_bdgt_budget_amt , cc_bdgt_budget_desc = fiscal_cc_budget_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_amt = fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_amt , cc_bdgt_cmtmnt_invoice_cnt = fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_bdgt_cmtmnt_outstanding_amt = fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_outstanding_amt , cc_bdgt_cmtmnt_overspent_amt = fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_overspent_amt , cc_bdgt_committed_amt = fiscal_cc_budget_tmp.cc_bdgt_committed_amt , cc_bdgt_direct_invoice_amt = fiscal_cc_budget_tmp.cc_bdgt_direct_invoice_amt , cc_bdgt_invoiced_amt = fiscal_cc_budget_tmp.cc_bdgt_invoiced_amt , cc_desc = fiscal_cc_budget_tmp.cc_desc , cc_nm = fiscal_cc_budget_tmp.cc_nm , cc_number = fiscal_cc_budget_tmp.cc_number , cc_obsolete_flg = fiscal_cc_budget_tmp.cc_obsolete_flg , cc_owner_usernm = fiscal_cc_budget_tmp.cc_owner_usernm , created_by_usernm = fiscal_cc_budget_tmp.created_by_usernm , created_dttm = fiscal_cc_budget_tmp.created_dttm , fin_accnt_desc = fiscal_cc_budget_tmp.fin_accnt_desc , fin_accnt_nm = fiscal_cc_budget_tmp.fin_accnt_nm , fin_accnt_obsolete_flg = fiscal_cc_budget_tmp.fin_accnt_obsolete_flg , fp_cls_ver = fiscal_cc_budget_tmp.fp_cls_ver , fp_desc = fiscal_cc_budget_tmp.fp_desc , fp_end_dt = fiscal_cc_budget_tmp.fp_end_dt , fp_nm = fiscal_cc_budget_tmp.fp_nm , fp_obsolete_flg = fiscal_cc_budget_tmp.fp_obsolete_flg , fp_start_dt = fiscal_cc_budget_tmp.fp_start_dt , gen_ledger_cd = fiscal_cc_budget_tmp.gen_ledger_cd , last_modified_dttm = fiscal_cc_budget_tmp.last_modified_dttm , last_modified_usernm = fiscal_cc_budget_tmp.last_modified_usernm , load_dttm = fiscal_cc_budget_tmp.load_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_cnt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,fp_cls_ver,fp_desc,fp_id,fp_nm,fp_obsolete_flg,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm
+        cc_bdgt_amt,cc_bdgt_budget_amt,cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_amt,cc_bdgt_cmtmnt_invoice_cnt,cc_bdgt_cmtmnt_outstanding_amt,cc_bdgt_cmtmnt_overspent_amt,cc_bdgt_committed_amt,cc_bdgt_direct_invoice_amt,cc_bdgt_invoiced_amt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cost_center_id,created_by_usernm,created_dttm,fin_accnt_desc,fin_accnt_nm,fin_accnt_obsolete_flg,fp_cls_ver,fp_desc,fp_end_dt,fp_id,fp_nm,fp_obsolete_flg,fp_start_dt,gen_ledger_cd,last_modified_dttm,last_modified_usernm,load_dttm
          ) values ( 
-        fiscal_cc_budget_tmp.cc_bdgt_budget_desc,fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_cnt,fiscal_cc_budget_tmp.cc_desc,fiscal_cc_budget_tmp.cc_nm,fiscal_cc_budget_tmp.cc_number,fiscal_cc_budget_tmp.cc_obsolete_flg,fiscal_cc_budget_tmp.cc_owner_usernm,fiscal_cc_budget_tmp.cost_center_id,fiscal_cc_budget_tmp.created_by_usernm,fiscal_cc_budget_tmp.created_dttm,fiscal_cc_budget_tmp.fin_accnt_desc,fiscal_cc_budget_tmp.fin_accnt_nm,fiscal_cc_budget_tmp.fin_accnt_obsolete_flg,fiscal_cc_budget_tmp.fp_cls_ver,fiscal_cc_budget_tmp.fp_desc,fiscal_cc_budget_tmp.fp_id,fiscal_cc_budget_tmp.fp_nm,fiscal_cc_budget_tmp.fp_obsolete_flg,fiscal_cc_budget_tmp.gen_ledger_cd,fiscal_cc_budget_tmp.last_modified_dttm,fiscal_cc_budget_tmp.last_modified_usernm,fiscal_cc_budget_tmp.load_dttm
+        fiscal_cc_budget_tmp.cc_bdgt_amt,fiscal_cc_budget_tmp.cc_bdgt_budget_amt,fiscal_cc_budget_tmp.cc_bdgt_budget_desc,fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_amt,fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_invoice_cnt,fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_outstanding_amt,fiscal_cc_budget_tmp.cc_bdgt_cmtmnt_overspent_amt,fiscal_cc_budget_tmp.cc_bdgt_committed_amt,fiscal_cc_budget_tmp.cc_bdgt_direct_invoice_amt,fiscal_cc_budget_tmp.cc_bdgt_invoiced_amt,fiscal_cc_budget_tmp.cc_desc,fiscal_cc_budget_tmp.cc_nm,fiscal_cc_budget_tmp.cc_number,fiscal_cc_budget_tmp.cc_obsolete_flg,fiscal_cc_budget_tmp.cc_owner_usernm,fiscal_cc_budget_tmp.cost_center_id,fiscal_cc_budget_tmp.created_by_usernm,fiscal_cc_budget_tmp.created_dttm,fiscal_cc_budget_tmp.fin_accnt_desc,fiscal_cc_budget_tmp.fin_accnt_nm,fiscal_cc_budget_tmp.fin_accnt_obsolete_flg,fiscal_cc_budget_tmp.fp_cls_ver,fiscal_cc_budget_tmp.fp_desc,fiscal_cc_budget_tmp.fp_end_dt,fiscal_cc_budget_tmp.fp_id,fiscal_cc_budget_tmp.fp_nm,fiscal_cc_budget_tmp.fp_obsolete_flg,fiscal_cc_budget_tmp.fp_start_dt,fiscal_cc_budget_tmp.gen_ledger_cd,fiscal_cc_budget_tmp.last_modified_dttm,fiscal_cc_budget_tmp.last_modified_usernm,fiscal_cc_budget_tmp.load_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -3938,6 +4067,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..fiscal_cc_budget;
       DROP TABLE work.fiscal_cc_budget;
   QUIT;
  %end;
@@ -3955,20 +4085,20 @@
         DROP TABLE &tmplib..form_details_tmp                ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=form_details, table_keys=%str(attempt_index_cnt,attempt_status_cd,detail_id,form_field_detail_dttm,submit_flg), out_table=work.form_details);
+ %check_duplicate_from_source(table_nm=form_details, table_keys=%str(event_id), out_table=work.form_details);
  data &tmplib..form_details_tmp                ;
      set work.form_details;
   if form_field_detail_dttm ne . then form_field_detail_dttm = tzoneu2s(form_field_detail_dttm,&timeZone_Value.);if form_field_detail_dttm_tz ne . then form_field_detail_dttm_tz = tzoneu2s(form_field_detail_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if attempt_status_cd='' then attempt_status_cd='-'; if detail_id='' then detail_id='-'; if submit_flg='' then submit_flg='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :form_details_tmp                , form_details);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..form_details using &tmpdbschema..form_details_tmp                
-         ON (form_details.attempt_index_cnt=form_details_tmp.attempt_index_cnt and form_details.attempt_status_cd=form_details_tmp.attempt_status_cd and form_details.detail_id=form_details_tmp.detail_id and form_details.form_field_detail_dttm=form_details_tmp.form_field_detail_dttm and form_details.submit_flg=form_details_tmp.submit_flg)
+         ON (form_details.event_id=form_details_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET change_index_no = form_details_tmp.change_index_no , detail_id_hex = form_details_tmp.detail_id_hex , event_id = form_details_tmp.event_id , event_key_cd = form_details_tmp.event_key_cd , event_source_cd = form_details_tmp.event_source_cd , form_field_detail_dttm_tz = form_details_tmp.form_field_detail_dttm_tz , form_field_id = form_details_tmp.form_field_id , form_field_nm = form_details_tmp.form_field_nm , form_field_value = form_details_tmp.form_field_value , form_nm = form_details_tmp.form_nm , identity_id = form_details_tmp.identity_id , load_dttm = form_details_tmp.load_dttm , session_id = form_details_tmp.session_id , session_id_hex = form_details_tmp.session_id_hex , visit_id = form_details_tmp.visit_id , visit_id_hex = form_details_tmp.visit_id_hex
+        UPDATE SET attempt_index_cnt = form_details_tmp.attempt_index_cnt , attempt_status_cd = form_details_tmp.attempt_status_cd , change_index_no = form_details_tmp.change_index_no , detail_id = form_details_tmp.detail_id , detail_id_hex = form_details_tmp.detail_id_hex , event_key_cd = form_details_tmp.event_key_cd , event_source_cd = form_details_tmp.event_source_cd , form_field_detail_dttm = form_details_tmp.form_field_detail_dttm , form_field_detail_dttm_tz = form_details_tmp.form_field_detail_dttm_tz , form_field_id = form_details_tmp.form_field_id , form_field_nm = form_details_tmp.form_field_nm , form_field_value = form_details_tmp.form_field_value , form_nm = form_details_tmp.form_nm , identity_id = form_details_tmp.identity_id , load_dttm = form_details_tmp.load_dttm , session_id = form_details_tmp.session_id , session_id_hex = form_details_tmp.session_id_hex , submit_flg = form_details_tmp.submit_flg , visit_id = form_details_tmp.visit_id , visit_id_hex = form_details_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         attempt_index_cnt,attempt_status_cd,change_index_no,detail_id,detail_id_hex,event_id,event_key_cd,event_source_cd,form_field_detail_dttm,form_field_detail_dttm_tz,form_field_id,form_field_nm,form_field_value,form_nm,identity_id,load_dttm,session_id,session_id_hex,submit_flg,visit_id,visit_id_hex
          ) values ( 
@@ -3986,6 +4116,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..form_details;
       DROP TABLE work.form_details;
   QUIT;
  %end;
@@ -4034,6 +4165,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..identity_attributes;
       DROP TABLE work.identity_attributes;
   QUIT;
  %end;
@@ -4082,6 +4214,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..identity_map;
       DROP TABLE work.identity_map;
   QUIT;
  %end;
@@ -4112,11 +4245,11 @@
         execute (MERGE INTO &dbschema..impression_delivered using &tmpdbschema..impression_delivered_tmp        
          ON (impression_delivered.event_id=impression_delivered_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = impression_delivered_tmp.aud_occurrence_id , audience_id = impression_delivered_tmp.audience_id , channel_nm = impression_delivered_tmp.channel_nm , channel_user_id = impression_delivered_tmp.channel_user_id , context_type_nm = impression_delivered_tmp.context_type_nm , context_val = impression_delivered_tmp.context_val , control_group_flg = impression_delivered_tmp.control_group_flg , creative_id = impression_delivered_tmp.creative_id , creative_version_id = impression_delivered_tmp.creative_version_id , detail_id_hex = impression_delivered_tmp.detail_id_hex , event_designed_id = impression_delivered_tmp.event_designed_id , event_key_cd = impression_delivered_tmp.event_key_cd , event_nm = impression_delivered_tmp.event_nm , event_source_cd = impression_delivered_tmp.event_source_cd , identity_id = impression_delivered_tmp.identity_id , impression_delivered_dttm = impression_delivered_tmp.impression_delivered_dttm , impression_delivered_dttm_tz = impression_delivered_tmp.impression_delivered_dttm_tz , load_dttm = impression_delivered_tmp.load_dttm , message_id = impression_delivered_tmp.message_id , message_version_id = impression_delivered_tmp.message_version_id , mobile_app_id = impression_delivered_tmp.mobile_app_id , product_id = impression_delivered_tmp.product_id , product_nm = impression_delivered_tmp.product_nm , product_qty_no = impression_delivered_tmp.product_qty_no , product_sku_no = impression_delivered_tmp.product_sku_no , properties_map_doc = impression_delivered_tmp.properties_map_doc , rec_group_id = impression_delivered_tmp.rec_group_id , request_id = impression_delivered_tmp.request_id , reserved_1_txt = impression_delivered_tmp.reserved_1_txt , reserved_2_txt = impression_delivered_tmp.reserved_2_txt , response_tracking_cd = impression_delivered_tmp.response_tracking_cd , segment_id = impression_delivered_tmp.segment_id , segment_version_id = impression_delivered_tmp.segment_version_id , session_id_hex = impression_delivered_tmp.session_id_hex , spot_id = impression_delivered_tmp.spot_id , task_id = impression_delivered_tmp.task_id , task_version_id = impression_delivered_tmp.task_version_id , visit_id_hex = impression_delivered_tmp.visit_id_hex
+        UPDATE SET aud_occurrence_id = impression_delivered_tmp.aud_occurrence_id , audience_id = impression_delivered_tmp.audience_id , channel_nm = impression_delivered_tmp.channel_nm , channel_user_id = impression_delivered_tmp.channel_user_id , context_type_nm = impression_delivered_tmp.context_type_nm , context_val = impression_delivered_tmp.context_val , control_group_flg = impression_delivered_tmp.control_group_flg , creative_id = impression_delivered_tmp.creative_id , creative_version_id = impression_delivered_tmp.creative_version_id , detail_id_hex = impression_delivered_tmp.detail_id_hex , event_designed_id = impression_delivered_tmp.event_designed_id , event_key_cd = impression_delivered_tmp.event_key_cd , event_nm = impression_delivered_tmp.event_nm , event_source_cd = impression_delivered_tmp.event_source_cd , identity_id = impression_delivered_tmp.identity_id , impression_delivered_dttm = impression_delivered_tmp.impression_delivered_dttm , impression_delivered_dttm_tz = impression_delivered_tmp.impression_delivered_dttm_tz , journey_id = impression_delivered_tmp.journey_id , journey_occurrence_id = impression_delivered_tmp.journey_occurrence_id , load_dttm = impression_delivered_tmp.load_dttm , message_id = impression_delivered_tmp.message_id , message_version_id = impression_delivered_tmp.message_version_id , mobile_app_id = impression_delivered_tmp.mobile_app_id , product_id = impression_delivered_tmp.product_id , product_nm = impression_delivered_tmp.product_nm , product_qty_no = impression_delivered_tmp.product_qty_no , product_sku_no = impression_delivered_tmp.product_sku_no , properties_map_doc = impression_delivered_tmp.properties_map_doc , rec_group_id = impression_delivered_tmp.rec_group_id , request_id = impression_delivered_tmp.request_id , reserved_1_txt = impression_delivered_tmp.reserved_1_txt , reserved_2_txt = impression_delivered_tmp.reserved_2_txt , response_tracking_cd = impression_delivered_tmp.response_tracking_cd , segment_id = impression_delivered_tmp.segment_id , segment_version_id = impression_delivered_tmp.segment_version_id , session_id_hex = impression_delivered_tmp.session_id_hex , spot_id = impression_delivered_tmp.spot_id , task_id = impression_delivered_tmp.task_id , task_version_id = impression_delivered_tmp.task_version_id , visit_id_hex = impression_delivered_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_delivered_dttm,impression_delivered_dttm_tz,load_dttm,message_id,message_version_id,mobile_app_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,request_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
+        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,control_group_flg,creative_id,creative_version_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,impression_delivered_dttm,impression_delivered_dttm_tz,journey_id,journey_occurrence_id,load_dttm,message_id,message_version_id,mobile_app_id,product_id,product_nm,product_qty_no,product_sku_no,properties_map_doc,rec_group_id,request_id,reserved_1_txt,reserved_2_txt,response_tracking_cd,segment_id,segment_version_id,session_id_hex,spot_id,task_id,task_version_id,visit_id_hex
          ) values ( 
-        impression_delivered_tmp.aud_occurrence_id,impression_delivered_tmp.audience_id,impression_delivered_tmp.channel_nm,impression_delivered_tmp.channel_user_id,impression_delivered_tmp.context_type_nm,impression_delivered_tmp.context_val,impression_delivered_tmp.control_group_flg,impression_delivered_tmp.creative_id,impression_delivered_tmp.creative_version_id,impression_delivered_tmp.detail_id_hex,impression_delivered_tmp.event_designed_id,impression_delivered_tmp.event_id,impression_delivered_tmp.event_key_cd,impression_delivered_tmp.event_nm,impression_delivered_tmp.event_source_cd,impression_delivered_tmp.identity_id,impression_delivered_tmp.impression_delivered_dttm,impression_delivered_tmp.impression_delivered_dttm_tz,impression_delivered_tmp.load_dttm,impression_delivered_tmp.message_id,impression_delivered_tmp.message_version_id,impression_delivered_tmp.mobile_app_id,impression_delivered_tmp.product_id,impression_delivered_tmp.product_nm,impression_delivered_tmp.product_qty_no,impression_delivered_tmp.product_sku_no,impression_delivered_tmp.properties_map_doc,impression_delivered_tmp.rec_group_id,impression_delivered_tmp.request_id,impression_delivered_tmp.reserved_1_txt,impression_delivered_tmp.reserved_2_txt,impression_delivered_tmp.response_tracking_cd,impression_delivered_tmp.segment_id,impression_delivered_tmp.segment_version_id,impression_delivered_tmp.session_id_hex,impression_delivered_tmp.spot_id,impression_delivered_tmp.task_id,impression_delivered_tmp.task_version_id,impression_delivered_tmp.visit_id_hex
+        impression_delivered_tmp.aud_occurrence_id,impression_delivered_tmp.audience_id,impression_delivered_tmp.channel_nm,impression_delivered_tmp.channel_user_id,impression_delivered_tmp.context_type_nm,impression_delivered_tmp.context_val,impression_delivered_tmp.control_group_flg,impression_delivered_tmp.creative_id,impression_delivered_tmp.creative_version_id,impression_delivered_tmp.detail_id_hex,impression_delivered_tmp.event_designed_id,impression_delivered_tmp.event_id,impression_delivered_tmp.event_key_cd,impression_delivered_tmp.event_nm,impression_delivered_tmp.event_source_cd,impression_delivered_tmp.identity_id,impression_delivered_tmp.impression_delivered_dttm,impression_delivered_tmp.impression_delivered_dttm_tz,impression_delivered_tmp.journey_id,impression_delivered_tmp.journey_occurrence_id,impression_delivered_tmp.load_dttm,impression_delivered_tmp.message_id,impression_delivered_tmp.message_version_id,impression_delivered_tmp.mobile_app_id,impression_delivered_tmp.product_id,impression_delivered_tmp.product_nm,impression_delivered_tmp.product_qty_no,impression_delivered_tmp.product_sku_no,impression_delivered_tmp.properties_map_doc,impression_delivered_tmp.rec_group_id,impression_delivered_tmp.request_id,impression_delivered_tmp.reserved_1_txt,impression_delivered_tmp.reserved_2_txt,impression_delivered_tmp.response_tracking_cd,impression_delivered_tmp.segment_id,impression_delivered_tmp.segment_version_id,impression_delivered_tmp.session_id_hex,impression_delivered_tmp.spot_id,impression_delivered_tmp.task_id,impression_delivered_tmp.task_version_id,impression_delivered_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4130,6 +4263,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..impression_delivered;
       DROP TABLE work.impression_delivered;
   QUIT;
  %end;
@@ -4178,6 +4312,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..impression_spot_viewable;
       DROP TABLE work.impression_spot_viewable;
   QUIT;
  %end;
@@ -4226,6 +4361,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..in_app_failed;
       DROP TABLE work.in_app_failed;
   QUIT;
  %end;
@@ -4274,6 +4410,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..in_app_message;
       DROP TABLE work.in_app_message;
   QUIT;
  %end;
@@ -4322,6 +4459,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..in_app_send;
       DROP TABLE work.in_app_send;
   QUIT;
  %end;
@@ -4370,6 +4508,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..in_app_targeting_request;
       DROP TABLE work.in_app_targeting_request;
   QUIT;
  %end;
@@ -4400,11 +4539,11 @@
         execute (MERGE INTO &dbschema..invoice_details using &tmpdbschema..invoice_details_tmp             
          ON (invoice_details.cmtmnt_id=invoice_details_tmp.cmtmnt_id and invoice_details.invoice_id=invoice_details_tmp.invoice_id and invoice_details.planning_id=invoice_details_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cmtmnt_nm = invoice_details_tmp.cmtmnt_nm , created_by_usernm = invoice_details_tmp.created_by_usernm , created_dttm = invoice_details_tmp.created_dttm , invoice_created_dttm = invoice_details_tmp.invoice_created_dttm , invoice_desc = invoice_details_tmp.invoice_desc , invoice_nm = invoice_details_tmp.invoice_nm , invoice_number = invoice_details_tmp.invoice_number , invoice_reconciled_dttm = invoice_details_tmp.invoice_reconciled_dttm , invoice_status = invoice_details_tmp.invoice_status , last_modified_dttm = invoice_details_tmp.last_modified_dttm , last_modified_usernm = invoice_details_tmp.last_modified_usernm , load_dttm = invoice_details_tmp.load_dttm , payment_dttm = invoice_details_tmp.payment_dttm , plan_currency_cd = invoice_details_tmp.plan_currency_cd , planning_nm = invoice_details_tmp.planning_nm , reconcile_note = invoice_details_tmp.reconcile_note , vendor_currency_cd = invoice_details_tmp.vendor_currency_cd , vendor_desc = invoice_details_tmp.vendor_desc , vendor_id = invoice_details_tmp.vendor_id , vendor_nm = invoice_details_tmp.vendor_nm , vendor_number = invoice_details_tmp.vendor_number , vendor_obsolete_flg = invoice_details_tmp.vendor_obsolete_flg
+        UPDATE SET cmtmnt_nm = invoice_details_tmp.cmtmnt_nm , created_by_usernm = invoice_details_tmp.created_by_usernm , created_dttm = invoice_details_tmp.created_dttm , invoice_amt = invoice_details_tmp.invoice_amt , invoice_created_dttm = invoice_details_tmp.invoice_created_dttm , invoice_desc = invoice_details_tmp.invoice_desc , invoice_nm = invoice_details_tmp.invoice_nm , invoice_number = invoice_details_tmp.invoice_number , invoice_reconciled_dttm = invoice_details_tmp.invoice_reconciled_dttm , invoice_status = invoice_details_tmp.invoice_status , last_modified_dttm = invoice_details_tmp.last_modified_dttm , last_modified_usernm = invoice_details_tmp.last_modified_usernm , load_dttm = invoice_details_tmp.load_dttm , payment_dttm = invoice_details_tmp.payment_dttm , plan_currency_cd = invoice_details_tmp.plan_currency_cd , planning_nm = invoice_details_tmp.planning_nm , reconcile_amt = invoice_details_tmp.reconcile_amt , reconcile_note = invoice_details_tmp.reconcile_note , vendor_amt = invoice_details_tmp.vendor_amt , vendor_currency_cd = invoice_details_tmp.vendor_currency_cd , vendor_desc = invoice_details_tmp.vendor_desc , vendor_id = invoice_details_tmp.vendor_id , vendor_nm = invoice_details_tmp.vendor_nm , vendor_number = invoice_details_tmp.vendor_number , vendor_obsolete_flg = invoice_details_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cmtmnt_id,cmtmnt_nm,created_by_usernm,created_dttm,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_note,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cmtmnt_id,cmtmnt_nm,created_by_usernm,created_dttm,invoice_amt,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_amt,reconcile_note,vendor_amt,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        invoice_details_tmp.cmtmnt_id,invoice_details_tmp.cmtmnt_nm,invoice_details_tmp.created_by_usernm,invoice_details_tmp.created_dttm,invoice_details_tmp.invoice_created_dttm,invoice_details_tmp.invoice_desc,invoice_details_tmp.invoice_id,invoice_details_tmp.invoice_nm,invoice_details_tmp.invoice_number,invoice_details_tmp.invoice_reconciled_dttm,invoice_details_tmp.invoice_status,invoice_details_tmp.last_modified_dttm,invoice_details_tmp.last_modified_usernm,invoice_details_tmp.load_dttm,invoice_details_tmp.payment_dttm,invoice_details_tmp.plan_currency_cd,invoice_details_tmp.planning_id,invoice_details_tmp.planning_nm,invoice_details_tmp.reconcile_note,invoice_details_tmp.vendor_currency_cd,invoice_details_tmp.vendor_desc,invoice_details_tmp.vendor_id,invoice_details_tmp.vendor_nm,invoice_details_tmp.vendor_number,invoice_details_tmp.vendor_obsolete_flg
+        invoice_details_tmp.cmtmnt_id,invoice_details_tmp.cmtmnt_nm,invoice_details_tmp.created_by_usernm,invoice_details_tmp.created_dttm,invoice_details_tmp.invoice_amt,invoice_details_tmp.invoice_created_dttm,invoice_details_tmp.invoice_desc,invoice_details_tmp.invoice_id,invoice_details_tmp.invoice_nm,invoice_details_tmp.invoice_number,invoice_details_tmp.invoice_reconciled_dttm,invoice_details_tmp.invoice_status,invoice_details_tmp.last_modified_dttm,invoice_details_tmp.last_modified_usernm,invoice_details_tmp.load_dttm,invoice_details_tmp.payment_dttm,invoice_details_tmp.plan_currency_cd,invoice_details_tmp.planning_id,invoice_details_tmp.planning_nm,invoice_details_tmp.reconcile_amt,invoice_details_tmp.reconcile_note,invoice_details_tmp.vendor_amt,invoice_details_tmp.vendor_currency_cd,invoice_details_tmp.vendor_desc,invoice_details_tmp.vendor_id,invoice_details_tmp.vendor_nm,invoice_details_tmp.vendor_number,invoice_details_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4418,6 +4557,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..invoice_details;
       DROP TABLE work.invoice_details;
   QUIT;
  %end;
@@ -4448,11 +4588,11 @@
         execute (MERGE INTO &dbschema..invoice_line_items using &tmpdbschema..invoice_line_items_tmp          
          ON (invoice_line_items.cmtmnt_id=invoice_line_items_tmp.cmtmnt_id and invoice_line_items.invoice_id=invoice_line_items_tmp.invoice_id and invoice_line_items.invoice_nm=invoice_line_items_tmp.invoice_nm and invoice_line_items.invoice_number=invoice_line_items_tmp.invoice_number and invoice_line_items.planning_id=invoice_line_items_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET cc_desc = invoice_line_items_tmp.cc_desc , cc_nm = invoice_line_items_tmp.cc_nm , cc_owner_usernm = invoice_line_items_tmp.cc_owner_usernm , ccat_nm = invoice_line_items_tmp.ccat_nm , cmtmnt_nm = invoice_line_items_tmp.cmtmnt_nm , cost_center_id = invoice_line_items_tmp.cost_center_id , created_by_usernm = invoice_line_items_tmp.created_by_usernm , created_dttm = invoice_line_items_tmp.created_dttm , fin_acc_ccat_nm = invoice_line_items_tmp.fin_acc_ccat_nm , fin_acc_nm = invoice_line_items_tmp.fin_acc_nm , gen_ledger_cd = invoice_line_items_tmp.gen_ledger_cd , invoice_created_dttm = invoice_line_items_tmp.invoice_created_dttm , invoice_desc = invoice_line_items_tmp.invoice_desc , invoice_reconciled_dttm = invoice_line_items_tmp.invoice_reconciled_dttm , invoice_status = invoice_line_items_tmp.invoice_status , item_alloc_unit = invoice_line_items_tmp.item_alloc_unit , item_nm = invoice_line_items_tmp.item_nm , item_number = invoice_line_items_tmp.item_number , item_qty = invoice_line_items_tmp.item_qty , item_vend_alloc_unit = invoice_line_items_tmp.item_vend_alloc_unit , last_modified_dttm = invoice_line_items_tmp.last_modified_dttm , last_modified_usernm = invoice_line_items_tmp.last_modified_usernm , load_dttm = invoice_line_items_tmp.load_dttm , payment_dttm = invoice_line_items_tmp.payment_dttm , plan_currency_cd = invoice_line_items_tmp.plan_currency_cd , planning_nm = invoice_line_items_tmp.planning_nm , reconcile_note = invoice_line_items_tmp.reconcile_note , vendor_currency_cd = invoice_line_items_tmp.vendor_currency_cd , vendor_desc = invoice_line_items_tmp.vendor_desc , vendor_id = invoice_line_items_tmp.vendor_id , vendor_nm = invoice_line_items_tmp.vendor_nm , vendor_number = invoice_line_items_tmp.vendor_number , vendor_obsolete_flg = invoice_line_items_tmp.vendor_obsolete_flg
+        UPDATE SET cc_allocated_amt = invoice_line_items_tmp.cc_allocated_amt , cc_available_amt = invoice_line_items_tmp.cc_available_amt , cc_desc = invoice_line_items_tmp.cc_desc , cc_nm = invoice_line_items_tmp.cc_nm , cc_owner_usernm = invoice_line_items_tmp.cc_owner_usernm , cc_recon_alloc_amt = invoice_line_items_tmp.cc_recon_alloc_amt , ccat_nm = invoice_line_items_tmp.ccat_nm , cmtmnt_nm = invoice_line_items_tmp.cmtmnt_nm , cost_center_id = invoice_line_items_tmp.cost_center_id , created_by_usernm = invoice_line_items_tmp.created_by_usernm , created_dttm = invoice_line_items_tmp.created_dttm , fin_acc_ccat_nm = invoice_line_items_tmp.fin_acc_ccat_nm , fin_acc_nm = invoice_line_items_tmp.fin_acc_nm , gen_ledger_cd = invoice_line_items_tmp.gen_ledger_cd , invoice_amt = invoice_line_items_tmp.invoice_amt , invoice_created_dttm = invoice_line_items_tmp.invoice_created_dttm , invoice_desc = invoice_line_items_tmp.invoice_desc , invoice_reconciled_dttm = invoice_line_items_tmp.invoice_reconciled_dttm , invoice_status = invoice_line_items_tmp.invoice_status , item_alloc_amt = invoice_line_items_tmp.item_alloc_amt , item_alloc_unit = invoice_line_items_tmp.item_alloc_unit , item_nm = invoice_line_items_tmp.item_nm , item_number = invoice_line_items_tmp.item_number , item_qty = invoice_line_items_tmp.item_qty , item_rate = invoice_line_items_tmp.item_rate , item_vend_alloc_amt = invoice_line_items_tmp.item_vend_alloc_amt , item_vend_alloc_unit = invoice_line_items_tmp.item_vend_alloc_unit , last_modified_dttm = invoice_line_items_tmp.last_modified_dttm , last_modified_usernm = invoice_line_items_tmp.last_modified_usernm , load_dttm = invoice_line_items_tmp.load_dttm , payment_dttm = invoice_line_items_tmp.payment_dttm , plan_currency_cd = invoice_line_items_tmp.plan_currency_cd , planning_nm = invoice_line_items_tmp.planning_nm , reconcile_amt = invoice_line_items_tmp.reconcile_amt , reconcile_note = invoice_line_items_tmp.reconcile_note , vendor_amt = invoice_line_items_tmp.vendor_amt , vendor_currency_cd = invoice_line_items_tmp.vendor_currency_cd , vendor_desc = invoice_line_items_tmp.vendor_desc , vendor_id = invoice_line_items_tmp.vendor_id , vendor_nm = invoice_line_items_tmp.vendor_nm , vendor_number = invoice_line_items_tmp.vendor_number , vendor_obsolete_flg = invoice_line_items_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_desc,cc_nm,cc_owner_usernm,ccat_nm,cmtmnt_id,cmtmnt_nm,cost_center_id,created_by_usernm,created_dttm,fin_acc_ccat_nm,fin_acc_nm,gen_ledger_cd,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,item_alloc_unit,item_nm,item_number,item_qty,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_note,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cc_allocated_amt,cc_available_amt,cc_desc,cc_nm,cc_owner_usernm,cc_recon_alloc_amt,ccat_nm,cmtmnt_id,cmtmnt_nm,cost_center_id,created_by_usernm,created_dttm,fin_acc_ccat_nm,fin_acc_nm,gen_ledger_cd,invoice_amt,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,item_alloc_amt,item_alloc_unit,item_nm,item_number,item_qty,item_rate,item_vend_alloc_amt,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_amt,reconcile_note,vendor_amt,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        invoice_line_items_tmp.cc_desc,invoice_line_items_tmp.cc_nm,invoice_line_items_tmp.cc_owner_usernm,invoice_line_items_tmp.ccat_nm,invoice_line_items_tmp.cmtmnt_id,invoice_line_items_tmp.cmtmnt_nm,invoice_line_items_tmp.cost_center_id,invoice_line_items_tmp.created_by_usernm,invoice_line_items_tmp.created_dttm,invoice_line_items_tmp.fin_acc_ccat_nm,invoice_line_items_tmp.fin_acc_nm,invoice_line_items_tmp.gen_ledger_cd,invoice_line_items_tmp.invoice_created_dttm,invoice_line_items_tmp.invoice_desc,invoice_line_items_tmp.invoice_id,invoice_line_items_tmp.invoice_nm,invoice_line_items_tmp.invoice_number,invoice_line_items_tmp.invoice_reconciled_dttm,invoice_line_items_tmp.invoice_status,invoice_line_items_tmp.item_alloc_unit,invoice_line_items_tmp.item_nm,invoice_line_items_tmp.item_number,invoice_line_items_tmp.item_qty,invoice_line_items_tmp.item_vend_alloc_unit,invoice_line_items_tmp.last_modified_dttm,invoice_line_items_tmp.last_modified_usernm,invoice_line_items_tmp.load_dttm,invoice_line_items_tmp.payment_dttm,invoice_line_items_tmp.plan_currency_cd,invoice_line_items_tmp.planning_id,invoice_line_items_tmp.planning_nm,invoice_line_items_tmp.reconcile_note,invoice_line_items_tmp.vendor_currency_cd,invoice_line_items_tmp.vendor_desc,invoice_line_items_tmp.vendor_id,invoice_line_items_tmp.vendor_nm,invoice_line_items_tmp.vendor_number,invoice_line_items_tmp.vendor_obsolete_flg
+        invoice_line_items_tmp.cc_allocated_amt,invoice_line_items_tmp.cc_available_amt,invoice_line_items_tmp.cc_desc,invoice_line_items_tmp.cc_nm,invoice_line_items_tmp.cc_owner_usernm,invoice_line_items_tmp.cc_recon_alloc_amt,invoice_line_items_tmp.ccat_nm,invoice_line_items_tmp.cmtmnt_id,invoice_line_items_tmp.cmtmnt_nm,invoice_line_items_tmp.cost_center_id,invoice_line_items_tmp.created_by_usernm,invoice_line_items_tmp.created_dttm,invoice_line_items_tmp.fin_acc_ccat_nm,invoice_line_items_tmp.fin_acc_nm,invoice_line_items_tmp.gen_ledger_cd,invoice_line_items_tmp.invoice_amt,invoice_line_items_tmp.invoice_created_dttm,invoice_line_items_tmp.invoice_desc,invoice_line_items_tmp.invoice_id,invoice_line_items_tmp.invoice_nm,invoice_line_items_tmp.invoice_number,invoice_line_items_tmp.invoice_reconciled_dttm,invoice_line_items_tmp.invoice_status,invoice_line_items_tmp.item_alloc_amt,invoice_line_items_tmp.item_alloc_unit,invoice_line_items_tmp.item_nm,invoice_line_items_tmp.item_number,invoice_line_items_tmp.item_qty,invoice_line_items_tmp.item_rate,invoice_line_items_tmp.item_vend_alloc_amt,invoice_line_items_tmp.item_vend_alloc_unit,invoice_line_items_tmp.last_modified_dttm,invoice_line_items_tmp.last_modified_usernm,invoice_line_items_tmp.load_dttm,invoice_line_items_tmp.payment_dttm,invoice_line_items_tmp.plan_currency_cd,invoice_line_items_tmp.planning_id,invoice_line_items_tmp.planning_nm,invoice_line_items_tmp.reconcile_amt,invoice_line_items_tmp.reconcile_note,invoice_line_items_tmp.vendor_amt,invoice_line_items_tmp.vendor_currency_cd,invoice_line_items_tmp.vendor_desc,invoice_line_items_tmp.vendor_id,invoice_line_items_tmp.vendor_nm,invoice_line_items_tmp.vendor_number,invoice_line_items_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4466,6 +4606,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..invoice_line_items;
       DROP TABLE work.invoice_line_items;
   QUIT;
  %end;
@@ -4496,11 +4637,11 @@
         execute (MERGE INTO &dbschema..invoice_line_items_ccbdgt using &tmpdbschema..invoice_line_items_ccbdgt_tmp   
          ON (invoice_line_items_ccbdgt.invoice_id=invoice_line_items_ccbdgt_tmp.invoice_id and invoice_line_items_ccbdgt.item_number=invoice_line_items_ccbdgt_tmp.item_number)
         WHEN MATCHED THEN  
-        UPDATE SET cc_bdgt_budget_desc = invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_cnt = invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_desc = invoice_line_items_ccbdgt_tmp.cc_desc , cc_nm = invoice_line_items_ccbdgt_tmp.cc_nm , cc_number = invoice_line_items_ccbdgt_tmp.cc_number , cc_obsolete_flg = invoice_line_items_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = invoice_line_items_ccbdgt_tmp.cc_owner_usernm , ccat_nm = invoice_line_items_ccbdgt_tmp.ccat_nm , cmtmnt_id = invoice_line_items_ccbdgt_tmp.cmtmnt_id , cmtmnt_nm = invoice_line_items_ccbdgt_tmp.cmtmnt_nm , cost_center_id = invoice_line_items_ccbdgt_tmp.cost_center_id , created_by_usernm = invoice_line_items_ccbdgt_tmp.created_by_usernm , created_dttm = invoice_line_items_ccbdgt_tmp.created_dttm , fin_acc_ccat_nm = invoice_line_items_ccbdgt_tmp.fin_acc_ccat_nm , fin_acc_nm = invoice_line_items_ccbdgt_tmp.fin_acc_nm , fp_cls_ver = invoice_line_items_ccbdgt_tmp.fp_cls_ver , fp_desc = invoice_line_items_ccbdgt_tmp.fp_desc , fp_id = invoice_line_items_ccbdgt_tmp.fp_id , fp_nm = invoice_line_items_ccbdgt_tmp.fp_nm , fp_obsolete_flg = invoice_line_items_ccbdgt_tmp.fp_obsolete_flg , gen_ledger_cd = invoice_line_items_ccbdgt_tmp.gen_ledger_cd , invoice_created_dttm = invoice_line_items_ccbdgt_tmp.invoice_created_dttm , invoice_desc = invoice_line_items_ccbdgt_tmp.invoice_desc , invoice_nm = invoice_line_items_ccbdgt_tmp.invoice_nm , invoice_number = invoice_line_items_ccbdgt_tmp.invoice_number , invoice_reconciled_dttm = invoice_line_items_ccbdgt_tmp.invoice_reconciled_dttm , invoice_status = invoice_line_items_ccbdgt_tmp.invoice_status , item_alloc_unit = invoice_line_items_ccbdgt_tmp.item_alloc_unit , item_nm = invoice_line_items_ccbdgt_tmp.item_nm , item_qty = invoice_line_items_ccbdgt_tmp.item_qty , item_vend_alloc_unit = invoice_line_items_ccbdgt_tmp.item_vend_alloc_unit , last_modified_dttm = invoice_line_items_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = invoice_line_items_ccbdgt_tmp.last_modified_usernm , load_dttm = invoice_line_items_ccbdgt_tmp.load_dttm , payment_dttm = invoice_line_items_ccbdgt_tmp.payment_dttm , plan_currency_cd = invoice_line_items_ccbdgt_tmp.plan_currency_cd , planning_id = invoice_line_items_ccbdgt_tmp.planning_id , planning_nm = invoice_line_items_ccbdgt_tmp.planning_nm , reconcile_note = invoice_line_items_ccbdgt_tmp.reconcile_note , vendor_currency_cd = invoice_line_items_ccbdgt_tmp.vendor_currency_cd , vendor_desc = invoice_line_items_ccbdgt_tmp.vendor_desc , vendor_id = invoice_line_items_ccbdgt_tmp.vendor_id , vendor_nm = invoice_line_items_ccbdgt_tmp.vendor_nm , vendor_number = invoice_line_items_ccbdgt_tmp.vendor_number , vendor_obsolete_flg = invoice_line_items_ccbdgt_tmp.vendor_obsolete_flg
+        UPDATE SET cc_allocated_amt = invoice_line_items_ccbdgt_tmp.cc_allocated_amt , cc_available_amt = invoice_line_items_ccbdgt_tmp.cc_available_amt , cc_bdgt_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_amt , cc_bdgt_budget_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_amt , cc_bdgt_budget_desc = invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_desc , cc_bdgt_cmtmnt_invoice_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt , cc_bdgt_cmtmnt_invoice_cnt = invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt , cc_bdgt_cmtmnt_outstanding_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt , cc_bdgt_cmtmnt_overspent_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt , cc_bdgt_committed_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_committed_amt , cc_bdgt_direct_invoice_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_direct_invoice_amt , cc_bdgt_invoiced_amt = invoice_line_items_ccbdgt_tmp.cc_bdgt_invoiced_amt , cc_desc = invoice_line_items_ccbdgt_tmp.cc_desc , cc_nm = invoice_line_items_ccbdgt_tmp.cc_nm , cc_number = invoice_line_items_ccbdgt_tmp.cc_number , cc_obsolete_flg = invoice_line_items_ccbdgt_tmp.cc_obsolete_flg , cc_owner_usernm = invoice_line_items_ccbdgt_tmp.cc_owner_usernm , cc_recon_alloc_amt = invoice_line_items_ccbdgt_tmp.cc_recon_alloc_amt , ccat_nm = invoice_line_items_ccbdgt_tmp.ccat_nm , cmtmnt_id = invoice_line_items_ccbdgt_tmp.cmtmnt_id , cmtmnt_nm = invoice_line_items_ccbdgt_tmp.cmtmnt_nm , cost_center_id = invoice_line_items_ccbdgt_tmp.cost_center_id , created_by_usernm = invoice_line_items_ccbdgt_tmp.created_by_usernm , created_dttm = invoice_line_items_ccbdgt_tmp.created_dttm , fin_acc_ccat_nm = invoice_line_items_ccbdgt_tmp.fin_acc_ccat_nm , fin_acc_nm = invoice_line_items_ccbdgt_tmp.fin_acc_nm , fp_cls_ver = invoice_line_items_ccbdgt_tmp.fp_cls_ver , fp_desc = invoice_line_items_ccbdgt_tmp.fp_desc , fp_end_dt = invoice_line_items_ccbdgt_tmp.fp_end_dt , fp_id = invoice_line_items_ccbdgt_tmp.fp_id , fp_nm = invoice_line_items_ccbdgt_tmp.fp_nm , fp_obsolete_flg = invoice_line_items_ccbdgt_tmp.fp_obsolete_flg , fp_start_dt = invoice_line_items_ccbdgt_tmp.fp_start_dt , gen_ledger_cd = invoice_line_items_ccbdgt_tmp.gen_ledger_cd , invoice_amt = invoice_line_items_ccbdgt_tmp.invoice_amt , invoice_created_dttm = invoice_line_items_ccbdgt_tmp.invoice_created_dttm , invoice_desc = invoice_line_items_ccbdgt_tmp.invoice_desc , invoice_nm = invoice_line_items_ccbdgt_tmp.invoice_nm , invoice_number = invoice_line_items_ccbdgt_tmp.invoice_number , invoice_reconciled_dttm = invoice_line_items_ccbdgt_tmp.invoice_reconciled_dttm , invoice_status = invoice_line_items_ccbdgt_tmp.invoice_status , item_alloc_amt = invoice_line_items_ccbdgt_tmp.item_alloc_amt , item_alloc_unit = invoice_line_items_ccbdgt_tmp.item_alloc_unit , item_nm = invoice_line_items_ccbdgt_tmp.item_nm , item_qty = invoice_line_items_ccbdgt_tmp.item_qty , item_rate = invoice_line_items_ccbdgt_tmp.item_rate , item_vend_alloc_amt = invoice_line_items_ccbdgt_tmp.item_vend_alloc_amt , item_vend_alloc_unit = invoice_line_items_ccbdgt_tmp.item_vend_alloc_unit , last_modified_dttm = invoice_line_items_ccbdgt_tmp.last_modified_dttm , last_modified_usernm = invoice_line_items_ccbdgt_tmp.last_modified_usernm , load_dttm = invoice_line_items_ccbdgt_tmp.load_dttm , payment_dttm = invoice_line_items_ccbdgt_tmp.payment_dttm , plan_currency_cd = invoice_line_items_ccbdgt_tmp.plan_currency_cd , planning_id = invoice_line_items_ccbdgt_tmp.planning_id , planning_nm = invoice_line_items_ccbdgt_tmp.planning_nm , reconcile_amt = invoice_line_items_ccbdgt_tmp.reconcile_amt , reconcile_note = invoice_line_items_ccbdgt_tmp.reconcile_note , vendor_amt = invoice_line_items_ccbdgt_tmp.vendor_amt , vendor_currency_cd = invoice_line_items_ccbdgt_tmp.vendor_currency_cd , vendor_desc = invoice_line_items_ccbdgt_tmp.vendor_desc , vendor_id = invoice_line_items_ccbdgt_tmp.vendor_id , vendor_nm = invoice_line_items_ccbdgt_tmp.vendor_nm , vendor_number = invoice_line_items_ccbdgt_tmp.vendor_number , vendor_obsolete_flg = invoice_line_items_ccbdgt_tmp.vendor_obsolete_flg
         WHEN NOT MATCHED THEN INSERT ( 
-        cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_cnt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,ccat_nm,cmtmnt_id,cmtmnt_nm,cost_center_id,created_by_usernm,created_dttm,fin_acc_ccat_nm,fin_acc_nm,fp_cls_ver,fp_desc,fp_id,fp_nm,fp_obsolete_flg,gen_ledger_cd,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,item_alloc_unit,item_nm,item_number,item_qty,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_note,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
+        cc_allocated_amt,cc_available_amt,cc_bdgt_amt,cc_bdgt_budget_amt,cc_bdgt_budget_desc,cc_bdgt_cmtmnt_invoice_amt,cc_bdgt_cmtmnt_invoice_cnt,cc_bdgt_cmtmnt_outstanding_amt,cc_bdgt_cmtmnt_overspent_amt,cc_bdgt_committed_amt,cc_bdgt_direct_invoice_amt,cc_bdgt_invoiced_amt,cc_desc,cc_nm,cc_number,cc_obsolete_flg,cc_owner_usernm,cc_recon_alloc_amt,ccat_nm,cmtmnt_id,cmtmnt_nm,cost_center_id,created_by_usernm,created_dttm,fin_acc_ccat_nm,fin_acc_nm,fp_cls_ver,fp_desc,fp_end_dt,fp_id,fp_nm,fp_obsolete_flg,fp_start_dt,gen_ledger_cd,invoice_amt,invoice_created_dttm,invoice_desc,invoice_id,invoice_nm,invoice_number,invoice_reconciled_dttm,invoice_status,item_alloc_amt,item_alloc_unit,item_nm,item_number,item_qty,item_rate,item_vend_alloc_amt,item_vend_alloc_unit,last_modified_dttm,last_modified_usernm,load_dttm,payment_dttm,plan_currency_cd,planning_id,planning_nm,reconcile_amt,reconcile_note,vendor_amt,vendor_currency_cd,vendor_desc,vendor_id,vendor_nm,vendor_number,vendor_obsolete_flg
          ) values ( 
-        invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_desc,invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,invoice_line_items_ccbdgt_tmp.cc_desc,invoice_line_items_ccbdgt_tmp.cc_nm,invoice_line_items_ccbdgt_tmp.cc_number,invoice_line_items_ccbdgt_tmp.cc_obsolete_flg,invoice_line_items_ccbdgt_tmp.cc_owner_usernm,invoice_line_items_ccbdgt_tmp.ccat_nm,invoice_line_items_ccbdgt_tmp.cmtmnt_id,invoice_line_items_ccbdgt_tmp.cmtmnt_nm,invoice_line_items_ccbdgt_tmp.cost_center_id,invoice_line_items_ccbdgt_tmp.created_by_usernm,invoice_line_items_ccbdgt_tmp.created_dttm,invoice_line_items_ccbdgt_tmp.fin_acc_ccat_nm,invoice_line_items_ccbdgt_tmp.fin_acc_nm,invoice_line_items_ccbdgt_tmp.fp_cls_ver,invoice_line_items_ccbdgt_tmp.fp_desc,invoice_line_items_ccbdgt_tmp.fp_id,invoice_line_items_ccbdgt_tmp.fp_nm,invoice_line_items_ccbdgt_tmp.fp_obsolete_flg,invoice_line_items_ccbdgt_tmp.gen_ledger_cd,invoice_line_items_ccbdgt_tmp.invoice_created_dttm,invoice_line_items_ccbdgt_tmp.invoice_desc,invoice_line_items_ccbdgt_tmp.invoice_id,invoice_line_items_ccbdgt_tmp.invoice_nm,invoice_line_items_ccbdgt_tmp.invoice_number,invoice_line_items_ccbdgt_tmp.invoice_reconciled_dttm,invoice_line_items_ccbdgt_tmp.invoice_status,invoice_line_items_ccbdgt_tmp.item_alloc_unit,invoice_line_items_ccbdgt_tmp.item_nm,invoice_line_items_ccbdgt_tmp.item_number,invoice_line_items_ccbdgt_tmp.item_qty,invoice_line_items_ccbdgt_tmp.item_vend_alloc_unit,invoice_line_items_ccbdgt_tmp.last_modified_dttm,invoice_line_items_ccbdgt_tmp.last_modified_usernm,invoice_line_items_ccbdgt_tmp.load_dttm,invoice_line_items_ccbdgt_tmp.payment_dttm,invoice_line_items_ccbdgt_tmp.plan_currency_cd,invoice_line_items_ccbdgt_tmp.planning_id,invoice_line_items_ccbdgt_tmp.planning_nm,invoice_line_items_ccbdgt_tmp.reconcile_note,invoice_line_items_ccbdgt_tmp.vendor_currency_cd,invoice_line_items_ccbdgt_tmp.vendor_desc,invoice_line_items_ccbdgt_tmp.vendor_id,invoice_line_items_ccbdgt_tmp.vendor_nm,invoice_line_items_ccbdgt_tmp.vendor_number,invoice_line_items_ccbdgt_tmp.vendor_obsolete_flg
+        invoice_line_items_ccbdgt_tmp.cc_allocated_amt,invoice_line_items_ccbdgt_tmp.cc_available_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_budget_desc,invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_invoice_cnt,invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_outstanding_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_cmtmnt_overspent_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_committed_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_direct_invoice_amt,invoice_line_items_ccbdgt_tmp.cc_bdgt_invoiced_amt,invoice_line_items_ccbdgt_tmp.cc_desc,invoice_line_items_ccbdgt_tmp.cc_nm,invoice_line_items_ccbdgt_tmp.cc_number,invoice_line_items_ccbdgt_tmp.cc_obsolete_flg,invoice_line_items_ccbdgt_tmp.cc_owner_usernm,invoice_line_items_ccbdgt_tmp.cc_recon_alloc_amt,invoice_line_items_ccbdgt_tmp.ccat_nm,invoice_line_items_ccbdgt_tmp.cmtmnt_id,invoice_line_items_ccbdgt_tmp.cmtmnt_nm,invoice_line_items_ccbdgt_tmp.cost_center_id,invoice_line_items_ccbdgt_tmp.created_by_usernm,invoice_line_items_ccbdgt_tmp.created_dttm,invoice_line_items_ccbdgt_tmp.fin_acc_ccat_nm,invoice_line_items_ccbdgt_tmp.fin_acc_nm,invoice_line_items_ccbdgt_tmp.fp_cls_ver,invoice_line_items_ccbdgt_tmp.fp_desc,invoice_line_items_ccbdgt_tmp.fp_end_dt,invoice_line_items_ccbdgt_tmp.fp_id,invoice_line_items_ccbdgt_tmp.fp_nm,invoice_line_items_ccbdgt_tmp.fp_obsolete_flg,invoice_line_items_ccbdgt_tmp.fp_start_dt,invoice_line_items_ccbdgt_tmp.gen_ledger_cd,invoice_line_items_ccbdgt_tmp.invoice_amt,invoice_line_items_ccbdgt_tmp.invoice_created_dttm,invoice_line_items_ccbdgt_tmp.invoice_desc,invoice_line_items_ccbdgt_tmp.invoice_id,invoice_line_items_ccbdgt_tmp.invoice_nm,invoice_line_items_ccbdgt_tmp.invoice_number,invoice_line_items_ccbdgt_tmp.invoice_reconciled_dttm,invoice_line_items_ccbdgt_tmp.invoice_status,invoice_line_items_ccbdgt_tmp.item_alloc_amt,invoice_line_items_ccbdgt_tmp.item_alloc_unit,invoice_line_items_ccbdgt_tmp.item_nm,invoice_line_items_ccbdgt_tmp.item_number,invoice_line_items_ccbdgt_tmp.item_qty,invoice_line_items_ccbdgt_tmp.item_rate,invoice_line_items_ccbdgt_tmp.item_vend_alloc_amt,invoice_line_items_ccbdgt_tmp.item_vend_alloc_unit,invoice_line_items_ccbdgt_tmp.last_modified_dttm,invoice_line_items_ccbdgt_tmp.last_modified_usernm,invoice_line_items_ccbdgt_tmp.load_dttm,invoice_line_items_ccbdgt_tmp.payment_dttm,invoice_line_items_ccbdgt_tmp.plan_currency_cd,invoice_line_items_ccbdgt_tmp.planning_id,invoice_line_items_ccbdgt_tmp.planning_nm,invoice_line_items_ccbdgt_tmp.reconcile_amt,invoice_line_items_ccbdgt_tmp.reconcile_note,invoice_line_items_ccbdgt_tmp.vendor_amt,invoice_line_items_ccbdgt_tmp.vendor_currency_cd,invoice_line_items_ccbdgt_tmp.vendor_desc,invoice_line_items_ccbdgt_tmp.vendor_id,invoice_line_items_ccbdgt_tmp.vendor_nm,invoice_line_items_ccbdgt_tmp.vendor_number,invoice_line_items_ccbdgt_tmp.vendor_obsolete_flg
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4514,6 +4655,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..invoice_line_items_ccbdgt;
       DROP TABLE work.invoice_line_items_ccbdgt;
   QUIT;
  %end;
@@ -4544,11 +4686,11 @@
         execute (MERGE INTO &dbschema..journey_entry using &tmpdbschema..journey_entry_tmp               
          ON (journey_entry.event_id=journey_entry_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_entry_tmp.aud_occurrence_id , audience_id = journey_entry_tmp.audience_id , entry_dttm = journey_entry_tmp.entry_dttm , entry_dttm_tz = journey_entry_tmp.entry_dttm_tz , event_nm = journey_entry_tmp.event_nm , identity_id = journey_entry_tmp.identity_id , identity_type_nm = journey_entry_tmp.identity_type_nm , identity_type_val = journey_entry_tmp.identity_type_val , journey_id = journey_entry_tmp.journey_id , journey_occurrence_id = journey_entry_tmp.journey_occurrence_id , load_dttm = journey_entry_tmp.load_dttm
+        UPDATE SET aud_occurrence_id = journey_entry_tmp.aud_occurrence_id , audience_id = journey_entry_tmp.audience_id , context_type_nm = journey_entry_tmp.context_type_nm , context_val = journey_entry_tmp.context_val , entry_dttm = journey_entry_tmp.entry_dttm , entry_dttm_tz = journey_entry_tmp.entry_dttm_tz , event_nm = journey_entry_tmp.event_nm , identity_id = journey_entry_tmp.identity_id , identity_type_nm = journey_entry_tmp.identity_type_nm , identity_type_val = journey_entry_tmp.identity_type_val , journey_id = journey_entry_tmp.journey_id , journey_occurrence_id = journey_entry_tmp.journey_occurrence_id , load_dttm = journey_entry_tmp.load_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,entry_dttm,entry_dttm_tz,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm
+        aud_occurrence_id,audience_id,context_type_nm,context_val,entry_dttm,entry_dttm_tz,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm
          ) values ( 
-        journey_entry_tmp.aud_occurrence_id,journey_entry_tmp.audience_id,journey_entry_tmp.entry_dttm,journey_entry_tmp.entry_dttm_tz,journey_entry_tmp.event_id,journey_entry_tmp.event_nm,journey_entry_tmp.identity_id,journey_entry_tmp.identity_type_nm,journey_entry_tmp.identity_type_val,journey_entry_tmp.journey_id,journey_entry_tmp.journey_occurrence_id,journey_entry_tmp.load_dttm
+        journey_entry_tmp.aud_occurrence_id,journey_entry_tmp.audience_id,journey_entry_tmp.context_type_nm,journey_entry_tmp.context_val,journey_entry_tmp.entry_dttm,journey_entry_tmp.entry_dttm_tz,journey_entry_tmp.event_id,journey_entry_tmp.event_nm,journey_entry_tmp.identity_id,journey_entry_tmp.identity_type_nm,journey_entry_tmp.identity_type_val,journey_entry_tmp.journey_id,journey_entry_tmp.journey_occurrence_id,journey_entry_tmp.load_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4562,6 +4704,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_entry;
       DROP TABLE work.journey_entry;
   QUIT;
  %end;
@@ -4592,11 +4735,11 @@
         execute (MERGE INTO &dbschema..journey_exit using &tmpdbschema..journey_exit_tmp                
          ON (journey_exit.event_id=journey_exit_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_exit_tmp.aud_occurrence_id , audience_id = journey_exit_tmp.audience_id , event_nm = journey_exit_tmp.event_nm , exit_dttm = journey_exit_tmp.exit_dttm , exit_dttm_tz = journey_exit_tmp.exit_dttm_tz , identity_id = journey_exit_tmp.identity_id , identity_type_nm = journey_exit_tmp.identity_type_nm , identity_type_val = journey_exit_tmp.identity_type_val , journey_id = journey_exit_tmp.journey_id , journey_occurrence_id = journey_exit_tmp.journey_occurrence_id , last_node_id = journey_exit_tmp.last_node_id , load_dttm = journey_exit_tmp.load_dttm , reason_cd = journey_exit_tmp.reason_cd , reason_txt = journey_exit_tmp.reason_txt
+        UPDATE SET aud_occurrence_id = journey_exit_tmp.aud_occurrence_id , audience_id = journey_exit_tmp.audience_id , context_type_nm = journey_exit_tmp.context_type_nm , context_val = journey_exit_tmp.context_val , event_nm = journey_exit_tmp.event_nm , exit_dttm = journey_exit_tmp.exit_dttm , exit_dttm_tz = journey_exit_tmp.exit_dttm_tz , identity_id = journey_exit_tmp.identity_id , identity_type_nm = journey_exit_tmp.identity_type_nm , identity_type_val = journey_exit_tmp.identity_type_val , journey_id = journey_exit_tmp.journey_id , journey_occurrence_id = journey_exit_tmp.journey_occurrence_id , last_node_id = journey_exit_tmp.last_node_id , load_dttm = journey_exit_tmp.load_dttm , reason_cd = journey_exit_tmp.reason_cd , reason_txt = journey_exit_tmp.reason_txt
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,event_id,event_nm,exit_dttm,exit_dttm_tz,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,last_node_id,load_dttm,reason_cd,reason_txt
+        aud_occurrence_id,audience_id,context_type_nm,context_val,event_id,event_nm,exit_dttm,exit_dttm_tz,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,last_node_id,load_dttm,reason_cd,reason_txt
          ) values ( 
-        journey_exit_tmp.aud_occurrence_id,journey_exit_tmp.audience_id,journey_exit_tmp.event_id,journey_exit_tmp.event_nm,journey_exit_tmp.exit_dttm,journey_exit_tmp.exit_dttm_tz,journey_exit_tmp.identity_id,journey_exit_tmp.identity_type_nm,journey_exit_tmp.identity_type_val,journey_exit_tmp.journey_id,journey_exit_tmp.journey_occurrence_id,journey_exit_tmp.last_node_id,journey_exit_tmp.load_dttm,journey_exit_tmp.reason_cd,journey_exit_tmp.reason_txt
+        journey_exit_tmp.aud_occurrence_id,journey_exit_tmp.audience_id,journey_exit_tmp.context_type_nm,journey_exit_tmp.context_val,journey_exit_tmp.event_id,journey_exit_tmp.event_nm,journey_exit_tmp.exit_dttm,journey_exit_tmp.exit_dttm_tz,journey_exit_tmp.identity_id,journey_exit_tmp.identity_type_nm,journey_exit_tmp.identity_type_val,journey_exit_tmp.journey_id,journey_exit_tmp.journey_occurrence_id,journey_exit_tmp.last_node_id,journey_exit_tmp.load_dttm,journey_exit_tmp.reason_cd,journey_exit_tmp.reason_txt
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4610,6 +4753,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_exit;
       DROP TABLE work.journey_exit;
   QUIT;
  %end;
@@ -4640,11 +4784,11 @@
         execute (MERGE INTO &dbschema..journey_holdout using &tmpdbschema..journey_holdout_tmp             
          ON (journey_holdout.event_id=journey_holdout_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_holdout_tmp.aud_occurrence_id , audience_id = journey_holdout_tmp.audience_id , event_nm = journey_holdout_tmp.event_nm , holdout_dttm = journey_holdout_tmp.holdout_dttm , holdout_dttm_tz = journey_holdout_tmp.holdout_dttm_tz , identity_id = journey_holdout_tmp.identity_id , identity_type_nm = journey_holdout_tmp.identity_type_nm , identity_type_val = journey_holdout_tmp.identity_type_val , journey_id = journey_holdout_tmp.journey_id , journey_occurrence_id = journey_holdout_tmp.journey_occurrence_id , load_dttm = journey_holdout_tmp.load_dttm
+        UPDATE SET aud_occurrence_id = journey_holdout_tmp.aud_occurrence_id , audience_id = journey_holdout_tmp.audience_id , context_type_nm = journey_holdout_tmp.context_type_nm , context_val = journey_holdout_tmp.context_val , event_nm = journey_holdout_tmp.event_nm , holdout_dttm = journey_holdout_tmp.holdout_dttm , holdout_dttm_tz = journey_holdout_tmp.holdout_dttm_tz , identity_id = journey_holdout_tmp.identity_id , identity_type_nm = journey_holdout_tmp.identity_type_nm , identity_type_val = journey_holdout_tmp.identity_type_val , journey_id = journey_holdout_tmp.journey_id , journey_occurrence_id = journey_holdout_tmp.journey_occurrence_id , load_dttm = journey_holdout_tmp.load_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,event_id,event_nm,holdout_dttm,holdout_dttm_tz,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm
+        aud_occurrence_id,audience_id,context_type_nm,context_val,event_id,event_nm,holdout_dttm,holdout_dttm_tz,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm
          ) values ( 
-        journey_holdout_tmp.aud_occurrence_id,journey_holdout_tmp.audience_id,journey_holdout_tmp.event_id,journey_holdout_tmp.event_nm,journey_holdout_tmp.holdout_dttm,journey_holdout_tmp.holdout_dttm_tz,journey_holdout_tmp.identity_id,journey_holdout_tmp.identity_type_nm,journey_holdout_tmp.identity_type_val,journey_holdout_tmp.journey_id,journey_holdout_tmp.journey_occurrence_id,journey_holdout_tmp.load_dttm
+        journey_holdout_tmp.aud_occurrence_id,journey_holdout_tmp.audience_id,journey_holdout_tmp.context_type_nm,journey_holdout_tmp.context_val,journey_holdout_tmp.event_id,journey_holdout_tmp.event_nm,journey_holdout_tmp.holdout_dttm,journey_holdout_tmp.holdout_dttm_tz,journey_holdout_tmp.identity_id,journey_holdout_tmp.identity_type_nm,journey_holdout_tmp.identity_type_val,journey_holdout_tmp.journey_id,journey_holdout_tmp.journey_occurrence_id,journey_holdout_tmp.load_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4658,6 +4802,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_holdout;
       DROP TABLE work.journey_holdout;
   QUIT;
  %end;
@@ -4688,11 +4833,11 @@
         execute (MERGE INTO &dbschema..journey_node_entry using &tmpdbschema..journey_node_entry_tmp          
          ON (journey_node_entry.event_id=journey_node_entry_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_node_entry_tmp.aud_occurrence_id , audience_id = journey_node_entry_tmp.audience_id , event_nm = journey_node_entry_tmp.event_nm , identity_id = journey_node_entry_tmp.identity_id , identity_type_nm = journey_node_entry_tmp.identity_type_nm , identity_type_val = journey_node_entry_tmp.identity_type_val , journey_id = journey_node_entry_tmp.journey_id , journey_occurrence_id = journey_node_entry_tmp.journey_occurrence_id , load_dttm = journey_node_entry_tmp.load_dttm , node_entry_dttm = journey_node_entry_tmp.node_entry_dttm , node_entry_dttm_tz = journey_node_entry_tmp.node_entry_dttm_tz , node_id = journey_node_entry_tmp.node_id , node_type_nm = journey_node_entry_tmp.node_type_nm , previous_node_id = journey_node_entry_tmp.previous_node_id
+        UPDATE SET aud_occurrence_id = journey_node_entry_tmp.aud_occurrence_id , audience_id = journey_node_entry_tmp.audience_id , context_type_nm = journey_node_entry_tmp.context_type_nm , context_val = journey_node_entry_tmp.context_val , event_nm = journey_node_entry_tmp.event_nm , identity_id = journey_node_entry_tmp.identity_id , identity_type_nm = journey_node_entry_tmp.identity_type_nm , identity_type_val = journey_node_entry_tmp.identity_type_val , journey_id = journey_node_entry_tmp.journey_id , journey_occurrence_id = journey_node_entry_tmp.journey_occurrence_id , load_dttm = journey_node_entry_tmp.load_dttm , node_entry_dttm = journey_node_entry_tmp.node_entry_dttm , node_entry_dttm_tz = journey_node_entry_tmp.node_entry_dttm_tz , node_id = journey_node_entry_tmp.node_id , node_type_nm = journey_node_entry_tmp.node_type_nm , previous_node_id = journey_node_entry_tmp.previous_node_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,node_entry_dttm,node_entry_dttm_tz,node_id,node_type_nm,previous_node_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,node_entry_dttm,node_entry_dttm_tz,node_id,node_type_nm,previous_node_id
          ) values ( 
-        journey_node_entry_tmp.aud_occurrence_id,journey_node_entry_tmp.audience_id,journey_node_entry_tmp.event_id,journey_node_entry_tmp.event_nm,journey_node_entry_tmp.identity_id,journey_node_entry_tmp.identity_type_nm,journey_node_entry_tmp.identity_type_val,journey_node_entry_tmp.journey_id,journey_node_entry_tmp.journey_occurrence_id,journey_node_entry_tmp.load_dttm,journey_node_entry_tmp.node_entry_dttm,journey_node_entry_tmp.node_entry_dttm_tz,journey_node_entry_tmp.node_id,journey_node_entry_tmp.node_type_nm,journey_node_entry_tmp.previous_node_id
+        journey_node_entry_tmp.aud_occurrence_id,journey_node_entry_tmp.audience_id,journey_node_entry_tmp.context_type_nm,journey_node_entry_tmp.context_val,journey_node_entry_tmp.event_id,journey_node_entry_tmp.event_nm,journey_node_entry_tmp.identity_id,journey_node_entry_tmp.identity_type_nm,journey_node_entry_tmp.identity_type_val,journey_node_entry_tmp.journey_id,journey_node_entry_tmp.journey_occurrence_id,journey_node_entry_tmp.load_dttm,journey_node_entry_tmp.node_entry_dttm,journey_node_entry_tmp.node_entry_dttm_tz,journey_node_entry_tmp.node_id,journey_node_entry_tmp.node_type_nm,journey_node_entry_tmp.previous_node_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4706,6 +4851,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_node_entry;
       DROP TABLE work.journey_node_entry;
   QUIT;
  %end;
@@ -4736,11 +4882,11 @@
         execute (MERGE INTO &dbschema..journey_success using &tmpdbschema..journey_success_tmp             
          ON (journey_success.event_id=journey_success_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_success_tmp.aud_occurrence_id , audience_id = journey_success_tmp.audience_id , event_nm = journey_success_tmp.event_nm , identity_id = journey_success_tmp.identity_id , identity_type_nm = journey_success_tmp.identity_type_nm , identity_type_val = journey_success_tmp.identity_type_val , journey_id = journey_success_tmp.journey_id , journey_occurrence_id = journey_success_tmp.journey_occurrence_id , load_dttm = journey_success_tmp.load_dttm , success_dttm = journey_success_tmp.success_dttm , success_dttm_tz = journey_success_tmp.success_dttm_tz , success_val = journey_success_tmp.success_val , unit_qty = journey_success_tmp.unit_qty
+        UPDATE SET aud_occurrence_id = journey_success_tmp.aud_occurrence_id , audience_id = journey_success_tmp.audience_id , context_type_nm = journey_success_tmp.context_type_nm , context_val = journey_success_tmp.context_val , event_nm = journey_success_tmp.event_nm , identity_id = journey_success_tmp.identity_id , identity_type_nm = journey_success_tmp.identity_type_nm , identity_type_val = journey_success_tmp.identity_type_val , journey_id = journey_success_tmp.journey_id , journey_occurrence_id = journey_success_tmp.journey_occurrence_id , load_dttm = journey_success_tmp.load_dttm , success_dttm = journey_success_tmp.success_dttm , success_dttm_tz = journey_success_tmp.success_dttm_tz , success_val = journey_success_tmp.success_val , unit_qty = journey_success_tmp.unit_qty
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,success_dttm,success_dttm_tz,success_val,unit_qty
+        aud_occurrence_id,audience_id,context_type_nm,context_val,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,success_dttm,success_dttm_tz,success_val,unit_qty
          ) values ( 
-        journey_success_tmp.aud_occurrence_id,journey_success_tmp.audience_id,journey_success_tmp.event_id,journey_success_tmp.event_nm,journey_success_tmp.identity_id,journey_success_tmp.identity_type_nm,journey_success_tmp.identity_type_val,journey_success_tmp.journey_id,journey_success_tmp.journey_occurrence_id,journey_success_tmp.load_dttm,journey_success_tmp.success_dttm,journey_success_tmp.success_dttm_tz,journey_success_tmp.success_val,journey_success_tmp.unit_qty
+        journey_success_tmp.aud_occurrence_id,journey_success_tmp.audience_id,journey_success_tmp.context_type_nm,journey_success_tmp.context_val,journey_success_tmp.event_id,journey_success_tmp.event_nm,journey_success_tmp.identity_id,journey_success_tmp.identity_type_nm,journey_success_tmp.identity_type_val,journey_success_tmp.journey_id,journey_success_tmp.journey_occurrence_id,journey_success_tmp.load_dttm,journey_success_tmp.success_dttm,journey_success_tmp.success_dttm_tz,journey_success_tmp.success_val,journey_success_tmp.unit_qty
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4754,6 +4900,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_success;
       DROP TABLE work.journey_success;
   QUIT;
  %end;
@@ -4784,11 +4931,11 @@
         execute (MERGE INTO &dbschema..journey_suppression using &tmpdbschema..journey_suppression_tmp         
          ON (journey_suppression.event_id=journey_suppression_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = journey_suppression_tmp.aud_occurrence_id , audience_id = journey_suppression_tmp.audience_id , event_nm = journey_suppression_tmp.event_nm , identity_id = journey_suppression_tmp.identity_id , identity_type_nm = journey_suppression_tmp.identity_type_nm , identity_type_val = journey_suppression_tmp.identity_type_val , journey_id = journey_suppression_tmp.journey_id , journey_occurrence_id = journey_suppression_tmp.journey_occurrence_id , load_dttm = journey_suppression_tmp.load_dttm , reason_cd = journey_suppression_tmp.reason_cd , reason_txt = journey_suppression_tmp.reason_txt , suppression_dttm = journey_suppression_tmp.suppression_dttm , suppression_dttm_tz = journey_suppression_tmp.suppression_dttm_tz
+        UPDATE SET aud_occurrence_id = journey_suppression_tmp.aud_occurrence_id , audience_id = journey_suppression_tmp.audience_id , context_type_nm = journey_suppression_tmp.context_type_nm , context_val = journey_suppression_tmp.context_val , event_nm = journey_suppression_tmp.event_nm , identity_id = journey_suppression_tmp.identity_id , identity_type_nm = journey_suppression_tmp.identity_type_nm , identity_type_val = journey_suppression_tmp.identity_type_val , journey_id = journey_suppression_tmp.journey_id , journey_occurrence_id = journey_suppression_tmp.journey_occurrence_id , load_dttm = journey_suppression_tmp.load_dttm , reason_cd = journey_suppression_tmp.reason_cd , reason_txt = journey_suppression_tmp.reason_txt , suppression_dttm = journey_suppression_tmp.suppression_dttm , suppression_dttm_tz = journey_suppression_tmp.suppression_dttm_tz
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,reason_cd,reason_txt,suppression_dttm,suppression_dttm_tz
+        aud_occurrence_id,audience_id,context_type_nm,context_val,event_id,event_nm,identity_id,identity_type_nm,identity_type_val,journey_id,journey_occurrence_id,load_dttm,reason_cd,reason_txt,suppression_dttm,suppression_dttm_tz
          ) values ( 
-        journey_suppression_tmp.aud_occurrence_id,journey_suppression_tmp.audience_id,journey_suppression_tmp.event_id,journey_suppression_tmp.event_nm,journey_suppression_tmp.identity_id,journey_suppression_tmp.identity_type_nm,journey_suppression_tmp.identity_type_val,journey_suppression_tmp.journey_id,journey_suppression_tmp.journey_occurrence_id,journey_suppression_tmp.load_dttm,journey_suppression_tmp.reason_cd,journey_suppression_tmp.reason_txt,journey_suppression_tmp.suppression_dttm,journey_suppression_tmp.suppression_dttm_tz
+        journey_suppression_tmp.aud_occurrence_id,journey_suppression_tmp.audience_id,journey_suppression_tmp.context_type_nm,journey_suppression_tmp.context_val,journey_suppression_tmp.event_id,journey_suppression_tmp.event_nm,journey_suppression_tmp.identity_id,journey_suppression_tmp.identity_type_nm,journey_suppression_tmp.identity_type_val,journey_suppression_tmp.journey_id,journey_suppression_tmp.journey_occurrence_id,journey_suppression_tmp.load_dttm,journey_suppression_tmp.reason_cd,journey_suppression_tmp.reason_txt,journey_suppression_tmp.suppression_dttm,journey_suppression_tmp.suppression_dttm_tz
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -4802,6 +4949,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..journey_suppression;
       DROP TABLE work.journey_suppression;
   QUIT;
  %end;
@@ -4850,6 +4998,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity;
       DROP TABLE work.md_activity;
   QUIT;
  %end;
@@ -4898,6 +5047,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity_abtestpath;
       DROP TABLE work.md_activity_abtestpath;
   QUIT;
  %end;
@@ -4947,6 +5097,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity_custom_prop;
       DROP TABLE work.md_activity_custom_prop;
   QUIT;
  %end;
@@ -4995,6 +5146,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity_node;
       DROP TABLE work.md_activity_node;
   QUIT;
  %end;
@@ -5042,6 +5194,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity_x_activity_node;
       DROP TABLE work.md_activity_x_activity_node;
   QUIT;
  %end;
@@ -5089,6 +5242,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_activity_x_task;
       DROP TABLE work.md_activity_x_task;
   QUIT;
  %end;
@@ -5137,6 +5291,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_asset;
       DROP TABLE work.md_asset;
   QUIT;
  %end;
@@ -5185,6 +5340,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_audience;
       DROP TABLE work.md_audience;
   QUIT;
  %end;
@@ -5233,6 +5389,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_audience_occurrence;
       DROP TABLE work.md_audience_occurrence;
   QUIT;
  %end;
@@ -5241,6 +5398,54 @@
  %end;
  %end;
  %put %sysfunc(datetime(),E8601DT25.) --- Processing table md_audience_occurrence;
+%put------------------------------------------------------------------;
+%if %sysfunc(exist(&udmmart..md_audience_x_segment) ) %then %do;
+ %let errFlag=0;
+ %let nrows=0;
+ %if %sysfunc(exist(&tmplib..md_audience_x_segment_tmp       ) ) %then %do;
+      PROC SQL NOERRORSTOP;
+        DROP TABLE &tmplib..md_audience_x_segment_tmp       ;
+      QUIT;
+ %end;
+ %check_duplicate_from_source(table_nm=md_audience_x_segment, table_keys=%str(audience_id), out_table=work.md_audience_x_segment);
+ data &tmplib..md_audience_x_segment_tmp       ;
+     set work.md_audience_x_segment;
+  if audience_id='' then audience_id='-';
+ run;
+ %ErrCheck (Failed to Append Data to :md_audience_x_segment_tmp       , md_audience_x_segment);
+ %if &errFlag = 0 %then %do;
+    PROC SQL NOERRORSTOP;
+    CONNECT TO REDSHIFT (&sql_passthru_connection.);
+        execute (MERGE INTO &dbschema..md_audience_x_segment using &tmpdbschema..md_audience_x_segment_tmp       
+         ON (md_audience_x_segment.audience_id=md_audience_x_segment_tmp.audience_id)
+        WHEN MATCHED THEN  
+        UPDATE SET segment_id = md_audience_x_segment_tmp.segment_id
+        WHEN NOT MATCHED THEN INSERT ( 
+        audience_id,segment_id
+         ) values ( 
+        md_audience_x_segment_tmp.audience_id,md_audience_x_segment_tmp.segment_id
+     );) BY REDSHIFT;
+    DISCONNECT FROM REDSHIFT;
+    QUIT;
+ %ErrCheck (Failed to Update/Insert into  :md_audience_x_segment_tmp       , md_audience_x_segment, err_macro=SYSDBRC);
+ %if &errFlag = 0 %then %do;
+    PROC SQL NOERRORSTOP;
+        DROP TABLE &tmplib..md_audience_x_segment_tmp       ;
+    QUIT;
+    %put ######## Staging table: md_audience_x_segment_tmp        Deleted ############;
+      %end;
+    %end;
+ %if &errFlag = 0 %then %do;
+  PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_audience_x_segment;
+      DROP TABLE work.md_audience_x_segment;
+  QUIT;
+ %end;
+ %else %do;
+    %put %sysfunc(datetime(),E8601DT25.) --- &CDM_ErrMsg;
+ %end;
+ %end;
+ %put %sysfunc(datetime(),E8601DT25.) --- Processing table md_audience_x_segment;
 %put------------------------------------------------------------------;
 %if %sysfunc(exist(&udmmart..md_bu) ) %then %do;
  %let errFlag=0;
@@ -5281,6 +5486,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_bu;
       DROP TABLE work.md_bu;
   QUIT;
  %end;
@@ -5329,6 +5535,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_business_context;
       DROP TABLE work.md_business_context;
   QUIT;
  %end;
@@ -5377,6 +5584,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_cost_category;
       DROP TABLE work.md_cost_category;
   QUIT;
  %end;
@@ -5425,6 +5633,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_costcenter;
       DROP TABLE work.md_costcenter;
   QUIT;
  %end;
@@ -5473,6 +5682,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_creative;
       DROP TABLE work.md_creative;
   QUIT;
  %end;
@@ -5522,6 +5732,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_creative_custom_prop;
       DROP TABLE work.md_creative_custom_prop;
   QUIT;
  %end;
@@ -5569,6 +5780,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_creative_x_asset;
       DROP TABLE work.md_creative_x_asset;
   QUIT;
  %end;
@@ -5617,6 +5829,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_cust_attrib;
       DROP TABLE work.md_cust_attrib;
   QUIT;
  %end;
@@ -5665,6 +5878,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_custattrib_table_values;
       DROP TABLE work.md_custattrib_table_values;
   QUIT;
  %end;
@@ -5713,6 +5927,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_dataview;
       DROP TABLE work.md_dataview;
   QUIT;
  %end;
@@ -5760,6 +5975,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_dataview_x_event;
       DROP TABLE work.md_dataview_x_event;
   QUIT;
  %end;
@@ -5808,6 +6024,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_event;
       DROP TABLE work.md_event;
   QUIT;
  %end;
@@ -5838,11 +6055,11 @@
         execute (MERGE INTO &dbschema..md_fiscal_period using &tmpdbschema..md_fiscal_period_tmp            
          ON (md_fiscal_period.fp_id=md_fiscal_period_tmp.fp_id)
         WHEN MATCHED THEN  
-        UPDATE SET created_by_usernm = md_fiscal_period_tmp.created_by_usernm , created_dttm = md_fiscal_period_tmp.created_dttm , fp_cls_ver = md_fiscal_period_tmp.fp_cls_ver , fp_desc = md_fiscal_period_tmp.fp_desc , fp_nm = md_fiscal_period_tmp.fp_nm , fp_obsolete_flg = md_fiscal_period_tmp.fp_obsolete_flg , last_modified_dttm = md_fiscal_period_tmp.last_modified_dttm , last_modified_usernm = md_fiscal_period_tmp.last_modified_usernm , load_dttm = md_fiscal_period_tmp.load_dttm
+        UPDATE SET created_by_usernm = md_fiscal_period_tmp.created_by_usernm , created_dttm = md_fiscal_period_tmp.created_dttm , fp_cls_ver = md_fiscal_period_tmp.fp_cls_ver , fp_desc = md_fiscal_period_tmp.fp_desc , fp_end_dt = md_fiscal_period_tmp.fp_end_dt , fp_nm = md_fiscal_period_tmp.fp_nm , fp_obsolete_flg = md_fiscal_period_tmp.fp_obsolete_flg , fp_start_dt = md_fiscal_period_tmp.fp_start_dt , last_modified_dttm = md_fiscal_period_tmp.last_modified_dttm , last_modified_usernm = md_fiscal_period_tmp.last_modified_usernm , load_dttm = md_fiscal_period_tmp.load_dttm
         WHEN NOT MATCHED THEN INSERT ( 
-        created_by_usernm,created_dttm,fp_cls_ver,fp_desc,fp_id,fp_nm,fp_obsolete_flg,last_modified_dttm,last_modified_usernm,load_dttm
+        created_by_usernm,created_dttm,fp_cls_ver,fp_desc,fp_end_dt,fp_id,fp_nm,fp_obsolete_flg,fp_start_dt,last_modified_dttm,last_modified_usernm,load_dttm
          ) values ( 
-        md_fiscal_period_tmp.created_by_usernm,md_fiscal_period_tmp.created_dttm,md_fiscal_period_tmp.fp_cls_ver,md_fiscal_period_tmp.fp_desc,md_fiscal_period_tmp.fp_id,md_fiscal_period_tmp.fp_nm,md_fiscal_period_tmp.fp_obsolete_flg,md_fiscal_period_tmp.last_modified_dttm,md_fiscal_period_tmp.last_modified_usernm,md_fiscal_period_tmp.load_dttm
+        md_fiscal_period_tmp.created_by_usernm,md_fiscal_period_tmp.created_dttm,md_fiscal_period_tmp.fp_cls_ver,md_fiscal_period_tmp.fp_desc,md_fiscal_period_tmp.fp_end_dt,md_fiscal_period_tmp.fp_id,md_fiscal_period_tmp.fp_nm,md_fiscal_period_tmp.fp_obsolete_flg,md_fiscal_period_tmp.fp_start_dt,md_fiscal_period_tmp.last_modified_dttm,md_fiscal_period_tmp.last_modified_usernm,md_fiscal_period_tmp.load_dttm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -5856,6 +6073,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_fiscal_period;
       DROP TABLE work.md_fiscal_period;
   QUIT;
  %end;
@@ -5904,6 +6122,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_grid_attr_defn;
       DROP TABLE work.md_grid_attr_defn;
   QUIT;
  %end;
@@ -5952,6 +6171,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey;
       DROP TABLE work.md_journey;
   QUIT;
  %end;
@@ -5999,6 +6219,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_node;
       DROP TABLE work.md_journey_node;
   QUIT;
  %end;
@@ -6047,6 +6268,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_node_occurrence;
       DROP TABLE work.md_journey_node_occurrence;
   QUIT;
  %end;
@@ -6095,6 +6317,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_occurrence;
       DROP TABLE work.md_journey_occurrence;
   QUIT;
  %end;
@@ -6142,6 +6365,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_x_audience;
       DROP TABLE work.md_journey_x_audience;
   QUIT;
  %end;
@@ -6189,6 +6413,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_x_event;
       DROP TABLE work.md_journey_x_event;
   QUIT;
  %end;
@@ -6236,6 +6461,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_journey_x_task;
       DROP TABLE work.md_journey_x_task;
   QUIT;
  %end;
@@ -6284,6 +6510,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_message;
       DROP TABLE work.md_message;
   QUIT;
  %end;
@@ -6333,6 +6560,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_message_custom_prop;
       DROP TABLE work.md_message_custom_prop;
   QUIT;
  %end;
@@ -6380,6 +6608,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_message_x_creative;
       DROP TABLE work.md_message_x_creative;
   QUIT;
  %end;
@@ -6428,6 +6657,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_object_type;
       DROP TABLE work.md_object_type;
   QUIT;
  %end;
@@ -6476,6 +6706,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_occurrence;
       DROP TABLE work.md_occurrence;
   QUIT;
  %end;
@@ -6524,6 +6755,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_picklist;
       DROP TABLE work.md_picklist;
   QUIT;
  %end;
@@ -6571,6 +6803,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_purpose;
       DROP TABLE work.md_purpose;
   QUIT;
  %end;
@@ -6619,6 +6852,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_rtc;
       DROP TABLE work.md_rtc;
   QUIT;
  %end;
@@ -6667,6 +6901,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment;
       DROP TABLE work.md_segment;
   QUIT;
  %end;
@@ -6716,6 +6951,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_custom_prop;
       DROP TABLE work.md_segment_custom_prop;
   QUIT;
  %end;
@@ -6764,6 +7000,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_map;
       DROP TABLE work.md_segment_map;
   QUIT;
  %end;
@@ -6813,6 +7050,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_map_custom_prop;
       DROP TABLE work.md_segment_map_custom_prop;
   QUIT;
  %end;
@@ -6860,6 +7098,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_map_x_segment;
       DROP TABLE work.md_segment_map_x_segment;
   QUIT;
  %end;
@@ -6889,11 +7128,11 @@
         execute (MERGE INTO &dbschema..md_segment_test using &tmpdbschema..md_segment_test_tmp             
          ON (md_segment_test.task_version_id=md_segment_test_tmp.task_version_id and md_segment_test.test_cd=md_segment_test_tmp.test_cd)
         WHEN MATCHED THEN  
-        UPDATE SET stratified_samp_criteria_txt = md_segment_test_tmp.stratified_samp_criteria_txt , stratified_sampling_flg = md_segment_test_tmp.stratified_sampling_flg , task_id = md_segment_test_tmp.task_id , test_cnt = md_segment_test_tmp.test_cnt , test_enabled_flg = md_segment_test_tmp.test_enabled_flg , test_nm = md_segment_test_tmp.test_nm , test_sizing_type_nm = md_segment_test_tmp.test_sizing_type_nm , test_type_nm = md_segment_test_tmp.test_type_nm
+        UPDATE SET stratified_samp_criteria_txt = md_segment_test_tmp.stratified_samp_criteria_txt , stratified_sampling_flg = md_segment_test_tmp.stratified_sampling_flg , task_id = md_segment_test_tmp.task_id , test_cnt = md_segment_test_tmp.test_cnt , test_enabled_flg = md_segment_test_tmp.test_enabled_flg , test_nm = md_segment_test_tmp.test_nm , test_pct = md_segment_test_tmp.test_pct , test_sizing_type_nm = md_segment_test_tmp.test_sizing_type_nm , test_type_nm = md_segment_test_tmp.test_type_nm
         WHEN NOT MATCHED THEN INSERT ( 
-        stratified_samp_criteria_txt,stratified_sampling_flg,task_id,task_version_id,test_cd,test_cnt,test_enabled_flg,test_nm,test_sizing_type_nm,test_type_nm
+        stratified_samp_criteria_txt,stratified_sampling_flg,task_id,task_version_id,test_cd,test_cnt,test_enabled_flg,test_nm,test_pct,test_sizing_type_nm,test_type_nm
          ) values ( 
-        md_segment_test_tmp.stratified_samp_criteria_txt,md_segment_test_tmp.stratified_sampling_flg,md_segment_test_tmp.task_id,md_segment_test_tmp.task_version_id,md_segment_test_tmp.test_cd,md_segment_test_tmp.test_cnt,md_segment_test_tmp.test_enabled_flg,md_segment_test_tmp.test_nm,md_segment_test_tmp.test_sizing_type_nm,md_segment_test_tmp.test_type_nm
+        md_segment_test_tmp.stratified_samp_criteria_txt,md_segment_test_tmp.stratified_sampling_flg,md_segment_test_tmp.task_id,md_segment_test_tmp.task_version_id,md_segment_test_tmp.test_cd,md_segment_test_tmp.test_cnt,md_segment_test_tmp.test_enabled_flg,md_segment_test_tmp.test_nm,md_segment_test_tmp.test_pct,md_segment_test_tmp.test_sizing_type_nm,md_segment_test_tmp.test_type_nm
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -6907,6 +7146,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_test;
       DROP TABLE work.md_segment_test;
   QUIT;
  %end;
@@ -6954,6 +7194,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_test_x_segment;
       DROP TABLE work.md_segment_test_x_segment;
   QUIT;
  %end;
@@ -7001,6 +7242,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_segment_x_event;
       DROP TABLE work.md_segment_x_event;
   QUIT;
  %end;
@@ -7049,6 +7291,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_spot;
       DROP TABLE work.md_spot;
   QUIT;
  %end;
@@ -7097,6 +7340,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_target_assist;
       DROP TABLE work.md_target_assist;
   QUIT;
  %end;
@@ -7145,6 +7389,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task;
       DROP TABLE work.md_task;
   QUIT;
  %end;
@@ -7194,6 +7439,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_custom_prop;
       DROP TABLE work.md_task_custom_prop;
   QUIT;
  %end;
@@ -7239,6 +7485,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_audience;
       DROP TABLE work.md_task_x_audience;
   QUIT;
  %end;
@@ -7286,6 +7533,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_creative;
       DROP TABLE work.md_task_x_creative;
   QUIT;
  %end;
@@ -7333,6 +7581,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_dataview;
       DROP TABLE work.md_task_x_dataview;
   QUIT;
  %end;
@@ -7380,6 +7629,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_event;
       DROP TABLE work.md_task_x_event;
   QUIT;
  %end;
@@ -7427,6 +7677,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_message;
       DROP TABLE work.md_task_x_message;
   QUIT;
  %end;
@@ -7474,6 +7725,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_segment;
       DROP TABLE work.md_task_x_segment;
   QUIT;
  %end;
@@ -7521,6 +7773,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_spot;
       DROP TABLE work.md_task_x_spot;
   QUIT;
  %end;
@@ -7568,6 +7821,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_task_x_variant;
       DROP TABLE work.md_task_x_variant;
   QUIT;
  %end;
@@ -7616,6 +7870,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_vendor;
       DROP TABLE work.md_vendor;
   QUIT;
  %end;
@@ -7664,6 +7919,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_wf_process_def;
       DROP TABLE work.md_wf_process_def;
   QUIT;
  %end;
@@ -7712,6 +7968,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_wf_process_def_attr_grp;
       DROP TABLE work.md_wf_process_def_attr_grp;
   QUIT;
  %end;
@@ -7760,6 +8017,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_wf_process_def_categories;
       DROP TABLE work.md_wf_process_def_categories;
   QUIT;
  %end;
@@ -7808,6 +8066,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_wf_process_def_task_assg;
       DROP TABLE work.md_wf_process_def_task_assg;
   QUIT;
  %end;
@@ -7856,6 +8115,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..md_wf_process_def_tasks;
       DROP TABLE work.md_wf_process_def_tasks;
   QUIT;
  %end;
@@ -7904,6 +8164,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..media_activity_details;
       DROP TABLE work.media_activity_details;
   QUIT;
  %end;
@@ -7921,24 +8182,24 @@
         DROP TABLE &tmplib..media_details_tmp               ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=media_details, table_keys=%str(detail_id,media_nm,play_start_dttm), out_table=work.media_details);
+ %check_duplicate_from_source(table_nm=media_details, table_keys=%str(event_id), out_table=work.media_details);
  data &tmplib..media_details_tmp               ;
      set work.media_details;
   if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.);if play_start_dttm ne . then play_start_dttm = tzoneu2s(play_start_dttm,&timeZone_Value.);if play_start_dttm_tz ne . then play_start_dttm_tz = tzoneu2s(play_start_dttm_tz,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-'; if media_nm='' then media_nm='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :media_details_tmp               , media_details);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..media_details using &tmpdbschema..media_details_tmp               
-         ON (media_details.detail_id=media_details_tmp.detail_id and media_details.media_nm=media_details_tmp.media_nm and media_details.play_start_dttm=media_details_tmp.play_start_dttm)
+         ON (media_details.event_id=media_details_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET detail_id_hex = media_details_tmp.detail_id_hex , event_id = media_details_tmp.event_id , event_key_cd = media_details_tmp.event_key_cd , event_source_cd = media_details_tmp.event_source_cd , identity_id = media_details_tmp.identity_id , load_dttm = media_details_tmp.load_dttm , media_player_nm = media_details_tmp.media_player_nm , media_player_version_txt = media_details_tmp.media_player_version_txt , media_uri_txt = media_details_tmp.media_uri_txt , play_start_dttm_tz = media_details_tmp.play_start_dttm_tz , session_id = media_details_tmp.session_id , session_id_hex = media_details_tmp.session_id_hex , visit_id = media_details_tmp.visit_id , visit_id_hex = media_details_tmp.visit_id_hex
+        UPDATE SET detail_id = media_details_tmp.detail_id , detail_id_hex = media_details_tmp.detail_id_hex , event_key_cd = media_details_tmp.event_key_cd , event_source_cd = media_details_tmp.event_source_cd , identity_id = media_details_tmp.identity_id , load_dttm = media_details_tmp.load_dttm , media_duration_secs = media_details_tmp.media_duration_secs , media_nm = media_details_tmp.media_nm , media_player_nm = media_details_tmp.media_player_nm , media_player_version_txt = media_details_tmp.media_player_version_txt , media_uri_txt = media_details_tmp.media_uri_txt , play_start_dttm = media_details_tmp.play_start_dttm , play_start_dttm_tz = media_details_tmp.play_start_dttm_tz , session_id = media_details_tmp.session_id , session_id_hex = media_details_tmp.session_id_hex , visit_id = media_details_tmp.visit_id , visit_id_hex = media_details_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        detail_id,detail_id_hex,event_id,event_key_cd,event_source_cd,identity_id,load_dttm,media_nm,media_player_nm,media_player_version_txt,media_uri_txt,play_start_dttm,play_start_dttm_tz,session_id,session_id_hex,visit_id,visit_id_hex
+        detail_id,detail_id_hex,event_id,event_key_cd,event_source_cd,identity_id,load_dttm,media_duration_secs,media_nm,media_player_nm,media_player_version_txt,media_uri_txt,play_start_dttm,play_start_dttm_tz,session_id,session_id_hex,visit_id,visit_id_hex
          ) values ( 
-        media_details_tmp.detail_id,media_details_tmp.detail_id_hex,media_details_tmp.event_id,media_details_tmp.event_key_cd,media_details_tmp.event_source_cd,media_details_tmp.identity_id,media_details_tmp.load_dttm,media_details_tmp.media_nm,media_details_tmp.media_player_nm,media_details_tmp.media_player_version_txt,media_details_tmp.media_uri_txt,media_details_tmp.play_start_dttm,media_details_tmp.play_start_dttm_tz,media_details_tmp.session_id,media_details_tmp.session_id_hex,media_details_tmp.visit_id,media_details_tmp.visit_id_hex
+        media_details_tmp.detail_id,media_details_tmp.detail_id_hex,media_details_tmp.event_id,media_details_tmp.event_key_cd,media_details_tmp.event_source_cd,media_details_tmp.identity_id,media_details_tmp.load_dttm,media_details_tmp.media_duration_secs,media_details_tmp.media_nm,media_details_tmp.media_player_nm,media_details_tmp.media_player_version_txt,media_details_tmp.media_uri_txt,media_details_tmp.play_start_dttm,media_details_tmp.play_start_dttm_tz,media_details_tmp.session_id,media_details_tmp.session_id_hex,media_details_tmp.visit_id,media_details_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -7952,6 +8213,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..media_details;
       DROP TABLE work.media_details;
   QUIT;
  %end;
@@ -7982,11 +8244,11 @@
         execute (MERGE INTO &dbschema..media_details_ext using &tmpdbschema..media_details_ext_tmp           
          ON (media_details_ext.detail_id=media_details_ext_tmp.detail_id and media_details_ext.media_nm=media_details_ext_tmp.media_nm and media_details_ext.play_end_dttm=media_details_ext_tmp.play_end_dttm)
         WHEN MATCHED THEN  
-        UPDATE SET detail_id_hex = media_details_ext_tmp.detail_id_hex , interaction_cnt = media_details_ext_tmp.interaction_cnt , load_dttm = media_details_ext_tmp.load_dttm , media_uri_txt = media_details_ext_tmp.media_uri_txt , play_end_dttm_tz = media_details_ext_tmp.play_end_dttm_tz
+        UPDATE SET detail_id_hex = media_details_ext_tmp.detail_id_hex , end_tm = media_details_ext_tmp.end_tm , exit_point_secs = media_details_ext_tmp.exit_point_secs , interaction_cnt = media_details_ext_tmp.interaction_cnt , load_dttm = media_details_ext_tmp.load_dttm , max_play_secs = media_details_ext_tmp.max_play_secs , media_display_duration_secs = media_details_ext_tmp.media_display_duration_secs , media_uri_txt = media_details_ext_tmp.media_uri_txt , play_end_dttm_tz = media_details_ext_tmp.play_end_dttm_tz , start_tm = media_details_ext_tmp.start_tm , view_duration_secs = media_details_ext_tmp.view_duration_secs
         WHEN NOT MATCHED THEN INSERT ( 
-        detail_id,detail_id_hex,interaction_cnt,load_dttm,media_nm,media_uri_txt,play_end_dttm,play_end_dttm_tz
+        detail_id,detail_id_hex,end_tm,exit_point_secs,interaction_cnt,load_dttm,max_play_secs,media_display_duration_secs,media_nm,media_uri_txt,play_end_dttm,play_end_dttm_tz,start_tm,view_duration_secs
          ) values ( 
-        media_details_ext_tmp.detail_id,media_details_ext_tmp.detail_id_hex,media_details_ext_tmp.interaction_cnt,media_details_ext_tmp.load_dttm,media_details_ext_tmp.media_nm,media_details_ext_tmp.media_uri_txt,media_details_ext_tmp.play_end_dttm,media_details_ext_tmp.play_end_dttm_tz
+        media_details_ext_tmp.detail_id,media_details_ext_tmp.detail_id_hex,media_details_ext_tmp.end_tm,media_details_ext_tmp.exit_point_secs,media_details_ext_tmp.interaction_cnt,media_details_ext_tmp.load_dttm,media_details_ext_tmp.max_play_secs,media_details_ext_tmp.media_display_duration_secs,media_details_ext_tmp.media_nm,media_details_ext_tmp.media_uri_txt,media_details_ext_tmp.play_end_dttm,media_details_ext_tmp.play_end_dttm_tz,media_details_ext_tmp.start_tm,media_details_ext_tmp.view_duration_secs
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8000,6 +8262,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..media_details_ext;
       DROP TABLE work.media_details_ext;
   QUIT;
  %end;
@@ -8048,6 +8311,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..mobile_focus_defocus;
       DROP TABLE work.mobile_focus_defocus;
   QUIT;
  %end;
@@ -8096,6 +8360,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..mobile_spots;
       DROP TABLE work.mobile_spots;
   QUIT;
  %end;
@@ -8125,11 +8390,11 @@
         execute (MERGE INTO &dbschema..monthly_usage using &tmpdbschema..monthly_usage_tmp               
          ON (monthly_usage.event_month=monthly_usage_tmp.event_month)
         WHEN MATCHED THEN  
-        UPDATE SET admin_user_cnt = monthly_usage_tmp.admin_user_cnt , api_usage_str = monthly_usage_tmp.api_usage_str , audience_usage_cnt = monthly_usage_tmp.audience_usage_cnt , bc_subjcnt_str = monthly_usage_tmp.bc_subjcnt_str , email_preview_cnt = monthly_usage_tmp.email_preview_cnt , email_send_cnt = monthly_usage_tmp.email_send_cnt , facebook_ads_cnt = monthly_usage_tmp.facebook_ads_cnt , google_ads_cnt = monthly_usage_tmp.google_ads_cnt , linkedin_ads_cnt = monthly_usage_tmp.linkedin_ads_cnt , mob_impr_cnt = monthly_usage_tmp.mob_impr_cnt , mob_sesn_cnt = monthly_usage_tmp.mob_sesn_cnt , mobile_in_app_msg_cnt = monthly_usage_tmp.mobile_in_app_msg_cnt , mobile_push_cnt = monthly_usage_tmp.mobile_push_cnt , outbound_api_cnt = monthly_usage_tmp.outbound_api_cnt , plan_users_cnt = monthly_usage_tmp.plan_users_cnt , web_impr_cnt = monthly_usage_tmp.web_impr_cnt , web_sesn_cnt = monthly_usage_tmp.web_sesn_cnt
+        UPDATE SET admin_user_cnt = monthly_usage_tmp.admin_user_cnt , api_usage_str = monthly_usage_tmp.api_usage_str , asset_size = monthly_usage_tmp.asset_size , audience_usage_cnt = monthly_usage_tmp.audience_usage_cnt , bc_subjcnt_str = monthly_usage_tmp.bc_subjcnt_str , customer_profiles_processed_str = monthly_usage_tmp.customer_profiles_processed_str , db_size = monthly_usage_tmp.db_size , email_preview_cnt = monthly_usage_tmp.email_preview_cnt , email_send_cnt = monthly_usage_tmp.email_send_cnt , facebook_ads_cnt = monthly_usage_tmp.facebook_ads_cnt , google_ads_cnt = monthly_usage_tmp.google_ads_cnt , linkedin_ads_cnt = monthly_usage_tmp.linkedin_ads_cnt , mob_impr_cnt = monthly_usage_tmp.mob_impr_cnt , mob_sesn_cnt = monthly_usage_tmp.mob_sesn_cnt , mobile_in_app_msg_cnt = monthly_usage_tmp.mobile_in_app_msg_cnt , mobile_push_cnt = monthly_usage_tmp.mobile_push_cnt , outbound_api_cnt = monthly_usage_tmp.outbound_api_cnt , plan_users_cnt = monthly_usage_tmp.plan_users_cnt , web_impr_cnt = monthly_usage_tmp.web_impr_cnt , web_sesn_cnt = monthly_usage_tmp.web_sesn_cnt
         WHEN NOT MATCHED THEN INSERT ( 
-        admin_user_cnt,api_usage_str,audience_usage_cnt,bc_subjcnt_str,email_preview_cnt,email_send_cnt,event_month,facebook_ads_cnt,google_ads_cnt,linkedin_ads_cnt,mob_impr_cnt,mob_sesn_cnt,mobile_in_app_msg_cnt,mobile_push_cnt,outbound_api_cnt,plan_users_cnt,web_impr_cnt,web_sesn_cnt
+        admin_user_cnt,api_usage_str,asset_size,audience_usage_cnt,bc_subjcnt_str,customer_profiles_processed_str,db_size,email_preview_cnt,email_send_cnt,event_month,facebook_ads_cnt,google_ads_cnt,linkedin_ads_cnt,mob_impr_cnt,mob_sesn_cnt,mobile_in_app_msg_cnt,mobile_push_cnt,outbound_api_cnt,plan_users_cnt,web_impr_cnt,web_sesn_cnt
          ) values ( 
-        monthly_usage_tmp.admin_user_cnt,monthly_usage_tmp.api_usage_str,monthly_usage_tmp.audience_usage_cnt,monthly_usage_tmp.bc_subjcnt_str,monthly_usage_tmp.email_preview_cnt,monthly_usage_tmp.email_send_cnt,monthly_usage_tmp.event_month,monthly_usage_tmp.facebook_ads_cnt,monthly_usage_tmp.google_ads_cnt,monthly_usage_tmp.linkedin_ads_cnt,monthly_usage_tmp.mob_impr_cnt,monthly_usage_tmp.mob_sesn_cnt,monthly_usage_tmp.mobile_in_app_msg_cnt,monthly_usage_tmp.mobile_push_cnt,monthly_usage_tmp.outbound_api_cnt,monthly_usage_tmp.plan_users_cnt,monthly_usage_tmp.web_impr_cnt,monthly_usage_tmp.web_sesn_cnt
+        monthly_usage_tmp.admin_user_cnt,monthly_usage_tmp.api_usage_str,monthly_usage_tmp.asset_size,monthly_usage_tmp.audience_usage_cnt,monthly_usage_tmp.bc_subjcnt_str,monthly_usage_tmp.customer_profiles_processed_str,monthly_usage_tmp.db_size,monthly_usage_tmp.email_preview_cnt,monthly_usage_tmp.email_send_cnt,monthly_usage_tmp.event_month,monthly_usage_tmp.facebook_ads_cnt,monthly_usage_tmp.google_ads_cnt,monthly_usage_tmp.linkedin_ads_cnt,monthly_usage_tmp.mob_impr_cnt,monthly_usage_tmp.mob_sesn_cnt,monthly_usage_tmp.mobile_in_app_msg_cnt,monthly_usage_tmp.mobile_push_cnt,monthly_usage_tmp.outbound_api_cnt,monthly_usage_tmp.plan_users_cnt,monthly_usage_tmp.web_impr_cnt,monthly_usage_tmp.web_sesn_cnt
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8143,6 +8408,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..monthly_usage;
       DROP TABLE work.monthly_usage;
   QUIT;
  %end;
@@ -8191,6 +8457,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..notification_failed;
       DROP TABLE work.notification_failed;
   QUIT;
  %end;
@@ -8239,6 +8506,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..notification_opened;
       DROP TABLE work.notification_opened;
   QUIT;
  %end;
@@ -8287,6 +8555,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..notification_send;
       DROP TABLE work.notification_send;
   QUIT;
  %end;
@@ -8317,11 +8586,11 @@
         execute (MERGE INTO &dbschema..notification_targeting_request using &tmpdbschema..notification_targeting_reque_tmp
          ON (notification_targeting_request.event_id=notification_targeting_reque_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = notification_targeting_reque_tmp.aud_occurrence_id , audience_id = notification_targeting_reque_tmp.audience_id , channel_nm = notification_targeting_reque_tmp.channel_nm , channel_user_id = notification_targeting_reque_tmp.channel_user_id , context_type_nm = notification_targeting_reque_tmp.context_type_nm , context_val = notification_targeting_reque_tmp.context_val , eligibility_flg = notification_targeting_reque_tmp.eligibility_flg , event_designed_id = notification_targeting_reque_tmp.event_designed_id , event_nm = notification_targeting_reque_tmp.event_nm , identity_id = notification_targeting_reque_tmp.identity_id , journey_id = notification_targeting_reque_tmp.journey_id , journey_occurrence_id = notification_targeting_reque_tmp.journey_occurrence_id , load_dttm = notification_targeting_reque_tmp.load_dttm , mobile_app_id = notification_targeting_reque_tmp.mobile_app_id , notification_tgt_req_dttm = notification_targeting_reque_tmp.notification_tgt_req_dttm , notification_tgt_req_dttm_tz = notification_targeting_reque_tmp.notification_tgt_req_dttm_tz
+        UPDATE SET aud_occurrence_id = notification_targeting_reque_tmp.aud_occurrence_id , audience_id = notification_targeting_reque_tmp.audience_id , channel_nm = notification_targeting_reque_tmp.channel_nm , channel_user_id = notification_targeting_reque_tmp.channel_user_id , context_type_nm = notification_targeting_reque_tmp.context_type_nm , context_val = notification_targeting_reque_tmp.context_val , eligibility_flg = notification_targeting_reque_tmp.eligibility_flg , event_designed_id = notification_targeting_reque_tmp.event_designed_id , event_nm = notification_targeting_reque_tmp.event_nm , identity_id = notification_targeting_reque_tmp.identity_id , journey_id = notification_targeting_reque_tmp.journey_id , journey_occurrence_id = notification_targeting_reque_tmp.journey_occurrence_id , load_dttm = notification_targeting_reque_tmp.load_dttm , mobile_app_id = notification_targeting_reque_tmp.mobile_app_id , notification_tgt_req_dttm = notification_targeting_reque_tmp.notification_tgt_req_dttm , notification_tgt_req_dttm_tz = notification_targeting_reque_tmp.notification_tgt_req_dttm_tz , task_id = notification_targeting_reque_tmp.task_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,eligibility_flg,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,mobile_app_id,notification_tgt_req_dttm,notification_tgt_req_dttm_tz
+        aud_occurrence_id,audience_id,channel_nm,channel_user_id,context_type_nm,context_val,eligibility_flg,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,mobile_app_id,notification_tgt_req_dttm,notification_tgt_req_dttm_tz,task_id
          ) values ( 
-        notification_targeting_reque_tmp.aud_occurrence_id,notification_targeting_reque_tmp.audience_id,notification_targeting_reque_tmp.channel_nm,notification_targeting_reque_tmp.channel_user_id,notification_targeting_reque_tmp.context_type_nm,notification_targeting_reque_tmp.context_val,notification_targeting_reque_tmp.eligibility_flg,notification_targeting_reque_tmp.event_designed_id,notification_targeting_reque_tmp.event_id,notification_targeting_reque_tmp.event_nm,notification_targeting_reque_tmp.identity_id,notification_targeting_reque_tmp.journey_id,notification_targeting_reque_tmp.journey_occurrence_id,notification_targeting_reque_tmp.load_dttm,notification_targeting_reque_tmp.mobile_app_id,notification_targeting_reque_tmp.notification_tgt_req_dttm,notification_targeting_reque_tmp.notification_tgt_req_dttm_tz
+        notification_targeting_reque_tmp.aud_occurrence_id,notification_targeting_reque_tmp.audience_id,notification_targeting_reque_tmp.channel_nm,notification_targeting_reque_tmp.channel_user_id,notification_targeting_reque_tmp.context_type_nm,notification_targeting_reque_tmp.context_val,notification_targeting_reque_tmp.eligibility_flg,notification_targeting_reque_tmp.event_designed_id,notification_targeting_reque_tmp.event_id,notification_targeting_reque_tmp.event_nm,notification_targeting_reque_tmp.identity_id,notification_targeting_reque_tmp.journey_id,notification_targeting_reque_tmp.journey_occurrence_id,notification_targeting_reque_tmp.load_dttm,notification_targeting_reque_tmp.mobile_app_id,notification_targeting_reque_tmp.notification_tgt_req_dttm,notification_targeting_reque_tmp.notification_tgt_req_dttm_tz,notification_targeting_reque_tmp.task_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8335,6 +8604,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..notification_targeting_request;
       DROP TABLE work.notification_targeting_request;
   QUIT;
  %end;
@@ -8365,11 +8635,11 @@
         execute (MERGE INTO &dbschema..order_details using &tmpdbschema..order_details_tmp               
          ON (order_details.detail_id=order_details_tmp.detail_id and order_details.event_designed_id=order_details_tmp.event_designed_id and order_details.product_id=order_details_tmp.product_id and order_details.product_nm=order_details_tmp.product_nm and order_details.product_sku=order_details_tmp.product_sku and order_details.record_type=order_details_tmp.record_type)
         WHEN MATCHED THEN  
-        UPDATE SET activity_dttm = order_details_tmp.activity_dttm , activity_dttm_tz = order_details_tmp.activity_dttm_tz , availability_message_txt = order_details_tmp.availability_message_txt , cart_id = order_details_tmp.cart_id , cart_nm = order_details_tmp.cart_nm , channel_nm = order_details_tmp.channel_nm , currency_cd = order_details_tmp.currency_cd , detail_id_hex = order_details_tmp.detail_id_hex , event_id = order_details_tmp.event_id , event_key_cd = order_details_tmp.event_key_cd , event_nm = order_details_tmp.event_nm , event_source_cd = order_details_tmp.event_source_cd , identity_id = order_details_tmp.identity_id , load_dttm = order_details_tmp.load_dttm , mobile_app_id = order_details_tmp.mobile_app_id , order_id = order_details_tmp.order_id , product_group_nm = order_details_tmp.product_group_nm , properties_map_doc = order_details_tmp.properties_map_doc , quantity_amt = order_details_tmp.quantity_amt , reserved_1_txt = order_details_tmp.reserved_1_txt , saving_message_txt = order_details_tmp.saving_message_txt , session_id = order_details_tmp.session_id , session_id_hex = order_details_tmp.session_id_hex , shipping_message_txt = order_details_tmp.shipping_message_txt , visit_id = order_details_tmp.visit_id , visit_id_hex = order_details_tmp.visit_id_hex
+        UPDATE SET activity_dttm = order_details_tmp.activity_dttm , activity_dttm_tz = order_details_tmp.activity_dttm_tz , availability_message_txt = order_details_tmp.availability_message_txt , cart_id = order_details_tmp.cart_id , cart_nm = order_details_tmp.cart_nm , channel_nm = order_details_tmp.channel_nm , currency_cd = order_details_tmp.currency_cd , detail_id_hex = order_details_tmp.detail_id_hex , event_id = order_details_tmp.event_id , event_key_cd = order_details_tmp.event_key_cd , event_nm = order_details_tmp.event_nm , event_source_cd = order_details_tmp.event_source_cd , identity_id = order_details_tmp.identity_id , load_dttm = order_details_tmp.load_dttm , mobile_app_id = order_details_tmp.mobile_app_id , order_id = order_details_tmp.order_id , product_group_nm = order_details_tmp.product_group_nm , properties_map_doc = order_details_tmp.properties_map_doc , quantity_amt = order_details_tmp.quantity_amt , reserved_1_txt = order_details_tmp.reserved_1_txt , saving_message_txt = order_details_tmp.saving_message_txt , session_id = order_details_tmp.session_id , session_id_hex = order_details_tmp.session_id_hex , shipping_message_txt = order_details_tmp.shipping_message_txt , unit_price_amt = order_details_tmp.unit_price_amt , visit_id = order_details_tmp.visit_id , visit_id_hex = order_details_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_dttm,activity_dttm_tz,availability_message_txt,cart_id,cart_nm,channel_nm,currency_cd,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,order_id,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,quantity_amt,record_type,reserved_1_txt,saving_message_txt,session_id,session_id_hex,shipping_message_txt,visit_id,visit_id_hex
+        activity_dttm,activity_dttm_tz,availability_message_txt,cart_id,cart_nm,channel_nm,currency_cd,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,order_id,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,quantity_amt,record_type,reserved_1_txt,saving_message_txt,session_id,session_id_hex,shipping_message_txt,unit_price_amt,visit_id,visit_id_hex
          ) values ( 
-        order_details_tmp.activity_dttm,order_details_tmp.activity_dttm_tz,order_details_tmp.availability_message_txt,order_details_tmp.cart_id,order_details_tmp.cart_nm,order_details_tmp.channel_nm,order_details_tmp.currency_cd,order_details_tmp.detail_id,order_details_tmp.detail_id_hex,order_details_tmp.event_designed_id,order_details_tmp.event_id,order_details_tmp.event_key_cd,order_details_tmp.event_nm,order_details_tmp.event_source_cd,order_details_tmp.identity_id,order_details_tmp.load_dttm,order_details_tmp.mobile_app_id,order_details_tmp.order_id,order_details_tmp.product_group_nm,order_details_tmp.product_id,order_details_tmp.product_nm,order_details_tmp.product_sku,order_details_tmp.properties_map_doc,order_details_tmp.quantity_amt,order_details_tmp.record_type,order_details_tmp.reserved_1_txt,order_details_tmp.saving_message_txt,order_details_tmp.session_id,order_details_tmp.session_id_hex,order_details_tmp.shipping_message_txt,order_details_tmp.visit_id,order_details_tmp.visit_id_hex
+        order_details_tmp.activity_dttm,order_details_tmp.activity_dttm_tz,order_details_tmp.availability_message_txt,order_details_tmp.cart_id,order_details_tmp.cart_nm,order_details_tmp.channel_nm,order_details_tmp.currency_cd,order_details_tmp.detail_id,order_details_tmp.detail_id_hex,order_details_tmp.event_designed_id,order_details_tmp.event_id,order_details_tmp.event_key_cd,order_details_tmp.event_nm,order_details_tmp.event_source_cd,order_details_tmp.identity_id,order_details_tmp.load_dttm,order_details_tmp.mobile_app_id,order_details_tmp.order_id,order_details_tmp.product_group_nm,order_details_tmp.product_id,order_details_tmp.product_nm,order_details_tmp.product_sku,order_details_tmp.properties_map_doc,order_details_tmp.quantity_amt,order_details_tmp.record_type,order_details_tmp.reserved_1_txt,order_details_tmp.saving_message_txt,order_details_tmp.session_id,order_details_tmp.session_id_hex,order_details_tmp.shipping_message_txt,order_details_tmp.unit_price_amt,order_details_tmp.visit_id,order_details_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8383,6 +8653,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..order_details;
       DROP TABLE work.order_details;
   QUIT;
  %end;
@@ -8413,11 +8684,11 @@
         execute (MERGE INTO &dbschema..order_summary using &tmpdbschema..order_summary_tmp               
          ON (order_summary.detail_id=order_summary_tmp.detail_id and order_summary.event_designed_id=order_summary_tmp.event_designed_id and order_summary.record_type=order_summary_tmp.record_type)
         WHEN MATCHED THEN  
-        UPDATE SET activity_dttm = order_summary_tmp.activity_dttm , activity_dttm_tz = order_summary_tmp.activity_dttm_tz , billing_city_nm = order_summary_tmp.billing_city_nm , billing_country_nm = order_summary_tmp.billing_country_nm , billing_postal_cd = order_summary_tmp.billing_postal_cd , billing_state_region_cd = order_summary_tmp.billing_state_region_cd , cart_id = order_summary_tmp.cart_id , cart_nm = order_summary_tmp.cart_nm , channel_nm = order_summary_tmp.channel_nm , currency_cd = order_summary_tmp.currency_cd , delivery_type_desc = order_summary_tmp.delivery_type_desc , detail_id_hex = order_summary_tmp.detail_id_hex , event_id = order_summary_tmp.event_id , event_key_cd = order_summary_tmp.event_key_cd , event_nm = order_summary_tmp.event_nm , event_source_cd = order_summary_tmp.event_source_cd , identity_id = order_summary_tmp.identity_id , load_dttm = order_summary_tmp.load_dttm , mobile_app_id = order_summary_tmp.mobile_app_id , order_id = order_summary_tmp.order_id , payment_type_desc = order_summary_tmp.payment_type_desc , properties_map_doc = order_summary_tmp.properties_map_doc , session_id = order_summary_tmp.session_id , session_id_hex = order_summary_tmp.session_id_hex , shipping_city_nm = order_summary_tmp.shipping_city_nm , shipping_country_nm = order_summary_tmp.shipping_country_nm , shipping_postal_cd = order_summary_tmp.shipping_postal_cd , shipping_state_region_cd = order_summary_tmp.shipping_state_region_cd , total_unit_qty = order_summary_tmp.total_unit_qty , visit_id = order_summary_tmp.visit_id , visit_id_hex = order_summary_tmp.visit_id_hex
+        UPDATE SET activity_dttm = order_summary_tmp.activity_dttm , activity_dttm_tz = order_summary_tmp.activity_dttm_tz , billing_city_nm = order_summary_tmp.billing_city_nm , billing_country_nm = order_summary_tmp.billing_country_nm , billing_postal_cd = order_summary_tmp.billing_postal_cd , billing_state_region_cd = order_summary_tmp.billing_state_region_cd , cart_id = order_summary_tmp.cart_id , cart_nm = order_summary_tmp.cart_nm , channel_nm = order_summary_tmp.channel_nm , currency_cd = order_summary_tmp.currency_cd , delivery_type_desc = order_summary_tmp.delivery_type_desc , detail_id_hex = order_summary_tmp.detail_id_hex , event_id = order_summary_tmp.event_id , event_key_cd = order_summary_tmp.event_key_cd , event_nm = order_summary_tmp.event_nm , event_source_cd = order_summary_tmp.event_source_cd , identity_id = order_summary_tmp.identity_id , load_dttm = order_summary_tmp.load_dttm , mobile_app_id = order_summary_tmp.mobile_app_id , order_id = order_summary_tmp.order_id , payment_type_desc = order_summary_tmp.payment_type_desc , properties_map_doc = order_summary_tmp.properties_map_doc , session_id = order_summary_tmp.session_id , session_id_hex = order_summary_tmp.session_id_hex , shipping_amt = order_summary_tmp.shipping_amt , shipping_city_nm = order_summary_tmp.shipping_city_nm , shipping_country_nm = order_summary_tmp.shipping_country_nm , shipping_postal_cd = order_summary_tmp.shipping_postal_cd , shipping_state_region_cd = order_summary_tmp.shipping_state_region_cd , total_price_amt = order_summary_tmp.total_price_amt , total_tax_amt = order_summary_tmp.total_tax_amt , total_unit_qty = order_summary_tmp.total_unit_qty , visit_id = order_summary_tmp.visit_id , visit_id_hex = order_summary_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_dttm,activity_dttm_tz,billing_city_nm,billing_country_nm,billing_postal_cd,billing_state_region_cd,cart_id,cart_nm,channel_nm,currency_cd,delivery_type_desc,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,order_id,payment_type_desc,properties_map_doc,record_type,session_id,session_id_hex,shipping_city_nm,shipping_country_nm,shipping_postal_cd,shipping_state_region_cd,total_unit_qty,visit_id,visit_id_hex
+        activity_dttm,activity_dttm_tz,billing_city_nm,billing_country_nm,billing_postal_cd,billing_state_region_cd,cart_id,cart_nm,channel_nm,currency_cd,delivery_type_desc,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,order_id,payment_type_desc,properties_map_doc,record_type,session_id,session_id_hex,shipping_amt,shipping_city_nm,shipping_country_nm,shipping_postal_cd,shipping_state_region_cd,total_price_amt,total_tax_amt,total_unit_qty,visit_id,visit_id_hex
          ) values ( 
-        order_summary_tmp.activity_dttm,order_summary_tmp.activity_dttm_tz,order_summary_tmp.billing_city_nm,order_summary_tmp.billing_country_nm,order_summary_tmp.billing_postal_cd,order_summary_tmp.billing_state_region_cd,order_summary_tmp.cart_id,order_summary_tmp.cart_nm,order_summary_tmp.channel_nm,order_summary_tmp.currency_cd,order_summary_tmp.delivery_type_desc,order_summary_tmp.detail_id,order_summary_tmp.detail_id_hex,order_summary_tmp.event_designed_id,order_summary_tmp.event_id,order_summary_tmp.event_key_cd,order_summary_tmp.event_nm,order_summary_tmp.event_source_cd,order_summary_tmp.identity_id,order_summary_tmp.load_dttm,order_summary_tmp.mobile_app_id,order_summary_tmp.order_id,order_summary_tmp.payment_type_desc,order_summary_tmp.properties_map_doc,order_summary_tmp.record_type,order_summary_tmp.session_id,order_summary_tmp.session_id_hex,order_summary_tmp.shipping_city_nm,order_summary_tmp.shipping_country_nm,order_summary_tmp.shipping_postal_cd,order_summary_tmp.shipping_state_region_cd,order_summary_tmp.total_unit_qty,order_summary_tmp.visit_id,order_summary_tmp.visit_id_hex
+        order_summary_tmp.activity_dttm,order_summary_tmp.activity_dttm_tz,order_summary_tmp.billing_city_nm,order_summary_tmp.billing_country_nm,order_summary_tmp.billing_postal_cd,order_summary_tmp.billing_state_region_cd,order_summary_tmp.cart_id,order_summary_tmp.cart_nm,order_summary_tmp.channel_nm,order_summary_tmp.currency_cd,order_summary_tmp.delivery_type_desc,order_summary_tmp.detail_id,order_summary_tmp.detail_id_hex,order_summary_tmp.event_designed_id,order_summary_tmp.event_id,order_summary_tmp.event_key_cd,order_summary_tmp.event_nm,order_summary_tmp.event_source_cd,order_summary_tmp.identity_id,order_summary_tmp.load_dttm,order_summary_tmp.mobile_app_id,order_summary_tmp.order_id,order_summary_tmp.payment_type_desc,order_summary_tmp.properties_map_doc,order_summary_tmp.record_type,order_summary_tmp.session_id,order_summary_tmp.session_id_hex,order_summary_tmp.shipping_amt,order_summary_tmp.shipping_city_nm,order_summary_tmp.shipping_country_nm,order_summary_tmp.shipping_postal_cd,order_summary_tmp.shipping_state_region_cd,order_summary_tmp.total_price_amt,order_summary_tmp.total_tax_amt,order_summary_tmp.total_unit_qty,order_summary_tmp.visit_id,order_summary_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8431,6 +8702,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..order_summary;
       DROP TABLE work.order_summary;
   QUIT;
  %end;
@@ -8479,6 +8751,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..outbound_system;
       DROP TABLE work.outbound_system;
   QUIT;
  %end;
@@ -8496,24 +8769,24 @@
         DROP TABLE &tmplib..page_details_tmp                ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=page_details, table_keys=%str(detail_id), out_table=work.page_details);
+ %check_duplicate_from_source(table_nm=page_details, table_keys=%str(event_id), out_table=work.page_details);
  data &tmplib..page_details_tmp                ;
      set work.page_details;
   if detail_dttm ne . then detail_dttm = tzoneu2s(detail_dttm,&timeZone_Value.);if detail_dttm_tz ne . then detail_dttm_tz = tzoneu2s(detail_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :page_details_tmp                , page_details);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..page_details using &tmpdbschema..page_details_tmp                
-         ON (page_details.detail_id=page_details_tmp.detail_id)
+         ON (page_details.event_id=page_details_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET bytes_sent_cnt = page_details_tmp.bytes_sent_cnt , channel_nm = page_details_tmp.channel_nm , class10_id = page_details_tmp.class10_id , class11_id = page_details_tmp.class11_id , class12_id = page_details_tmp.class12_id , class13_id = page_details_tmp.class13_id , class14_id = page_details_tmp.class14_id , class15_id = page_details_tmp.class15_id , class1_id = page_details_tmp.class1_id , class2_id = page_details_tmp.class2_id , class3_id = page_details_tmp.class3_id , class4_id = page_details_tmp.class4_id , class5_id = page_details_tmp.class5_id , class6_id = page_details_tmp.class6_id , class7_id = page_details_tmp.class7_id , class8_id = page_details_tmp.class8_id , class9_id = page_details_tmp.class9_id , detail_dttm = page_details_tmp.detail_dttm , detail_dttm_tz = page_details_tmp.detail_dttm_tz , detail_id_hex = page_details_tmp.detail_id_hex , domain_nm = page_details_tmp.domain_nm , event_id = page_details_tmp.event_id , event_key_cd = page_details_tmp.event_key_cd , event_nm = page_details_tmp.event_nm , event_source_cd = page_details_tmp.event_source_cd , identity_id = page_details_tmp.identity_id , load_dttm = page_details_tmp.load_dttm , mobile_app_id = page_details_tmp.mobile_app_id , page_complete_sec_cnt = page_details_tmp.page_complete_sec_cnt , page_desc = page_details_tmp.page_desc , page_load_sec_cnt = page_details_tmp.page_load_sec_cnt , page_url_txt = page_details_tmp.page_url_txt , protocol_nm = page_details_tmp.protocol_nm , referrer_url_txt = page_details_tmp.referrer_url_txt , session_id = page_details_tmp.session_id , session_id_hex = page_details_tmp.session_id_hex , url_domain = page_details_tmp.url_domain , visit_id = page_details_tmp.visit_id , visit_id_hex = page_details_tmp.visit_id_hex , window_size_txt = page_details_tmp.window_size_txt
+        UPDATE SET bytes_sent_cnt = page_details_tmp.bytes_sent_cnt , channel_nm = page_details_tmp.channel_nm , class10_id = page_details_tmp.class10_id , class11_id = page_details_tmp.class11_id , class12_id = page_details_tmp.class12_id , class13_id = page_details_tmp.class13_id , class14_id = page_details_tmp.class14_id , class15_id = page_details_tmp.class15_id , class1_id = page_details_tmp.class1_id , class2_id = page_details_tmp.class2_id , class3_id = page_details_tmp.class3_id , class4_id = page_details_tmp.class4_id , class5_id = page_details_tmp.class5_id , class6_id = page_details_tmp.class6_id , class7_id = page_details_tmp.class7_id , class8_id = page_details_tmp.class8_id , class9_id = page_details_tmp.class9_id , detail_dttm = page_details_tmp.detail_dttm , detail_dttm_tz = page_details_tmp.detail_dttm_tz , detail_id = page_details_tmp.detail_id , detail_id_hex = page_details_tmp.detail_id_hex , domain_nm = page_details_tmp.domain_nm , event_key_cd = page_details_tmp.event_key_cd , event_nm = page_details_tmp.event_nm , event_source_cd = page_details_tmp.event_source_cd , identity_id = page_details_tmp.identity_id , load_dttm = page_details_tmp.load_dttm , mobile_app_id = page_details_tmp.mobile_app_id , page_complete_sec_cnt = page_details_tmp.page_complete_sec_cnt , page_desc = page_details_tmp.page_desc , page_load_sec_cnt = page_details_tmp.page_load_sec_cnt , page_url_txt = page_details_tmp.page_url_txt , protocol_nm = page_details_tmp.protocol_nm , referrer_url_txt = page_details_tmp.referrer_url_txt , session_dt = page_details_tmp.session_dt , session_dt_tz = page_details_tmp.session_dt_tz , session_id = page_details_tmp.session_id , session_id_hex = page_details_tmp.session_id_hex , url_domain = page_details_tmp.url_domain , visit_id = page_details_tmp.visit_id , visit_id_hex = page_details_tmp.visit_id_hex , window_size_txt = page_details_tmp.window_size_txt
         WHEN NOT MATCHED THEN INSERT ( 
-        bytes_sent_cnt,channel_nm,class10_id,class11_id,class12_id,class13_id,class14_id,class15_id,class1_id,class2_id,class3_id,class4_id,class5_id,class6_id,class7_id,class8_id,class9_id,detail_dttm,detail_dttm_tz,detail_id,detail_id_hex,domain_nm,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,page_complete_sec_cnt,page_desc,page_load_sec_cnt,page_url_txt,protocol_nm,referrer_url_txt,session_id,session_id_hex,url_domain,visit_id,visit_id_hex,window_size_txt
+        bytes_sent_cnt,channel_nm,class10_id,class11_id,class12_id,class13_id,class14_id,class15_id,class1_id,class2_id,class3_id,class4_id,class5_id,class6_id,class7_id,class8_id,class9_id,detail_dttm,detail_dttm_tz,detail_id,detail_id_hex,domain_nm,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,page_complete_sec_cnt,page_desc,page_load_sec_cnt,page_url_txt,protocol_nm,referrer_url_txt,session_dt,session_dt_tz,session_id,session_id_hex,url_domain,visit_id,visit_id_hex,window_size_txt
          ) values ( 
-        page_details_tmp.bytes_sent_cnt,page_details_tmp.channel_nm,page_details_tmp.class10_id,page_details_tmp.class11_id,page_details_tmp.class12_id,page_details_tmp.class13_id,page_details_tmp.class14_id,page_details_tmp.class15_id,page_details_tmp.class1_id,page_details_tmp.class2_id,page_details_tmp.class3_id,page_details_tmp.class4_id,page_details_tmp.class5_id,page_details_tmp.class6_id,page_details_tmp.class7_id,page_details_tmp.class8_id,page_details_tmp.class9_id,page_details_tmp.detail_dttm,page_details_tmp.detail_dttm_tz,page_details_tmp.detail_id,page_details_tmp.detail_id_hex,page_details_tmp.domain_nm,page_details_tmp.event_id,page_details_tmp.event_key_cd,page_details_tmp.event_nm,page_details_tmp.event_source_cd,page_details_tmp.identity_id,page_details_tmp.load_dttm,page_details_tmp.mobile_app_id,page_details_tmp.page_complete_sec_cnt,page_details_tmp.page_desc,page_details_tmp.page_load_sec_cnt,page_details_tmp.page_url_txt,page_details_tmp.protocol_nm,page_details_tmp.referrer_url_txt,page_details_tmp.session_id,page_details_tmp.session_id_hex,page_details_tmp.url_domain,page_details_tmp.visit_id,page_details_tmp.visit_id_hex,page_details_tmp.window_size_txt
+        page_details_tmp.bytes_sent_cnt,page_details_tmp.channel_nm,page_details_tmp.class10_id,page_details_tmp.class11_id,page_details_tmp.class12_id,page_details_tmp.class13_id,page_details_tmp.class14_id,page_details_tmp.class15_id,page_details_tmp.class1_id,page_details_tmp.class2_id,page_details_tmp.class3_id,page_details_tmp.class4_id,page_details_tmp.class5_id,page_details_tmp.class6_id,page_details_tmp.class7_id,page_details_tmp.class8_id,page_details_tmp.class9_id,page_details_tmp.detail_dttm,page_details_tmp.detail_dttm_tz,page_details_tmp.detail_id,page_details_tmp.detail_id_hex,page_details_tmp.domain_nm,page_details_tmp.event_id,page_details_tmp.event_key_cd,page_details_tmp.event_nm,page_details_tmp.event_source_cd,page_details_tmp.identity_id,page_details_tmp.load_dttm,page_details_tmp.mobile_app_id,page_details_tmp.page_complete_sec_cnt,page_details_tmp.page_desc,page_details_tmp.page_load_sec_cnt,page_details_tmp.page_url_txt,page_details_tmp.protocol_nm,page_details_tmp.referrer_url_txt,page_details_tmp.session_dt,page_details_tmp.session_dt_tz,page_details_tmp.session_id,page_details_tmp.session_id_hex,page_details_tmp.url_domain,page_details_tmp.visit_id,page_details_tmp.visit_id_hex,page_details_tmp.window_size_txt
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8527,6 +8800,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..page_details;
       DROP TABLE work.page_details;
   QUIT;
  %end;
@@ -8575,6 +8849,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..page_details_ext;
       DROP TABLE work.page_details_ext;
   QUIT;
  %end;
@@ -8592,20 +8867,20 @@
         DROP TABLE &tmplib..page_errors_tmp                 ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=page_errors, table_keys=%str(detail_id,error_location_txt,in_page_error_txt), out_table=work.page_errors);
+ %check_duplicate_from_source(table_nm=page_errors, table_keys=%str(event_id), out_table=work.page_errors);
  data &tmplib..page_errors_tmp                 ;
      set work.page_errors;
   if in_page_error_dttm ne . then in_page_error_dttm = tzoneu2s(in_page_error_dttm,&timeZone_Value.);if in_page_error_dttm_tz ne . then in_page_error_dttm_tz = tzoneu2s(in_page_error_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-'; if error_location_txt='' then error_location_txt='-'; if in_page_error_txt='' then in_page_error_txt='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :page_errors_tmp                 , page_errors);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..page_errors using &tmpdbschema..page_errors_tmp                 
-         ON (page_errors.detail_id=page_errors_tmp.detail_id and page_errors.error_location_txt=page_errors_tmp.error_location_txt and page_errors.in_page_error_txt=page_errors_tmp.in_page_error_txt)
+         ON (page_errors.event_id=page_errors_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET detail_id_hex = page_errors_tmp.detail_id_hex , event_id = page_errors_tmp.event_id , event_source_cd = page_errors_tmp.event_source_cd , identity_id = page_errors_tmp.identity_id , in_page_error_dttm = page_errors_tmp.in_page_error_dttm , in_page_error_dttm_tz = page_errors_tmp.in_page_error_dttm_tz , load_dttm = page_errors_tmp.load_dttm , session_id = page_errors_tmp.session_id , session_id_hex = page_errors_tmp.session_id_hex , visit_id = page_errors_tmp.visit_id , visit_id_hex = page_errors_tmp.visit_id_hex
+        UPDATE SET detail_id = page_errors_tmp.detail_id , detail_id_hex = page_errors_tmp.detail_id_hex , error_location_txt = page_errors_tmp.error_location_txt , event_source_cd = page_errors_tmp.event_source_cd , identity_id = page_errors_tmp.identity_id , in_page_error_dttm = page_errors_tmp.in_page_error_dttm , in_page_error_dttm_tz = page_errors_tmp.in_page_error_dttm_tz , in_page_error_txt = page_errors_tmp.in_page_error_txt , load_dttm = page_errors_tmp.load_dttm , session_id = page_errors_tmp.session_id , session_id_hex = page_errors_tmp.session_id_hex , visit_id = page_errors_tmp.visit_id , visit_id_hex = page_errors_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         detail_id,detail_id_hex,error_location_txt,event_id,event_source_cd,identity_id,in_page_error_dttm,in_page_error_dttm_tz,in_page_error_txt,load_dttm,session_id,session_id_hex,visit_id,visit_id_hex
          ) values ( 
@@ -8623,6 +8898,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..page_errors;
       DROP TABLE work.page_errors;
   QUIT;
  %end;
@@ -8671,6 +8947,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..planning_hierarchy_defn;
       DROP TABLE work.planning_hierarchy_defn;
   QUIT;
  %end;
@@ -8701,11 +8978,11 @@
         execute (MERGE INTO &dbschema..planning_info using &tmpdbschema..planning_info_tmp               
          ON (planning_info.hier_defn_id=planning_info_tmp.hier_defn_id and planning_info.planning_id=planning_info_tmp.planning_id)
         WHEN MATCHED THEN  
-        UPDATE SET activity_desc = planning_info_tmp.activity_desc , activity_id = planning_info_tmp.activity_id , activity_nm = planning_info_tmp.activity_nm , activity_status = planning_info_tmp.activity_status , all_msgs = planning_info_tmp.all_msgs , bu_currency_cd = planning_info_tmp.bu_currency_cd , bu_desc = planning_info_tmp.bu_desc , bu_id = planning_info_tmp.bu_id , bu_nm = planning_info_tmp.bu_nm , bu_obsolete_flg = planning_info_tmp.bu_obsolete_flg , category_nm = planning_info_tmp.category_nm , created_by_usernm = planning_info_tmp.created_by_usernm , created_dttm = planning_info_tmp.created_dttm , currency_cd = planning_info_tmp.currency_cd , hier_defn_nodeid = planning_info_tmp.hier_defn_nodeid , last_modified_dttm = planning_info_tmp.last_modified_dttm , last_modified_usernm = planning_info_tmp.last_modified_usernm , lev10_nm = planning_info_tmp.lev10_nm , lev1_nm = planning_info_tmp.lev1_nm , lev2_nm = planning_info_tmp.lev2_nm , lev3_nm = planning_info_tmp.lev3_nm , lev4_nm = planning_info_tmp.lev4_nm , lev5_nm = planning_info_tmp.lev5_nm , lev6_nm = planning_info_tmp.lev6_nm , lev7_nm = planning_info_tmp.lev7_nm , lev8_nm = planning_info_tmp.lev8_nm , lev9_nm = planning_info_tmp.lev9_nm , load_dttm = planning_info_tmp.load_dttm , parent_id = planning_info_tmp.parent_id , parent_nm = planning_info_tmp.parent_nm , planned_end_dttm = planning_info_tmp.planned_end_dttm , planned_start_dttm = planning_info_tmp.planned_start_dttm , planning_desc = planning_info_tmp.planning_desc , planning_item_path = planning_info_tmp.planning_item_path , planning_level_no = planning_info_tmp.planning_level_no , planning_level_type = planning_info_tmp.planning_level_type , planning_nm = planning_info_tmp.planning_nm , planning_number = planning_info_tmp.planning_number , planning_owner_usernm = planning_info_tmp.planning_owner_usernm , planning_status = planning_info_tmp.planning_status , planning_type = planning_info_tmp.planning_type , reserved_budget_same_flg = planning_info_tmp.reserved_budget_same_flg , task_channel = planning_info_tmp.task_channel , task_desc = planning_info_tmp.task_desc , task_id = planning_info_tmp.task_id , task_nm = planning_info_tmp.task_nm , task_status = planning_info_tmp.task_status
+        UPDATE SET activity_desc = planning_info_tmp.activity_desc , activity_id = planning_info_tmp.activity_id , activity_nm = planning_info_tmp.activity_nm , activity_status = planning_info_tmp.activity_status , all_msgs = planning_info_tmp.all_msgs , alloc_budget = planning_info_tmp.alloc_budget , available_budget = planning_info_tmp.available_budget , bu_currency_cd = planning_info_tmp.bu_currency_cd , bu_desc = planning_info_tmp.bu_desc , bu_id = planning_info_tmp.bu_id , bu_nm = planning_info_tmp.bu_nm , bu_obsolete_flg = planning_info_tmp.bu_obsolete_flg , category_nm = planning_info_tmp.category_nm , created_by_usernm = planning_info_tmp.created_by_usernm , created_dttm = planning_info_tmp.created_dttm , currency_cd = planning_info_tmp.currency_cd , hier_defn_nodeid = planning_info_tmp.hier_defn_nodeid , last_modified_dttm = planning_info_tmp.last_modified_dttm , last_modified_usernm = planning_info_tmp.last_modified_usernm , lev10_nm = planning_info_tmp.lev10_nm , lev1_nm = planning_info_tmp.lev1_nm , lev2_nm = planning_info_tmp.lev2_nm , lev3_nm = planning_info_tmp.lev3_nm , lev4_nm = planning_info_tmp.lev4_nm , lev5_nm = planning_info_tmp.lev5_nm , lev6_nm = planning_info_tmp.lev6_nm , lev7_nm = planning_info_tmp.lev7_nm , lev8_nm = planning_info_tmp.lev8_nm , lev9_nm = planning_info_tmp.lev9_nm , load_dttm = planning_info_tmp.load_dttm , parent_id = planning_info_tmp.parent_id , parent_nm = planning_info_tmp.parent_nm , planned_end_dttm = planning_info_tmp.planned_end_dttm , planned_start_dttm = planning_info_tmp.planned_start_dttm , planning_desc = planning_info_tmp.planning_desc , planning_item_path = planning_info_tmp.planning_item_path , planning_level_no = planning_info_tmp.planning_level_no , planning_level_type = planning_info_tmp.planning_level_type , planning_nm = planning_info_tmp.planning_nm , planning_number = planning_info_tmp.planning_number , planning_owner_usernm = planning_info_tmp.planning_owner_usernm , planning_status = planning_info_tmp.planning_status , planning_type = planning_info_tmp.planning_type , reserved_budget = planning_info_tmp.reserved_budget , reserved_budget_same_flg = planning_info_tmp.reserved_budget_same_flg , rolledup_budget = planning_info_tmp.rolledup_budget , task_channel = planning_info_tmp.task_channel , task_desc = planning_info_tmp.task_desc , task_id = planning_info_tmp.task_id , task_nm = planning_info_tmp.task_nm , task_status = planning_info_tmp.task_status , tot_cmtmnt_outstanding = planning_info_tmp.tot_cmtmnt_outstanding , tot_cmtmnt_overspent = planning_info_tmp.tot_cmtmnt_overspent , tot_committed = planning_info_tmp.tot_committed , tot_expenses = planning_info_tmp.tot_expenses , tot_invoiced = planning_info_tmp.tot_invoiced , total_budget = planning_info_tmp.total_budget
         WHEN NOT MATCHED THEN INSERT ( 
-        activity_desc,activity_id,activity_nm,activity_status,all_msgs,bu_currency_cd,bu_desc,bu_id,bu_nm,bu_obsolete_flg,category_nm,created_by_usernm,created_dttm,currency_cd,hier_defn_id,hier_defn_nodeid,last_modified_dttm,last_modified_usernm,lev10_nm,lev1_nm,lev2_nm,lev3_nm,lev4_nm,lev5_nm,lev6_nm,lev7_nm,lev8_nm,lev9_nm,load_dttm,parent_id,parent_nm,planned_end_dttm,planned_start_dttm,planning_desc,planning_id,planning_item_path,planning_level_no,planning_level_type,planning_nm,planning_number,planning_owner_usernm,planning_status,planning_type,reserved_budget_same_flg,task_channel,task_desc,task_id,task_nm,task_status
+        activity_desc,activity_id,activity_nm,activity_status,all_msgs,alloc_budget,available_budget,bu_currency_cd,bu_desc,bu_id,bu_nm,bu_obsolete_flg,category_nm,created_by_usernm,created_dttm,currency_cd,hier_defn_id,hier_defn_nodeid,last_modified_dttm,last_modified_usernm,lev10_nm,lev1_nm,lev2_nm,lev3_nm,lev4_nm,lev5_nm,lev6_nm,lev7_nm,lev8_nm,lev9_nm,load_dttm,parent_id,parent_nm,planned_end_dttm,planned_start_dttm,planning_desc,planning_id,planning_item_path,planning_level_no,planning_level_type,planning_nm,planning_number,planning_owner_usernm,planning_status,planning_type,reserved_budget,reserved_budget_same_flg,rolledup_budget,task_channel,task_desc,task_id,task_nm,task_status,tot_cmtmnt_outstanding,tot_cmtmnt_overspent,tot_committed,tot_expenses,tot_invoiced,total_budget
          ) values ( 
-        planning_info_tmp.activity_desc,planning_info_tmp.activity_id,planning_info_tmp.activity_nm,planning_info_tmp.activity_status,planning_info_tmp.all_msgs,planning_info_tmp.bu_currency_cd,planning_info_tmp.bu_desc,planning_info_tmp.bu_id,planning_info_tmp.bu_nm,planning_info_tmp.bu_obsolete_flg,planning_info_tmp.category_nm,planning_info_tmp.created_by_usernm,planning_info_tmp.created_dttm,planning_info_tmp.currency_cd,planning_info_tmp.hier_defn_id,planning_info_tmp.hier_defn_nodeid,planning_info_tmp.last_modified_dttm,planning_info_tmp.last_modified_usernm,planning_info_tmp.lev10_nm,planning_info_tmp.lev1_nm,planning_info_tmp.lev2_nm,planning_info_tmp.lev3_nm,planning_info_tmp.lev4_nm,planning_info_tmp.lev5_nm,planning_info_tmp.lev6_nm,planning_info_tmp.lev7_nm,planning_info_tmp.lev8_nm,planning_info_tmp.lev9_nm,planning_info_tmp.load_dttm,planning_info_tmp.parent_id,planning_info_tmp.parent_nm,planning_info_tmp.planned_end_dttm,planning_info_tmp.planned_start_dttm,planning_info_tmp.planning_desc,planning_info_tmp.planning_id,planning_info_tmp.planning_item_path,planning_info_tmp.planning_level_no,planning_info_tmp.planning_level_type,planning_info_tmp.planning_nm,planning_info_tmp.planning_number,planning_info_tmp.planning_owner_usernm,planning_info_tmp.planning_status,planning_info_tmp.planning_type,planning_info_tmp.reserved_budget_same_flg,planning_info_tmp.task_channel,planning_info_tmp.task_desc,planning_info_tmp.task_id,planning_info_tmp.task_nm,planning_info_tmp.task_status
+        planning_info_tmp.activity_desc,planning_info_tmp.activity_id,planning_info_tmp.activity_nm,planning_info_tmp.activity_status,planning_info_tmp.all_msgs,planning_info_tmp.alloc_budget,planning_info_tmp.available_budget,planning_info_tmp.bu_currency_cd,planning_info_tmp.bu_desc,planning_info_tmp.bu_id,planning_info_tmp.bu_nm,planning_info_tmp.bu_obsolete_flg,planning_info_tmp.category_nm,planning_info_tmp.created_by_usernm,planning_info_tmp.created_dttm,planning_info_tmp.currency_cd,planning_info_tmp.hier_defn_id,planning_info_tmp.hier_defn_nodeid,planning_info_tmp.last_modified_dttm,planning_info_tmp.last_modified_usernm,planning_info_tmp.lev10_nm,planning_info_tmp.lev1_nm,planning_info_tmp.lev2_nm,planning_info_tmp.lev3_nm,planning_info_tmp.lev4_nm,planning_info_tmp.lev5_nm,planning_info_tmp.lev6_nm,planning_info_tmp.lev7_nm,planning_info_tmp.lev8_nm,planning_info_tmp.lev9_nm,planning_info_tmp.load_dttm,planning_info_tmp.parent_id,planning_info_tmp.parent_nm,planning_info_tmp.planned_end_dttm,planning_info_tmp.planned_start_dttm,planning_info_tmp.planning_desc,planning_info_tmp.planning_id,planning_info_tmp.planning_item_path,planning_info_tmp.planning_level_no,planning_info_tmp.planning_level_type,planning_info_tmp.planning_nm,planning_info_tmp.planning_number,planning_info_tmp.planning_owner_usernm,planning_info_tmp.planning_status,planning_info_tmp.planning_type,planning_info_tmp.reserved_budget,planning_info_tmp.reserved_budget_same_flg,planning_info_tmp.rolledup_budget,planning_info_tmp.task_channel,planning_info_tmp.task_desc,planning_info_tmp.task_id,planning_info_tmp.task_nm,planning_info_tmp.task_status,planning_info_tmp.tot_cmtmnt_outstanding,planning_info_tmp.tot_cmtmnt_overspent,planning_info_tmp.tot_committed,planning_info_tmp.tot_expenses,planning_info_tmp.tot_invoiced,planning_info_tmp.total_budget
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8719,6 +8996,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..planning_info;
       DROP TABLE work.planning_info;
   QUIT;
  %end;
@@ -8767,6 +9045,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..planning_info_custom_prop;
       DROP TABLE work.planning_info_custom_prop;
   QUIT;
  %end;
@@ -8797,11 +9076,11 @@
         execute (MERGE INTO &dbschema..product_views using &tmpdbschema..product_views_tmp               
          ON (product_views.detail_id=product_views_tmp.detail_id and product_views.product_id=product_views_tmp.product_id and product_views.product_nm=product_views_tmp.product_nm and product_views.product_sku=product_views_tmp.product_sku)
         WHEN MATCHED THEN  
-        UPDATE SET action_dttm = product_views_tmp.action_dttm , action_dttm_tz = product_views_tmp.action_dttm_tz , availability_message_txt = product_views_tmp.availability_message_txt , channel_nm = product_views_tmp.channel_nm , currency_cd = product_views_tmp.currency_cd , detail_id_hex = product_views_tmp.detail_id_hex , event_designed_id = product_views_tmp.event_designed_id , event_id = product_views_tmp.event_id , event_key_cd = product_views_tmp.event_key_cd , event_nm = product_views_tmp.event_nm , event_source_cd = product_views_tmp.event_source_cd , identity_id = product_views_tmp.identity_id , load_dttm = product_views_tmp.load_dttm , mobile_app_id = product_views_tmp.mobile_app_id , product_group_nm = product_views_tmp.product_group_nm , properties_map_doc = product_views_tmp.properties_map_doc , saving_message_txt = product_views_tmp.saving_message_txt , session_id = product_views_tmp.session_id , session_id_hex = product_views_tmp.session_id_hex , shipping_message_txt = product_views_tmp.shipping_message_txt , visit_id = product_views_tmp.visit_id , visit_id_hex = product_views_tmp.visit_id_hex
+        UPDATE SET action_dttm = product_views_tmp.action_dttm , action_dttm_tz = product_views_tmp.action_dttm_tz , availability_message_txt = product_views_tmp.availability_message_txt , channel_nm = product_views_tmp.channel_nm , currency_cd = product_views_tmp.currency_cd , detail_id_hex = product_views_tmp.detail_id_hex , event_designed_id = product_views_tmp.event_designed_id , event_id = product_views_tmp.event_id , event_key_cd = product_views_tmp.event_key_cd , event_nm = product_views_tmp.event_nm , event_source_cd = product_views_tmp.event_source_cd , identity_id = product_views_tmp.identity_id , load_dttm = product_views_tmp.load_dttm , mobile_app_id = product_views_tmp.mobile_app_id , price_val = product_views_tmp.price_val , product_group_nm = product_views_tmp.product_group_nm , properties_map_doc = product_views_tmp.properties_map_doc , saving_message_txt = product_views_tmp.saving_message_txt , session_id = product_views_tmp.session_id , session_id_hex = product_views_tmp.session_id_hex , shipping_message_txt = product_views_tmp.shipping_message_txt , visit_id = product_views_tmp.visit_id , visit_id_hex = product_views_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
-        action_dttm,action_dttm_tz,availability_message_txt,channel_nm,currency_cd,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,saving_message_txt,session_id,session_id_hex,shipping_message_txt,visit_id,visit_id_hex
+        action_dttm,action_dttm_tz,availability_message_txt,channel_nm,currency_cd,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,price_val,product_group_nm,product_id,product_nm,product_sku,properties_map_doc,saving_message_txt,session_id,session_id_hex,shipping_message_txt,visit_id,visit_id_hex
          ) values ( 
-        product_views_tmp.action_dttm,product_views_tmp.action_dttm_tz,product_views_tmp.availability_message_txt,product_views_tmp.channel_nm,product_views_tmp.currency_cd,product_views_tmp.detail_id,product_views_tmp.detail_id_hex,product_views_tmp.event_designed_id,product_views_tmp.event_id,product_views_tmp.event_key_cd,product_views_tmp.event_nm,product_views_tmp.event_source_cd,product_views_tmp.identity_id,product_views_tmp.load_dttm,product_views_tmp.mobile_app_id,product_views_tmp.product_group_nm,product_views_tmp.product_id,product_views_tmp.product_nm,product_views_tmp.product_sku,product_views_tmp.properties_map_doc,product_views_tmp.saving_message_txt,product_views_tmp.session_id,product_views_tmp.session_id_hex,product_views_tmp.shipping_message_txt,product_views_tmp.visit_id,product_views_tmp.visit_id_hex
+        product_views_tmp.action_dttm,product_views_tmp.action_dttm_tz,product_views_tmp.availability_message_txt,product_views_tmp.channel_nm,product_views_tmp.currency_cd,product_views_tmp.detail_id,product_views_tmp.detail_id_hex,product_views_tmp.event_designed_id,product_views_tmp.event_id,product_views_tmp.event_key_cd,product_views_tmp.event_nm,product_views_tmp.event_source_cd,product_views_tmp.identity_id,product_views_tmp.load_dttm,product_views_tmp.mobile_app_id,product_views_tmp.price_val,product_views_tmp.product_group_nm,product_views_tmp.product_id,product_views_tmp.product_nm,product_views_tmp.product_sku,product_views_tmp.properties_map_doc,product_views_tmp.saving_message_txt,product_views_tmp.session_id,product_views_tmp.session_id_hex,product_views_tmp.shipping_message_txt,product_views_tmp.visit_id,product_views_tmp.visit_id_hex
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -8815,6 +9094,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..product_views;
       DROP TABLE work.product_views;
   QUIT;
  %end;
@@ -8832,20 +9112,20 @@
         DROP TABLE &tmplib..promotion_displayed_tmp         ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=promotion_displayed, table_keys=%str(detail_id,display_dttm,promotion_nm), out_table=work.promotion_displayed);
+ %check_duplicate_from_source(table_nm=promotion_displayed, table_keys=%str(event_id), out_table=work.promotion_displayed);
  data &tmplib..promotion_displayed_tmp         ;
      set work.promotion_displayed;
   if display_dttm ne . then display_dttm = tzoneu2s(display_dttm,&timeZone_Value.);if display_dttm_tz ne . then display_dttm_tz = tzoneu2s(display_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-'; if promotion_nm='' then promotion_nm='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :promotion_displayed_tmp         , promotion_displayed);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..promotion_displayed using &tmpdbschema..promotion_displayed_tmp         
-         ON (promotion_displayed.detail_id=promotion_displayed_tmp.detail_id and promotion_displayed.display_dttm=promotion_displayed_tmp.display_dttm and promotion_displayed.promotion_nm=promotion_displayed_tmp.promotion_nm)
+         ON (promotion_displayed.event_id=promotion_displayed_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET channel_nm = promotion_displayed_tmp.channel_nm , derived_display_flg = promotion_displayed_tmp.derived_display_flg , detail_id_hex = promotion_displayed_tmp.detail_id_hex , display_dttm_tz = promotion_displayed_tmp.display_dttm_tz , event_designed_id = promotion_displayed_tmp.event_designed_id , event_id = promotion_displayed_tmp.event_id , event_key_cd = promotion_displayed_tmp.event_key_cd , event_nm = promotion_displayed_tmp.event_nm , event_source_cd = promotion_displayed_tmp.event_source_cd , identity_id = promotion_displayed_tmp.identity_id , load_dttm = promotion_displayed_tmp.load_dttm , mobile_app_id = promotion_displayed_tmp.mobile_app_id , promotion_creative_nm = promotion_displayed_tmp.promotion_creative_nm , promotion_number = promotion_displayed_tmp.promotion_number , promotion_placement_nm = promotion_displayed_tmp.promotion_placement_nm , promotion_tracking_cd = promotion_displayed_tmp.promotion_tracking_cd , promotion_type_nm = promotion_displayed_tmp.promotion_type_nm , properties_map_doc = promotion_displayed_tmp.properties_map_doc , session_id = promotion_displayed_tmp.session_id , session_id_hex = promotion_displayed_tmp.session_id_hex , visit_id = promotion_displayed_tmp.visit_id , visit_id_hex = promotion_displayed_tmp.visit_id_hex
+        UPDATE SET channel_nm = promotion_displayed_tmp.channel_nm , derived_display_flg = promotion_displayed_tmp.derived_display_flg , detail_id = promotion_displayed_tmp.detail_id , detail_id_hex = promotion_displayed_tmp.detail_id_hex , display_dttm = promotion_displayed_tmp.display_dttm , display_dttm_tz = promotion_displayed_tmp.display_dttm_tz , event_designed_id = promotion_displayed_tmp.event_designed_id , event_key_cd = promotion_displayed_tmp.event_key_cd , event_nm = promotion_displayed_tmp.event_nm , event_source_cd = promotion_displayed_tmp.event_source_cd , identity_id = promotion_displayed_tmp.identity_id , load_dttm = promotion_displayed_tmp.load_dttm , mobile_app_id = promotion_displayed_tmp.mobile_app_id , promotion_creative_nm = promotion_displayed_tmp.promotion_creative_nm , promotion_nm = promotion_displayed_tmp.promotion_nm , promotion_number = promotion_displayed_tmp.promotion_number , promotion_placement_nm = promotion_displayed_tmp.promotion_placement_nm , promotion_tracking_cd = promotion_displayed_tmp.promotion_tracking_cd , promotion_type_nm = promotion_displayed_tmp.promotion_type_nm , properties_map_doc = promotion_displayed_tmp.properties_map_doc , session_id = promotion_displayed_tmp.session_id , session_id_hex = promotion_displayed_tmp.session_id_hex , visit_id = promotion_displayed_tmp.visit_id , visit_id_hex = promotion_displayed_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         channel_nm,derived_display_flg,detail_id,detail_id_hex,display_dttm,display_dttm_tz,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,promotion_creative_nm,promotion_nm,promotion_number,promotion_placement_nm,promotion_tracking_cd,promotion_type_nm,properties_map_doc,session_id,session_id_hex,visit_id,visit_id_hex
          ) values ( 
@@ -8863,6 +9143,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..promotion_displayed;
       DROP TABLE work.promotion_displayed;
   QUIT;
  %end;
@@ -8880,20 +9161,20 @@
         DROP TABLE &tmplib..promotion_used_tmp              ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=promotion_used, table_keys=%str(click_dttm,detail_id,promotion_nm), out_table=work.promotion_used);
+ %check_duplicate_from_source(table_nm=promotion_used, table_keys=%str(event_id), out_table=work.promotion_used);
  data &tmplib..promotion_used_tmp              ;
      set work.promotion_used;
   if click_dttm ne . then click_dttm = tzoneu2s(click_dttm,&timeZone_Value.);if click_dttm_tz ne . then click_dttm_tz = tzoneu2s(click_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-'; if promotion_nm='' then promotion_nm='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :promotion_used_tmp              , promotion_used);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..promotion_used using &tmpdbschema..promotion_used_tmp              
-         ON (promotion_used.click_dttm=promotion_used_tmp.click_dttm and promotion_used.detail_id=promotion_used_tmp.detail_id and promotion_used.promotion_nm=promotion_used_tmp.promotion_nm)
+         ON (promotion_used.event_id=promotion_used_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET channel_nm = promotion_used_tmp.channel_nm , click_dttm_tz = promotion_used_tmp.click_dttm_tz , detail_id_hex = promotion_used_tmp.detail_id_hex , event_designed_id = promotion_used_tmp.event_designed_id , event_id = promotion_used_tmp.event_id , event_key_cd = promotion_used_tmp.event_key_cd , event_nm = promotion_used_tmp.event_nm , event_source_cd = promotion_used_tmp.event_source_cd , identity_id = promotion_used_tmp.identity_id , load_dttm = promotion_used_tmp.load_dttm , mobile_app_id = promotion_used_tmp.mobile_app_id , promotion_creative_nm = promotion_used_tmp.promotion_creative_nm , promotion_number = promotion_used_tmp.promotion_number , promotion_placement_nm = promotion_used_tmp.promotion_placement_nm , promotion_tracking_cd = promotion_used_tmp.promotion_tracking_cd , promotion_type_nm = promotion_used_tmp.promotion_type_nm , properties_map_doc = promotion_used_tmp.properties_map_doc , session_id = promotion_used_tmp.session_id , session_id_hex = promotion_used_tmp.session_id_hex , visit_id = promotion_used_tmp.visit_id , visit_id_hex = promotion_used_tmp.visit_id_hex
+        UPDATE SET channel_nm = promotion_used_tmp.channel_nm , click_dttm = promotion_used_tmp.click_dttm , click_dttm_tz = promotion_used_tmp.click_dttm_tz , detail_id = promotion_used_tmp.detail_id , detail_id_hex = promotion_used_tmp.detail_id_hex , event_designed_id = promotion_used_tmp.event_designed_id , event_key_cd = promotion_used_tmp.event_key_cd , event_nm = promotion_used_tmp.event_nm , event_source_cd = promotion_used_tmp.event_source_cd , identity_id = promotion_used_tmp.identity_id , load_dttm = promotion_used_tmp.load_dttm , mobile_app_id = promotion_used_tmp.mobile_app_id , promotion_creative_nm = promotion_used_tmp.promotion_creative_nm , promotion_nm = promotion_used_tmp.promotion_nm , promotion_number = promotion_used_tmp.promotion_number , promotion_placement_nm = promotion_used_tmp.promotion_placement_nm , promotion_tracking_cd = promotion_used_tmp.promotion_tracking_cd , promotion_type_nm = promotion_used_tmp.promotion_type_nm , properties_map_doc = promotion_used_tmp.properties_map_doc , session_id = promotion_used_tmp.session_id , session_id_hex = promotion_used_tmp.session_id_hex , visit_id = promotion_used_tmp.visit_id , visit_id_hex = promotion_used_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         channel_nm,click_dttm,click_dttm_tz,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,promotion_creative_nm,promotion_nm,promotion_number,promotion_placement_nm,promotion_tracking_cd,promotion_type_nm,properties_map_doc,session_id,session_id_hex,visit_id,visit_id_hex
          ) values ( 
@@ -8911,6 +9192,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..promotion_used;
       DROP TABLE work.promotion_used;
   QUIT;
  %end;
@@ -8959,6 +9241,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..response_history;
       DROP TABLE work.response_history;
   QUIT;
  %end;
@@ -8976,20 +9259,20 @@
         DROP TABLE &tmplib..search_results_tmp              ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=search_results, table_keys=%str(detail_id,search_results_dttm), out_table=work.search_results);
+ %check_duplicate_from_source(table_nm=search_results, table_keys=%str(event_id), out_table=work.search_results);
  data &tmplib..search_results_tmp              ;
      set work.search_results;
   if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.);if search_results_dttm ne . then search_results_dttm = tzoneu2s(search_results_dttm,&timeZone_Value.);if search_results_dttm_tz ne . then search_results_dttm_tz = tzoneu2s(search_results_dttm_tz,&timeZone_Value.) ;
-  if detail_id='' then detail_id='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :search_results_tmp              , search_results);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..search_results using &tmpdbschema..search_results_tmp              
-         ON (search_results.detail_id=search_results_tmp.detail_id and search_results.search_results_dttm=search_results_tmp.search_results_dttm)
+         ON (search_results.event_id=search_results_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET channel_nm = search_results_tmp.channel_nm , detail_id_hex = search_results_tmp.detail_id_hex , event_designed_id = search_results_tmp.event_designed_id , event_id = search_results_tmp.event_id , event_key_cd = search_results_tmp.event_key_cd , event_nm = search_results_tmp.event_nm , event_source_cd = search_results_tmp.event_source_cd , identity_id = search_results_tmp.identity_id , load_dttm = search_results_tmp.load_dttm , mobile_app_id = search_results_tmp.mobile_app_id , properties_map_doc = search_results_tmp.properties_map_doc , results_displayed_flg = search_results_tmp.results_displayed_flg , search_nm = search_results_tmp.search_nm , search_results_displayed = search_results_tmp.search_results_displayed , search_results_dttm_tz = search_results_tmp.search_results_dttm_tz , search_results_sk = search_results_tmp.search_results_sk , session_id = search_results_tmp.session_id , session_id_hex = search_results_tmp.session_id_hex , srch_field_id = search_results_tmp.srch_field_id , srch_field_name = search_results_tmp.srch_field_name , srch_phrase = search_results_tmp.srch_phrase , visit_id = search_results_tmp.visit_id , visit_id_hex = search_results_tmp.visit_id_hex
+        UPDATE SET channel_nm = search_results_tmp.channel_nm , detail_id = search_results_tmp.detail_id , detail_id_hex = search_results_tmp.detail_id_hex , event_designed_id = search_results_tmp.event_designed_id , event_key_cd = search_results_tmp.event_key_cd , event_nm = search_results_tmp.event_nm , event_source_cd = search_results_tmp.event_source_cd , identity_id = search_results_tmp.identity_id , load_dttm = search_results_tmp.load_dttm , mobile_app_id = search_results_tmp.mobile_app_id , properties_map_doc = search_results_tmp.properties_map_doc , results_displayed_flg = search_results_tmp.results_displayed_flg , search_nm = search_results_tmp.search_nm , search_results_displayed = search_results_tmp.search_results_displayed , search_results_dttm = search_results_tmp.search_results_dttm , search_results_dttm_tz = search_results_tmp.search_results_dttm_tz , search_results_sk = search_results_tmp.search_results_sk , session_id = search_results_tmp.session_id , session_id_hex = search_results_tmp.session_id_hex , srch_field_id = search_results_tmp.srch_field_id , srch_field_name = search_results_tmp.srch_field_name , srch_phrase = search_results_tmp.srch_phrase , visit_id = search_results_tmp.visit_id , visit_id_hex = search_results_tmp.visit_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         channel_nm,detail_id,detail_id_hex,event_designed_id,event_id,event_key_cd,event_nm,event_source_cd,identity_id,load_dttm,mobile_app_id,properties_map_doc,results_displayed_flg,search_nm,search_results_displayed,search_results_dttm,search_results_dttm_tz,search_results_sk,session_id,session_id_hex,srch_field_id,srch_field_name,srch_phrase,visit_id,visit_id_hex
          ) values ( 
@@ -9007,6 +9290,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..search_results;
       DROP TABLE work.search_results;
   QUIT;
  %end;
@@ -9024,24 +9308,24 @@
         DROP TABLE &tmplib..search_results_ext_tmp          ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=search_results_ext, table_keys=%str(search_results_sk), out_table=work.search_results_ext);
+ %check_duplicate_from_source(table_nm=search_results_ext, table_keys=%str(event_id), out_table=work.search_results_ext);
  data &tmplib..search_results_ext_tmp          ;
      set work.search_results_ext;
   if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.) ;
-  if search_results_sk='' then search_results_sk='-';
+  if event_id='' then event_id='-';
  run;
  %ErrCheck (Failed to Append Data to :search_results_ext_tmp          , search_results_ext);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..search_results_ext using &tmpdbschema..search_results_ext_tmp          
-         ON (search_results_ext.search_results_sk=search_results_ext_tmp.search_results_sk)
+         ON (search_results_ext.event_id=search_results_ext_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET event_designed_id = search_results_ext_tmp.event_designed_id , load_dttm = search_results_ext_tmp.load_dttm , search_results_displayed = search_results_ext_tmp.search_results_displayed
+        UPDATE SET event_designed_id = search_results_ext_tmp.event_designed_id , load_dttm = search_results_ext_tmp.load_dttm , search_results_displayed = search_results_ext_tmp.search_results_displayed , search_results_sk = search_results_ext_tmp.search_results_sk
         WHEN NOT MATCHED THEN INSERT ( 
-        event_designed_id,load_dttm,search_results_displayed,search_results_sk
+        event_designed_id,event_id,load_dttm,search_results_displayed,search_results_sk
          ) values ( 
-        search_results_ext_tmp.event_designed_id,search_results_ext_tmp.load_dttm,search_results_ext_tmp.search_results_displayed,search_results_ext_tmp.search_results_sk
+        search_results_ext_tmp.event_designed_id,search_results_ext_tmp.event_id,search_results_ext_tmp.load_dttm,search_results_ext_tmp.search_results_displayed,search_results_ext_tmp.search_results_sk
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9055,6 +9339,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..search_results_ext;
       DROP TABLE work.search_results_ext;
   QUIT;
  %end;
@@ -9085,11 +9370,11 @@
         execute (MERGE INTO &dbschema..session_details using &tmpdbschema..session_details_tmp             
          ON (session_details.session_id=session_details_tmp.session_id)
         WHEN MATCHED THEN  
-        UPDATE SET app_id = session_details_tmp.app_id , app_version = session_details_tmp.app_version , browser_nm = session_details_tmp.browser_nm , browser_version_no = session_details_tmp.browser_version_no , carrier_name = session_details_tmp.carrier_name , channel_nm = session_details_tmp.channel_nm , city_nm = session_details_tmp.city_nm , client_session_start_dttm = session_details_tmp.client_session_start_dttm , client_session_start_dttm_tz = session_details_tmp.client_session_start_dttm_tz , cookies_enabled_flg = session_details_tmp.cookies_enabled_flg , country_cd = session_details_tmp.country_cd , country_nm = session_details_tmp.country_nm , device_language = session_details_tmp.device_language , device_nm = session_details_tmp.device_nm , device_type_nm = session_details_tmp.device_type_nm , event_id = session_details_tmp.event_id , flash_enabled_flg = session_details_tmp.flash_enabled_flg , flash_version_no = session_details_tmp.flash_version_no , identity_id = session_details_tmp.identity_id , ip_address = session_details_tmp.ip_address , is_portable_flag = session_details_tmp.is_portable_flag , java_enabled_flg = session_details_tmp.java_enabled_flg , java_script_enabled_flg = session_details_tmp.java_script_enabled_flg , java_version_no = session_details_tmp.java_version_no , load_dttm = session_details_tmp.load_dttm , manufacturer = session_details_tmp.manufacturer , metro_cd = session_details_tmp.metro_cd , mobile_country_code = session_details_tmp.mobile_country_code , network_code = session_details_tmp.network_code , new_visitor_flg = session_details_tmp.new_visitor_flg , organization_nm = session_details_tmp.organization_nm , parent_event_id = session_details_tmp.parent_event_id , platform_desc = session_details_tmp.platform_desc , platform_type_nm = session_details_tmp.platform_type_nm , platform_version = session_details_tmp.platform_version , postal_cd = session_details_tmp.postal_cd , previous_session_id = session_details_tmp.previous_session_id , previous_session_id_hex = session_details_tmp.previous_session_id_hex , profile_nm1 = session_details_tmp.profile_nm1 , profile_nm2 = session_details_tmp.profile_nm2 , profile_nm3 = session_details_tmp.profile_nm3 , profile_nm4 = session_details_tmp.profile_nm4 , profile_nm5 = session_details_tmp.profile_nm5 , region_nm = session_details_tmp.region_nm , screen_color_depth_no = session_details_tmp.screen_color_depth_no , screen_size_txt = session_details_tmp.screen_size_txt , sdk_version = session_details_tmp.sdk_version , session_id_hex = session_details_tmp.session_id_hex , session_start_dttm = session_details_tmp.session_start_dttm , session_start_dttm_tz = session_details_tmp.session_start_dttm_tz , session_timeout = session_details_tmp.session_timeout , state_region_cd = session_details_tmp.state_region_cd , user_agent_nm = session_details_tmp.user_agent_nm , user_language_cd = session_details_tmp.user_language_cd , visitor_id = session_details_tmp.visitor_id
+        UPDATE SET app_id = session_details_tmp.app_id , app_version = session_details_tmp.app_version , browser_nm = session_details_tmp.browser_nm , browser_version_no = session_details_tmp.browser_version_no , carrier_name = session_details_tmp.carrier_name , channel_nm = session_details_tmp.channel_nm , city_nm = session_details_tmp.city_nm , client_session_start_dttm = session_details_tmp.client_session_start_dttm , client_session_start_dttm_tz = session_details_tmp.client_session_start_dttm_tz , cookies_enabled_flg = session_details_tmp.cookies_enabled_flg , country_cd = session_details_tmp.country_cd , country_nm = session_details_tmp.country_nm , device_language = session_details_tmp.device_language , device_nm = session_details_tmp.device_nm , device_type_nm = session_details_tmp.device_type_nm , event_id = session_details_tmp.event_id , flash_enabled_flg = session_details_tmp.flash_enabled_flg , flash_version_no = session_details_tmp.flash_version_no , identity_id = session_details_tmp.identity_id , ip_address = session_details_tmp.ip_address , is_portable_flag = session_details_tmp.is_portable_flag , java_enabled_flg = session_details_tmp.java_enabled_flg , java_script_enabled_flg = session_details_tmp.java_script_enabled_flg , java_version_no = session_details_tmp.java_version_no , latitude = session_details_tmp.latitude , load_dttm = session_details_tmp.load_dttm , longitude = session_details_tmp.longitude , manufacturer = session_details_tmp.manufacturer , metro_cd = session_details_tmp.metro_cd , mobile_country_code = session_details_tmp.mobile_country_code , network_code = session_details_tmp.network_code , new_visitor_flg = session_details_tmp.new_visitor_flg , organization_nm = session_details_tmp.organization_nm , parent_event_id = session_details_tmp.parent_event_id , platform_desc = session_details_tmp.platform_desc , platform_type_nm = session_details_tmp.platform_type_nm , platform_version = session_details_tmp.platform_version , postal_cd = session_details_tmp.postal_cd , previous_session_id = session_details_tmp.previous_session_id , previous_session_id_hex = session_details_tmp.previous_session_id_hex , profile_nm1 = session_details_tmp.profile_nm1 , profile_nm2 = session_details_tmp.profile_nm2 , profile_nm3 = session_details_tmp.profile_nm3 , profile_nm4 = session_details_tmp.profile_nm4 , profile_nm5 = session_details_tmp.profile_nm5 , region_nm = session_details_tmp.region_nm , screen_color_depth_no = session_details_tmp.screen_color_depth_no , screen_size_txt = session_details_tmp.screen_size_txt , sdk_version = session_details_tmp.sdk_version , session_dt = session_details_tmp.session_dt , session_dt_tz = session_details_tmp.session_dt_tz , session_id_hex = session_details_tmp.session_id_hex , session_start_dttm = session_details_tmp.session_start_dttm , session_start_dttm_tz = session_details_tmp.session_start_dttm_tz , session_timeout = session_details_tmp.session_timeout , state_region_cd = session_details_tmp.state_region_cd , user_agent_nm = session_details_tmp.user_agent_nm , user_language_cd = session_details_tmp.user_language_cd , visitor_id = session_details_tmp.visitor_id
         WHEN NOT MATCHED THEN INSERT ( 
-        app_id,app_version,browser_nm,browser_version_no,carrier_name,channel_nm,city_nm,client_session_start_dttm,client_session_start_dttm_tz,cookies_enabled_flg,country_cd,country_nm,device_language,device_nm,device_type_nm,event_id,flash_enabled_flg,flash_version_no,identity_id,ip_address,is_portable_flag,java_enabled_flg,java_script_enabled_flg,java_version_no,load_dttm,manufacturer,metro_cd,mobile_country_code,network_code,new_visitor_flg,organization_nm,parent_event_id,platform_desc,platform_type_nm,platform_version,postal_cd,previous_session_id,previous_session_id_hex,profile_nm1,profile_nm2,profile_nm3,profile_nm4,profile_nm5,region_nm,screen_color_depth_no,screen_size_txt,sdk_version,session_id,session_id_hex,session_start_dttm,session_start_dttm_tz,session_timeout,state_region_cd,user_agent_nm,user_language_cd,visitor_id
+        app_id,app_version,browser_nm,browser_version_no,carrier_name,channel_nm,city_nm,client_session_start_dttm,client_session_start_dttm_tz,cookies_enabled_flg,country_cd,country_nm,device_language,device_nm,device_type_nm,event_id,flash_enabled_flg,flash_version_no,identity_id,ip_address,is_portable_flag,java_enabled_flg,java_script_enabled_flg,java_version_no,latitude,load_dttm,longitude,manufacturer,metro_cd,mobile_country_code,network_code,new_visitor_flg,organization_nm,parent_event_id,platform_desc,platform_type_nm,platform_version,postal_cd,previous_session_id,previous_session_id_hex,profile_nm1,profile_nm2,profile_nm3,profile_nm4,profile_nm5,region_nm,screen_color_depth_no,screen_size_txt,sdk_version,session_dt,session_dt_tz,session_id,session_id_hex,session_start_dttm,session_start_dttm_tz,session_timeout,state_region_cd,user_agent_nm,user_language_cd,visitor_id
          ) values ( 
-        session_details_tmp.app_id,session_details_tmp.app_version,session_details_tmp.browser_nm,session_details_tmp.browser_version_no,session_details_tmp.carrier_name,session_details_tmp.channel_nm,session_details_tmp.city_nm,session_details_tmp.client_session_start_dttm,session_details_tmp.client_session_start_dttm_tz,session_details_tmp.cookies_enabled_flg,session_details_tmp.country_cd,session_details_tmp.country_nm,session_details_tmp.device_language,session_details_tmp.device_nm,session_details_tmp.device_type_nm,session_details_tmp.event_id,session_details_tmp.flash_enabled_flg,session_details_tmp.flash_version_no,session_details_tmp.identity_id,session_details_tmp.ip_address,session_details_tmp.is_portable_flag,session_details_tmp.java_enabled_flg,session_details_tmp.java_script_enabled_flg,session_details_tmp.java_version_no,session_details_tmp.load_dttm,session_details_tmp.manufacturer,session_details_tmp.metro_cd,session_details_tmp.mobile_country_code,session_details_tmp.network_code,session_details_tmp.new_visitor_flg,session_details_tmp.organization_nm,session_details_tmp.parent_event_id,session_details_tmp.platform_desc,session_details_tmp.platform_type_nm,session_details_tmp.platform_version,session_details_tmp.postal_cd,session_details_tmp.previous_session_id,session_details_tmp.previous_session_id_hex,session_details_tmp.profile_nm1,session_details_tmp.profile_nm2,session_details_tmp.profile_nm3,session_details_tmp.profile_nm4,session_details_tmp.profile_nm5,session_details_tmp.region_nm,session_details_tmp.screen_color_depth_no,session_details_tmp.screen_size_txt,session_details_tmp.sdk_version,session_details_tmp.session_id,session_details_tmp.session_id_hex,session_details_tmp.session_start_dttm,session_details_tmp.session_start_dttm_tz,session_details_tmp.session_timeout,session_details_tmp.state_region_cd,session_details_tmp.user_agent_nm,session_details_tmp.user_language_cd,session_details_tmp.visitor_id
+        session_details_tmp.app_id,session_details_tmp.app_version,session_details_tmp.browser_nm,session_details_tmp.browser_version_no,session_details_tmp.carrier_name,session_details_tmp.channel_nm,session_details_tmp.city_nm,session_details_tmp.client_session_start_dttm,session_details_tmp.client_session_start_dttm_tz,session_details_tmp.cookies_enabled_flg,session_details_tmp.country_cd,session_details_tmp.country_nm,session_details_tmp.device_language,session_details_tmp.device_nm,session_details_tmp.device_type_nm,session_details_tmp.event_id,session_details_tmp.flash_enabled_flg,session_details_tmp.flash_version_no,session_details_tmp.identity_id,session_details_tmp.ip_address,session_details_tmp.is_portable_flag,session_details_tmp.java_enabled_flg,session_details_tmp.java_script_enabled_flg,session_details_tmp.java_version_no,session_details_tmp.latitude,session_details_tmp.load_dttm,session_details_tmp.longitude,session_details_tmp.manufacturer,session_details_tmp.metro_cd,session_details_tmp.mobile_country_code,session_details_tmp.network_code,session_details_tmp.new_visitor_flg,session_details_tmp.organization_nm,session_details_tmp.parent_event_id,session_details_tmp.platform_desc,session_details_tmp.platform_type_nm,session_details_tmp.platform_version,session_details_tmp.postal_cd,session_details_tmp.previous_session_id,session_details_tmp.previous_session_id_hex,session_details_tmp.profile_nm1,session_details_tmp.profile_nm2,session_details_tmp.profile_nm3,session_details_tmp.profile_nm4,session_details_tmp.profile_nm5,session_details_tmp.region_nm,session_details_tmp.screen_color_depth_no,session_details_tmp.screen_size_txt,session_details_tmp.sdk_version,session_details_tmp.session_dt,session_details_tmp.session_dt_tz,session_details_tmp.session_id,session_details_tmp.session_id_hex,session_details_tmp.session_start_dttm,session_details_tmp.session_start_dttm_tz,session_details_tmp.session_timeout,session_details_tmp.state_region_cd,session_details_tmp.user_agent_nm,session_details_tmp.user_language_cd,session_details_tmp.visitor_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9103,6 +9388,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..session_details;
       DROP TABLE work.session_details;
   QUIT;
  %end;
@@ -9120,20 +9406,20 @@
         DROP TABLE &tmplib..session_details_ext_tmp         ;
       QUIT;
  %end;
- %check_duplicate_from_source(table_nm=session_details_ext, table_keys=%str(session_id,session_id_hex), out_table=work.session_details_ext);
+ %check_duplicate_from_source(table_nm=session_details_ext, table_keys=%str(last_session_activity_dttm,session_id), out_table=work.session_details_ext);
  data &tmplib..session_details_ext_tmp         ;
      set work.session_details_ext;
   if last_session_activity_dttm ne . then last_session_activity_dttm = tzoneu2s(last_session_activity_dttm,&timeZone_Value.);if last_session_activity_dttm_tz ne . then last_session_activity_dttm_tz = tzoneu2s(last_session_activity_dttm_tz,&timeZone_Value.);if load_dttm ne . then load_dttm = tzoneu2s(load_dttm,&timeZone_Value.);if session_expiration_dttm ne . then session_expiration_dttm = tzoneu2s(session_expiration_dttm,&timeZone_Value.);if session_expiration_dttm_tz ne . then session_expiration_dttm_tz = tzoneu2s(session_expiration_dttm_tz,&timeZone_Value.) ;
-  if session_id='' then session_id='-'; if session_id_hex='' then session_id_hex='-';
+  if session_id='' then session_id='-';
  run;
  %ErrCheck (Failed to Append Data to :session_details_ext_tmp         , session_details_ext);
  %if &errFlag = 0 %then %do;
     PROC SQL NOERRORSTOP;
     CONNECT TO REDSHIFT (&sql_passthru_connection.);
         execute (MERGE INTO &dbschema..session_details_ext using &tmpdbschema..session_details_ext_tmp         
-         ON (session_details_ext.session_id=session_details_ext_tmp.session_id and session_details_ext.session_id_hex=session_details_ext_tmp.session_id_hex)
+         ON (session_details_ext.last_session_activity_dttm=session_details_ext_tmp.last_session_activity_dttm and session_details_ext.session_id=session_details_ext_tmp.session_id)
         WHEN MATCHED THEN  
-        UPDATE SET active_sec_spent_in_sessn_cnt = session_details_ext_tmp.active_sec_spent_in_sessn_cnt , last_session_activity_dttm = session_details_ext_tmp.last_session_activity_dttm , last_session_activity_dttm_tz = session_details_ext_tmp.last_session_activity_dttm_tz , load_dttm = session_details_ext_tmp.load_dttm , seconds_spent_in_session_cnt = session_details_ext_tmp.seconds_spent_in_session_cnt , session_expiration_dttm = session_details_ext_tmp.session_expiration_dttm , session_expiration_dttm_tz = session_details_ext_tmp.session_expiration_dttm_tz
+        UPDATE SET active_sec_spent_in_sessn_cnt = session_details_ext_tmp.active_sec_spent_in_sessn_cnt , last_session_activity_dttm_tz = session_details_ext_tmp.last_session_activity_dttm_tz , load_dttm = session_details_ext_tmp.load_dttm , seconds_spent_in_session_cnt = session_details_ext_tmp.seconds_spent_in_session_cnt , session_expiration_dttm = session_details_ext_tmp.session_expiration_dttm , session_expiration_dttm_tz = session_details_ext_tmp.session_expiration_dttm_tz , session_id_hex = session_details_ext_tmp.session_id_hex
         WHEN NOT MATCHED THEN INSERT ( 
         active_sec_spent_in_sessn_cnt,last_session_activity_dttm,last_session_activity_dttm_tz,load_dttm,seconds_spent_in_session_cnt,session_expiration_dttm,session_expiration_dttm_tz,session_id,session_id_hex
          ) values ( 
@@ -9151,6 +9437,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..session_details_ext;
       DROP TABLE work.session_details_ext;
   QUIT;
  %end;
@@ -9181,11 +9468,11 @@
         execute (MERGE INTO &dbschema..sms_message_clicked using &tmpdbschema..sms_message_clicked_tmp         
          ON (sms_message_clicked.event_id=sms_message_clicked_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_message_clicked_tmp.aud_occurrence_id , audience_id = sms_message_clicked_tmp.audience_id , context_type_nm = sms_message_clicked_tmp.context_type_nm , context_val = sms_message_clicked_tmp.context_val , country_cd = sms_message_clicked_tmp.country_cd , creative_id = sms_message_clicked_tmp.creative_id , creative_version_id = sms_message_clicked_tmp.creative_version_id , event_designed_id = sms_message_clicked_tmp.event_designed_id , event_nm = sms_message_clicked_tmp.event_nm , identity_id = sms_message_clicked_tmp.identity_id , load_dttm = sms_message_clicked_tmp.load_dttm , occurrence_id = sms_message_clicked_tmp.occurrence_id , response_tracking_cd = sms_message_clicked_tmp.response_tracking_cd , sender_id = sms_message_clicked_tmp.sender_id , sms_click_dttm = sms_message_clicked_tmp.sms_click_dttm , sms_click_dttm_tz = sms_message_clicked_tmp.sms_click_dttm_tz , sms_message_id = sms_message_clicked_tmp.sms_message_id , task_id = sms_message_clicked_tmp.task_id , task_version_id = sms_message_clicked_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_message_clicked_tmp.aud_occurrence_id , audience_id = sms_message_clicked_tmp.audience_id , context_type_nm = sms_message_clicked_tmp.context_type_nm , context_val = sms_message_clicked_tmp.context_val , country_cd = sms_message_clicked_tmp.country_cd , creative_id = sms_message_clicked_tmp.creative_id , creative_version_id = sms_message_clicked_tmp.creative_version_id , event_designed_id = sms_message_clicked_tmp.event_designed_id , event_nm = sms_message_clicked_tmp.event_nm , identity_id = sms_message_clicked_tmp.identity_id , journey_id = sms_message_clicked_tmp.journey_id , journey_occurrence_id = sms_message_clicked_tmp.journey_occurrence_id , load_dttm = sms_message_clicked_tmp.load_dttm , occurrence_id = sms_message_clicked_tmp.occurrence_id , response_tracking_cd = sms_message_clicked_tmp.response_tracking_cd , sender_id = sms_message_clicked_tmp.sender_id , sms_click_dttm = sms_message_clicked_tmp.sms_click_dttm , sms_click_dttm_tz = sms_message_clicked_tmp.sms_click_dttm_tz , sms_message_id = sms_message_clicked_tmp.sms_message_id , task_id = sms_message_clicked_tmp.task_id , task_version_id = sms_message_clicked_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_click_dttm,sms_click_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_click_dttm,sms_click_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_clicked_tmp.aud_occurrence_id,sms_message_clicked_tmp.audience_id,sms_message_clicked_tmp.context_type_nm,sms_message_clicked_tmp.context_val,sms_message_clicked_tmp.country_cd,sms_message_clicked_tmp.creative_id,sms_message_clicked_tmp.creative_version_id,sms_message_clicked_tmp.event_designed_id,sms_message_clicked_tmp.event_id,sms_message_clicked_tmp.event_nm,sms_message_clicked_tmp.identity_id,sms_message_clicked_tmp.load_dttm,sms_message_clicked_tmp.occurrence_id,sms_message_clicked_tmp.response_tracking_cd,sms_message_clicked_tmp.sender_id,sms_message_clicked_tmp.sms_click_dttm,sms_message_clicked_tmp.sms_click_dttm_tz,sms_message_clicked_tmp.sms_message_id,sms_message_clicked_tmp.task_id,sms_message_clicked_tmp.task_version_id
+        sms_message_clicked_tmp.aud_occurrence_id,sms_message_clicked_tmp.audience_id,sms_message_clicked_tmp.context_type_nm,sms_message_clicked_tmp.context_val,sms_message_clicked_tmp.country_cd,sms_message_clicked_tmp.creative_id,sms_message_clicked_tmp.creative_version_id,sms_message_clicked_tmp.event_designed_id,sms_message_clicked_tmp.event_id,sms_message_clicked_tmp.event_nm,sms_message_clicked_tmp.identity_id,sms_message_clicked_tmp.journey_id,sms_message_clicked_tmp.journey_occurrence_id,sms_message_clicked_tmp.load_dttm,sms_message_clicked_tmp.occurrence_id,sms_message_clicked_tmp.response_tracking_cd,sms_message_clicked_tmp.sender_id,sms_message_clicked_tmp.sms_click_dttm,sms_message_clicked_tmp.sms_click_dttm_tz,sms_message_clicked_tmp.sms_message_id,sms_message_clicked_tmp.task_id,sms_message_clicked_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9199,6 +9486,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_message_clicked;
       DROP TABLE work.sms_message_clicked;
   QUIT;
  %end;
@@ -9229,11 +9517,11 @@
         execute (MERGE INTO &dbschema..sms_message_delivered using &tmpdbschema..sms_message_delivered_tmp       
          ON (sms_message_delivered.event_id=sms_message_delivered_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_message_delivered_tmp.aud_occurrence_id , audience_id = sms_message_delivered_tmp.audience_id , context_type_nm = sms_message_delivered_tmp.context_type_nm , context_val = sms_message_delivered_tmp.context_val , country_cd = sms_message_delivered_tmp.country_cd , creative_id = sms_message_delivered_tmp.creative_id , creative_version_id = sms_message_delivered_tmp.creative_version_id , event_designed_id = sms_message_delivered_tmp.event_designed_id , event_nm = sms_message_delivered_tmp.event_nm , identity_id = sms_message_delivered_tmp.identity_id , load_dttm = sms_message_delivered_tmp.load_dttm , occurrence_id = sms_message_delivered_tmp.occurrence_id , response_tracking_cd = sms_message_delivered_tmp.response_tracking_cd , sender_id = sms_message_delivered_tmp.sender_id , sms_delivered_dttm = sms_message_delivered_tmp.sms_delivered_dttm , sms_delivered_dttm_tz = sms_message_delivered_tmp.sms_delivered_dttm_tz , sms_message_id = sms_message_delivered_tmp.sms_message_id , task_id = sms_message_delivered_tmp.task_id , task_version_id = sms_message_delivered_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_message_delivered_tmp.aud_occurrence_id , audience_id = sms_message_delivered_tmp.audience_id , context_type_nm = sms_message_delivered_tmp.context_type_nm , context_val = sms_message_delivered_tmp.context_val , country_cd = sms_message_delivered_tmp.country_cd , creative_id = sms_message_delivered_tmp.creative_id , creative_version_id = sms_message_delivered_tmp.creative_version_id , event_designed_id = sms_message_delivered_tmp.event_designed_id , event_nm = sms_message_delivered_tmp.event_nm , identity_id = sms_message_delivered_tmp.identity_id , journey_id = sms_message_delivered_tmp.journey_id , journey_occurrence_id = sms_message_delivered_tmp.journey_occurrence_id , load_dttm = sms_message_delivered_tmp.load_dttm , occurrence_id = sms_message_delivered_tmp.occurrence_id , response_tracking_cd = sms_message_delivered_tmp.response_tracking_cd , sender_id = sms_message_delivered_tmp.sender_id , sms_delivered_dttm = sms_message_delivered_tmp.sms_delivered_dttm , sms_delivered_dttm_tz = sms_message_delivered_tmp.sms_delivered_dttm_tz , sms_message_id = sms_message_delivered_tmp.sms_message_id , task_id = sms_message_delivered_tmp.task_id , task_version_id = sms_message_delivered_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_delivered_dttm,sms_delivered_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_delivered_dttm,sms_delivered_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_delivered_tmp.aud_occurrence_id,sms_message_delivered_tmp.audience_id,sms_message_delivered_tmp.context_type_nm,sms_message_delivered_tmp.context_val,sms_message_delivered_tmp.country_cd,sms_message_delivered_tmp.creative_id,sms_message_delivered_tmp.creative_version_id,sms_message_delivered_tmp.event_designed_id,sms_message_delivered_tmp.event_id,sms_message_delivered_tmp.event_nm,sms_message_delivered_tmp.identity_id,sms_message_delivered_tmp.load_dttm,sms_message_delivered_tmp.occurrence_id,sms_message_delivered_tmp.response_tracking_cd,sms_message_delivered_tmp.sender_id,sms_message_delivered_tmp.sms_delivered_dttm,sms_message_delivered_tmp.sms_delivered_dttm_tz,sms_message_delivered_tmp.sms_message_id,sms_message_delivered_tmp.task_id,sms_message_delivered_tmp.task_version_id
+        sms_message_delivered_tmp.aud_occurrence_id,sms_message_delivered_tmp.audience_id,sms_message_delivered_tmp.context_type_nm,sms_message_delivered_tmp.context_val,sms_message_delivered_tmp.country_cd,sms_message_delivered_tmp.creative_id,sms_message_delivered_tmp.creative_version_id,sms_message_delivered_tmp.event_designed_id,sms_message_delivered_tmp.event_id,sms_message_delivered_tmp.event_nm,sms_message_delivered_tmp.identity_id,sms_message_delivered_tmp.journey_id,sms_message_delivered_tmp.journey_occurrence_id,sms_message_delivered_tmp.load_dttm,sms_message_delivered_tmp.occurrence_id,sms_message_delivered_tmp.response_tracking_cd,sms_message_delivered_tmp.sender_id,sms_message_delivered_tmp.sms_delivered_dttm,sms_message_delivered_tmp.sms_delivered_dttm_tz,sms_message_delivered_tmp.sms_message_id,sms_message_delivered_tmp.task_id,sms_message_delivered_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9247,6 +9535,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_message_delivered;
       DROP TABLE work.sms_message_delivered;
   QUIT;
  %end;
@@ -9277,11 +9566,11 @@
         execute (MERGE INTO &dbschema..sms_message_failed using &tmpdbschema..sms_message_failed_tmp          
          ON (sms_message_failed.event_id=sms_message_failed_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_message_failed_tmp.aud_occurrence_id , audience_id = sms_message_failed_tmp.audience_id , context_type_nm = sms_message_failed_tmp.context_type_nm , context_val = sms_message_failed_tmp.context_val , country_cd = sms_message_failed_tmp.country_cd , creative_id = sms_message_failed_tmp.creative_id , creative_version_id = sms_message_failed_tmp.creative_version_id , event_designed_id = sms_message_failed_tmp.event_designed_id , event_nm = sms_message_failed_tmp.event_nm , identity_id = sms_message_failed_tmp.identity_id , load_dttm = sms_message_failed_tmp.load_dttm , occurrence_id = sms_message_failed_tmp.occurrence_id , reason_cd = sms_message_failed_tmp.reason_cd , reason_description_txt = sms_message_failed_tmp.reason_description_txt , response_tracking_cd = sms_message_failed_tmp.response_tracking_cd , sender_id = sms_message_failed_tmp.sender_id , sms_failed_dttm = sms_message_failed_tmp.sms_failed_dttm , sms_failed_dttm_tz = sms_message_failed_tmp.sms_failed_dttm_tz , sms_message_id = sms_message_failed_tmp.sms_message_id , task_id = sms_message_failed_tmp.task_id , task_version_id = sms_message_failed_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_message_failed_tmp.aud_occurrence_id , audience_id = sms_message_failed_tmp.audience_id , context_type_nm = sms_message_failed_tmp.context_type_nm , context_val = sms_message_failed_tmp.context_val , country_cd = sms_message_failed_tmp.country_cd , creative_id = sms_message_failed_tmp.creative_id , creative_version_id = sms_message_failed_tmp.creative_version_id , event_designed_id = sms_message_failed_tmp.event_designed_id , event_nm = sms_message_failed_tmp.event_nm , identity_id = sms_message_failed_tmp.identity_id , journey_id = sms_message_failed_tmp.journey_id , journey_occurrence_id = sms_message_failed_tmp.journey_occurrence_id , load_dttm = sms_message_failed_tmp.load_dttm , occurrence_id = sms_message_failed_tmp.occurrence_id , reason_cd = sms_message_failed_tmp.reason_cd , reason_description_txt = sms_message_failed_tmp.reason_description_txt , response_tracking_cd = sms_message_failed_tmp.response_tracking_cd , sender_id = sms_message_failed_tmp.sender_id , sms_failed_dttm = sms_message_failed_tmp.sms_failed_dttm , sms_failed_dttm_tz = sms_message_failed_tmp.sms_failed_dttm_tz , sms_message_id = sms_message_failed_tmp.sms_message_id , task_id = sms_message_failed_tmp.task_id , task_version_id = sms_message_failed_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,reason_cd,reason_description_txt,response_tracking_cd,sender_id,sms_failed_dttm,sms_failed_dttm_tz,sms_message_id,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,reason_cd,reason_description_txt,response_tracking_cd,sender_id,sms_failed_dttm,sms_failed_dttm_tz,sms_message_id,task_id,task_version_id
          ) values ( 
-        sms_message_failed_tmp.aud_occurrence_id,sms_message_failed_tmp.audience_id,sms_message_failed_tmp.context_type_nm,sms_message_failed_tmp.context_val,sms_message_failed_tmp.country_cd,sms_message_failed_tmp.creative_id,sms_message_failed_tmp.creative_version_id,sms_message_failed_tmp.event_designed_id,sms_message_failed_tmp.event_id,sms_message_failed_tmp.event_nm,sms_message_failed_tmp.identity_id,sms_message_failed_tmp.load_dttm,sms_message_failed_tmp.occurrence_id,sms_message_failed_tmp.reason_cd,sms_message_failed_tmp.reason_description_txt,sms_message_failed_tmp.response_tracking_cd,sms_message_failed_tmp.sender_id,sms_message_failed_tmp.sms_failed_dttm,sms_message_failed_tmp.sms_failed_dttm_tz,sms_message_failed_tmp.sms_message_id,sms_message_failed_tmp.task_id,sms_message_failed_tmp.task_version_id
+        sms_message_failed_tmp.aud_occurrence_id,sms_message_failed_tmp.audience_id,sms_message_failed_tmp.context_type_nm,sms_message_failed_tmp.context_val,sms_message_failed_tmp.country_cd,sms_message_failed_tmp.creative_id,sms_message_failed_tmp.creative_version_id,sms_message_failed_tmp.event_designed_id,sms_message_failed_tmp.event_id,sms_message_failed_tmp.event_nm,sms_message_failed_tmp.identity_id,sms_message_failed_tmp.journey_id,sms_message_failed_tmp.journey_occurrence_id,sms_message_failed_tmp.load_dttm,sms_message_failed_tmp.occurrence_id,sms_message_failed_tmp.reason_cd,sms_message_failed_tmp.reason_description_txt,sms_message_failed_tmp.response_tracking_cd,sms_message_failed_tmp.sender_id,sms_message_failed_tmp.sms_failed_dttm,sms_message_failed_tmp.sms_failed_dttm_tz,sms_message_failed_tmp.sms_message_id,sms_message_failed_tmp.task_id,sms_message_failed_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9295,6 +9584,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_message_failed;
       DROP TABLE work.sms_message_failed;
   QUIT;
  %end;
@@ -9325,11 +9615,11 @@
         execute (MERGE INTO &dbschema..sms_message_reply using &tmpdbschema..sms_message_reply_tmp           
          ON (sms_message_reply.event_id=sms_message_reply_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_message_reply_tmp.aud_occurrence_id , audience_id = sms_message_reply_tmp.audience_id , context_type_nm = sms_message_reply_tmp.context_type_nm , context_val = sms_message_reply_tmp.context_val , country_cd = sms_message_reply_tmp.country_cd , event_designed_id = sms_message_reply_tmp.event_designed_id , event_nm = sms_message_reply_tmp.event_nm , identity_id = sms_message_reply_tmp.identity_id , load_dttm = sms_message_reply_tmp.load_dttm , occurrence_id = sms_message_reply_tmp.occurrence_id , response_tracking_cd = sms_message_reply_tmp.response_tracking_cd , sender_id = sms_message_reply_tmp.sender_id , sms_content = sms_message_reply_tmp.sms_content , sms_message_id = sms_message_reply_tmp.sms_message_id , sms_reply_dttm = sms_message_reply_tmp.sms_reply_dttm , sms_reply_dttm_tz = sms_message_reply_tmp.sms_reply_dttm_tz , task_id = sms_message_reply_tmp.task_id , task_version_id = sms_message_reply_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_message_reply_tmp.aud_occurrence_id , audience_id = sms_message_reply_tmp.audience_id , context_type_nm = sms_message_reply_tmp.context_type_nm , context_val = sms_message_reply_tmp.context_val , country_cd = sms_message_reply_tmp.country_cd , event_designed_id = sms_message_reply_tmp.event_designed_id , event_nm = sms_message_reply_tmp.event_nm , identity_id = sms_message_reply_tmp.identity_id , journey_id = sms_message_reply_tmp.journey_id , journey_occurrence_id = sms_message_reply_tmp.journey_occurrence_id , load_dttm = sms_message_reply_tmp.load_dttm , occurrence_id = sms_message_reply_tmp.occurrence_id , response_tracking_cd = sms_message_reply_tmp.response_tracking_cd , sender_id = sms_message_reply_tmp.sender_id , sms_content = sms_message_reply_tmp.sms_content , sms_message_id = sms_message_reply_tmp.sms_message_id , sms_reply_dttm = sms_message_reply_tmp.sms_reply_dttm , sms_reply_dttm_tz = sms_message_reply_tmp.sms_reply_dttm_tz , task_id = sms_message_reply_tmp.task_id , task_version_id = sms_message_reply_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_content,sms_message_id,sms_reply_dttm,sms_reply_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_content,sms_message_id,sms_reply_dttm,sms_reply_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_message_reply_tmp.aud_occurrence_id,sms_message_reply_tmp.audience_id,sms_message_reply_tmp.context_type_nm,sms_message_reply_tmp.context_val,sms_message_reply_tmp.country_cd,sms_message_reply_tmp.event_designed_id,sms_message_reply_tmp.event_id,sms_message_reply_tmp.event_nm,sms_message_reply_tmp.identity_id,sms_message_reply_tmp.load_dttm,sms_message_reply_tmp.occurrence_id,sms_message_reply_tmp.response_tracking_cd,sms_message_reply_tmp.sender_id,sms_message_reply_tmp.sms_content,sms_message_reply_tmp.sms_message_id,sms_message_reply_tmp.sms_reply_dttm,sms_message_reply_tmp.sms_reply_dttm_tz,sms_message_reply_tmp.task_id,sms_message_reply_tmp.task_version_id
+        sms_message_reply_tmp.aud_occurrence_id,sms_message_reply_tmp.audience_id,sms_message_reply_tmp.context_type_nm,sms_message_reply_tmp.context_val,sms_message_reply_tmp.country_cd,sms_message_reply_tmp.event_designed_id,sms_message_reply_tmp.event_id,sms_message_reply_tmp.event_nm,sms_message_reply_tmp.identity_id,sms_message_reply_tmp.journey_id,sms_message_reply_tmp.journey_occurrence_id,sms_message_reply_tmp.load_dttm,sms_message_reply_tmp.occurrence_id,sms_message_reply_tmp.response_tracking_cd,sms_message_reply_tmp.sender_id,sms_message_reply_tmp.sms_content,sms_message_reply_tmp.sms_message_id,sms_message_reply_tmp.sms_reply_dttm,sms_message_reply_tmp.sms_reply_dttm_tz,sms_message_reply_tmp.task_id,sms_message_reply_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9343,6 +9633,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_message_reply;
       DROP TABLE work.sms_message_reply;
   QUIT;
  %end;
@@ -9373,11 +9664,11 @@
         execute (MERGE INTO &dbschema..sms_message_send using &tmpdbschema..sms_message_send_tmp            
          ON (sms_message_send.event_id=sms_message_send_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_message_send_tmp.aud_occurrence_id , audience_id = sms_message_send_tmp.audience_id , context_type_nm = sms_message_send_tmp.context_type_nm , context_val = sms_message_send_tmp.context_val , country_cd = sms_message_send_tmp.country_cd , creative_id = sms_message_send_tmp.creative_id , creative_version_id = sms_message_send_tmp.creative_version_id , event_designed_id = sms_message_send_tmp.event_designed_id , event_nm = sms_message_send_tmp.event_nm , fragment_cnt = sms_message_send_tmp.fragment_cnt , identity_id = sms_message_send_tmp.identity_id , load_dttm = sms_message_send_tmp.load_dttm , occurrence_id = sms_message_send_tmp.occurrence_id , response_tracking_cd = sms_message_send_tmp.response_tracking_cd , sender_id = sms_message_send_tmp.sender_id , sms_message_id = sms_message_send_tmp.sms_message_id , sms_send_dttm = sms_message_send_tmp.sms_send_dttm , sms_send_dttm_tz = sms_message_send_tmp.sms_send_dttm_tz , task_id = sms_message_send_tmp.task_id , task_version_id = sms_message_send_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_message_send_tmp.aud_occurrence_id , audience_id = sms_message_send_tmp.audience_id , context_type_nm = sms_message_send_tmp.context_type_nm , context_val = sms_message_send_tmp.context_val , country_cd = sms_message_send_tmp.country_cd , creative_id = sms_message_send_tmp.creative_id , creative_version_id = sms_message_send_tmp.creative_version_id , event_designed_id = sms_message_send_tmp.event_designed_id , event_nm = sms_message_send_tmp.event_nm , fragment_cnt = sms_message_send_tmp.fragment_cnt , identity_id = sms_message_send_tmp.identity_id , journey_id = sms_message_send_tmp.journey_id , journey_occurrence_id = sms_message_send_tmp.journey_occurrence_id , load_dttm = sms_message_send_tmp.load_dttm , occurrence_id = sms_message_send_tmp.occurrence_id , response_tracking_cd = sms_message_send_tmp.response_tracking_cd , sender_id = sms_message_send_tmp.sender_id , sms_message_id = sms_message_send_tmp.sms_message_id , sms_send_dttm = sms_message_send_tmp.sms_send_dttm , sms_send_dttm_tz = sms_message_send_tmp.sms_send_dttm_tz , task_id = sms_message_send_tmp.task_id , task_version_id = sms_message_send_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,fragment_cnt,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_send_dttm,sms_send_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,fragment_cnt,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_send_dttm,sms_send_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_message_send_tmp.aud_occurrence_id,sms_message_send_tmp.audience_id,sms_message_send_tmp.context_type_nm,sms_message_send_tmp.context_val,sms_message_send_tmp.country_cd,sms_message_send_tmp.creative_id,sms_message_send_tmp.creative_version_id,sms_message_send_tmp.event_designed_id,sms_message_send_tmp.event_id,sms_message_send_tmp.event_nm,sms_message_send_tmp.fragment_cnt,sms_message_send_tmp.identity_id,sms_message_send_tmp.load_dttm,sms_message_send_tmp.occurrence_id,sms_message_send_tmp.response_tracking_cd,sms_message_send_tmp.sender_id,sms_message_send_tmp.sms_message_id,sms_message_send_tmp.sms_send_dttm,sms_message_send_tmp.sms_send_dttm_tz,sms_message_send_tmp.task_id,sms_message_send_tmp.task_version_id
+        sms_message_send_tmp.aud_occurrence_id,sms_message_send_tmp.audience_id,sms_message_send_tmp.context_type_nm,sms_message_send_tmp.context_val,sms_message_send_tmp.country_cd,sms_message_send_tmp.creative_id,sms_message_send_tmp.creative_version_id,sms_message_send_tmp.event_designed_id,sms_message_send_tmp.event_id,sms_message_send_tmp.event_nm,sms_message_send_tmp.fragment_cnt,sms_message_send_tmp.identity_id,sms_message_send_tmp.journey_id,sms_message_send_tmp.journey_occurrence_id,sms_message_send_tmp.load_dttm,sms_message_send_tmp.occurrence_id,sms_message_send_tmp.response_tracking_cd,sms_message_send_tmp.sender_id,sms_message_send_tmp.sms_message_id,sms_message_send_tmp.sms_send_dttm,sms_message_send_tmp.sms_send_dttm_tz,sms_message_send_tmp.task_id,sms_message_send_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9391,6 +9682,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_message_send;
       DROP TABLE work.sms_message_send;
   QUIT;
  %end;
@@ -9421,11 +9713,11 @@
         execute (MERGE INTO &dbschema..sms_optout using &tmpdbschema..sms_optout_tmp                  
          ON (sms_optout.event_id=sms_optout_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET aud_occurrence_id = sms_optout_tmp.aud_occurrence_id , audience_id = sms_optout_tmp.audience_id , context_type_nm = sms_optout_tmp.context_type_nm , context_val = sms_optout_tmp.context_val , country_cd = sms_optout_tmp.country_cd , creative_id = sms_optout_tmp.creative_id , creative_version_id = sms_optout_tmp.creative_version_id , event_designed_id = sms_optout_tmp.event_designed_id , event_nm = sms_optout_tmp.event_nm , identity_id = sms_optout_tmp.identity_id , load_dttm = sms_optout_tmp.load_dttm , occurrence_id = sms_optout_tmp.occurrence_id , response_tracking_cd = sms_optout_tmp.response_tracking_cd , sender_id = sms_optout_tmp.sender_id , sms_message_id = sms_optout_tmp.sms_message_id , sms_optout_dttm = sms_optout_tmp.sms_optout_dttm , sms_optout_dttm_tz = sms_optout_tmp.sms_optout_dttm_tz , task_id = sms_optout_tmp.task_id , task_version_id = sms_optout_tmp.task_version_id
+        UPDATE SET aud_occurrence_id = sms_optout_tmp.aud_occurrence_id , audience_id = sms_optout_tmp.audience_id , context_type_nm = sms_optout_tmp.context_type_nm , context_val = sms_optout_tmp.context_val , country_cd = sms_optout_tmp.country_cd , creative_id = sms_optout_tmp.creative_id , creative_version_id = sms_optout_tmp.creative_version_id , event_designed_id = sms_optout_tmp.event_designed_id , event_nm = sms_optout_tmp.event_nm , identity_id = sms_optout_tmp.identity_id , journey_id = sms_optout_tmp.journey_id , journey_occurrence_id = sms_optout_tmp.journey_occurrence_id , load_dttm = sms_optout_tmp.load_dttm , occurrence_id = sms_optout_tmp.occurrence_id , response_tracking_cd = sms_optout_tmp.response_tracking_cd , sender_id = sms_optout_tmp.sender_id , sms_message_id = sms_optout_tmp.sms_message_id , sms_optout_dttm = sms_optout_tmp.sms_optout_dttm , sms_optout_dttm_tz = sms_optout_tmp.sms_optout_dttm_tz , task_id = sms_optout_tmp.task_id , task_version_id = sms_optout_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
+        aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_optout_tmp.aud_occurrence_id,sms_optout_tmp.audience_id,sms_optout_tmp.context_type_nm,sms_optout_tmp.context_val,sms_optout_tmp.country_cd,sms_optout_tmp.creative_id,sms_optout_tmp.creative_version_id,sms_optout_tmp.event_designed_id,sms_optout_tmp.event_id,sms_optout_tmp.event_nm,sms_optout_tmp.identity_id,sms_optout_tmp.load_dttm,sms_optout_tmp.occurrence_id,sms_optout_tmp.response_tracking_cd,sms_optout_tmp.sender_id,sms_optout_tmp.sms_message_id,sms_optout_tmp.sms_optout_dttm,sms_optout_tmp.sms_optout_dttm_tz,sms_optout_tmp.task_id,sms_optout_tmp.task_version_id
+        sms_optout_tmp.aud_occurrence_id,sms_optout_tmp.audience_id,sms_optout_tmp.context_type_nm,sms_optout_tmp.context_val,sms_optout_tmp.country_cd,sms_optout_tmp.creative_id,sms_optout_tmp.creative_version_id,sms_optout_tmp.event_designed_id,sms_optout_tmp.event_id,sms_optout_tmp.event_nm,sms_optout_tmp.identity_id,sms_optout_tmp.journey_id,sms_optout_tmp.journey_occurrence_id,sms_optout_tmp.load_dttm,sms_optout_tmp.occurrence_id,sms_optout_tmp.response_tracking_cd,sms_optout_tmp.sender_id,sms_optout_tmp.sms_message_id,sms_optout_tmp.sms_optout_dttm,sms_optout_tmp.sms_optout_dttm_tz,sms_optout_tmp.task_id,sms_optout_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9439,6 +9731,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_optout;
       DROP TABLE work.sms_optout;
   QUIT;
  %end;
@@ -9469,11 +9762,11 @@
         execute (MERGE INTO &dbschema..sms_optout_details using &tmpdbschema..sms_optout_details_tmp          
          ON (sms_optout_details.event_id=sms_optout_details_tmp.event_id)
         WHEN MATCHED THEN  
-        UPDATE SET address_val = sms_optout_details_tmp.address_val , aud_occurrence_id = sms_optout_details_tmp.aud_occurrence_id , audience_id = sms_optout_details_tmp.audience_id , context_type_nm = sms_optout_details_tmp.context_type_nm , context_val = sms_optout_details_tmp.context_val , country_cd = sms_optout_details_tmp.country_cd , creative_id = sms_optout_details_tmp.creative_id , creative_version_id = sms_optout_details_tmp.creative_version_id , event_designed_id = sms_optout_details_tmp.event_designed_id , event_nm = sms_optout_details_tmp.event_nm , identity_id = sms_optout_details_tmp.identity_id , load_dttm = sms_optout_details_tmp.load_dttm , occurrence_id = sms_optout_details_tmp.occurrence_id , response_tracking_cd = sms_optout_details_tmp.response_tracking_cd , sender_id = sms_optout_details_tmp.sender_id , sms_message_id = sms_optout_details_tmp.sms_message_id , sms_optout_dttm = sms_optout_details_tmp.sms_optout_dttm , sms_optout_dttm_tz = sms_optout_details_tmp.sms_optout_dttm_tz , task_id = sms_optout_details_tmp.task_id , task_version_id = sms_optout_details_tmp.task_version_id
+        UPDATE SET address_val = sms_optout_details_tmp.address_val , aud_occurrence_id = sms_optout_details_tmp.aud_occurrence_id , audience_id = sms_optout_details_tmp.audience_id , context_type_nm = sms_optout_details_tmp.context_type_nm , context_val = sms_optout_details_tmp.context_val , country_cd = sms_optout_details_tmp.country_cd , creative_id = sms_optout_details_tmp.creative_id , creative_version_id = sms_optout_details_tmp.creative_version_id , event_designed_id = sms_optout_details_tmp.event_designed_id , event_nm = sms_optout_details_tmp.event_nm , identity_id = sms_optout_details_tmp.identity_id , journey_id = sms_optout_details_tmp.journey_id , journey_occurrence_id = sms_optout_details_tmp.journey_occurrence_id , load_dttm = sms_optout_details_tmp.load_dttm , occurrence_id = sms_optout_details_tmp.occurrence_id , response_tracking_cd = sms_optout_details_tmp.response_tracking_cd , sender_id = sms_optout_details_tmp.sender_id , sms_message_id = sms_optout_details_tmp.sms_message_id , sms_optout_dttm = sms_optout_details_tmp.sms_optout_dttm , sms_optout_dttm_tz = sms_optout_details_tmp.sms_optout_dttm_tz , task_id = sms_optout_details_tmp.task_id , task_version_id = sms_optout_details_tmp.task_version_id
         WHEN NOT MATCHED THEN INSERT ( 
-        address_val,aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
+        address_val,aud_occurrence_id,audience_id,context_type_nm,context_val,country_cd,creative_id,creative_version_id,event_designed_id,event_id,event_nm,identity_id,journey_id,journey_occurrence_id,load_dttm,occurrence_id,response_tracking_cd,sender_id,sms_message_id,sms_optout_dttm,sms_optout_dttm_tz,task_id,task_version_id
          ) values ( 
-        sms_optout_details_tmp.address_val,sms_optout_details_tmp.aud_occurrence_id,sms_optout_details_tmp.audience_id,sms_optout_details_tmp.context_type_nm,sms_optout_details_tmp.context_val,sms_optout_details_tmp.country_cd,sms_optout_details_tmp.creative_id,sms_optout_details_tmp.creative_version_id,sms_optout_details_tmp.event_designed_id,sms_optout_details_tmp.event_id,sms_optout_details_tmp.event_nm,sms_optout_details_tmp.identity_id,sms_optout_details_tmp.load_dttm,sms_optout_details_tmp.occurrence_id,sms_optout_details_tmp.response_tracking_cd,sms_optout_details_tmp.sender_id,sms_optout_details_tmp.sms_message_id,sms_optout_details_tmp.sms_optout_dttm,sms_optout_details_tmp.sms_optout_dttm_tz,sms_optout_details_tmp.task_id,sms_optout_details_tmp.task_version_id
+        sms_optout_details_tmp.address_val,sms_optout_details_tmp.aud_occurrence_id,sms_optout_details_tmp.audience_id,sms_optout_details_tmp.context_type_nm,sms_optout_details_tmp.context_val,sms_optout_details_tmp.country_cd,sms_optout_details_tmp.creative_id,sms_optout_details_tmp.creative_version_id,sms_optout_details_tmp.event_designed_id,sms_optout_details_tmp.event_id,sms_optout_details_tmp.event_nm,sms_optout_details_tmp.identity_id,sms_optout_details_tmp.journey_id,sms_optout_details_tmp.journey_occurrence_id,sms_optout_details_tmp.load_dttm,sms_optout_details_tmp.occurrence_id,sms_optout_details_tmp.response_tracking_cd,sms_optout_details_tmp.sender_id,sms_optout_details_tmp.sms_message_id,sms_optout_details_tmp.sms_optout_dttm,sms_optout_details_tmp.sms_optout_dttm_tz,sms_optout_details_tmp.task_id,sms_optout_details_tmp.task_version_id
      );) BY REDSHIFT;
     DISCONNECT FROM REDSHIFT;
     QUIT;
@@ -9487,6 +9780,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..sms_optout_details;
       DROP TABLE work.sms_optout_details;
   QUIT;
  %end;
@@ -9535,6 +9829,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..spot_clicked;
       DROP TABLE work.spot_clicked;
   QUIT;
  %end;
@@ -9583,6 +9878,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..spot_requested;
       DROP TABLE work.spot_requested;
   QUIT;
  %end;
@@ -9631,6 +9927,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..tag_details;
       DROP TABLE work.tag_details;
   QUIT;
  %end;
@@ -9679,6 +9976,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..visit_details;
       DROP TABLE work.visit_details;
   QUIT;
  %end;
@@ -9727,6 +10025,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..wf_process_details;
       DROP TABLE work.wf_process_details;
   QUIT;
  %end;
@@ -9775,6 +10074,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..wf_process_details_custom_prop;
       DROP TABLE work.wf_process_details_custom_prop;
   QUIT;
  %end;
@@ -9823,6 +10123,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..wf_process_tasks;
       DROP TABLE work.wf_process_tasks;
   QUIT;
  %end;
@@ -9871,6 +10172,7 @@
     %end;
  %if &errFlag = 0 %then %do;
   PROC SQL NOERRORSTOP;
+      drop table &udmmart..wf_tasks_user_assignment;
       DROP TABLE work.wf_tasks_user_assignment;
   QUIT;
  %end;

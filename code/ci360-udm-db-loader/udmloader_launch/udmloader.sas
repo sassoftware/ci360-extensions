@@ -31,7 +31,7 @@
 %macro udmloader;
 %let errFlag=0;
 options mprint SPOOL ;
-%include "/userdata/udmloader/config/config.sas"; 
+%include "<Utility Loaction>/cdm-udmloader-sas/config/config.sas"; 
 
 /*%let sysparameter=&sysparm;*/
 %Let sysparameter=CREATEDDL;

@@ -13,7 +13,7 @@
 	%end;
 
 	%if %upcase("&database.") eq "REDSHIFT" %then %do;
-	%include "&UtilityLocation.&slash.code&slash.rdstcode.sas";
+	%include "&UtilityLocation.&slash.code&slash.&database..sas";
 	%end;
 
 	%if %upcase("&database.") eq "DB2" %then %do;

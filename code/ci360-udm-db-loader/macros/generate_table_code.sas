@@ -101,9 +101,14 @@
 
 		target_table=trim(table_name);
 		staging_view=cat(substr(trim(staging_table),1,length(trim(staging_table))-3),'view');
-		merge_update=cat(trim(table_name),'.',trim(column_name),' = ',trim(Staging_table),'.',trim(column_name));
+		if upcase("&dbname.") eq "REDSHIFT" then do;
+			merge_update=cat(trim(column_name),' = ',trim(Staging_table),'.',trim(column_name));
+		end;
+		else do;
+			merge_update=cat(trim(table_name),'.',trim(column_name),' = ',trim(Staging_table),'.',trim(column_name));
 
-		if upcase("&dbname.") eq "SQLSVR" then
+		end;
+		if upcase("&dbname.") eq "SQLSVR" OR  upcase("&dbname.") eq "REDSHIFT"  then
 			do;
 				merge_insert=trim(column_name);
 			end;

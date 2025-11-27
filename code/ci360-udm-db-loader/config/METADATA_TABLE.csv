@@ -338,6 +338,393 @@ cc_budget_breakup_ccbdgt|last_modified_usernm||||
 cc_budget_breakup_ccbdgt|load_dttm||||
 cc_budget_breakup_ccbdgt|planning_id|TS|TS||
 cc_budget_breakup_ccbdgt|planning_nm||||
+cdm_activity_custom_attr|activity_id||||
+cdm_activity_custom_attr|activity_version_id|TS|TS|TS|cdm_activity_detail (activity_version_id)
+cdm_activity_custom_attr|attribute_character_val||||
+cdm_activity_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_activity_custom_attr|attribute_dttm_val||||
+cdm_activity_custom_attr|attribute_nm|TS|TS||
+cdm_activity_custom_attr|attribute_numeric_val||||
+cdm_activity_custom_attr|attribute_val|TS|TS||
+cdm_activity_custom_attr|updated_by_nm||||
+cdm_activity_custom_attr|updated_dttm||||
+cdm_activity_detail|activity_category_nm||||
+cdm_activity_detail|activity_cd||||
+cdm_activity_detail|activity_desc||||
+cdm_activity_detail|activity_id||||
+cdm_activity_detail|activity_nm||||
+cdm_activity_detail|activity_version_id|TS|TS||
+cdm_activity_detail|last_published_dttm||||
+cdm_activity_detail|source_system_cd||||
+cdm_activity_detail|status_cd||||
+cdm_activity_detail|updated_by_nm||||
+cdm_activity_detail|updated_dttm||||
+cdm_activity_detail|valid_from_dttm||||
+cdm_activity_detail|valid_to_dttm||||
+cdm_activity_x_task|activity_id||||
+cdm_activity_x_task|activity_version_id|TS|TS|TS|cdm_activity_detail (activity_version_id)
+cdm_activity_x_task|task_id||||
+cdm_activity_x_task|task_version_id|TS|TS|TS|cdm_task_detail (task_version_id)
+cdm_activity_x_task|updated_by_nm||||
+cdm_activity_x_task|updated_dttm||||
+cdm_audience_detail|audience_data_source_nm||||
+cdm_audience_detail|audience_desc||||
+cdm_audience_detail|audience_id|TS|TS||
+cdm_audience_detail|audience_nm||||
+cdm_audience_detail|audience_schedule_flg||||
+cdm_audience_detail|audience_source_nm||||
+cdm_audience_detail|create_dttm||||
+cdm_audience_detail|created_user_nm||||
+cdm_audience_detail|delete_dttm||||
+cdm_audience_detail|updated_dttm||||
+cdm_audience_occur_detail|audience_id||||
+cdm_audience_occur_detail|audience_occur_id|TS|TS||
+cdm_audience_occur_detail|audience_size_cnt||||
+cdm_audience_occur_detail|end_dttm||||
+cdm_audience_occur_detail|execution_status_cd||||
+cdm_audience_occur_detail|occurrence_type_nm||||
+cdm_audience_occur_detail|start_dttm||||
+cdm_audience_occur_detail|started_by_nm||||
+cdm_audience_occur_detail|updated_dttm||||
+cdm_audience_x_segment|audience_id|TS|TS||
+cdm_audience_x_segment|segment_id||||
+cdm_business_context|business_context_id|TS|TS||
+cdm_business_context|business_context_nm||||
+cdm_business_context|business_context_type_cd||||
+cdm_business_context|source_system_cd||||
+cdm_business_context|updated_by_nm||||
+cdm_business_context|updated_dttm||||
+cdm_campaign_custom_attr|attribute_character_val||||
+cdm_campaign_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_campaign_custom_attr|attribute_dttm_val||||
+cdm_campaign_custom_attr|attribute_nm|TS|TS||
+cdm_campaign_custom_attr|attribute_numeric_val||||
+cdm_campaign_custom_attr|attribute_val|TS|TS||
+cdm_campaign_custom_attr|campaign_id|TS|TS|TS|cdm_campaign_detail (campaign_id)
+cdm_campaign_custom_attr|extension_attribute_nm||||
+cdm_campaign_custom_attr|page_nm|TS|TS||
+cdm_campaign_custom_attr|updated_by_nm||||
+cdm_campaign_custom_attr|updated_dttm||||
+cdm_campaign_detail|approval_dttm||||
+cdm_campaign_detail|approval_given_by_nm||||
+cdm_campaign_detail|campaign_cd||||
+cdm_campaign_detail|campaign_desc||||
+cdm_campaign_detail|campaign_folder_txt||||
+cdm_campaign_detail|campaign_group_sk||||
+cdm_campaign_detail|campaign_id|TS|TS||
+cdm_campaign_detail|campaign_nm||||
+cdm_campaign_detail|campaign_owner_nm||||
+cdm_campaign_detail|campaign_status_cd||||
+cdm_campaign_detail|campaign_type_cd||||
+cdm_campaign_detail|campaign_version_no||||
+cdm_campaign_detail|current_version_flg||||
+cdm_campaign_detail|deleted_flg||||
+cdm_campaign_detail|deployment_version_no||||
+cdm_campaign_detail|end_dttm||||
+cdm_campaign_detail|last_modified_by_user_nm||||
+cdm_campaign_detail|last_modified_dttm||||
+cdm_campaign_detail|max_budget_amt||||
+cdm_campaign_detail|max_budget_offer_amt||||
+cdm_campaign_detail|min_budget_amt||||
+cdm_campaign_detail|min_budget_offer_amt||||
+cdm_campaign_detail|run_dttm||||
+cdm_campaign_detail|source_system_cd||||
+cdm_campaign_detail|start_dttm||||
+cdm_campaign_detail|updated_by_nm||||
+cdm_campaign_detail|updated_dttm||||
+cdm_campaign_detail|valid_from_dttm||||
+cdm_campaign_detail|valid_to_dttm||||
+cdm_contact_channel|contact_channel_cd|TS|TS||
+cdm_contact_channel|contact_channel_nm||||
+cdm_contact_channel|updated_by_nm||||
+cdm_contact_channel|updated_dttm||||
+cdm_contact_history|audience_id||||
+cdm_contact_history|audience_occur_id||||
+cdm_contact_history|contact_dt||||
+cdm_contact_history|contact_dttm||||
+cdm_contact_history|contact_dttm_tz||||
+cdm_contact_history|contact_id|TS|TS||
+cdm_contact_history|contact_nm||||
+cdm_contact_history|contact_status_cd|||TS|cdm_contact_status (contact_status_cd)
+cdm_contact_history|context_type_nm||||
+cdm_contact_history|context_val||||
+cdm_contact_history|control_group_flg||||
+cdm_contact_history|external_contact_info_1_id||||
+cdm_contact_history|external_contact_info_2_id||||
+cdm_contact_history|identity_id|||TS|cdm_identity_map (identity_id)
+cdm_contact_history|optimization_backfill_flg||||
+cdm_contact_history|rtc_id|||TS|cdm_rtc_detail (rtc_id)
+cdm_contact_history|source_system_cd||||
+cdm_contact_history|updated_by_nm||||
+cdm_contact_history|updated_dttm||||
+cdm_contact_status|contact_status_cd|TS|TS||
+cdm_contact_status|contact_status_desc||||
+cdm_contact_status|updated_by_nm||||
+cdm_contact_status|updated_dttm||||
+cdm_content_custom_attr|attribute_character_val|TS|TS||
+cdm_content_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_content_custom_attr|attribute_dttm_val|TS|TS||
+cdm_content_custom_attr|attribute_nm|TS|TS||
+cdm_content_custom_attr|attribute_numeric_val|TS|TS||
+cdm_content_custom_attr|attribute_val|TS|TS||
+cdm_content_custom_attr|content_id||||
+cdm_content_custom_attr|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_content_custom_attr|extension_attribute_nm||||
+cdm_content_custom_attr|updated_by_nm||||
+cdm_content_custom_attr|updated_dttm||||
+cdm_content_detail|active_flg||||
+cdm_content_detail|contact_content_category_nm||||
+cdm_content_detail|contact_content_cd||||
+cdm_content_detail|contact_content_class_nm||||
+cdm_content_detail|contact_content_desc||||
+cdm_content_detail|contact_content_nm||||
+cdm_content_detail|contact_content_status_cd||||
+cdm_content_detail|contact_content_type_nm||||
+cdm_content_detail|content_id||||
+cdm_content_detail|content_version_id|TS|TS||
+cdm_content_detail|created_dt||||
+cdm_content_detail|created_user_nm||||
+cdm_content_detail|external_reference_txt||||
+cdm_content_detail|external_reference_url_txt||||
+cdm_content_detail|owner_nm||||
+cdm_content_detail|source_system_cd||||
+cdm_content_detail|updated_by_nm||||
+cdm_content_detail|updated_dttm||||
+cdm_content_detail|valid_from_dttm||||
+cdm_content_detail|valid_to_dttm||||
+cdm_dyn_content_custom_attr|attribute_character_val||||
+cdm_dyn_content_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_dyn_content_custom_attr|attribute_dttm_val||||
+cdm_dyn_content_custom_attr|attribute_nm|TS|TS||
+cdm_dyn_content_custom_attr|attribute_numeric_val||||
+cdm_dyn_content_custom_attr|attribute_val|TS|TS||
+cdm_dyn_content_custom_attr|content_hash_val|TS|TS||
+cdm_dyn_content_custom_attr|content_id||||
+cdm_dyn_content_custom_attr|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_dyn_content_custom_attr|extension_attribute_nm||||
+cdm_dyn_content_custom_attr|updated_by_nm||||
+cdm_dyn_content_custom_attr|updated_dttm||||
+cdm_identifier_type|identifier_type_desc||||
+cdm_identifier_type|identifier_type_id|TS|TS||
+cdm_identifier_type|updated_by_nm||||
+cdm_identifier_type|updated_dttm||||
+cdm_identity_attr|entry_dttm||||
+cdm_identity_attr|identifier_type_id|TS|TS||
+cdm_identity_attr|identity_id|TS|TS|TS|cdm_identity_map (identity_id)
+cdm_identity_attr|source_system_cd||||
+cdm_identity_attr|updated_by_nm||||
+cdm_identity_attr|updated_dttm||||
+cdm_identity_attr|user_identifier_val||||
+cdm_identity_attr|valid_from_dttm||||
+cdm_identity_attr|valid_to_dttm||||
+cdm_identity_map|identity_id|TS|TS||
+cdm_identity_map|identity_type_cd|||TS|cdm_identity_type (identity_type_cd)
+cdm_identity_map|updated_by_nm||||
+cdm_identity_map|updated_dttm||||
+cdm_identity_type|identity_type_cd|TS|TS||
+cdm_identity_type|identity_type_desc||||
+cdm_identity_type|updated_by_nm||||
+cdm_identity_type|updated_dttm||||
+cdm_occurrence_detail|end_dttm||||
+cdm_occurrence_detail|execution_status_cd||||
+cdm_occurrence_detail|occurrence_id|TS|TS||
+cdm_occurrence_detail|occurrence_no||||
+cdm_occurrence_detail|occurrence_object_id||||
+cdm_occurrence_detail|occurrence_object_type_cd||||
+cdm_occurrence_detail|occurrence_type_cd||||
+cdm_occurrence_detail|source_system_cd||||
+cdm_occurrence_detail|start_dttm||||
+cdm_occurrence_detail|updated_by_nm||||
+cdm_occurrence_detail|updated_dttm||||
+cdm_response_channel|response_channel_cd|TS|TS||
+cdm_response_channel|response_channel_nm||||
+cdm_response_channel|updated_by_nm||||
+cdm_response_channel|updated_dttm||||
+cdm_response_extended_attr|attribute_data_type_cd||||
+cdm_response_extended_attr|attribute_nm|TS|TS||
+cdm_response_extended_attr|attribute_val||||
+cdm_response_extended_attr|response_attribute_type_cd|TS|TS||
+cdm_response_extended_attr|response_id|TS|TS|TS|cdm_response_history (response_id)
+cdm_response_extended_attr|updated_by_nm||||
+cdm_response_extended_attr|updated_dttm||||
+cdm_response_history|audience_id||||
+cdm_response_history|audience_occur_id||||
+cdm_response_history|contact_id|||TS|cdm_contact_history (contact_id)
+cdm_response_history|content_hash_val||||
+cdm_response_history|content_id||||
+cdm_response_history|content_version_id|||TS|cdm_content_detail (content_version_id)
+cdm_response_history|context_type_nm||||
+cdm_response_history|context_val||||
+cdm_response_history|conversion_flg||||
+cdm_response_history|external_contact_info_1_id||||
+cdm_response_history|external_contact_info_2_id||||
+cdm_response_history|identity_id|||TS|cdm_identity_map (identity_id)
+cdm_response_history|inferred_response_flg||||
+cdm_response_history|properties_map_doc||||
+cdm_response_history|response_cd|||TS|cdm_response_lookup (response_cd)
+cdm_response_history|response_channel_cd|||TS|cdm_response_channel (response_channel_cd)
+cdm_response_history|response_dt||||
+cdm_response_history|response_dttm||||
+cdm_response_history|response_dttm_tz||||
+cdm_response_history|response_id|TS|TS||
+cdm_response_history|response_type_cd|||TS|cdm_response_type (response_type_cd)
+cdm_response_history|response_val_amt||||
+cdm_response_history|rtc_id|||TS|cdm_rtc_detail (rtc_id)
+cdm_response_history|source_system_cd||||
+cdm_response_history|updated_by_nm||||
+cdm_response_history|updated_dttm||||
+cdm_response_lookup|response_cd|TS|TS||
+cdm_response_lookup|response_nm||||
+cdm_response_lookup|updated_by_nm||||
+cdm_response_lookup|updated_dttm||||
+cdm_response_type|response_type_cd|TS|TS||
+cdm_response_type|response_type_desc||||
+cdm_response_type|updated_by_nm||||
+cdm_response_type|updated_dttm||||
+cdm_rtc_detail|deleted_flg||||
+cdm_rtc_detail|execution_status_cd||||
+cdm_rtc_detail|occurrence_id|||TS|cdm_occurrence_detail (occurrence_id)
+cdm_rtc_detail|processed_dttm||||
+cdm_rtc_detail|response_tracking_flg||||
+cdm_rtc_detail|rtc_id|TS|TS||
+cdm_rtc_detail|segment_id||||
+cdm_rtc_detail|segment_version_id|||TS|cdm_segment_detail (segment_version_id)
+cdm_rtc_detail|source_system_cd||||
+cdm_rtc_detail|task_id||||
+cdm_rtc_detail|task_occurrence_no||||
+cdm_rtc_detail|task_version_id|||TS|cdm_task_detail (task_version_id
+cdm_rtc_detail|updated_by_nm||||
+cdm_rtc_detail|updated_dttm||||
+cdm_rtc_x_content|content_hash_val||||
+cdm_rtc_x_content|content_id||||
+cdm_rtc_x_content|content_version_id|TS|TS|TS|cdm_content_detail (content_version_id)
+cdm_rtc_x_content|rtc_id|TS|TS|TS|cdm_rtc_detail (rtc_id)
+cdm_rtc_x_content|rtc_x_content_sk||||
+cdm_rtc_x_content|sequence_no||||
+cdm_rtc_x_content|updated_by_nm||||
+cdm_rtc_x_content|updated_dttm||||
+cdm_segment_custom_attr|attribute_character_val||||
+cdm_segment_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_segment_custom_attr|attribute_dttm_val||||
+cdm_segment_custom_attr|attribute_nm|TS|TS||
+cdm_segment_custom_attr|attribute_numeric_val||||
+cdm_segment_custom_attr|attribute_val|TS|TS||
+cdm_segment_custom_attr|segment_id||||
+cdm_segment_custom_attr|segment_version_id|TS|TS|TS|cdm_segment_detail (segment_version_id)
+cdm_segment_custom_attr|updated_by_nm||||
+cdm_segment_custom_attr|updated_dttm||||
+cdm_segment_detail|segment_category_nm||||
+cdm_segment_detail|segment_cd||||
+cdm_segment_detail|segment_desc||||
+cdm_segment_detail|segment_id||||
+cdm_segment_detail|segment_map_id||||
+cdm_segment_detail|segment_map_version_id||||
+cdm_segment_detail|segment_nm||||
+cdm_segment_detail|segment_src_nm||||
+cdm_segment_detail|segment_status_cd||||
+cdm_segment_detail|segment_version_id|TS|TS||
+cdm_segment_detail|source_system_cd||||
+cdm_segment_detail|updated_by_nm||||
+cdm_segment_detail|updated_dttm||||
+cdm_segment_detail|valid_from_dttm||||
+cdm_segment_detail|valid_to_dttm||||
+cdm_segment_map|segment_map_category_nm||||
+cdm_segment_map|segment_map_cd||||
+cdm_segment_map|segment_map_desc||||
+cdm_segment_map|segment_map_id||||
+cdm_segment_map|segment_map_nm||||
+cdm_segment_map|segment_map_src_nm||||
+cdm_segment_map|segment_map_status_cd||||
+cdm_segment_map|segment_map_version_id|TS|TS||
+cdm_segment_map|source_system_cd||||
+cdm_segment_map|updated_by_nm||||
+cdm_segment_map|updated_dttm||||
+cdm_segment_map|valid_from_dttm||||
+cdm_segment_map|valid_to_dttm||||
+cdm_segment_map_custom_attr|attribute_character_val||||
+cdm_segment_map_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_segment_map_custom_attr|attribute_dttm_val||||
+cdm_segment_map_custom_attr|attribute_nm|TS|TS||
+cdm_segment_map_custom_attr|attribute_numeric_val||||
+cdm_segment_map_custom_attr|attribute_val|TS|TS||
+cdm_segment_map_custom_attr|segment_map_id||||
+cdm_segment_map_custom_attr|segment_map_version_id|TS|TS|TS|cdm_segment_map (segment_map_version_id)
+cdm_segment_map_custom_attr|updated_by_nm||||
+cdm_segment_map_custom_attr|updated_dttm||||
+cdm_segment_test|stratified_samp_criteria_txt||||
+cdm_segment_test|stratified_sampling_flg||||
+cdm_segment_test|task_id||||
+cdm_segment_test|task_version_id|TS|TS||
+cdm_segment_test|test_cd|TS|TS||
+cdm_segment_test|test_cnt||||
+cdm_segment_test|test_enabled_flg||||
+cdm_segment_test|test_nm||||
+cdm_segment_test|test_pct||||
+cdm_segment_test|test_sizing_type_nm||||
+cdm_segment_test|test_type_nm||||
+cdm_segment_test|updated_dttm||||
+cdm_segment_test_x_segment|segment_id|TS|TS||
+cdm_segment_test_x_segment|task_id||||
+cdm_segment_test_x_segment|task_version_id|TS|TS||
+cdm_segment_test_x_segment|test_cd|TS|TS||
+cdm_segment_test_x_segment|updated_dttm||||
+cdm_task_custom_attr|attribute_character_val||||
+cdm_task_custom_attr|attribute_data_type_cd|TS|TS||
+cdm_task_custom_attr|attribute_dttm_val||||
+cdm_task_custom_attr|attribute_nm|TS|TS||
+cdm_task_custom_attr|attribute_numeric_val||||
+cdm_task_custom_attr|attribute_val|TS|TS||
+cdm_task_custom_attr|extension_attribute_nm||||
+cdm_task_custom_attr|task_id||||
+cdm_task_custom_attr|task_version_id|TS|TS|TS|cdm_task_detail (task_version_id)
+cdm_task_custom_attr|updated_by_nm||||
+cdm_task_custom_attr|updated_dttm||||
+cdm_task_detail|active_flg||||
+cdm_task_detail|budget_unit_cost_amt||||
+cdm_task_detail|budget_unit_usage_amt||||
+cdm_task_detail|business_context_id|||TS|cdm_business_context (business_context_id)
+cdm_task_detail|campaign_id|||TS|cdm_campaign_detail (campaign_id)
+cdm_task_detail|contact_channel_cd|||TS|cdm_contact_channel (contact_channel_cd)
+cdm_task_detail|control_group_action_nm||||
+cdm_task_detail|created_dt||||
+cdm_task_detail|created_user_nm||||
+cdm_task_detail|export_dttm||||
+cdm_task_detail|limit_by_total_impression_flg||||
+cdm_task_detail|limit_period_unit_cnt||||
+cdm_task_detail|max_budget_amt||||
+cdm_task_detail|max_budget_offer_amt||||
+cdm_task_detail|maximum_period_expression_cnt||||
+cdm_task_detail|min_budget_amt||||
+cdm_task_detail|min_budget_offer_amt||||
+cdm_task_detail|modified_status_cd||||
+cdm_task_detail|owner_nm||||
+cdm_task_detail|published_flg||||
+cdm_task_detail|recurr_type_cd||||
+cdm_task_detail|recurring_schedule_flg||||
+cdm_task_detail|saved_flg||||
+cdm_task_detail|scheduled_end_dttm||||
+cdm_task_detail|scheduled_flg||||
+cdm_task_detail|scheduled_start_dttm||||
+cdm_task_detail|segment_tests_flg||||
+cdm_task_detail|source_system_cd||||
+cdm_task_detail|staged_flg||||
+cdm_task_detail|standard_reply_flg||||
+cdm_task_detail|stratified_sampling_action_nm||||
+cdm_task_detail|subject_type_nm||||
+cdm_task_detail|task_cd||||
+cdm_task_detail|task_delivery_type_nm||||
+cdm_task_detail|task_desc||||
+cdm_task_detail|task_id||||
+cdm_task_detail|task_nm||||
+cdm_task_detail|task_status_cd||||
+cdm_task_detail|task_subtype_nm||||
+cdm_task_detail|task_type_nm||||
+cdm_task_detail|task_version_id|TS|TS||
+cdm_task_detail|update_contact_history_flg||||
+cdm_task_detail|updated_by_nm||||
+cdm_task_detail|updated_dttm||||
+cdm_task_detail|valid_from_dttm||||
+cdm_task_detail|valid_to_dttm||||
 commitment_details|cmtmnt_amt||||
 commitment_details|cmtmnt_closure_note||||
 commitment_details|cmtmnt_created_dttm||||
@@ -572,6 +959,7 @@ daily_usage|api_usage_str||||
 daily_usage|asset_size||||
 daily_usage|audience_usage_cnt||||
 daily_usage|bc_subjcnt_str||||
+daily_usage|customer_profiles_processed_str||||
 daily_usage|db_size||||
 daily_usage|email_preview_cnt||||
 daily_usage|email_send_cnt||||
@@ -1261,15 +1649,15 @@ fiscal_cc_budget|gen_ledger_cd||||
 fiscal_cc_budget|last_modified_dttm||||
 fiscal_cc_budget|last_modified_usernm||||
 fiscal_cc_budget|load_dttm||||
-form_details|attempt_index_cnt|TS|TS||
-form_details|attempt_status_cd|TS|TS||
+form_details|attempt_index_cnt||||
+form_details|attempt_status_cd||||
 form_details|change_index_no||||
-form_details|detail_id|TS|TS|TS|page_details (detail_id)
+form_details|detail_id|||TS|page_details (detail_id)
 form_details|detail_id_hex|||TS|page_details (detail_id_hex)
-form_details|event_id||||
+form_details|event_id|TS|TS||
 form_details|event_key_cd||||
 form_details|event_source_cd||||
-form_details|form_field_detail_dttm|TS|TS||
+form_details|form_field_detail_dttm||||
 form_details|form_field_detail_dttm_tz||||
 form_details|form_field_id||||
 form_details|form_field_nm||||
@@ -1279,7 +1667,7 @@ form_details|identity_id|||TS|identity_attributes (identity_id)
 form_details|load_dttm||||
 form_details|session_id|||TS|session_details (session_id)
 form_details|session_id_hex|||TS|session_details (session_id_hex)
-form_details|submit_flg|TS|TS||
+form_details|submit_flg||||
 form_details|visit_id|||TS|visit_details (visit_id)
 form_details|visit_id_hex|||TS|visit_details (visit_id_hex)
 identity_attributes|entrytime|TS|TS||
@@ -1309,6 +1697,8 @@ impression_delivered|event_source_cd||||
 impression_delivered|identity_id|||TS|identity_attributes (identity_id)
 impression_delivered|impression_delivered_dttm||||
 impression_delivered|impression_delivered_dttm_tz||||
+impression_delivered|journey_id||||
+impression_delivered|journey_occurrence_id||||
 impression_delivered|load_dttm||||
 impression_delivered|message_id||||
 impression_delivered|message_version_id||||
@@ -1319,6 +1709,7 @@ impression_delivered|product_qty_no||||
 impression_delivered|product_sku_no||||
 impression_delivered|properties_map_doc||||
 impression_delivered|rec_group_id||||
+impression_delivered|request_id||||
 impression_delivered|reserved_1_txt||||
 impression_delivered|reserved_2_txt||||
 impression_delivered|response_tracking_cd||||
@@ -1359,6 +1750,7 @@ impression_spot_viewable|product_qty_no||||
 impression_spot_viewable|product_sku_no||||
 impression_spot_viewable|properties_map_doc||||
 impression_spot_viewable|rec_group_id||||
+impression_spot_viewable|request_id||||
 impression_spot_viewable|reserved_1_txt||||
 impression_spot_viewable|reserved_2_txt||||
 impression_spot_viewable|response_tracking_cd||||
@@ -1606,6 +1998,8 @@ invoice_line_items_ccbdgt|vendor_number||||
 invoice_line_items_ccbdgt|vendor_obsolete_flg||||
 journey_entry|aud_occurrence_id||||
 journey_entry|audience_id||||
+journey_entry|context_type_nm||||
+journey_entry|context_val||||
 journey_entry|entry_dttm||||
 journey_entry|entry_dttm_tz||||
 journey_entry|event_id|TS|TS||
@@ -1618,6 +2012,8 @@ journey_entry|journey_occurrence_id||||
 journey_entry|load_dttm||||
 journey_exit|aud_occurrence_id||||
 journey_exit|audience_id||||
+journey_exit|context_type_nm||||
+journey_exit|context_val||||
 journey_exit|event_id|TS|TS||
 journey_exit|event_nm||||
 journey_exit|exit_dttm||||
@@ -1633,6 +2029,8 @@ journey_exit|reason_cd||||
 journey_exit|reason_txt||||
 journey_holdout|aud_occurrence_id||||
 journey_holdout|audience_id||||
+journey_holdout|context_type_nm||||
+journey_holdout|context_val||||
 journey_holdout|event_id|TS|TS||
 journey_holdout|event_nm||||
 journey_holdout|holdout_dttm||||
@@ -1645,6 +2043,8 @@ journey_holdout|journey_occurrence_id||||
 journey_holdout|load_dttm||||
 journey_node_entry|aud_occurrence_id||||
 journey_node_entry|audience_id||||
+journey_node_entry|context_type_nm||||
+journey_node_entry|context_val||||
 journey_node_entry|event_id|TS|TS||
 journey_node_entry|event_nm||||
 journey_node_entry|identity_id||||
@@ -1660,6 +2060,8 @@ journey_node_entry|node_type_nm||||
 journey_node_entry|previous_node_id||||
 journey_success|aud_occurrence_id||||
 journey_success|audience_id||||
+journey_success|context_type_nm||||
+journey_success|context_val||||
 journey_success|event_id|TS|TS||
 journey_success|event_nm||||
 journey_success|identity_id||||
@@ -1674,6 +2076,8 @@ journey_success|success_val||||
 journey_success|unit_qty||||
 journey_suppression|aud_occurrence_id||||
 journey_suppression|audience_id||||
+journey_suppression|context_type_nm||||
+journey_suppression|context_val||||
 journey_suppression|event_id|TS|TS||
 journey_suppression|event_nm||||
 journey_suppression|identity_id||||
@@ -1772,6 +2176,8 @@ md_audience_occurrence|execution_status_cd||||
 md_audience_occurrence|occurrence_type_nm||||
 md_audience_occurrence|start_tm||||
 md_audience_occurrence|started_by_nm||||
+md_audience_x_segment|audience_id|TS|TS||
+md_audience_x_segment|segment_id||||
 md_bu|bu_currency_cd||||
 md_bu|bu_desc||||
 md_bu|bu_id|TS|TS||
@@ -2184,11 +2590,13 @@ md_spot|created_user_nm||||
 md_spot|dimension_label_txt||||
 md_spot|height_width_ratio_val_txt||||
 md_spot|last_published_dttm||||
+md_spot|location_selector_flg||||
 md_spot|multi_page_flg||||
 md_spot|owner_nm||||
 md_spot|spot_desc||||
 md_spot|spot_height_val_no||||
 md_spot|spot_id||||
+md_spot|spot_key||||
 md_spot|spot_nm||||
 md_spot|spot_status_cd||||
 md_spot|spot_type_nm||||
@@ -2237,6 +2645,7 @@ md_task|rtdm_flg||||
 md_task|scheduled_end_dttm||||
 md_task|scheduled_flg||||
 md_task|scheduled_start_dttm||||
+md_task|secondary_status||||
 md_task|segment_tests_flg||||
 md_task|send_notification_locale_cd||||
 md_task|stratified_sampling_action_nm||||
@@ -2392,19 +2801,19 @@ media_activity_details|load_dttm||||
 media_activity_details|media_nm|TS|TS||
 media_activity_details|media_uri_txt||||
 media_activity_details|playhead_position||||
-media_details|detail_id|TS|TS|TS|page_details (detail_id)
+media_details|detail_id|||TS|page_details (detail_id)
 media_details|detail_id_hex|||TS|page_details (detail_id_hex)
-media_details|event_id||||
+media_details|event_id|TS|TS||
 media_details|event_key_cd||||
 media_details|event_source_cd||||
 media_details|identity_id|||TS|identity_attributes (identity_id)
 media_details|load_dttm||||
 media_details|media_duration_secs||||
-media_details|media_nm|TS|TS||
+media_details|media_nm||||
 media_details|media_player_nm||||
 media_details|media_player_version_txt||||
 media_details|media_uri_txt||||
-media_details|play_start_dttm|TS|TS||
+media_details|play_start_dttm||||
 media_details|play_start_dttm_tz||||
 media_details|session_id|||TS|session_details (session_id)
 media_details|session_id_hex|||TS|session_details (session_id_hex)
@@ -2458,6 +2867,7 @@ monthly_usage|api_usage_str||||
 monthly_usage|asset_size||||
 monthly_usage|audience_usage_cnt||||
 monthly_usage|bc_subjcnt_str||||
+monthly_usage|customer_profiles_processed_str||||
 monthly_usage|db_size||||
 monthly_usage|email_preview_cnt||||
 monthly_usage|email_send_cnt||||
@@ -2583,6 +2993,7 @@ notification_targeting_request|load_dttm||||
 notification_targeting_request|mobile_app_id||||
 notification_targeting_request|notification_tgt_req_dttm||||
 notification_targeting_request|notification_tgt_req_dttm_tz||||
+notification_targeting_request|task_id||||
 order_details|activity_dttm||||
 order_details|activity_dttm_tz||||
 order_details|availability_message_txt||||
@@ -2706,10 +3117,10 @@ page_details|class8_id||||
 page_details|class9_id||||
 page_details|detail_dttm||||
 page_details|detail_dttm_tz||||
-page_details|detail_id|TS|TS||
+page_details|detail_id||||
 page_details|detail_id_hex||||
 page_details|domain_nm||||
-page_details|event_id||||
+page_details|event_id|TS|TS||
 page_details|event_key_cd||||
 page_details|event_nm||||
 page_details|event_source_cd||||
@@ -2737,15 +3148,15 @@ page_details_ext|load_dttm|TS|TS||
 page_details_ext|seconds_spent_on_page_cnt||||
 page_details_ext|session_id|TS|TS|TS|session_details (session_id)
 page_details_ext|session_id_hex|||TS|session_details (session_id_hex)
-page_errors|detail_id|TS|TS|TS|page_details (detail_id)
+page_errors|detail_id|||TS|page_details (detail_id)
 page_errors|detail_id_hex|||TS|page_details (detail_id_hex)
-page_errors|error_location_txt|TS|TS||
-page_errors|event_id||||
+page_errors|error_location_txt||||
+page_errors|event_id|TS|TS||
 page_errors|event_source_cd||||
 page_errors|identity_id|||TS|identity_attributes (identity_id)
 page_errors|in_page_error_dttm||||
 page_errors|in_page_error_dttm_tz||||
-page_errors|in_page_error_txt|TS|TS||
+page_errors|in_page_error_txt||||
 page_errors|load_dttm||||
 page_errors|session_id|||TS|session_details (session_id)
 page_errors|session_id_hex|||TS|session_details (session_id_hex)
@@ -2870,12 +3281,12 @@ product_views|visit_id|||TS|visit_details (visit_id)
 product_views|visit_id_hex|||TS|visit_details (visit_id_hex)
 promotion_displayed|channel_nm||||
 promotion_displayed|derived_display_flg||||
-promotion_displayed|detail_id|TS|TS|TS|page_details (detail_id)
+promotion_displayed|detail_id|||TS|page_details (detail_id)
 promotion_displayed|detail_id_hex|||TS|page_details (detail_id_hex)
-promotion_displayed|display_dttm|TS|TS||
+promotion_displayed|display_dttm||||
 promotion_displayed|display_dttm_tz||||
 promotion_displayed|event_designed_id|||TS|md_event (event_id)
-promotion_displayed|event_id||||
+promotion_displayed|event_id|TS|TS||
 promotion_displayed|event_key_cd||||
 promotion_displayed|event_nm||||
 promotion_displayed|event_source_cd||||
@@ -2883,7 +3294,7 @@ promotion_displayed|identity_id|||TS|identity_attributes (identity_id)
 promotion_displayed|load_dttm||||
 promotion_displayed|mobile_app_id||||
 promotion_displayed|promotion_creative_nm||||
-promotion_displayed|promotion_nm|TS|TS||
+promotion_displayed|promotion_nm||||
 promotion_displayed|promotion_number||||
 promotion_displayed|promotion_placement_nm||||
 promotion_displayed|promotion_tracking_cd||||
@@ -2894,12 +3305,12 @@ promotion_displayed|session_id_hex|||TS|session_details (session_id_hex)
 promotion_displayed|visit_id|||TS|visit_details (visit_id)
 promotion_displayed|visit_id_hex|||TS|visit_details (visit_id_hex)
 promotion_used|channel_nm||||
-promotion_used|click_dttm|TS|TS||
+promotion_used|click_dttm||||
 promotion_used|click_dttm_tz||||
-promotion_used|detail_id|TS|TS|TS|page_details (detail_id)
+promotion_used|detail_id|||TS|page_details (detail_id)
 promotion_used|detail_id_hex|||TS|page_details (detail_id_hex)
 promotion_used|event_designed_id|||TS|md_event (event_id)
-promotion_used|event_id||||
+promotion_used|event_id|TS|TS||
 promotion_used|event_key_cd||||
 promotion_used|event_nm||||
 promotion_used|event_source_cd||||
@@ -2907,7 +3318,7 @@ promotion_used|identity_id|||TS|identity_attributes (identity_id)
 promotion_used|load_dttm||||
 promotion_used|mobile_app_id||||
 promotion_used|promotion_creative_nm||||
-promotion_used|promotion_nm|TS|TS||
+promotion_used|promotion_nm||||
 promotion_used|promotion_number||||
 promotion_used|promotion_placement_nm||||
 promotion_used|promotion_tracking_cd||||
@@ -2943,10 +3354,10 @@ response_history|task_id|||TS|md_task (task_id)
 response_history|task_version_id||||
 response_history|visit_id_hex|||TS|visit_details (visit_id_hex)
 search_results|channel_nm||||
-search_results|detail_id|TS|TS|TS|page_details (detail_id)
+search_results|detail_id|||TS|page_details (detail_id)
 search_results|detail_id_hex|||TS|page_details (detail_id_hex)
 search_results|event_designed_id|||TS|md_event (event_id)
-search_results|event_id||||
+search_results|event_id|TS|TS||
 search_results|event_key_cd||||
 search_results|event_nm||||
 search_results|event_source_cd||||
@@ -2957,7 +3368,7 @@ search_results|properties_map_doc||||
 search_results|results_displayed_flg||||
 search_results|search_nm||||
 search_results|search_results_displayed||||
-search_results|search_results_dttm|TS|TS||
+search_results|search_results_dttm||||
 search_results|search_results_dttm_tz||||
 search_results|search_results_sk|||TS|search_results_ext (search_results_sk)
 search_results|session_id|||TS|session_details (session_id)
@@ -2968,9 +3379,10 @@ search_results|srch_phrase||||
 search_results|visit_id|||TS|visit_details (visit_id)
 search_results|visit_id_hex|||TS|visit_details (visit_id_hex)
 search_results_ext|event_designed_id|||TS|md_event (event_id)
+search_results_ext|event_id|TS|TS||
 search_results_ext|load_dttm||||
 search_results_ext|search_results_displayed||||
-search_results_ext|search_results_sk|TS|TS||
+search_results_ext|search_results_sk||||
 session_details|app_id||||
 session_details|app_version||||
 session_details|browser_nm||||
@@ -3023,7 +3435,7 @@ session_details|sdk_version||||
 session_details|session_dt||||
 session_details|session_dt_tz||||
 session_details|session_id|TS|TS|TS|session_details_ext (session_id)
-session_details|session_id_hex|||TS|session_details_ext (session_id)
+session_details|session_id_hex||||
 session_details|session_start_dttm||||
 session_details|session_start_dttm_tz||||
 session_details|session_timeout||||
@@ -3032,16 +3444,18 @@ session_details|user_agent_nm||||
 session_details|user_language_cd||||
 session_details|visitor_id||||
 session_details_ext|active_sec_spent_in_sessn_cnt||||
-session_details_ext|last_session_activity_dttm||||
+session_details_ext|last_session_activity_dttm|TS|TS||
 session_details_ext|last_session_activity_dttm_tz||||
 session_details_ext|load_dttm||||
 session_details_ext|seconds_spent_in_session_cnt||||
 session_details_ext|session_expiration_dttm||||
 session_details_ext|session_expiration_dttm_tz||||
 session_details_ext|session_id|TS|TS||
-session_details_ext|session_id_hex|TS|TS||
+session_details_ext|session_id_hex||||
 sms_message_clicked|aud_occurrence_id||||
 sms_message_clicked|audience_id||||
+sms_message_clicked|context_type_nm||||
+sms_message_clicked|context_val||||
 sms_message_clicked|country_cd||||
 sms_message_clicked|creative_id||||
 sms_message_clicked|creative_version_id||||
@@ -3049,6 +3463,8 @@ sms_message_clicked|event_designed_id||||
 sms_message_clicked|event_id|TS|TS||
 sms_message_clicked|event_nm||||
 sms_message_clicked|identity_id||||
+sms_message_clicked|journey_id||||
+sms_message_clicked|journey_occurrence_id||||
 sms_message_clicked|load_dttm||||
 sms_message_clicked|occurrence_id||||
 sms_message_clicked|response_tracking_cd||||
@@ -3060,6 +3476,8 @@ sms_message_clicked|task_id||||
 sms_message_clicked|task_version_id||||
 sms_message_delivered|aud_occurrence_id||||
 sms_message_delivered|audience_id||||
+sms_message_delivered|context_type_nm||||
+sms_message_delivered|context_val||||
 sms_message_delivered|country_cd||||
 sms_message_delivered|creative_id||||
 sms_message_delivered|creative_version_id||||
@@ -3067,6 +3485,8 @@ sms_message_delivered|event_designed_id||||
 sms_message_delivered|event_id|TS|TS||
 sms_message_delivered|event_nm||||
 sms_message_delivered|identity_id||||
+sms_message_delivered|journey_id||||
+sms_message_delivered|journey_occurrence_id||||
 sms_message_delivered|load_dttm||||
 sms_message_delivered|occurrence_id||||
 sms_message_delivered|response_tracking_cd||||
@@ -3078,6 +3498,8 @@ sms_message_delivered|task_id||||
 sms_message_delivered|task_version_id||||
 sms_message_failed|aud_occurrence_id||||
 sms_message_failed|audience_id||||
+sms_message_failed|context_type_nm||||
+sms_message_failed|context_val||||
 sms_message_failed|country_cd||||
 sms_message_failed|creative_id||||
 sms_message_failed|creative_version_id||||
@@ -3085,6 +3507,8 @@ sms_message_failed|event_designed_id||||
 sms_message_failed|event_id|TS|TS||
 sms_message_failed|event_nm||||
 sms_message_failed|identity_id||||
+sms_message_failed|journey_id||||
+sms_message_failed|journey_occurrence_id||||
 sms_message_failed|load_dttm||||
 sms_message_failed|occurrence_id||||
 sms_message_failed|reason_cd||||
@@ -3098,15 +3522,20 @@ sms_message_failed|task_id||||
 sms_message_failed|task_version_id||||
 sms_message_reply|aud_occurrence_id||||
 sms_message_reply|audience_id||||
+sms_message_reply|context_type_nm||||
+sms_message_reply|context_val||||
 sms_message_reply|country_cd||||
 sms_message_reply|event_designed_id||||
 sms_message_reply|event_id|TS|TS||
 sms_message_reply|event_nm||||
 sms_message_reply|identity_id||||
+sms_message_reply|journey_id||||
+sms_message_reply|journey_occurrence_id||||
 sms_message_reply|load_dttm||||
 sms_message_reply|occurrence_id||||
 sms_message_reply|response_tracking_cd||||
 sms_message_reply|sender_id||||
+sms_message_reply|sms_content||||
 sms_message_reply|sms_message_id||||
 sms_message_reply|sms_reply_dttm||||
 sms_message_reply|sms_reply_dttm_tz||||
@@ -3114,6 +3543,8 @@ sms_message_reply|task_id||||
 sms_message_reply|task_version_id||||
 sms_message_send|aud_occurrence_id||||
 sms_message_send|audience_id||||
+sms_message_send|context_type_nm||||
+sms_message_send|context_val||||
 sms_message_send|country_cd||||
 sms_message_send|creative_id||||
 sms_message_send|creative_version_id||||
@@ -3122,6 +3553,8 @@ sms_message_send|event_id|TS|TS||
 sms_message_send|event_nm||||
 sms_message_send|fragment_cnt||||
 sms_message_send|identity_id||||
+sms_message_send|journey_id||||
+sms_message_send|journey_occurrence_id||||
 sms_message_send|load_dttm||||
 sms_message_send|occurrence_id||||
 sms_message_send|response_tracking_cd||||
@@ -3133,6 +3566,8 @@ sms_message_send|task_id||||
 sms_message_send|task_version_id||||
 sms_optout|aud_occurrence_id||||
 sms_optout|audience_id||||
+sms_optout|context_type_nm||||
+sms_optout|context_val||||
 sms_optout|country_cd||||
 sms_optout|creative_id||||
 sms_optout|creative_version_id||||
@@ -3140,6 +3575,8 @@ sms_optout|event_designed_id||||
 sms_optout|event_id|TS|TS||
 sms_optout|event_nm||||
 sms_optout|identity_id||||
+sms_optout|journey_id||||
+sms_optout|journey_occurrence_id||||
 sms_optout|load_dttm||||
 sms_optout|occurrence_id||||
 sms_optout|response_tracking_cd||||
@@ -3152,6 +3589,8 @@ sms_optout|task_version_id||||
 sms_optout_details|address_val||||
 sms_optout_details|aud_occurrence_id||||
 sms_optout_details|audience_id||||
+sms_optout_details|context_type_nm||||
+sms_optout_details|context_val||||
 sms_optout_details|country_cd||||
 sms_optout_details|creative_id||||
 sms_optout_details|creative_version_id||||
@@ -3159,6 +3598,8 @@ sms_optout_details|event_designed_id||||
 sms_optout_details|event_id|TS|TS||
 sms_optout_details|event_nm||||
 sms_optout_details|identity_id||||
+sms_optout_details|journey_id||||
+sms_optout_details|journey_occurrence_id||||
 sms_optout_details|load_dttm||||
 sms_optout_details|occurrence_id||||
 sms_optout_details|response_tracking_cd||||
@@ -3193,6 +3634,7 @@ spot_clicked|product_qty_no||||
 spot_clicked|product_sku_no||||
 spot_clicked|properties_map_doc||||
 spot_clicked|rec_group_id||||
+spot_clicked|request_id||||
 spot_clicked|reserved_1_txt||||
 spot_clicked|reserved_2_txt||||
 spot_clicked|response_tracking_cd||||
@@ -3218,6 +3660,8 @@ spot_requested|event_source_cd||||
 spot_requested|identity_id|||TS|identity_attributes (identity_id)
 spot_requested|load_dttm||||
 spot_requested|mobile_app_id||||
+spot_requested|properties_map_doc||||
+spot_requested|request_id||||
 spot_requested|session_id_hex|||TS|session_details (session_id_hex)
 spot_requested|spot_id|||TS|md_spot (spot_id)
 spot_requested|spot_requested_dttm||||
