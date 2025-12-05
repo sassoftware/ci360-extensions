@@ -47,7 +47,6 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
-- [__CI360 Debug Agent__](code/ci360-debug-agent): CI360 Debug agent streams events into log files, console output, local database or Elastic search API
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
 - [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
 - [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
