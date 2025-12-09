@@ -96,6 +96,9 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 MCP Content Server__](code/ci360-server-side-example/): The CI360 MCP (Model Context Protocol) Content Server is a FastAPI-based orchestration layer for SAS CI360 (Customer Intelligence 360). This system integrates with SAS CI360 APIs to deliver targeted marketing content and track user behavior in real time.
 - [__CI360 Engage Direct DM Agent Log Parser__](code/ci360-engage-direct-dm-agent-onpremlog-parser/): A set of executable/SAS code to parse the DM Agent log (onprem_direct.log) from Engage:Direct.
 
+- [__CI360 Engage Direct Information Map Spreadsheet__](code/ci360-engage-direct-information-map-spreadsheet/): Supports the automated creation of information maps for use with CI 360
+
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
