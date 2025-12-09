@@ -23,10 +23,14 @@ Modification History
 01/15/2024	Expand data item width to accommodate larger names
 	Provide option to extract data item values specified in filter predicates
 	Capture calc data items
+11/25/2025  Added sample reports
+            Extract segment map names correctly
+			Save the results from each execution to SAS datasets
 ******************************************************************************/
 options errabend fullstimer;
 options nosource nosource2;
 options nomlogic nomprint nosymbolgen;
+
 %global _CLIENTAPPABREV;
 
 /*
@@ -43,13 +47,44 @@ c_infile_dir:
 	This is the directory containing the onprem_direct.log files
 	It is assumed that the files are suffixed by a date: .yyyy-mm-dd
 
+c_debug:
+	When set to Y any pre-existing c_lastUpdateFile is removed
 */
-%let c_lastUpdateFile=D:\mydocs\w2k_race_01\data\onpremdiext_lastupdate.txt;
-%let c_infile_dir=D:\mydocs\w2k_race_01\data\onprem;
-%let c_outputDir=D:\Temp;
-%let c_extract_dataitem_values=Y;
+%let c_lastUpdateFile=C:\SAS\Software\DirectAgent\logs\utl_opremdiext.dat;
+%let c_infile_dir=C:\SAS\Software\DirectAgent\logs\;
+%let c_outputDir=C:\Temp\onpremdiext;
+%let c_extract_dataitem_values=N;
+%let c_debug=N;
 libname outlib "&c_outputDir." compress=yes;
+%let datetimenow=%sysfunc(datetime(), 15.);
+* %let datetimenow=%sysfunc(putn('24Nov2025 20:45:00'dt, 15.));
 
+/*
+This macro deletes an external file.  The input file name should not be enclosed in quotes.
+*/
+%macro deleteFile(dsn=);
+    data _null_;
+        length msg $ 512;
+        fname="tempfile";
+        rc=filename(fname, "&dsn.");
+        if rc=0 and fexist(fname) then do;
+           rc=fdelete(fname);
+        end;
+        msg=sysmsg();
+        call symputx('msg', msg);
+        call symputx('rc', rc);
+        rc=filename(fname);
+    run;
+ 
+   %let rc=&rc.;
+   %if "&rc." ne "0" %then %do;
+       %let returnkode=12;
+       %let MAMsg="File &dsn. delete step failed. RC:&rc. Message: &msg.";
+       %put ERROR: &=MAMsg.; 
+   %end;
+   %else
+   	   %put NOTE: "File &dsn. successfully deleted. &msg.";;
+%mend deleteFile;
 /*
 This macro removes all files from a directory
 */
@@ -92,18 +127,13 @@ This macro removes all files from a directory
 %global g_last_date_processed g_file_list g_counts_only;
 %global workLocation;
 
-%let debug=N;
 %let syscc=0;
-%let datetimenow=%sysfunc(datetime(), 15.);
+
 
 %let LOGFILENAME=onprem_direct.log;
 /*
-*options mlogic mprint symbolgen;
-*%let debug=Y;
 %let LOGFILENAME=onprem_direct_small.log;
 %let datetimenow=%sysfunc(putn('28MAR2022 20:45:00'dt, 15.));
-%let datetimenow=%sysfunc(putn('04DEC2021 20:45:00'dt, 15.));
-%let datetimenow=%sysfunc(putn('07APR2022 20:45:00'dt, 15.));
 %cleanDir(dir=&c_outputDir);
 */
 %let datenow=%sysfunc(datepart(&datetimenow.));
@@ -118,19 +148,26 @@ This macro removes all files from a directory
 1. Read the configuration file and get the last date already processed
 2. Get each date from the date in #1 to current date (maximum of 10) excluding today
 3. Generate list of input file and assign filename.
+
+If the configuration file does not exist, then one will be created and yesterdays' log
+ file is processed
 */
 %macro init;
 
 options dlcreatedir;
 %let workLocation=%sysfunc(getoption(work))/onpremext;
-%if &debug eq Y %then %do;
-%let workLocation=d:\temp\onpremext;
-%end;
+
 libname appdir "&workLocation.";
 options nodlcreatedir;
 options user=appdir;
 %put &=workLocation.;
 %cleanDir(dir=&workLocation.);
+
+%if &c_debug eq %str(Y) %then %do;
+	%deleteFile(dsn=&c_lastUpdateFile.);
+	%cleanDir(dir=&c_outputDir.);
+	options mlogic mprint symbolgen;
+%end;
 
 %if %sysfunc(fileexist(&c_lastUpdateFile.)) %then %do;
 
@@ -144,7 +181,9 @@ options user=appdir;
 		if ((today_date - last_date_processed)) gt 100 or
 			((today_date - last_date_processed) le 1) then do;
 			put "Invalid configuration file: Today is: " today_date date9. " Last processed date: " last_date_processed date9.;
-			put "There are too many or zero days between last_date_processed and today";
+            put "NOTE: This program does not process todays' log file.";
+			put "NOTE: If too much time has elapsed since last run, try updating/deleting &c_lastUpdateFile.";
+			put "NOTE: There are too many or zero days between last_date_processed and yesterday";
 			abort cancel;
 		end;
 
@@ -320,6 +359,10 @@ proc sql noprint;
         and memname = upcase(scan("&inds.", 2, '.'))
         ;
 quit;
+title &inds.;
+proc print data=&inds.;
+run;
+title;
 
 data stg_runtask(keep=task_name runtask_id type externalCode modifiedByUserName  task_runtime businessContextUUID countsOnly log_filename file_record_nbr );
 	attrib name length=$100;
@@ -368,36 +411,26 @@ Some of the export header information is shown at the end of other export
 	run;
 %end;
 
-
-
 %mend setup_exportHeader_view;
-/*
-Mapping the segment map information for each node executed by a task,
- requires a lookup on the following view
-If we are processing a segment map (instead of task), these tables may
- not exist.
-*/
-%macro setup_queryHeader_view;
 
-%if %sysfunc(exist(injson.segmentsinfo)) %then %do;
-	proc sql noprint;
-		create table vw_qry_header as
-			select qt.id length=50, qt.segmentNodeId, qt.outputSubjectId, qt.name,
-				sf.segmentMapName, sf.segmentName, sf.segmentMapCode, sf.segmentCode
-			  from injson.segmentsinfo sf
-			  	inner join injson.querytasks qt
-					on sf.segmentNodeId = qt.segmentNodeId
-					;
-	quit;
-%end;
-%else %do;	
-	data vw_qry_header;
-		attrib id length=$50;
-		attrib segmentMapName length=$50;
-	run;
-%end;
+%macro get_segmap_data(inds=);
 
-%mend setup_queryHeader_view;
+filename segmapd temp;
+data _null_;
+	file segmapd;
+	set &inds.;
+	where p3="segmentMapData" ;
+	put value;
+run;
+libname jsondata JSON fileref=segmapd;
+data stg_segmap_data;
+	attrib runtask_id length=$40;
+	runtask_id = "&g_task_id.";
+	set jsondata.root;
+run;
+
+%mend get_segmap_data;
+
 
 /*
 If dataitem contains a full-stop, then it is from the Information map.
@@ -424,11 +457,28 @@ quit;
 		%let p_col_count=%eval(&p_col_count.+1);;
 %end;
 
-
+%let this_libname=%upcase(%scan(&inds., 1, %str(.)));
+%put &=this_libname.;
+%if &c_debug eq %str(Y) %then %do;
+	data outlib.save_output;
+		set &inds.;
+	run;
+%end;
 %setup_exportHeader_view;
-* %setup_queryHeader_view;
+%get_segmap_data(inds=&inds.);
 
-data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapName node_name outputSubjectId dataitem_name 
+/*
+
+%printall(&this_libname.);
+* 
+proc sql number;
+	select *
+	from &inds.
+	;
+quit;
+*/
+
+data stg_node (keep=externalCode runtask_id task_runtime node_type node_id node_name outputSubjectId dataitem_name 
 	%if &c_extract_dataitem_values eq %str(Y) %then %do;
 	dataitem_value
 	operator_name
@@ -440,14 +490,13 @@ data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapNam
 
 	attrib externalCode length=$15;
 	attrib runtask_id length=$40;
-	attrib segmentMapName length=$50;
 	attrib dataitem_name length=$100;
 	attrib outputName length=$60;
+	attrib node_id length=$40;
 	attrib node_name length=$60;
 	attrib prev_dataitem_name length=$100;
 	attrib dataitem_name_list length=$2048;
 	attrib outputSubjectId length=$50;
-	attrib query_id length=$50;
 	attrib task_runtime length=8 format=e8601dt.;
 	attrib dataitem_value length=$200;
 	attrib dataitem_value_list length=$32000;
@@ -464,7 +513,7 @@ data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapNam
 	retain capture_calc_columns;
 	retain ci_id ci_type ci_name ci_expression ci_related_items;
 
-	retain dataitem_name dataitem_name_list externalCode node_name segmentMapName
+	retain dataitem_name dataitem_name_list externalCode node_id node_name segmentMapName
 		outputName outputSubjectId prev_dataitem_name query_id dataitem_value dataitem_value_list
 		operator_list dateType dataitem_name_switch;
 	if 0 then set &inds. vw_exp_header;
@@ -494,6 +543,7 @@ data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapNam
 		if rc then call missing(outputSubjectId);
 		delete;
 	end;
+	if p2 eq "id" then node_id = value;
 	if p1 eq "exportDataTasks" and p4 eq "columnValue" and p5 eq "id" then do;
 		dataitem_name = Value;
 		if index(Value, '.') then
@@ -594,9 +644,7 @@ data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapNam
 		outputSubjectId = Value;
 		delete;
 	end;
-	if p1 eq "queryTasks" and p2 eq "id" then do;
-		query_id = Value;
-	end;
+
 /*
 	Here we create one row per data item from the comma separated dataitem_name_list 
 	However data_item_value_list can contain multiple values per data item separated
@@ -607,11 +655,6 @@ data stg_node (keep=externalCode runtask_id task_runtime node_type segmentMapNam
 		node_name = Value;
 		prev_dataitem_name='';
 		j=1;
-		if externalCode = "MAP_138" then do;
-			putlog dataitem_name_list=;
-			putlog dataitem_value_list=;
-			putlog operator_list=;
-		end;
 		do i=1 to countw(dataitem_name_list, ',');
 			dataitem_name = scan(dataitem_name_list, i, ',');
 			k = index(dataitem_value_list, '|') - 1;
@@ -653,6 +696,8 @@ proc append base=node data=stg_node;
 run;
 proc append base=calc_item data=stg_calc_item;
 run;
+proc append base=segmap_data data=stg_segmap_data;
+run;
 
 %exit_save_runtask_data:
 %mend save_runtask_data;
@@ -676,12 +721,6 @@ run;
 %put &=filesCount.;
 %let start_file_no=1;
   
-%if &debug eq Y %then %do;
-	%let start_file_no=103;
-	%let filesCount=103;
-	proc delete data=outlib.task outlib.node outlib.export;
-	run;
-%end;
   
 %do i=&start_file_no. %to &filesCount.; 
 
@@ -694,22 +733,15 @@ run;
 		stop;
 	run;
 
-	filename injson "&task_filename.";
-	libname injson json;
-
-	%if &debug eq Y %then %do;
-	%put &=task_filename. &=task_runtime. &=i. &=file_record_nbr.;
-      	 
-	options mlogic mprint symbolgen noerrabend;
-	%if &i. eq 103 %then 
-		%printall(injson);;
-	 
+	%if &c_debug eq Y %then %do;
+		%put &=task_filename. &=task_runtime. &=i. &=file_record_nbr.;     	 
 	%end;
 
+	filename injson "&task_filename.";
+	libname injson json;
 	%create_runtask(inds=injson.root);
 	%if "&g_task_id." ne "" %then %do;
 		%capture_nodeInfo(inds=injson.alldata);
-
 		%save_runtask_data;
 	%end;
 	libname injson clear;
@@ -738,6 +770,11 @@ proc append base=outlib.node data=node force;
 run;
 %end;
 
+%if %sysfunc(exist(segmap_data)) %then %do;
+proc append base=outlib.segmap_data data=segmap_data force;
+run;
+%end;
+
 %exit_save_data:
 %mend save_data;
 
@@ -754,3 +791,17 @@ run;
 %save_data;
 %update_cfg_file;
 libname outlib clear;
+
+/*
+proc contents data=runtask nodetails varnum;
+run;
+
+proc sql number;
+describe table dictionary.columns;
+select name, type, length, varnum from dictionary.columns
+where libname = 'APPDIR' and upper(memname) = 'RUNTASK'
+order by varnum
+;
+quit;
+*/
+ 
