@@ -98,6 +98,7 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 Engage Direct Information Map Spreadsheet__](code/ci360-engage-direct-information-map-spreadsheet/): Supports the automated creation of information maps for use with CI 360
 
+- [__CI360 Contact Preference Download Package: Python__](code/ci-360-manage-contact-preferences/): Manage Contact Preferences: This Python script enables you to download/upload/validate the CI 360 contact preference data for both Email and SMS into csv using a command-line interface.
 
 ## Getting Started
 
