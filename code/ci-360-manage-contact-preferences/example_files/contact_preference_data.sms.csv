@@ -1,0 +1,11 @@
+identity_type,identity_value,preference_type,preference_value
+sms_id,+01123125123,OPT-OUT,true
+sms_id,+02123125124,OPT-OUT,true
+sms_id,+03123125126,OPT-OUT,true
+sms_id,+04123125127,OPT-OUT,true
+sms_id,+05123125128,OPT-OUT,false
+sms_id,+06123125129,OPT-OUT,true
+sms_id,+07123125120,OPT-OUT,true
+sms_id,+08123125121,OPT-OUT,true
+sms_id,+09123125122,OPT-OUT,true
+sms_id,+010123125123,OPT-OUT,true

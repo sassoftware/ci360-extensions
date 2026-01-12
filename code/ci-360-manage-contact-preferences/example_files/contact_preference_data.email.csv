@@ -1,0 +1,11 @@
+identity_type,identity_value,preference_type,preference_value
+email_id,test001@example.com,TR@OPT-OUT,true
+email_id,test002@example.com,TR@OPT-OUT,true
+email_id,test003@example.com,HARDBOUNCE,true
+email_id,test004@example.com,OPT-OUT,true
+email_id,test005@example.com,TR1@OPT-OUT,false
+email_id,test006@example.com,OPT-OUT,true
+email_id,test007@example.com,TR@OPT-OUT,true
+email_id,test008@example.com,HOLIDAYPROG@OPT-OUT,true
+email_id,test009@example.com,NEWSPROG@OPT-OUT,true
+email_id,test010@example.com,OPT-OUT,true

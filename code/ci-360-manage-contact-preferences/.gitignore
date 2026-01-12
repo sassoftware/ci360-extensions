@@ -1,0 +1,20 @@
+# Python
+# Byte-code files
+*.pyc
+__pycache__/
+
+# Environment
+.env
+venv/
+
+# OS-generated files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Contact Preferences
+uploaded_files/*.csv
+downloads/*.csv
+logs/*.log
+logs/*.log.*
+config.ini
+config.ini.*
