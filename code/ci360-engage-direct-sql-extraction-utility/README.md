@@ -27,33 +27,38 @@ The extracted SQL is shown as a tabular report.  You can easily copy/paste the S
 - Access to a SAS Customer Intelligence 360 tenant.
 - Awareness of 360 Engage Direct, 360 Direct Agent.
 - Awareness of SAS Stored Process application.
+- On Windows - you will need to enable XCMD to search the current days' log.
+https://go.documentation.sas.com/doc/en/webeditorcdc/3.8/webeditorag/n0zgqoiah057f3n1pjd8uvoh9pbx.htm
 
 ## Configuration
 
-1. Download the repository on the machine. Copy the SAS package `SASCI360_SQL_Extraction.spk` for Linux and `SASCI360_SQL_Extraction_Win.spk` for Windows, to a folder/directory of your choice.
+1. Download the repository on the machine. Copy the SAS package `SASCI360_SQL_Extraction.spk` to a folder/directory of your choice.
 2. Start **SAS Management Console** and navigate to  the folder  where you wish to save the STP.
 3. Right click the folder and choose Import SAS Package.
-   * In the Import package wizard, browse to the SAS package `SASCI360_SQL_Extraction.spk` for Linux and `SASCI360_SQL_Extraction_Win.spk` for Windows, saved as part of step 1.
-   * Choose 'All Objects' and click 'Next'.
+   * In the Import package wizard, browse to the SAS package `SASCI360_SQL_Extraction.spk` saved as part of step 1.
+   * Choose 'All Objects' (Uncheck "Include access controls") and click 'Next'.
+   * Click 'Next' on the 'Select Objects to Import' window.
+   * Click 'Next' on the 'About Metadata Connections' windows.
    * Specify the SAS application server and click 'Next'
-   * Specify the source code repository and click 'Next'
    * Verify the summary page and click 'Next'
    * The package will be imported with a message "The import process completed successfully".
    * Click 'Finish' to exit the wizard.
 
 ### Initialization
-1. Navigate to the source code repository specified and customize the source code `SASCI360_SQL_Extraction.sas` for Linux and `SASCI360_SQL_Extraction_Win.sas` for Windows.
+1. In **SAS Management Console** and navigate to  the folder where you saved the SAS Package in the Configuration step
+   * Right click the new imported stored process, and choose 'Properties'
+   * Choose the 'Execution' tab, and click on the 'Edit Source Code..' button
    * Locate the begining `%let p_infileDir= ` in the source code file. This variable must be customized to the directory containing the onprem_direct.log files.
 	For Example:
       - For Linux: ```%let p_infileDir=/sas/ci360direct/logs;```
-      - For Windows:```%let p_infileDir=D:\sas\ ci360direct\logs;```
+      - For Windows:```%let p_infileDir=C:\SAS\Software\DirectAgent\logs;```
 2. It is also assumed that the `onprem_direct.log` files are suffixed by a date: .yyyy-mm-dd. For Example: onprem_direct.log.2024-08-28
 3. The following variables will be the parameters retrieved via the STP
 
    * **p_objName (mandatory)**: This is task or segment name for whom the SQLs need to be retrieved.
    * **p_startTS (mandatory)**: Start timestamp to be processed from log.
    * **p_endTS (mandatory)**: Last timestamp to be processed from log.
-4. It is assumed that Start Date and End date are same.
+4. It is assumed that the date part of Start Date and End date are same.
 
 ## Execution
 
@@ -61,8 +66,10 @@ Here are the steps you can follow to execute the utility:
 
 1. Access the SAS Stored Process Web Application from your browser and the url is (replace HOSTNAME with host where utility is running):
 ```
-http://HOSTNAME/SASStoredProcess/do
+http://HOSTNAME:PORT/SASStoredProcess/do
 ```
+   for example:  http://sas-aap.demo.sas.com/SASStoredProcess/do.  (Specify https and/or port as needed for your installation.)
+
 2. Login to the SAS Stored Process Web application.
 3. From the home page click `Search for Stored Process and Reports` and specify the name: `SASCI360_SQL_Extraction`.
 4. The search results should show the folders where you had imported the package `SASCI360_SQL_Extraction` for Linux and `SASCI360_SQL_Extraction_Win` for Windows.
@@ -80,6 +87,5 @@ On click of `Run` below output was received. This gives you a detail like the lo
 ![images/output.png](images/output.png)
 
 This way using this utility you can find out all the SQLs for a specific Task or a Segment Map, along with other details like nodes name and nodes type.
-
 
 
