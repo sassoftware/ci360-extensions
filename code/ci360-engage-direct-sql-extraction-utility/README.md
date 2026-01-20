@@ -87,5 +87,3 @@ On click of `Run` below output was received. This gives you a detail like the lo
 ![images/output.png](images/output.png)
 
 This way using this utility you can find out all the SQLs for a specific Task or a Segment Map, along with other details like nodes name and nodes type.
-
-
