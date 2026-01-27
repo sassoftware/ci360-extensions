@@ -6,3 +6,4 @@ Open the spreadsheet with Excel and customize for the specific tenant/business c
 
 The spreadsheet contains additional comments to help with the usage.
 
+**Caution**:  If you have an existing information map that you created using the SAS Information map studio and the 360 Direct application is in active/production use, do not use this spreadsheet to make updates to pre-existing data items etc. as this may result in new IDs being generated and potential issues with existing segment map and task objects.  You may however use this spreadsheet to add a new table and/or new data items that did not previously exist.  This does not apply if you always use this spreadsheet to make information map updates.
