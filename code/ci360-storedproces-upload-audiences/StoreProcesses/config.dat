@@ -1,0 +1,8 @@
+External_gateway=https://extapigwservice-training.ci360.sas.com
+tenant_id=xxxxxxxxxxxxxxxxxx
+client_secret=xxxxxxxxxxx
+api_user=API-xxxx-xxxxx
+api_password=xxxxxxxxxx
+minutesValidatingStatus=2
+email_list="youremail1@yourcompany.com" "youremail2@yourcompany.com" 
+email_from="AudienceProcess@yourcompany.com"
