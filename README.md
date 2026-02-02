@@ -100,6 +100,8 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 Contact Preference Download Package: Python__](code/ci-360-manage-contact-preferences/): Manage Contact Preferences: This Python script enables you to download/upload/validate the CI 360 contact preference data for both Email and SMS into csv using a command-line interface.
 
+- [__CI360 – Audience Post‑Process Utility__](code/ci360-storedproces-upload-audiences/): This utility enables refinement, validation, and upload of Audience data produced by a Direct Marketing (DM) task in SAS CI 360. It addresses a key platform limitation—Direct Audience sources cannot apply Refine logic—which is handled by introducing a post‑processing a stored process at DM Task, that transforms the exported dataset and uploads a clean, validated Audience for use in Scheduled Journeys.
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
