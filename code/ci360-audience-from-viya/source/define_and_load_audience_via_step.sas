@@ -14,7 +14,7 @@
 %let API_USER=;
 %let API_PASSWORD=;
 /*%let AUDIENCE_NAME = UNIQUE NAME;*/
-%let AUDIENCE_DEBUG=0; /* 0 or 1 where 1 increases the log level */
+%let AUDIENCE_DEBUG=1; /* 0 or 1 where 1 increases the log level */
 %let STOP_PROCESS=0; /* Resets error flag for reruns */
 
 /* Get tenant connection details */
@@ -286,8 +286,15 @@ libname aud_out;
 		if colNum > 0 then put ',' @;
 	    colNum+1;
  	    put '{"columnNumber":' colNum +(-1) ',' @;
+ 	    put '"name":"' "&&columnSelector1_&i._name" '",' @;
 	    put '"label":"' @;
-		%if "&&columnSelector1_&i._label"="" %then %do;
+		%if "&&columnSelector1_&i._label"="" 
+        /* CIAUDIENCE-2154 start */
+                or "&&columnSelector1_&i._name" = "&Identity_column" 
+                or "&&columnSelector1_&i._name" = "&email_column"
+                or "&&columnSelector1_&i._name" = "&phone_column"
+        /* CIAUDIENCE-2154 end */
+            %then %do;
 			put "&&columnSelector1_&i._name" '",' @;
 		%end;
 		%else %do;
@@ -326,6 +333,9 @@ libname aud_out;
 		%if "&email_column" ne "" %then %do;
 	    	put '"emailColumnName": "' "&email_column" '",';
 		%end;
+		%if "&phone_column" ne "" %then %do;
+	    	put '"smsColumnName": "' "&phone_column" '",';
+		%end;
 	    put '"dataItems": [';
 		/* Add Identity_column if not selected as an attributed */
 		colNum=0;
@@ -333,20 +343,60 @@ libname aud_out;
 			if colNum > 0 then put ',' @;
 		    colNum+1;
 		    put '{"columnNumber":' colNum +(-1) ',' @;
-		    put '"label":"' "&Identity_column" '",' @;
+            put '"name":"' "&Identity_column" '",' @;
+		    put '"label":"' @;
+            %if "&Identity_column_1_label"="" %then %do;
+                put "&Identity_column" '",' @;
+            %end;
+            %else %do;
+/* CIAUDIENCE-2154 start */
+                put "&Identity_column" '",' @;
+/*               put "&Identity_column_1_label" '",' @;*/
+/* CIAUDIENCE-2154 end */
+            %end;            
 		    put '"dataType":"character",' @;
 		    put '"usedForTracking":false}';
 			same_csv_col_order=catx(' ',strip(same_csv_col_order),"&Identity_column");
 		end;
 		/* Add email_column if specified and not selected as an attributed */
 		if "&email_column" ne "" and findw("&columnSelector1","&email_column", ' ', 'i')=0 then do;
-		if colNum>0 then put ',' @;
+		    if colNum>0 then put ',' @;
 		    colNum+1;
 		    put '{"columnNumber":' colNum +(-1) ',' @;
-		    put '"label":"' "&email_column" '",' @;
+            put '"name":"' "&email_column" '",' @;
+	        put '"label":"' @;
+            %if "&email_column_1_label"="" %then %do;
+                put "&email_column" '",' @;
+            %end;
+            %else %do;
+/* CIAUDIENCE-2154 start */
+                put "&email_column" '",' @;
+/*                put "&email_column_1_label" '",' @;*/
+/* CIAUDIENCE-2154 end */
+            %end;		    
 		    put '"dataType":"character",' @;
 		    put '"usedForTracking":false}';
 			same_csv_col_order=catx(' ',strip(same_csv_col_order),"&email_column");
+		end;
+		/* Add phone_column if specified and not selected as an attributed */
+		if "&phone_column" ne "" and findw("&columnSelector1","&phone_column", ' ', 'i')=0 then do;
+		    if colNum>0 then put ',' @;
+		    colNum+1;
+		    put '{"columnNumber":' colNum +(-1) ',' @;
+            put '"name":"' "&phone_column" '",' @;
+	        put '"label":"' @;
+            %if "&phone_column_1_label"="" %then %do;
+                put "&phone_column" '",' @;
+            %end;
+            %else %do;
+/* CIAUDIENCE-2154 start */
+                put "&phone_column" '",' @;
+/*                put "&phone_column_1_label" '",' @;*/
+/* CIAUDIENCE-2154 end */
+            %end;		    
+            put '"dataType":"character",' @;
+		    put '"usedForTracking":false}';
+			same_csv_col_order=catx(' ',strip(same_csv_col_order),"&phone_column");
 		end;
 		%audience_dataitems;
 		put']}'; 

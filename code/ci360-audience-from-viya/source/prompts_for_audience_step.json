@@ -112,7 +112,20 @@
 				{
 					"id": "email_column",
 					"type": "columnselector",
-					"label": "email",
+					"label": "email contact",
+					"order": false,
+					"columntype": "c",
+					"max": 1,
+					"min": 0,
+					"visible": "",
+					"readonly": false,
+					"table": "inputtable1",
+					"include": null
+				},
+				{
+					"id": "phone_column",
+					"type": "columnselector",
+					"label": "SMS contact",
 					"order": false,
 					"columntype": "c",
 					"max": 1,
@@ -133,23 +146,6 @@
 			]
 		}
 	],
-	"values": {
-		"profile": {
-			"value": "training tenant 01"
-		},
-		"audience_name": "",
-		"expiration": 14,
-		"inputtable1": {
-			"library": "",
-			"table": ""
-		},
-		"columnselector1": [],
-		"Identity_column": [],
-		"Identity_type": null,
-		"email_column": [],
-		"outputtable1": {
-			"library": "",
-			"table": ""
-		}
-	}
+	"syntaxversion": "1.3.0",
+	"promptHierarchies": []
 }
