@@ -288,13 +288,7 @@ libname aud_out;
  	    put '{"columnNumber":' colNum +(-1) ',' @;
  	    put '"name":"' "&&columnSelector1_&i._name" '",' @;
 	    put '"label":"' @;
-		%if "&&columnSelector1_&i._label"="" 
-        /* CIAUDIENCE-2154 start */
-                or "&&columnSelector1_&i._name" = "&Identity_column" 
-                or "&&columnSelector1_&i._name" = "&email_column"
-                or "&&columnSelector1_&i._name" = "&phone_column"
-        /* CIAUDIENCE-2154 end */
-            %then %do;
+		%if "&&columnSelector1_&i._label"="" %then %do;
 			put "&&columnSelector1_&i._name" '",' @;
 		%end;
 		%else %do;
@@ -349,10 +343,7 @@ libname aud_out;
                 put "&Identity_column" '",' @;
             %end;
             %else %do;
-/* CIAUDIENCE-2154 start */
-                put "&Identity_column" '",' @;
-/*               put "&Identity_column_1_label" '",' @;*/
-/* CIAUDIENCE-2154 end */
+               put "&Identity_column_1_label" '",' @;
             %end;            
 		    put '"dataType":"character",' @;
 		    put '"usedForTracking":false}';
@@ -369,10 +360,7 @@ libname aud_out;
                 put "&email_column" '",' @;
             %end;
             %else %do;
-/* CIAUDIENCE-2154 start */
-                put "&email_column" '",' @;
-/*                put "&email_column_1_label" '",' @;*/
-/* CIAUDIENCE-2154 end */
+                put "&email_column_1_label" '",' @;
             %end;		    
 		    put '"dataType":"character",' @;
 		    put '"usedForTracking":false}';
@@ -389,10 +377,7 @@ libname aud_out;
                 put "&phone_column" '",' @;
             %end;
             %else %do;
-/* CIAUDIENCE-2154 start */
-                put "&phone_column" '",' @;
-/*                put "&phone_column_1_label" '",' @;*/
-/* CIAUDIENCE-2154 end */
+                put "&phone_column_1_label" '",' @;
             %end;		    
             put '"dataType":"character",' @;
 		    put '"usedForTracking":false}';
