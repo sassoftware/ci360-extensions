@@ -60,6 +60,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__CI360 Direct Send to Scheduler__](code/ci360-direct-send-to-scheduler/): Allows a CI 360 User to create deployed jobs from the CI 360 tenant for Direct Marketing Tasks, Bulk Email Tasks and Direct Segment Maps for a SAS Administrator to schedule on-prem in the SAS LSF scheduler.
 - [__CI360 SCR Gateway__](code/ci360-scr-gateway//): Enables clients to integrate SCR containers with SAS CI 360.
 
+- [__CI360 Connector Template__](code/ci360-connector-templates/): This project will provide scalable, robust, and traceable REST API templates designed to handle high transaction volumes, with best practices for logging, database, and web service integration.
+
 ### Utilities
 
 - [__Google Tag Manager__](https://github.com/sassoftware/sas-ci360-template-google-tag-manager): Employ the use of Google Tag Manager's Community Templates in order to easily deploy javascript actions for Customer Intelligence 360

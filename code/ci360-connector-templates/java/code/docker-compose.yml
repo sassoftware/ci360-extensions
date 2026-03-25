@@ -1,0 +1,26 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+    ports:
+      - "5432:5432"
+
+  agent:
+    build: ./agent
+    env_file: ./360.env
+    # Connector endpoint is http://spring.local:8080/connector
+    links:
+      - app:spring.local
+

@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Python Connector - Design Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        header {
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .doc-info {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .doc-info p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .doc-info strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table thead {
+            background-color: #3498db;
+            color: white;
+        }
+
+        table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        .toc ul li {
+            margin-bottom: 10px;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #e74c3c;
+        }
+
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: #ecf0f1;
+            padding: 0;
+        }
+
+        .diagram {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .diagram pre {
+            background-color: transparent;
+            color: #2c3e50;
+            padding: 0;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            margin: 0 4px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sample Python Connector - Design Document</h1>
+            <div class="doc-info">
+                <p><strong>Project Name:</strong> Sample Connector</p>
+                <p><strong>Version:</strong> 1.1</p>
+                <p><strong>Date:</strong> December 5, 2025</p>
+                <p><strong>Author:</strong> Development Team</p>
+            </div>
+        </header>
+
+        <nav class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#overview">1. Overview</a></li>
+                <li><a href="#system-architecture">2. System Architecture</a></li>
+                <li><a href="#component-design">3. Component Design</a></li>
+                <li><a href="#data-flow">4. Data Flow</a></li>
+                <li><a href="#api-specifications">5. API Specifications</a></li>
+                <li><a href="#database-design">6. Database Design</a></li>
+                <li><a href="#configuration-management">7. Configuration Management</a></li>
+                <li><a href="#logging-monitoring">8. Logging and Monitoring</a></li>
+                <li><a href="#concurrency-threading">9. Concurrency and Threading</a></li>
+                <li><a href="#error-handling">10. Error Handling</a></li>
+                <li><a href="#deployment">11. Deployment</a></li>
+                <li><a href="#appendices">12. Appendices</a></li>
+            </ul>
+        </nav>
+
+        <section id="overview">
+            <h2>1. Overview</h2>
+            
+            <h3>1.1 Purpose</h3>
+            <p>The Sample Connector is a <strong>FastAPI-based microservice</strong> designed to facilitate asynchronous integration with external APIs through a message queue pattern. It provides a scalable, resilient solution for handling external API calls with configurable worker pools, advanced load balancing, and comprehensive logging.</p>
+
+            <h3>1.2 Key Features</h3>
+            <ul>
+                <li><span class="badge badge-success">✅</span> <strong>Asynchronous API Processing:</strong> Non-blocking external API calls</li>
+                <li><span class="badge badge-success">✅</span> <strong>Message Queue Pattern:</strong> Decouple request intake from execution</li>
+                <li><span class="badge badge-success">✅</span> <strong>Worker Pool Management:</strong> Configurable concurrent workers (default: 3)</li>
+                <li><span class="badge badge-success">✅</span> <strong>Advanced Load Balancing:</strong> Support for Round Robin, Least Loaded, Random, and Least Loaded Random distribution</li>
+                <li><span class="badge badge-success">✅</span> <strong>Configuration-Driven:</strong> External API settings loaded from config files</li>
+                <li><span class="badge badge-success">✅</span> <strong>Comprehensive Logging:</strong> Thread-safe, custom log formatting with dynamic field injection</li>
+                <li><span class="badge badge-success">✅</span> <strong>Graceful Lifecycle Management:</strong> Clean startup/shutdown procedures</li>
+                <li><span class="badge badge-success">✅</span> <strong>Decorator-Based Threading:</strong> Simplified worker function definition with <code>@threadedWorker</code> decorator</li>
+            </ul>
+
+            <h3>1.3 Technology Stack</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Technology</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Web Framework</strong></td>
+                        <td>FastAPI 0.104+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ASGI Server</strong></td>
+                        <td>Uvicorn</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database ORM</strong></td>
+                        <td>SQLAlchemy 2.0+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database</strong></td>
+                        <td>PostgreSQL (via psycopg3)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Async Runtime</strong></td>
+                        <td>asyncio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Threading</strong></td>
+                        <td>Python threading module</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HTTP Client</strong></td>
+                        <td>httpx (async)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Logging</strong></td>
+                        <td>Custom SASCI360VeloxPyLogging</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Load Balancing</strong></td>
+                        <td>Custom AppCommonDefaultLoadBalancer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="system-architecture">
+            <h2>2. System Architecture</h2>
+            
+            <h3>2.1 High-Level Architecture</h3>
+            <div class="diagram">
+                <pre>
+┌─────────────────────────────────────────────────────────────┐
+│                       Client Layer                          │
+│                   (HTTP/REST Clients)                       │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    FastAPI Application                       │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │
+│  │ echoAPIRouter│  │echoAPIQueue  │  │  eventRouter │        │
+│  │   (Direct)   │  │   Router     │  │              │        │
+│  └──────┬───────┘  └──────┬───────┘  └──────────────┘        │
+└─────────┼──────────────────┼─────────────────────────────────┘
+          │                  │
+          │                  ▼
+          │         ┌────────────────────┐
+          │         │  Message Queue DB  │
+          │         │  (PostgreSQL)      │
+          │         └────────┬───────────┘
+          │                  │
+          │                  ▼
+          │         ┌────────────────────────────────────────┐
+          │         │   Worker Thread Pool (Dynamic)         │
+          │         │  ┌──────────────────────────────────┐  │
+          │         │  │  Load Balancer                   │  │
+          │         │  │  (RR/LL/RND/LLRND)               │  │
+          │         │  └──────────┬───────────────────────┘  │
+          │         │             │                          │
+          │         │  ┌──────┐  ┌──────┐  ┌──────┐          │
+          │         │  │Worker│  │Worker│  │Worker│  ...     │
+          │         │  │  #1  │  │  #2  │  │  #N  │          │
+          │         │  └───┬──┘  └───┬──┘  └───┬──┘          │
+          │         └──────┼─────────┼─────────┼─────────────┘
+          │                │         │         │
+          └────────────────┴─────────┴─────────┴────────┐
+                                                        │
+                                                        ▼
+                                             ┌────────────────────┐
+                                             │   External APIs    │
+                                             │  (Bearer Auth)     │
+                                             └────────────────────┘
+                </pre>
+            </div>
+
+            <h3>2.2 Architectural Patterns</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Implementation</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Message Queue</strong></td>
+                        <td>PostgreSQL-backed queue</td>
+                        <td>Decouple intake from execution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Worker Pool</strong></td>
+                        <td>Dynamic concurrent threads</td>
+                        <td>Parallel message processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Repository Pattern</strong></td>
+                        <td><code>ExternalAPI</code> class</td>
+                        <td>Business logic encapsulation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Router Pattern</strong></td>
+                        <td>FastAPI routers</td>
+                        <td>API endpoint organization</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Configuration Provider</strong></td>
+                        <td><code>ApplicationConfiguration</code></td>
+                        <td>Centralized config management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lifecycle Manager</strong></td>
+                        <td>FastAPI lifespan</td>
+                        <td>Resource initialization/cleanup</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Decorator Pattern</strong></td>
+                        <td><code>@threadedWorker</code> decorator</td>
+                        <td>Simplified worker function definition</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Load Balancer</strong></td>
+                        <td><code>AppCommonDefaultLoadBalancer</code></td>
+                        <td>Intelligent work distribution</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="component-design">
+            <h2>3. Component Design</h2>
+            
+            <h3>3.1 Core Components</h3>
+            
+            <h4>3.1.1 FastAPI Application (sample_connector.py)</h4>
+            <p><strong>Responsibilities:</strong></p>
+            <ul>
+                <li>Application initialization and lifecycle management</li>
+                <li>Router registration</li>
+                <li>Database schema creation</li>
+                <li>Worker thread spawning/termination</li>
+                <li>Load balancer initialization</li>
+            </ul>
+
+            <p><strong>Key Configuration:</strong></p>
+            <pre><code>external_api_max_workers = 5        # Max concurrent workers
+external_api_workers_timeout = 30   # Worker timeout (seconds)
+external_api_message_queue = False  # Enable queue processing
+load_balancer_method = "LLRND"     # Load balancing strategy</code></pre>
+
+            <p><strong>Lifespan Events:</strong></p>
+            <pre><code>@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Initialize DB, load balancer, spawn workers
+    MessageQueueBase.metadata.create_all(bind=queueDBEngine)
+    AppCommonDefaultLoadBalancer.registerDefaultLoadBalancerMethods()
+    await ThreadedAppCommon.createAppThread(...)
+    yield
+    # Shutdown: Gracefully close workers
+    await ThreadedAppCommon.closeAllAppThreads(...)</code></pre>
+
+            <h4>3.1.2 ThreadedAppCommon (common/appCommon.py)</h4>
+            <p><strong>Enhanced Thread Management with Load Balancing:</strong></p>
+
+            <p><strong>Thread Registry Structure:</strong></p>
+            <pre><code>appThreads: Dict[str, List[
+    List[Thread],           # [0] Thread list
+    Event,                  # [1] Stop signal event
+    Lock,                   # [2] Thread lock
+    int,                    # [3] Round-robin index
+    Dict[str, int],         # [4] Load count per thread
+    str                     # [5] Load balancing method
+]]</code></pre>
+
+            <p><strong>Load Balancing Signals:</strong></p>
+            <pre><code>SIG_INIT = 0   # Initialized
+SIG_START = 1  # Starting
+SIG_PAUSE = 2  # Paused
+SIG_LOCK = 3   # Locked
+SIG_RUN = 4    # Running
+SIG_STOP = 5   # Stopping
+SIG_KILL = 6   # Force kill</code></pre>
+
+            <p><strong>Key Methods:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>createAppThread(vAppName, vTarget, **kwargs)</code></td>
+                        <td>Spawn new managed thread with load balancer support</td>
+                    </tr>
+                    <tr>
+                        <td><code>startAppThreads(vAppName)</code></td>
+                        <td>Start all threads for an app</td>
+                    </tr>
+                    <tr>
+                        <td><code>closeAllAppThreads(vAppName)</code></td>
+                        <td>Graceful shutdown with SIG_STOP</td>
+                    </tr>
+                    <tr>
+                        <td><code>getAppThreadSignal(vAppName)</code></td>
+                        <td>Query current thread signal state</td>
+                    </tr>
+                    <tr>
+                        <td><code>getNextThread(vAppName, method)</code></td>
+                        <td>Get next thread based on load balancing method</td>
+                    </tr>
+                    <tr>
+                        <td><code>incrementThreadLoad(vAppName, threadId)</code></td>
+                        <td>Increment load counter for thread</td>
+                    </tr>
+                    <tr>
+                        <td><code>decrementThreadLoad(vAppName, threadId)</code></td>
+                        <td>Decrement load counter for thread</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>3.1.3 AppCommonDefaultLoadBalancer (common/appCommonDefaultLoadBalancer.py)</h4>
+            <p><strong>Load Balancing Strategies:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Round Robin</strong></td>
+                        <td><code>RR</code></td>
+                        <td>Distribute tasks sequentially across threads</td>
+                        <td>Uniform task duration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Least Loaded</strong></td>
+                        <td><code>LL</code></td>
+                        <td>Assign to thread with lowest current load</td>
+                        <td>Variable task duration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Random</strong></td>
+                        <td><code>RND</code></td>
+                        <td>Randomly select thread</td>
+                        <td>Simple distribution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Least Loaded Random</strong></td>
+                        <td><code>LLRND</code></td>
+                        <td>Random selection from least loaded subset</td>
+                        <td>Balance + randomness</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="data-flow">
+            <h2>4. Data Flow</h2>
+            
+            <h3>4.1 Direct API Call Flow</h3>
+            <div class="diagram">
+                <pre>
+┌──────────┐      POST /EchoAPICall       ┌───────────────┐
+│  Client  │ ──────────────────────────>  │echoAPIRouter  │
+└──────────┘                              └───────┬───────┘
+                                                  │
+                                                  ▼
+                                         ┌────────────────┐
+                                         │ ExternalAPI    │
+                                         │ .callExternal  │
+                                         │     API()      │
+                                         └────────┬───────┘
+                                                  │
+                                                  ▼
+                                         ┌────────────────┐
+                                         │ External API   │
+                                         │ (HTTP POST)    │
+                                         └────────┬───────┘
+                                                  │
+                                                  ▼
+┌──────────┐      HTTP 200 + Response    ┌───────────────┐
+│  Client  │ <────────────────────────── │    FastAPI    │
+└──────────┘                             └───────────────┘
+                </pre>
+            </div>
+
+            <h3>4.2 Queue-Based API Call Flow with Load Balancing</h3>
+            <div class="diagram">
+                <pre>
+┌──────────┐   POST /EchoAPIQueue    ┌──────────────────┐
+│  Client  │ ──────────────────────> │echoAPIQueueRouter│
+└──────────┘                         └─────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌────────────────────┐
+                                      │ Insert to DB Queue │
+                                      │ (external_api_     │
+                                      │  message_queue)    │
+                                      └────────┬───────────┘
+                                               │
+┌──────────┐   HTTP 202 Accepted               │
+│  Client  │ <─────────────────────────────────┘
+└──────────┘                                   |
+                                               │
+                    ┌──────────────────────────┘
+                    │
+                    ▼
+           ┌─────────────────────────┐
+           │   Load Balancer         │
+           │   (RR/LL/RND/LLRND)     │
+           └─────────┬───────────────┘
+                     │
+                     ▼
+           ┌─────────────────────────┐
+           │  Select Optimal Thread  │
+           │  Based on:              │
+           │  - Current load         │
+           │  - Distribution method  │
+           │  - Thread availability  │
+           └─────────┬───────────────┘
+                     │
+                     ▼
+           ┌─────────────────────────┐
+           │  Worker Thread Pool     │
+           │  (Background)           │
+           └─────────┬───────────────┘
+                     │
+                     ▼
+           ┌─────────────────────────┐
+           │ 1. Increment load       │
+           │ 2. Poll Queue           │
+           │ 3. Fetch Message        │
+           │ 4. Call External API    │
+           │ 5. Log Result           │
+           │ 6. Delete Message       │
+           │ 7. Decrement load       │
+           └─────────┬───────────────┘
+                     │
+                     ▼
+           ┌─────────────────────────┐
+           │   External API          │
+           │  (Bearer Token)         │
+           └─────────────────────────┘
+                </pre>
+            </div>
+        </section>
+
+        <section id="api-specifications">
+            <h2>5. API Specifications</h2>
+            
+            <h3>5.1 Endpoint: POST /EchoAPICall</h3>
+            <p><strong>Purpose:</strong> Direct synchronous call to external API</p>
+
+            <p><strong>Request:</strong></p>
+            <pre><code>POST /EchoAPICall HTTP/1.1
+Content-Type: application/json
+
+{
+  "field1": "value1",
+  "field2": "value2"
+}</code></pre>
+
+            <p><strong>Response (Success):</strong></p>
+            <pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "success",
+  "data": {
+    "external_api_response": "..."
+  }
+}</code></pre>
+
+            <h3>5.2 Endpoint: POST /EchoAPIQueue</h3>
+            <p><strong>Purpose:</strong> Enqueue API call for asynchronous processing with load balancing</p>
+
+            <p><strong>Response:</strong></p>
+            <pre><code>HTTP/1.1 202 Accepted
+Content-Type: application/json
+
+{
+  "status": "queued",
+  "message_id": 12345,
+  "estimated_processing_time": "< 30 seconds",
+  "load_balancer_method": "LLRND",
+  "assigned_worker": "Worker-3"
+}</code></pre>
+        </section>
+
+        <section id="database-design">
+            <h2>6. Database Design</h2>
+            
+            <h3>6.1 Schema: external_api_message_queue</h3>
+            <pre><code>CREATE TABLE external_api_message_queue (
+    id BIGSERIAL PRIMARY KEY,
+    api_name VARCHAR(100) NOT NULL,
+    api_base_url VARCHAR(255) NOT NULL,
+    api_route VARCHAR(255) NOT NULL,
+    bearer_token VARCHAR(255) NOT NULL,
+    payload TEXT NOT NULL,
+    send_interval BIGINT,
+    timeout BIGINT,
+    created_at BIGINT DEFAULT (EXTRACT(EPOCH FROM NOW()) * 1000),
+    status VARCHAR(20) DEFAULT 'pending',
+    assigned_worker VARCHAR(100),
+    processing_started_at BIGINT,
+    processing_completed_at BIGINT
+);</code></pre>
+
+            <h3>6.2 Column Descriptions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Column</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>id</code></td>
+                        <td>BIGSERIAL</td>
+                        <td>Auto-incrementing primary key</td>
+                    </tr>
+                    <tr>
+                        <td><code>api_name</code></td>
+                        <td>VARCHAR(100)</td>
+                        <td>Identifier for API configuration (e.g., "echo")</td>
+                    </tr>
+                    <tr>
+                        <td><code>api_base_url</code></td>
+                        <td>VARCHAR(255)</td>
+                        <td>Base URL of external API</td>
+                    </tr>
+                    <tr>
+                        <td><code>api_route</code></td>
+                        <td>VARCHAR(255)</td>
+                        <td>Specific API endpoint path</td>
+                    </tr>
+                    <tr>
+                        <td><code>bearer_token</code></td>
+                        <td>VARCHAR(255)</td>
+                        <td>Authentication token</td>
+                    </tr>
+                    <tr>
+                        <td><code>payload</code></td>
+                        <td>TEXT</td>
+                        <td>JSON payload to send</td>
+                    </tr>
+                    <tr>
+                        <td><code>status</code></td>
+                        <td>VARCHAR(20)</td>
+                        <td>'pending', 'processing', 'completed', 'failed'</td>
+                    </tr>
+                    <tr>
+                        <td><code>assigned_worker</code></td>
+                        <td>VARCHAR(100)</td>
+                        <td>Worker thread ID processing the message</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="configuration-management">
+            <h2>7. Configuration Management</h2>
+            
+            <h3>7.1 Configuration File Structure</h3>
+            <p><strong>Example config.ini:</strong></p>
+            <pre><code>[application]
+name = SampleConnector
+version = 1.1.0
+
+[external_api]
+max_workers = 5
+workers_timeout = 30
+message_queue = True
+iteration_wait = 5
+load_balancer_method = LLRND
+
+[echo_api]
+base_url = https://echo.example.com
+route = /webhook
+bearer_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+timeout = 30000
+
+[logging]
+level = TRACE
+file_path = C:\temp
+logger_name = FastAPIApp
+
+[load_balancer]
+default_method = LLRND
+enable_metrics = True</code></pre>
+        </section>
+
+        <section id="logging-monitoring">
+            <h2>8. Logging and Monitoring</h2>
+            
+            <h3>8.1 Log File Naming Convention</h3>
+            <p><strong>Pattern:</strong></p>
+            <pre><code>Connector_{LOGGERNAME}_PID{PID}_TH{THREADID}_DTTM{TIMESTAMP}_RUN{RUNID}_web.log</code></pre>
+
+            <h3>8.2 Log Levels and Usage</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>When to Use</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>TRACE</strong></td>
+                        <td>Detailed debug info</td>
+                        <td>"Polling queue: 0 messages found"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DEBUG</strong></td>
+                        <td>Development debugging</td>
+                        <td>"API config loaded: echo, Load balancer: LLRND"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>INFO</strong></td>
+                        <td>General events</td>
+                        <td>"Worker thread started with load balancer RR"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WARNING</strong></td>
+                        <td>Recoverable issues</td>
+                        <td>"Retry attempt 2/3, reassigning to different worker"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ERROR</strong></td>
+                        <td>Errors that don't crash</td>
+                        <td>"External API returned 500, worker: Worker-3"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CRITICAL</strong></td>
+                        <td>Application-level failures</td>
+                        <td>"Database connection lost, all workers stopped"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="concurrency-threading">
+            <h2>9. Concurrency and Threading</h2>
+            
+            <h3>9.1 Thread Synchronization with Load Counters</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mechanism</th>
+                        <th>Purpose</th>
+                        <th>Implementation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Event</strong></td>
+                        <td>Signal workers to stop</td>
+                        <td><code>threading.Event()</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lock</strong></td>
+                        <td>Protect critical sections</td>
+                        <td><code>threading.Lock()</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Queue</strong></td>
+                        <td>Message distribution</td>
+                        <td>Database-backed queue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Load Counter</strong></td>
+                        <td>Track thread workload</td>
+                        <td><code>Dict[str, int]</code> with lock protection</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="error-handling">
+            <h2>10. Error Handling</h2>
+            
+            <h3>10.1 Error Categories with Load Balancing</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Examples</th>
+                        <th>Handling Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Network Errors</strong></td>
+                        <td>Connection timeout, DNS failure</td>
+                        <td>Retry with exponential backoff, reassign to different worker</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Errors</strong></td>
+                        <td>4xx/5xx responses</td>
+                        <td>Log and optionally dead-letter queue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database Errors</strong></td>
+                        <td>Connection loss, constraint violation</td>
+                        <td>Retry with circuit breaker</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Validation Errors</strong></td>
+                        <td>Invalid payload format</td>
+                        <td>Reject immediately, log error</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Load Balancer Errors</strong></td>
+                        <td>No available workers</td>
+                        <td>Queue message, wait for worker availability</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="deployment">
+            <h2>11. Deployment</h2>
+            
+            <h3>11.1 Prerequisites</h3>
+            <p><strong>System Requirements:</strong></p>
+            <ul>
+                <li>Git (<a href="https://git-scm.com/install/windows">O.S. specific installation instructions</a>)</li>
+                <li>Python 3.11+</li>
+                <li>PostgreSQL 13+</li>
+                <li>2+ CPU cores (4+ recommended for load balancing)</li>
+                <li>4GB+ RAM (8GB+ recommended)</li>
+            </ul>
+
+            <h3>11.2 Installation Steps</h3>
+            <ol>
+                <li><strong>Clone Repository:</strong>
+                    <pre><code>git clone &lt;repository_url&gt;
+cd connector-templates</code></pre>
+                </li>
+                <li><strong>Create Virtual Environment:</strong>
+                    <pre><code>python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows</code></pre>
+                </li>
+                <li><strong>Install Dependencies:</strong>
+                    <pre><code>pip install -r requirements.txt</code></pre>
+                </li>
+                <li><strong>Configure Application:</strong>
+                    <pre><code>cp config.ini.example config.ini
+# Edit config.ini with your settings
+# Set load_balancer_method = LLRND (or RR/LL/RND)</code></pre>
+                </li>
+            </ol>
+
+            <h3>11.3 Running the Application</h3>
+            <p><strong>Development:</strong></p>
+            While you are in the connector-templates directory, you can run the application with Uvicorn in development mode. This will enable auto-reloading on code changes and provide detailed error messages. Run the following commands to start the application in development mode:
+            <pre><code>cd code/python
+                uvicorn connector-templates:connectorApp --reload --host 0.0.0.0 --port 8000</code></pre>
+
+            <p><strong>Production:</strong></p>
+            While you are in the connector-templates directory, you can run the application with Uvicorn using multiple workers for better performance. The load balancer will distribute the tasks among the worker threads based on the configured method (e.g., LLRND). Run following commands to start the application in production mode:
+            <pre><code>cd code/python
+                uvicorn connector-templates:connectorApp --workers 4 --host 0.0.0.0 --port 8000</code></pre>
+
+            <h3>11.4 Environment Variables</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>DATABASE_URL</code></td>
+                        <td>PostgreSQL connection string</td>
+                        <td><code>postgresql://user:pass@localhost:5432/db</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>LOG_LEVEL</code></td>
+                        <td>Logging verbosity</td>
+                        <td><code>INFO</code>, <code>DEBUG</code>, <code>TRACE</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>MAX_WORKERS</code></td>
+                        <td>Number of worker threads</td>
+                        <td><code>5</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>LOAD_BALANCER_METHOD</code></td>
+                        <td>Load balancing strategy</td>
+                        <td><code>LLRND</code>, <code>RR</code>, <code>LL</code>, <code>RND</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="appendices">
+            <h2>12. Appendices</h2>
+            
+            <h3>12.1 Performance Tuning</h3>
+            <p><strong>Load Balancer Performance:</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Best For</th>
+                        <th>Throughput</th>
+                        <th>CPU Usage</th>
+                        <th>Memory Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RR</strong></td>
+                        <td>Uniform tasks</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LL</strong></td>
+                        <td>Variable tasks</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td><strong>RND</strong></td>
+                        <td>Simple distribution</td>
+                        <td>High</td>
+                        <td>Low</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LLRND</strong></td>
+                        <td>Mixed workload</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>12.2 Troubleshooting</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Possible Cause</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Workers not processing</td>
+                        <td>Signal not set to <code>SIG_RUN</code></td>
+                        <td>Check <code>getAppThreadSignal()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Uneven load distribution</td>
+                        <td>Wrong load balancer method</td>
+                        <td>Switch from RR to LLRND</td>
+                    </tr>
+                    <tr>
+                        <td>Database connection errors</td>
+                        <td>Pool exhausted</td>
+                        <td>Increase <code>pool_size</code></td>
+                    </tr>
+                    <tr>
+                        <td>High memory usage</td>
+                        <td>Messages not deleted, load counters not reset</td>
+                        <td>Verify <code>db.delete(message)</code> and <code>decrementThreadLoad()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Load balancer not initialized</td>
+                        <td>Missing registration call</td>
+                        <td>Ensure <code>AppCommonDefaultLoadBalancer.registerDefaultLoadBalancerMethods()</code> is called</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>12.3 Future Enhancements</h3>
+            <div class="note">
+                <p><strong>Planned Features:</strong></p>
+                <ul>
+                    <li>Support for multiple external API configurations</li>
+                    <li>Web UI for queue monitoring with load visualization</li>
+                    <li>GraphQL API support</li>
+                    <li>Redis-backed queue for higher performance</li>
+                    <li>Kubernetes-native deployment with horizontal pod autoscaling</li>
+                    <li>Circuit breaker pattern for failing APIs</li>
+                    <li>Message priority queue with weighted load balancing</li>
+                    <li>Machine learning-based load prediction</li>
+                    <li>Real-time load balancer metrics dashboard</li>
+                    <li>A/B testing framework for load balancing strategies</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <h2>Document Approval</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Name</th>
+                        <th>Signature</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Author</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reviewer</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Approver</strong></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 30px;">
+                <strong>End of Document</strong><br>
+                Generated on December 5, 2025<br>
+                <em>Version 1.1 - Added Load Balancing Features</em>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
