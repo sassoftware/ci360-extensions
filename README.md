@@ -102,6 +102,9 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 – Audience Post‑Process Utility__](code/ci360-storedproces-upload-audiences/): This utility enables refinement, validation, and upload of Audience data produced by a Direct Marketing (DM) task in SAS CI 360. It addresses a key platform limitation—Direct Audience sources cannot apply Refine logic—which is handled by introducing a post‑processing a stored process at DM Task, that transforms the exported dataset and uploads a clean, validated Audience for use in Scheduled Journeys.
 
+- [__CI360 - Waterfall Report - Segment Map__](code/ci360-waterfall-report/): Waterfall report showing Initial and Match/Excluded counts produced between 2 or more segment nodes.
+This report consolidates all analyzed nodes into a single view, showing client counts before and after the criterion applied at each node.
+
 ## Getting Started
 
 To set up and use the provided extension code you need to perform the following steps :
