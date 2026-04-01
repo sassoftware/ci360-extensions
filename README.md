@@ -44,12 +44,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__Adobe Audience Manager__](code/adobe-audience-manager-integration): Implementation of connection with Adobe Audience Manager (AAM)
 - [__SAS Event Stream Processing__](code/ci360-esp-agent): SAS Event Stream Processing (ESP) agent enables streaming of CI360 events into ESP
 - [__SAS ESP CI360 Adapter__](code/esp-ci360-adapter): SAS Event Stream Processing adapter that allows streaming of events from an ESP window to CI360
-- [__SAS Cloud Analytic Services__](code/ci360-cas-agent): SAS Cloud Analyic Services (CAS) Agent streams CI360 events into a CAS table
-- [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
 - [__CRM (via Salesforce)__](code/ci360-sfdc-connector): Salesforce CRM (SFDC) connector, enables creating contacts and cases in SFDC
-- [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI360 events to DB Table
 - [__AWS S3__](code/ci360-s3-bulk-connector): Upload customer data to AWS S3 bucket
-- [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI360 events into Google BigQuery table
 - [__Kafka CI360 Connector__](code/kafka-ci360-connector): Send events from Kafka to CI360
 - [__CI360 Braze Bulk User Import Connector__](code/ci360-braze-bulk-user-import-connector): Send customer audiences and attributes generated in CI360 from various sources to Braze 
 - [__MailChimp List Upload__](code/ci360-mailchimp-bulk-connector): Send customer lists and attributes from CI360 to MailChimp for use in email campaign activation
@@ -59,8 +55,8 @@ This is a list of connectors, agents and other related content and utilities inc
 - [__Optilyz Connector__](code/ci360-optilyz-bulk-connector): Send customer audiences and attributes generated in CI360 from various sources to Optilyz for direct mail automation
 - [__CI360 Direct Send to Scheduler__](code/ci360-direct-send-to-scheduler/): Allows a CI 360 User to create deployed jobs from the CI 360 tenant for Direct Marketing Tasks, Bulk Email Tasks and Direct Segment Maps for a SAS Administrator to schedule on-prem in the SAS LSF scheduler.
 - [__CI360 SCR Gateway__](code/ci360-scr-gateway//): Enables clients to integrate SCR containers with SAS CI 360.
-
 - [__CI360 Connector Template__](code/ci360-connector-templates/): This project will provide scalable, robust, and traceable REST API templates designed to handle high transaction volumes, with best practices for logging, database, and web service integration.
+
 
 ### Utilities
 
@@ -106,6 +102,13 @@ This is a list of connectors, agents and other related content and utilities inc
 
 - [__CI360 - Waterfall Report - Segment Map__](code/ci360-waterfall-report/): Waterfall report showing Initial and Match/Excluded counts produced between 2 or more segment nodes.
 This report consolidates all analyzed nodes into a single view, showing client counts before and after the criterion applied at each node.
+
+### Event Streaming Agents
+Several sample agents exit that stream CI 360 events to some data store. To determine which may be relevant for your use case, please check the detailed descriptions in below entries.
+- [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI 360 events to DB Table
+- [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
+- [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI 360 events into Google BigQuery table
+- [__SAS Cloud Analytic Services Agent__](code/ci360-cas-agent): Streams CI 360 events into a CAS (SAS Cloud Analyic Services) table
 
 ## Getting Started
 
