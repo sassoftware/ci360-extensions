@@ -104,7 +104,7 @@ This is a list of connectors, agents and other related content and utilities inc
 This report consolidates all analyzed nodes into a single view, showing client counts before and after the criterion applied at each node.
 
 ### Event Streaming Agents
-Several sample agents exit that stream CI 360 events to some data store. To determine which may be relevant for your use case, please check the detailed descriptions in below entries.
+This repository contains several sample agents that stream CI 360 events into different data stores. To determine which agent is most relevant for your use case, refer to the detailed descriptions linked below.
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Stream CI 360 events to DB Table
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): CI360 Snowflake Agent streams all received events to the configured Snowflake instance
 - [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Google BigQuery agent enables streaming of CI 360 events into Google BigQuery table
