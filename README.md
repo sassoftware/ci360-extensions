@@ -105,7 +105,8 @@ This report consolidates all analyzed nodes into a single view, showing client c
 
 ### Event Streaming Agents
 This repository contains several sample agents that stream CI 360 events into different target systems. To determine which agent is most relevant for your use case, refer to the detailed descriptions linked below.
-- [__CI363 Event to DB Agent__](code/ci360-events-to-db-agent): Streams CI 360 events into a relational database table.
+- [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Streams CI 360 events into a relational database table. 
+- [__CI360 Event Download Agent__](code/ci360-event-download-agent): Streams CI 360 events into Microsoft SQLServer. The full event information is stored as a JSON data type.
 - [__Snowflake Streaming Agent__](code/ci360-snowflake-agent): Streams CI 360 events into a configured Snowflake instance.
 - [__Google BigQuery Streaming Agent__](code/ci360-gbq-event-streaming-agent): Streams CI 360 events into a Google BigQuery table.
 - [__SAS Cloud Analytic Services Agent__](code/ci360-cas-agent): Streams CI 360 events into a SAS Cloud Analytic Services (CAS) table.

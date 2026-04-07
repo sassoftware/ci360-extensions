@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan this file for configuration changes every minute -->
+<!-- change the scan period with: <configuration scan="true" scanPeriod="30 seconds" > -->
+<configuration scan="true" scanPeriod="60 seconds">
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <append>true</append>
+    <encoder>
+      <pattern>%d{ISO8601} %-5p [%-4.15t] %-40.60c - %m%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+    <file>logs/EventStreamAgent.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>logs/EventStreamAgent.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+  </appender>
+  <logger name="client.ci360.eventstreamagent" level="INFO"></logger>
+  <logger name="client.ci360.tasks" level="INFO"></logger>
+  <logger name="client.ci360.sql" level="INFO"></logger>  
+  <logger name="client.HttpWrapper" level="INFO"></logger>
+  <logger name="java.net" level="INFO"></logger>
+  <logger name="com.sas" level="INFO"></logger>
+  <logger name="org.eclipse.jetty" level="INFO"></logger>
+  <logger name="org.eclipse.jetty.util.ssl" level="ERROR"></logger>
+  <root level="INFO">
+    <appender-ref ref="FILE" />
+  </root>
+</configuration>
+
