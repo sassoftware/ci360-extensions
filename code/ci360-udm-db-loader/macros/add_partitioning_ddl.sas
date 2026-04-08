@@ -70,7 +70,7 @@
 		put '  ) by &database.;';
 
 		put '  execute (';
-		put "    ALTER TABLE &dbschema..&table_name.";
+		put '    ALTER TABLE &dbschema..' "&table_name.";
 		put "      ADD CONSTRAINT &pk_name.";
 		%if %index(%superq(keylist), %superq(pcol)) %then %do;
 		  PUT "       PRIMARY KEY CLUSTERED (" &key_list ")";
