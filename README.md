@@ -9,7 +9,7 @@ SAS CI360 Connector Framework and Agent SDK provide infrastructure to integrate 
 This topic contains the following sections:
 * <a href="#prerequisites">Prerequisites</a>
 * <a href="#installation">Installation</a>
-* <a hre="#custom-development-standards">Custom Development Standards</a>
+* <a href="#custom-development-standards">Custom Development Standards</a>
 * <a href="#list-of-extensions">List of Extensions</a>
 * <a href="#getting-started">Getting Started</a>
 * <a href="#contributing">Contributing</a>
