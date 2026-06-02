@@ -27,6 +27,10 @@ Prerequisites vary between integration assets included here, and are listed in d
 
 Installation instructions for every extension are included in the project specific sub-folder README file. Installation and deployment instructions are platform specific.
 
+## Custom Development Standards
+
+We have compiled a list of development guidelines for integrating with SAS Customer Intelligence 360. It is designed to assist developers in building robust, secure, and maintainable custom integrations. Please refer to the relevant sections in this [__document__](/ci360-custom-development-standards/README.md) for more details.
+
 ## List of Extensions
 
 This is a list of connectors, agents and other related content and utilities included in this repository.
