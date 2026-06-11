@@ -74,10 +74,24 @@ For bulk custom tasks, SAS CI 360 provides signed Amazon S3 URLs for both data a
 
 **Recommended Architecture:**
 1. Download data and metadata files immediately upon connector invocation
-2. Acknowledge receipt to SAS CI 360
+2. Return a `200`/`202` response promptly — this HTTP response *is* the acknowledgement to CI 360; there is no separate callback channel
 3. Queue records for asynchronous processing
 4. Use worker processes to consume and process queued items
 5. Implement retry logic for failed records
+
+#### Response Timeout
+
+The connector's response timeout is configured per connector in the CI 360 UI, up to a maximum that is currently 60 seconds (this limit is set by CI 360 and may change in future releases).
+
+Your hosting platform may impose a *shorter* ceiling — for example, AWS API Gateway REST APIs cap the integration timeout at ~29 seconds (HTTP APIs at a hard 30 seconds), and Azure's load balancer gates HTTP responses at ~230 seconds. **The effective deadline is the shorter of the CI 360 timeout and your platform's limit.**
+
+When processing could exceed that deadline — especially bulk audiences of hundreds of thousands of rows — do not process synchronously. Download the data and metadata files immediately, hand the work to an asynchronous queue/worker (AWS SQS, Azure Service Bus, etc.), and return `200`/`202` right away. Report downstream results afterward using the response tracking code (see below).
+
+#### Reporting Results Back to CI 360 (Response Tracking Code)
+
+The inbound payload includes a **response tracking code (RTC)**. It is the correlation handle for feeding activity back into CI 360: you inject a **named external event** into CI 360 carrying the RTC, and CI 360 attributes that event to the originating contact and task.
+
+This is how downstream signals are reported back to CI 360 — for example, asynchronous delivery events (sent, delivered, bounced) and engagement metrics such as opens and clicks. Because it is decoupled from the connector's synchronous response, the event can be injected whenever the signal becomes available, which may be well after the connector has returned.
 
 ### 4. Error Handling
 
