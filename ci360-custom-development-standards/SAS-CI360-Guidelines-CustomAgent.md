@@ -28,11 +28,11 @@ If you don’t acknowledge in time:
 - CI 360 may resend the event  
 - You may process the same event multiple times  
 
-Ackknowlege happens implicitly in when `processEvent()` returns true.
+Acknowledgement happens implicitly when `processEvent()` returns true.
 
 **Correct pattern in `processEvent()`:**
 - Receive event  
-- Put event on a queue / worker thread for asynchronous 
+- Put event on a queue / worker thread for asynchronous processing
 - acknowledge (`return true`)
 
 

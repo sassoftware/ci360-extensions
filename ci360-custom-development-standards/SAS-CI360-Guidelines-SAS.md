@@ -116,7 +116,7 @@ quit;
 - Use `KEEP=` and `DROP=` to limit variables.
 - Prefer `WHERE` over `IF` when subsetting.
 - Use `IF/ELSE` for mutually exclusive conditions.
-- Use `IN` instead of multiple OR conditionsin a where clause.
+- Use `IN` instead of multiple OR conditions in a where clause.
 - Prefer built-in functions such as `COALESCE`, `SUM`, `MIN`, `MAX`.
 
 ```sas
@@ -155,11 +155,11 @@ MY_VALUE = MY_VALUE  +  INCREASE + BONUS;
     - Filter the table as the first step, to reduce the data transfer
     - Write the filter condition in a WHERE statement, instead of an IF statement
     - Use only SAS functions that can be transferred to the database
-    - You can use any SAS function inside a macro function as only it's result gets send to the database. 
+    - You can use any SAS function inside a macro function, as only its result is sent to the database. 
 
 ```sas
 data foo;
-	set db_ext.ext_table.
+	set db_ext.ext_table;
 	where REF_DATE = %sysfunc(intnx(month, &REF_DATE., 1));
 run;
 ```
@@ -173,13 +173,14 @@ run;
 - Avoid implicit type conversions, use the `PUT` or `INPUT` function.
 - Always name the macro in the `%MEND` statement.
 - Avoid global macro variables when possible.
-- Define local macro variables inside a macro as `%LOCAL`, to prevent nested macrofrom overwriting them.
+- Define local macro variables inside a macro as `%LOCAL`, to prevent nested macros from overwriting them.
 - Initialize macro variables before assigning a value via `PROC SQL INTO`.
 - In proc sql, use the option `NOPRINT` to eliminate unused data listings.
 - Check for errors
-    - After every PROC SQL, `&SQLRC. > 4` means an error occured.
-    - After every DATA step or non-sql PROC, `&SYSCC. > 4` means an error occured.
-- Insert meaningful logging messages in the code, to make the log more readable via a reusable macro. - Split large macros into smaller ones.
+    - After every PROC SQL, `&SQLRC. > 4` means an error occurred.
+    - After every DATA step or non-sql PROC, `&SYSCC. > 4` means an error occurred.
+- Insert meaningful logging messages in the code, to make the log more readable via a reusable macro.
+- Split large macros into smaller ones.
 - Draw a diagram of how macros get called.
 - `%GOTO` statements are unavoidable in SAS, but  use them sparingly.
 - Always use the dot to end resolution of a macro variable value.

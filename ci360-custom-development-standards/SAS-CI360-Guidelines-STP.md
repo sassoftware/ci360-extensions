@@ -45,9 +45,9 @@ Maxcells=0
 
 When defining the stored process in metadata you must always check the **Package** box on the Execution tab so that the status and count value are available to the Process Node in CI 360
 
-The **Stream** check box is used to provides extra information to the stored process code.  via a combination of metadata and code settings
+The **Stream** check box is used to provide extra information to the stored process code via a combination of metadata and code settings:
 - add `%maspinit(xmlstream=MacroVar Neighbor);` to the STP code
-- add a XML Data Soruce to the data tab of the stored processs metadata. The label and fileref need to correspond to be `macrovar` or `neighbor` and content type `text/xml`.
+- add a XML Data Source to the data tab of the stored process metadata. The label and fileref need to correspond to be `macrovar` or `neighbor` and content type `text/xml`.
    - `macrovar` provides information about the task or segment map 
    - `neighbor` provides information about the input and output nodes of the process node
 
@@ -114,7 +114,7 @@ run;
 
 - Use `proc printto` to write logs to accessible locations
 - Use dynamic log file names as in the example wrapper code above
-- Write custom error messages to the log, but use `%str()` avoid using the literal word `ERROR` in code. This way the word error only appears in the log when an error occurs.
+- Write custom error messages to the log, but use `%str()` to avoid using the literal word `ERROR` in code. This way the word error only appears in the log when an error occurs.
 ```sas
 %PUT ERR%str()OR: Duplicates in table &in_table. detected during &SYSMACRONAME.; 
 ```
@@ -183,14 +183,14 @@ STP-root/
 ```
 
 The stored process root directory should be accessible to developers and the logs subdirectory should also allow key users access. 
-An example got STP-root/ is `/sas/storedprocesses/`.
+An example for STP-root/ is `/sas/storedprocesses/`.
 
 The config folder contains:
 - The `config.sas` sets macro variables for the tenant credentials and database connectivity, as needed
 - All environment-specific values are kept in the `config.sas`, not in the macros
 - Store metadata files here. Use text files (not datasets) for better version control in Git.
 
-Any physical file output – including logs – should be added to any system maintenance scripts for deletion after a retention period of e.g; 30 days.
+Any physical file output – including logs – should be added to any system maintenance scripts for deletion after a retention period of, e.g., 30 days.
 
 Example project - not a STP though:
 https://github.com/sassoftware/ci360-download-client-sas/
