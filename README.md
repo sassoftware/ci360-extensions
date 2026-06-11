@@ -30,7 +30,7 @@ Installation instructions for every extension are included in the project specif
 
 ## Custom Development Standards
 
-We have compiled a list of development guidelines for integrating with SAS Customer Intelligence 360. It is designed to assist developers in building robust, secure, and maintainable custom integrations. Please refer to the relevant sections in this [__document__](/ci360-custom-development-standards/README.md) for more details.
+We have compiled a list of development guidelines for integrating with SAS Customer Intelligence 360. It is designed to assist developers in building robust, secure, and maintainable custom integrations. Please refer to the relevant sections in this [__document__](ci360-custom-development-standards/README.md) for more details.
 
 ## List of Extensions
 

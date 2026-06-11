@@ -8,5 +8,5 @@ This document provides comprehensive development guidelines for integrating with
 2. [Custom Agents](SAS-CI360-Guidelines-CustomAgent.md)
 3. [Stored Process](SAS-CI360-Guidelines-STP.md) and [SAS Code Style Guide](SAS-CI360-Guidelines-SAS.md)
 4. [Mobile SDK](SAS-CI360-Guidelines-MobileSDK.md)
-5. [SAS Tag: JavaScript API](SAS-CI360-Guidelines-MobileSDK.md)
+5. [SAS Tag: JavaScript API](SAS-CI360-Guidelines-JavaScriptAPI.md)
 
