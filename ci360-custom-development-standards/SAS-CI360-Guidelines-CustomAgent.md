@@ -30,18 +30,18 @@ If you don’t acknowledge in time:
 
 Acknowledgement happens implicitly when `processEvent()` returns true.
 
-**Correct pattern in `processEvent()`:**
+**Option 1: Receive -> Queue -> Acknowledge -> Process:**
 - Receive event  
 - Put event on a queue / worker thread for asynchronous processing
 - acknowledge (`return true`)
+> This approach is preferred when you you have complex integration that may take longer time to execute, or have its own delivery schedule, or rate limiting. For example, the channel you are integrating allows only 5 incoming events per 30 seconds, but your customer is ingesting 20 events every 30 seconds. 
 
-
-**Wrong pattern:**
+**Option 2: Receive -> Process -> Acknowledge:**
 - Receive event  
 - Call API / write DB  
 - Then acknowledge (`return true`)
 
-> Always acknowledge first. Processing comes after.
+> Select this approach when your integration is direct and quick, like handing over the incoming event to an SMS gateway of your customer or updating to a customer database for tracking real time contact and response.
 
 ---
 
