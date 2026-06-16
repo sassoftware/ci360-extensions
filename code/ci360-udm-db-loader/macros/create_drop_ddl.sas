@@ -3,28 +3,42 @@
 /* SPDX-License-Identifier: Apache-2.0                                         */
 /* *****************************************************************************/
 
-/* Not a macro. Just a trick to drop the whole UDM during development */
-%let sysparameter=DROPDDL; 
-%include "C:\sas\ci360-udm-db-loader\config\config.sas"; 
+/* NOTE: This file is not a macro — it is a standalone script used during      */
+/* development to drop all UDM tables from the target schema.                  */
 
-%get_udm_schema(api_schema_version=&schema_version, schema_table=schema_details, partitioning_table=partitioning_table); 
-%get_primary_keys(schema_table=schema_details, partitioning_table=partitioning_table, key_table=key_table);
+%let sysparameter = DROPDDL;
+%include "/userdata/dev/common/projects/UDMLoader_Git/cdm-udmloader-sas/config/config.sas";
 
-%let code_file_path=&codes_path.&slash.DROP_V&schema_version._DDL.sas;
-filename ddlfile "&code_file_path.";
-data _null_;
-	set key_table end=last;
-    file ddlfile ; 
-	if _n_=1 then do;
-	    PUT  'PROC SQL ;';
-	    PUT +3 'CONNECT to &database. (&sql_passthru_connection.);';       
-	end;			   
-	PUT +3 'EXECUTE (DROP TABLE &dbschema..' table_name ') by &database.;';
-	if last then do;
-	    PUT +3 'DISCONNECT FROM &database.;';
-	    PUT 'QUIT;';
-	end;			   
-run;
-filename ddlfile;
+%get_udm_schema(
+    api_schema_version=&schema_version.,
+    schema_table=schema_details,
+    partitioning_table=partitioning_table
+);
+%get_primary_keys(
+    schema_table=schema_details,
+    partitioning_table=partitioning_table,
+    key_table=key_table
+);
 
-proc printto;run;
+%let code_file_path = &codes_path.&slash.DROP_V&schema_version._DDL.sas;
+
+FILENAME ddlfile "&code_file_path.";
+DATA _NULL_;
+    SET key_table END=last;
+    FILE ddlfile;
+
+    IF _n_ = 1 THEN DO;
+        PUT 'PROC SQL;';
+        PUT +3 'CONNECT TO &database. (&sql_passthru_connection.);';
+    END;
+
+    PUT +3 'EXECUTE (DROP TABLE IF EXISTS &dbschema..' table_name ') BY &database.;';
+
+    IF last THEN DO;
+        PUT +3 'DISCONNECT FROM &database.;';
+        PUT 'QUIT;';
+    END;
+RUN;
+FILENAME ddlfile;
+
+PROC PRINTTO; RUN;

@@ -2,39 +2,49 @@
 /* Copyright (c) 2025, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */
 /* SPDX-License-Identifier: Apache-2.0                                          */
 /* ******************************************************************************/
+
 %macro set_partitioned_flag(json_all_data=, partition_out=);
-	%local	json_all_data partition_out;
+    %local json_all_data partition_out;
 
-	data work.partitioning_temp (keep=current_table partitioned_flg rename=(current_table=table_name));
-	 set &json_all_data. end=last;
-		length current_table $32;
-		retain current_table "";
-		retain partitioned_flg 1;
+    DATA work.partitioning_temp
+        (KEEP=current_table partitioned_flg RENAME=(current_table=table_name));
+        SET &json_all_data. END=last;
+        LENGTH current_table $32;
+        RETAIN current_table "";
+        RETAIN partitioned_flg 1;
 
-		* write table when first row of next table is identified;
-		if P1='table_name' and current_table ne value and _n_ ne 1 then do;
-			output; 
-			partitioned_flg=1;
-			current_table="";
-		end;
+        * Write current table record when the first row of the next table is seen;
+        IF P1 = 'table_name' AND current_table NE value AND _n_ NE 1 THEN DO;
+            OUTPUT;
+            partitioned_flg = 1;
+            current_table   = "";
+        END;
 
-		if P1='table_name' then current_table=value;
-		if substr(P2,1,10)='categories' and upcase(value) in ('ENGAGEMETADATA','PLAN') then partitioned_flg=0;
-		if substr(current_table,1,4)='cdm_' and upcase(current_table) not in 
-			('CDM_CONTACT_HISTORY','CDM_RESPONSE_HISTORY','CDM_RESPONSE_EXTENDED_ATTR') then partitioned_flg=0;
-		if substr(current_table,1,3)='md_' then partitioned_flg=0;
-		
-		if last then output; * write last table;
-	run;
+        IF P1 = 'table_name' THEN current_table = value;
 
-	%if %sysfunc(exist(&partition_out.)) %then %do;
-		proc append data=work.partitioning_temp base=&partition_out. force;
-		run;
-	%end;
-	%else %do;
-		data &partition_out.;
-			set work.partitioning_temp;
-		run;
-	%end;
-	PROC DELETE data=work.partitioning; run;
-%mend;
+        IF substr(P2, 1, 10) = 'categories' AND upcase(value) IN ('ENGAGEMETADATA','PLAN')
+            THEN partitioned_flg = 0;
+
+        IF substr(current_table, 1, 4) = 'cdm_'
+            AND upcase(current_table) NOT IN
+                ('CDM_CONTACT_HISTORY','CDM_RESPONSE_HISTORY','CDM_RESPONSE_EXTENDED_ATTR')
+            THEN partitioned_flg = 0;
+
+        IF substr(current_table, 1, 3) = 'md_' THEN partitioned_flg = 0;
+
+        IF last THEN OUTPUT;  * Write the final table record;
+    RUN;
+
+    %if %sysfunc(exist(&partition_out.)) %then %do;
+        PROC APPEND DATA=work.partitioning_temp BASE=&partition_out. FORCE;
+        RUN;
+    %end;
+    %else %do;
+        DATA &partition_out.;
+            SET work.partitioning_temp;
+        RUN;
+    %end;
+
+    PROC DELETE DATA=work.partitioning_temp; RUN;
+
+%mend set_partitioned_flag;

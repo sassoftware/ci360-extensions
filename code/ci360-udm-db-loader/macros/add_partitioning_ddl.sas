@@ -3,88 +3,88 @@
 /* SPDX-License-Identifier: Apache-2.0                                        */
 /* ****************************************************************************/
 
-%macro add_partitioning_ddl(database=, table_name=, column_name= ,key_list=, column_datatype=);
-%local database table_name column_name key_list column_datatype;
+%macro add_partitioning_ddl(database=, table_name=, column_name=, key_list=, column_datatype=);
+    %local database table_name column_name key_list column_datatype;
 
+    /* ------------------------------------------------------------------ */
+    /* Oracle: MODIFY ... PARTITION BY RANGE INTERVAL                      */
+    /* ------------------------------------------------------------------ */
+    %if &database. = ORACLE %then %do;
+        DATA _NULL_;
+            FILE ddlfile MOD;
+            day_txt = PUT(today(), yymmdd10.);
+            PUT +3 "EXECUTE (ALTER TABLE %nrstr(&dbschema)..&table_name MODIFY";
+            PUT +6 "PARTITION BY RANGE( &column_name ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (";
+            PUT +9 "PARTITION p0 VALUES LESS THAN (TO_DATE('" day_txt +(-1) "','YYYY-MM-DD') )";
+            PUT +9 "SEGMENT CREATION IMMEDIATE";
+            PUT +6 ')) BY &database.;';
+        RUN;
+    %end;
 
-%if &database. = ORACLE %then %do;
+    /* ------------------------------------------------------------------ */
+    /* SQL Server: partition function, scheme, and clustered primary key   */
+    /* ------------------------------------------------------------------ */
+    %if &database. = SQLSVR %then %do;
+        %let primary_key_defined = 1;
+        %let pf_name = PF_&table_name._&column_name.;
+        %let ps_name = PS_&table_name._&column_name.;
+        %let pk_name = &table_name._pk;
+        %let _key_list = %sysfunc(tranwrd(%superq(key_list), %str(%"), %str()));
+        %let keylist   = ,%upcase(&_key_list.),;
+        %let pcol      = ,%upcase(%superq(column_name)),;
 
-	data _null_;
-	file ddlfile mod; 
+        DATA _NULL_;
+            FILE ddlfile MOD;
 
-	    PUT +3 "EXECUTE (ALTER TABLE %nrstr(&dbschema)..&table_name MODIFY";
-		PUT +6 "PARTITION BY RANGE( &column_name ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (";
-		/* Oracle Enterprise Editions */			
-		day_txt=PUT(today(),yymmdd10.);
-		PUT  +9 "PARTITION p0 VALUES LESS THAN (TO_DATE('" day_txt +(-1) "','YYYY-MM-DD') )" ;
-		PUT  +9 "SEGMENT CREATION IMMEDIATE" ;
-		PUT  +6 ')) by &database.;';
+            /* Create monthly partition function if it does not already exist */
+            PUT "    EXECUTE (";
+            PUT "        IF NOT EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = '&pf_name.') BEGIN";
+            PUT "            DECLARE @startDate date = DATEADD(MONTH, -12, CONVERT(date, GETDATE()));";
+            PUT "            DECLARE @endDate   date = DATEADD(MONTH,  1,  CONVERT(date, GETDATE()));";
+            PUT "            DECLARE @sql nvarchar(max) = N'CREATE PARTITION FUNCTION &pf_name. (&column_datatype.) AS RANGE RIGHT FOR VALUES ';";
+            PUT "    ;WITH d AS (";
+            PUT "    SELECT DATEFROMPARTS(YEAR(@startDate), MONTH(@startDate), 1) AS d";
+            PUT "                UNION ALL";
+            PUT "                SELECT DATEADD(MONTH, 1, d) FROM d";
+            PUT "                WHERE d < DATEFROMPARTS(YEAR(@endDate), MONTH(@endDate), 1)";
+            PUT "            )";
+            PUT "    SELECT @sql = @sql + CASE WHEN d > @startDate THEN N',' ELSE N'(' END +";
+            PUT "        N'''' + CONVERT(varchar(10), d, 120) + N''''";
+            PUT "        FROM d OPTION (MAXRECURSION 0);";
+            PUT "            SET @sql = @sql + N');';";
+            PUT "            EXEC sys.sp_executesql @sql;";
+            PUT "        END";
+            PUT "    ) BY &database.;";
 
-	run;
+            /* Create partition scheme if it does not already exist */
+            PUT '    EXECUTE (';
+            PUT '        IF NOT EXISTS (';
+            PUT '            SELECT 1';
+            PUT '            FROM sys.partition_schemes';
+            PUT "            WHERE name = '&ps_name.'";
+            PUT '        )';
+            PUT '        BEGIN';
+            PUT "            CREATE PARTITION SCHEME &ps_name.";
+            PUT "              AS PARTITION &pf_name.";
+            PUT '              ALL TO ([PRIMARY]);';
+            PUT '        END';
+            PUT '    ) BY &database.;';
 
-%end;
-	
-%if &database. = SQLSVR %then %do;
-	%let primary_key_defined=1;
-	%let pf_name = PF_&table_name._&column_name;
-	%let ps_name = PS_&table_name._&column_name;
-	%let pk_name = &table_name._pk;
-	%let _key_list = %sysfunc(tranwrd(%superq(key_list),%str(%"),%str()));
-	%let keylist = ,%upcase(&_key_list),;
-	%let pcol  = ,%upcase(%superq(column_name)),;
+            /* Add clustered primary key on the partition scheme */
+            PUT '    EXECUTE (';
+            PUT '        ALTER TABLE &dbschema..' "&table_name.";
+            PUT "          ADD CONSTRAINT &pk_name.";
+            %if %index(%superq(keylist), %superq(pcol)) %then %do;
+                PUT "           PRIMARY KEY CLUSTERED (" &key_list. ")";
+            %end;
+            %else %do;
+                PUT "           PRIMARY KEY CLUSTERED (&column_name., " &key_list. ")";
+            %end;
+            PUT "            ON &ps_name.(&column_name.);";
+            PUT '    ) BY &database.;';
+        RUN;
+    %end;
 
-	data _null_;
-
-	file ddlfile mod;
-
-		put "	execute (";
-		put "		IF NOT EXISTS (SELECT 1 FROM sys.partition_functions WHERE name = '&pf_name.') BEGIN";
-		put "			DECLARE @startDate date = DATEADD(MONTH, -12, CONVERT(date, GETDATE()));";
-	 	put "			DECLARE @endDate   date = DATEADD(MONTH,  1, CONVERT(date, GETDATE()));";
-		put "			DECLARE @sql nvarchar(max) = N'CREATE PARTITION FUNCTION &pf_name. (&column_datatype.) AS RANGE RIGHT FOR VALUES ';";
-		put "	;WITH d AS (";
-		put "	SELECT DATEFROMPARTS(YEAR(@startDate), MONTH(@startDate), 1) AS d";
-	    put "                UNION ALL";
-	    put "                SELECT DATEADD(MONTH, 1, d) FROM d";
-	    put "                WHERE d < DATEFROMPARTS(YEAR(@endDate), MONTH(@endDate), 1)";
-	    put "			)";
-		put "	SELECT @sql = @sql + CASE WHEN d > @startDate THEN N',' ELSE N'(' END +";
-		put "		N'''' + CONVERT(varchar(10), d, 120) + N''''";
-		put "		FROM d OPTION (MAXRECURSION 0);";
-		put "			SET @sql = @sql + N');';";
-		put "			EXEC sys.sp_executesql @sql;";
-		put "		END";
-		PUT'	) by &database.;';
-		
-		put '  execute (';
-		put '    IF NOT EXISTS (';
-		put '        SELECT 1';
-		put '        FROM sys.partition_schemes';
-		put "        WHERE name = '&ps_name.'";
-		put '    )';
-		put '    BEGIN';
-		put "        CREATE PARTITION SCHEME &ps_name.";
-		put "          AS PARTITION &pf_name.";
-		put '          ALL TO ([PRIMARY]);';
-		put '    END';
-		put '  ) by &database.;';
-
-		put '  execute (';
-		put '    ALTER TABLE &dbschema..' "&table_name.";
-		put "      ADD CONSTRAINT &pk_name.";
-		%if %index(%superq(keylist), %superq(pcol)) %then %do;
-		  PUT "       PRIMARY KEY CLUSTERED (" &key_list ")";
-		%end;
-		%else %do;
-		  PUT "       PRIMARY KEY CLUSTERED (&column_name. ," &key_list ")";
-		%end;
-		put "        ON &ps_name.(&column_name.);";
-		put '  ) by &database.;';
-
-	run;
-%end;
-
-
-	
 %mend add_partitioning_ddl;
-/*%add_partitioning;*/
+
+/* %add_partitioning_ddl(); */

@@ -13,6 +13,7 @@ The utility includes database-specific Data Definition Language (DDL) to create 
 - Redshift
 - Oracle
 - Postgres
+- Google BigQuery
 
 ## Supported UDM Schema Version
 
@@ -26,9 +27,9 @@ To set up the ci360-udm-db-loader, you need access to a supported database. Also
 
 So before you deploy this tool make sure you have
 1.	https://github.com/sassoftware/ci360-download-client-sas deployed 
-2.	access details for a the supported target database that allow to create tables and load data. Foresee a separate schema for the UDM tables and optionally a second schema for temporary tables that get created and dropped during the load process.
+2.	access details for a supported target database that allows to create tables and load data. Foresee a separate schema for the UDM tables and optionally a second schema for temporary tables that get created and dropped during the load process.
 
-> **WARNING:** Downloaded SAS datasets are deleted after each succesful upload to prevents unnecessary reloading. The download tool will recreate tables as required.
+> **WARNING:** Downloaded SAS datasets are deleted after each successful upload to prevent unnecessary reloading. The download tool will recreate tables as required.
 
 > **TIP:** This tool should NOT run at the same time as the download tool. Schedule it to run after downloading. 
 
@@ -36,7 +37,7 @@ So before you deploy this tool make sure you have
 
 ## Setup
 
-Unzip and copy the tool to a location on you SAS server, where you also have the ci360-download-client-sas deployed. 
+Unzip and copy the tool to a location on your SAS server, where you also have the ci360-download-client-sas deployed. 
 
 ## Configuration
 
@@ -55,7 +56,7 @@ Define tenant details and schema version for which you want to use this utility.
 - %let schema_version=20;
 - %let previous_schema_version=19; 
 
-Previous schema version is used only to create a migration script
+Previous schema version is used only to create a migration script.
 
 > **WARNING:** The schema version of the downloaded data and this utility need to be align.
 
@@ -89,7 +90,7 @@ These macro variable shouldn't need any adaptations
 - %let tmpdbschema = ...
 - %let tmp_lib_attrib = ...
 
-If you prefer to use different database schema for temporary tables you can adapt the temporary schema details. For performance the temporary schema needs to be in the same database instance as the target schema. By default the target schema also is used for temporary the tables. Temporary tables are deleted automatically.
+If you prefer to use a different database schema for temporary tables you can adapt the temporary schema details. For performance the temporary schema needs to be in the same database instance as the target schema. By default the target schema also is used for the temporary tables. Temporary tables are deleted automatically.
 
 > **NOTE:** Bulkload options also differ per database. Additional configuration options can be found in the SAS/ACCESS online help for your database.
 
@@ -101,7 +102,7 @@ This section doesn't require any changes.
 
 ## ci360-udm-db-loader File Overview
 
-The ci360-udm-db-loader should be scheduled to run after the ci360-download-client-sas utility has downloaded new data. You can create one command-line or shell script that runs both utilities in sequence. 
+The ci360-udm-db-loader should be scheduled to run after the ci360-download-client-sas utility has downloaded new data. The scripts folder contains a script that runs both utilities in sequence. 
 
 The **udmloader_launch** folder of this project contains the launcher code of the tool.
 
@@ -109,7 +110,7 @@ The **udmloader_launch** folder of this project contains the launcher code of th
 
 - **udmloader.sas**
   
-  This the main macro which will launch the utility. See the usage section below for details.
+  This id the main macro which will launch the utility. See the usage section below for details.
 
 The **config** folder contains below content:
 - **config.sas**
@@ -118,7 +119,7 @@ The **config** folder contains below content:
 
 - **METADATA_TABLE.csv**
 
-  This csv is UDM schema specific as it identifies which columns are a part of the primary key or each table. This CSV will be updated with every release of a new UDM schema version.
+  This CSV identifies which columns are a part of the primary key for each table. In recent UDM schema versions primary and foreign key information became available via the API, making this CSV obsolete.
 
 - **datatypes.sas7bdat**
   
@@ -141,7 +142,7 @@ The **scripts** folder
 
 Before you can load the data, the target tables need to be created. 
 - Go to the **Interactive Execution** topic below to create the target data.
-- Next go to **Batch Execution** to load the tool in batch 
+- Next go to **Batch Execution** to load data in batch 
 - If you want generate DDL or load code for a new schema version of the UDM tables,  use the parameters **CREATEDDL** and **CREATEETLCODE** as described in **Interactive Execution** below.
 - If you want to upgrade your UDM data structure,  use the parameters **CREATEMIGR** and **MIGRATEUDM** codes.
 
@@ -155,26 +156,26 @@ To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), 
 
    > **NOTE:** Run EXECUTEDDL only once before loading data for the first time. If a correction is needed, drop all tables before re-executing
 
-- **LOADDATA** : This will execute the generated database specific ETL code file. It will Insert/update downloaded data into database specific target tables (you can schedule this periodically depending on the frequency of data download by using batch process). 
+- **LOADDATA** : This will execute the generated database specific ETL code file. It will Insert/update downloaded data into database specific target tables (you can schedule this periodically depending on the frequency of data download). 
 
 - **CREATEMIGR** : This will generate schema migration ddl code which will create alter and create table ddl when there is new schema version available. Set the schema_version and previous_schema version macro variables in the config.sas file accordingly.
 
-- **MIGRATEUDM** : This will execute the generated database specific DDL schema migration script. This will pick the generated DDL migration code from previous step and create the tables in target Database. This will help create table structure based on new schema version without deleteting old tables and data.
+- **MIGRATEUDM** : This will execute the generated database specific DDL schema migration script. This will pick the generated DDL migration code from the previous step and create the tables in target Database. This will help create table structure based on the new schema version without deleting old tables and data.
 
 ### Batch Execution
 
 To run this utility in batch mode you need to 
-- Commment out the **%Let sysparameter=XXXXX ;** from the launcher code.
+- Comment out the **%Let sysparameter=XXXXX ;** from the launcher code.
 - Adapt the sample scripts in the **scripts** folder to your environment or create a new script that executes below command:
 
 **{SASHOME}/sas –sysin {UDMLoader_Location}/UDMLoader.sas -sysparm LOADDATA -log {UDMLoader_Location}/UDMLoader.log**
 
-- Create separate scripts if you want to download and load different set of tales at different frequencies.
+- Create separate scripts if you want to download and load different sets of tables at different frequencies.
 - Schedule the scripts.
 
 ## Troubleshooting
 
-The logs folder contain a log file for each execution of this utility. The MPRINT option is set to identify in the log which macro is running. 
+The logs folder contains a log file for each execution of this utility. The MPRINT option is set to identify in the log which macro is running. 
 
 To facilitate troubleshooting, the diagram below shows how each macro is called, depending on the sysparam or sysparameter value.  
 
