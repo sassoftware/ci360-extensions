@@ -9,6 +9,7 @@ SAS CI360 Connector Framework and Agent SDK provide infrastructure to integrate 
 This topic contains the following sections:
 * <a href="#prerequisites">Prerequisites</a>
 * <a href="#installation">Installation</a>
+* <a href="#custom-development-standards">Custom Development Standards</a>
 * <a href="#list-of-extensions">List of Extensions</a>
 * <a href="#getting-started">Getting Started</a>
 * <a href="#contributing">Contributing</a>
@@ -26,6 +27,10 @@ Prerequisites vary between integration assets included here, and are listed in d
 ## Installation
 
 Installation instructions for every extension are included in the project specific sub-folder README file. Installation and deployment instructions are platform specific.
+
+## Custom Development Standards
+
+We have compiled a list of development guidelines for integrating with SAS Customer Intelligence 360. It is designed to assist developers in building robust, secure, and maintainable custom integrations. Please refer to the relevant sections in this [__document__](ci360-custom-development-standards/README.md) for more details.
 
 ## List of Extensions
 
