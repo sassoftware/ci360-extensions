@@ -2,7 +2,7 @@
 
 ## Overview
 
-The ci360-udm-db-loader utility loads data from the CI 360 Unified Data Model (UDM) into a relational database management system (RDBMS), The tool can also load the CI360 Common Data Model (CDM) which is a part of the UDM.
+The ci360-udm-db-loader utility loads data from the CI 360 Unified Data Model (UDM) into a relational database management system (RDBMS). The tool can also load the CI360 Common Data Model (CDM), which is a part of the UDM.
 
 The utility includes database-specific Data Definition Language (DDL) to create the table structure during the initial setup.
 
@@ -17,13 +17,15 @@ The utility includes database-specific Data Definition Language (DDL) to create 
 
 ## Supported UDM Schema Version
 
-This utility is optimized for UDM schema version 20. With version 20, a new set of metadata tables with full history is available, which eliminates the need to incrementally load metadata tables.
+This utility is optimized for UDM schema version 22. As of version 20, a new set of metadata tables with full history is available, which eliminates the need to incrementally load metadata tables.
 
-> **WARNING:** If you upgrade from a previous version of this utility and you use other than the latest published metadata of objects, please adjust your data source to point to the md_*_all tables of those objects instead of the corresponding md_* tables. 
+> **WARNING:** If you upgrade from UDM schema version 19 or earlier, you may want to adjust your queries to point to the md_\*\_all tables, introduced with version 20, instead of the corresponding md_\* tables. Queries that use only the latest published version of an object, such as tasks, do not require any changes.
 
 
 ## Pre-requisites
 To set up the ci360-udm-db-loader, you need access to a supported database. Also note the ci360-udm-db-loader does not download the UDM data. It is built and tested to use data downloaded via the ci360-download-client-sas utility. 
+
+> **NOTE:** A Python alternative for this tool is available in the same repository.
 
 So before you deploy this tool make sure you have
 1.	https://github.com/sassoftware/ci360-download-client-sas deployed 
@@ -53,19 +55,15 @@ Define tenant details and schema version for which you want to use this utility.
 - %let external_gateway=https://< external gateway host >/marketingGateway;
 
 ### Schema version
-- %let schema_version=20;
-- %let previous_schema_version=19; 
+- %let schema_version=22;
+- %let previous_schema_version=21; 
 
 Previous schema version is used only to create a migration script.
 
-> **WARNING:** The schema version of the downloaded data and this utility need to be align.
+> **WARNING:** The schema version of the downloaded data and this utility must be align.
 
-### Time zone
-The UDM makes datetime values available in UTC. Use this configuration to adapt the time zone.
-
-- %let timeZone_Value=AMERICA/NEW_YORK; /* Provide time zone specific value for convertion of datetime fields into target tables */
-
-For more information on time zone and its values please see : [Time Zone Info and Time Zone Names](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lesysoptsref/n13ytdu4ohkwoln1gtu6byka5lpd.htm)
+### Execution options
+Flip the 1/0 flag to include or exclude the CDM tables and the dbtReport tables in the load process. Note that CDM is excluded by default as it is going to be deprecated in the future.
 
 ### Bulkload
 Most databases support bulkload which accelerates the load process for large data volumes.
@@ -84,7 +82,7 @@ Define the third-party database name and connection details.
 
   > **NOTE:** The required details differ per database engine, for example Oracle used dbpath, while SQL server uses dbDataSourceName.
 
-These macro variable shouldn't need any adaptations
+These macro variable should not need any changes.
 - %let sql_passthru_connection = ...
 - %let trg_lib_attrib = ...
 - %let tmpdbschema = ...
@@ -104,22 +102,21 @@ This section doesn't require any changes.
 
 The ci360-udm-db-loader should be scheduled to run after the ci360-download-client-sas utility has downloaded new data. The scripts folder contains a script that runs both utilities in sequence. 
 
-The **udmloader_launch** folder of this project contains the launcher code of the tool.
 
 The **udmloader_launch** folder of this project contains the launcher code of the tool.
 
 - **udmloader.sas**
   
-  This id the main macro which will launch the utility. See the usage section below for details.
+  This is the main macro which will launch the utility. See the usage section below for details.
 
 The **config** folder contains below content:
 - **config.sas**
 
   This file contains the environment specific configurations.
 
-- **METADATA_TABLE.csv**
+- **MISSING_PRIMARY_KEYS.csv**
 
-  This CSV identifies which columns are a part of the primary key for each table. In recent UDM schema versions primary and foreign key information became available via the API, making this CSV obsolete.
+  Use this file to flag additional primary-key columns if the schema JSON primary-key metadata is incomplete.
 
 - **datatypes.sas7bdat**
   
@@ -127,7 +124,7 @@ The **config** folder contains below content:
 
 - **table_list.sas7bdat**
   
-  This data set contains one row per UDM table. The execution_flag column is used to include or exclude tables when building the ddl and etl codes. The mart_type column has no impact on the processing.
+  This data set contains one row per UDM table. The execution_flag column is used to include or exclude tables when building the ddl and etl codes. The mart_type column has no impact on the processing. This table is recreated each time the ddl or etl codes is generated.
 
 The **macros** folder
 - This folder contains all the logic in sas macros, in .sas code files.
@@ -148,7 +145,7 @@ Before you can load the data, the target tables need to be created.
 
 ### Interactive Execution
 
-To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), edit **udmloader.sas** from udmloader_launch folder, update **%Let sysparameter=XXXXX ;** variable with one of the below parameters and run it.
+To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), edit **udmloader.sas** from udmloader_launch folder, update **%Let sysparameter=XXXX;** variable with one of the below parameters and run it.
 
 - **CREATEDDL/CREATEETLCODE** : This will  generates DDL or load code.
 
@@ -160,22 +157,22 @@ To run the utility interactively (e.g. via SAS Studio or SAS Enterprise Guide), 
 
 - **CREATEMIGR** : This will generate schema migration ddl code which will create alter and create table ddl when there is new schema version available. Set the schema_version and previous_schema version macro variables in the config.sas file accordingly.
 
-- **MIGRATEUDM** : This will execute the generated database specific DDL schema migration script. This will pick the generated DDL migration code from the previous step and create the tables in target Database. This will help create table structure based on the new schema version without deleting old tables and data.
+- **MIGRATEUDM** : This will pick the generated DDL migration code from the previous step and create the tables in target Database. This will help create table structure based on the new schema version without deleting old tables and data. This approach does not add partitioning to tables.
 
 ### Batch Execution
 
 To run this utility in batch mode you need to 
-- Comment out the **%Let sysparameter=XXXXX ;** from the launcher code.
+- Comment out the **%Let sysparameter=XXXXX;** from the **udmloader.sas** code.
 - Adapt the sample scripts in the **scripts** folder to your environment or create a new script that executes below command:
 
-**{SASHOME}/sas –sysin {UDMLoader_Location}/UDMLoader.sas -sysparm LOADDATA -log {UDMLoader_Location}/UDMLoader.log**
+  **{SASHOME}/sas -sysin {UDMLoader_Location}/UDMLoader.sas -sysparm LOADDATA -log {UDMLoader_Location}/UDMLoader.log**
 
 - Create separate scripts if you want to download and load different sets of tables at different frequencies.
 - Schedule the scripts.
 
 ## Troubleshooting
 
-The logs folder contains a log file for each execution of this utility. The MPRINT option is set to identify in the log which macro is running. 
+The logs folder contains a log file for each execution of this utility. The MPRINT option is set to identify in the log which macro is running. You can temporarily increase logging via the options at the top of the **config.sas** file.
 
 To facilitate troubleshooting, the diagram below shows how each macro is called, depending on the sysparam or sysparameter value.  
 

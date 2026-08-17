@@ -32,7 +32,7 @@
     %end;
 
     %if &duplicate_keys. = 0 %then %do;
-        /* No duplicates — create a passthrough view for zero-copy performance */
+        /* No duplicates -- create a view for zero-copy performance */
         DATA &out_table. / VIEW=&out_table.;
             SET &udmmart..&table_nm.;
         RUN;
@@ -40,7 +40,7 @@
     %end;
 
     %else %do;
-        /* Duplicates found — deduplicate by primary key */
+        /* Duplicates found -- deduplicate by primary key */
         PROC SORT DATA=&udmmart..&table_nm. OUT=&out_table. NODUPKEY;
             BY &table_keys_spaced.;
         RUN;
@@ -53,7 +53,7 @@
         PROC SQL NOPRINT NOERRORSTOP;
             SELECT name INTO :column_list SEPARATED BY ','
             FROM COLUMNLIST
-            WHERE upcase(name) NOT IN ('LOAD_DTTM');
+            WHERE upcase(name) NOT IN ('LOAD_DTTM', 'DATEKEY');
         QUIT;
 
         PROC SQL NOERRORSTOP;
@@ -79,9 +79,12 @@
             %put WARNING: &duplicate_rows. duplicate rows found in downloaded data. Rows deduplicated without data loss.;
         %end;
         %else %do;
-            %put ERROR: Duplicate primary key found in &table_nm. with different data. Primary key (&table_keys.) may be wrong.;
-            %if &ignore_duplicate_err = 0 %then %do;
-                %let errFlag = 1;
+            %if &ignore_duplicate_err = 0  
+				/* Aug2026 BUG FIX for historical data that doesn't contain the correct primary key */
+				AND ("%sysfunc(SUBSTR(&table_nm.,1,4))" NE "DBT_" OR "&table_keys." NE "DETAIL_ID")
+			%then %do;
+	            %put ERR%str()OR: Duplicate primary key found in &table_nm. with different data. Primary key (&table_keys.) may be wrong.;
+            	%let errFlag = 1;
             %end;
             %else %do;
                 %put WARNING: Processing will continue because ignore_duplicate_err = &ignore_duplicate_err..;

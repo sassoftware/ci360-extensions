@@ -28,7 +28,7 @@ DATA _NULL_;
     FILE ddlfile;
 
     IF _n_ = 1 THEN DO;
-        PUT 'PROC SQL;';
+        PUT 'PROC SQL NOERRORSTOP;';
         PUT +3 'CONNECT TO &database. (&sql_passthru_connection.);';
     END;
 

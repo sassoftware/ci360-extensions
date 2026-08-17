@@ -88,21 +88,20 @@
             SET &column_table.(WHERE=(upcase(table_name) = "&table_name." AND partition_column = 1) OBS=1);
             FILE ddlcod;
             PUT '%add_partitioning_ddl(database=&database., table_name=&table_name., column_name='
-                column_name ', key_list=%superq(key_list), column_datatype='
-                rdbms_column_type ');';
+                column_name ', key_list=&key_list., column_datatype=' rdbms_column_type ');';
         RUN;
 
-    %include ddlcod;
+	    %include ddlcod;
 
-    %if &verbose. %then %do;
-        DATA _NULL_;
-            INFILE ddlcod;
-            INPUT;
-            PUT _infile_;
-        RUN;
-    %end;
+	    %if &verbose. %then %do;
+	        DATA _NULL_;
+	            INFILE ddlcod;
+	            INPUT;
+	            PUT _infile_;
+	        RUN;
+	    %end;
 
-    FILENAME ddlcod;
+	    FILENAME ddlcod;
 
     %end;
 

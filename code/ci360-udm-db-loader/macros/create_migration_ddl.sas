@@ -161,7 +161,7 @@
         IF last.table_name THEN DO;
             PUT 'DISCONNECT FROM &database.;';
             PUT 'QUIT;';
-            PUT '%err_check (Failed to alter Table: ' "&table_name., &table_name.);";
+            PUT '%err_check (Failed to alter Table: ' table_name ',' table_name ');';
         END;
     RUN;
     FILENAME codeout;

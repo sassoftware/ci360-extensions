@@ -19,7 +19,7 @@
           );
     QUIT;
 
-    %read_metadata_table_csv(IMPORTED_METADATA_TABLE=IMPORTED_METADATA_TABLE);
+    %read_metadata_table_csv(IMPORTED_METADATA_TABLE=MISSING_PRIMARY_KEYS);
 
     /* Derive primary keys from the metadata CSV for partitioned tables that need them */
     PROC SQL;
@@ -27,9 +27,11 @@
         SELECT lowcase(table_name)  AS table_name,
                lowcase(column_name) AS column_name,
                1                    AS primary_key_to_add
-        FROM IMPORTED_METADATA_TABLE
-        WHERE ispk NE ""
-          AND lowcase(table_name) IN (SELECT table_name FROM Part_tables_without_primary_key);
+        FROM MISSING_PRIMARY_KEYS
+        WHERE lowcase(table_name) IN (SELECT table_name FROM Part_tables_without_primary_key)
+		/* Aug 2026 bug fix for wrong key in identity_addressable_devices */
+		OR lowcase(table_name) = 'identity_addressable_devices'
+		;
     QUIT;
 
     /* Merge CSV-derived keys into the schema detail */
@@ -37,7 +39,7 @@
         CREATE TABLE schema_details_with_to_many_keys AS
         SELECT s.*,
                CASE
-                   WHEN primary_key_to_add = 1 THEN primary_key_to_add
+                   WHEN primary_key_to_add = 1 THEN 1
                    WHEN primary_key = .        THEN 0
                    ELSE primary_key
                END AS full_primary_key

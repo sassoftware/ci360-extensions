@@ -1,0 +1,10 @@
+event_errors,event_id
+page_details_ext,detail_id
+page_details_ext,load_dttm
+page_details_ext,session_id
+response_history,response_id
+session_details_ext,load_dttm
+session_details_ext,session_id
+identity_addressable_devices,identity_id
+identity_addressable_devices,device_id
+identity_addressable_devices,entrytime

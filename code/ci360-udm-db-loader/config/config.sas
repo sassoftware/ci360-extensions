@@ -19,12 +19,16 @@ OPTIONS NOFULLSTIMER;                  /* regular logging */
 %let External_gateway = https://<external gateway host>/marketingGateway;
 
 /* ---- Schema version ---- */
-%let schema_version          = 20;
-%let previous_schema_version = 19;  * Used only to create a migration script;
+%let schema_version          = 22;
+%let previous_schema_version = 21;  * Used only to create a migration script;
 
-/* ---- Regional and load settings ---- */
-%let timezone_value    = 'AMERICA/NEW_YORK';  * Convert _dttm_tz columns from UTC;
-%let DB_BL_THRESHOLD   = 100000;              * Apply bulkload when row count exceeds this 0 = no bulkload;
+/* ---- Execution options ---- */
+%let include_CDM = 0;
+%let include_dbtReport = 1;
+/* future: %let include_partitioning_logic=1; */
+
+/* ---- Load settings ---- */
+%let DB_BL_THRESHOLD   = 100000;              * Apply bulkload when row count exceeds this 0 = no bulkload; 
 %let DB_LD_OPTS        = %str(INSERTBUFF=32767 DBCOMMIT=0);  * Alternative to bulkload;
 
 /* ---- Path configuration ---- */
@@ -36,7 +40,7 @@ OPTIONS NOFULLSTIMER;                  /* regular logging */
 PROC PRINTTO
     LOG="&UtilityLocation.&slash.logs&slash.udm_&sysparameter._%left(%sysfunc(datetime(),B8601DT15.)).log";
 RUN;
-
+%put ******** UDM Utility START AT %sysfunc(datetime(),E8601DT25.)  ********* ;
 
 /* ===========================================================================
    Database connection parameters - uncomment the section for your engine
@@ -121,7 +125,8 @@ RUN;
 
 /* ---- Temporary schema (same as target by default) ---- */
 %let tmpdbschema    = &dbschema.;
-%let tmp_lib_attrib = &sql_passthru_connection.;
+%let tmp_lib_attrib = &sql_passthru_connection. schema=&tmpdbschema.; * BIGQUERY: Remove schema option. ;
+
 
 /* ---- Data library assignments ---- */
 %let trglib  = target;  * Target library name;

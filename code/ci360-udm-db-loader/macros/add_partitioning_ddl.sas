@@ -25,13 +25,9 @@
     /* SQL Server: partition function, scheme, and clustered primary key   */
     /* ------------------------------------------------------------------ */
     %if &database. = SQLSVR %then %do;
-        %let primary_key_defined = 1;
         %let pf_name = PF_&table_name._&column_name.;
         %let ps_name = PS_&table_name._&column_name.;
         %let pk_name = &table_name._pk;
-        %let _key_list = %sysfunc(tranwrd(%superq(key_list), %str(%"), %str()));
-        %let keylist   = ,%upcase(&_key_list.),;
-        %let pcol      = ,%upcase(%superq(column_name)),;
 
         DATA _NULL_;
             FILE ddlfile MOD;
@@ -54,7 +50,7 @@
             PUT "            SET @sql = @sql + N');';";
             PUT "            EXEC sys.sp_executesql @sql;";
             PUT "        END";
-            PUT "    ) BY &database.;";
+            PUT '    ) BY &database.;';
 
             /* Create partition scheme if it does not already exist */
             PUT '    EXECUTE (';
@@ -74,17 +70,15 @@
             PUT '    EXECUTE (';
             PUT '        ALTER TABLE &dbschema..' "&table_name.";
             PUT "          ADD CONSTRAINT &pk_name.";
-            %if %index(%superq(keylist), %superq(pcol)) %then %do;
-                PUT "           PRIMARY KEY CLUSTERED (" &key_list. ")";
-            %end;
-            %else %do;
-                PUT "           PRIMARY KEY CLUSTERED (&column_name., " &key_list. ")";
-            %end;
-            PUT "            ON &ps_name.(&column_name.);";
+            if index(upcase(cats(',',&key_list.,',')),upcase(cats(',',"&column_name.",','))) then do;
+                PUT "           PRIMARY KEY CLUSTERED ( " &key_list. " )" ;
+			end;
+            else do;
+                PUT "           PRIMARY KEY CLUSTERED (&column_name., " &key_list. " )" ;
+            end;
+			PUT "            ON &ps_name.(&column_name.);";
             PUT '    ) BY &database.;';
         RUN;
     %end;
 
 %mend add_partitioning_ddl;
-
-/* %add_partitioning_ddl(); */

@@ -20,11 +20,15 @@
     %let download_url = &External_gateway./discoverService/dataDownload/eventData/detail/partitionedData?schemaVersion=&api_schema_version.%nrstr(&category)=all;
     %get_udm_mart(mart_type=detail, schema_table=&schema_table., partitioning_table=&partitioning_table., download_url=&download_url.);
 
-    %let download_url = &External_gateway./discoverService/dataDownload/eventData/detail/nonPartitionedData?schemaVersion=&api_schema_version.%nrstr(&category)=cdm;
-    %get_udm_mart(mart_type=cdm, schema_table=&schema_table., partitioning_table=&partitioning_table., download_url=&download_url.);
+	%if &include_CDM.=1 %then %dO;
+	    %let download_url = &External_gateway./discoverService/dataDownload/eventData/detail/nonPartitionedData?schemaVersion=&api_schema_version.%nrstr(&category)=cdm;
+	    %get_udm_mart(mart_type=cdm, schema_table=&schema_table., partitioning_table=&partitioning_table., download_url=&download_url.);
+	%end;
 
-    %let download_url = &External_gateway./discoverService/dataDownload/eventData/dbtReport?schemaVersion=&api_schema_version.;
-    %get_udm_mart(mart_type=dbtrpt, schema_table=&schema_table., partitioning_table=&partitioning_table., download_url=&download_url.);
+	%if &include_dbtReport.=1 %then %do;
+	    %let download_url = &External_gateway./discoverService/dataDownload/eventData/dbtReport?schemaVersion=&api_schema_version.;
+	    %get_udm_mart(mart_type=dbtrpt, schema_table=&schema_table., partitioning_table=&partitioning_table., download_url=&download_url.);
+	%end;
 
     %err_check(Unable to get data from Download URL, &SYSMACRONAME.);
     %if &errFlag %then %do;

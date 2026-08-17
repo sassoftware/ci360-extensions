@@ -12,7 +12,8 @@
         METHOD = "GET"
         OUT    = outfile
         CT     = "application/json"
-        URL    = "%superq(download_url)";
+        URL    = "%superq(download_url)"
+		TIMEOUT= 30;
         HEADERS "Authorization" = "Bearer &DSC_AUTH_TOKEN.";
     RUN;
 
@@ -55,7 +56,8 @@
         PROC HTTP
             METHOD = "GET"
             OUT    = mdfile
-            URL    = "%superq(schemaUrl)";
+            URL    = "%superq(schemaUrl)"
+			TIMEOUT= 30;
         RUN;
 
         LIBNAME mdjson JSON FILEREF=mdfile;

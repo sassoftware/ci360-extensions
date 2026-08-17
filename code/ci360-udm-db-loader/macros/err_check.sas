@@ -6,27 +6,22 @@
 %macro err_check(err_msg, table, err_macro=SYSERR);
     %global UDM_ErrMsg;
 
-    %let UDM_SYSERRORTEXT = %superq(SYSERRORTEXT);
-    %put UDM_SYSERRORTEXT : %superq(SYSERRORTEXT);
-    %put UDM_SYSDBMSG     : %superq(SYSDBMSG);
-    %put UDM_SYSDBRC      : %superq(SYSDBRC);
-
     %if (&syserr. > 4) %then %do;
         %let errFlag      = 1;
         %let UDM_ErrMsg   = 'Unable to load  ' &table. and process aborted at :&err_msg.;
         %put %sysfunc(datetime(),E8601DT25.) --- &syserr.;
-        %put %sysfunc(datetime(),E8601DT25.) --- ERROR: %superq(UDM_SYSERRORTEXT);
+        %put %sysfunc(datetime(),E8601DT25.) --- ERROR: %superq(SYSERRORTEXT);
     %end;
     %else %do;
-        %let UDM_ErrMsg       = ;
-        %let UDM_SYSERRORTEXT = ;
+        %let UDM_ErrMsg     = ;
     %end;
 
     %if &err_macro = SYSDBRC %then %do;
         %put &err_macro. : &&&err_macro.;
-        %if ("&database." = "MSSQL"    AND &&&err_macro. > 01000) OR
+        %if ("&database." = "SQLSVR"   AND &&&err_macro. > 01000) OR
+            ("&database." = "POSTGRES" AND &&&err_macro. > 0)     OR
             ("&database." = "BIGQUERY" AND &&&err_macro. ne 0)    OR
-            ("&database." = "POSTGRES" AND &&&err_macro. > 0)
+            ("&database." = "ORACLE"   AND &&&err_macro. ne 0)
         %then %do;
             %let errFlag    = 1;
             %let UDM_ErrMsg = 'Unable to load UDM  ' &table. and process aborted at :&err_msg.;
@@ -37,5 +32,3 @@
     %end;
 
 %mend err_check;
-
-/* %err_check(test, table_name, err_macro=SQLRC); */

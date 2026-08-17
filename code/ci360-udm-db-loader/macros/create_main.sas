@@ -3,8 +3,6 @@
 /* SPDX-License-Identifier: Apache-2.0                                        */
 /* ****************************************************************************/
 
-OPTION SPOOL;
-
 %macro create_main(database=, schema_version=, DDL=);
     %local database schema_version DDL;
 
@@ -25,7 +23,7 @@ OPTION SPOOL;
         metadata_table=column_metadata
     );
 
-    %if %upcase(&database.) = %str(BIGQUERY) %then %do;
+    %if &database. = BIGQUERY %then %do;
         %get_cluster_column(metadata_table=column_metadata);
     %end;
 
@@ -49,7 +47,7 @@ OPTION SPOOL;
     DATA _NULL_;
         FILE codeout MOD;
         PUT '/*******************************************************************************/';
-        PUT '/* Copyright(c) 2025, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */';
+        PUT '/* Copyright(c) 2026, SAS Institute Inc., Cary, NC, USA.  All Rights Reserved. */';
         PUT '/* SPDX-License-Identifier: Apache-2.0                                         */';
         PUT '/* *****************************************************************************/';
         %if &DDL. = 0 %then %do;
@@ -84,7 +82,7 @@ OPTION SPOOL;
                 ', column_table=column_metadata, key_list="' key_list +(-1) '");';
         %end;
         %else %do;
-            PUT '%create_&database._etl(database=&database., table_name=' table_name
+            PUT '%create_etl(database=&database., table_name=' table_name
                 ', column_table=column_metadata, key_list="' key_list +(-1) '");';
         %end;
     RUN;
