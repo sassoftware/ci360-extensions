@@ -16,10 +16,10 @@ QUIT;
 PROC SQL ;
    CONNECT TO &database. (&sql_passthru_connection.);
    EXECUTE (CREATE TABLE &dbschema..IDENTITY_ADDRESSABLE_DEVICES (
-      reachable_flg char(1) NULL, entrytime timestamp NOT NULL, mobile_app_id varchar(40) NULL, device_id varchar(36) NOT NULL, 
-      identity_id varchar(36) NOT NULL    )) BY &database.;
+      reachable_flg char(1) NULL, entrytime timestamp NULL, mobile_app_id varchar(40) NULL, device_id varchar(36) NOT NULL, 
+      identity_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IDENTITY_ADDRESSABLE_DEVICES
-      ADD CONSTRAINT IDENTITY_ADDRESSABLE_DEVICES_pk  PRIMARY KEY (DEVICE_ID,ENTRYTIME,IDENTITY_ID)) BY &database.;
+      ADD CONSTRAINT IDENTITY_ADDRESSABLE_DEVICES_pk  PRIMARY KEY (DEVICE_ID)) BY &database.;
    DISCONNECT FROM &database.;
 QUIT;
 %err_check (Failed to create Table: IDENTITY_ADDRESSABLE_DEVICES, IDENTITY_ADDRESSABLE_DEVICES);

@@ -33,8 +33,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ABT_ATTRIBUTION_tmp as 
-            select * from &dbschema..ABT_ATTRIBUTION where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ABT_ATTRIBUTION_tmp as select * from &dbschema..ABT_ATTRIBUTION where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ABT_ATTRIBUTION_tmp , ABT_ATTRIBUTION , err_macro=SYSDBRC);
@@ -124,8 +123,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..AB_TEST_PATH_ASSIGNMENT_tmp as 
-            select * from &dbschema..AB_TEST_PATH_ASSIGNMENT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..AB_TEST_PATH_ASSIGNMENT_tmp as select * from &dbschema..AB_TEST_PATH_ASSIGNMENT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : AB_TEST_PATH_ASSIGNMENT_tmp , AB_TEST_PATH_ASSIGNMENT , err_macro=SYSDBRC);
@@ -218,8 +216,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ACTIVITY_CONVERSION_tmp as 
-            select * from &dbschema..ACTIVITY_CONVERSION where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ACTIVITY_CONVERSION_tmp as select * from &dbschema..ACTIVITY_CONVERSION where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ACTIVITY_CONVERSION_tmp , ACTIVITY_CONVERSION , err_macro=SYSDBRC);
@@ -316,8 +313,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ACTIVITY_FLOW_IN_tmp as 
-            select * from &dbschema..ACTIVITY_FLOW_IN where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ACTIVITY_FLOW_IN_tmp as select * from &dbschema..ACTIVITY_FLOW_IN where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ACTIVITY_FLOW_IN_tmp , ACTIVITY_FLOW_IN , err_macro=SYSDBRC);
@@ -411,8 +407,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ACTIVITY_START_tmp as 
-            select * from &dbschema..ACTIVITY_START where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ACTIVITY_START_tmp as select * from &dbschema..ACTIVITY_START where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ACTIVITY_START_tmp , ACTIVITY_START , err_macro=SYSDBRC);
@@ -504,8 +499,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ADVERTISING_CONTACT_tmp as 
-            select * from &dbschema..ADVERTISING_CONTACT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ADVERTISING_CONTACT_tmp as select * from &dbschema..ADVERTISING_CONTACT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ADVERTISING_CONTACT_tmp , ADVERTISING_CONTACT , err_macro=SYSDBRC);
@@ -831,8 +825,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..AUDIENCE_MEMBERSHIP_CHANGE_tmp as 
-            select * from &dbschema..AUDIENCE_MEMBERSHIP_CHANGE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..AUDIENCE_MEMBERSHIP_CHANGE_tmp as select * from &dbschema..AUDIENCE_MEMBERSHIP_CHANGE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : AUDIENCE_MEMBERSHIP_CHANGE_tmp , AUDIENCE_MEMBERSHIP_CHANGE , err_macro=SYSDBRC);
@@ -920,8 +913,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..BUSINESS_PROCESS_DETAILS_tmp as 
-            select * from &dbschema..BUSINESS_PROCESS_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..BUSINESS_PROCESS_DETAILS_tmp as select * from &dbschema..BUSINESS_PROCESS_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : BUSINESS_PROCESS_DETAILS_tmp , BUSINESS_PROCESS_DETAILS , err_macro=SYSDBRC);
@@ -1029,8 +1021,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..CART_ACTIVITY_DETAILS_tmp as 
-            select * from &dbschema..CART_ACTIVITY_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..CART_ACTIVITY_DETAILS_tmp as select * from &dbschema..CART_ACTIVITY_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : CART_ACTIVITY_DETAILS_tmp , CART_ACTIVITY_DETAILS , err_macro=SYSDBRC);
@@ -1368,8 +1359,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..CONTACT_HISTORY_tmp as 
-            select * from &dbschema..CONTACT_HISTORY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..CONTACT_HISTORY_tmp as select * from &dbschema..CONTACT_HISTORY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : CONTACT_HISTORY_tmp , CONTACT_HISTORY , err_macro=SYSDBRC);
@@ -1474,8 +1464,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..CONVERSION_MILESTONE_tmp as 
-            select * from &dbschema..CONVERSION_MILESTONE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..CONVERSION_MILESTONE_tmp as select * from &dbschema..CONVERSION_MILESTONE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : CONVERSION_MILESTONE_tmp , CONVERSION_MILESTONE , err_macro=SYSDBRC);
@@ -1596,8 +1585,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..CUSTOM_EVENTS_tmp as 
-            select * from &dbschema..CUSTOM_EVENTS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..CUSTOM_EVENTS_tmp as select * from &dbschema..CUSTOM_EVENTS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : CUSTOM_EVENTS_tmp , CUSTOM_EVENTS , err_macro=SYSDBRC);
@@ -1703,8 +1691,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..CUSTOM_EVENTS_EXT_tmp as 
-            select * from &dbschema..CUSTOM_EVENTS_EXT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..CUSTOM_EVENTS_EXT_tmp as select * from &dbschema..CUSTOM_EVENTS_EXT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : CUSTOM_EVENTS_EXT_tmp , CUSTOM_EVENTS_EXT , err_macro=SYSDBRC);
@@ -1784,8 +1771,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DAILY_USAGE_tmp as 
-            select * from &dbschema..DAILY_USAGE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DAILY_USAGE_tmp as select * from &dbschema..DAILY_USAGE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DAILY_USAGE_tmp , DAILY_USAGE , err_macro=SYSDBRC);
@@ -1895,8 +1881,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DATA_VIEW_DETAILS_tmp as 
-            select * from &dbschema..DATA_VIEW_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DATA_VIEW_DETAILS_tmp as select * from &dbschema..DATA_VIEW_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DATA_VIEW_DETAILS_tmp , DATA_VIEW_DETAILS , err_macro=SYSDBRC);
@@ -1990,8 +1975,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_ADV_CAMPAIGN_VISITORS_tmp as 
-            select * from &dbschema..DBT_ADV_CAMPAIGN_VISITORS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_ADV_CAMPAIGN_VISITORS_tmp as select * from &dbschema..DBT_ADV_CAMPAIGN_VISITORS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_ADV_CAMPAIGN_VISITORS_tmp , DBT_ADV_CAMPAIGN_VISITORS , err_macro=SYSDBRC);
@@ -2108,8 +2092,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_BUSINESS_PROCESS_tmp as 
-            select * from &dbschema..DBT_BUSINESS_PROCESS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_BUSINESS_PROCESS_tmp as select * from &dbschema..DBT_BUSINESS_PROCESS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_BUSINESS_PROCESS_tmp , DBT_BUSINESS_PROCESS , err_macro=SYSDBRC);
@@ -2215,8 +2198,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_CONTENT_tmp as 
-            select * from &dbschema..DBT_CONTENT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_CONTENT_tmp as select * from &dbschema..DBT_CONTENT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_CONTENT_tmp , DBT_CONTENT , err_macro=SYSDBRC);
@@ -2322,8 +2304,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_DOCUMENTS_tmp as 
-            select * from &dbschema..DBT_DOCUMENTS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_DOCUMENTS_tmp as select * from &dbschema..DBT_DOCUMENTS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_DOCUMENTS_tmp , DBT_DOCUMENTS , err_macro=SYSDBRC);
@@ -2423,8 +2404,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_ECOMMERCE_tmp as 
-            select * from &dbschema..DBT_ECOMMERCE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_ECOMMERCE_tmp as select * from &dbschema..DBT_ECOMMERCE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_ECOMMERCE_tmp , DBT_ECOMMERCE , err_macro=SYSDBRC);
@@ -2537,8 +2517,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_FORMS_tmp as 
-            select * from &dbschema..DBT_FORMS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_FORMS_tmp as select * from &dbschema..DBT_FORMS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_FORMS_tmp , DBT_FORMS , err_macro=SYSDBRC);
@@ -2639,8 +2618,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_GOALS_tmp as 
-            select * from &dbschema..DBT_GOALS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_GOALS_tmp as select * from &dbschema..DBT_GOALS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_GOALS_tmp , DBT_GOALS , err_macro=SYSDBRC);
@@ -2740,8 +2718,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_MEDIA_CONSUMPTION_tmp as 
-            select * from &dbschema..DBT_MEDIA_CONSUMPTION where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_MEDIA_CONSUMPTION_tmp as select * from &dbschema..DBT_MEDIA_CONSUMPTION where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_MEDIA_CONSUMPTION_tmp , DBT_MEDIA_CONSUMPTION , err_macro=SYSDBRC);
@@ -2850,8 +2827,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_PROMOTIONS_tmp as 
-            select * from &dbschema..DBT_PROMOTIONS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_PROMOTIONS_tmp as select * from &dbschema..DBT_PROMOTIONS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_PROMOTIONS_tmp , DBT_PROMOTIONS , err_macro=SYSDBRC);
@@ -2952,8 +2928,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DBT_SEARCH_tmp as 
-            select * from &dbschema..DBT_SEARCH where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DBT_SEARCH_tmp as select * from &dbschema..DBT_SEARCH where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DBT_SEARCH_tmp , DBT_SEARCH , err_macro=SYSDBRC);
@@ -3058,8 +3033,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DECISION_EXECUTION_tmp as 
-            select * from &dbschema..DECISION_EXECUTION where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DECISION_EXECUTION_tmp as select * from &dbschema..DECISION_EXECUTION where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DECISION_EXECUTION_tmp , DECISION_EXECUTION , err_macro=SYSDBRC);
@@ -3148,8 +3122,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DIRECT_CONTACT_tmp as 
-            select * from &dbschema..DIRECT_CONTACT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DIRECT_CONTACT_tmp as select * from &dbschema..DIRECT_CONTACT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DIRECT_CONTACT_tmp , DIRECT_CONTACT , err_macro=SYSDBRC);
@@ -3250,8 +3223,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..DOCUMENT_DETAILS_tmp as 
-            select * from &dbschema..DOCUMENT_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..DOCUMENT_DETAILS_tmp as select * from &dbschema..DOCUMENT_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : DOCUMENT_DETAILS_tmp , DOCUMENT_DETAILS , err_macro=SYSDBRC);
@@ -3348,8 +3320,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_BOUNCE_tmp as 
-            select * from &dbschema..EMAIL_BOUNCE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_BOUNCE_tmp as select * from &dbschema..EMAIL_BOUNCE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_BOUNCE_tmp , EMAIL_BOUNCE , err_macro=SYSDBRC);
@@ -3458,8 +3429,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_CLICK_tmp as 
-            select * from &dbschema..EMAIL_CLICK where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_CLICK_tmp as select * from &dbschema..EMAIL_CLICK where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_CLICK_tmp , EMAIL_CLICK , err_macro=SYSDBRC);
@@ -3580,8 +3550,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_COMPLAINT_tmp as 
-            select * from &dbschema..EMAIL_COMPLAINT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_COMPLAINT_tmp as select * from &dbschema..EMAIL_COMPLAINT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_COMPLAINT_tmp , EMAIL_COMPLAINT , err_macro=SYSDBRC);
@@ -3687,8 +3656,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_OPEN_tmp as 
-            select * from &dbschema..EMAIL_OPEN where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_OPEN_tmp as select * from &dbschema..EMAIL_OPEN where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_OPEN_tmp , EMAIL_OPEN , err_macro=SYSDBRC);
@@ -3805,8 +3773,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_OPTOUT_tmp as 
-            select * from &dbschema..EMAIL_OPTOUT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_OPTOUT_tmp as select * from &dbschema..EMAIL_OPTOUT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_OPTOUT_tmp , EMAIL_OPTOUT , err_macro=SYSDBRC);
@@ -3916,8 +3883,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_OPTOUT_DETAILS_tmp as 
-            select * from &dbschema..EMAIL_OPTOUT_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_OPTOUT_DETAILS_tmp as select * from &dbschema..EMAIL_OPTOUT_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_OPTOUT_DETAILS_tmp , EMAIL_OPTOUT_DETAILS , err_macro=SYSDBRC);
@@ -4025,8 +3991,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_REPLY_tmp as 
-            select * from &dbschema..EMAIL_REPLY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_REPLY_tmp as select * from &dbschema..EMAIL_REPLY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_REPLY_tmp , EMAIL_REPLY , err_macro=SYSDBRC);
@@ -4134,8 +4099,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_SEND_tmp as 
-            select * from &dbschema..EMAIL_SEND where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_SEND_tmp as select * from &dbschema..EMAIL_SEND where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_SEND_tmp , EMAIL_SEND , err_macro=SYSDBRC);
@@ -4244,8 +4208,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EMAIL_VIEW_tmp as 
-            select * from &dbschema..EMAIL_VIEW where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EMAIL_VIEW_tmp as select * from &dbschema..EMAIL_VIEW where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EMAIL_VIEW_tmp , EMAIL_VIEW , err_macro=SYSDBRC);
@@ -4350,8 +4313,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EVENT_ERRORS_tmp as 
-            select * from &dbschema..EVENT_ERRORS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EVENT_ERRORS_tmp as select * from &dbschema..EVENT_ERRORS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EVENT_ERRORS_tmp , EVENT_ERRORS , err_macro=SYSDBRC);
@@ -4439,8 +4401,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..EXTERNAL_EVENT_tmp as 
-            select * from &dbschema..EXTERNAL_EVENT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..EXTERNAL_EVENT_tmp as select * from &dbschema..EXTERNAL_EVENT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : EXTERNAL_EVENT_tmp , EXTERNAL_EVENT , err_macro=SYSDBRC);
@@ -4578,8 +4539,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..FORM_DETAILS_tmp as 
-            select * from &dbschema..FORM_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..FORM_DETAILS_tmp as select * from &dbschema..FORM_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : FORM_DETAILS_tmp , FORM_DETAILS , err_macro=SYSDBRC);
@@ -4666,18 +4626,17 @@
       %err_check (Failed to drop temporary DB table IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
    %if &errFlag = 0 %then %do;
-      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID,ENTRYTIME,IDENTITY_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
+      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
       DATA work.IDENTITY_ADDRESSABLE_DEVICES_tmp ;
          SET work.IDENTITY_ADDRESSABLE_DEVICES ;
-         WHERE 1=1 AND DEVICE_ID IS NOT NULL AND ENTRYTIME IS NOT NULL AND IDENTITY_ID IS NOT NULL;
+         WHERE 1=1 AND DEVICE_ID IS NOT NULL;
       RUN;
       %err_check (Failed to prepare staging table : IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IDENTITY_ADDRESSABLE_DEVICES_tmp as 
-            select * from &dbschema..IDENTITY_ADDRESSABLE_DEVICES where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IDENTITY_ADDRESSABLE_DEVICES_tmp as select * from &dbschema..IDENTITY_ADDRESSABLE_DEVICES where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES , err_macro=SYSDBRC);
@@ -4695,12 +4654,12 @@
       PROC SQL NOERRORSTOP;
          CONNECT TO &database. (&sql_passthru_connection.);
          EXECUTE (MERGE INTO &dbschema..IDENTITY_ADDRESSABLE_DEVICES b USING &tmpdbschema..IDENTITY_ADDRESSABLE_DEVICES_tmp d ON (
-            b.entrytime = d.entrytime AND 
-            b.device_id = d.device_id AND b.identity_id = d.identity_id )
+            b.device_id = d.device_id )
          WHEN MATCHED THEN
          UPDATE SET
             b.reachable_flg = d.reachable_flg, 
-            b.mobile_app_id = d.mobile_app_id
+            b.entrytime = d.entrytime, b.mobile_app_id = d.mobile_app_id, 
+            b.identity_id = d.identity_id
          WHEN NOT MATCHED THEN INSERT (
             reachable_flg, entrytime, mobile_app_id, 
             device_id, identity_id
@@ -4758,8 +4717,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IDENTITY_ATTRIBUTES_tmp as 
-            select * from &dbschema..IDENTITY_ATTRIBUTES where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IDENTITY_ATTRIBUTES_tmp as select * from &dbschema..IDENTITY_ATTRIBUTES where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IDENTITY_ATTRIBUTES_tmp , IDENTITY_ATTRIBUTES , err_macro=SYSDBRC);
@@ -4840,8 +4798,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IDENTITY_MAP_tmp as 
-            select * from &dbschema..IDENTITY_MAP where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IDENTITY_MAP_tmp as select * from &dbschema..IDENTITY_MAP where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IDENTITY_MAP_tmp , IDENTITY_MAP , err_macro=SYSDBRC);
@@ -4925,8 +4882,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IMPRESSION_DELIVERED_tmp as 
-            select * from &dbschema..IMPRESSION_DELIVERED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IMPRESSION_DELIVERED_tmp as select * from &dbschema..IMPRESSION_DELIVERED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IMPRESSION_DELIVERED_tmp , IMPRESSION_DELIVERED , err_macro=SYSDBRC);
@@ -5047,8 +5003,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IMPRESSION_SPOT_VIEWABLE_tmp as 
-            select * from &dbschema..IMPRESSION_SPOT_VIEWABLE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IMPRESSION_SPOT_VIEWABLE_tmp as select * from &dbschema..IMPRESSION_SPOT_VIEWABLE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IMPRESSION_SPOT_VIEWABLE_tmp , IMPRESSION_SPOT_VIEWABLE , err_macro=SYSDBRC);
@@ -5305,8 +5260,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IN_APP_FAILED_tmp as 
-            select * from &dbschema..IN_APP_FAILED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IN_APP_FAILED_tmp as select * from &dbschema..IN_APP_FAILED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IN_APP_FAILED_tmp , IN_APP_FAILED , err_macro=SYSDBRC);
@@ -5414,8 +5368,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IN_APP_MESSAGE_tmp as 
-            select * from &dbschema..IN_APP_MESSAGE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IN_APP_MESSAGE_tmp as select * from &dbschema..IN_APP_MESSAGE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IN_APP_MESSAGE_tmp , IN_APP_MESSAGE , err_macro=SYSDBRC);
@@ -5521,8 +5474,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IN_APP_SEND_tmp as 
-            select * from &dbschema..IN_APP_SEND where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IN_APP_SEND_tmp as select * from &dbschema..IN_APP_SEND where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IN_APP_SEND_tmp , IN_APP_SEND , err_macro=SYSDBRC);
@@ -5627,8 +5579,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..IN_APP_TARGETING_REQUEST_tmp as 
-            select * from &dbschema..IN_APP_TARGETING_REQUEST where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..IN_APP_TARGETING_REQUEST_tmp as select * from &dbschema..IN_APP_TARGETING_REQUEST where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : IN_APP_TARGETING_REQUEST_tmp , IN_APP_TARGETING_REQUEST , err_macro=SYSDBRC);
@@ -5721,8 +5672,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_ENTRY_tmp as 
-            select * from &dbschema..JOURNEY_ENTRY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_ENTRY_tmp as select * from &dbschema..JOURNEY_ENTRY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_ENTRY_tmp , JOURNEY_ENTRY , err_macro=SYSDBRC);
@@ -5815,8 +5765,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_EXIT_tmp as 
-            select * from &dbschema..JOURNEY_EXIT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_EXIT_tmp as select * from &dbschema..JOURNEY_EXIT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_EXIT_tmp , JOURNEY_EXIT , err_macro=SYSDBRC);
@@ -5916,8 +5865,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_HOLDOUT_tmp as 
-            select * from &dbschema..JOURNEY_HOLDOUT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_HOLDOUT_tmp as select * from &dbschema..JOURNEY_HOLDOUT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_HOLDOUT_tmp , JOURNEY_HOLDOUT , err_macro=SYSDBRC);
@@ -6010,8 +5958,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_NODE_ENTRY_tmp as 
-            select * from &dbschema..JOURNEY_NODE_ENTRY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_NODE_ENTRY_tmp as select * from &dbschema..JOURNEY_NODE_ENTRY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_NODE_ENTRY_tmp , JOURNEY_NODE_ENTRY , err_macro=SYSDBRC);
@@ -6108,8 +6055,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_SUCCESS_tmp as 
-            select * from &dbschema..JOURNEY_SUCCESS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_SUCCESS_tmp as select * from &dbschema..JOURNEY_SUCCESS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_SUCCESS_tmp , JOURNEY_SUCCESS , err_macro=SYSDBRC);
@@ -6209,8 +6155,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_SUPPRESSION_tmp as 
-            select * from &dbschema..JOURNEY_SUPPRESSION where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_SUPPRESSION_tmp as select * from &dbschema..JOURNEY_SUPPRESSION where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_SUPPRESSION_tmp , JOURNEY_SUPPRESSION , err_macro=SYSDBRC);
@@ -6302,8 +6247,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..JOURNEY_TEST_SUCCESS_tmp as 
-            select * from &dbschema..JOURNEY_TEST_SUCCESS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..JOURNEY_TEST_SUCCESS_tmp as select * from &dbschema..JOURNEY_TEST_SUCCESS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : JOURNEY_TEST_SUCCESS_tmp , JOURNEY_TEST_SUCCESS , err_macro=SYSDBRC);
@@ -11076,8 +11020,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MEDIA_ACTIVITY_DETAILS_tmp as 
-            select * from &dbschema..MEDIA_ACTIVITY_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MEDIA_ACTIVITY_DETAILS_tmp as select * from &dbschema..MEDIA_ACTIVITY_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MEDIA_ACTIVITY_DETAILS_tmp , MEDIA_ACTIVITY_DETAILS , err_macro=SYSDBRC);
@@ -11166,8 +11109,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MEDIA_DETAILS_tmp as 
-            select * from &dbschema..MEDIA_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MEDIA_DETAILS_tmp as select * from &dbschema..MEDIA_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MEDIA_DETAILS_tmp , MEDIA_DETAILS , err_macro=SYSDBRC);
@@ -11264,8 +11206,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MEDIA_DETAILS_EXT_tmp as 
-            select * from &dbschema..MEDIA_DETAILS_EXT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MEDIA_DETAILS_EXT_tmp as select * from &dbschema..MEDIA_DETAILS_EXT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MEDIA_DETAILS_EXT_tmp , MEDIA_DETAILS_EXT , err_macro=SYSDBRC);
@@ -11359,8 +11300,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MOBILE_FOCUS_DEFOCUS_tmp as 
-            select * from &dbschema..MOBILE_FOCUS_DEFOCUS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MOBILE_FOCUS_DEFOCUS_tmp as select * from &dbschema..MOBILE_FOCUS_DEFOCUS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MOBILE_FOCUS_DEFOCUS_tmp , MOBILE_FOCUS_DEFOCUS , err_macro=SYSDBRC);
@@ -11453,8 +11393,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MOBILE_SPOTS_tmp as 
-            select * from &dbschema..MOBILE_SPOTS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MOBILE_SPOTS_tmp as select * from &dbschema..MOBILE_SPOTS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MOBILE_SPOTS_tmp , MOBILE_SPOTS , err_macro=SYSDBRC);
@@ -11546,8 +11485,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..MONTHLY_USAGE_tmp as 
-            select * from &dbschema..MONTHLY_USAGE where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..MONTHLY_USAGE_tmp as select * from &dbschema..MONTHLY_USAGE where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : MONTHLY_USAGE_tmp , MONTHLY_USAGE , err_macro=SYSDBRC);
@@ -11657,8 +11595,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..NOTIFICATION_FAILED_tmp as 
-            select * from &dbschema..NOTIFICATION_FAILED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..NOTIFICATION_FAILED_tmp as select * from &dbschema..NOTIFICATION_FAILED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : NOTIFICATION_FAILED_tmp , NOTIFICATION_FAILED , err_macro=SYSDBRC);
@@ -11770,8 +11707,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..NOTIFICATION_OPENED_tmp as 
-            select * from &dbschema..NOTIFICATION_OPENED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..NOTIFICATION_OPENED_tmp as select * from &dbschema..NOTIFICATION_OPENED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : NOTIFICATION_OPENED_tmp , NOTIFICATION_OPENED , err_macro=SYSDBRC);
@@ -11881,8 +11817,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..NOTIFICATION_SEND_tmp as 
-            select * from &dbschema..NOTIFICATION_SEND where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..NOTIFICATION_SEND_tmp as select * from &dbschema..NOTIFICATION_SEND where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : NOTIFICATION_SEND_tmp , NOTIFICATION_SEND , err_macro=SYSDBRC);
@@ -11991,8 +11926,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..NOTIFICATION_TARGETING_REQUE_tmp as 
-            select * from &dbschema..NOTIFICATION_TARGETING_REQUEST where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..NOTIFICATION_TARGETING_REQUE_tmp as select * from &dbschema..NOTIFICATION_TARGETING_REQUEST where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : NOTIFICATION_TARGETING_REQUE_tmp , NOTIFICATION_TARGETING_REQUEST , err_macro=SYSDBRC);
@@ -12089,8 +12023,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ORDER_DETAILS_tmp as 
-            select * from &dbschema..ORDER_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ORDER_DETAILS_tmp as select * from &dbschema..ORDER_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ORDER_DETAILS_tmp , ORDER_DETAILS , err_macro=SYSDBRC);
@@ -12203,8 +12136,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..ORDER_SUMMARY_tmp as 
-            select * from &dbschema..ORDER_SUMMARY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..ORDER_SUMMARY_tmp as select * from &dbschema..ORDER_SUMMARY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : ORDER_SUMMARY_tmp , ORDER_SUMMARY , err_macro=SYSDBRC);
@@ -12321,8 +12253,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..OUTBOUND_SYSTEM_tmp as 
-            select * from &dbschema..OUTBOUND_SYSTEM where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..OUTBOUND_SYSTEM_tmp as select * from &dbschema..OUTBOUND_SYSTEM where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : OUTBOUND_SYSTEM_tmp , OUTBOUND_SYSTEM , err_macro=SYSDBRC);
@@ -12435,8 +12366,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PAGE_DETAILS_tmp as 
-            select * from &dbschema..PAGE_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PAGE_DETAILS_tmp as select * from &dbschema..PAGE_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PAGE_DETAILS_tmp , PAGE_DETAILS , err_macro=SYSDBRC);
@@ -12558,8 +12488,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PAGE_DETAILS_EXT_tmp as 
-            select * from &dbschema..PAGE_DETAILS_EXT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PAGE_DETAILS_EXT_tmp as select * from &dbschema..PAGE_DETAILS_EXT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PAGE_DETAILS_EXT_tmp , PAGE_DETAILS_EXT , err_macro=SYSDBRC);
@@ -12645,8 +12574,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PAGE_ERRORS_tmp as 
-            select * from &dbschema..PAGE_ERRORS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PAGE_ERRORS_tmp as select * from &dbschema..PAGE_ERRORS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PAGE_ERRORS_tmp , PAGE_ERRORS , err_macro=SYSDBRC);
@@ -12874,8 +12802,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PRODUCT_VIEWS_tmp as 
-            select * from &dbschema..PRODUCT_VIEWS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PRODUCT_VIEWS_tmp as select * from &dbschema..PRODUCT_VIEWS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PRODUCT_VIEWS_tmp , PRODUCT_VIEWS , err_macro=SYSDBRC);
@@ -12981,8 +12908,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PROMOTION_DISPLAYED_tmp as 
-            select * from &dbschema..PROMOTION_DISPLAYED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PROMOTION_DISPLAYED_tmp as select * from &dbschema..PROMOTION_DISPLAYED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PROMOTION_DISPLAYED_tmp , PROMOTION_DISPLAYED , err_macro=SYSDBRC);
@@ -13087,8 +13013,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..PROMOTION_USED_tmp as 
-            select * from &dbschema..PROMOTION_USED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..PROMOTION_USED_tmp as select * from &dbschema..PROMOTION_USED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : PROMOTION_USED_tmp , PROMOTION_USED , err_macro=SYSDBRC);
@@ -13192,8 +13117,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..RESPONSE_HISTORY_tmp as 
-            select * from &dbschema..RESPONSE_HISTORY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..RESPONSE_HISTORY_tmp as select * from &dbschema..RESPONSE_HISTORY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : RESPONSE_HISTORY_tmp , RESPONSE_HISTORY , err_macro=SYSDBRC);
@@ -13298,8 +13222,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SEARCH_RESULTS_tmp as 
-            select * from &dbschema..SEARCH_RESULTS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SEARCH_RESULTS_tmp as select * from &dbschema..SEARCH_RESULTS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SEARCH_RESULTS_tmp , SEARCH_RESULTS , err_macro=SYSDBRC);
@@ -13404,8 +13327,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SEARCH_RESULTS_EXT_tmp as 
-            select * from &dbschema..SEARCH_RESULTS_EXT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SEARCH_RESULTS_EXT_tmp as select * from &dbschema..SEARCH_RESULTS_EXT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SEARCH_RESULTS_EXT_tmp , SEARCH_RESULTS_EXT , err_macro=SYSDBRC);
@@ -13486,8 +13408,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SEGMENT_MEMBERSHIP_tmp as 
-            select * from &dbschema..SEGMENT_MEMBERSHIP where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SEGMENT_MEMBERSHIP_tmp as select * from &dbschema..SEGMENT_MEMBERSHIP where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SEGMENT_MEMBERSHIP_tmp , SEGMENT_MEMBERSHIP , err_macro=SYSDBRC);
@@ -13575,8 +13496,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SESSION_DETAILS_tmp as 
-            select * from &dbschema..SESSION_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SESSION_DETAILS_tmp as select * from &dbschema..SESSION_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SESSION_DETAILS_tmp , SESSION_DETAILS , err_macro=SYSDBRC);
@@ -13717,8 +13637,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SESSION_DETAILS_EXT_tmp as 
-            select * from &dbschema..SESSION_DETAILS_EXT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SESSION_DETAILS_EXT_tmp as select * from &dbschema..SESSION_DETAILS_EXT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SESSION_DETAILS_EXT_tmp , SESSION_DETAILS_EXT , err_macro=SYSDBRC);
@@ -13807,8 +13726,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_MESSAGE_CLICKED_tmp as 
-            select * from &dbschema..SMS_MESSAGE_CLICKED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_MESSAGE_CLICKED_tmp as select * from &dbschema..SMS_MESSAGE_CLICKED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_MESSAGE_CLICKED_tmp , SMS_MESSAGE_CLICKED , err_macro=SYSDBRC);
@@ -13909,8 +13827,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_MESSAGE_DELIVERED_tmp as 
-            select * from &dbschema..SMS_MESSAGE_DELIVERED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_MESSAGE_DELIVERED_tmp as select * from &dbschema..SMS_MESSAGE_DELIVERED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_MESSAGE_DELIVERED_tmp , SMS_MESSAGE_DELIVERED , err_macro=SYSDBRC);
@@ -14011,8 +13928,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_MESSAGE_FAILED_tmp as 
-            select * from &dbschema..SMS_MESSAGE_FAILED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_MESSAGE_FAILED_tmp as select * from &dbschema..SMS_MESSAGE_FAILED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_MESSAGE_FAILED_tmp , SMS_MESSAGE_FAILED , err_macro=SYSDBRC);
@@ -14116,8 +14032,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_MESSAGE_REPLY_tmp as 
-            select * from &dbschema..SMS_MESSAGE_REPLY where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_MESSAGE_REPLY_tmp as select * from &dbschema..SMS_MESSAGE_REPLY where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_MESSAGE_REPLY_tmp , SMS_MESSAGE_REPLY , err_macro=SYSDBRC);
@@ -14218,8 +14133,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_MESSAGE_SEND_tmp as 
-            select * from &dbschema..SMS_MESSAGE_SEND where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_MESSAGE_SEND_tmp as select * from &dbschema..SMS_MESSAGE_SEND where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_MESSAGE_SEND_tmp , SMS_MESSAGE_SEND , err_macro=SYSDBRC);
@@ -14321,8 +14235,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_OPTOUT_tmp as 
-            select * from &dbschema..SMS_OPTOUT where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_OPTOUT_tmp as select * from &dbschema..SMS_OPTOUT where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_OPTOUT_tmp , SMS_OPTOUT , err_macro=SYSDBRC);
@@ -14424,8 +14337,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SMS_OPTOUT_DETAILS_tmp as 
-            select * from &dbschema..SMS_OPTOUT_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SMS_OPTOUT_DETAILS_tmp as select * from &dbschema..SMS_OPTOUT_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SMS_OPTOUT_DETAILS_tmp , SMS_OPTOUT_DETAILS , err_macro=SYSDBRC);
@@ -14529,8 +14441,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SPOT_CLICKED_tmp as 
-            select * from &dbschema..SPOT_CLICKED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SPOT_CLICKED_tmp as select * from &dbschema..SPOT_CLICKED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SPOT_CLICKED_tmp , SPOT_CLICKED , err_macro=SYSDBRC);
@@ -14648,8 +14559,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..SPOT_REQUESTED_tmp as 
-            select * from &dbschema..SPOT_REQUESTED where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..SPOT_REQUESTED_tmp as select * from &dbschema..SPOT_REQUESTED where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : SPOT_REQUESTED_tmp , SPOT_REQUESTED , err_macro=SYSDBRC);
@@ -14792,8 +14702,7 @@
    %if &errFlag = 0 %then %do;
       PROC SQL noerrorstop;
          connect to &database. (&sql_passthru_connection.);
-         execute( create  table &tmpdbschema..VISIT_DETAILS_tmp as 
-            select * from &dbschema..VISIT_DETAILS where 1=0            ) by &database.;
+         execute( create table &tmpdbschema..VISIT_DETAILS_tmp as select * from &dbschema..VISIT_DETAILS where 1=0) by &database.;
          disconnect from &database.;
       QUIT;
       %err_check (Failed to create table : VISIT_DETAILS_tmp , VISIT_DETAILS , err_macro=SYSDBRC);

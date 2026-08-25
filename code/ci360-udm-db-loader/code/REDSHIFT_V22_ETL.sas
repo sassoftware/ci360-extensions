@@ -4626,10 +4626,10 @@
       %err_check (Failed to drop temporary DB table IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
    %if &errFlag = 0 %then %do;
-      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID,ENTRYTIME,IDENTITY_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
+      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
       DATA work.IDENTITY_ADDRESSABLE_DEVICES_tmp ;
          SET work.IDENTITY_ADDRESSABLE_DEVICES ;
-         WHERE 1=1 AND DEVICE_ID IS NOT NULL AND ENTRYTIME IS NOT NULL AND IDENTITY_ID IS NOT NULL;
+         WHERE 1=1 AND DEVICE_ID IS NOT NULL;
       RUN;
       %err_check (Failed to prepare staging table : IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
@@ -4654,12 +4654,12 @@
       PROC SQL NOERRORSTOP;
          CONNECT TO &database. (&sql_passthru_connection.);
          EXECUTE (MERGE INTO &dbschema..IDENTITY_ADDRESSABLE_DEVICES USING &tmpdbschema..IDENTITY_ADDRESSABLE_DEVICES_tmp AS d ON (
-            IDENTITY_ADDRESSABLE_DEVICES.entrytime = d.entrytime AND 
-            IDENTITY_ADDRESSABLE_DEVICES.device_id = d.device_id AND IDENTITY_ADDRESSABLE_DEVICES.identity_id = d.identity_id )
+            IDENTITY_ADDRESSABLE_DEVICES.device_id = d.device_id )
          WHEN MATCHED THEN
          UPDATE SET
             reachable_flg = d.reachable_flg, 
-            mobile_app_id = d.mobile_app_id
+            entrytime = d.entrytime, mobile_app_id = d.mobile_app_id, 
+            identity_id = d.identity_id
          WHEN NOT MATCHED THEN INSERT (
             reachable_flg, entrytime, mobile_app_id, 
             device_id, identity_id

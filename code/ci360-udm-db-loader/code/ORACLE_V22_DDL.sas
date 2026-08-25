@@ -10,7 +10,7 @@ PROC SQL ;
       interaction varchar(260) NOT NULL, identity_id varchar(36) NULL, creative_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ABT_ATTRIBUTION MODIFY
       PARTITION BY RANGE( interaction_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ABT_ATTRIBUTION
@@ -27,7 +27,7 @@ PROC SQL ;
       activity_id varchar(36) NULL, context_val varchar(256) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..AB_TEST_PATH_ASSIGNMENT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..AB_TEST_PATH_ASSIGNMENT
@@ -45,7 +45,7 @@ PROC SQL ;
       context_type_nm varchar(256) NULL, channel_user_id varchar(300) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_CONVERSION MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_CONVERSION
@@ -62,7 +62,7 @@ PROC SQL ;
       abtest_path_id varchar(36) NULL, channel_nm varchar(40) NULL, event_designed_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_FLOW_IN MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_FLOW_IN
@@ -79,7 +79,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_START MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ACTIVITY_START
@@ -98,7 +98,7 @@ PROC SQL ;
       aud_occurrence_id varchar(36) NULL, advertising_platform_nm varchar(100) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ADVERTISING_CONTACT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ADVERTISING_CONTACT
@@ -177,7 +177,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..AUDIENCE_MEMBERSHIP_CHANGE MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..AUDIENCE_MEMBERSHIP_CHANGE
@@ -198,7 +198,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..BUSINESS_PROCESS_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..BUSINESS_PROCESS_DETAILS
@@ -220,7 +220,7 @@ PROC SQL ;
       channel_nm varchar(40) NULL, cart_nm varchar(100) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CART_ACTIVITY_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CART_ACTIVITY_DETAILS
@@ -319,7 +319,7 @@ PROC SQL ;
       parent_event_designed_id varchar(36) NULL, task_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CONTACT_HISTORY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CONTACT_HISTORY
@@ -343,7 +343,7 @@ PROC SQL ;
       goal_id varchar(36) NULL, event_nm varchar(256) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CONVERSION_MILESTONE MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CONVERSION_MILESTONE
@@ -363,7 +363,7 @@ PROC SQL ;
       custom_event_group_nm varchar(256) NULL, channel_user_id varchar(300) NULL, channel_nm varchar(40) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CUSTOM_EVENTS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CUSTOM_EVENTS
@@ -378,7 +378,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CUSTOM_EVENTS_EXT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..CUSTOM_EVENTS_EXT
@@ -412,7 +412,7 @@ PROC SQL ;
       detail_id_hex varchar(32) NULL, detail_id varchar(32) NULL, channel_user_id varchar(300) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DATA_VIEW_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DATA_VIEW_DETAILS
@@ -436,7 +436,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_ADV_CAMPAIGN_VISITORS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_ADV_CAMPAIGN_VISITORS
@@ -457,7 +457,7 @@ PROC SQL ;
       visit_origination_tracking_code varchar(65) NULL, visitor_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_BUSINESS_PROCESS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_BUSINESS_PROCESS
@@ -478,7 +478,7 @@ PROC SQL ;
       device_type varchar(52) NULL, visit_id varchar(32) NULL, visit_origination_name varchar(260) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_CONTENT MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_CONTENT
@@ -498,7 +498,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_DOCUMENTS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_DOCUMENTS
@@ -521,7 +521,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_ECOMMERCE MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_ECOMMERCE
@@ -541,7 +541,7 @@ PROC SQL ;
       visitor_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_FORMS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_FORMS
@@ -561,7 +561,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_GOALS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_GOALS
@@ -583,7 +583,7 @@ PROC SQL ;
       visitor_type varchar(10) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_MEDIA_CONSUMPTION MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_MEDIA_CONSUMPTION
@@ -603,7 +603,7 @@ PROC SQL ;
       visit_origination_type varchar(65) NULL, visitor_type varchar(10) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_PROMOTIONS MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_PROMOTIONS
@@ -624,7 +624,7 @@ PROC SQL ;
       visitor_type varchar(10) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_SEARCH MODIFY
       PARTITION BY RANGE( session_complete_load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DBT_SEARCH
@@ -654,7 +654,7 @@ PROC SQL ;
       task_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DIRECT_CONTACT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DIRECT_CONTACT
@@ -672,7 +672,7 @@ PROC SQL ;
       session_id_hex varchar(29) NULL, visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DOCUMENT_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..DOCUMENT_DETAILS
@@ -693,7 +693,7 @@ PROC SQL ;
       program_id varchar(50) NULL, raw_reason_txt varchar(1000) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_BOUNCE MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_BOUNCE
@@ -717,7 +717,7 @@ PROC SQL ;
       program_id varchar(50) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_CLICK MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_CLICK
@@ -737,7 +737,7 @@ PROC SQL ;
       audience_id varchar(36) NULL, aud_occurrence_id varchar(36) NULL, analysis_group_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_COMPLAINT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_COMPLAINT
@@ -760,7 +760,7 @@ PROC SQL ;
       analysis_group_id varchar(36) NULL, agent_family_nm varchar(100) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPEN MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPEN
@@ -781,7 +781,7 @@ PROC SQL ;
       audience_id varchar(36) NULL, aud_occurrence_id varchar(36) NULL, analysis_group_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPTOUT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPTOUT
@@ -802,7 +802,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPTOUT_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_OPTOUT_DETAILS
@@ -823,7 +823,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_REPLY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_REPLY
@@ -844,7 +844,7 @@ PROC SQL ;
       analysis_group_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_SEND MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_SEND
@@ -865,7 +865,7 @@ PROC SQL ;
       aud_occurrence_id varchar(36) NULL, analysis_group_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_VIEW MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EMAIL_VIEW
@@ -893,7 +893,7 @@ PROC SQL ;
       channel_nm varchar(40) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EXTERNAL_EVENT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..EXTERNAL_EVENT
@@ -927,7 +927,7 @@ PROC SQL ;
       visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..FORM_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..FORM_DETAILS
@@ -938,10 +938,10 @@ QUIT;
 PROC SQL ;
    CONNECT TO &database. (&sql_passthru_connection.);
    EXECUTE (CREATE TABLE &dbschema..IDENTITY_ADDRESSABLE_DEVICES (
-      reachable_flg char(1) NULL, entrytime timestamp NOT NULL, mobile_app_id varchar(40) NULL, device_id varchar(36) NOT NULL, 
-      identity_id varchar(36) NOT NULL    )) BY &database.;
+      reachable_flg char(1) NULL, entrytime timestamp NULL, mobile_app_id varchar(40) NULL, device_id varchar(36) NOT NULL, 
+      identity_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IDENTITY_ADDRESSABLE_DEVICES
-      ADD CONSTRAINT IDENTITY_ADDRESSABLE_DEVICES_pk  PRIMARY KEY (DEVICE_ID,ENTRYTIME,IDENTITY_ID)) BY &database.;
+      ADD CONSTRAINT IDENTITY_ADDRESSABLE_DEVICES_pk  PRIMARY KEY (DEVICE_ID)) BY &database.;
    DISCONNECT FROM &database.;
 QUIT;
 %err_check (Failed to create Table: IDENTITY_ADDRESSABLE_DEVICES, IDENTITY_ADDRESSABLE_DEVICES);
@@ -981,7 +981,7 @@ PROC SQL ;
       visit_id_hex varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IMPRESSION_DELIVERED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IMPRESSION_DELIVERED
@@ -1005,7 +1005,7 @@ PROC SQL ;
       response_tracking_cd varchar(36) NULL, segment_version_id varchar(36) NULL, spot_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IMPRESSION_SPOT_VIEWABLE MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IMPRESSION_SPOT_VIEWABLE
@@ -1081,7 +1081,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_FAILED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_FAILED
@@ -1101,7 +1101,7 @@ PROC SQL ;
       segment_id varchar(36) NULL, spot_id varchar(36) NULL, task_version_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_MESSAGE MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_MESSAGE
@@ -1121,7 +1121,7 @@ PROC SQL ;
       spot_id varchar(36) NULL, task_version_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_SEND MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_SEND
@@ -1138,7 +1138,7 @@ PROC SQL ;
       event_nm varchar(256) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_TARGETING_REQUEST MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..IN_APP_TARGETING_REQUEST
@@ -1155,7 +1155,7 @@ PROC SQL ;
       event_nm varchar(256) NULL, journey_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_ENTRY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_ENTRY
@@ -1174,7 +1174,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_EXIT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_EXIT
@@ -1191,7 +1191,7 @@ PROC SQL ;
       identity_type_nm varchar(100) NULL, journey_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_HOLDOUT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_HOLDOUT
@@ -1209,7 +1209,7 @@ PROC SQL ;
       node_id varchar(36) NULL, previous_node_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_NODE_ENTRY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_NODE_ENTRY
@@ -1228,7 +1228,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_SUCCESS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_SUCCESS
@@ -1246,7 +1246,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_SUPPRESSION MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..JOURNEY_SUPPRESSION
@@ -2251,7 +2251,7 @@ PROC SQL ;
       detail_id_hex varchar(32) NULL, media_uri_txt varchar(2024) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_ACTIVITY_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_ACTIVITY_DETAILS
@@ -2269,7 +2269,7 @@ PROC SQL ;
       media_player_version_txt varchar(20) NULL, visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_DETAILS
@@ -2286,7 +2286,7 @@ PROC SQL ;
       detail_id_hex varchar(32) NULL, detail_id varchar(32) NULL, media_uri_txt varchar(2024) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_DETAILS_EXT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MEDIA_DETAILS_EXT
@@ -2303,7 +2303,7 @@ PROC SQL ;
       session_id_hex varchar(29) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MOBILE_FOCUS_DEFOCUS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MOBILE_FOCUS_DEFOCUS
@@ -2321,7 +2321,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MOBILE_SPOTS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..MOBILE_SPOTS
@@ -2359,7 +2359,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_FAILED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_FAILED
@@ -2380,7 +2380,7 @@ PROC SQL ;
       response_tracking_cd varchar(36) NULL, segment_version_id varchar(36) NULL, task_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_OPENED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_OPENED
@@ -2401,7 +2401,7 @@ PROC SQL ;
       segment_version_id varchar(36) NULL, task_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_SEND MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_SEND
@@ -2419,7 +2419,7 @@ PROC SQL ;
       event_id varchar(36) NOT NULL, identity_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_TARGETING_REQUEST MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..NOTIFICATION_TARGETING_REQUEST
@@ -2441,7 +2441,7 @@ PROC SQL ;
       visit_id_hex varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ORDER_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ORDER_DETAILS
@@ -2464,7 +2464,7 @@ PROC SQL ;
       shipping_state_region_cd varchar(256) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ORDER_SUMMARY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..ORDER_SUMMARY
@@ -2486,7 +2486,7 @@ PROC SQL ;
       spot_id varchar(36) NULL, task_version_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..OUTBOUND_SYSTEM MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..OUTBOUND_SYSTEM
@@ -2510,7 +2510,7 @@ PROC SQL ;
       identity_id varchar(36) NULL, referrer_url_txt varchar(1332) NULL, visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_DETAILS
@@ -2525,7 +2525,7 @@ PROC SQL ;
       detail_id_hex varchar(32) NULL, detail_id varchar(32) NOT NULL, session_id varchar(29) NOT NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_DETAILS_EXT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_DETAILS_EXT
@@ -2542,7 +2542,7 @@ PROC SQL ;
       detail_id varchar(32) NULL, error_location_txt varchar(41) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_ERRORS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PAGE_ERRORS
@@ -2604,7 +2604,7 @@ PROC SQL ;
       session_id varchar(29) NULL, shipping_message_txt varchar(650) NULL, visit_id_hex varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PRODUCT_VIEWS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PRODUCT_VIEWS
@@ -2624,7 +2624,7 @@ PROC SQL ;
       visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PROMOTION_DISPLAYED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PROMOTION_DISPLAYED
@@ -2644,7 +2644,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PROMOTION_USED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..PROMOTION_USED
@@ -2664,7 +2664,7 @@ PROC SQL ;
       task_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..RESPONSE_HISTORY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..RESPONSE_HISTORY
@@ -2684,7 +2684,7 @@ PROC SQL ;
       visit_id varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SEARCH_RESULTS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SEARCH_RESULTS
@@ -2699,7 +2699,7 @@ PROC SQL ;
       event_designed_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SEARCH_RESULTS_EXT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SEARCH_RESULTS_EXT
@@ -2739,7 +2739,7 @@ PROC SQL ;
       user_language_cd varchar(12) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SESSION_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SESSION_DETAILS
@@ -2755,7 +2755,7 @@ PROC SQL ;
       session_id_hex varchar(29) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SESSION_DETAILS_EXT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SESSION_DETAILS_EXT
@@ -2774,7 +2774,7 @@ PROC SQL ;
       event_designed_id varchar(36) NULL, event_nm varchar(256) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_CLICKED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_CLICKED
@@ -2793,7 +2793,7 @@ PROC SQL ;
       event_nm varchar(256) NULL, journey_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_DELIVERED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_DELIVERED
@@ -2813,7 +2813,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_FAILED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_FAILED
@@ -2832,7 +2832,7 @@ PROC SQL ;
       response_tracking_cd varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_REPLY MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_REPLY
@@ -2851,7 +2851,7 @@ PROC SQL ;
       journey_id varchar(36) NULL, response_tracking_cd varchar(36) NULL, sms_message_id varchar(40) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_SEND MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_MESSAGE_SEND
@@ -2870,7 +2870,7 @@ PROC SQL ;
       audience_id varchar(36) NULL, event_nm varchar(256) NULL, sender_id varchar(40) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_OPTOUT MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_OPTOUT
@@ -2890,7 +2890,7 @@ PROC SQL ;
          )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_OPTOUT_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SMS_OPTOUT_DETAILS
@@ -2913,7 +2913,7 @@ PROC SQL ;
       segment_version_id varchar(36) NULL, task_version_id varchar(36) NULL, visit_id_hex varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SPOT_CLICKED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SPOT_CLICKED
@@ -2931,7 +2931,7 @@ PROC SQL ;
       event_nm varchar(256) NULL, identity_id varchar(36) NULL, spot_id varchar(36) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SPOT_REQUESTED MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..SPOT_REQUESTED
@@ -2960,7 +2960,7 @@ PROC SQL ;
       visit_id_hex varchar(32) NULL    )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..VISIT_DETAILS MODIFY
       PARTITION BY RANGE( load_dttm ) INTERVAL (NUMTODSINTERVAL(1, 'DAY')) (
-         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-10','YYYY-MM-DD') )
+         PARTITION p0 VALUES LESS THAN (TO_DATE('2026-08-21','YYYY-MM-DD') )
          SEGMENT CREATION IMMEDIATE
       )) BY &database.;
    EXECUTE (ALTER TABLE &dbschema..VISIT_DETAILS

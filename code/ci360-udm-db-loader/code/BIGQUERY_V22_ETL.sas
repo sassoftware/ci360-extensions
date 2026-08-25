@@ -2455,6 +2455,87 @@
             basket_id, cu_customer_id, device_type, product_id, 
             session_id, visit_origination_creative, visit_origination_placement, visit_origination_type, 
             visitor_type
+         ) VALUES (
+            d.basket_removes_revenue, d.basket_adds_revenue, d.product_purchase_revenues, 
+            d.basket_adds_units, d.basket_adds, d.product_views, d.product_purchase_units, 
+            d.basket_removes_units, d.product_purchases, d.basket_removes, d.baskets_completed, 
+            d.baskets_abandoned, d.baskets_started, d.product_activity_dttm, d.product_activity_dttm_tz, 
+            d.session_start_dttm, d.session_complete_load_dttm, d.session_start_dttm_tz, d.visitor_id, 
+            d.visit_origination_tracking_code, d.visit_origination_name, d.visit_id, d.product_sku, 
+            d.product_name, d.product_group_name, d.device_name, d.bouncer, 
+            d.basket_id, d.cu_customer_id, d.device_type, d.product_id, 
+            d.session_id, d.visit_origination_creative, d.visit_origination_placement, d.visit_origination_type, 
+            d.visitor_type  )) BY &database.;
+         DISCONNECT FROM &database.;
+      QUIT;
+      %err_check (Failed to Update/Insert into : DBT_ECOMMERCE_tmp , DBT_ECOMMERCE , err_macro=SYSDBRC);
+   %end;
+   %if %sysfunc(exist(&tmplib..DBT_ECOMMERCE_tmp )) %then %do;
+      PROC SQL NOERRORSTOP;
+         DROP TABLE &tmplib..DBT_ECOMMERCE_tmp ;
+      QUIT;
+   %end;
+   %if &errFlag = 0 %then %do;
+      PROC SQL NOERRORSTOP;
+         DROP TABLE &udmmart..DBT_ECOMMERCE;
+         DROP TABLE work.DBT_ECOMMERCE;
+      QUIT;
+   %end;
+   %else %do;
+      %put %sysfunc(datetime(),E8601DT25.) --- &UDM_ErrMsg;
+   %end;
+   %put %sysfunc(datetime(),E8601DT25.) --- Processing table DBT_ECOMMERCE;
+   %put------------------------------------------------------------------;
+%end;
+%if %sysfunc(exist(&udmmart..DBT_FORMS)) %then %do;
+   %let errFlag=0;
+   %let nrows=0;
+   %let dsid=%sysfunc(open(&udmmart..DBT_FORMS));
+   %let nrows=%sysfunc(attrn(&dsid,nlobs));
+   %let dsid=%sysfunc(close(&dsid));
+   %if &nrows = 0 %then %do;
+      %put NOTE: DBT_FORMS has 0 rows. Dropping and skipping load.;
+      PROC SQL NOERRORSTOP;
+         DROP TABLE &udmmart..DBT_FORMS;
+      QUIT;
+      %let errFlag=1;
+   %end;
+   %if &errFlag = 0 %then %do;
+      PROC SQL NOERRORSTOP;
+         DROP TABLE &tmplib..DBT_FORMS_tmp ;
+      QUIT;
+      %err_check (Failed to drop temporary DB table DBT_FORMS_tmp , DBT_FORMS_tmp );
+   %end;
+   %if &errFlag = 0 %then %do;
+      %check_duplicate_from_source(table_nm=DBT_FORMS , table_keys=%str(DETAIL_ID), out_table=work.DBT_FORMS );
+      DATA work.DBT_FORMS_tmp ;
+         SET work.DBT_FORMS ;
+         WHERE 1=1 AND DETAIL_ID IS NOT NULL;
+      RUN;
+      %err_check (Failed to prepare staging table : DBT_FORMS_tmp , DBT_FORMS_tmp );
+   %end;
+   %if &errFlag = 0 %then %do;
+      PROC SQL noerrorstop;
+         connect to &database. (&sql_passthru_connection.);
+         execute( create table &tmpdbschema..DBT_FORMS_tmp as select * from &dbschema..DBT_FORMS where 1=0) by &database.;
+         disconnect from &database.;
+      QUIT;
+      %err_check (Failed to create table : DBT_FORMS_tmp , DBT_FORMS , err_macro=SYSDBRC);
+   %end;
+   %if &errFlag = 0 %then %do;
+      PROC APPEND data=work.DBT_FORMS_tmp  base=&tmplib..DBT_FORMS_tmp
+         %if &nrows ge &DB_BL_THRESHOLD. and &DB_BL_THRESHOLD. gt 0 %then %do;
+            (&DB_BL_OPTS)
+         %end;
+         force;
+      RUN;
+      %err_check (Failed to upload to temp location in DB : DBT_FORMS_tmp , DBT_FORMS );
+   %end;
+   %if &errFlag = 0 %then %do;
+      PROC SQL NOERRORSTOP;
+         CONNECT TO &database. (&sql_passthru_connection.);
+         EXECUTE (MERGE INTO &dbschema..DBT_FORMS b USING &tmpdbschema..DBT_FORMS_tmp d ON (
+            b.detail_id = d.detail_id )
          WHEN MATCHED THEN
          UPDATE SET
             b.attempts = d.attempts, 
@@ -4545,10 +4626,10 @@
       %err_check (Failed to drop temporary DB table IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
    %if &errFlag = 0 %then %do;
-      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID,ENTRYTIME,IDENTITY_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
+      %check_duplicate_from_source(table_nm=IDENTITY_ADDRESSABLE_DEVICES , table_keys=%str(DEVICE_ID), out_table=work.IDENTITY_ADDRESSABLE_DEVICES );
       DATA work.IDENTITY_ADDRESSABLE_DEVICES_tmp ;
          SET work.IDENTITY_ADDRESSABLE_DEVICES ;
-         WHERE 1=1 AND DEVICE_ID IS NOT NULL AND ENTRYTIME IS NOT NULL AND IDENTITY_ID IS NOT NULL;
+         WHERE 1=1 AND DEVICE_ID IS NOT NULL;
       RUN;
       %err_check (Failed to prepare staging table : IDENTITY_ADDRESSABLE_DEVICES_tmp , IDENTITY_ADDRESSABLE_DEVICES_tmp );
    %end;
@@ -4573,12 +4654,12 @@
       PROC SQL NOERRORSTOP;
          CONNECT TO &database. (&sql_passthru_connection.);
          EXECUTE (MERGE INTO &dbschema..IDENTITY_ADDRESSABLE_DEVICES b USING &tmpdbschema..IDENTITY_ADDRESSABLE_DEVICES_tmp d ON (
-            b.entrytime = d.entrytime AND 
-            b.device_id = d.device_id AND b.identity_id = d.identity_id )
+            b.device_id = d.device_id )
          WHEN MATCHED THEN
          UPDATE SET
             b.reachable_flg = d.reachable_flg, 
-            b.mobile_app_id = d.mobile_app_id
+            b.entrytime = d.entrytime, b.mobile_app_id = d.mobile_app_id, 
+            b.identity_id = d.identity_id
          WHEN NOT MATCHED THEN INSERT (
             reachable_flg, entrytime, mobile_app_id, 
             device_id, identity_id
