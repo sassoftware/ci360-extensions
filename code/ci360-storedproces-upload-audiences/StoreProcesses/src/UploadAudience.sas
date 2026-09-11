@@ -12,7 +12,7 @@ COPY TO AUTOEXEC /app/sas/config/Lev1/SASApp/StoredProcessServer/autoexec_usermo
 %let STP_AUD_CLIENT_SECRET    = access_point_secret_key;
 %let STP_AUD_API_USER         = api_user;
 %let STP_AUD_API_PW           = api_password;
-%let STP_AUD_VAL_MINUTES      = 10; --how long script check the audience upload status
+%let STP_AUD_VAL_MINUTES      = 30; --how long script check the audience upload status
 %let STP_AUD_EMAIL_LIST       = "admin@yourcompany.com" "marketing@yourcompany.com";
 %let STP_proxyhost            = proxy.yoursite.com;   --do not create in autoexec if not used
 %let STP_proxypw              = proxy_password;       --do not create in autoexec if not used 
@@ -111,7 +111,15 @@ options mprint mlogic ;
 %RetrieveConfigparameters();
 
 /*Redirect log*/
-proc printto log="&STP_AUD_LOG_DIR.stpAudienceUpload.log";
+
+/*Building a unique suffix from this session's own WORK path so parallel STP
+  invocations never contend for the same physical log file*/
+%let _wp = %sysfunc(pathname(work));
+%let _stpUniqueId = %scan(&_wp,-1,%str(\/));
+
+/*Redirect log - one log file per session/audience to support parallel runs*/
+proc printto log="&STP_AUD_LOG_DIR.stpAudienceUpload_&audience_id._&_stpUniqueId..log";
+
 data _null_;
 put "Process started 2";
 run;
@@ -316,7 +324,10 @@ run;
       run;
       
       data attributes(keep=name datatype columnnumber);/*table contains name and datatype of each attribute*/
+      retain columnnumber 0;
       set addd.dataitems(rename=(name=name1));
+      if upcase(strip(name1)) eq upcase("CONTEXT_TYPE") then delete; /*support of context type */
+      columnnumber+1;
       name=upcase(strip(label));
       if upcase(name1) eq upcase("&identColumn.") then call symput('identName',strip(label));
       run;

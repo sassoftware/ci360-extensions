@@ -120,7 +120,7 @@ Add parameters into - appserver_autoexec_usermods.sas located eg. in SAS\Config\
           %let STP_AUD_CLIENT_SECRET    = access_point_secret_key;
           %let STP_AUD_API_USER         = api_user;
           %let STP_AUD_API_PW           = api_password;
-          %let STP_AUD_VAL_MINUTES      = 10; --how long script check the audience upload status
+          %let STP_AUD_VAL_MINUTES      = 20; --how long script check the audience upload status
           %let STP_AUD_EMAIL_LIST       = "admin@yourcompany.com" "marketing@yourcompany.com";
           %let STP_proxyhost            = proxy.yoursite.com;   --do not create in autoexec if not used
           %let STP_proxypw              = proxy_password;       --do not create in autoexec if not used 
