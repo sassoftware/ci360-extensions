@@ -128,7 +128,7 @@ Add parameters into - appserver_autoexec_usermods.sas located eg. in SAS\Config\
           %let STP_proxyport            = 1234;                 --do not create in autoexec if not used    
 
 ######    Autoexec variable description:
-    - STP_AUD_LOG_DIR       - Folder Path where STP will store logs
+    - STP_AUD_LOG_DIR       - Folder Path where STP will store logs. Include the trailing folder separator character in the directory name
     - STP_AUD_EMAIL_FROM    - Email address which will be used as a sender for status email delivery
     - STP_AUD_GATEWAY       - SAS 360 API GW (Value from `General Settings → Access Points External gateway host`)
     - STP_AUD_TENANT_ID     - Tenant Id (Value from Audience Upload Access point)
@@ -145,23 +145,14 @@ Add parameters into - appserver_autoexec_usermods.sas located eg. in SAS\Config\
 
 ##### **2.2. Configuration Files - Using config.dat**
 If using config.dat instead of autoexec:
-- Maintain **same parameter order** as provided in project sample
+- Customize the project sample based on your environment
 - Set `projectpath` hidden parameter in STP metadata to enable log redirection
+- The location of config.dat is based on the value of `projectpath`
 
 
+An example of the file is provide in the project.  The variable names and description are identical to those described above in section 2.1 
 
-An example of the file is provide in the project.
-- External_gateway - SAS 360 API GW (Value from General Settings → Access Points External gateway host)
-- tenant_id - Tenant Id (Value from Audience Upload Access point)
-- client_secret - Client Secret (Value from Audience Upload Access point)
-- api_user - API User ID (Value from Audience Upload API User)
-- api_password - API User Secret (Value from Audience Upload API User)
-- minutesValidatingStatus - How long the Direct marketing task will try to get status of Audience upload (in Minutes) - 10 for 
-- email_list - List of the email addresses which will be notified about fail - long time upload processes
-- email_from - Email address which will be used as a sender for status email delivery   
-
-If you use config.data file, projectpath macrovariable is used to redirect log for testing. This Macrovariable is defined as a hidden parameter in Stored Process in SAS Management Console.
- You need to set a value for your environment.
+If you use config.data file, projectpath macrovariable is used to redirect log for testing. This Macrovariable is defined as a hidden parameter in Stored Process in SAS Management Console.  You need to set a value for your environment.  Logs are written to `projectpath`/logs
 
 #### **3. Upload store process metadata to SAS 360**
 - Upload STP to SAS 360 using Direct Marketing agent commands - Detail info about commands: https://go.documentation.sas.com/doc/en/cintcdc/production.a/cintag/dmaccess-commands.htm
@@ -222,7 +213,7 @@ Copy Audience Id of saved audience:
 
 
 
-## Upload Audience Store process Usage
+## Upload Audience Stored process Usage
 
 
 - Create a DM Task and use Audience export template as an output.
@@ -257,6 +248,6 @@ After DM Task execution:
 ## Logging
 
 - Logs are written to `STP_AUD_LOG_DIR`.
-- If log redirection (projectpath) is used, logs route to the specified path.
-- If not, logs default to `onprem.log`.
+- If log redirection (projectpath) is used, logs route to the path:  (projectpath)/logs
+
 
