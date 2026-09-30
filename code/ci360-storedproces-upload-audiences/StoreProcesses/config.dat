@@ -1,8 +1,15 @@
-External_gateway=https://extapigwservice-training.ci360.sas.com
-tenant_id=xxxxxxxxxxxxxxxxxx
-client_secret=xxxxxxxxxxx
-api_user=API-xxxx-xxxxx
-api_password=xxxxxxxxxx
-minutesValidatingStatus=2
-email_list="youremail1@yourcompany.com" "youremail2@yourcompany.com" 
-email_from="AudienceProcess@yourcompany.com"
+STP_AUD_GATEWAY=https://extapigwservice-prod.ci360.sas.com
+STP_AUD_TENANT_ID=fceabcdeabcde1234abcdef9
+STP_AUD_CLIENT_SECRET=XXX
+STP_AUD_API_USER=API-abc12-meme
+STP_AUD_API_PW=123456789123456789BE
+# If the STP_AUD_VAL_MINUTES value is too low an alert email is sent to the STP_AUD_EMAIL_LIST
+STP_AUD_VAL_MINUTES=30
+# Separate multiple email addresses with a blank space.  Quote your email address in double quotes
+STP_AUD_EMAIL_LIST="your.name@company.com" "mail.list@company.com" 
+STP_AUD_EMAIL_FROM="upload-audience@company.com"
+# Leave the following parameters blank unless you need to use a proxy
+STP_proxyhost=
+STP_proxypw=
+STP_proxyuser=
+STP_proxyport=
