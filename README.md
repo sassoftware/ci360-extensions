@@ -110,6 +110,9 @@ This report consolidates all analyzed nodes into a single view, showing client c
 
 - [__Create EXT view in UDM__](code/ci360-udm-_ext-views/): This tool creates views in the CI 360 Unified Data Model (UDM) that transpose custom properties, so each custom property can be represented as a separate column.
 
+- [__CI 360 CDM as Views__](code/ci360-cdm-as-views/): This tool creates views that map data from the CI 360 Unified Data Model (UDM) to the CI 360 Common Data Model (CDM) format. These views provide a compatibility layer for existing data flows that rely on CDM tables by exposing the underlying UDM data through CDM-based views.
+
+
 ### Event Streaming Agents
 This repository contains several sample agents that stream CI 360 events into different target systems. To determine which agent is most relevant for your use case, refer to the detailed descriptions linked below.
 - [__CI360 Event to DB Agent__](code/ci360-events-to-db-agent): Streams CI 360 events into a relational database table. 
