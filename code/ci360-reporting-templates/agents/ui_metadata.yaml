@@ -1,0 +1,3 @@
+interface:
+  display_name: "CI 360 UDM Reporting"
+  short_description: "Generate CI 360 UDM SQL and report guidance"
