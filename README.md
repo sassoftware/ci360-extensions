@@ -112,6 +112,7 @@ This report consolidates all analyzed nodes into a single view, showing client c
 
 - [__CI 360 CDM as Views__](code/ci360-cdm-as-views/): This tool creates views that map data from the CI 360 Unified Data Model (UDM) to the CI 360 Common Data Model (CDM) format. These views provide a compatibility layer for existing data flows that rely on CDM tables by exposing the underlying UDM data through CDM-based views.
 
+- [__CI 360 Reporting Templates__](code/ci360-reporting-templates): This repository contains reporting templates to get value more quickly out of the CI 360 ​UDM data.
 
 ### Event Streaming Agents
 This repository contains several sample agents that stream CI 360 events into different target systems. To determine which agent is most relevant for your use case, refer to the detailed descriptions linked below.
