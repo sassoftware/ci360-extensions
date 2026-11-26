@@ -114,7 +114,7 @@ This report consolidates all analyzed nodes into a single view, showing client c
 
 - [__CI 360 Reporting Templates__](code/ci360-reporting-templates): This repository contains reporting templates to get value more quickly out of the CI 360 ​UDM data.
 
-- [__CI 360 Reporting Templates__](code/ci-360-server-side-tagging-gtm-sample): A sample that integrates CI 360 with Google Tag Manager (GTM) using server side tagging.
+- [__CI 360 Server-Side Tagging with Google Tag Manager__](code/ci-360-server-side-tagging-gtm-sample): A sample that integrates CI 360 with Google Tag Manager (GTM) using server side tagging.
 
 ### Event Streaming Agents
 This repository contains several sample agents that stream CI 360 events into different target systems. To determine which agent is most relevant for your use case, refer to the detailed descriptions linked below.
