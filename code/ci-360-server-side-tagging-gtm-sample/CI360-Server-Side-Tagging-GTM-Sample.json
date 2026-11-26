@@ -1,0 +1,1178 @@
+{
+  "exportFormatVersion": 2,
+  "containerVersion": {
+    "accountId": "0",
+    "containerId": "0",
+    "containerVersionId": "0",
+    "container": {
+      "accountId": "0",
+      "containerId": "0",
+      "name": "CI 360 Server Side Tagging Sample",
+      "publicId": "GTM-XXXXXXX",
+      "usageContext": [
+        "SERVER"
+      ],
+      "features": {
+        "supportUserPermissions": true,
+        "supportEnvironments": true,
+        "supportWorkspaces": true,
+        "supportGtagConfigs": false,
+        "supportBuiltInVariables": true,
+        "supportClients": true,
+        "supportFolders": true,
+        "supportTags": true,
+        "supportTemplates": true,
+        "supportTriggers": true,
+        "supportVariables": true,
+        "supportVersions": true,
+        "supportZones": true,
+        "supportTransformations": true
+      }
+    },
+    "tag": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "92",
+        "name": "Google Analytics GA4",
+        "type": "sgtmgaaw",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "redactVisitorIp",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "epToIncludeDropdown",
+            "value": "all"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "upToIncludeDropdown",
+            "value": "all"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "G-XXXXXXXXXX"
+          }
+        ],
+        "firingTriggerId": [
+          "91"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "paused": true
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "103",
+        "name": "[CI 360] - Scroll Depth",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "apiEventKey",
+            "value": "scroll_depth"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "custom"
+          },
+          {
+            "type": "LIST",
+            "key": "additionalProperties",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "scroll_percent"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{ed - scroll_percent}}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "96"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "104",
+        "name": "[CI 360] - Spot Clicked",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "spotKey",
+            "value": "{{ed - spot_key}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "requestId",
+            "value": "{{ed - request_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "clickThrough"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "variantId",
+            "value": "{{ed - variant_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "taskId",
+            "value": "{{ed - task_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "creativeId",
+            "value": "{{ed - creative_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "87"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "paused": true
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "105",
+        "name": "[CI 360] - Load",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "pageTitle",
+            "value": "{{ed - page_title}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "load"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "pageReferrer",
+            "value": "{{ed - page_referrer}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "82"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "106",
+        "name": "[CI 360] - Click",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "targetInnerText",
+            "value": "{{ed - click_text}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "targetUri",
+            "value": "{{ed - click_url}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "click"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "70"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "108",
+        "name": "[CI 360] - Spot Viewable",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "spotKey",
+            "value": "{{ed - spot_key}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "requestId",
+            "value": "{{ed - request_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "impressionViewable"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "variantId",
+            "value": "{{ed - variant_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "taskId",
+            "value": "{{ed - task_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "creativeId",
+            "value": "{{ed - creative_id}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "79"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "paused": true
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "109",
+        "name": "[CI 360] - Duration",
+        "type": "cvt_0_102",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "apiEventKey",
+            "value": "duration"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "custom"
+          },
+          {
+            "type": "LIST",
+            "key": "additionalProperties",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "duration_seconds"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{ed - duration_seconds}}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "uri",
+            "value": "{{ed - page_location}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "76"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "110",
+        "name": "[CI 360] - Content Request",
+        "type": "cvt_0_107",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "spotKey",
+            "value": "{{ed - spot_key}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "authHeader",
+            "value": "{{const - [CI 360] Auth Header}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "endpoint",
+            "value": "{{const - [CI 360] Endpoint}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "identityType",
+            "value": "_ci360_id"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "tenantId",
+            "value": "{{const - [CI 360] Tenant ID}}"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "consentState",
+            "value": "{{ed - ci360_consent}}"
+          }
+        ],
+        "firingTriggerId": [
+          "94"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        },
+        "paused": true
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "70",
+        "name": "[CI 360] - Event - click",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "click"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "76",
+        "name": "[CI 360] - Event - duration",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "duration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "79",
+        "name": "[CI 360] - Event - spot_viewable",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "spot_viewable"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "82",
+        "name": "[CI 360] - Event - page_view",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "page_view"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "87",
+        "name": "[CI 360] - Event - spot_clicked",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "spot_clicked"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "91",
+        "name": "All GA4 Client Events",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Client Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "GA4 client"
+              }
+            ]
+          },
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{ed - analytics_consent}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "granted"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "94",
+        "name": "[CI 360] - Event - request_content",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "request_content"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "96",
+        "name": "[CI 360] - Event - scroll_depth",
+        "type": "ALWAYS",
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{Event Name}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "scroll_depth"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "66",
+        "name": "ed - page_location",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "page_location"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "67",
+        "name": "const - [CI 360] Endpoint",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "https://configure-your-tenant.example.invalid"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "68",
+        "name": "const - [CI 360] Tenant ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "REPLACE_WITH_YOUR_CI360_TENANT_ID"
+          }
+        ]
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "69",
+        "name": "ed - click_url",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "click_url"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "71",
+        "name": "const - [CI 360] Auth Header",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "Bearer PLACEHOLDER"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "72",
+        "name": "ed - click_text",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "click_text"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "75",
+        "name": "ed - scroll_percent",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "scroll_percent"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "77",
+        "name": "ed - duration_seconds",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "duration_seconds"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "80",
+        "name": "ed - page_title",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "page_title"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "81",
+        "name": "ed - page_referrer",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "page_referrer"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "84",
+        "name": "ed - task_id",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "task_id"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "85",
+        "name": "ed - creative_id",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "creative_id"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "86",
+        "name": "ed - spot_key",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "spot_key"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "88",
+        "name": "ed - request_id",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "request_id"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "89",
+        "name": "ed - variant_id",
+        "type": "ed",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "variant_id"
+          }
+        ],
+        "formatValue": {}
+      },
+      {
+        "name": "ed - ci360_consent",
+        "type": "ed",
+        "variableId": "111",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "ci360_consent"
+          }
+        ]
+      },
+      {
+        "name": "ed - analytics_consent",
+        "type": "ed",
+        "variableId": "112",
+        "parameter": [
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "keyPath",
+            "value": "analytics_consent"
+          }
+        ]
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "type": "EVENT_NAME",
+        "name": "Event Name"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "type": "CLIENT_NAME",
+        "name": "Client Name"
+      }
+    ],
+    "customTemplate": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "templateId": "102",
+        "name": "[CI 360] Events API v2",
+        "templateData": "___INFO___\n\n{\n  \"type\": \"TAG\",\n  \"id\": \"cvt_temp_public_id\",\n  \"version\": 1,\n  \"securityGroups\": [],\n  \"displayName\": \"[CI 360] Events API v2\",\n  \"description\": \"Posts a single event to the CI 360 Server-Side Events API. Supports all identity types (_ci360_id, visitor_id, customer_id, login_id, subject_id). Builds correct nested payload per event type.\",\n  \"containerContexts\": [\n    \"SERVER\"\n  ]\n}\n\n\n___TEMPLATE_PARAMETERS___\n\n[\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"endpoint\",\n    \"displayName\": \"CI 360 Endpoint\",\n    \"simpleValueType\": true,\n    \"help\": \"Required HTTPS origin. Configure matching send_http permissions before use.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Endpoint is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"tenantId\",\n    \"displayName\": \"External Tenant ID\",\n    \"simpleValueType\": true,\n    \"help\": \"Required. 24-character hex tenant ID.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Tenant ID is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"authHeader\",\n    \"displayName\": \"Authorization Header\",\n    \"simpleValueType\": true,\n    \"help\": \"Required full Bearer credential. Placeholders are rejected.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"identityType\",\n    \"displayName\": \"Identity Type\",\n    \"simpleValueType\": true,\n    \"help\": \"_ci360_id (default) | visitor_id | customer_id | login_id | subject_id\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Identity Type is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"identityValue\",\n    \"displayName\": \"Identity Value\",\n    \"simpleValueType\": true,\n    \"help\": \"Required non-empty string for known identity types; otherwise cookie lookup is used.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"cookieName\",\n    \"displayName\": \"Cookie Name Override\",\n    \"simpleValueType\": true,\n    \"help\": \"Optional. Default: _ci360_id or _SI_VID_1.<tenantId> for visitor_id.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"eventName\",\n    \"displayName\": \"Event Name\",\n    \"simpleValueType\": true,\n    \"help\": \"Required. load | click | impressionViewable | clickThrough | custom | etc.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Event Name is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"apiEventKey\",\n    \"displayName\": \"API Event Key\",\n    \"simpleValueType\": true,\n    \"help\": \"Required for custom, cart, cartAction, internalSearch, productView, promotion. Must match CI 360 UI event key.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"uri\",\n    \"displayName\": \"URI\",\n    \"simpleValueType\": true,\n    \"help\": \"Required. Page URL for the event.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"URI is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"sessionId\",\n    \"displayName\": \"Session ID (augmented)\",\n    \"simpleValueType\": true,\n    \"help\": \"Optional. From ci360('info').sid. Merges event into existing SAS tag session.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"loadId\",\n    \"displayName\": \"Load ID (augmented)\",\n    \"simpleValueType\": true,\n    \"help\": \"Optional. Required when sessionId is set. From ci360('info').loadId.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"pageTitle\",\n    \"displayName\": \"Page Title\",\n    \"simpleValueType\": true,\n    \"help\": \"load events only. -> properties.pageTitle\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"pageReferrer\",\n    \"displayName\": \"Page Referrer\",\n    \"simpleValueType\": true,\n    \"help\": \"load events only. -> properties.pageReferrer\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"ipAddress\",\n    \"displayName\": \"IP Address\",\n    \"simpleValueType\": true,\n    \"help\": \"load events only. -> properties.ip. For geo-IP lookup.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"userAgent\",\n    \"displayName\": \"User Agent\",\n    \"simpleValueType\": true,\n    \"help\": \"load events only. -> properties.userAgent. For device detection.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"targetUri\",\n    \"displayName\": \"Target URI\",\n    \"simpleValueType\": true,\n    \"help\": \"click events only. -> click.targetUri\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"targetInnerText\",\n    \"displayName\": \"Target Inner Text\",\n    \"simpleValueType\": true,\n    \"help\": \"click events only. -> click.targetInnerText\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"spotKey\",\n    \"displayName\": \"Spot Key\",\n    \"simpleValueType\": true,\n    \"help\": \"impressionViewable / clickThrough only.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"taskId\",\n    \"displayName\": \"Task ID\",\n    \"simpleValueType\": true,\n    \"help\": \"impressionViewable / clickThrough only. From Content Request API response.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"creativeId\",\n    \"displayName\": \"Creative ID\",\n    \"simpleValueType\": true,\n    \"help\": \"impressionViewable / clickThrough only. From Content Request API response.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"variantId\",\n    \"displayName\": \"Variant ID\",\n    \"simpleValueType\": true,\n    \"help\": \"impressionViewable / clickThrough only. From Content Request API response.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"requestId\",\n    \"displayName\": \"Request ID\",\n    \"simpleValueType\": true,\n    \"help\": \"impressionViewable / clickThrough only. From Content Request API response.\"\n  },\n  {\n    \"type\": \"SIMPLE_TABLE\",\n    \"name\": \"additionalProperties\",\n    \"displayName\": \"Additional Properties\",\n    \"simpleTableColumns\": [\n      {\n        \"defaultValue\": \"\",\n        \"displayName\": \"Name\",\n        \"name\": \"name\",\n        \"type\": \"TEXT\"\n      },\n      {\n        \"defaultValue\": \"\",\n        \"displayName\": \"Value\",\n        \"name\": \"value\",\n        \"type\": \"TEXT\"\n      }\n    ],\n    \"help\": \"For custom events. Flat key-value pairs added to the payload.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"consentState\",\n    \"displayName\": \"CI 360 consent state\",\n    \"simpleValueType\": true,\n    \"help\": \"Must equal granted. Map only from the approved website consent decision.\"\n  }\n]\n\n\n___SANDBOXED_JS_FOR_SERVER___\n\nconst sendHttpRequest = require('sendHttpRequest');\nconst getCookieValues = require('getCookieValues');\nconst setCookie = require('setCookie');\nconst logToConsole = require('logToConsole');\nconst encodeUriComponent = require('encodeUriComponent');\nconst parseUrl = require('parseUrl');\nconst getType = require('getType');\nconst queryPermission = require('queryPermission');\nconst JSON = require('JSON');\n\nconst identityType = data.identityType || '_ci360_id';\nconst COOKIE_MAX_AGE = 63072000;\nvar endpoint = '';\nvar finished = false;\n\nfunction text(value) {\n  return getType(value) === 'string' ? value.trim() : '';\n}\nfunction finish(ok, reason) {\n  if (finished) { return; }\n  finished = true;\n  // Never log identity-bearing URLs, credentials, payloads or response bodies.\n  logToConsole('[CI 360]', reason);\n  if (ok) { data.gtmOnSuccess(); } else { data.gtmOnFailure(); }\n}\nfunction isHexTenant(value) {\n  if (getType(value) !== 'string' || value.length !== 24) { return false; }\n  for (var i = 0; i < value.length; i++) {\n    if ('0123456789abcdefABCDEF'.indexOf(value.charAt(i)) < 0) { return false; }\n  }\n  return true;\n}\nfunction validateConfig() {\n  if (data.consentState !== 'granted') {\n    finish(false, 'Skipped: CI 360 consent not granted'); return false;\n  }\n  var url = parseUrl(text(data.endpoint));\n  if (!url || url.protocol !== 'https:' || url.username || url.password ||\n      url.search || url.hash || (url.pathname && url.pathname !== '/')) {\n    finish(false, 'Invalid endpoint: configure an HTTPS origin'); return false;\n  }\n  endpoint = url.origin;\n  if (!isHexTenant(data.tenantId)) {\n    finish(false, 'Invalid or unconfigured tenant ID'); return false;\n  }\n  var auth = text(data.authHeader);\n  if (auth.indexOf('Bearer ') !== 0 || auth.length <= 7 ||\n      auth.indexOf('PLACEHOLDER') >= 0 || auth.indexOf('REPLACE_') >= 0 ||\n      auth.indexOf('\\r') >= 0 || auth.indexOf('\\n') >= 0) {\n    finish(false, 'Missing or placeholder Bearer credential'); return false;\n  }\n  if (['_ci360_id', 'visitor_id', 'customer_id', 'login_id', 'subject_id'].indexOf(identityType) < 0) {\n    finish(false, 'Unsupported identity type'); return false;\n  }\n  return true;\n}\nfunction headers(contentType) {\n  return {'Content-Type': contentType, 'Authorization': text(data.authHeader)};\n}\nfunction identityPath(idValue) {\n  return '/id_type=' + encodeUriComponent(identityType) + '/id_value=' + encodeUriComponent(idValue);\n}\nfunction request(url, options, body, onSuccess) {\n  if (!queryPermission('send_http', url)) {\n    finish(false, 'HTTP destination not permitted'); return;\n  }\n  sendHttpRequest(url, options, body).then(function(result) {\n    if (result && result.statusCode >= 200 && result.statusCode < 300) {\n      onSuccess(result);\n    } else {\n      finish(false, 'Upstream HTTP failure');\n    }\n  }).catch(function() {\n    finish(false, 'Network, timeout or response processing failure');\n  });\n}\nfunction resolveIdentity(callback) {\n  var value = text(data.identityValue);\n  var known = ['customer_id', 'login_id', 'subject_id'].indexOf(identityType) >= 0;\n  if (known && !value) { finish(false, 'Known identity value is required'); return; }\n  if (value) { callback(value); return; }\n  var cookie = text(data.cookieName) ||\n    (identityType === 'visitor_id' ? '_SI_VID_1.' + data.tenantId : '_ci360_id');\n  if (!queryPermission('get_cookies', cookie)) {\n    finish(false, 'Identity cookie is not permitted'); return;\n  }\n  var cookies = getCookieValues(cookie) || [];\n  var stored = text(cookies[0]);\n  if (stored) { callback(stored); return; }\n  if (identityType !== 'visitor_id') {\n    finish(false, 'Identity cookie is not available'); return;\n  }\n  var options = {domain: 'auto', path: '/', 'max-age': COOKIE_MAX_AGE,\n    secure: true, httpOnly: true, sameSite: 'lax'};\n  if (!queryPermission('set_cookies', cookie, options)) {\n    finish(false, 'Visitor cookie write is not permitted'); return;\n  }\n  request(endpoint + '/t/events/i/' + encodeUriComponent(data.tenantId),\n    {method: 'GET', headers: headers('application/json'), timeout: 5000}, '', function(result) {\n      var response = JSON.parse(result.body);\n      if (getType(response) !== 'object') {\n        finish(false, 'Invalid visitor identity response'); return;\n      }\n      var id = text(response.visitorId) || text(response.visitor_id) ||\n        text(response.id_value) || text(response.idValue);\n      if (!id) { finish(false, 'Empty visitor identity response'); return; }\n      setCookie(cookie, id, options);\n      callback(id);\n    });\n}\n\nconst getTimestampMillis = require('getTimestampMillis');\nfunction validateEvent() {\n  var name = text(data.eventName);\n  if (!name || name !== data.eventName || !text(data.uri)) { finish(false, 'Event name and URI are required'); return false; }\n  if ((text(data.sessionId) && !text(data.loadId)) || (!text(data.sessionId) && text(data.loadId))) {\n    finish(false, 'Session ID and load ID must be supplied together'); return false;\n  }\n  if (name === 'impressionViewable' || name === 'clickThrough') {\n    if (!text(data.spotKey) || !text(data.taskId) || !text(data.creativeId) ||\n        !text(data.variantId) || !text(data.requestId)) {\n      finish(false, 'Spot response correlation fields are required'); return false;\n    }\n  } else if (name !== 'load' && name !== 'click') {\n    if (!text(data.apiEventKey)) { finish(false, 'API event key is required'); return false; }\n  }\n  var rows = data.additionalProperties || [];\n  if (getType(rows) !== 'array') { finish(false, 'Invalid additional properties'); return false; }\n  var reserved = ['eventName', 'channel', 'clientTimestamp', 'uri', 'sessionId', 'loadId',\n    'apiEventKey', 'properties', 'click', 'spotKey', 'taskId', 'creativeId', 'variantId',\n    'requestId', '__proto__', 'prototype', 'constructor'];\n  for (var i = 0; i < rows.length; i++) {\n    if (getType(rows[i]) !== 'object' || !text(rows[i].name) ||\n        reserved.indexOf(rows[i].name) >= 0 || text(rows[i].name) !== rows[i].name ||\n        ['string', 'number', 'boolean'].indexOf(getType(rows[i].value)) < 0) {\n      finish(false, 'Invalid or reserved additional property'); return false;\n    }\n  }\n  return true;\n}\nfunction buildPayload() {\n  var eventObj = {\n    eventName: text(data.eventName),\n    channel: 'web',\n    clientTimestamp: getTimestampMillis(),\n    uri: data.uri\n  };\n\n  if (data.sessionId) {\n    eventObj.sessionId = data.sessionId;\n    if (data.loadId) { eventObj.loadId = data.loadId; }\n  }\n\n  if (data.eventName === 'load') {\n    var props = {};\n    var hasProps = false;\n    if (data.pageTitle)    { props.pageTitle    = data.pageTitle;    hasProps = true; }\n    if (data.pageReferrer) { props.pageReferrer = data.pageReferrer; hasProps = true; }\n    if (data.ipAddress)    { props.ip           = data.ipAddress;    hasProps = true; }\n    if (data.userAgent)    { props.userAgent    = data.userAgent;    hasProps = true; }\n    if (hasProps) { eventObj.properties = props; }\n\n  } else if (data.eventName === 'click') {\n    var clickObj = {};\n    var hasClick = false;\n    if (data.targetUri)       { clickObj.targetUri       = data.targetUri;       hasClick = true; }\n    if (data.targetInnerText) { clickObj.targetInnerText = data.targetInnerText; hasClick = true; }\n    if (hasClick) { eventObj.click = clickObj; }\n\n  } else if (data.eventName === 'impressionViewable' || data.eventName === 'clickThrough') {\n    if (data.spotKey)    { eventObj.spotKey    = data.spotKey; }\n    if (data.taskId)     { eventObj.taskId     = data.taskId; }\n    if (data.creativeId) { eventObj.creativeId = data.creativeId; }\n    if (data.variantId)  { eventObj.variantId  = data.variantId; }\n    if (data.requestId)  { eventObj.requestId  = data.requestId; }\n\n  } else {\n    if (data.apiEventKey) { eventObj.apiEventKey = data.apiEventKey; }\n    if (data.additionalProperties) {\n      for (var i = 0; i < data.additionalProperties.length; i++) {\n        var row = data.additionalProperties[i];\n        if (row.name) { eventObj[row.name] = row.value; }\n      }\n    }\n  }\n\n  return JSON.stringify(eventObj);\n}\nif (validateConfig() && validateEvent()) {\n  resolveIdentity(function(id) {\n    var url = endpoint + '/t/events/e/' + encodeUriComponent(data.tenantId) + identityPath(id);\n    request(url, {method: 'POST', headers: headers('application/x-ndjson'), timeout: 5000},\n      buildPayload() + '\\n', function() { finish(true, 'Event request accepted'); });\n  });\n}\n\n\n___SERVER_PERMISSIONS___\n\n[\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"get_cookies\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"cookieAccess\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"specific\"\n          }\n        },\n        {\n          \"key\": \"cookieNames\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 1,\n                \"string\": \"_ci360_id\"\n              },\n              {\n                \"type\": 1,\n                \"string\": \"_SI_VID_1.REPLACE_WITH_YOUR_CI360_TENANT_ID\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"set_cookies\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"allowedCookies\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"name\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"domain\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"path\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"secure\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"session\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"_SI_VID_1.REPLACE_WITH_YOUR_CI360_TENANT_ID\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"*\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"/\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"any\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"any\"\n                  }\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"send_http\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"allowedUrls\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"specific\"\n          }\n        },\n        {\n          \"key\": \"urls\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 1,\n                \"string\": \"https://configure-your-tenant.example.invalid/t/*\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"logging\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"environments\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"debug\"\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  }\n]\n\n\n___TESTS___\n\nscenarios: []\n\n\n___NOTES___\n\nReviewed portable sample. Configure endpoint permissions and consent mapping.\nContent response delivery is outside this package; dependent tags ship paused.\n\n"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "templateId": "107",
+        "name": "[CI 360] Content Request API v2",
+        "templateData": "___INFO___\n\n{\n  \"type\": \"TAG\",\n  \"id\": \"cvt_temp_public_id\",\n  \"version\": 1,\n  \"securityGroups\": [],\n  \"displayName\": \"[CI 360] Content Request API v2\",\n  \"description\": \"Calls the CI 360 Content Request API for one spot. Supports all identity types. Logs response fields.\",\n  \"containerContexts\": [\n    \"SERVER\"\n  ]\n}\n\n\n___TEMPLATE_PARAMETERS___\n\n[\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"endpoint\",\n    \"displayName\": \"CI 360 Endpoint\",\n    \"simpleValueType\": true,\n    \"help\": \"Required HTTPS origin. Configure matching send_http permissions before use.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Endpoint is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"tenantId\",\n    \"displayName\": \"External Tenant ID\",\n    \"simpleValueType\": true,\n    \"help\": \"Required. 24-character hex.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Tenant ID is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"authHeader\",\n    \"displayName\": \"Authorization Header\",\n    \"simpleValueType\": true,\n    \"help\": \"Required full Bearer credential. Placeholders are rejected.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"identityType\",\n    \"displayName\": \"Identity Type\",\n    \"simpleValueType\": true,\n    \"help\": \"_ci360_id (default) | visitor_id | customer_id | login_id | subject_id\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Identity Type is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"identityValue\",\n    \"displayName\": \"Identity Value\",\n    \"simpleValueType\": true,\n    \"help\": \"Required non-empty string for known identity types; otherwise cookie lookup is used.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"cookieName\",\n    \"displayName\": \"Cookie Name Override\",\n    \"simpleValueType\": true,\n    \"help\": \"Optional.\"\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"spotKey\",\n    \"displayName\": \"Spot Key\",\n    \"simpleValueType\": true,\n    \"help\": \"Required. Human-readable spot identifier.\",\n    \"valueValidators\": [\n      {\n        \"type\": \"NON_EMPTY\",\n        \"errorMessage\": \"Spot Key is required.\"\n      }\n    ]\n  },\n  {\n    \"type\": \"TEXT\",\n    \"name\": \"consentState\",\n    \"displayName\": \"CI 360 consent state\",\n    \"simpleValueType\": true,\n    \"help\": \"Must equal granted. Map only from the approved website consent decision.\"\n  }\n]\n\n\n___SANDBOXED_JS_FOR_SERVER___\n\nconst sendHttpRequest = require('sendHttpRequest');\nconst getCookieValues = require('getCookieValues');\nconst setCookie = require('setCookie');\nconst logToConsole = require('logToConsole');\nconst encodeUriComponent = require('encodeUriComponent');\nconst parseUrl = require('parseUrl');\nconst getType = require('getType');\nconst queryPermission = require('queryPermission');\nconst JSON = require('JSON');\n\nconst identityType = data.identityType || '_ci360_id';\nconst COOKIE_MAX_AGE = 63072000;\nvar endpoint = '';\nvar finished = false;\n\nfunction text(value) {\n  return getType(value) === 'string' ? value.trim() : '';\n}\nfunction finish(ok, reason) {\n  if (finished) { return; }\n  finished = true;\n  // Never log identity-bearing URLs, credentials, payloads or response bodies.\n  logToConsole('[CI 360]', reason);\n  if (ok) { data.gtmOnSuccess(); } else { data.gtmOnFailure(); }\n}\nfunction isHexTenant(value) {\n  if (getType(value) !== 'string' || value.length !== 24) { return false; }\n  for (var i = 0; i < value.length; i++) {\n    if ('0123456789abcdefABCDEF'.indexOf(value.charAt(i)) < 0) { return false; }\n  }\n  return true;\n}\nfunction validateConfig() {\n  if (data.consentState !== 'granted') {\n    finish(false, 'Skipped: CI 360 consent not granted'); return false;\n  }\n  var url = parseUrl(text(data.endpoint));\n  if (!url || url.protocol !== 'https:' || url.username || url.password ||\n      url.search || url.hash || (url.pathname && url.pathname !== '/')) {\n    finish(false, 'Invalid endpoint: configure an HTTPS origin'); return false;\n  }\n  endpoint = url.origin;\n  if (!isHexTenant(data.tenantId)) {\n    finish(false, 'Invalid or unconfigured tenant ID'); return false;\n  }\n  var auth = text(data.authHeader);\n  if (auth.indexOf('Bearer ') !== 0 || auth.length <= 7 ||\n      auth.indexOf('PLACEHOLDER') >= 0 || auth.indexOf('REPLACE_') >= 0 ||\n      auth.indexOf('\\r') >= 0 || auth.indexOf('\\n') >= 0) {\n    finish(false, 'Missing or placeholder Bearer credential'); return false;\n  }\n  if (['_ci360_id', 'visitor_id', 'customer_id', 'login_id', 'subject_id'].indexOf(identityType) < 0) {\n    finish(false, 'Unsupported identity type'); return false;\n  }\n  return true;\n}\nfunction headers(contentType) {\n  return {'Content-Type': contentType, 'Authorization': text(data.authHeader)};\n}\nfunction identityPath(idValue) {\n  return '/id_type=' + encodeUriComponent(identityType) + '/id_value=' + encodeUriComponent(idValue);\n}\nfunction request(url, options, body, onSuccess) {\n  if (!queryPermission('send_http', url)) {\n    finish(false, 'HTTP destination not permitted'); return;\n  }\n  sendHttpRequest(url, options, body).then(function(result) {\n    if (result && result.statusCode >= 200 && result.statusCode < 300) {\n      onSuccess(result);\n    } else {\n      finish(false, 'Upstream HTTP failure');\n    }\n  }).catch(function() {\n    finish(false, 'Network, timeout or response processing failure');\n  });\n}\nfunction resolveIdentity(callback) {\n  var value = text(data.identityValue);\n  var known = ['customer_id', 'login_id', 'subject_id'].indexOf(identityType) >= 0;\n  if (known && !value) { finish(false, 'Known identity value is required'); return; }\n  if (value) { callback(value); return; }\n  var cookie = text(data.cookieName) ||\n    (identityType === 'visitor_id' ? '_SI_VID_1.' + data.tenantId : '_ci360_id');\n  if (!queryPermission('get_cookies', cookie)) {\n    finish(false, 'Identity cookie is not permitted'); return;\n  }\n  var cookies = getCookieValues(cookie) || [];\n  var stored = text(cookies[0]);\n  if (stored) { callback(stored); return; }\n  if (identityType !== 'visitor_id') {\n    finish(false, 'Identity cookie is not available'); return;\n  }\n  var options = {domain: 'auto', path: '/', 'max-age': COOKIE_MAX_AGE,\n    secure: true, httpOnly: true, sameSite: 'lax'};\n  if (!queryPermission('set_cookies', cookie, options)) {\n    finish(false, 'Visitor cookie write is not permitted'); return;\n  }\n  request(endpoint + '/t/events/i/' + encodeUriComponent(data.tenantId),\n    {method: 'GET', headers: headers('application/json'), timeout: 5000}, '', function(result) {\n      var response = JSON.parse(result.body);\n      if (getType(response) !== 'object') {\n        finish(false, 'Invalid visitor identity response'); return;\n      }\n      var id = text(response.visitorId) || text(response.visitor_id) ||\n        text(response.id_value) || text(response.idValue);\n      if (!id) { finish(false, 'Empty visitor identity response'); return; }\n      setCookie(cookie, id, options);\n      callback(id);\n    });\n}\n\nif (validateConfig()) {\n  if (!text(data.spotKey)) {\n    finish(false, 'Spot key is required');\n  } else {\n    resolveIdentity(function(id) {\n      var url = endpoint + '/t/content/' + encodeUriComponent(data.tenantId) +\n        identityPath(id) + '/' + encodeUriComponent(data.spotKey);\n      request(url, {method: 'POST', headers: headers('application/json'), timeout: 5000},\n        '{}', function() { finish(true, 'Content request accepted; browser delivery is not implemented'); });\n    });\n  }\n}\n\n\n___SERVER_PERMISSIONS___\n\n[\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"get_cookies\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"cookieAccess\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"specific\"\n          }\n        },\n        {\n          \"key\": \"cookieNames\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 1,\n                \"string\": \"_ci360_id\"\n              },\n              {\n                \"type\": 1,\n                \"string\": \"_SI_VID_1.REPLACE_WITH_YOUR_CI360_TENANT_ID\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"set_cookies\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"allowedCookies\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 3,\n                \"mapKey\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"name\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"domain\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"path\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"secure\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"session\"\n                  }\n                ],\n                \"mapValue\": [\n                  {\n                    \"type\": 1,\n                    \"string\": \"_SI_VID_1.REPLACE_WITH_YOUR_CI360_TENANT_ID\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"*\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"/\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"any\"\n                  },\n                  {\n                    \"type\": 1,\n                    \"string\": \"any\"\n                  }\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"send_http\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"allowedUrls\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"specific\"\n          }\n        },\n        {\n          \"key\": \"urls\",\n          \"value\": {\n            \"type\": 2,\n            \"listItem\": [\n              {\n                \"type\": 1,\n                \"string\": \"https://configure-your-tenant.example.invalid/t/*\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  },\n  {\n    \"instance\": {\n      \"key\": {\n        \"publicId\": \"logging\",\n        \"versionId\": \"1\"\n      },\n      \"param\": [\n        {\n          \"key\": \"environments\",\n          \"value\": {\n            \"type\": 1,\n            \"string\": \"debug\"\n          }\n        }\n      ]\n    },\n    \"isRequired\": true\n  }\n]\n\n\n___TESTS___\n\nscenarios: []\n\n\n___NOTES___\n\nReviewed portable sample. Configure endpoint permissions and consent mapping.\nContent response delivery is outside this package; dependent tags ship paused.\n\n"
+      }
+    ],
+    "client": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "clientId": "99",
+        "name": "GA4 client",
+        "type": "gaaw_client",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "cookieDomain",
+            "value": "auto"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieMaxAgeInSec",
+            "value": "63072000"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "activateDefaultPaths",
+            "value": "true"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookiePath",
+            "value": "/"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "migrateFromJsClientId",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieManagement",
+            "value": "server"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "cookieName",
+            "value": "FPID"
+          }
+        ]
+      }
+    ]
+  }
+}
